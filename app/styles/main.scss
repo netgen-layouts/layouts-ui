@@ -1,1 +1,23 @@
 body{background:#eee;}
+
+#app{width:1000px; margin:0 auto;}
+
+.split{
+  box-sizing:border-box;
+  > div{float:left; width:49%;
+    &.r{float: right;}
+  }
+}
+
+[data-zone]{outline:1px solid #f00; min-height:40px; margin-bottom:10px;}
+
+
+.s70-30{
+  > div.l{width:69.5%}
+  > div.r{width:29.5%}
+}
+
+.s30-70{
+  > div.l{width:29.5%}
+  > div.r{width:69.5%}
+}

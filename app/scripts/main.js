@@ -13,6 +13,12 @@ require.config({
     'backbone.localstorage': '../../bower_components/backbone.localstorage/backbone.localStorage',
     backbone_original: '../../bower_components/backbone/backbone',
     backbone: './extended/backbone_override',
+
+    jquery_ui: '../../bower_components/jquery-ui/jquery-ui',
+
+    collection: 'extended/collection',
+    model: 'extended/model',
+    view: 'extended/view',
     register_helpers: './register_helpers',
     templates: 'templates',
     app: 'app',
@@ -38,6 +44,10 @@ require.config({
   }
 });
 
-require(['init', 'jquery'], function(App) {
-  App.init();
+require(['init', 'jquery', 'jquery_ui', 'templates'], function(App){
+
+  $(function(){
+    App.init();
+  });
+
 });

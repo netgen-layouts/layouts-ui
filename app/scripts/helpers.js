@@ -1,13 +1,13 @@
 (function (factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
-        define(['underscore', 'handlebars', 'lib/formatters', 'app'], factory); // AMD
+        define(['underscore', 'handlebars', 'app'], factory); // AMD
     } else if (typeof module.exports === 'object') {
        module.exports = factory(); // Node
     } else {
         factory(window.helpers); // Browser global
     }
-}(function (_, Handlebars, Formatters, App){
+}(function (_, Handlebars, App){
   'use strict';
 
   var safe = function(str){
@@ -29,7 +29,7 @@
       console.log(what);
       return null;
     },
-    
+
     yield: function(opts){
       var attributes = _.extend({
         'data-yield': this.view.cid
@@ -104,7 +104,7 @@
           }
         }
       }
-      
+
       var value = this.view.resolve_live_value(model, attribute);
 
       return safe('<span data-bind="'+attribute+'">'+value+'</span>');

@@ -18,7 +18,7 @@ for(var k in helpers){ known_helpers[k] = true ;}
 
 
 JavaScriptCompiler.prototype.nameLookup = function(parent, name /* , type*/) {
-    return "Handlebars.r("+parent +",'"+name+"')";
+  return "Handlebars.r("+parent +",'"+name+"')";
 };
 
 /* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('foo', 'A sample task that logs stuff.', function() {
       console.log(grunt.filerev.summary);
-    });    
+    });
 
     grunt.initConfig({
         yeoman: yeomanConfig,
@@ -134,7 +134,7 @@ module.exports = function (grunt) {
                 hostname: '0.0.0.0'
             },
             proxies: [
-                
+
                 {
                   context: '/pdf',
                   host: 'htmlpdfapi.com',
@@ -147,7 +147,7 @@ module.exports = function (grunt) {
                     '^/pdf': '/api/v1/pdf'
                   }
                 },
-                
+
 
                 {
                   context: ['/token', '/api'],
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
                   }
                 }
 
-            ],            
+            ],
             livereload: {
                 options: {
                     middleware: function (connect) {
@@ -342,7 +342,7 @@ module.exports = function (grunt) {
 
         },
         filerev: {
-            
+
             files: {
                 src: [
                     '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}', //TODO: fix reving images in HTML templates
@@ -352,7 +352,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.dist %>/locales/*'
                 ]
             }
-            
+
         },
 
 
@@ -406,7 +406,7 @@ module.exports = function (grunt) {
                         [
                             /["'](styles\/[^'"\)#]+)(#.+)?["']/gm,
                             'Replacing styles'
-                        ]                            
+                        ]
                     ]
                 }
             },
@@ -501,7 +501,7 @@ module.exports = function (grunt) {
               from: 'data-manifest',
               to: 'manifest'
             }]
-          }          
+          }
         },
 
         // Put files not handled in other tasks here
@@ -544,7 +544,7 @@ module.exports = function (grunt) {
 
             translations_upload: {
                 command: 'ruby onesky.rb upload'
-            },            
+            },
 
             read_file_name: {
                 command: 'ls <%= yeoman.dist %>/scripts/*.main.js',
@@ -590,7 +590,7 @@ module.exports = function (grunt) {
               {src: ['<%= yeoman.dist %>/**'] }, // includes files in path and its subdirs
             ]
           }
-        },        
+        },
         bower: {
             options: {
               exclude: ['sass-bootstrap']
