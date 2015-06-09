@@ -1,0 +1,13 @@
+node_modules
+dist
+.tmp
+.sass-cache
+bower_components
+app/scripts/templates.js
+*.orig
+*.log
+coverage
+*.sublime-workspace
+*.ruby-version
+releases
+onesky.json
