@@ -6,7 +6,7 @@ define(['app', 'backbone',  'components/main'], function(App, Backbone, Componen
       console.log('Hello world');
 
       Components.Zones.collection.fetch();
-      Components.Blocks.collection.fetch();
+      Components.BlockTemplates.collection.fetch();
 
     },
   });

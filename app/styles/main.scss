@@ -21,3 +21,10 @@ body{background:#eee;}
   > div.l{width:29.5%}
   > div.r{width:69.5%}
 }
+
+
+img{width:100%; max-width:100%;}
+
+.no-placeholder{height:2px; background:#000; margin:2px -20px;}
+.blocks .no-placeholder{display:none;}
+

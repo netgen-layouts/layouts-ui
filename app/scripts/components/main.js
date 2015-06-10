@@ -3,7 +3,7 @@ define(function(require){
 
   return {
     Zones: require('./zones'),
-    Blocks: require('./blocks')
-  }
+    BlockTemplates: require('./block_templates')
+  };
 
 });

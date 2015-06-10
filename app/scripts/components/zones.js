@@ -4,7 +4,7 @@ define(['views/zones', 'collections/zones'], function(ViewZones, Zones){
   var Compontent = new ViewZones({
     el: '.zones',
     collection: new Zones()
-  })
+  });
 
   return Compontent;
 

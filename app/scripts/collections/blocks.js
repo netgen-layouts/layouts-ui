@@ -1,8 +1,8 @@
-define(['collection', 'models/block'], function(Collection, Block){
+define(['collection', 'backbone',  'models/block'], function(Collection, Backbone, Block){
   'use strict';
 
   return Collection.extend({
-    url: 'data/blocks.json',
+    localStorage: new Backbone.LocalStorage('blocks'),
     model: Block
   });
 

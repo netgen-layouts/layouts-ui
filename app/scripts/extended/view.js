@@ -9,6 +9,7 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       this.context = _.extend({}, this.context, options.context);
       options.body && (this.context.body = options.body);
       options.template && (this.template = options.template);
+      this.template = _.result(this, 'template');
       this.parent = options.parent;
       this.child || (this.child =  options.child);
       this.child && (this.child.parent = this);

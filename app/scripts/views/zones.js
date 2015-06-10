@@ -9,7 +9,7 @@ define(['view', './zone'], function(View, ViewZone){
     },
 
     parse_dom: function(){
-      var id, self = this;;
+      var id, self = this;
       this.$('[data-zone]').each(function(){
         id = $(this).data('zone');
         new ViewZone({
