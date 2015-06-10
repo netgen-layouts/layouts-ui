@@ -3,11 +3,7 @@ define(['collection', 'models/zone'], function(Collection, Zone){
 
   return Collection.extend({
     model: Zone,
-    url: 'data/zones.json',
-    TYPES: {
-      1: 'normal',
-      2: 'inherited'
-    }
+    url: 'data/zones.json'
   });
 
 });

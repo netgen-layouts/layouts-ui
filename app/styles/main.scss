@@ -9,7 +9,7 @@ body{background:#eee;}
   }
 }
 
-[data-zone]{outline:1px solid #f00; min-height:40px; margin-bottom:10px;}
+[data-zone]{outline:1px solid #090; min-height:40px; margin-bottom:10px;}
 
 
 .s70-30{
@@ -28,3 +28,7 @@ img{width:100%; max-width:100%;}
 .no-placeholder{height:2px; background:#000; margin:2px -20px;}
 .blocks .no-placeholder{display:none;}
 
+.zone_type_inherited{outline-color:#f00;}
+
+
+.ui-sortable-helper{background:#ff9;}

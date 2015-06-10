@@ -17,6 +17,9 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       this.opts = _.extend({}, this.opts, options.opts);
       this.yield_el = '[data-yield="'+this.cid+'"]';
 
+      this.$el.data('_view', this);
+      this.$el.attr('data-view', '');
+
       this.default_query = options.default_query || {};
       this.listen_to_filter = options.listen_to_filter || this.listen_to_filter;
 
@@ -219,9 +222,6 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       this.set_context();
 
       this.$el.html(this.template ? this.render_template() : this.context.body);
-
-      this.$el.data('_view', this);
-      this.$el.attr('data-view', '');
 
       this.render_child();
       this.new_data = false;
