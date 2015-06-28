@@ -4,7 +4,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
 
 
 ;(function(Backbone) {
- 
+
   // The super method takes two parameters: a method name
   // and an array of arguments to pass to the overridden method.
   // This is to optimize for the common case of passing 'arguments'.
@@ -15,13 +15,13 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
     var currentObject = this._superCallObjects[methodName] || this,
         parentObject  = findSuper(methodName, currentObject);
     this._superCallObjects[methodName] = parentObject;
- 
+
     var result = parentObject[methodName].apply(this, args || []);
     //delete this._superCallObjects[methodName];
     this._superCallObjects[methodName] = null;
     return result;
   }
- 
+
   // Find the next object up the prototype chain that has a
   // different implementation of the method.
   function findSuper(methodName, childObject) {
@@ -31,11 +31,11 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
     }
     return object;
   }
- 
+
   _.each(["Model", "Collection", "View", "Router"], function(klass) {
     Backbone[klass].prototype._super = _super;
   });
- 
+
 })(Backbone);
 
 
@@ -59,7 +59,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
 
 
 
-  //Router params as object ======================================================================= 
+  //Router params as object =======================================================================
   var _extractParametersOriginal = Backbone.Router.prototype._extractParameters;
 
 
@@ -88,7 +88,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
       router.route_name = name;
       router.trigger.apply(router, ['route:before:' + name].concat(args));
       router.trigger.apply(router, ['route:before', name].concat(args));
-      
+
       var default_callback = function(){
         router.execute(callback, args, name);
       };
@@ -104,8 +104,8 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
 
 
 
-  //Router url_for  ======================================================================= 
-  
+  //Router url_for  =======================================================================
+
   // From prototype 1.7
   var rescape = function(str){return String(str).replace(/([.*+?\^=!:${}()|\[\]\/\\])/g, '\\$1')};
 
@@ -130,10 +130,10 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
           in_url = true;
           return v;
         });
-        
+
         if(!in_url && v !== null){ query_params[k] = v; }
       });
-        
+
       !_.isEmpty(query_params) && (route += '?' + $.param(query_params));
     }
 
@@ -143,7 +143,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
   };
 
   // ===============================================================================================
-  
+
   Backbone.Router.prototype.navigate_to = function(name, params, options){
     options = _.extend({
       trigger: true
@@ -151,6 +151,14 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
     return this.navigate(this.url_for(name, params), options);
   };
 
+
+  //Copy events
+  var original_extend  = Backbone.View.extend;
+  Backbone.View.extend = function(child) {
+    var view = original_extend.apply(this, arguments);
+    view.prototype.events = _.extend({}, this.prototype.events, child.events);
+    return view;
+  };
 
 
   return Backbone;

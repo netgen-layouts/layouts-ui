@@ -1,8 +1,10 @@
-@import "compass/css3/transition";
+@import "compass/css3";
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
+// @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_modals";
 
-body{background:#333; color:#eee;}
+body{background:#333; }
 
-#app{width:1000px; margin:0 auto;}
+#app{width:1000px; margin:0 auto; color:#eee;}
 
 .split{
   box-sizing:border-box;
@@ -40,6 +42,8 @@ img{width:100%; max-width:100%;}
 
 [data-block]{
   position:relative;
-  .handle{width:14px; height:14px; display:none; background:#f00; position:absolute; left:-7px; top:-7px;}
+  .block_actions{position:absolute;  display:none; text-align:right; left:-180px; top:0px; padding:4px; width:180px; color:#fff;}
+  .block_actions span{ background:rgba(0,0,0, 0.5); padding:6px 8px;}
+  .handle{}
 }
-[data-block]:hover .handle{display: inline-block;}
+[data-block]:hover .block_actions{display: inline-block;}

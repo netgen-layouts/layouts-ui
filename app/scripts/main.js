@@ -22,10 +22,16 @@ require.config({
     register_helpers: './register_helpers',
     templates: 'templates',
     app: 'app',
-    init: 'init'
+    init: 'init',
+    modal: '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal'
   },
 
   shim: {
+
+    modal: {
+      deps: ['jquery'],
+      exports: 'jquery'
+    },
 
     handlebars: {
       exports: 'Handlebars',
@@ -44,7 +50,7 @@ require.config({
   }
 });
 
-require(['init', 'jquery', 'jquery_ui', 'templates'], function(App){
+require(['init', 'jquery', 'jquery_ui', 'modal', 'templates'], function(App){
 
   $(function(){
     App.init();
