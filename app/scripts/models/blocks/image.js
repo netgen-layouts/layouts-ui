@@ -1,7 +1,7 @@
-define(['model'], function(Model){
+define(['./base'], function(Block){
   'use strict';
 
-  return Model.extend({
+  return Block.extend({
     defaults: {
       template: 'image'
     }

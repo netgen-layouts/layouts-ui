@@ -17,6 +17,12 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
 
       view_block_templates.collection.fetch();
 
+      this.on('sortable:start', function(){
+        $(document.body).addClass('sorting');
+      }).on('sortable:end', function(){
+        $(document.body).removeClass('sorting');
+      });
+
     },
   });
 

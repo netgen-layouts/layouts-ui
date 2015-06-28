@@ -1,4 +1,4 @@
-define(['view', './block_template', 'models/block', './block'], function(View, ViewBlockTemplate, Block, ViewBlock) {
+define(['underscore', 'view', './block_template', 'models/blocks/main', './blocks/main', 'app'], function(_, View, ViewBlockTemplate, Blocks, ViewBlocks, App) {
   'use strict';
 
   return View.extend({
@@ -10,26 +10,40 @@ define(['view', './block_template', 'models/block', './block'], function(View, V
       return this;
     },
 
+    initialize_block: function(template){
+      var Klass = Blocks[template.get('type')] || Blocks.Def;
+      var attributes = _.defaults({template_id: template.id}, template.get('params'));
+      return new Klass(attributes);
+    },
+
 
     dnd: function() {
+      var self = this;
 
       $('[data-zone]').sortable({
         connectWith: '[data-zone]',
         placeholder: 'no-placeholder',
+        handle: ".handle",
+        tolerance: "pointer",
+        cursorAt: { left: 5 },
+        delay: 150,
+        distance: 20,
         // forceHelperSize: true,
-        helper: function(e, item){
-          var view = $(item).data('_view');
-          console.log(view);
-          var helper = $('<div>'+view.model.template().get('name')+'</div>');
-          helper.css({'width': '100px', 'height': '100px'});
-          return helper;
-        },
+        // helper: function(e, item){
+        //   var view = $(item).data('_view');
+        //   console.log(view);
+        //   var helper = $('<div>'+view.model.template().get('name')+'</div>');
+        //   helper.css({'width': '100px', 'height': '100px'});
+        //   return helper;
+        // },
 
         start: function( event, ui ) {
+          App.trigger('sortable:start');
           $( this ).sortable( 'refreshPositions' );
         },
 
         stop: function(){
+          App.trigger('sortable:end');
           console.log('STOP', this, arguments);
         },
         receive: function(e, ui) {
@@ -70,11 +84,12 @@ define(['view', './block_template', 'models/block', './block'], function(View, V
           if(block){
 
           }else{
-            block = new Block({
+            block = self.initialize_block(block_template, {
               template_id: block_template.id
             });
 
-            var view_block = new ViewBlock({
+            var ViewBlockKlass = ViewBlocks[block.template().get('type')] || ViewBlocks.Def;
+            var view_block = new ViewBlockKlass({
               model: block
             });
             console.log(block);
@@ -100,7 +115,12 @@ define(['view', './block_template', 'models/block', './block'], function(View, V
             return item.clone();
         },
 
+        start: function(){
+          App.trigger('sortable:start');
+        },
+
         stop: function (e) {
+            App.trigger('sortable:end');
             var copied = $(this).data('copied');
 
             if(!copied){

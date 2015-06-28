@@ -1,3 +1,5 @@
+@import "compass/css3/transition";
+
 body{background:#333; color:#eee;}
 
 #app{width:1000px; margin:0 auto;}
@@ -8,9 +10,12 @@ body{background:#333; color:#eee;}
     &.r{float: right;}
   }
 }
+[data-zone]{outline:0px solid transparent;  min-height:2em;}
+[data-zone]:empty:before{content:'Drop content here!'; color:#999; font-size:1em; display:block;   }
+.sorting [data-zone]{outline:1px dotted #999;   outline-offset: 3px;margin-bottom:10px; @include transition(all 0.3s ease-in-out);}
 
-[data-zone]{outline:1px solid #090; min-height:40px; margin-bottom:10px;}
-
+[data-zone].zone_type_inherited:empty:before{content: 'Inherited zone!'}
+.zone_type_inherited{outline-color:#f00;}
 
 .s70-30{
   > div.l{width:69.5%}
@@ -25,10 +30,16 @@ body{background:#333; color:#eee;}
 
 img{width:100%; max-width:100%;}
 
-.no-placeholder{height:2px; background:#000; margin:2px -20px;}
+.no-placeholder{height:2px; background:#cc0; margin:2px -20px;}
 .blocks .no-placeholder{display:none;}
 
-.zone_type_inherited{outline-color:#f00;}
 
 
-.ui-sortable-helper{background:#ff9;}
+
+.ui-sortable-helper{opacity:0.8}
+
+[data-block]{
+  position:relative;
+  .handle{width:14px; height:14px; display:none; background:#f00; position:absolute; left:-7px; top:-7px;}
+}
+[data-block]:hover .handle{display: inline-block;}
