@@ -3,7 +3,7 @@ define(['view'], function(View){
 
   return View.extend({
     template: function(){
-      return 'blocks/'+this.model.template().get('template');
+      return 'blocks/'+this.model.resource.get('template');
     }
   });
 

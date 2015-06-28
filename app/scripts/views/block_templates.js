@@ -25,9 +25,9 @@ define(['view', './block_template', 'models/block', './block'], function(View, V
           return helper;
         },
 
-start: function( event, ui ) {
-    $( this ).sortable( 'refreshPositions' )
-  },
+        start: function( event, ui ) {
+          $( this ).sortable( 'refreshPositions' );
+        },
 
         stop: function(){
           console.log('STOP', this, arguments);
@@ -42,7 +42,7 @@ start: function( event, ui ) {
           var zone = zone_view.model;
 
 
-          console.log(block);
+          console.log('block', block);
 
           // if(block){
           //   console.warn('cancel')
@@ -77,6 +77,7 @@ start: function( event, ui ) {
             var view_block = new ViewBlock({
               model: block
             });
+            console.log(block);
             ui.item.after(view_block.render().$el);
             ui.item.remove();
           }
