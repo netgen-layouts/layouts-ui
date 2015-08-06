@@ -50,7 +50,7 @@ require.config({
   }
 });
 
-require(['init', 'jquery', 'jquery_ui', 'modal', 'templates'], function(App){
+require(['init', 'jquery', 'jquery_ui', 'modal', 'register_helpers', 'templates'], function(App){
 
   $(function(){
     App.init();
