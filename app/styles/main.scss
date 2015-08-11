@@ -1,6 +1,12 @@
 @import "compass/css3";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "grid";
 // @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_modals";
+
+*{
+  padding: 0;
+  margin: 0;
+}
 
 body{background:#333; }
 
@@ -47,3 +53,21 @@ img{width:100%; max-width:100%;}
   .handle{}
 }
 [data-block]:hover .block_actions{display: inline-block;}
+
+.grid-block{
+  @include clearfix;
+  margin: 10px 0;
+  list-style: none;
+  li{
+    float: left;
+    margin: 0;
+    h2{
+      margin: 10px 0;
+      font-size: 20px;
+    }
+    img{
+      display: block;
+    }
+  }
+
+}

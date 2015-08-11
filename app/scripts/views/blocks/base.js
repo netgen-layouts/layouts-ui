@@ -13,9 +13,13 @@ define(['view', 'views/modal'], function(View, Modal){
 
     render: function(){
       View.prototype.render.apply(this, arguments);
+      this.render2();
+      return this;
+    },
+
+    render2: function(){
       this.$el.attr('data-block', '');
       this.$el.prepend(JST['block_actions']());
-      return this;
     },
 
     $edit: function(e){

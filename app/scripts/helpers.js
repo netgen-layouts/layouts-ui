@@ -121,8 +121,8 @@
 
     times: function(count, options){
       var buffer = '';
-      _(count).times(function(){
-        buffer += options.fn();
+      _(count).times(function(item){
+        buffer += options.fn(item);
       });
       return buffer;
     },
@@ -139,7 +139,7 @@
     absolute_url: function(path, opts){
       var hostname;
       if(/localhost|127\.|192\./.test(location.hostname)){
-        hostname = '188.252.173.66'
+        hostname = '188.252.173.66';
       }
       var host = opts.hash.hostname || hostname || location.hostname || '',
           port = opts.hash.port || location.port;

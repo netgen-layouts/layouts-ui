@@ -5,7 +5,8 @@ define(function(require){
     Image: require('./image'),
     Def:   require('./def'),
     Title: require('./title'),
-    List:  require('./list')
+    List:  require('./list'),
+    Grid:  require('./grid')
   };
 
 });
