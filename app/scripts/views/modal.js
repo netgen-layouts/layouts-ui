@@ -24,7 +24,7 @@ define(['view'], function(View){
 
     set_context: function(){
       View.prototype.set_context.apply(this, arguments);
-      //this.context.body = "Hello world";
+      //this.context.body = "Hello world 1";
       return this;
     },
 

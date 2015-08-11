@@ -23,7 +23,9 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
         $(document.body).removeClass('sorting');
       });
 
-    },
+
+      $(document).on('submit', function(e){ e.preventDefault(); } );
+    }
   });
 
   return App;
