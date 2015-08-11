@@ -5,7 +5,7 @@ define(['./base'], function(Base){
 
     render: function(){
       var self = this;
-      $.get(this.model.get('grid_real'))
+      $.get(this.model.get('grid'))
         .done(function(resp){
           self.$el.html(resp);
           self.render2();
