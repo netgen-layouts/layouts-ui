@@ -5,8 +5,17 @@ define(['./base', 'views/modal'], function(Base, Modal){
 
     events: {
       'click .action-edit': '$edit',
-      'click .action-destroy': '$destroy',
-      'submit form': '$submit'
+      'click .action-destroy': '$destroy'
+      //'submit form': '$submit'
+    },
+
+    initialize: function(){
+      Base.prototype.initialize.apply(this, arguments);
+
+      var self = this;
+      $(document).on('submit', 'form', function(){
+        self.$submit();
+      });
     },
 
     render: function(){
@@ -24,7 +33,7 @@ define(['./base', 'views/modal'], function(Base, Modal){
       $.get('http://localhost:3000/grids/1/edit?ajax=true')
         .done(function(response){
 
-          new Modal({
+          self.modal = new Modal({
             context: {
               body: response
             }
@@ -37,7 +46,6 @@ define(['./base', 'views/modal'], function(Base, Modal){
     },
 
     $submit: function (e) {
-      console.log(e);
       e && e.preventDefault();
       var self = this;
       var data = $('form').serialize();
@@ -46,7 +54,9 @@ define(['./base', 'views/modal'], function(Base, Modal){
           data: data,
           type: 'PUT'
         }).done(function(){
+          self.modal.close();
           self.render();
+
         });
 
     }
