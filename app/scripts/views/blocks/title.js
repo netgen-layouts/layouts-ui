@@ -54,6 +54,7 @@ define(['./base', 'views/modal', 'app'], function(Base, Modal, App){
         }).done(function(data){
           self.model.set(data);
           self.render();
+          App.trigger('positions:update');
         });
 
     },
@@ -72,8 +73,8 @@ define(['./base', 'views/modal', 'app'], function(Base, Modal, App){
         type: type
       }).done(function(data){
         self.model.set(data);
-        App.trigger('positions:update');
         self.render();
+        App.trigger('positions:update');
       });
     }
 

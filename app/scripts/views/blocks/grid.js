@@ -49,6 +49,7 @@ define(['./base', 'views/modal'], function(Base, Modal){
         }).done(function(data){
           self.model.set(data);
           self.render();
+          App.trigger('positions:update');
         });
 
     }
