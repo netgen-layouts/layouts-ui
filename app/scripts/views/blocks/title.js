@@ -1,4 +1,4 @@
-define(['./base'], function(Base){
+define(['./base', 'views/modal', 'app'], function(Base, Modal, App){
   'use strict';
 
   return Base.extend({
@@ -10,13 +10,71 @@ define(['./base'], function(Base){
     },
 
     events: {
-      'dblclick': '$click'
+      'blur .title': '$blur',
+      'click .action-edit': '$edit',
     },
 
-    $click: function(){
+    render: function(){
+      var self = this;
+      $.get(this.model.show_url())
+        .done(function(resp){
+          self.$el.html(resp);
+          self.render2();
+        });
+      return this;
+    },
 
-      // this.model.set({content: 'Bla'});
+    $edit: function(){
+      var self = this;
+      $.get(this.model.get_url())
+        .done(function(response){
 
+          new Modal({
+            context: {
+              body: response
+            }
+          }).on('apply', function(){
+            self.$submit();
+          }).open();
+        });
+
+      return this;
+    },
+
+    $submit: function (e) {
+      e && e.preventDefault();
+
+      var self = this;
+
+      var data = $('form').serialize();
+        $.ajax({
+          url: self.model.update_url(),
+          data: data,
+          type: 'POST'
+        }).done(function(data){
+          self.model.set(data);
+          self.render();
+        });
+
+    },
+
+    $blur: function(){
+      var self = this;
+      var type = this.model.id ? 'PUT' : 'POST';
+
+      $.ajax({
+        url:  self.model.update_url(),
+        data: {
+          simple_block: {
+            title: self.$('.title').text()
+          }
+        },
+        type: type
+      }).done(function(data){
+        self.model.set(data);
+        App.trigger('positions:update');
+        self.render();
+      });
     }
 
   });

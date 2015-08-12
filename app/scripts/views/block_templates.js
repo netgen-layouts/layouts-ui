@@ -3,6 +3,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
 
   return View.extend({
     ViewItem: ViewBlockTemplate,
+
     render: function() {
       View.prototype.render.apply(this, arguments);
       this.render_items();
@@ -23,8 +24,8 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
       $('[data-zone]').sortable({
         connectWith: '[data-zone]',
         placeholder: 'no-placeholder',
-        handle: ".handle",
-        tolerance: "pointer",
+        handle: '.handle',
+        tolerance: 'pointer',
         cursorAt: { left: 5 },
         delay: 150,
         distance: 20,
@@ -55,7 +56,6 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
           var block = block_template.has('template_id') && block_template;
           var zone = zone_view.model;
 
-
           console.log('block', block);
 
           // if(block){
@@ -78,9 +78,6 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
 
           ui.sender.data('copied', true);
 
-
-
-
           if(block){
 
           }else{
@@ -97,6 +94,8 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
             ui.item.remove();
           }
 
+
+          App.trigger('positions:update');
 
 
         }
@@ -133,6 +132,8 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
 
       return this;
     }
+
+
 
 
 

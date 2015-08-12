@@ -42,7 +42,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
   var sync = Backbone.sync;
 
   Backbone.sync = function(method, what, xhr){
-    xhr.data || (xhr.data = {});
+    //xhr.data || (xhr.data = {});
     Backbone.defaults && _.extend(xhr, Backbone.defaults() || {});
     Backbone._cacheRequest.apply(this, arguments);
     return sync(method, what, xhr);

@@ -10,7 +10,7 @@ define(['./base', 'views/modal'], function(Base, Modal){
 
     render: function(){
       var self = this;
-      $.get(this.model.get('grid'))
+      $.get(this.model.show_url())
         .done(function(resp){
           self.$el.html(resp);
           self.render2();
@@ -20,7 +20,7 @@ define(['./base', 'views/modal'], function(Base, Modal){
 
     $edit: function(e){
       var self = this;
-      $.get('http://localhost:3000/grids/1/edit?ajax=true')
+      $.get(this.model.get_url())
         .done(function(response){
 
           new Modal({
@@ -37,13 +37,17 @@ define(['./base', 'views/modal'], function(Base, Modal){
 
     $submit: function (e) {
       e && e.preventDefault();
+
       var self = this;
+      console.log(self.model.update_url());
+
       var data = $('form').serialize();
         $.ajax({
-          url: 'http://localhost:3000/grids/1.json',
+          url: self.model.update_url(),
           data: data,
-          type: 'PUT'
-        }).done(function(){
+          type: 'POST'
+        }).done(function(data){
+          self.model.set(data);
           self.render();
         });
 
