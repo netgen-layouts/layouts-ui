@@ -8,7 +8,8 @@ define(['view'], function(View){
     className: 'mymodal modal fade',
 
     events: {
-      'click .action_apply':  '$apply'
+      'click .action_apply':  '$apply',
+      'submit form': '$submit',
     },
 
     initialize: function(){
@@ -44,8 +45,16 @@ define(['view'], function(View){
       //this.trigger('close');
     },
 
-    $apply: function(e){
+    $submit: function(e){
       e.preventDefault();
+      this.$apply();
+      return this;
+    },
+
+
+
+    $apply: function(e){
+      e && e.preventDefault();
       this.trigger('apply');
       this.close();
       return this;
