@@ -23,7 +23,8 @@ require.config({
     templates: 'templates',
     app: 'app',
     init: 'init',
-    modal: '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal'
+    modal: '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal',
+    serializeJSON: '../../bower_components/jquery.serializeJSON/jquery.serializejson'
   },
 
   shim: {
@@ -50,7 +51,7 @@ require.config({
   }
 });
 
-require(['init', 'jquery', 'jquery_ui', 'modal', 'register_helpers', 'templates'], function(App){
+require(['init', 'jquery', 'jquery_ui', 'modal', 'register_helpers', 'templates', 'serializeJSON'], function(App){
 
   $(function(){
     App.init();

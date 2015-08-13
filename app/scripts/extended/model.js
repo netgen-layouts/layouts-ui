@@ -39,6 +39,11 @@ define(['underscore', 'backbone'], function(_, Backbone){
       return Backbone.Model.prototype.set.call(this, attrs, options);
     },
 
+    url: function(){
+      var url = Backbone.Model.prototype.url.apply(this, arguments);
+      return this.format ? url + '.'+this.format : url;
+    },
+
     set_if_empty: function(key, value){
       console.log(this.get(key));
       return !this.has(key) && this.set(key, value);
@@ -52,12 +57,12 @@ define(['underscore', 'backbone'], function(_, Backbone){
     selected_children: function(){
       return _.filter(this.children(), function(item){
         return item.get('selected');
-      });     
+      });
     },
 
     select: function(){
       this.children && _.invoke(this.children(), 'select');
-      this.set({selected: true, indeterminate: false});      
+      this.set({selected: true, indeterminate: false});
       this.children && this.detect_indeterminate();
       this.trigger('select');
       return this;
@@ -120,6 +125,6 @@ define(['underscore', 'backbone'], function(_, Backbone){
 
 
   });
-  
+
 
 });

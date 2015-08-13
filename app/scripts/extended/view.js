@@ -179,6 +179,7 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     },
 
     render_with_new_data: function(){
+      console.log('render_with_new_data')
       this.new_data = true;
       this.render();
     },
@@ -206,6 +207,7 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     trigger_render: function(){
       this.trigger('render', {self: this});
       App.trigger('render', {view: this});
+      console.log('trigger render')
       return this;
     },
 

@@ -2,33 +2,26 @@ define(['underscore', 'backbone', './base'], function(_, Backbone, Block){
   'use strict';
 
   return Block.extend({
-    defaults: {
-      template: 'grid'
-    },
 
-    show_url: function(){
-      if(this.id){
-        return 'http://localhost:3000/grids/'+ this.id + '?ajax=true';
+    format: 'json',
+    urlRoot: 'http://localhost:3000/grids',
+
+    html_url: function(){
+      if(this.isNew()){
+        return this.urlRoot + '/' + '1?ajax=true';
       }else{
-        return 'http://localhost:3000/grids/1?ajax=true';
+        return this.urlRoot + '/' + this.id + '?ajax=true';
       }
     },
 
-    get_url: function(){
+    new_or_edit_url: function(){
       if(this.id){
-        return 'http://localhost:3000/grids/'+ this.id +'/edit?ajax=true';
+        return this.urlRoot + '/' + this.id +'/edit?ajax=true';
       }else{
-        return 'http://localhost:3000/grids/new?ajax=true';
-      }
-    },
-
-    update_url: function(){
-      if(this.id){
-        return 'http://localhost:3000/grids/'+ this.id +'.json';
-      }else{
-        return 'http://localhost:3000/grids.json';
+        return this.urlRoot + '/' + 'new?ajax=true';
       }
     }
+
   });
 
 });

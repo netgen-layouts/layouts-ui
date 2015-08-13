@@ -4,6 +4,12 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
   return View.extend({
     ViewItem: ViewBlockTemplate,
 
+    initialize: function(){
+      View.prototype.initialize.apply(this, arguments);
+      this.listenToOnce(App.g.layout, 'sync', this.load_blocks);
+      return this;
+    },
+
     render: function() {
       View.prototype.render.apply(this, arguments);
       this.render_items();
@@ -17,6 +23,28 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
       return new Klass(attributes);
     },
 
+    load_blocks: function(){
+      var self = this;
+      _.each(App.g.layout.get('positions'), function(position){
+        _.each(position.blocks, function(item){
+
+          var block_template = App.g.block_templates.get(item.block_type_id);
+          var block = self.initialize_block(block_template);
+
+          if(item.block_id){
+            block.set({id: item.block_id});
+          }
+
+          var ViewBlockKlass = ViewBlocks[block.template().get('type')] || ViewBlocks.Def;
+          var view_block = new ViewBlockKlass({
+            model: block
+          });
+
+          $('[data-zone='+ position.zone  +']').append(view_block.render().$el);
+        });
+
+      });
+    },
 
     dnd: function() {
       var self = this;
@@ -45,6 +73,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
 
         stop: function(){
           App.trigger('sortable:end');
+          App.trigger('positions:update');
           console.log('STOP', this, arguments);
         },
         receive: function(e, ui) {
@@ -56,6 +85,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
           var block = block_template.has('template_id') && block_template;
           var zone = zone_view.model;
 
+          console.log('block model', block_template_view.model);
           console.log('block', block);
 
           // if(block){

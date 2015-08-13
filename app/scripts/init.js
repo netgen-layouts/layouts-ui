@@ -47,7 +47,7 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
         blocks = [];
         $(this).find('[data-view]').each(function(){
           var model = $(this).data('_view').model;
-          var block = model.isNew() ? {block_type_id: model.get('template_id')} : {block_id: model.id};
+          var block = model.isNew() ? {block_type_id: model.get('template_id')} : {block_id: model.id, block_type_id: model.get('template_id')};
 
           blocks.push(block);
         });

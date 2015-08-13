@@ -6,7 +6,6 @@ define(['underscore', 'model'], function(_, Model){
       return 'http://localhost:3000/layouts/' + this.id +'.json';
     },
     parse: function (response, options) {
-      console.log(options);
       response.zones = JSON.parse(response.zones);
       response.positions = JSON.parse(response.positions);
       return response;

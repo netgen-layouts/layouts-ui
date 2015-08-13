@@ -1,4 +1,4 @@
-define(['./base', 'views/modal'], function(Base, Modal){
+define(['./base', 'views/modal', 'app'], function(Base, Modal, App){
   'use strict';
 
   return Base.extend({
@@ -8,19 +8,10 @@ define(['./base', 'views/modal'], function(Base, Modal){
       'click .action-destroy': '$destroy'
     },
 
-    render: function(){
-      var self = this;
-      $.get(this.model.show_url())
-        .done(function(resp){
-          self.$el.html(resp);
-          self.render2();
-        });
-      return this;
-    },
 
     $edit: function(e){
       var self = this;
-      $.get(this.model.get_url())
+      $.get(this.model.new_or_edit_url())
         .done(function(response){
 
           new Modal({
@@ -28,14 +19,20 @@ define(['./base', 'views/modal'], function(Base, Modal){
               body: response
             }
           }).on('apply', function(){
-            self.$submit();
+            self.$submit(null, this);
           }).open();
         });
 
       return this;
     },
 
-    $submit: function (e) {
+    $submit: function (e, modal) {
+      e && e.preventDefault();
+      console.log(modal.$('form').serializeJSON().grid);
+      this.model.save(modal.$('form').serializeJSON().grid, {wait: true});
+    },
+
+    /*$submit: function (e) {
       e && e.preventDefault();
 
       var self = this;
@@ -52,6 +49,6 @@ define(['./base', 'views/modal'], function(Base, Modal){
           App.trigger('positions:update');
         });
 
-    }
+    }*/
   });
 });
