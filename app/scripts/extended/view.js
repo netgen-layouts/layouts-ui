@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
+define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, Backbone, App, params_parser){
   'use strict';
 
   return Backbone.View.extend({
@@ -179,7 +179,6 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     },
 
     render_with_new_data: function(){
-      console.log('render_with_new_data')
       this.new_data = true;
       this.render();
     },
@@ -207,7 +206,6 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     trigger_render: function(){
       this.trigger('render', {self: this});
       App.trigger('render', {view: this});
-      console.log('trigger render')
       return this;
     },
 
@@ -273,7 +271,7 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       }
       json = elements.toJSON();
       this.$elements && _.extend(json, this.$elements.find(form_elements, scope).toJSON());
-      var parsed_params = App.params_parser(json);
+      var parsed_params = params_parser(json);
       this.params = parsed_params;
       return this;
     },

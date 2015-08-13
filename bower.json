@@ -13,8 +13,7 @@
     "underscore": "*",
     "almond": "*",
     "bootstrap-sass": "*",
-    "jquery-ui": "~1.11.4",
-    "jquery.serializeJSON": "~2.6.1"
+    "jquery-ui": "~1.11.4"
   },
   "devDependencies": {}
 }

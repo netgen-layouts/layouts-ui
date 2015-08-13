@@ -32,8 +32,20 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
       this.trigger_render();
     },
 
-    $edit: function(e){
-      new Modal({}).open();
+    $edit: function(){
+      var self = this;
+      $.get(this.model.new_or_edit_url())
+        .done(function(response){
+
+         new Modal({
+            context: {
+              body: response
+            }
+          }).on('apply', function(){
+            self.$submit(null, this);
+          }).open();
+        });
+
       return this;
     },
 
@@ -53,7 +65,13 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
         self.model.destroy();
         App.trigger('positions:update');
       }).open();
-    }
+    },
+
+    $submit: function (e, modal) {
+      e && e.preventDefault();
+      var params = modal.serialize().params[this.form_namespace];
+      this.model.save(params);
+    },
 
   });
 
