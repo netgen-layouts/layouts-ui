@@ -16,6 +16,11 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
         collection: App.g.block_templates
       });
 
+      jQuery('.title').bind('dragover drop', function(e){
+          e.preventDefault();
+          return false;
+      });
+
 
       Components.Zones.collection.fetch();
 
