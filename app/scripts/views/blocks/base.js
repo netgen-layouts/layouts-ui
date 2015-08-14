@@ -55,7 +55,6 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
     },
 
     $destroy: function(){
-      console.log(this.model);
       var self = this;
       new Modal({
         body: 'Are you sure you want to delete?',
@@ -71,7 +70,7 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
       e && e.preventDefault();
       var params = modal.serialize().params[this.form_namespace];
       this.model.save(params);
-    },
+    }
 
   });
 

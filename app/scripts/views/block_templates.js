@@ -4,12 +4,6 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
   return View.extend({
     ViewItem: ViewBlockTemplate,
 
-    initialize: function(){
-      View.prototype.initialize.apply(this, arguments);
-      this.listenToOnce(App.g.layout, 'sync', this.load_blocks);
-      return this;
-    },
-
     render: function() {
       View.prototype.render.apply(this, arguments);
       this.render_items();
@@ -35,11 +29,10 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
             block.set({id: item.block_id});
           }
 
-          var ViewBlockKlass = ViewBlocks[block.template().get('type')] || ViewBlocks.Def;
+          var ViewBlockKlass = ViewBlocks[block_template.get('type')] || ViewBlocks.Def;
           var view_block = new ViewBlockKlass({
             model: block
           });
-
           $('[data-zone='+ position.zone  +']').append(view_block.render().$el);
         });
 

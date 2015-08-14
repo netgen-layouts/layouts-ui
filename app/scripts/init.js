@@ -4,28 +4,37 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
   $.extend(App, Backbone.Events, {
 
 
-
     init: function(){
-      console.log('Hello world');
+      this.setup_data();
 
+
+      $.when(
+        App.g.block_templates.fetch(),
+        App.g.layout.fetch(),
+        Components.Zones.collection.fetch() //TODO: remove this
+      ).then(this.start.bind(this));
+
+    },
+
+
+    setup_data: function(){
       App.g.block_templates = new BlockTemplates();
       App.g.layout = new Layout({id: $('[data-layout]').data('layout') });
+    },
+
+
+    start: function(){
 
       var view_block_templates = new ViewBlockTemplates({
         el: '.blocks',
         collection: App.g.block_templates
       });
 
-      jQuery('.title').bind('dragover drop', function(e){
-          e.preventDefault();
-          return false;
-      });
 
 
-      Components.Zones.collection.fetch();
+      view_block_templates.render();
+      view_block_templates.load_blocks();
 
-      view_block_templates.collection.fetch();
-      App.g.layout.fetch();
 
       this.on('sortable:start', function(){
         $(document.body).addClass('sorting');
@@ -40,7 +49,15 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
         });
       });
 
-
+      $(document).on('dragenter', function(e){
+        e.preventDefault();
+        $(document.body).addClass('dragging');
+      }).on('dragover dragleave', function(e){
+        e.preventDefault();
+      }).on('drop', function(e){
+        e.preventDefault();
+        $(document.body).removeClass('dragging');
+      });
     },
 
     get_positions: function(){

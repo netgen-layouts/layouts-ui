@@ -2,9 +2,7 @@ define(['./base'], function(Block){
   'use strict';
 
   return Block.extend({
-    defaults: {
-      template: 'image'
-    }
+    urlRoot: 'http://localhost:3000/images'
   });
 
 });
