@@ -12,7 +12,7 @@ define(['./base'], function(Base){
     $blur: function(){
 
       this.model.save({
-        title: this.$('.title').text()
+        title: this.$('.title').text().trim()
       });
 
     }
