@@ -24,7 +24,7 @@ define(['./base'], function(Base){
 
       if(image.length){
         var form_data = new FormData();
-        form_data.append('image[path]', image[0]);
+        form_data.append('image[media]', image[0]);
         var method = this.model.isNew() ? 'POST' : 'PUT';
         this.upload_image(form_data, method);
       }
