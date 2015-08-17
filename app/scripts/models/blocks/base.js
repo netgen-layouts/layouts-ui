@@ -10,7 +10,7 @@ define(['underscore', 'model',  'app'], function(_, Model, App){
     },
 
     html_url: function(){
-      var params = $.param(this.attributes);
+      var params = $.param({block: this.attributes});
       if(this.isNew()){
         return this.urlRoot + '/' + 'dummy?ajax=true&'+params;
       }else{
