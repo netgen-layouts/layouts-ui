@@ -12,7 +12,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
     },
 
     initialize_block: function(template){
-      var Klass = Blocks[template.get('type')] || Blocks.Def;
+      var Klass = Blocks[template.get('kind')] || Blocks.Def;
       var attributes = _.defaults({template_id: template.id}, template.get('params'));
       return new Klass(attributes);
     },
@@ -29,7 +29,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
             block.set({id: item.block_id});
           }
 
-          var ViewBlockKlass = ViewBlocks[block_template.get('type')] || ViewBlocks.Def;
+          var ViewBlockKlass = ViewBlocks[block_template.get('kind')] || ViewBlocks.Def;
           var view_block = new ViewBlockKlass({
             model: block
           });
@@ -108,7 +108,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
               template_id: block_template.id
             });
 
-            var ViewBlockKlass = ViewBlocks[block.template().get('type')] || ViewBlocks.Def;
+            var ViewBlockKlass = ViewBlocks[block.template().get('kind')] || ViewBlocks.Def;
             var view_block = new ViewBlockKlass({
               model: block
             });

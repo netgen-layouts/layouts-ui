@@ -2,7 +2,7 @@ define(['collection', 'models/block_template'], function(Collection, BlockTempla
   'use strict';
 
   return Collection.extend({
-    url: 'data/block_types.json',
+    url: 'http://localhost:3000/block_types.json',
     model: BlockTemplate
   });
 
