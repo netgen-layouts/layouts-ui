@@ -7,7 +7,7 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
       View.prototype.initialize.apply(this, arguments);
       this.on('render', this.update_positions);
       console.log(this.model.id);
-      // !this.model.isNew() && this.model.fetch();
+      !this.model.isNew() && this.model.fetch();
     },
 
 
