@@ -28,12 +28,16 @@ define(['underscore', 'model',  'app'], function(_, Model, App){
       return App.g.block_templates.get(this.get('template_id'));
     },
 
+    template: function(){
+      return this.type();
+    },
+
     type_name: function(){
       return this.type().get('type');
     },
 
     html_url: function(){
-      console.log(this.attributes);
+      console.log(this.attributes, this.urlRoot);
       var params = $.param({block: this.attributes});
       if(this.isNew()){
         return this.urlRoot + '/' + 'dummy?ajax=true&'+params;

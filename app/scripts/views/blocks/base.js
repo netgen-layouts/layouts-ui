@@ -7,7 +7,7 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
       View.prototype.initialize.apply(this, arguments);
       this.on('render', this.update_positions);
       console.log(this.model.id);
-      !this.model.isNew() && this.model.fetch();
+      // !this.model.isNew() && this.model.fetch();
     },
 
 
@@ -29,7 +29,7 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
 
     render2: function(){
       this.$el.attr('data-block', '');
-      this.$el.attr('data-type', this.model.get('type_name'));
+      this.$el.attr('data-type', this.model.get('template').get('kind'));
       this.$el.prepend(JST['block_actions'](this.context));
       this.trigger_render();
     },
