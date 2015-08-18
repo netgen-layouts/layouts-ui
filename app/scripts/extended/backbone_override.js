@@ -41,11 +41,25 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
 
   var sync = Backbone.sync;
 
-  Backbone.sync = function(method, what, xhr){
-    //xhr.data || (xhr.data = {});
-    Backbone.defaults && _.extend(xhr, Backbone.defaults() || {});
+  Backbone.sync = function(method, what, options){
+    //options.data || (options.data = {});
+    Backbone.defaults && _.extend(options, Backbone.defaults() || {});
     Backbone._cacheRequest.apply(this, arguments);
-    return sync(method, what, xhr);
+
+
+    var xhr = sync(method, what, options)
+      .done(function(){
+        var save_method = /create|update/.test(method);
+        what.trigger(method+':'+'success', what, xhr, options);
+        save_method && what.trigger('save:'+'success', what, xhr, options);
+      })
+      .fail(function(){
+        var save_method = /create|update/.test(method);
+        what.trigger(method+':'+'error', what, xhr, options);
+        save_method && what.trigger('save:'+'error', what, xhr, options);
+      });
+
+    return xhr;
   };
 
 
@@ -158,6 +172,15 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
     var view = original_extend.apply(this, arguments);
     view.prototype.events = _.extend({}, this.prototype.events, child.events);
     return view;
+  };
+
+
+  Backbone.Events.listenToAll = function(what, events, callback, delay){
+    return this.listenTo(what, events, _.debounce(callback, delay || 100));
+  };
+
+  Backbone.Events.onAll = function(name, callback, delay, context) {
+    return this.on(name, _.debounce(callback, delay || 100), context);
   };
 
 

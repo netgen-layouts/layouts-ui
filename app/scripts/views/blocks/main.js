@@ -4,9 +4,10 @@ define(function(require){
   return {
     Image: require('./image'),
     Def:   require('./def'),
-    Title: require('./title'),
+    SimpleBlock: require('./title'),
     List:  require('./list'),
-    Grid:  require('./grid')
+    Grid:  require('./grid'),
+    Group:  require('./group')
   };
 
 });

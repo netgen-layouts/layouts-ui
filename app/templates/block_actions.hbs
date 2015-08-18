@@ -1,5 +1,9 @@
+{{debug this}}
+
 <span class="block_actions">
   <span class="action-edit">Edit</span>
-  <span class="action-destroy">Delete</span>
-  <span class="handle">Move</span>
+  {{#unless model.in_group}}
+    <span class="action-destroy">Delete</span>
+    <span class="handle">Move</span>
+  {{/unless}}
 </span>

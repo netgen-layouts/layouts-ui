@@ -108,7 +108,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
               template_id: block_template.id
             });
 
-            var ViewBlockKlass = ViewBlocks[block.template().get('type')] || ViewBlocks.Def;
+            var ViewBlockKlass = ViewBlocks[block.type().get('type')] || ViewBlocks.Def;
             var view_block = new ViewBlockKlass({
               model: block
             });

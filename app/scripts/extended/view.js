@@ -26,7 +26,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       this.render_deps = [];
       this.last_query = {};
 
-      this.auto_render();
+      this.prevent_auto_render !== true && this.auto_render();
 
       if(this.listen_to_filter){
         this.listenTo(App, 'period:changed', this.load);
@@ -45,11 +45,6 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       //this.listen_to_filter && App.on('period:changed', this.load, this);
 
       return this;
-    },
-
-
-    listenToAll: function(what, events, callback){
-      this.listenTo(what, events, _.debounce(callback, 100));
     },
 
 

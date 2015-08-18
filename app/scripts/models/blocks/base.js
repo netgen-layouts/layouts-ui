@@ -5,11 +5,35 @@ define(['underscore', 'model',  'app'], function(_, Model, App){
 
     format: 'json',
 
-    template: function(){
+    initialize: function(){
+      Model.prototype.initialize.apply(this, arguments);
+      this.on('save:success', this.after_save);
+      return this;
+    },
+
+    after_save: function(model){
+      if(!model.group){return;}
+
+      console.log("SAVE SUCCESS", this, arguments);
+      var p = JSON.parse(model.group.get('params') || "{}");
+      console.debug(p);
+      p[model.get('label')] = model.id;
+      console.debug(p);
+
+      model.group.save({params: JSON.stringify(p) });
+      return this;
+    },
+
+    type: function(){
       return App.g.block_templates.get(this.get('template_id'));
     },
 
+    type_name: function(){
+      return this.type().get('type');
+    },
+
     html_url: function(){
+      console.log(this.attributes);
       var params = $.param({block: this.attributes});
       if(this.isNew()){
         return this.urlRoot + '/' + 'dummy?ajax=true&'+params;

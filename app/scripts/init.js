@@ -1,8 +1,9 @@
-define(['app', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout'], function(App, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout){
+define(['app', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load'], function(App, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad){
   'use strict';
 
   $.extend(App, Backbone.Events, {
 
+    blocks: ViewBlocksLoad,
 
     init: function(){
       this.setup_data();
@@ -43,11 +44,12 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
       });
 
 
-      App.on('positions:update', function() {
+      //Debounced with 100ms
+      App.onAll('positions:update', function() {
         App.g.layout.save({
           positions: App.get_positions()
         });
-      });
+      },200);
 
       $(document).on('dragenter', function(e){
         e.preventDefault();
@@ -67,7 +69,7 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
 
 
         blocks = [];
-        $(this).find('[data-view]').each(function(){
+        $(this).find('> [data-view]').each(function(){
           var model = $(this).data('_view').model;
           var block = model.isNew() ? {block_type_id: model.get('template_id')} : {block_id: model.id, block_type_id: model.get('template_id')};
 
