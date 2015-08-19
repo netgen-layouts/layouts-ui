@@ -13,13 +13,8 @@ define(['underscore', 'model',  'app'], function(_, Model, App){
 
     after_save: function(model){
       if(!model.group){return;}
-
-      console.log("SAVE SUCCESS", this, arguments);
-      var p = JSON.parse(model.group.get('params') || "{}");
-      console.debug(p);
+      var p = JSON.parse(model.group.get('params') || '{}');
       p[model.get('label')] = model.id;
-      console.debug(p);
-
       model.group.save({params: JSON.stringify(p) });
       return this;
     },
@@ -34,24 +29,6 @@ define(['underscore', 'model',  'app'], function(_, Model, App){
 
     type_name: function(){
       return this.type().get('type');
-    },
-
-    html_url: function(){
-      console.log(this.attributes, this.urlRoot);
-      var params = $.param({block: this.attributes});
-      if(this.isNew()){
-        return this.urlRoot + '/' + 'dummy?ajax=true&'+params;
-      }else{
-        return this.urlRoot + '/' + this.id + '?ajax=true';
-      }
-    },
-
-    new_or_edit_url: function(){
-      if(this.isNew()){
-        return this.urlRoot + '/' + 'new?ajax=true';
-      }else{
-        return this.urlRoot + '/' + this.id +'/edit?ajax=true';
-      }
     },
 
     toString: function(){

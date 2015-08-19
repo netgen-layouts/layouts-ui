@@ -39,9 +39,19 @@ define(['underscore', 'backbone'], function(_, Backbone){
       return Backbone.Model.prototype.set.call(this, attrs, options);
     },
 
-    url: function(){
+
+    fetch: function(options){
+      options && options.via && _.extend(options, {
+        via: options.via,
+        url: this.url(options.via)
+      });
+      return  Backbone.Model.prototype.fetch.call(this, options);
+    },
+
+    url: function(additional){
+      additional  = additional ? '/' + additional : '';
       var url = Backbone.Model.prototype.url.apply(this, arguments);
-      return this.format ? url + '.'+this.format : url;
+      return this.format ? url + additional + '.'+this.format : url;
     },
 
     set_if_empty: function(key, value){

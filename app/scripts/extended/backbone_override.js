@@ -46,16 +46,18 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
     Backbone.defaults && _.extend(options, Backbone.defaults() || {});
     Backbone._cacheRequest.apply(this, arguments);
 
+    var via = options.via || method;
+    //delete(options.via);
 
     var xhr = sync(method, what, options)
       .done(function(){
-        var save_method = /create|update/.test(method);
-        what.trigger(method+':'+'success', what, xhr, options);
+        var save_method = /create|update/.test(via);
+        what.trigger(via+':'+'success', what, xhr, options);
         save_method && what.trigger('save:'+'success', what, xhr, options);
       })
       .fail(function(){
-        var save_method = /create|update/.test(method);
-        what.trigger(method+':'+'error', what, xhr, options);
+        var save_method = /create|update/.test(via);
+        what.trigger(via+':'+'error', what, xhr, options);
         save_method && what.trigger('save:'+'error', what, xhr, options);
       });
 

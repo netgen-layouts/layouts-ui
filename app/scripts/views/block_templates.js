@@ -109,10 +109,12 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
               template_id: block_template.id
             });
 
+
             var ViewBlockKlass = ViewBlocks[block.template().get('kind')] || ViewBlocks.Def;
             var view_block = new ViewBlockKlass({
               model: block
             });
+            block.save();
             console.log(block);
             ui.item.after(view_block.render().$el);
             ui.item.remove();

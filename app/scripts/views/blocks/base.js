@@ -1,4 +1,4 @@
-define(['view', 'views/modal', 'app'], function(View, Modal, App){
+define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal, FormModal, App){
   'use strict';
 
   return View.extend({
@@ -6,47 +6,36 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
       this.on('render', this.update_positions);
-      console.log(this.model.id);
       !this.model.isNew() && this.model.fetch();
     },
 
 
     events: {
       'click > .block_actions .action-edit': '$edit',
-      'dblclick > .block_actions .action-destroy': '$fast_destroy'
-      // 'click > .block_actions .action-destroy': '$destroy'
+      //'dblclick > .block_actions .action-destroy': '$fast_destroy'
+       'click > .block_actions .action-destroy': '$destroy'
     },
 
     render: function(){
-      View.prototype.render.apply(this, arguments);
-      $.get(this.model.html_url())
-        .done(function(resp){
-          this.$el.html(resp);
-          this.render2();
-        }.bind(this));
-      return this;
-    },
+      this.$el.html(this.model.get('html'));
 
-    render2: function(){
       this.$el.attr('data-block', '');
       this.$el.attr('data-type', this.model.get('template').get('kind'));
       this.$el.prepend(JST['block_actions'](this.context));
-      this.trigger_render();
+
+      View.prototype.render.apply(this, arguments);
+      return this;
     },
 
-    $edit: function(){
-      var self = this;
-      $.get(this.model.new_or_edit_url())
-        .done(function(response){
 
-         new Modal({
-            context: {
-              body: response
-            }
-          }).on('apply', function(){
-            self.$submit(null, this);
-          }).open();
-        });
+    $edit: function(){
+
+      new FormModal({
+        form_namespace: this.form_namespace,
+        model: this.model
+      });
+
+      this.model.fetch({via: 'edit'});
 
       return this;
     },
@@ -67,12 +56,6 @@ define(['view', 'views/modal', 'app'], function(View, Modal, App){
         self.model.destroy();
         App.trigger('positions:update');
       }).open();
-    },
-
-    $submit: function (e, modal) {
-      e && e.preventDefault();
-      var params = modal.serialize().params[this.form_namespace];
-      this.model.save(params);
     },
 
     $fast_destroy: function(){

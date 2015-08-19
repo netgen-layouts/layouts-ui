@@ -44,12 +44,12 @@ define(['app', 'backbone',  'components/main', 'collections/block_templates', 'v
       });
 
 
-      //Debounced with 100ms
+      //Debounced with 200ms
       App.onAll('positions:update', function() {
         App.g.layout.save({
           positions: App.get_positions()
         });
-      },200);
+      }, 200);
 
       $(document).on('dragenter', function(e){
         e.preventDefault();
