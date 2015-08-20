@@ -22,28 +22,25 @@ define(['view'], function(View){
       return this;
     },
 
-
-    set_context: function(){
-      View.prototype.set_context.apply(this, arguments);
-      //this.context.body = "Hello world 1";
-      return this;
-    },
-
     insert: function(){
       this.$el.appendTo(document.body);
       return this;
     },
 
     open: function(){
+      if(this.is_open){ return this; }
       this.render().insert().$el.modal({});
       this.trigger('open');
+      this.is_open = true;
       return this;
     },
 
     close: function(){
       this.$el.modal('hide');
-      //this.trigger('close');
+      this.is_open = false;
+      this.trigger('close');
     },
+
 
     $submit: function(e){
       e.preventDefault();
