@@ -27,13 +27,19 @@ define(['./modal'], function(Modal){
 
     $submit: function (e) {
       e && e.preventDefault();
-      var params = this.serialize().params[this.form_namespace];
-      this.model.save(params);
+      var params = this.serialize().params[this.form_namespace], options = {};
+
+      if(this.form_namespace === 'image'){
+        options.form_data = new FormData(this.$('form').get(0));
+      }
+
+      this.model.save(params, options);
     },
 
     $apply: function () {
       this.$submit.apply(this, arguments);
     }
+
 
   });
 
