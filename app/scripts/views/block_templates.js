@@ -119,11 +119,6 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
             ui.item.after(view_block.render().$el);
             ui.item.remove();
           }
-
-
-          App.trigger('positions:update');
-
-
         }
       });
 

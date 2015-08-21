@@ -4,7 +4,7 @@ define(['view', './zone'], function(View, ViewZone){
   return View.extend({
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
-      this.listenTo(this.collection, 'sync', this.parse_dom);
+      this.listenTo(this.collection, 'reset', this.parse_dom);
       return this;
     },
 

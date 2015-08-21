@@ -1,8 +1,9 @@
-define([], function(){
+define(['env'], function(env){
   'use strict';
 
   return {
-    g: {}
+    g: {},
+    env: env
   };
 
 });

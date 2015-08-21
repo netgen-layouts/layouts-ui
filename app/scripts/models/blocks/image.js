@@ -2,7 +2,7 @@ define(['underscore', './base'], function(_, Block){
   'use strict';
 
   return Block.extend({
-    urlRoot: 'http://localhost:3000/images',
+    path: 'images',
     sync: function(method, model, options){
       options.form_data && _.extend(options, {
         data: options.form_data,

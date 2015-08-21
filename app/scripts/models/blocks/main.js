@@ -7,7 +7,8 @@ define(function(require){
     SimpleBlock: require('./title'),
     List:  require('./list'),
     Grid:  require('./grid'),
-    Group:  require('./group')
+    Group:  require('./group'),
+    ContentBlock:  require('./content_block')
   };
 
 });

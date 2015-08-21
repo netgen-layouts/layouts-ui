@@ -1,4 +1,4 @@
-define(['underscore', 'model',  'app'], function(_, Model, App){
+define(['underscore', 'model', 'app'], function(_, Model, App){
   'use strict';
 
   return Model.extend({

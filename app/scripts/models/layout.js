@@ -2,10 +2,13 @@ define(['underscore', 'model'], function(_, Model){
   'use strict';
 
   return Model.extend({
-    url: function(){
-      return 'http://localhost:3000/layouts/' + this.id +'.json';
+    format: 'json',
+
+    path: function(){
+      return 'layouts';
     },
-    parse: function (response, options) {
+
+    parse: function (response) {
       response.zones = JSON.parse(response.zones);
       response.positions = JSON.parse(response.positions);
       return response;

@@ -1,4 +1,4 @@
-define(['underscore', 'backbone'], function(_, Backbone){
+define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
   'use strict';
 
   return Backbone.Model.extend({
@@ -48,10 +48,15 @@ define(['underscore', 'backbone'], function(_, Backbone){
       return  Backbone.Model.prototype.fetch.call(this, options);
     },
 
+    urlRoot: function(){
+      return App.env.base_url + _.result(this, 'path');
+    },
+
     url: function(additional){
       additional  = additional ? '/' + additional : '';
       var url = Backbone.Model.prototype.url.apply(this, arguments);
-      return this.format ? url + additional + '.'+this.format : url;
+      console.log(url);
+      return this.format ? url + additional + '.'+ this.format : url;
     },
 
     set_if_empty: function(key, value){

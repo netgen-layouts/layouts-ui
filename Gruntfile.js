@@ -333,11 +333,7 @@ module.exports = function (grunt) {
             },
 
             development: {
-              options: {
-                paths: {
-                  "env": 'environments/development'
-                }
-              }
+
             }
 
         },

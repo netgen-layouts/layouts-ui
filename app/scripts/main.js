@@ -4,6 +4,7 @@ require.config({
   baseUrl: 'scripts',
 
   paths: {
+    env: 'environments/development',
     modernizr: '../../bower_components/modernizr/modernizr',
     underscore: '../../bower_components/underscore/underscore',
     requirejs: '../../bower_components/requirejs/require',
