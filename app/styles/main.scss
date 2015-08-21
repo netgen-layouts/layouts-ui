@@ -83,7 +83,8 @@ img{width:100%; max-width:100%;}
     left: 0;
     right: 0;
     z-index: 1;
-    background: url('/images/drag-drop.png') top left;
+    background: url('/images/drag-drop.png') center center no-repeat;
+    background-size: 100% 100%;
   }
 }
 
