@@ -4,7 +4,7 @@ define(function(require){
   return {
     Image: require('./image'),
     Def:   require('./def'),
-    SimpleBlock: require('./title'),
+    SimpleBlock: require('./simple_block'),
     List:  require('./list'),
     Grid:  require('./grid'),
     Group:  require('./group'),
