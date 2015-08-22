@@ -51,9 +51,11 @@ require.config({
   }
 });
 
-require(['init', 'jquery', 'jquery_ui', 'extended/jquery_override','modal', 'register_helpers', 'templates'], function(App){
+require(['init', 'router', 'jquery', 'jquery_ui', 'extended/jquery_override','modal', 'register_helpers', 'templates'], function(App, Router){
 
   $(function(){
+    App.router = new Router();
+    Backbone.history.start();
     App.init();
   });
 
