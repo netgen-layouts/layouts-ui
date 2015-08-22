@@ -24,6 +24,8 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
 
     start: function(){
 
+      $('.zones').append(App.g.layout.get('html'));
+
       Components.Zones.collection.reset(App.g.layout.get('zones'));
 
       var view_block_templates = new ViewBlockTemplates({
