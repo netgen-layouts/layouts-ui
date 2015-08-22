@@ -4,7 +4,7 @@ define(['./base'], function(Base){
   return Base.extend({
 
     events: {
-      'blur .title': '$blur'
+      'blur .simple-block': '$blur'
     },
 
     form_namespace: 'simple_block',
@@ -12,7 +12,7 @@ define(['./base'], function(Base){
     $blur: function(){
 
       this.model.save({
-        title: this.$('.title').text().trim()
+        title: this.$('.simple-block').text().trim()
       });
 
     }
