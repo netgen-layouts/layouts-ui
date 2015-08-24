@@ -2,7 +2,7 @@ define([], function(){
   'use strict';
 
   return {
-    env: 'development',
+    name: 'development',
     base_url: 'http://localhost:3000/'
   };
 

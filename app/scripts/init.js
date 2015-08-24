@@ -1,6 +1,19 @@
 define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load'], function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad){
   'use strict';
 
+
+    Backbone.defaults = function(){
+      var request = {};
+
+      if(App.env.name === 'staging'){
+         request.headers = {
+          Authentication: 'Token EffectivaNetgen'
+        };
+      }
+
+      return request;
+    };
+
   $.extend(App, Backbone.Events, {
 
     blocks: ViewBlocksLoad,

@@ -362,7 +362,7 @@ module.exports = function (grunt) {
                 preferOnline: true,
                 verbose: false,
                 hash: false,
-                timestamp: false,
+                timestamp: true
                 // master: ['*']
               },
               src: [
