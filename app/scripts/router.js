@@ -1,4 +1,4 @@
-define(['backbone'], function(Backbone){
+define(['backbone', 'app'], function(Backbone, App){
   'use strict';
 
 
@@ -9,14 +9,15 @@ define(['backbone'], function(Backbone){
       'layout(/:id)': 'layout'
     },
 
+
     home: function(){
-      this.navigate('layout/' + 1, {trigger: true});
+      this.navigate_to('layout', {id: 1});
     },
 
-    layout: function(route){
-      $('[data-layout]').data('layout', route.id);
-      App.init();
+    layout: function(){
+      App.page_layout();
     }
+
   });
 
 });

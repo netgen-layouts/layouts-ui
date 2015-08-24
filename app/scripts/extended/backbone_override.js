@@ -1,4 +1,4 @@
-define(['underscore', 'backbone_original'], function(_, Backbone){
+define(['underscore', 'backbone_original', 'app'], function(_, Backbone, App){
   'use strict';
 
 
@@ -130,7 +130,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
     opts || (opts = {});
 
 
-    params.locale = params.locale || this.params.locale || 'en'; //TODO: extract
+    params.locale = params.locale || this.params.locale || App.default_locale; //TODO: extract
 
     this._inverted_routes || (this._inverted_routes = _.invert(this.routes));
 
@@ -147,7 +147,7 @@ define(['underscore', 'backbone_original'], function(_, Backbone){
           return v;
         });
 
-        if(!in_url && v !== null){ query_params[k] = v; }
+        if(!in_url && !(v === null || v === undefined)){ query_params[k] = v; }
       });
 
       !_.isEmpty(query_params) && (route += '?' + $.param(query_params));

@@ -1,18 +1,31 @@
-define(['view'], function(View){
+define(['view', 'app'], function(View, App){
   'use strict';
 
   return View.extend({
+
+    events: {
+      'click': '$goto_parent'
+    },
     // template: 'blocks/item',
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
       // this.dnd();
       this.mark_zone_type();
+
+      console.log(this.$el);
       return this;
     },
 
     mark_zone_type: function(){
       this.$el.addClass('zone_type_'+ this.model.get('type_name'));
     },
+
+    $goto_parent: function(e){
+      e.preventDefault();
+      if(this.model.is_inherited()){
+        App.router.navigate_to('layout', {id: App.g.layout.get('parent_id')});
+      }
+    }
 
     // dnd: function(){
     //   this.$el.droppable({

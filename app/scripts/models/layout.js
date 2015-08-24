@@ -1,4 +1,4 @@
-define(['underscore', 'model'], function(_, Model){
+define(['underscore', 'model', 'app'], function(_, Model, App){
   'use strict';
 
   return Model.extend({
@@ -21,6 +21,10 @@ define(['underscore', 'model'], function(_, Model){
       json.zones = JSON.stringify(json.zones);
       json.positions = JSON.stringify(json.positions);
       return json;
+    },
+
+    inherited_zones: function(){
+      return _.where(App.g.layout.get('zones'), {type: 2});
     }
 
   });
