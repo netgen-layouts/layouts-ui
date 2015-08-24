@@ -34,7 +34,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
           var view_block = new ViewBlockKlass({
             model: block
           });
-          $('[data-zone='+ position.zone  +']').append(view_block.render().$el);
+          $('[data-zone='+ position.zone  +']').append(view_block.$el);
         });
 
       });

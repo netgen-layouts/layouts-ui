@@ -43,7 +43,6 @@ require.config({
       }
     },
 
-
     templates: {
       deps: ['register_helpers']
     }
@@ -51,12 +50,14 @@ require.config({
   }
 });
 
-require(['init', 'router', 'jquery', 'jquery_ui', 'extended/jquery_override','modal', 'register_helpers', 'templates'], function(App, Router){
+require(['init', 'backbone', 'router', 'jquery', 'jquery_ui', 'extended/jquery_override','modal', 'register_helpers', 'templates'],
+  function(App, Backbone, Router){
 
-  $(function(){
-    App.router = new Router();
-    Backbone.history.start();
     App.init();
-  });
+
+    $(function(){
+      App.router = new Router();
+      Backbone.history.start();
+    });
 
 });

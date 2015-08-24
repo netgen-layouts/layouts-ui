@@ -43,6 +43,7 @@ define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal,
 
     update_positions: function(){
       var self = this;
+      console.log(this.model.changed)
       self.model.changed.id && App.trigger('positions:update');
     },
 

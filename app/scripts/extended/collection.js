@@ -30,7 +30,7 @@ define(['underscore', 'backbone', 'model'], function(_, Backbone, Model){
       return ('values' in resp) ? resp.values : resp;
     },
 
-    fetch: function(){
+    fetch_once: function(){
       if(this.cached && this.length){return null;}
       return Backbone.Collection.prototype.fetch.apply(this, arguments);
     },

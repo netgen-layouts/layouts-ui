@@ -19,39 +19,12 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
     blocks: ViewBlocksLoad,
 
     init: function(){
-      this.setup_data();
+      this.setup_events();
 
-
-      $.when(
-        App.g.block_templates.fetch(),
-        App.g.layout.fetch()
-      ).then(this.start.bind(this));
-    },
-
-
-    setup_data: function(){
       App.g.block_templates = new BlockTemplates();
-      App.g.layout = new Layout({id: $('[data-layout]').data('layout') });
     },
 
-
-    start: function(){
-
-      $('.zones').html(App.g.layout.get('html'));
-
-      Components.Zones.collection.reset(App.g.layout.get('zones'));
-
-      var view_block_templates = new ViewBlockTemplates({
-        el: '.blocks',
-        collection: App.g.block_templates
-      });
-
-
-
-      view_block_templates.render();
-      view_block_templates.load_blocks();
-
-
+    setup_events: function(){
       this.on('sortable:start', function(){
         $(document.body).addClass('sorting');
       }).on('sortable:end', function(){
@@ -77,12 +50,37 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
       });
     },
 
+    page_layout: function(){
+      App.g.layout = new Layout({id: App.router.params.id});
+
+      $.when(
+        App.g.block_templates.fetch_once(),
+        App.g.layout.fetch()
+      ).then(this.start.bind(this));
+    },
+
+    start: function(){
+
+      $('.zones').html(App.g.layout.get('html'));
+
+      Components.Zones.collection.reset(App.g.layout.get('zones'));
+
+      var view_block_templates = new ViewBlockTemplates({
+        el: '.blocks',
+        collection: App.g.block_templates
+      });
+
+      view_block_templates.render();
+      view_block_templates.load_blocks();
+
+    },
+
     get_positions: function(){
       var positions = [], blocks;
       $('[data-zone]').each(function(){
         var zone_id = $(this).data().zone;
-
-
+        var zone_model = $(this).data('_view').model;
+        console.log(zone_model);
         blocks = [];
         $(this).find('> [data-view]').each(function(){
           var model = $(this).data('_view').model;
@@ -92,7 +90,7 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
           });
         });
 
-        positions.push({
+        !zone_model.is_inherited() && positions.push({
           zone: zone_id,
           blocks: blocks
         });
