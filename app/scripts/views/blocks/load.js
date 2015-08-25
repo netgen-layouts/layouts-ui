@@ -2,7 +2,7 @@ define(['underscore', 'models/blocks/main', './main'], function(_, Blocks, ViewB
   'use strict';
 
    return {
-      initialize_block: function(data){
+    initialize_block: function(data){
       var Klass = Blocks[data.type] || Blocks.Def;
       var attributes = _.defaults({template_id: 1, in_group: true, label: data.label}, data.attributes);
       return new Klass(attributes);
@@ -11,17 +11,19 @@ define(['underscore', 'models/blocks/main', './main'], function(_, Blocks, ViewB
     load_blocks: function(view_group){
       var self = this;
 
+      console.log(view_group.model);
+
       view_group.$('[data-block]').each(function(n, item){
 
           var json = $(item).text().trim();
-          console.log(json);
+          console.log(item);
           if(!json){return;}
           var data = JSON.parse(json);
           console.log(data);
 
           var block = self.initialize_block(data);
 
-          console.log("Block:", block);
+          console.log('Block:', block);
 
           if(data.block_id){
             block.set({id: data.block_id});
@@ -35,7 +37,7 @@ define(['underscore', 'models/blocks/main', './main'], function(_, Blocks, ViewB
           });
 
           console.log(item);
-          $(item).html(view_block.render().$el);
+          $(item).html(view_block.$el);
         });
 
     }

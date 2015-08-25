@@ -1,9 +1,12 @@
-define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load'], function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad){
+define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load', 'models/blocks/helper'],
+  function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad, ModelHelper){
   'use strict';
 
   $.extend(App, Backbone.Events, {
 
     blocks: ViewBlocksLoad,
+
+    model_helper: ModelHelper,
 
     init: function(){
       this.setup_events();
@@ -67,7 +70,6 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
       $('[data-zone]').each(function(){
         var zone_id = $(this).data().zone;
         var zone_model = $(this).data('_view').model;
-        console.log(zone_model);
         blocks = [];
         $(this).find('> [data-view]').each(function(){
           var model = $(this).data('_view').model;
