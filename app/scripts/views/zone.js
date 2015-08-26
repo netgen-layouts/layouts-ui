@@ -12,7 +12,6 @@ define(['view', 'app'], function(View, App){
       // this.dnd();
       this.mark_zone_type();
 
-      console.log(this.$el);
       return this;
     },
 

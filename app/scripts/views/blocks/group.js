@@ -39,9 +39,8 @@ define(['underscore', './base', 'app'], function(_, Base, App){
     },
 
     render: function(){
-      Base.prototype.render.apply(this, arguments);
-
-     $.get(this.model.html_url())
+      if(!this.model.id){ return this; }
+      $.get(this.model.html_url())
         .done(function(resp){
           this.$el.html(resp);
           this.render2();
