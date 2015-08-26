@@ -55,7 +55,6 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     url: function(additional){
       additional  = additional ? '/' + additional : '';
       var url = Backbone.Model.prototype.url.apply(this, arguments);
-      console.log(url);
       return this.format ? url + additional + '.'+ this.format : url;
     },
 

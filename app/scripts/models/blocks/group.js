@@ -9,7 +9,6 @@ define(['./base', 'app'], function(Block, App){
     },
 
     parse: function (response) {
-      console.log(response);
       response.parameters = JSON.parse(response.parameters);
       return response;
     },

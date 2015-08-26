@@ -17,14 +17,12 @@ define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal,
     },
 
     render: function(){
-      console.log('REBDER BASE');
-      this.$el.html(this.model.get('html'));
+      View.prototype.render.apply(this, arguments);
 
+      this.$el.html(this.model.get('html'));
       this.$el.attr('data-block', '');
       this.$el.attr('data-type', this.model.get('template').get('kind'));
       this.$el.prepend(JST['block_actions'](this.context));
-
-      View.prototype.render.apply(this, arguments);
       return this;
     },
 
