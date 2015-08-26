@@ -111,6 +111,9 @@ input[type="text"]{
   > .block_actions{ top:-30px; left:-8px; height:30px;
     span{background-color:#900;}
   }
+  [data-block] .block_actions{
+    .action-destroy, .action-edit{display:none;}
+  }
 }
 
 
@@ -124,3 +127,5 @@ input[type="text"]{
 .zone_type_inherited{
   cursor: pointer;
 }
+
+
