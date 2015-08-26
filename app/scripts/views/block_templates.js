@@ -12,7 +12,6 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
     },
 
     initialize_block: function(template){
-      console.log(template.attributes);
       var Klass = Blocks[template.get('kind')] || Blocks.Def;
       var attributes = _.defaults({template_id: template.id}, template.get('parameters'));
       return new Klass(attributes);
@@ -109,13 +108,17 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
               template_id: block_template.id
             });
 
-
             var ViewBlockKlass = ViewBlocks[block.template().get('kind')] || ViewBlocks.Def;
             var view_block = new ViewBlockKlass({
               model: block
             });
-            block.save();
-            console.log(block);
+
+            if(block.is_group()){
+              block.save_group();
+            }else{
+              block.save();
+            }
+
             ui.item.after(view_block.render().$el);
             ui.item.remove();
           }

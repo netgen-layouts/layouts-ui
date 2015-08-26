@@ -17,6 +17,7 @@ define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal,
     },
 
     render: function(){
+      console.log('REBDER BASE');
       this.$el.html(this.model.get('html'));
 
       this.$el.attr('data-block', '');
@@ -43,7 +44,6 @@ define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal,
 
     update_positions: function(){
       var self = this;
-      console.log(this.model.changed)
       self.model.changed.id && App.trigger('positions:update');
     },
 
