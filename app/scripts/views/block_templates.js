@@ -1,4 +1,4 @@
-define(['underscore', 'view', './block_template', 'models/blocks/main', './blocks/main', 'app'], function(_, View, ViewBlockTemplate, Blocks, ViewBlocks, App) {
+define(['underscore', 'view', './block_template', './blocks/main', 'app'], function(_, View, ViewBlockTemplate, ViewBlocks, App) {
   'use strict';
 
   return View.extend({
@@ -11,19 +11,13 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
       return this;
     },
 
-    initialize_block: function(template){
-      var Klass = Blocks[template.get('kind')] || Blocks.Def;
-      var attributes = _.defaults({template_id: template.id}, template.get('parameters'));
-      return new Klass(attributes);
-    },
-
     load_blocks: function(){
       var self = this;
       _.each(App.g.layout.get('positions'), function(position){
         _.each(position.blocks, function(item){
 
           var block_template = App.g.block_templates.get(item.block_type_id);
-          var block = self.initialize_block(block_template);
+          var block = App.model_helper.init_block(block_template);
 
           if(item.block_id){
             block.set({id: item.block_id});
@@ -104,7 +98,7 @@ define(['underscore', 'view', './block_template', 'models/blocks/main', './block
           if(block){
 
           }else{
-            block = self.initialize_block(block_template, {
+            block = App.model_helper.init_block(block_template, {
               template_id: block_template.id
             });
 

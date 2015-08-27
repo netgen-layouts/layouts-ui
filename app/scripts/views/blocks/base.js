@@ -1,4 +1,4 @@
-define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal, FormModal, App){
+define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app', 'models/blocks/base'], function(_, View, Modal, FormModal, App, BaseModel){
   'use strict';
 
   return View.extend({
@@ -22,7 +22,7 @@ define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal,
       this.$el.html(this.model.get('html'));
       this.$el.attr('data-block', '');
       this.$el.attr('data-type', this.model.get('template').get('kind'));
-      this.$el.prepend(JST['block_actions'](this.context));
+      this.$el.prepend(JST['block_actions'](this.context)); // jshint ignore:line
       return this;
     },
 
@@ -51,8 +51,20 @@ define(['view', 'views/modal', 'views/form_modal', 'app'], function(View, Modal,
         body: 'Are you sure you want to delete?',
         context: { title: 'Confirm' }
       }).on('apply', function(){
+
+        if(self.model.is_group()){
+          var kind, block;
+          var block_ids = _.pluck(self.model.get('parameters'), 'block_id');
+          _.each(block_ids, function(block_id){
+            kind = self.$('[data-block='+ block_id +']').find('[data-type]').data('type');
+            block = App.model_helper.init_block_kind(block_id, kind);
+            block.destroy();
+          });
+        }
+
         self.remove();
         self.model.destroy();
+
         App.trigger('positions:update');
       }).open();
     },

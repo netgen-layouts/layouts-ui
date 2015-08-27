@@ -1,15 +1,9 @@
-define(['underscore', 'models/blocks/main', './main'], function(_, Blocks, ViewBlocks){
+define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
   'use strict';
 
    return {
-    initialize_block: function(data){
-      var Klass = Blocks[data.type] || Blocks.Def;
-      var attributes = _.defaults({template_id: 1, in_group: true, label: data.label}, data.attributes);
-      return new Klass(attributes);
-    },
 
     load_blocks: function(view_group){
-      var self = this;
 
       view_group.$('[data-block]').each(function(n, item){
 
@@ -17,7 +11,7 @@ define(['underscore', 'models/blocks/main', './main'], function(_, Blocks, ViewB
           if(!json){return;}
           var data = JSON.parse(json);
 
-          var block = self.initialize_block(data);
+          var block = App.model_helper.init_group_block(data);
 
           if(data.block_id){
             block.set({id: data.block_id});
