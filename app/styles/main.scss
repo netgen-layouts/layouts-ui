@@ -135,11 +135,10 @@ input[type="text"]{
     position:relative;
     margin-bottom:20px;
     &:empty:before{ content:'Drop content in section!!!'; color:#999; font-size:1em; }
+    background:#339;
   }
 
   > .block_actions{ top:-30px; left:-8px; height:30px;
     span{background-color:#3A7EA2;}
   }
 }
-
-
