@@ -12,7 +12,6 @@ define(['underscore', 'view', './block_template', './blocks/main', 'app'], funct
     },
 
     load_blocks: function(){
-      var self = this;
       _.each(App.g.layout.get('positions'), function(position){
         _.each(position.blocks, function(item){
 
@@ -34,7 +33,6 @@ define(['underscore', 'view', './block_template', './blocks/main', 'app'], funct
     },
 
     dnd: function() {
-      var self = this;
 
       $('[data-zone]').sortable({
         connectWith: '[data-zone]',
@@ -120,7 +118,7 @@ define(['underscore', 'view', './block_template', './blocks/main', 'app'], funct
       });
 
       $('.blocks').sortable({
-        connectWith: '[data-zone]',
+        connectWith: '[data-zone], [data-section]',
         placeholder: 'no-placeholder',
         receive: function(e, ui){
           console.log(ui.sender, this);

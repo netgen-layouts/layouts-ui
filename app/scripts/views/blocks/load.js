@@ -3,6 +3,13 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
 
    return {
 
+    create_view: function(kind, model){
+      var ViewBlockKlass = ViewBlocks[kind] || ViewBlocks.Def;
+      return new ViewBlockKlass({
+        model: model
+      });
+    },
+
     load_blocks: function(view_group){
 
       view_group.$('[data-block]').each(function(n, item){

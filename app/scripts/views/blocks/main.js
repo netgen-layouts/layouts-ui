@@ -8,7 +8,8 @@ define(function(require){
     List:  require('./list'),
     Grid:  require('./grid'),
     Group:  require('./group'),
-    ContentBlock:  require('./content_block')
+    ContentBlock:  require('./content_block'),
+    Section:  require('./section')
   };
 
 });
