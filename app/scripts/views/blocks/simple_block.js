@@ -9,7 +9,8 @@ define(['./base'], function(Base){
 
     form_namespace: 'simple_block',
 
-    $blur: function(){
+    $blur: function(e){
+      e.preventDefault();
 
       this.model.save({
         title: this.$('.simple-block').text().trim()
