@@ -1,8 +1,18 @@
-define(['./base', 'app'], function(Base, App){
+define(['underscore', './base', 'app'], function(_, Base, App){
   'use strict';
 
   return Base.extend({
     form_namespace: 'section',
+
+    initialize: function(){
+      Base.prototype.initialize.apply(this, arguments);
+      this.on('render', this.load_blocks);
+      return this;
+    },
+
+    load_blocks: function(){
+      App.blocks.load_section_blocks(this);
+    },
 
     render: function() {
       Base.prototype.render.apply(this, arguments);
@@ -47,8 +57,11 @@ define(['./base', 'app'], function(Base, App){
               block.save();
             }
 
+
             ui.item.after(view_block.render().$el);
             ui.item.remove();
+
+            self.listenToOnce(block, 'save:success', self.save_positions);
           }
 
         },
@@ -63,7 +76,8 @@ define(['./base', 'app'], function(Base, App){
           App.trigger('positions:update');
           console.log('STOP', this, arguments);
           self.save_positions();
-        },
+        }
+
       });
 
       return this;
@@ -71,8 +85,9 @@ define(['./base', 'app'], function(Base, App){
 
     save_positions: function(){
       var positions = [];
-      this.$('[data-block]').each(function(i, item){
+      this.$('[data-type]').each(function(i, item){
         var model = $(item).data('_view').model;
+        console.log(model.attributes);
         positions.push({
           block_id: model.id,
           block_type_id: model.get('template_id')

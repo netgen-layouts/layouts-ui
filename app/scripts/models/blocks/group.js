@@ -38,7 +38,6 @@ define(['underscore', './base', 'app'], function(_, Block, App){
 
             block.save(null, {
               success: function(model){
-                console.log(model);
                 params.push({
                   label: model.get('label'),
                   block_id: model.id
