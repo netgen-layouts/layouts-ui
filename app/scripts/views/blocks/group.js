@@ -1,4 +1,4 @@
-define(['underscore', './base', 'app'], function(_, Base, App){
+define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, App){
   'use strict';
 
   return Base.extend({
@@ -40,8 +40,10 @@ define(['underscore', './base', 'app'], function(_, Base, App){
 
     render: function(){
       if(!this.model.id){ return this; }
-      $.get(this.model.html_url())
-        .done(function(resp){
+      $.ajax({
+        url: this.model.html_url(),
+        headers: Backbone.defaults().headers
+      }).done(function(resp){
           this.$el.html(resp);
           this.render2();
         }.bind(this));

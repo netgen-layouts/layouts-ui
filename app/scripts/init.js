@@ -21,7 +21,21 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
 
     model_helper: ModelHelper,
 
+    app_cache_handler: function(){
+        window.applicationCache && window.applicationCache.addEventListener('updateready', function() {
+          if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+            if (confirm('A new version of this site is available. Load it?')) {
+              window.location.reload();
+            }
+          } else {
+            // Manifest didn't changed. Nothing new to server.
+          }
+        }, false);
+    },
+
+
     init: function(){
+      this.app_cache_handler();
       this.setup_events();
 
       App.g.block_templates = new BlockTemplates();
