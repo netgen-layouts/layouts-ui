@@ -1,4 +1,4 @@
-define(['underscore', 'view', './block_template', './blocks/main', 'app'], function(_, View, ViewBlockTemplate, ViewBlocks, App) {
+define(['underscore', 'view', './block_template', 'app'], function(_, View, ViewBlockTemplate, App) {
   'use strict';
 
   return View.extend({
@@ -22,10 +22,8 @@ define(['underscore', 'view', './block_template', './blocks/main', 'app'], funct
             block.set({id: item.block_id});
           }
 
-          var ViewBlockKlass = ViewBlocks[block_template.get('kind')] || ViewBlocks.Def;
-          var view_block = new ViewBlockKlass({
-            model: block
-          });
+          var view_block = App.blocks.create_view(block.template().get('kind'), block);
+
           $('[data-zone='+ position.zone  +']').append(view_block.$el);
         });
 
@@ -35,7 +33,7 @@ define(['underscore', 'view', './block_template', './blocks/main', 'app'], funct
     dnd: function() {
 
       $('[data-zone]').sortable({
-        connectWith: '[data-zone]',
+        connectWith: '[data-zone], [data-section]',
         placeholder: 'no-placeholder',
         handle: '.handle',
         tolerance: 'pointer',
@@ -100,10 +98,7 @@ define(['underscore', 'view', './block_template', './blocks/main', 'app'], funct
               template_id: block_template.id
             });
 
-            var ViewBlockKlass = ViewBlocks[block.template().get('kind')] || ViewBlocks.Def;
-            var view_block = new ViewBlockKlass({
-              model: block
-            });
+            var view_block = App.blocks.create_view(block.template().get('kind'), block);
 
             if(block.is_group()){
               block.save_group();

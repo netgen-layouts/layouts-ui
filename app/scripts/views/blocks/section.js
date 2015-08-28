@@ -14,10 +14,10 @@ define(['./base', 'app'], function(Base, App){
       var self = this;
 
       this.$('[data-section]').sortable({
-        connectWith: '.blocks',
+        connectWith: '.blocks, [data-zone]',
         placeholder: 'no-placeholder',
         receive: function(e, ui){
-          console.log('receive', this, arguments);
+          console.log('section receive', this, arguments);
 
           var section_view = self.$el.data('_view');
 
@@ -53,25 +53,35 @@ define(['./base', 'app'], function(Base, App){
 
         },
 
-        // helper: function (e, item) {
-        //     this.copyHelper = item.clone(true).insertAfter(item);
-        //     $(this).data('copied', false);
-        //     return item.clone();
-        // },
-
         start: function( event, ui ) {
           App.trigger('sortable:start');
-          $(this).sortable( 'refreshPositions' );
+          $(this).sortable('refreshPositions');
         },
 
         stop: function(){
           App.trigger('sortable:end');
           App.trigger('positions:update');
           console.log('STOP', this, arguments);
+          self.save_positions();
         },
       });
 
       return this;
+    },
+
+    save_positions: function(){
+      var positions = [];
+      this.$('[data-block]').each(function(i, item){
+        var model = $(item).data('_view').model;
+        positions.push({
+          block_id: model.id,
+          block_type_id: model.get('template_id')
+        });
+      });
+
+      this.model.save({
+        positions: positions
+      });
     }
   });
 });
