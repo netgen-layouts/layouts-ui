@@ -88,7 +88,8 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
       });
 
       view_block_templates.render();
-      view_block_templates.load_blocks();
+
+      this.blocks.load_layout_blocks();
 
     },
 

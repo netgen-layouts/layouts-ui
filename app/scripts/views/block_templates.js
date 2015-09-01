@@ -1,7 +1,7 @@
-define(['underscore', 'view', './block_template', 'app'], function(_, View, ViewBlockTemplate, App) {
+define(['underscore', 'view', './block_template', 'app', './dnd'], function(_, View, ViewBlockTemplate, App, Dnd) {
   'use strict';
 
-  return View.extend({
+  return View.extend(Dnd).extend({
     ViewItem: ViewBlockTemplate,
 
     render: function() {
@@ -9,144 +9,7 @@ define(['underscore', 'view', './block_template', 'app'], function(_, View, View
       this.render_items();
       this.dnd();
       return this;
-    },
-
-    load_blocks: function(){
-      _.each(App.g.layout.get('positions'), function(position){
-        _.each(position.blocks, function(item){
-
-          var block_template = App.g.block_templates.get(item.block_type_id);
-          var block = App.model_helper.init_block(block_template);
-
-          if(item.block_id){
-            block.set({id: item.block_id});
-          }
-
-          var view_block = App.blocks.create_view(block.template().get('kind'), block);
-
-          $('[data-zone='+ position.zone  +']').append(view_block.$el);
-        });
-
-      });
-    },
-
-    dnd: function() {
-
-      $('[data-zone]').sortable({
-        connectWith: '[data-zone], [data-section]',
-        placeholder: 'no-placeholder',
-        handle: '.handle',
-        tolerance: 'pointer',
-        cursorAt: { left: 5 },
-        delay: 150,
-        distance: 20,
-        // forceHelperSize: true,
-        // helper: function(e, item){
-        //   var view = $(item).data('_view');
-        //   console.log(view);
-        //   var helper = $('<div>'+view.model.template().get('name')+'</div>');
-        //   helper.css({'width': '100px', 'height': '100px'});
-        //   return helper;
-        // },
-
-        start: function( event, ui ) {
-          App.trigger('sortable:start');
-          $( this ).sortable( 'refreshPositions' );
-        },
-
-        stop: function(){
-          App.trigger('sortable:end');
-          App.trigger('positions:update');
-          console.log('STOP', this, arguments);
-        },
-        receive: function(e, ui) {
-          console.log('receive', this, arguments);
-
-          var zone_view = $(this).data('_view');
-          var block_template_view = $(ui.item).data('_view');
-          var block_template = block_template_view.model;
-          var block = block_template.has('template_id') && block_template;
-          var zone = zone_view.model;
-
-          console.log('block model', block_template_view.model);
-          console.log('block', block);
-
-          // if(block){
-          //   console.warn('cancel')
-          //   $(ui.sender).sortable('cancel');
-          //   return false;
-          // }
-
-
-          console.log(zone.should_accept(block_template));
-          if(zone.is_inherited()){
-            $(ui.sender).sortable('cancel');
-            return false;
-          }
-          if(!zone.should_accept(block_template)){
-            $(ui.sender).sortable('cancel');
-            return;
-          }
-
-
-          ui.sender.data('copied', true);
-
-          if(block){
-
-          }else{
-            block = App.model_helper.init_block(block_template, {
-              template_id: block_template.id
-            });
-
-            var view_block = App.blocks.create_view(block.template().get('kind'), block);
-
-            if(block.is_group()){
-              block.save_group();
-            }else{
-              block.save();
-            }
-
-            ui.item.after(view_block.render().$el);
-            ui.item.remove();
-          }
-        }
-      });
-
-      $('.blocks').sortable({
-        connectWith: '[data-zone], [data-section]',
-        placeholder: 'no-placeholder',
-        receive: function(e, ui){
-          console.log(ui.sender, this);
-        },
-
-        helper: function (e, item) {
-            this.copyHelper = item.clone(true).insertAfter(item);
-            $(this).data('copied', false);
-            return item.clone();
-        },
-
-        start: function(){
-          App.trigger('sortable:start');
-        },
-
-        stop: function (e) {
-            App.trigger('sortable:end');
-            var copied = $(this).data('copied');
-
-            if(!copied){
-              e.preventDefault();
-              this.copyHelper.remove();
-            }
-            this.copyHelper = null;
-        }
-      });
-
-      return this;
     }
-
-
-
-
 
   });
 
