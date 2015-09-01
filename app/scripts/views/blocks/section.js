@@ -7,6 +7,8 @@ define(['underscore', './base', 'app'], function(_, Base, App){
     initialize: function(){
       Base.prototype.initialize.apply(this, arguments);
       this.on('render', this.load_blocks);
+      App.on('section:block:render', this.save_positions, this);
+      App.on('block:destroy', this.save_positions, this);
       return this;
     },
 
@@ -61,7 +63,10 @@ define(['underscore', './base', 'app'], function(_, Base, App){
             ui.item.after(view_block.render().$el);
             ui.item.remove();
 
-            self.listenToOnce(block, 'save:success', self.save_positions);
+            view_block.on('render', function(){
+              App.trigger('section:block:render', view_block);
+            });
+
           }
 
         },
@@ -87,7 +92,6 @@ define(['underscore', './base', 'app'], function(_, Base, App){
       var positions = [];
       this.$('[data-type]').each(function(i, item){
         var model = $(item).data('_view').model;
-        console.log(model.attributes);
         positions.push({
           block_id: model.id,
           block_type_id: model.get('template_id')

@@ -35,7 +35,7 @@ define(['underscore', './base', 'app'], function(_, Base, App){
     },
 
     after_render: function(){
-      App.blocks.load_blocks(this);
+      App.blocks.load_group_blocks(this);
     },
 
     render: function(){

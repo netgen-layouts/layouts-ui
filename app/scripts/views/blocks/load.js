@@ -10,8 +10,8 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       });
     },
 
-    load_blocks: function(view_group){
-
+    load_group_blocks: function(view_group){
+      var self = this;
       view_group.$('[data-block]').each(function(n, item){
         var json = $(item).text().trim();
         if(!json){return;}
@@ -25,13 +25,14 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
 
         block.group = view_group.model;
 
-        var view_block = App.blocks.create_view(data.type, block);
+        var view_block = self.create_view(data.type, block);
 
         $(item).html(view_block.$el);
       });
     },
 
     load_section_blocks: function(section){
+      var self = this;
       _.each(section.model.get('positions'), function(item){
 
           var block_template = App.g.block_templates.get(item.block_type_id);
@@ -41,12 +42,10 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
             block.set({id: item.block_id});
           }
 
-          var view_block = App.blocks.create_view(block.template().get('kind'), block);
+          var view_block = self.create_view(block.template().get('kind'), block);
 
-          block.fetch({
-            success: function(){
-              section.$('[data-section]').append(view_block.$el);
-            }
+          view_block.on('render', function(){
+            section.$('[data-section]').append(view_block.$el);
           });
       });
 

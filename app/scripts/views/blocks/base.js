@@ -63,7 +63,11 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app', 'models/
         }
 
         self.remove();
-        self.model.destroy();
+        self.model.destroy({
+          success: function(){
+            App.trigger('block:destroy', self.model);
+          }
+        });
 
         App.trigger('positions:update');
       }).open();
