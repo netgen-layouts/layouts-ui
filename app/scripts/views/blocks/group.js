@@ -35,7 +35,7 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
     },
 
     after_render: function(){
-      App.blocks.load_blocks(this);
+      App.blocks.load_group_blocks(this);
     },
 
     render: function(){

@@ -1,4 +1,4 @@
-define(['./base'], function(Block){
+define(['underscore', './base'], function(_, Block){
   'use strict';
 
   return Block.extend({
@@ -13,12 +13,8 @@ define(['./base'], function(Block){
       options || (options = {});
       var json = Block.prototype.toJSON.apply(this, arguments);
       if(!options.parse){return json;}
-      json.positions = JSON.stringify(json.positions);
+      !_.isString(json.positions) && (json.positions = JSON.stringify(json.positions));
       return json;
-    },
-
-    save_positions: function(){
-
     }
 
   });

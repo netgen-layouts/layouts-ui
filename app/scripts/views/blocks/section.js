@@ -1,8 +1,20 @@
-define(['./base', 'app'], function(Base, App){
+define(['underscore', './base', 'app'], function(_, Base, App){
   'use strict';
 
   return Base.extend({
     form_namespace: 'section',
+
+    initialize: function(){
+      Base.prototype.initialize.apply(this, arguments);
+      this.on('render', this.load_blocks);
+      App.on('section:block:render', this.save_positions, this);
+      App.on('block:destroy', this.save_positions, this);
+      return this;
+    },
+
+    load_blocks: function(){
+      App.blocks.load_section_blocks(this);
+    },
 
     render: function() {
       Base.prototype.render.apply(this, arguments);
@@ -47,8 +59,14 @@ define(['./base', 'app'], function(Base, App){
               block.save();
             }
 
+
             ui.item.after(view_block.render().$el);
             ui.item.remove();
+
+            view_block.on('render', function(){
+              App.trigger('section:block:render', view_block);
+            });
+
           }
 
         },
@@ -63,7 +81,8 @@ define(['./base', 'app'], function(Base, App){
           App.trigger('positions:update');
           console.log('STOP', this, arguments);
           self.save_positions();
-        },
+        }
+
       });
 
       return this;
@@ -71,7 +90,7 @@ define(['./base', 'app'], function(Base, App){
 
     save_positions: function(){
       var positions = [];
-      this.$('[data-block]').each(function(i, item){
+      this.$('[data-type]').each(function(i, item){
         var model = $(item).data('_view').model;
         positions.push({
           block_id: model.id,
