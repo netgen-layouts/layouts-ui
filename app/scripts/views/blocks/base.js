@@ -5,6 +5,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
 
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
+      this.setup_dom_element();
       this.on('render', this.update_positions);
       !this.model.isNew() && this.model.fetch();
     },
@@ -25,14 +26,13 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
 
     render: function(){
       View.prototype.render.apply(this, arguments);
-      this.setup_dom_element();
       this.$el.html(this.model.get('html'));
       this.$el.prepend(JST['block_actions'](this.context)); // jshint ignore:line
       return this;
     },
 
     $section_el: function(){
-      return this.$el.closest('[data-type="Section"]');
+      return this.$el.parents('[data-type="Section"]');
     },
 
     is_in_section: function(){
@@ -58,7 +58,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
 
 
     update_positions: function(){
-
+      console.warn('IN SECTION? ', this.is_in_section());
       if(this.model.changed.id){
         console.info('Block base: update_positions');
         if(this.is_in_section()){

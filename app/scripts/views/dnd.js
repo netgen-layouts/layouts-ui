@@ -62,7 +62,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
               block.save();
             }
 
-            ui.item.after(view_block.setup_dom_element().$el);
+            ui.item.after(view_block.$el);
             ui.item.remove();
 
           }
