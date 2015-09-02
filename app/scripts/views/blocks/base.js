@@ -5,7 +5,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
 
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
-      this.setup_dom_element();
+      this.listenTo(this.model, 'change', this.setup_dom_element);
       this.on('render', this.update_positions);
       !this.model.isNew() && this.model.fetch();
     },
@@ -18,6 +18,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     setup_dom_element: function(){
+      this.model.is_in_section() && this.$el.attr('data-in-section', '');
       this.$el
         .attr('data-block', '')
         .attr('data-type', this.model.get('template').get('kind'));
@@ -26,8 +27,9 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
 
     render: function(){
       View.prototype.render.apply(this, arguments);
-      this.$el.html(this.model.get('html'));
-      this.$el.prepend(JST['block_actions'](this.context)); // jshint ignore:line
+      this.$el
+        .html(this.model.get('html'))
+        .prepend(JST['block_actions'](this.context)); // jshint ignore:line
       return this;
     },
 
@@ -41,6 +43,10 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
 
     section: function(){
       return this.is_in_section() && this.$section_el().data('_view');
+    },
+
+    is_section: function(){
+      return this.model.is_section();
     },
 
 
@@ -92,11 +98,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
         }
 
         self.remove();
-        self.model.destroy({
-          success: function(){
-            App.trigger('block:destroy', self.model);
-          }
-        });
+        self.model.destroy();
 
         App.trigger('positions:update');
       }).open();

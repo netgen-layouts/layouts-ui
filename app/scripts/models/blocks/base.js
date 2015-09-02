@@ -27,7 +27,19 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     is_group: function(){
-      return this.type().get('kind') === 'Group';
+      return this.kind_of('Group');
+    },
+
+    is_section: function(){
+      return this.kind_of('Section');
+    },
+
+    is_in_section: function(){
+      return this.get('section_id');
+    },
+
+    kind_of: function(kind){
+      return this.type().get('kind') === kind;
     },
 
     toString: function(){

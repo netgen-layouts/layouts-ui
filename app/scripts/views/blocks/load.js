@@ -50,23 +50,21 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       });
     },
 
-    load_section_blocks: function(section){
-      var self = this;
-      _.each(section.model.get('positions'), function(item){
+    load_section_blocks: function(section_view){
+      section_view.children = [];
+      section_view.dom_elements = [];
+      _.each(section_view.model.get('positions'), function(item){
+          var block_template = App.g.block_templates.get(item.block_type_id),
+              block = App.model_helper.init_block(block_template, {
+                section_id: section_view.model.id,
+                id: item.block_id ? item.block_id : null
+              }),
+              child = this.create_view(block.template().get('kind'), block);
 
-          var block_template = App.g.block_templates.get(item.block_type_id);
-          var block = App.model_helper.init_block(block_template);
 
-          if(item.block_id){
-            block.set({id: item.block_id});
-          }
-
-          var view_block = self.create_view(block.template().get('kind'), block);
-
-          view_block.on('render', function(){
-            section.$('[data-section]').append(view_block.$el);
-          });
-      });
+          section_view.children.push(child.model);
+          section_view.dom_elements.push(child.$el);
+      }, this);
 
     }
   };

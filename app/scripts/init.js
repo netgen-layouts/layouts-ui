@@ -50,7 +50,8 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
 
 
       //Debounced with 200ms
-      App.onAll('positions:update', function() {
+      App.onAll('positions:update', function(){
+        console.log('[LAYOUT] saving positions');
         App.g.layout.save({
           positions: App.get_positions()
         });

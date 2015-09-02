@@ -222,7 +222,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       this.new_data = false;
       this.trigger('render:initial', {self: this});
       App.trigger('render:initial', {view: this});
-      // console.log('RENDER:', this.template, '|', this.cid, this);
+      console.log('RENDER:', this.template, '|', this.cid, this);
       return this;
     },
 

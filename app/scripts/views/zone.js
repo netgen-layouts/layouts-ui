@@ -24,7 +24,11 @@ define(['view', 'app'], function(View, App){
       if(this.model.is_inherited()){
         App.router.navigate_to('layout', {id: App.g.layout.get('parent_id')});
       }
-    }
+    },
+
+    is_section: function(){
+      return false;
+    },
 
     // dnd: function(){
     //   this.$el.droppable({

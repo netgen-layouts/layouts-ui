@@ -10,9 +10,9 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
       return new Klass(attributes);
     },
 
-    init_block: function(template){
+    init_block: function(template, additional_attributes){
       var Klass = Blocks[template.get('kind')] || Blocks.Def;
-      var attributes = _.defaults({template_id: template.id}, template.get('parameters'));
+      var attributes = _.defaults({template_id: template.id}, template.get('parameters'), additional_attributes);
       return new Klass(attributes);
     },
 

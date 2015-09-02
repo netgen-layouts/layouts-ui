@@ -29,7 +29,6 @@ define(['underscore', 'view', 'app'], function(_, View, App){
           var block_template = block_template_view.model;
           var block = block_template.has('template_id') && block_template;
           var receiver_block = $(this).closest('[data-view]').data('_view');
-          console.log('receiver_block', receiver_block);
 
           if(self.is_zone()){
             var zone_view = $(this).data('_view');
@@ -46,13 +45,15 @@ define(['underscore', 'view', 'app'], function(_, View, App){
           }
 
           ui.sender.data('copied', true);
+          console.log(block.attributes, receiver_block.is_section());
+          var section_attributes = {section_id: receiver_block.is_section() && receiver_block.model.id};
 
           if(block){
-
+            block.set(section_attributes);
           }else{
-            block = App.model_helper.init_block(block_template, {
-              template_id: block_template.id
-            });
+            block = App.model_helper.init_block(block_template, section_attributes);
+
+            console.log(block.attributes);
 
             var view_block = App.blocks.create_view(block.template().get('kind'), block);
 
@@ -70,17 +71,16 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         },
 
         start: function(event, ui) {
+          console.log('Start');
           App.trigger('sortable:start');
           $(this).sortable('refreshPositions');
         },
 
         stop: function(){
+          console.log('stop');
+          App.trigger('block:move');
+          App.trigger('positions:update');
           App.trigger('sortable:end');
-          if(self.is_zone()){
-            App.trigger('positions:update');
-          }else{
-            App.trigger('block:move');
-          }
         }
 
       });
