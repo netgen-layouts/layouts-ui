@@ -168,8 +168,8 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
     },
 
     auto_render: function(){
-      this.model && this.listenTo(this.model, 'sync error', this.render_with_new_data);
-      this.collection && this.listenTo(this.collection, 'sync error', this.render_with_new_data);
+      this.model && this.listenTo(this.model, 'read:success save:success save:error', this.render_with_new_data);
+      this.collection && this.listenTo(this.collection, 'read:success save:success save:error', this.render_with_new_data);
       return this;
     },
 

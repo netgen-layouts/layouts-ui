@@ -29,6 +29,13 @@ define(['underscore', 'view', 'app'], function(_, View, App){
           var block_template = block_template_view.model;
           var block = block_template.has('template_id') && block_template;
           var receiver_block = $(this).closest('[data-view]').data('_view');
+          $(this).data('section', true);
+
+          if(receiver_block.is_section() && block && block.is_section()){
+            $(ui.sender).sortable('cancel');
+            $(ui.item).data('canceled', true);
+            return false;
+          }
 
           if(self.is_zone()){
             var zone_view = $(this).data('_view');
@@ -70,16 +77,18 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
         },
 
-        start: function(event, ui) {
-          console.log('Start');
+        start: function(e, ui) {
+          console.log('start');
           App.trigger('sortable:start');
           $(this).sortable('refreshPositions');
         },
 
-        stop: function(){
+        stop: function(e, ui){
           console.log('stop');
-          App.trigger('block:move');
-          App.trigger('positions:update');
+          if(!$(ui.item).read_data_and_remove_key('canceled')){
+            App.trigger('block:move');
+            App.trigger('positions:update');
+          }
           App.trigger('sortable:end');
         }
 

@@ -15,4 +15,12 @@ define(['jquery'], function($){
     return hash;
   };
 
+
+  $.fn.read_data_and_remove_key = function(name){
+    var $this = $(this);
+    var val = $this.data(name);
+    $this.removeData(name);
+    return val;
+  };
+
 });

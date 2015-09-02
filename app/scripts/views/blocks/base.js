@@ -1,3 +1,4 @@
+
 define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], function(_, View, Modal, FormModal, App){
   'use strict';
 
@@ -7,6 +8,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       View.prototype.initialize.apply(this, arguments);
       this.listenTo(this.model, 'change', this.setup_dom_element);
       this.on('render', this.update_positions);
+      this.listenTo(this.model, 'delete:success', this.on_destroy);
       !this.model.isNew() && this.model.fetch();
     },
 
@@ -86,22 +88,14 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
         body: 'Are you sure you want to delete?',
         context: { title: 'Confirm' }
       }).on('apply', function(){
-
-        if(self.model.is_group()){
-          var kind, block;
-          var block_ids = _.pluck(self.model.get('parameters'), 'block_id');
-          _.each(block_ids, function(block_id){
-            kind = self.$('[data-block='+ block_id +']').find('[data-type]').data('type');
-            block = App.model_helper.init_block_kind(block_id, kind);
-            block.destroy();
-          });
-        }
-
-        self.remove();
         self.model.destroy();
-
-        App.trigger('positions:update');
       }).open();
+    },
+
+    on_destroy: function(){
+      console.log('ON DESTROY');
+      this.remove();
+      App.trigger('positions:update');
     },
 
     $fast_destroy: function(){

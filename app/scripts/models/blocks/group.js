@@ -40,7 +40,8 @@ define(['underscore', './base', 'app'], function(_, Block, App){
               success: function(model){
                 params.push({
                   label: model.get('label'),
-                  block_id: model.id
+                  block_id: model.id,
+                  block_type_id: model.get('template_id')
                 });
 
                 count--;

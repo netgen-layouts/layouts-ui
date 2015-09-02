@@ -4,7 +4,7 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
   return Base.extend(Dnd).extend({
     form_namespace: 'section',
     sort_element: '[data-section]',
-    connect_with: '.blocks, [data-zone]',
+    connect_with: '[data-section], [data-zone]',
 
     initialize: function(){
       Base.prototype.initialize.apply(this, arguments);
