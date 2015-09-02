@@ -28,6 +28,8 @@ define(['underscore', 'view', 'app'], function(_, View, App){
           var block_template_view = $(ui.item).data('_view');
           var block_template = block_template_view.model;
           var block = block_template.has('template_id') && block_template;
+          var receiver_block = $(this).closest('[data-view]').data('_view');
+          console.log('receiver_block', receiver_block);
 
           if(self.is_zone()){
             var zone_view = $(this).data('_view');
@@ -60,13 +62,8 @@ define(['underscore', 'view', 'app'], function(_, View, App){
               block.save();
             }
 
-
-            ui.item.after(view_block.render().$el);
+            ui.item.after(view_block.setup_dom_element().$el);
             ui.item.remove();
-
-            view_block.on('render', function(){
-              App.trigger('block:render', view_block);
-            });
 
           }
 

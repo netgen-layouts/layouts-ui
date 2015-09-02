@@ -9,8 +9,8 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     parse: function (response) {
-      response.zones = JSON.parse(response.zones);
-      response.positions = JSON.parse(response.positions);
+      response.zones = response.zones ? JSON.parse(response.zones) : [];
+      response.positions = response.positions ? JSON.parse(response.positions) : [];
       return response;
     },
 
@@ -26,6 +26,8 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     inherited_zones: function(){
       return _.where(App.g.layout.get('zones'), {type: 2});
     }
+
+
 
   });
 

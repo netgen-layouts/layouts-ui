@@ -175,18 +175,8 @@ define(['underscore', 'backbone', 'model'], function(_, Backbone, Model){
 
     }
 
+
   });
-
-
-
-
-
-
-
-
-
-
-
 
 
 

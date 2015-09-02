@@ -1,4 +1,4 @@
-define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app', 'models/blocks/base'], function(_, View, Modal, FormModal, App, BaseModel){
+define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], function(_, View, Modal, FormModal, App){
   'use strict';
 
   return View.extend({
@@ -16,14 +16,31 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app', 'models/
        'click > .block_actions .action-destroy': '$destroy'
     },
 
+    setup_dom_element: function(){
+      this.$el
+        .attr('data-block', '')
+        .attr('data-type', this.model.get('template').get('kind'));
+      return this;
+    },
+
     render: function(){
       View.prototype.render.apply(this, arguments);
-
+      this.setup_dom_element();
       this.$el.html(this.model.get('html'));
-      this.$el.attr('data-block', '');
-      this.$el.attr('data-type', this.model.get('template').get('kind'));
       this.$el.prepend(JST['block_actions'](this.context)); // jshint ignore:line
       return this;
+    },
+
+    $section_el: function(){
+      return this.$el.closest('[data-type="Section"]');
+    },
+
+    is_in_section: function(){
+      return this.$section_el().length;
+    },
+
+    section: function(){
+      return this.is_in_section() && this.$section_el().data('_view');
     },
 
 
@@ -41,8 +58,20 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app', 'models/
 
 
     update_positions: function(){
-      var self = this;
-      self.model.changed.id && App.trigger('positions:update');
+
+      if(this.model.changed.id){
+        console.info('Block base: update_positions');
+        if(this.is_in_section()){
+          console.info('in section: save_positions');
+          this.section().save_positions();
+          return;
+        }else{
+          App.trigger('positions:update');
+        }
+      }
+
+
+
     },
 
     $destroy: function(){

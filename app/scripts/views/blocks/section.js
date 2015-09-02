@@ -9,9 +9,10 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
     initialize: function(){
       Base.prototype.initialize.apply(this, arguments);
       this.on('render', this.load_blocks);
-      App.on('block:render', this.save_positions, this);
-      App.on('block:destroy', this.save_positions, this);
-      App.on('block:move', this.save_positions, this);
+      // this.on('render', this.save_positions);
+      // App.on('block:render', , this);
+      // App.on('block:destroy', this.save_positions, this);
+      // App.on('block:move', this.save_positions, this);
       return this;
     },
 
@@ -26,6 +27,7 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
     },
 
     save_positions: function(){
+      console.warn('[SECTION] Saving positions');
       var positions = [];
       this.$('[data-type]').each(function(i, item){
         var model = $(item).data('_view').model;
@@ -37,7 +39,7 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
 
       this.model.save({
         positions: positions
-      },{silent: true});
+      }, {silent:true});
     }
   });
 });

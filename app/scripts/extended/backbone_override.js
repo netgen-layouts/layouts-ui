@@ -32,7 +32,7 @@ define(['underscore', 'backbone_original', 'app'], function(_, Backbone, App){
     return object;
   }
 
-  _.each(["Model", "Collection", "View", "Router"], function(klass) {
+  _.each(['Model', 'Collection', 'View', 'Router'], function(klass) {
     Backbone[klass].prototype._super = _super;
   });
 

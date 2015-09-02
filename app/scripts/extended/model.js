@@ -12,6 +12,14 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       return Backbone.Model.prototype.get.call(this, attr);
     },
 
+
+    //TODO: maybe add this to collection
+    trigger: function(name, model, resp, options){
+      if(options && options.silent){return this;}
+      Backbone.Model.prototype.trigger.apply(this, arguments);
+      return this;
+    },
+
     set: function(key, value, options) {
       var attrs, attr, setter;
 
