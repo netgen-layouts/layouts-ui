@@ -38,8 +38,8 @@ body{background:#333; }
 
 img{width:100%; max-width:100%;}
 
-.no-placeholder{height:2px; background:#cc0; margin:2px -20px;}
-[data-block] .no-placeholder{height:2px; background:#f30; margin:2px -20px;}
+.no-placeholder{height:2px; background:#cc0; margin:10px -20px;}
+[data-block] .no-placeholder{height:2px; background:#F0D; margin-left: 20px; margin-right: 20px;}
 .blocks .no-placeholder{display:none;}
 
 
@@ -137,10 +137,16 @@ input[type="text"]{
     position:relative;
     margin-bottom:20px;
     &:empty:before{ content:'Drop content in section!!!'; display:block; color:#000; font-size:1.4em; position:absolute; top:0; left:0; width:100%; background:#66f;}
-    background:#66f;
+    background:#66f; padding: 1px 0;
   }
 
   > .block_actions{ top:-30px; left:-8px; height:30px;
     span{background-color:#3A7EA2;}
+  }
+}
+
+.forbidden{
+  > div[data-section]{
+    background: #900;
   }
 }

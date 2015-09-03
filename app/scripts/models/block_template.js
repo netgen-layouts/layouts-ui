@@ -14,6 +14,18 @@ define(['model'], function(Model){
       if(!options.parse){return json;}
       json.parameters = JSON.stringify(json.parameters);
       return json;
+    },
+
+    is_group: function(){
+      return this.kind_of('Group');
+    },
+
+    is_section: function(){
+      return this.kind_of('Section');
+    },
+
+    kind_of: function(kind){
+      return this.get('kind') === kind;
     }
 
   });
