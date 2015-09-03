@@ -82,29 +82,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       }
     },
 
-
     setup_dnd_for_section_and_zones: function(){
-
-    },
-
-    setup_dnd_for_blocks: function(){
-
-    },
-
-    init: function(){
-      this.setup_dnd_for_blocks();
-      this.setup_dnd_for_section_and_zones();
-    },
-
-
-    render: function(){
-      this._super('render', arguments);
-      this.dnd();
-      return this;
-    },
-
-    dnd: function(){
-      console.log('INITIALIZE DND FOR', this.sort_element);
       var self = this,
           $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 
@@ -160,8 +138,10 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         }
 
       });
+    },
 
-      if(self.is_zone()){
+    setup_dnd_for_blocks: function(){
+      if(this.is_zone()){
         $('.blocks').sortable({
           connectWith: '[data-zone], [data-section]',
           placeholder: 'no-placeholder',
@@ -191,11 +171,19 @@ define(['underscore', 'view', 'app'], function(_, View, App){
           }
         });
       }
+    },
 
+    init: function(){
+      this.setup_dnd_for_blocks();
+      this.setup_dnd_for_section_and_zones();
+    },
+
+    render: function(){
+      this._super('render', arguments);
+      this.init();
       return this;
     }
 
   };
-
 
 });
