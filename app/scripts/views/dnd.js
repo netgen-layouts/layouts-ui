@@ -3,7 +3,6 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
   return {
 
-    sort_element: '[data-zone]',
     connect_with: '[data-zone], [data-section]',
 
     is_zone: function(){
@@ -83,7 +82,29 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       }
     },
 
+
+    setup_dnd_for_section_and_zones: function(){
+
+    },
+
+    setup_dnd_for_blocks: function(){
+
+    },
+
+    init: function(){
+      this.setup_dnd_for_blocks();
+      this.setup_dnd_for_section_and_zones();
+    },
+
+
+    render: function(){
+      this._super('render', arguments);
+      this.dnd();
+      return this;
+    },
+
     dnd: function(){
+      console.log('INITIALIZE DND FOR', this.sort_element);
       var self = this,
           $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 

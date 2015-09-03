@@ -219,6 +219,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       this.$el.html(this.template ? this.render_template() : this.context.body);
 
       this.render_child();
+      this.ViewItem && this.render_items();
       this.new_data = false;
       this.trigger('render:initial', {self: this});
       App.trigger('render:initial', {view: this});
