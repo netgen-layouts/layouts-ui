@@ -62,7 +62,7 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
               child = this.create_view(block.template().get('kind'), block);
 
 
-          section_view.children.push(child.model);
+          section_view.children.push(block);
           section_view.dom_elements.push(child.$el);
       }, this);
 

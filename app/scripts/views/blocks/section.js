@@ -19,7 +19,6 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
       return this;
     },
 
-
     setup_children_events: function(){
       _.each(this.children, function(child){
         this.listenTo(child, 'destroy', this.save_positions);

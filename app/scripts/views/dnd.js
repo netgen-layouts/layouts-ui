@@ -64,7 +64,8 @@ define(['underscore', 'view', 'app'], function(_, View, App){
     },
 
     save_and_add_block: function(ui, block_template, block, receiver_block){
-      var section_attributes = {section_id: receiver_block.is_section() && receiver_block.model.id};
+      var receiver_model = receiver_block.model;
+      var section_attributes = {section_id: receiver_block.is_section() && receiver_model.id};
 
       if(block){
         block.set(section_attributes);

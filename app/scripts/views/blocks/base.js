@@ -88,6 +88,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
         body: 'Are you sure you want to delete?',
         context: { title: 'Confirm' }
       }).on('apply', function(){
+        console.log('View destroy model', self.model.attributes);
         self.model.destroy();
       }).open();
     },

@@ -7,6 +7,9 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
 
     initialize: function(){
       Model.prototype.initialize.apply(this, arguments);
+      this.on('destroy', function(){
+        console.log('destroy model');
+      });
       return this;
     },
 

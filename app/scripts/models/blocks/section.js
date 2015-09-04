@@ -5,7 +5,7 @@ define(['underscore', './base'], function(_, Block){
     path: 'sections',
 
     parse: function (response) {
-      response.positions = JSON.parse(response.positions);
+      response.positions = response.positions ? JSON.parse(response.positions) : [];
       return response;
     },
 
