@@ -64,8 +64,8 @@ define(['underscore', 'view', 'app'], function(_, View, App){
     },
 
     save_and_add_block: function(ui, block_template, block, receiver_block){
-      var receiver_model = receiver_block.model;
-      var section_attributes = {section_id: receiver_block.is_section() && receiver_model.id};
+      var receiver_model = receiver_block.model,
+        section_attributes = {section_id: receiver_block.is_section() && receiver_model.id};
 
       if(block){
         block.set(section_attributes);
@@ -93,7 +93,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         connectWith: self.connect_with,
         placeholder: 'no-placeholder',
         handle: '.handle',
-        tolerance: 'intersect',
+        tolerance: 'pointer',
         cursorAt: { left: 5 },
         delay: 150,
         distance: 20,
@@ -126,8 +126,9 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
         stop: function(e, ui){
           console.log('stop');
+          var block = $(ui.item).data('_view').model;
           if(!$(ui.item).read_data_and_remove_key('canceled')){
-            App.trigger('block:move');
+            App.trigger('block:move', block);
             App.trigger('positions:update');
           }
           App.trigger('sortable:end');

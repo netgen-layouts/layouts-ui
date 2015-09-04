@@ -64,7 +64,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       return this;
     },
 
-
     update_positions: function(){
       console.warn('IN SECTION? ', this.is_in_section());
       if(this.model.changed.id){
@@ -77,9 +76,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
           App.trigger('positions:update');
         }
       }
-
-
-
     },
 
     $destroy: function(){
@@ -96,6 +92,9 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     on_destroy: function(){
       console.log('ON DESTROY');
       this.remove();
+      if(this.model.is_in_section()){
+        App.trigger('section:block:remove');
+      }
       App.trigger('positions:update');
     },
 

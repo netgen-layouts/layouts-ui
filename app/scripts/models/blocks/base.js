@@ -5,14 +5,6 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
 
     format: 'json',
 
-    initialize: function(){
-      Model.prototype.initialize.apply(this, arguments);
-      this.on('destroy', function(){
-        console.log('destroy model');
-      });
-      return this;
-    },
-
     type: function(){
       return App.g.block_templates.get(this.get('template_id'));
     },
@@ -48,7 +40,6 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     toString: function(){
       return JSON.stringify(this.toJSON());
     }
-
 
   });
 
