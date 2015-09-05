@@ -93,7 +93,6 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         connectWith: self.connect_with,
         placeholder: 'no-placeholder',
         handle: '.handle',
-        tolerance: 'pointer',
         cursorAt: { left: 5 },
         delay: 150,
         distance: 20,
