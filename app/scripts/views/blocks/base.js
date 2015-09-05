@@ -90,11 +90,11 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     on_destroy: function(){
-      console.log('ON DESTROY');
+      var is_in_section = this.is_in_section(),
+          section = this.section();
+
       this.remove();
-      if(this.model.is_in_section()){
-        App.trigger('section:block:remove');
-      }
+      is_in_section && section.trigger('block:remove');
       App.trigger('positions:update');
     },
 

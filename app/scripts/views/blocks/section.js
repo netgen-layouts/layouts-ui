@@ -7,8 +7,7 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
 
     initialize: function(){
       this._super('initialize', arguments);
-      App.on('block:move', this.save_positions, this);
-      App.on('section:block:remove', this.save_positions, this);
+      this.on('block:move block:remove', this.save_positions);
       return this;
     },
 

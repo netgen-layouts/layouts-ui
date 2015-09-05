@@ -72,17 +72,20 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       }else{
         block = App.model_helper.init_block(block_template, section_attributes);
 
-        var view_block = App.blocks.create_view(block.template().get('kind'), block);
-
         if(block.is_group()){
           block.save_group();
         }else{
           block.save();
         }
 
-        ui.item.after(view_block.$el);
-        ui.item.remove();
+        this.add_new_block(ui, block);
       }
+    },
+
+    add_new_block: function(ui, block){
+      var view_block = App.blocks.create_view(block.template().get('kind'), block);
+      ui.item.after(view_block.$el);
+      ui.item.remove();
     },
 
     setup_dnd_for_sections_and_zones: function(){
@@ -124,16 +127,38 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         },
 
         stop: function(e, ui){
-          console.log('stop');
-          var block = $(ui.item).data('_view').model;
+          console.log('stop', this, ui);
+          var dragables = self.extract_sender_and_receiver(this, ui);
+
+          console.log('dragables', dragables);
+
           if(!$(ui.item).read_data_and_remove_key('canceled')){
-            App.trigger('block:move', block);
+
+            if(dragables.receiver && self.is_same_section(dragables)){
+              dragables.receiver.trigger('block:move');
+            }else{
+              dragables.receiver && dragables.receiver.trigger('block:move');
+              dragables.sender && dragables.sender.trigger('block:move');
+            }
+
             App.trigger('positions:update');
           }
+
           App.trigger('sortable:end');
         }
 
       });
+    },
+
+    is_same_section: function(dragables){
+      return dragables.receiver.model.id === dragables.sender.model.id;
+    },
+
+    extract_sender_and_receiver: function(element, ui){
+      return {
+        sender: $(element).closest('[data-view]').data('_view'),
+        receiver: $(ui.item).data('_view').section()
+      };
     },
 
     setup_dnd_for_blocks: function(){
