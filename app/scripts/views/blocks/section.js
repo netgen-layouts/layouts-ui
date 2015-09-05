@@ -22,7 +22,7 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
       console.log('SECTION: save_positions section id: ', this.model.id);
       var positions = [], model;
 
-      this.$('[data-in-section]').each(function(i, item){
+      this.$('>[data-section]>[data-in-section]').each(function(i, item){
         model = $(item).data('_view').model;
 
         positions.push({
