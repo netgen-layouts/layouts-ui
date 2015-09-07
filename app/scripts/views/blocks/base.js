@@ -12,7 +12,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       !this.model.isNew() && this.model.fetch();
     },
 
-
     events: {
       'click > .block_actions .action-edit': '$edit',
       //'dblclick > .block_actions .action-destroy': '$fast_destroy'

@@ -26,6 +26,10 @@ define(['model'], function(Model){
 
     kind_of: function(kind){
       return this.get('kind') === kind;
+    },
+
+    as_section: function(){
+      return this.get('parameters') && this.get('parameters').as_section;
     }
 
   });

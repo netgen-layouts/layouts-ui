@@ -37,8 +37,14 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       console.log('drag_view', drag_view.model.attributes);
       console.log('receiver_view', receiver_view.model.attributes);
       console.log('is_section', drag_view.model.is_section() && receiver_view.model.is_section());
+      console.log('as_section', drag_view.model.as_section && drag_view.model.as_section());
 
       if(drag_view.model.is_section() && receiver_view.model.is_section()){
+        receiver_element.addClass('forbidden');
+        this.set_canceled(ui, true);
+      }
+
+      if(drag_view.model.as_section && drag_view.model.as_section()){
         receiver_element.addClass('forbidden');
         this.set_canceled(ui, true);
       }

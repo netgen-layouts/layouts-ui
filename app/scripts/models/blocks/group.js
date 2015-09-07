@@ -17,6 +17,10 @@ define(['underscore', './base', 'app'], function(_, Block, App){
       return response;
     },
 
+    as_section: function(){
+      return this.get('as_section');
+    },
+
     save_group: function(){
       var self = this;
 
