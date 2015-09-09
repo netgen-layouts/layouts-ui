@@ -19,7 +19,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     setup_dom_element: function(){
-      this.model.is_in_section() && this.$el.attr('data-in-section', '');
+      this.model.is_in_container() && this.$el.attr('data-in-container', '');
       this.$el
         .attr('data-block', '')
         .attr('data-type', this.model.get('template').get('kind'));
@@ -34,20 +34,20 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       return this;
     },
 
-    $section_el: function(){
-      return this.$el.parents('[data-type="Section"]');
+    $container_el: function(){
+      return this.$el.parents('[data-type="Container"]');
     },
 
-    is_in_section: function(){
-      return this.$section_el().length;
+    is_in_container: function(){
+      return this.$container_el().length;
     },
 
-    section: function(){
-      return this.is_in_section() && this.$section_el().data('_view');
+    container: function(){
+      return this.is_in_container() && this.$container_el().data('_view');
     },
 
-    is_section: function(){
-      return this.model.is_section();
+    is_container: function(){
+      return this.model.is_container();
     },
 
 
@@ -64,12 +64,12 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     update_positions: function(){
-      console.warn('IN SECTION? ', this.is_in_section());
+      console.warn('IN CONTAINER? ', this.is_in_container());
       if(this.model.changed.id){
         console.info('Block base: update_positions');
-        if(this.is_in_section()){
-          console.info('in section: save_positions');
-          this.section().save_positions();
+        if(this.is_in_container()){
+          console.info('in container: save_positions');
+          this.container().save_positions();
           return;
         }else{
           App.trigger('positions:update');
@@ -89,11 +89,11 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     on_destroy: function(){
-      var is_in_section = this.is_in_section(),
-          section = this.section();
+      var is_in_container = this.is_in_container(),
+          container = this.container();
 
       this.remove();
-      is_in_section && section.trigger('block:remove');
+      is_in_container && container.trigger('block:remove');
       App.trigger('positions:update');
     },
 

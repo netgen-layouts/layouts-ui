@@ -9,7 +9,7 @@ define(function(require){
     Grid:  require('./grid'),
     Group:  require('./group'),
     ContentBlock:  require('./content_block'),
-    Section:  require('./section')
+    Container:  require('./container')
   };
 
 });

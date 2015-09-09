@@ -2,8 +2,8 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
   'use strict';
 
   return Base.extend(Dnd).extend({
-    form_namespace: 'section',
-    sort_element: '[data-section]',
+    form_namespace: 'container',
+    sort_element: '[data-container]',
 
     initialize: function(){
       this._super('initialize', arguments);
@@ -13,16 +13,16 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
 
     render: function() {
       this._super('render', arguments);
-      App.blocks.load_section_blocks(this);
-      this.$('[data-section]').html(this.dom_elements);
+      App.blocks.load_container_blocks(this);
+      this.$('[data-container]').html(this.dom_elements);
       return this;
     },
 
     save_positions: function(){
-      console.log('SECTION: save_positions section id: ', this.model.id);
+      console.log('CONTAINER: save_positions container id: ', this.model.id);
       var positions = [], model;
 
-      this.$('>[data-section]>[data-in-section]').each(function(i, item){
+      this.$('>[data-container]>[data-in-container]').each(function(i, item){
         model = $(item).data('_view').model;
 
         positions.push({

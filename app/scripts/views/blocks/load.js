@@ -50,18 +50,18 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       });
     },
 
-    load_section_blocks: function(section_view){
-      section_view.children = [];
-      section_view.dom_elements = [];
-      _.each(section_view.model.get('positions'), function(item){
+    load_container_blocks: function(container_view){
+      container_view.children = [];
+      container_view.dom_elements = [];
+      _.each(container_view.model.get('positions'), function(item){
           var block_template = App.g.block_templates.get(item.block_type_id),
               block = App.model_helper.init_block(block_template, {
-                section_id: section_view.model.id,
+                container_id: container_view.model.id,
                 id: item.block_id ? item.block_id : null
               }),
               child = this.create_view(block.template().get('kind'), block);
 
-          section_view.dom_elements.push(child.$el);
+          container_view.dom_elements.push(child.$el);
       }, this);
 
     }

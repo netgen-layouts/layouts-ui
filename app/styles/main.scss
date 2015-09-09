@@ -129,14 +129,14 @@ input[type="text"]{
   cursor: pointer;
 }
 
-[data-type="Section"]{
+[data-type="Container"]{
   position: relative;
   > div{
     min-height: 3em;
     width: auto;
     position:relative;
     margin-bottom:20px;
-    &:empty:before{ content:'Drop content in section!!!'; display:block; color:#000; font-size:1.4em; position:absolute; top:0; left:0; width:100%; background:#66f;}
+    &:empty:before{ content:'Drop content in container!!!'; display:block; color:#000; font-size:1.4em; position:absolute; top:0; left:0; width:100%; background:#66f;}
     background:#66f; padding: 1px 0;
   }
 
@@ -146,7 +146,7 @@ input[type="text"]{
 }
 
 .forbidden{
-  > div[data-section]{
+  > div[data-container]{
     background: #900;
   }
 }

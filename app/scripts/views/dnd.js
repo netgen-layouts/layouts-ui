@@ -3,7 +3,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
   return {
 
-    connect_with: '[data-zone], [data-section]',
+    connect_with: '[data-zone], [data-container]',
     canceled_attr: 'canceled',
 
     is_zone: function(){
@@ -19,12 +19,12 @@ define(['underscore', 'view', 'app'], function(_, View, App){
     },
 
     remove_forbidden_class: function(e){
-      $(e.target).closest('[data-type="Section"]').removeClass('forbidden');
+      $(e.target).closest('[data-type="Container"]').removeClass('forbidden');
     },
 
-    check_sections: function(e, ui){
+    check_containers: function(e, ui){
       var drag_view, receiver_view,
-          receiver_element = $(e.target).closest('[data-type="Section"]');
+          receiver_element = $(e.target).closest('[data-type="Container"]');
 
       if(!receiver_element.length){
         this.set_canceled(ui, false);
@@ -36,15 +36,15 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
       console.log('drag_view', drag_view.model.attributes);
       console.log('receiver_view', receiver_view.model.attributes);
-      console.log('is_section', drag_view.model.is_section() && receiver_view.model.is_section());
-      console.log('as_section', drag_view.model.as_section && drag_view.model.as_section());
+      console.log('is_container', drag_view.model.is_container() && receiver_view.model.is_container());
+      console.log('as_container', drag_view.model.as_container && drag_view.model.as_container());
 
-      if(drag_view.model.is_section() && receiver_view.model.is_section()){
+      if(drag_view.model.is_container() && receiver_view.model.is_container()){
         receiver_element.addClass('forbidden');
         this.set_canceled(ui, true);
       }
 
-      if(drag_view.model.as_section && drag_view.model.as_section()){
+      if(drag_view.model.as_container && drag_view.model.as_container()){
         receiver_element.addClass('forbidden');
         this.set_canceled(ui, true);
       }
@@ -71,12 +71,12 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
     save_and_add_block: function(ui, block_template, block, receiver_block){
       var receiver_model = receiver_block.model,
-        section_attributes = {section_id: receiver_block.is_section() && receiver_model.id};
+        container_attributes = {container_id: receiver_block.is_container() && receiver_model.id};
 
       if(block){
-        block.set(section_attributes);
+        block.set(container_attributes);
       }else{
-        block = App.model_helper.init_block(block_template, section_attributes);
+        block = App.model_helper.init_block(block_template, container_attributes);
 
         if(block.is_group()){
           block.save_group();
@@ -94,7 +94,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       ui.item.remove();
     },
 
-    setup_dnd_for_sections_and_zones: function(){
+    setup_dnd_for_containers_and_zones: function(){
       var self = this,
           $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 
@@ -105,7 +105,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         cursorAt: { left: 5 },
         delay: 150,
         distance: 20,
-        over: self.check_sections.bind(self),
+        over: self.check_containers.bind(self),
         out: self.remove_forbidden_class,
         receive: function(e, ui){
           console.log('base receive', this, arguments);
@@ -140,7 +140,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
           if(!$(ui.item).read_data_and_remove_key('canceled')){
 
-            if(dragables.receiver && self.is_same_section(dragables)){
+            if(dragables.receiver && self.is_same_container(dragables)){
               dragables.receiver.trigger('block:move');
             }else{
               dragables.receiver && dragables.receiver.trigger('block:move');
@@ -156,21 +156,21 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       });
     },
 
-    is_same_section: function(dragables){
+    is_same_container: function(dragables){
       return dragables.receiver.model.id === dragables.sender.model.id;
     },
 
     extract_sender_and_receiver: function(element, ui){
       return {
         sender: $(element).closest('[data-view]').data('_view'),
-        receiver: $(ui.item).data('_view').section()
+        receiver: $(ui.item).data('_view').container()
       };
     },
 
     setup_dnd_for_blocks: function(){
       if(this.is_zone()){
         $('.blocks').sortable({
-          connectWith: '[data-zone], [data-section]',
+          connectWith: '[data-zone], [data-container]',
           placeholder: 'no-placeholder',
           receive: function(e, ui){
             console.log(ui.sender, this);
@@ -202,7 +202,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
     init: function(){
       this.setup_dnd_for_blocks();
-      this.setup_dnd_for_sections_and_zones();
+      this.setup_dnd_for_containers_and_zones();
     },
 
     render: function(){

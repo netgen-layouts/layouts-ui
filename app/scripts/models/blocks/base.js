@@ -25,12 +25,12 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
       return this.kind_of('Group');
     },
 
-    is_section: function(){
-      return this.kind_of('Section');
+    is_container: function(){
+      return this.kind_of('Container');
     },
 
-    is_in_section: function(){
-      return this.get('section_id');
+    is_in_container: function(){
+      return this.get('container_id');
     },
 
     kind_of: function(kind){

@@ -20,16 +20,16 @@ define(['model'], function(Model){
       return this.kind_of('Group');
     },
 
-    is_section: function(){
-      return this.kind_of('Section');
+    is_container: function(){
+      return this.kind_of('Container');
     },
 
     kind_of: function(kind){
       return this.get('kind') === kind;
     },
 
-    as_section: function(){
-      return this.get('parameters') && this.get('parameters').as_section;
+    as_container: function(){
+      return this.get('parameters') && this.get('parameters').as_container;
     }
 
   });

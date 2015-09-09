@@ -2,7 +2,7 @@ define(['underscore', './base'], function(_, Block){
   'use strict';
 
   return Block.extend({
-    path: 'sections',
+    path: 'containers',
 
     parse: function (response) {
       response.positions = response.positions ? JSON.parse(response.positions) : [];

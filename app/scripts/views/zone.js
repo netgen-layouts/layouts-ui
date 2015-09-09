@@ -26,7 +26,7 @@ define(['view', 'app'], function(View, App){
       }
     },
 
-    is_section: function(){
+    is_container: function(){
       return false;
     },
 
