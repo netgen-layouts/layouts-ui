@@ -8,7 +8,7 @@ define(function(require){
     List:  require('./list'),
     Grid:  require('./grid'),
     Group:  require('./group'),
-    ContentBlock:  require('./content_block'),
+    Content:  require('./content'),
     Container:  require('./container')
   };
 
