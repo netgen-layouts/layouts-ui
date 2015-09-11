@@ -3,8 +3,8 @@ define(['underscore', 'view', './block_template', 'app', './dnd'], function(_, V
 
   return View.extend(Dnd).extend({
     sort_element: '[data-zone]',
-    template: 'block_templates/items',
-    //ViewItem: ViewBlockTemplate,
+    //template: 'block_templates/items',
+    ViewItem: ViewBlockTemplate,
 
     initialize: function(){
       this._super('initialize', arguments);
@@ -17,7 +17,24 @@ define(['underscore', 'view', './block_template', 'app', './dnd'], function(_, V
       this.context.custom_blocks = block_types[3];
 
       return this;
-    }
+    },
+
+    /*render: function(){
+      this._super('initialize', arguments);
+
+      var children = [];
+      _.each(this.context.simple_blocks, function(model){
+        children.push(new ViewBlockTemplate({
+          model: model
+        }));
+      });
+
+      _.each(children, function(child){
+        this.$el.append(child.render().$el);
+      }, this);
+
+      return this;
+    },*/
   });
 
 });
