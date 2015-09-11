@@ -13,8 +13,12 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
       return this.type();
     },
 
-    template_name: function(){
+    template_name_from_params: function(){
       return this.type().get('parameters').template;
+    },
+
+    template_name: function(){
+      return this.attributes.template;
     },
 
     type_name: function(){

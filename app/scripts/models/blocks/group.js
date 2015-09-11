@@ -6,7 +6,7 @@ define(['underscore', './base', 'app'], function(_, Block, App){
 
     html_url: function(){
       if(this.isNew()){
-        return this.urlRoot() + '/dummy?ajax=true&block[template]=' + this.template_name();
+        return this.urlRoot() + '/dummy?ajax=true&block[template]=' + this.template_name_from_params();
       }else{
         return this.urlRoot() + '/' + this.id +  '?ajax=true';
       }

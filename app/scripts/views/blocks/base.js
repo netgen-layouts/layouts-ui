@@ -30,7 +30,8 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       View.prototype.render.apply(this, arguments);
       this.$el
         .html(this.model.get('html'))
-        .prepend(JST['block_actions'](this.context)); // jshint ignore:line
+        .prepend(JST['block_actions'](this.context)) // jshint ignore:line
+        .prepend(JST['block_template'](this.context)) // jshint ignore:line
       return this;
     },
 

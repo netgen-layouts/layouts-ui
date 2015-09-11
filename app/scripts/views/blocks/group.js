@@ -40,6 +40,7 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
 
     render: function(){
       if(!this.model.id){ return this; }
+      this.context.model  = this.model;
       $.ajax({
         url: this.model.html_url(),
         headers: Backbone.defaults().headers
@@ -51,9 +52,11 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
     },
 
     render2: function(){
-      this.$el.attr('data-block', '');
-      this.$el.attr('data-type', this.model.get('template').get('kind'));
-      this.$el.prepend(JST['block_actions'](this.context)); // jshint ignore:line
+      console.log(this.context);
+      this.$el.attr('data-block', '')
+      .attr('data-type', this.model.get('template').get('kind'))
+      .prepend(JST['block_actions'](this.context)) // jshint ignore:line
+      .prepend(JST['block_template'](this.context)); // jshint ignore:line
       this.trigger_render();
     }
 
