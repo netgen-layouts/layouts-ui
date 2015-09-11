@@ -166,3 +166,16 @@ input[type="text"]{
     display: none;
   }
 }
+
+.image-holder{
+  position: relative;
+  .image-title{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3px;
+    background: black;
+    opacity: .5;
+  }
+}
