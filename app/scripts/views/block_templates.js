@@ -3,38 +3,41 @@ define(['underscore', 'view', './block_template', 'app', './dnd'], function(_, V
 
   return View.extend(Dnd).extend({
     sort_element: '[data-zone]',
-    //template: 'block_templates/items',
-    ViewItem: ViewBlockTemplate,
+    template: 'block_templates/items',
 
     initialize: function(){
       this._super('initialize', arguments);
 
       var block_types = this.collection.by_group();
 
-      this.context.simple_blocks = block_types[0];
-      this.context.group_blocks = block_types[1];
-      this.context.container_blocks = block_types[2];
-      this.context.custom_blocks = block_types[3];
+      this.simple_blocks = block_types[0];
+      this.group_blocks = block_types[1];
+      this.container_blocks = block_types[2];
+      this.custom_blocks = block_types[3];
 
       return this;
     },
 
-    /*render: function(){
-      this._super('initialize', arguments);
+    render: function(){
+      this._super('render', arguments);
 
-      var children = [];
-      _.each(this.context.simple_blocks, function(model){
-        children.push(new ViewBlockTemplate({
-          model: model
-        }));
-      });
-
-      _.each(children, function(child){
-        this.$el.append(child.render().$el);
-      }, this);
+      this.render_group(this.simple_blocks, '#simple-blocks');
+      this.render_group(this.group_blocks, '#group-blocks');
+      this.render_group(this.container_blocks, '#container-blocks');
+      this.render_group(this.custom_blocks, '#custom-blocks');
 
       return this;
-    },*/
+    },
+
+    render_group: function(group, html_id){
+      var view;
+      _.each(group, function(model){
+        view = new ViewBlockTemplate({
+          model: model
+        });
+        this.$(html_id).append(view.render().$el);
+      }, this);
+    }
   });
 
 });
