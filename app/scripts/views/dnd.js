@@ -169,7 +169,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
     setup_dnd_for_blocks: function(){
       if(this.is_zone()){
-        $('.blocks .block').sortable({
+        $('.blocks .block-items').sortable({
           connectWith: '[data-zone], [data-container]',
           placeholder: 'no-placeholder',
           receive: function(e, ui){

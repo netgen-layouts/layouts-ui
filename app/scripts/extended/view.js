@@ -281,10 +281,11 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
     },
 
 
-    render_items: function(items){
+    render_items: function(items, el, ViewItem){
       items || (items = this.collection.models);
-      this.$el.html(_.map(items, function(item){
-        return new this.ViewItem({model: item}).render().el;
+      var ViewKlass = ViewItem || this.ViewItem;
+      $(el || this.$el).html(_.map(items, function(item){
+        return new ViewKlass({model: item}).render().el;
       }, this));
     }
 

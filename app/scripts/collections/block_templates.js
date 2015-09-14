@@ -14,9 +14,7 @@ define(['underscore', 'app', 'collection', 'models/block_template'], function(_,
     },
 
     by_group: function(){
-      if(this._by_group){ return; }
-      this._by_group = _.groupBy(this.models, function(item){return item.get('group');});
-      return this._by_group;
+      return this._by_group || (this._by_group = this.groupBy(function(item){return item.group_name();}));
     }
 
   });

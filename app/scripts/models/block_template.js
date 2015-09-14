@@ -3,6 +3,18 @@ define(['model'], function(Model){
 
   return Model.extend({
 
+    GROUPS: {
+      0: 'simple',
+      1: 'group',
+      2: 'container',
+      3: 'custom'
+    },
+
+    group_name: function(){
+      return this.GROUPS[this.get('group')];
+    },
+
+
     parse: function (response) {
       response.parameters = JSON.parse(response.parameters);
       return response;

@@ -4,9 +4,7 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
   return Model.extend({
     format: 'json',
 
-    path: function(){
-      return 'layouts';
-    },
+    path: 'layouts',
 
     parse: function (response) {
       response.zones = response.zones ? JSON.parse(response.zones) : [];
