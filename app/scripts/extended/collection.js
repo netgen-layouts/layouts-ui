@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'model'], function(_, Backbone, Model){
+define(['underscore', 'backbone', 'model', 'app'], function(_, Backbone, Model, App){
   'use strict';
 
 
@@ -25,6 +25,10 @@ define(['underscore', 'backbone', 'model'], function(_, Backbone, Model){
     model: Model,
 
     index: {},
+
+    url: function(){
+      return App.env.base_url + _.result(this, 'path');
+    },
 
     parse: function(resp){
       return ('values' in resp) ? resp.values : resp;

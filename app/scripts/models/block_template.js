@@ -3,6 +3,9 @@ define(['model'], function(Model){
 
   return Model.extend({
 
+    format: 'json',
+    path: 'block_types',
+
     GROUPS: {
       0: 'simple',
       1: 'group',

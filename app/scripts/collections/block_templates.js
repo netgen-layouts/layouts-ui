@@ -5,9 +5,7 @@ define(['underscore', 'app', 'collection', 'models/block_template'], function(_,
     cached: true,
     model: BlockTemplate,
 
-    url: function(){
-      return App.env.base_url +  'block_types.json';
-    },
+    path: 'block_types.json',
 
     comparator: function(model) {
       return model.get('order');
