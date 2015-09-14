@@ -26,8 +26,9 @@ define(['underscore', 'backbone', 'model', 'app'], function(_, Backbone, Model, 
 
     index: {},
 
-    url: function(){
-      return App.env.base_url + _.result(this, 'path');
+    url: function(additional){
+      var url = this.model.prototype.urlRoot();
+      return this.model.prototype.url_format(url, additional);
     },
 
     parse: function(resp){

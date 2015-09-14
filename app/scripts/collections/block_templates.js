@@ -4,8 +4,7 @@ define(['underscore', 'app', 'collection', 'models/block_template'], function(_,
   return Collection.extend({
     cached: true,
     model: BlockTemplate,
-
-    path: 'block_types.json',
+    name: 'BlockTemplates',
 
     comparator: function(model) {
       return model.get('order');

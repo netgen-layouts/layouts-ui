@@ -3,7 +3,8 @@ define(['collection', 'backbone',  'models/block'], function(Collection, Backbon
 
   return Collection.extend({
     localStorage: new Backbone.LocalStorage('blocks'),
-    model: Block
+    model: Block,
+    name: 'Blocks'
   });
 
 });
