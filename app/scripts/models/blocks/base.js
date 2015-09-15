@@ -18,6 +18,7 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     template_name: function(){
+      if(this.get('data') === false) { return 'dummy'; }
       return this.attributes.template;
     },
 
