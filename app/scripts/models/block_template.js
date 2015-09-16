@@ -8,9 +8,10 @@ define(['model'], function(Model){
 
     GROUPS: {
       0: 'simple',
-      1: 'group',
-      2: 'container',
-      3: 'custom'
+      1: 'content',
+      2: 'group',
+      3: 'container',
+      4: 'custom'
     },
 
     group_name: function(){
@@ -19,7 +20,7 @@ define(['model'], function(Model){
 
 
     parse: function (response) {
-      response.parameters = JSON.parse(response.parameters);
+      response.parameters = response.parameters ? JSON.parse(response.parameters) : {};
       return response;
     },
 

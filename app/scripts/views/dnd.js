@@ -36,15 +36,14 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
       console.log('drag_view', drag_view.model.attributes);
       console.log('receiver_view', receiver_view.model.attributes);
-      console.log('is_container', drag_view.model.is_container() && receiver_view.model.is_container());
-      console.log('as_container', drag_view.model.as_container && drag_view.model.as_container());
+      console.log('as_container', drag_view.model.is_container && drag_view.model.is_container());
 
       if(drag_view.model.is_container() && receiver_view.model.is_container()){
         receiver_element.addClass('forbidden');
         this.set_canceled(ui, true);
       }
 
-      if(drag_view.model.as_container && drag_view.model.as_container()){
+      if(drag_view.model.is_container && drag_view.model.is_container()){
         receiver_element.addClass('forbidden');
         this.set_canceled(ui, true);
       }

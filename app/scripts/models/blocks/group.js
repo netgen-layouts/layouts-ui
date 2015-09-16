@@ -17,7 +17,7 @@ define(['underscore', './base', 'app'], function(_, Block, App){
       return response;
     },
 
-    as_container: function(){
+    is_container: function(){
       return this.get('as_container');
     },
 
