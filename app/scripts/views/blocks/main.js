@@ -10,7 +10,8 @@ define(function(require){
     Group:  require('./group'),
     Content:  require('./content'),
     Container:  require('./container'),
-    HtmlBlock:  require('./html_block')
+    HtmlBlock:  require('./html_block'),
+    Custom:  require('./custom')
   };
 
 });

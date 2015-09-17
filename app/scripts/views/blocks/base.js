@@ -26,12 +26,22 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       return this;
     },
 
-    render: function(){
+    /**
+     * NOTE: when overriding the render DO NOT forget to trigger events
+     *       if not calling super method
+     * @param  {html}
+     * @return {this}
+     */
+    render: function(html){
       View.prototype.render.apply(this, arguments);
+      this.$el.html(html || this.model.get('html'));
+      return this.append_additionals();
+    },
+
+    append_additionals: function(){
       this.$el
-        .html(this.model.get('html'))
-        .prepend(JST['block_actions'](this.context)) // jshint ignore:line
-        .prepend(JST['block_template'](this.context)) // jshint ignore:line
+        .prepend(JST.block_actions(this.context))
+        .prepend(JST.block_template(this.context));
       return this;
     },
 
