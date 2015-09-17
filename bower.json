@@ -13,7 +13,8 @@
     "underscore": "*",
     "almond": "*",
     "bootstrap-sass": "*",
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "inflection": "~1.7.1"
   },
   "devDependencies": {}
 }

@@ -24,7 +24,8 @@ require.config({
     templates: 'templates',
     app: 'app',
     init: 'init',
-    modal: '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal'
+    modal: '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal',
+    inflection: '../../bower_components/inflection/lib/inflection'
   },
 
   shim: {

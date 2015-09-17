@@ -3,8 +3,6 @@ define(['./base'], function(Base){
 
   return Base.extend({
 
-    form_namespace: 'simple_block',
-
     events: {
       'blur .simple-block': '$blur'
     },

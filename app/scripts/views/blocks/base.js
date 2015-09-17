@@ -55,7 +55,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     $edit: function(){
 
       new FormModal({
-        form_namespace: this.form_namespace,
         model: this.model
       });
 

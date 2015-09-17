@@ -2,7 +2,6 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
   'use strict';
 
   return Base.extend(Dnd).extend({
-    form_namespace: 'container',
     sort_element: '[data-container]',
 
     initialize: function(){

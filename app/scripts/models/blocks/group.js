@@ -13,7 +13,7 @@ define(['underscore', './base', 'app'], function(_, Block, App){
     },
 
     parse: function (response) {
-      response.parameters = JSON.parse(response.parameters);
+      response.parameters = response.parameters ? JSON.parse(response.parameters) : [];
       return response;
     },
 

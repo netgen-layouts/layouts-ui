@@ -3,8 +3,6 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
 
   return Base.extend({
 
-    form_namespace: 'group',
-
     events: {
       // 'mouseenter': '$mouseenter',
       // 'mouseleave': '$mouseleave'

@@ -40,6 +40,10 @@ define(['model'], function(Model){
       return this.kind_of('Container');
     },
 
+    is_custom: function(){
+      return this.kind_of('Custom');
+    },
+
     kind_of: function(kind){
       return this.get('kind') === kind;
     },

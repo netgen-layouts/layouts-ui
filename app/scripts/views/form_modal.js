@@ -1,4 +1,4 @@
-define(['./modal'], function(Modal){
+define(['inflection', './modal'], function(Inflection, Modal){
   'use strict';
 
   return Modal.extend({
@@ -10,7 +10,6 @@ define(['./modal'], function(Modal){
     initialize: function(options){
       Modal.prototype.initialize.apply(this, arguments);
       options || (options = {});
-      this.form_namespace = options.form_namespace;
 
       this.listenTo(this.model, 'edit:success', this.open);
       this.listenTo(this.model, 'save:success', this.close);
@@ -27,19 +26,26 @@ define(['./modal'], function(Modal){
 
     $submit: function (e) {
       e && e.preventDefault();
-      var params = this.serialize().params[this.form_namespace], options = {};
 
-      if(this.form_namespace === 'image'){
+      var options = {},
+          form_namespace = this.get_form_namespace(),
+          params = this.serialize().params[form_namespace];
+
+      if(form_namespace === 'image'){
         options.form_data = new FormData(this.$('form').get(0));
       }
 
       this.model.save(params, options);
     },
 
+    get_form_namespace: function(){
+      var kind = this.model.template().get('kind');
+      return kind === 'Custom' ? Inflection.singularize(this.model.get('endpoint')) : Inflection.underscore(kind);
+    },
+
     $apply: function () {
       this.$submit.apply(this, arguments);
     }
-
 
   });
 
