@@ -3,15 +3,9 @@ define(['./base'], function(Base){
 
   return Base.extend({
 
-    template: 'blocks/custom',
-
-    /*
-    render: function(){
-      this.context.name = this.model.template().get('name');
-      return Base.prototype.render.call(this, this.render_template());
-    }
-    */
+    template: 'blocks/custom'
 
   });
 
 });
+
