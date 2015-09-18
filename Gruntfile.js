@@ -269,11 +269,11 @@ module.exports = function (grunt) {
                 generatedImagesDir: '.tmp/images/generated',
                 imagesDir: '<%= yeoman.app %>/images',
                 javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/styles/fonts',
+                fontsDir: '<%= yeoman.app %>/fonts',
                 importPath: 'bower_components',
                 httpImagesPath: '../images',
                 httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/styles/fonts',
+                httpFontsPath: '/fonts',
                 relativeAssets: false
             },
             dist: {},
@@ -344,7 +344,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}', //TODO: fix reving images in HTML templates
                     '<%= yeoman.dist %>/scripts/{,*/}*.js',
                     '<%= yeoman.dist %>/styles/{,*/}*.css',
-                    '<%= yeoman.dist %>/styles/fonts/**/{,*/}*.{eot,svg,ttf,woff}',
+                    '<%= yeoman.dist %>/fonts/**/{,*/}*.{eot,svg,ttf,woff}',
                     '<%= yeoman.dist %>/locales/*'
                 ]
             }
@@ -372,7 +372,7 @@ module.exports = function (grunt) {
                 'locales/*',
                 'scripts/*.js',
                 'styles/*.css',
-                'styles/fonts/**/{,*/}*.{eot,svg,ttf,woff}'
+                'fonts/**/{,*/}*.{eot,svg,ttf,woff}'
               ],
               dest: '<%= yeoman.dist %>/manifest.appcache'
             }
@@ -517,7 +517,7 @@ module.exports = function (grunt) {
                         'locales/*',
                         'includes/*',
                         'images/{,*/}*.{webp,gif}',
-                        'styles/fonts/**/{,*/}*.{eot,svg,ttf,woff}'
+                        'fonts/**/{,*/}*.{eot,svg,ttf,woff}'
                     ]
                 }, {
                     expand: true,
