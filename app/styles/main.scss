@@ -1,4 +1,4 @@
-$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+$icon-font-path: "../fonts/bootstrap/";
 
 @import "compass/css3";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
@@ -220,3 +220,6 @@ input[type="text"]{
 .empty-block{
   padding: 6px 0;
 }
+
+
+.the_pencil{font-size:30px; color:#fff;}
