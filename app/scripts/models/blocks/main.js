@@ -11,7 +11,8 @@ define(function(require){
     Content:  require('./content'),
     Container:  require('./container'),
     HtmlBlock:  require('./html_block'),
-    Custom:  require('./custom')
+    Custom:  require('./custom'),
+    Slider:  require('./slider')
   };
 
 });
