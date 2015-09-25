@@ -9,8 +9,7 @@ define(['./base'], function(Base){
     },
 
     append_slider_options: function(){
-      this.$el
-        .prepend(JST.slider(this.context));
+      this.$el.prepend(JST.slider(this.context));
       return this;
     }
 
