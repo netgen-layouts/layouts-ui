@@ -1,0 +1,14 @@
+{{#if model.autoplay}}
+  <i class="autoplay glyphicon glyphicon-play"></i>
+{{/if}}
+
+{{#if model.navigation}}
+  <i class="navigation navigation-prev glyphicon glyphicon-menu-left"></i>
+  <i class="navigation navigation-next glyphicon glyphicon-menu-right"></i>
+{{/if}}
+
+{{#if model.pagination}}
+  <i class="pagination glyphicon glyphicon-option-horizontal"></i>
+{{/if}}
+
+<span class="speed">{{speed model.speed}} s</span>

@@ -146,6 +146,11 @@
           port = port ? ':'+port : '';
       var url = [location.protocol, '//', host, port, '/', path].join('');
       return url;
+    },
+
+    speed: function(number){
+      number = number || 300;
+      return number / 1000;
     }
 
   };
