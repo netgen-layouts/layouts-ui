@@ -256,3 +256,17 @@ input[type="text"]{
     padding: 4px;
   }
 }
+
+.modal-header{
+  min-height: 64px;
+}
+
+.modal-body{
+  h1{
+    font-size: 24px;
+    margin-top: -40px;
+  }
+  .actions{
+    display: none;
+  }
+}

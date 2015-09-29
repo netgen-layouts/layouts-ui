@@ -9,7 +9,7 @@ define(['view'], function(View){
 
     events: {
       'click .action_apply':  '$apply',
-      'submit form': '$submit',
+      'submit form': '$submit'
     },
 
     initialize: function(){
