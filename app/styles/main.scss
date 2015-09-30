@@ -257,14 +257,41 @@ input[type="text"]{
   }
 }
 
+fieldset{
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+legend{
+  border: none;
+  display: inline-block;
+  width: auto;
+  padding: 0 10px;
+  margin-bottom: 0px;
+}
+
+.form-group{
+  margin-bottom: 5px;
+}
+
+.form-group.boolean{
+  display: inline-block;
+  width: 20%;
+}
+
 .modal-header{
   min-height: 64px;
+  .modal-title{
+    font-size: 24px;
+  }
 }
 
 .modal-body{
   h1{
     font-size: 24px;
-    margin-top: -40px;
+    margin-top: -56px;
+    margin-bottom: 40px;
   }
   .actions{
     display: none;
