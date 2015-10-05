@@ -1,4 +1,4 @@
-define(['jquery'], function($){
+define(['jquery', 'app'], function($, App){
   'use strict';
 
   $.fn.toJSON = function() {
@@ -21,6 +21,19 @@ define(['jquery'], function($){
     var val = $this.data(name);
     $this.removeData(name);
     return val;
+  };
+
+
+  $.fn.ajax_submit = function (opts) {
+    opts || (opts = {});
+    var format = opts.format ? '.' + opts.format : '';
+    var $this = $(this);
+    return $.ajax({
+      url: App.env.base_url + $this.attr('action') + format,
+      type: 'json',
+      method: $this.attr('method'),
+      data: $this.serialize()
+    });
   };
 
 });
