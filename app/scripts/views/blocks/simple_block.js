@@ -4,25 +4,19 @@ define(['./base'], function(Base){
   return Base.extend({
 
     events: {
-      'blur .simple-block': '$blur'
+      'blur .simple-block': '$blur',
+      'keyup [data-inline]': '$keyup'
     },
 
-    render: function(){
-      Base.prototype.render.apply(this, arguments);
-      this.content = this.$('.simple-block').text().trim();
-      return this;
+
+    $keyup: function (e) {
+      var $target = $(e.target), name = $target.data('attr');
+      this.$('input[name*="'+name+'"]').val($target.text().trim());
     },
 
     $blur: function(e){
       e.preventDefault();
-
-      var text = this.$('.simple-block').text().trim();
-
-      if(this.content !== text){
-        this.model.save({
-          title: text
-        });
-      }
+      this.model.save_via_form(this);
     }
 
   });

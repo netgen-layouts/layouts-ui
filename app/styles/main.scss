@@ -53,6 +53,7 @@ img{width:100%; max-width:100%;}
   .block_actions{position:absolute;  display:none; text-align:right; height:100%; left:-124px; width:124px; top:-10px; padding:10px 8px 0 0; color:#fff; z-index: 1000; }
   .block_actions span{ background: black; padding: 8px;}
   .handle{}
+  form{display:none;}
 }
 [data-block]:hover > .block_actions{display: inline-block;}
 

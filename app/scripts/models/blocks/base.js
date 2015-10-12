@@ -5,6 +5,10 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
 
     format: 'json',
 
+    path: function(){
+      return this.get('endpoint');
+    },
+
     type: function(){
       return App.g.block_templates.get(this.get('template_id'));
     },

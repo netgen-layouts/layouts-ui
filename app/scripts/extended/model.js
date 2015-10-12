@@ -20,6 +20,18 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       return this;
     },
 
+
+    save_via_form: function(view_or_form){
+      var $form = view_or_form.jquery ? view_or_form : view_or_form.$('form');
+      return $form.ajax_submit({format: this.get('format') })
+        .done(function(response){
+          this.set(response).trigger('save:success');
+        }.bind(this))
+        .fail(function(response){
+          this.set(response).trigger('save:error');
+        }.bind(this));
+    },
+
     set: function(key, value, options) {
       var attrs, attr, setter;
 
