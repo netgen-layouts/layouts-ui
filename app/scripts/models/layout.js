@@ -21,6 +21,10 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
 
     inherited_zones: function(){
       return _.where(App.g.layout.get('zones'), {kind: 2});
+    },
+
+    get_block_by_id: function(id){
+      return _.findWhere(App.g.layout.get('blocks'), {id: id});
     }
 
   });

@@ -10,7 +10,7 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     type: function(){
-      return App.g.block_templates.get(this.get('template_id'));
+      return App.g.block_templates.get(this.get('block_type_id'));
     },
 
     template: function(){

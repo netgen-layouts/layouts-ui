@@ -38,7 +38,7 @@ define(['inflection', './modal'], function(Inflection, Modal){
         options.form_data = new FormData(this.$('form').get(0));
       }
 
-      this.model.save(args, options);
+      this.model.save(params, options);
     },
 
     get_form_namespace: function(){

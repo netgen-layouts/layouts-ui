@@ -25,8 +25,7 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
         model = $(item).data('_view').model;
 
         positions.push({
-          block_id: model.id,
-          block_type_id: model.get('template_id')
+          block_id: model.id
         });
 
       });

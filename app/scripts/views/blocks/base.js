@@ -9,7 +9,10 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       this.listenTo(this.model, 'change', this.setup_dom_element);
       this.on('render', this.update_positions);
       this.listenTo(this.model, 'delete:success', this.on_destroy);
-      !this.model.isNew() && this.model.fetch();
+      if(!this.model.isNew()){
+        this.setup_dom_element();
+        this.render();
+      }
     },
 
     events: {

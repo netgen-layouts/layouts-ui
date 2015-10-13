@@ -103,8 +103,7 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
         $(this).find('> [data-view]').each(function(){
           var model = $(this).data('_view').model;
           !model.isNew() && blocks.push({
-            block_id: model.id,
-            block_type_id: model.get('template_id')
+            block_id: model.id
           });
         });
 

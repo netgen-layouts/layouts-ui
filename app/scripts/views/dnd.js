@@ -70,12 +70,15 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
     save_and_add_block: function(ui, block_template, block, receiver_block){
       var receiver_model = receiver_block.model,
-        container_attributes = {container_id: receiver_block.is_container() && receiver_model.id};
+        container_attributes = {
+          container_id: receiver_block.is_container() && receiver_model.id,
+          zone_id: receiver_block.$el.data('zone')
+        };
 
       if(block){
         block.set(container_attributes);
       }else{
-        block = App.model_helper.init_block(block_template, container_attributes);
+        block = App.model_helper.init_block_from_template(block_template, container_attributes);
 
         if(block.is_group()){
           block.save_group();
@@ -113,7 +116,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
           var drag_block = $(ui.item).data('_view');
           var block_template = drag_block.model;
-          var block = block_template.has('template_id') && block_template;
+          var block = block_template.has('block_type_id') && block_template;
           var receiver_block = $(this).closest('[data-view]').data('_view');
 
           if(self.is_zone() && !self.zone_accept_blocks(ui, block_template, $(this).data('_view'))){

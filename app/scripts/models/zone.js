@@ -18,7 +18,7 @@ define(['underscore', 'model'], function(_, Model){
     should_accept: function(template_or_block){
       var accepts = JSON.parse(this.get('accepts'));
       if(accepts.length === 0){ return true; }
-      var id = template_or_block.get('template_id') || template_or_block.id;
+      var id = template_or_block.get('block_type_id') || template_or_block.id;
       return _.contains(accepts, id);
     }
   });

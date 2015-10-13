@@ -14,12 +14,8 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       _.each(App.g.layout.get('positions'), function(position){
         _.each(position.blocks, function(item){
 
-          var block_template = App.g.block_templates.get(item.block_type_id);
-          var block = App.model_helper.init_block(block_template);
-
-          if(item.block_id){
-            block.set({id: item.block_id});
-          }
+          var block_attr = App.g.layout.get_block_by_id(item.block_id);
+          var block = App.model_helper.init_block(block_attr);
 
           var view_block = App.blocks.create_view(block.template().get('kind'), block);
 
@@ -53,7 +49,10 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
     load_container_blocks: function(container_view){
       container_view.children = [];
       container_view.dom_elements = [];
+      console.log(container_view.model.get('positions'));
       _.each(container_view.model.get('positions'), function(item){
+
+
           var block_template = App.g.block_templates.get(item.block_type_id),
               block = App.model_helper.init_block(block_template, {
                 container_id: container_view.model.id,
