@@ -29,13 +29,16 @@ define(['inflection', './modal'], function(Inflection, Modal){
 
       var options = {},
           form_namespace = this.get_form_namespace(),
-          params = this.serialize().params[form_namespace];
+          params = this.serialize().params[form_namespace],
+          args = {};
+
+      args[form_namespace] = params;
 
       if(form_namespace === 'image'){
         options.form_data = new FormData(this.$('form').get(0));
       }
 
-      this.model.save(params, options);
+      this.model.save(args, options);
     },
 
     get_form_namespace: function(){

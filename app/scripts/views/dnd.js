@@ -110,6 +110,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
           console.log('base receive', this, arguments);
           if(self.receive_is_canceled(ui)){ return; }
 
+
           var drag_block = $(ui.item).data('_view');
           var block_template = drag_block.model;
           var block = block_template.has('template_id') && block_template;
