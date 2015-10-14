@@ -28,17 +28,15 @@ define(['inflection', './modal'], function(Inflection, Modal){
       e && e.preventDefault();
 
       var options = {},
-          form_namespace = this.get_form_namespace(),
-          params = this.serialize().params[form_namespace],
-          args = {};
+          params = this.serialize();
 
-      args[form_namespace] = params;
-
-      if(form_namespace === 'image'){
+      if(this.model.is_image()){
         options.form_data = new FormData(this.$('form').get(0));
+        this.model.save(params, options);
+      }else{
+        this.model.save_via_form(this);
       }
 
-      this.model.save(params, options);
     },
 
     get_form_namespace: function(){

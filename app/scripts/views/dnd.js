@@ -72,7 +72,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       var receiver_model = receiver_block.model,
         container_attributes = {
           container_id: receiver_block.is_container() && receiver_model.id,
-          zone_id: receiver_block.$el.data('zone')
+          zone_id: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id')
         };
 
       if(block){
@@ -97,6 +97,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
     },
 
     setup_dnd_for_containers_and_zones: function(){
+      console.log('setup_dnd_for_containers_and_zones');
       var self = this,
           $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 

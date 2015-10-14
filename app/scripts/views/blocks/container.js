@@ -30,7 +30,11 @@ define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd)
 
       });
 
-      this.model.save({positions: positions}, {silent:true});
+      var container = _.extend({}, this.model.attributes, { positions: JSON.stringify(positions) });
+
+      console.log(container);
+
+      this.model.save({container}, {silent:true});
     }
   });
 });

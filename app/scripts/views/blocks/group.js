@@ -37,15 +37,8 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
     },
 
     render: function(){
-      if(!this.model.id){ return this; }
-      this.context.model  = this.model;
-      $.ajax({
-        url: this.model.html_url(),
-        headers: Backbone.defaults().headers
-      }).done(function(resp){
-          this.$el.html(resp);
-          this.render2();
-        }.bind(this));
+      this.render2();
+      Base.prototype.render.apply(this, arguments);
       return this;
     },
 
@@ -56,7 +49,7 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
       .prepend(JST['block_actions'](this.context)) // jshint ignore:line
       .prepend(JST['block_template'](this.context)); // jshint ignore:line
       this.trigger_render();
-    }
+     }
 
   });
 });

@@ -27,10 +27,13 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
 
     load_group_blocks: function(view_group){
       var self = this;
+
       view_group.$('[data-block]').each(function(n, item){
         var json = $(item).text().trim();
         if(!json){return;}
         var data = JSON.parse(json);
+
+        console.log(data);
 
         var block = App.model_helper.init_group_block(data);
 
@@ -49,18 +52,12 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
     load_container_blocks: function(container_view){
       container_view.children = [];
       container_view.dom_elements = [];
-      console.log(container_view.model.get('positions'));
-      _.each(container_view.model.get('positions'), function(item){
+      _.each(container_view.model.get('get_positions'), function(item){
+        var block_attr = App.g.layout.get_block_by_id(item.block_id),
+            block = App.model_helper.init_block(block_attr),
+            child = this.create_view(block.template().get('kind'), block);
 
-
-          var block_template = App.g.block_templates.get(item.block_type_id),
-              block = App.model_helper.init_block(block_template, {
-                container_id: container_view.model.id,
-                id: item.block_id ? item.block_id : null
-              }),
-              child = this.create_view(block.template().get('kind'), block);
-
-          container_view.dom_elements.push(child.$el);
+        container_view.dom_elements.push(child.$el);
       }, this);
 
     }

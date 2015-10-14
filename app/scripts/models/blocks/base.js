@@ -42,6 +42,10 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
       return this.get('container_id');
     },
 
+    is_image: function(){
+      return this.kind_of('Image');
+    },
+
     kind_of: function(kind){
       return this.type().get('kind') === kind;
     },

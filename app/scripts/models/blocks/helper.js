@@ -17,6 +17,7 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
     },
 
     init_block: function(attributes){
+      attributes = _.defaults(attributes, attributes.parameters);
       var block_type = App.g.block_templates.get(attributes.block_type_id);
       var Klass = Blocks[block_type.get('kind')] || Blocks.Def;
       return new Klass(attributes);

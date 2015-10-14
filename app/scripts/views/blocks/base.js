@@ -64,7 +64,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       return this.model.is_container();
     },
 
-
     $edit: function(){
 
       new FormModal({

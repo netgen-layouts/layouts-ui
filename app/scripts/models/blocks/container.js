@@ -4,6 +4,10 @@ define(['underscore', './base'], function(_, Block){
   return Block.extend({
     path: 'containers',
 
+    get_positions: function(){
+      return this.get('parameters') && this.get('parameters').positions && JSON.parse(this.get('parameters').positions);
+    },
+
     parse: function (response) {
       response.positions = response.positions ? JSON.parse(response.positions) : [];
       return response;

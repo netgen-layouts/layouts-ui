@@ -13,7 +13,7 @@ define(['underscore', './base', 'app'], function(_, Block, App){
     },
 
     parse: function (response) {
-      response.parameters = response.parameters ? JSON.parse(response.parameters) : [];
+      response.params = response.params ? JSON.parse(response.params) : [];
       return response;
     },
 
@@ -44,15 +44,15 @@ define(['underscore', './base', 'app'], function(_, Block, App){
               success: function(model){
                 params.push({
                   label: model.get('label'),
-                  block_id: model.id,
-                  block_type_id: model.get('block_type_id')
+                  block_id: model.id
                 });
 
                 count--;
 
                 if(!count){
+                  var group = _.extend({}, self.attributes, { params: JSON.stringify(params) });
                   self.save({
-                    parameters: JSON.stringify(params)
+                    group: group
                   });
                 }
               }
