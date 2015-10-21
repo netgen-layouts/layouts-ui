@@ -14,18 +14,23 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       _.each(App.g.layout.get('positions'), function(position){
         _.each(position.blocks, function(item){
 
-          var block_attr = App.g.layout.get_block_by_id(item.block_id);
-          var block = App.model_helper.init_block(block_attr);
-
-          var view_block = App.blocks.create_view(block.template().get('kind'), block);
+          var block = App.g.layout.get_block_by_id(item.block_id);
+          console.log(block);
+          var view_block = App.blocks.create_view(block.get('type'), block);
 
           $('[data-zone='+ position.zone  +']').append(view_block.$el);
-        });
 
-      });
+          if(block.is_group()){
+            this.load_group_blocks(view_block);
+          }
+
+        }, this);
+
+      }, this);
     },
 
     load_group_blocks: function(view_group){
+      console.log('load_group_blocks');
       var self = this;
 
       view_group.$('[data-block]').each(function(n, item){
@@ -35,15 +40,12 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
 
         console.log(data);
 
-        var block = App.model_helper.init_group_block(data);
-
-        if(data.block_id){
-          block.set({id: data.block_id});
-        }
+        var block = App.g.layout.get_block_by_id(parseInt(data.block_id, 10));
 
         block.group = view_group.model;
+        block.in_group = true;
 
-        var view_block = self.create_view(data.type, block);
+        var view_block = self.create_view(data.kind, block);
 
         $(item).html(view_block.$el);
       });
@@ -53,8 +55,7 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       container_view.children = [];
       container_view.dom_elements = [];
       _.each(container_view.model.get('get_positions'), function(item){
-        var block_attr = App.g.layout.get_block_by_id(item.block_id),
-            block = App.model_helper.init_block(block_attr),
+        var block = App.g.layout.get_block_by_id(item.block_id),
             child = this.create_view(block.template().get('kind'), block);
 
         container_view.dom_elements.push(child.$el);

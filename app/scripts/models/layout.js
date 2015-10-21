@@ -1,4 +1,4 @@
-define(['underscore', 'model', 'app'], function(_, Model, App){
+define(['underscore', 'model', 'app', 'collection'], function(_, Model, App, Collection){
   'use strict';
 
   return Model.extend({
@@ -6,10 +6,27 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
 
     path: 'layouts',
 
+    initialize: function(){
+      Model.prototype.initialize.apply(this, arguments);
+      this.blocks = new Collection();
+      return this;
+    },
+
     parse: function (response) {
       response.positions = response.positions ? JSON.parse(response.positions) : {};
+      response.blocks && this.initialize_blocks(response);
       return response;
     },
+
+
+    initialize_blocks: function(response){
+      _.each(response.blocks, function(params){
+        this.blocks.add(App.model_helper.init_block(params));
+      }, this);
+
+      delete(response.blocks);
+    },
+
 
     toJSON: function(options){
       options || (options = {});
@@ -24,7 +41,7 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     get_block_by_id: function(id){
-      return _.findWhere(App.g.layout.get('blocks'), {id: id});
+      return App.g.layout.get('blocks').get(id);
     }
 
   });

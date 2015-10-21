@@ -68,17 +68,17 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       return true;
     },
 
-    save_and_add_block: function(ui, block_template, block, receiver_block){
+    save_and_add_block: function(ui, block_type, block, receiver_block){
       var receiver_model = receiver_block.model,
         container_attributes = {
-          container_id: receiver_block.is_container() && receiver_model.id,
+          container_id: receiver_block.is_container() ? receiver_model.id : null,
           zone_id: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id')
         };
 
       if(block){
         block.set(container_attributes);
       }else{
-        block = App.model_helper.init_block_from_template(block_template, container_attributes);
+        block = App.model_helper.init_block_from_template(block_type, container_attributes);
 
         if(block.is_group()){
           block.save_group();
@@ -97,7 +97,6 @@ define(['underscore', 'view', 'app'], function(_, View, App){
     },
 
     setup_dnd_for_containers_and_zones: function(){
-      console.log('setup_dnd_for_containers_and_zones');
       var self = this,
           $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 

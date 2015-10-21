@@ -1,4 +1,4 @@
-define(['underscore', './base', 'app'], function(_, Block, App){
+define(['underscore', 'model', './base', 'app'], function(_, Model, Block, App){
   'use strict';
 
   return Block.extend({
@@ -21,6 +21,10 @@ define(['underscore', './base', 'app'], function(_, Block, App){
       return this.get('as_container');
     },
 
+    get_params: function(){
+      return this.get('parameters') && this.get('parameters').params && JSON.parse(this.get('parameters').params);
+    },
+
     save_group: function(){
       var self = this;
 
@@ -40,7 +44,7 @@ define(['underscore', './base', 'app'], function(_, Block, App){
           _.each(blocks, function(data){
             var block = App.model_helper.init_group_block(data);
 
-            block.save(null, {
+            block.save({zone_id: self.get('zone_id')}, {
               success: function(model){
                 params.push({
                   label: model.get('label'),
@@ -50,10 +54,7 @@ define(['underscore', './base', 'app'], function(_, Block, App){
                 count--;
 
                 if(!count){
-                  var group = _.extend({}, self.attributes, { params: JSON.stringify(params) });
-                  self.save({
-                    group: group
-                  });
+                  self.save({ params: params });
                 }
               }
             });
@@ -61,6 +62,14 @@ define(['underscore', './base', 'app'], function(_, Block, App){
 
 
         }.bind(this));
+    },
+
+    toJSON: function(options){
+      options || (options = {});
+      var json = Block.prototype.toJSON.apply(this, arguments);
+      if(!options.parse){return json;}
+      !_.isString(json.group.params) && (json.group.params = JSON.stringify(json.group.params));
+      return json;
     }
 
   });

@@ -8,6 +8,10 @@ define(['underscore', './base'], function(_, Block){
       return this.get('parameters') && this.get('parameters').positions && JSON.parse(this.get('parameters').positions);
     },
 
+    save_positions: function(){
+
+    },
+
     parse: function (response) {
       response.positions = response.positions ? JSON.parse(response.positions) : [];
       return response;
@@ -17,7 +21,7 @@ define(['underscore', './base'], function(_, Block){
       options || (options = {});
       var json = Block.prototype.toJSON.apply(this, arguments);
       if(!options.parse){return json;}
-      !_.isString(json.positions) && (json.positions = JSON.stringify(json.positions));
+      !_.isString(json.container.positions) && (json.container.positions = JSON.stringify(json.container.positions));
       return json;
     }
 

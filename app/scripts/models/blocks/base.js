@@ -5,20 +5,30 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
 
     format: 'json',
 
+    initialize: function(){
+      Model.prototype.initialize.apply(this, arguments);
+      this.on('create:success', this.add_to_blocks_collection);
+      return this;
+    },
+
+    add_to_blocks_collection: function(){
+     App.g.layout.get('blocks').add(this);
+    },
+
     path: function(){
       return this.get('endpoint');
     },
 
-    type: function(){
+    block_type: function(){
       return App.g.block_templates.get(this.get('block_type_id'));
     },
 
     template: function(){
-      return this.type();
+      return this.block_type();
     },
 
     template_name_from_params: function(){
-      return this.type().get('parameters').template;
+      return this.block_type().get('parameters').template;
     },
 
     template_name: function(){
@@ -27,7 +37,7 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     type_name: function(){
-      return this.type().get('type');
+      return this.block_type().get('kind');
     },
 
     is_group: function(){
@@ -47,11 +57,20 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     kind_of: function(kind){
-      return this.type().get('kind') === kind;
+      return this.block_type().get('kind') === kind;
     },
 
-    toString: function(){
-      return JSON.stringify(this.toJSON());
+    get_namespace: function(){
+      var path = _.result(this, 'path');
+      return path.substring(0, path.length-1);
+    },
+
+    toJSON: function(options) {
+      var namespace = this.get_namespace(),
+          attrs = {};
+
+      attrs[namespace] = Model.prototype.toJSON.apply(this, arguments);
+      return attrs;
     }
 
   });

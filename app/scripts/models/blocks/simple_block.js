@@ -1,4 +1,4 @@
-define(['./base'], function(Block){
+define(['underscore', './base'], function(_, Block){
   'use strict';
 
   return Block.extend({

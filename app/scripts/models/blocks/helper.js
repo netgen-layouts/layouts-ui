@@ -3,8 +3,8 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
 
   return {
     init_group_block: function(data){
-      var Klass = Blocks[data.type] || Blocks.Def;
-      var block_template = App.g.block_templates.findWhere({kind: data.type});
+      var Klass = Blocks[data.kind] || Blocks.Def;
+      var block_template = App.g.block_templates.findWhere({kind: data.kind});
       var type = (block_template && block_template.id) || 1;
       var attributes = _.defaults({block_type_id: type, in_group: true, label: data.label}, data.attributes);
       return new Klass(attributes);
@@ -13,14 +13,19 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
     init_block_from_template: function(template, additional_attributes){
       var Klass = Blocks[template.get('kind')] || Blocks.Def;
       var attributes = _.defaults({block_type_id: template.id}, template.get('parameters'), additional_attributes);
+      //attributes.parameters = template.get('parameters');
       return new Klass(attributes);
     },
 
-    init_block: function(attributes){
-      attributes = _.defaults(attributes, attributes.parameters);
-      var block_type = App.g.block_templates.get(attributes.block_type_id);
-      var Klass = Blocks[block_type.get('kind')] || Blocks.Def;
-      return new Klass(attributes);
+    init_block: function(params){
+      var block_type = App.g.block_templates.get(params.block_type_id);
+      var Klass = Blocks[block_type.get('kind')];
+      console.log(params);
+      return new Klass(params);
+
+      // var block = App.g.layout.get_block_by_id(block_id);
+      // var Klass = Blocks[block.template().get('kind')] || Blocks.Def;
+      // return new Klass(block.toJSON());
     },
 
     init_block_kind: function(id, kind){

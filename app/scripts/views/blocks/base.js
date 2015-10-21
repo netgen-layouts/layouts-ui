@@ -22,6 +22,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     setup_dom_element: function(){
+      console.log(this.model);
       this.model.is_in_container() && this.$el.attr('data-in-container', '');
       this.$el
         .attr('data-block', '')
@@ -95,7 +96,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
         body: 'Are you sure you want to delete?',
         context: { title: 'Confirm' }
       }).on('apply', function(){
-        console.log('View destroy model', self.model.attributes);
+        console.log('View destroy model', self.model);
         self.model.destroy();
       }).open();
     },
