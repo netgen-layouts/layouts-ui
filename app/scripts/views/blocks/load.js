@@ -53,7 +53,7 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
       container_view.dom_elements = [];
       _.each(container_view.model.get('get_positions'), function(item){
         var block = App.g.layout.get_block_by_id(item.block_id),
-            child = this.create_view(block.template().get('kind'), block);
+            child = this.create_view(block.type_name(), block);
 
           block.is_group() && this.load_group_blocks(child);
 
