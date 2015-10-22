@@ -22,7 +22,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     setup_dom_element: function(){
-      console.log(this.model);
       this.model.is_in_container() && this.$el.attr('data-in-container', '');
       this.$el
         .attr('data-block', '')
@@ -43,7 +42,6 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     append_additionals: function(){
-      console.log(this.context.model.attributes);
       this.$el
         .prepend(JST.block_actions(this.context))
         .prepend(JST.block_template(this.context));
