@@ -20,8 +20,9 @@ define(['underscore', './base'], function(_, Block){
     toJSON: function(options){
       options || (options = {});
       var json = Block.prototype.toJSON.apply(this, arguments);
+      var namespace = this.get_namespace();
       if(!options.parse){return json;}
-      !_.isString(json.container.positions) && (json.container.positions = JSON.stringify(json.container.positions));
+      !_.isString(json[namespace].positions) && (json[namespace].positions = JSON.stringify(json[namespace].positions));
       return json;
     }
 

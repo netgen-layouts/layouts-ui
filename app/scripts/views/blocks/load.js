@@ -15,7 +15,6 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
         _.each(position.blocks, function(item){
 
           var block = App.g.layout.get_block_by_id(item.block_id);
-          console.log(block);
           var view_block = App.blocks.create_view(block.get('type'), block);
 
           $('[data-zone='+ position.zone  +']').append(view_block.$el);
@@ -38,8 +37,6 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
         if(!json){return;}
         var data = JSON.parse(json);
 
-        console.log(data);
-
         var block = App.g.layout.get_block_by_id(parseInt(data.block_id, 10));
 
         block.group = view_group.model;
@@ -58,7 +55,10 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
         var block = App.g.layout.get_block_by_id(item.block_id),
             child = this.create_view(block.template().get('kind'), block);
 
-        container_view.dom_elements.push(child.$el);
+          block.is_group() && this.load_group_blocks(child);
+
+          container_view.dom_elements.push(child.$el);
+
       }, this);
 
     }

@@ -68,7 +68,8 @@ define(['underscore', 'model', './base', 'app'], function(_, Model, Block, App){
       options || (options = {});
       var json = Block.prototype.toJSON.apply(this, arguments);
       if(!options.parse){return json;}
-      !_.isString(json.group.params) && (json.group.params = JSON.stringify(json.group.params));
+      var namespace = this.get_namespace();
+      !_.isString(json[namespace].params) && (json[namespace].params = JSON.stringify(json[namespace].params));
       return json;
     }
 
