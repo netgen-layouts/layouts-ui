@@ -23,17 +23,14 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
       return App.g.block_templates.get(this.get('block_type_id'));
     },
 
-    template: function(){
-      return this.block_type();
-    },
-
     template_name_from_params: function(){
       return this.block_type().get('parameters').template;
     },
 
     template_name: function(){
-      if(this.get('data') === false) { return 'dummy'; }
-      return this.attributes.template;
+      if(this.get('data') === false || (this.get('parameters') && this.get('parameters').data === false)) { return 'dummy'; }
+      if((this.get('data') === true || (this.get('parameters') && this.get('parameters').data)) && !this.get('template')) { return 'normal'; }
+      return this.get('template');
     },
 
     type_name: function(){

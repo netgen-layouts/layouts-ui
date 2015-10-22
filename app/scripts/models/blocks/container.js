@@ -8,10 +8,6 @@ define(['underscore', './base'], function(_, Block){
       return this.get('parameters') && this.get('parameters').positions && JSON.parse(this.get('parameters').positions);
     },
 
-    save_positions: function(){
-
-    },
-
     parse: function (response) {
       response.positions = response.positions ? JSON.parse(response.positions) : [];
       return response;

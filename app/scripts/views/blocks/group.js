@@ -30,7 +30,7 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
 
     render2: function(){
       this.$el.attr('data-block', '')
-      .attr('data-type', this.model.get('template').get('kind'))
+      .attr('data-type', this.model.type_name())
       .prepend(JST['block_actions'](this.context)) // jshint ignore:line
       .prepend(JST['block_template'](this.context)); // jshint ignore:line
       this.trigger_render();

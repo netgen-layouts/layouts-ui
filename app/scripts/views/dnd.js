@@ -91,7 +91,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
     },
 
     add_new_block: function(ui, block){
-      var view_block = App.blocks.create_view(block.template().get('kind'), block);
+      var view_block = App.blocks.create_view(block.type_name(), block);
       ui.item.after(view_block.$el);
       ui.item.remove();
     },

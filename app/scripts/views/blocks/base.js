@@ -26,7 +26,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
       this.model.is_in_container() && this.$el.attr('data-in-container', '');
       this.$el
         .attr('data-block', '')
-        .attr('data-type', this.model.get('template').get('kind'));
+        .attr('data-type', this.model.type_name());
       return this;
     },
 
@@ -43,6 +43,7 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     },
 
     append_additionals: function(){
+      console.log(this.context.model.attributes);
       this.$el
         .prepend(JST.block_actions(this.context))
         .prepend(JST.block_template(this.context));
