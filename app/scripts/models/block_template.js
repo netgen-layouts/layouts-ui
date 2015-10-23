@@ -49,7 +49,7 @@ define(['model'], function(Model){
     },
 
     as_container: function(){
-      return this.get('parameters') && this.get('parameters').as_container;
+      return this.param() && this.param().as_container;
     }
 
   });

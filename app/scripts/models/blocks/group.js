@@ -22,7 +22,7 @@ define(['underscore', 'model', './base', 'app'], function(_, Model, Block, App){
     },
 
     get_params: function(){
-      return this.get('parameters') && this.get('parameters').params && JSON.parse(this.get('parameters').params);
+      return this.param() && this.param().params && JSON.parse(this.param().params);
     },
 
     save_group: function(){

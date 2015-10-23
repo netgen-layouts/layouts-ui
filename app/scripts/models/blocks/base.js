@@ -28,9 +28,14 @@ define(['underscore', 'model', 'app'], function(_, Model, App){
     },
 
     template_name: function(){
-      if(this.get('data') === false || (this.get('parameters') && this.get('parameters').data === false)) { return 'dummy'; }
-      if((this.get('data') === true || (this.get('parameters') && this.get('parameters').data)) && !this.get('template')) { return 'normal'; }
+      if(this.param().data === false) { return 'dummy'; }
+      if(!this.get('template')) { return 'normal'; }
+
       return this.get('template');
+    },
+
+    param: function(){
+      return this.get('parameters');
     },
 
     type_name: function(){

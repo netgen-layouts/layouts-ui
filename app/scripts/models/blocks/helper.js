@@ -12,8 +12,7 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
 
     init_block_from_template: function(template, additional_attributes){
       var Klass = Blocks[template.get('kind')] || Blocks.Def;
-      var attributes = _.defaults({block_type_id: template.id}, template.get('parameters'), additional_attributes);
-      //attributes.parameters = template.get('parameters');
+      var attributes = _.defaults({block_type_id: template.id}, template.get('parameters'), template.get('parameters').parameters, additional_attributes);
       return new Klass(attributes);
     },
 
@@ -22,10 +21,6 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
       var Klass = Blocks[block_type.get('kind')];
       console.log(params);
       return new Klass(params);
-
-      // var block = App.g.layout.get_block_by_id(block_id);
-      // var Klass = Blocks[block.template().get('kind')] || Blocks.Def;
-      // return new Klass(block.toJSON());
     },
 
     init_block_kind: function(id, kind){

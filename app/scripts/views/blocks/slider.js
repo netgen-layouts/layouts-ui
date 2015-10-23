@@ -9,7 +9,7 @@ define(['./base'], function(Base){
     },
 
     append_slider_options: function(){
-      this.context.parameters = this.model.get('autoplay') === undefined ? this.model.get('parameters') : this.model.attributes;
+      this.context.parameters = this.model.param();
       this.$el.prepend(JST.slider(this.context));
       return this;
     }

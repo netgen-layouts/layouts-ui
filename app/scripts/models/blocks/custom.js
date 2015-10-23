@@ -3,7 +3,7 @@ define(['underscore', './base'], function(_, Block){
 
   return Block.extend({
     path: function(){
-      return (this.get('parameters') && this.get('parameters').endpoint) || this.get('endpoint');
+      return (this.param() && this.param().endpoint) || this.get('endpoint');
     }
   });
 

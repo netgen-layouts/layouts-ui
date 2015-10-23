@@ -5,7 +5,7 @@ define(['underscore', './base'], function(_, Block){
     path: 'containers',
 
     get_positions: function(){
-      return this.get('parameters') && this.get('parameters').positions && JSON.parse(this.get('parameters').positions);
+      return this.param() && this.param().positions && JSON.parse(this.param().positions);
     },
 
     parse: function (response) {
