@@ -12,7 +12,7 @@ define(['underscore', './main', 'app'], function(_, Blocks, App){
 
     init_block_from_template: function(template, additional_attributes){
       var Klass = Blocks[template.get('kind')] || Blocks.Def;
-      var attributes = _.defaults({block_type_id: template.id}, template.get('parameters'), template.get('parameters').parameters, additional_attributes);
+      var attributes = _.defaults({block_type_id: template.id}, template.get('parameters'), additional_attributes);
       return new Klass(attributes);
     },
 
