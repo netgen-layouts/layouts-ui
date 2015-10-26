@@ -1,5 +1,5 @@
-define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load', 'models/blocks/helper'],
-  function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad, ModelHelper){
+define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load', 'models/blocks/helper', 'views/browser', 'collections/categories'],
+  function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad, ModelHelper, Browser, Categories){
   'use strict';
 
 
@@ -91,6 +91,24 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
       view_block_templates.render();
 
       this.blocks.load_layout_blocks();
+
+
+
+      var categories = new Categories();
+
+      var browser = new Browser({
+        collection: categories,
+        context: {
+          title: 'Browse'
+        }
+      });
+
+      categories.fetch({
+        success: function(){
+          browser.open();
+        }
+      });
+
 
     },
 
