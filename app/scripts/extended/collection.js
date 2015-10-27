@@ -26,6 +26,10 @@ define(['underscore', 'backbone', 'model', 'app'], function(_, Backbone, Model, 
 
     index: {},
 
+    new_from: function(items){
+      return new this.constructor(items);
+    },
+
     url: function(additional){
       var url = this.model.prototype.urlRoot();
       return this.model.prototype.url_format(url, additional);

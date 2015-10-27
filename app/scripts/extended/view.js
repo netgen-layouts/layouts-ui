@@ -4,6 +4,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
   return Backbone.View.extend({
 
     initialize: function(options){
+      this.extend_with && options && this._extend_with(options);
       options || (options = {});
       this.ViewItem = this.ViewItem || options.ViewItem;
       this.context = _.extend({}, this.context, options.context);
@@ -45,6 +46,10 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       //this.listen_to_filter && App.on('period:changed', this.load, this);
 
       return this;
+    },
+
+    _extend_with: function(options){
+      _.extend(this, _.pick.apply(_, [options].concat(this.extend_with)));
     },
 
 
@@ -282,10 +287,11 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
 
 
     render_items: function(items, el, ViewItem){
+      console.log('render items ----------------------')
       items || (items = this.collection.models);
       var ViewKlass = ViewItem || this.ViewItem;
       $(el || this.$el).html(_.map(items, function(item){
-        return new ViewKlass({model: item}).render().el;
+        return new ViewKlass({model: item, parent: this}).render().el;
       }, this));
     }
 

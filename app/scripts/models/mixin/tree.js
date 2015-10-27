@@ -61,8 +61,8 @@ define([], function(){
     depth: function(){
       return this.__depth || (this.__depth = this.get('parents').length);
     }
-  
+
   };
-  
+
 
 });

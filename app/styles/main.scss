@@ -302,10 +302,36 @@ legend{
 
 .browser{
   .modal-dialog{
-    width: 800px;
+    width: 900px;
+  }
+  .modal-body{
+    padding: 0 15px;
   }
 }
 
 #browser{
-
+  .panel{
+    height: 600px;
+    overflow-y: scroll;
+    margin-bottom: 0;
+    padding: 10px;
+  }
+  .tree{
+    li{
+      ul{
+        display: none;
+      }
+      &.open{
+        > ul{ display: block; }
+      }
+      &.item{
+        list-style: none;
+        padding-left: 22px;
+        background: url('/images/folder.png') 0 0 no-repeat;
+      }
+      &.loading{
+        background: url('/images/ajax-loader.gif') 0 0 no-repeat;
+      }
+    }
+  }
 }

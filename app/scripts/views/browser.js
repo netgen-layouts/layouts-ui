@@ -1,4 +1,4 @@
-define(['underscore', 'view', './modal', './browser/folder'], function(_, View, Modal, FolderView){
+define(['underscore', 'view', './modal', './browser/tree'], function(_, View, Modal, TreeView){
   'use strict';
 
   return Modal.extend({
@@ -11,28 +11,22 @@ define(['underscore', 'view', './modal', './browser/folder'], function(_, View, 
 
     initialize: function(){
       Modal.prototype.initialize.apply(this, arguments);
-      this.on('open', this.render_panels);
+      this.on('open', this.render_subtree);
       return this;
     },
 
-    render_panels: function(){
+    render_subtree: function(el, items){
+      var collection = this.collection.new_from(items || this.collection.roots());
+      console.log(el, items, collection);
 
-      var folder_view = new FolderView({
-        collection: this.collection,
-        browser: this
-      });
-
-      folder_view.setElement('.left-panel').render();
+      new TreeView({
+        collection: collection,
+        browser: this,
+        el: el || '.tree'
+      }).render();
 
       return this;
-    },
-
-    select_item: function(model, view){
-      _.each(this.collection.get(model.id).children(), function(item){
-        view.render_folder(item, view);
-      }, this);
-    },
-
+    }
 
   });
 

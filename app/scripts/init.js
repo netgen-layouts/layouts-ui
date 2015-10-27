@@ -1,5 +1,5 @@
-define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load', 'models/blocks/helper', 'views/browser', 'collections/categories'],
-  function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad, ModelHelper, Browser, Categories){
+define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load', 'models/blocks/helper', 'views/browser', 'collections/nodes'],
+  function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad, ModelHelper, Browser, Nodes){
   'use strict';
 
 
@@ -94,16 +94,16 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
 
 
 
-      var categories = new Categories();
+      var nodes = new Nodes();
 
       var browser = new Browser({
-        collection: categories,
+        collection: nodes,
         context: {
           title: 'Browse'
         }
       });
 
-      categories.fetch({
+      nodes.fetch({
         success: function(){
           browser.open();
         }
