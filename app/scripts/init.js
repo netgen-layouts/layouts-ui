@@ -101,9 +101,12 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
         context: {
           title: 'Browse'
         }
+      }).on('apply', function(){
+        console.log(browser.selected_ids());
       });
 
       nodes.fetch({
+        data: { tree: true },
         success: function(){
           browser.open();
         }

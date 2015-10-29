@@ -311,26 +311,93 @@ legend{
 
 #browser{
   .panel{
-    height: 600px;
+    height: 400px;
     overflow-y: scroll;
     margin-bottom: 0;
     padding: 10px;
   }
+  li{
+    ul{
+      display: none;
+    }
+    a{
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+      span{
+        padding: 2px 3px;
+        border: 1px solid #fff;
+      }
+    }
+    &.item{
+      line-height: 24px;
+      list-style: none;
+      > a{
+        padding-left: 22px;
+        background: url('/images/folder.png') 0 0 no-repeat;
+      }
+    }
+    &.selected{
+      > a{
+        span{
+          background-color: #b5deff;
+          border: 1px solid #a1ceed;
+        }
+      }
+    }
+    &[data-type="Category"]{
+      a{
+        background: url('/images/folder.png') 0 0 no-repeat;
+      }
+    }
+    &[data-type="Article"]{
+      a{
+        background: url('/images/article.png') 0 0 no-repeat;
+      }
+    }
+    &[data-type="Image"]{
+      a{
+        background: url('/images/image.png') 0 0 no-repeat;
+      }
+    }
+  }
   .tree{
     li{
-      ul{
-        display: none;
+      &.has_children{
+        background: url('/images/plus.gif') left -1px no-repeat;
       }
       &.open{
         > ul{ display: block; }
       }
+      &.has_children.open{
+        background-image: url('/images/minus.gif');
+      }
       &.item{
-        list-style: none;
-        padding-left: 22px;
-        background: url('/images/folder.png') 0 0 no-repeat;
+        padding-left: 18px;
+      }
+      &[data-type="Category"].selected{
+        > a{
+          background: url('/images/folder-open.png') 0 0 no-repeat;
+        }
+      }
+      &[data-type="Category"].open{
+        > a{
+          background: url('/images/folder-open.png') 0 0 no-repeat;
+        }
       }
       &.loading{
-        background: url('/images/ajax-loader.gif') 0 0 no-repeat;
+        > a{
+          background: url('/images/ajax-loader.gif') 0 0 no-repeat;
+        }
+      }
+    }
+  }
+  .list{
+    li{
+      input[type="checkbox"]{
+        margin: 5px 5px 0 0;
+        display: block;
+        float: left;
       }
     }
   }

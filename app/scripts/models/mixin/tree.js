@@ -18,7 +18,6 @@ define([], function(){
       return this.__parents;
     },
 
-
     children: function(){
       return this.__children || (this.__children = this.collection.where({parent_id: this.get('id')}));
     },

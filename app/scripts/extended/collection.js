@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'model', 'app'], function(_, Backbone, Model, App){
+define(['underscore', 'backbone', 'model'], function(_, Backbone, Model){
   'use strict';
 
 
@@ -36,6 +36,7 @@ define(['underscore', 'backbone', 'model', 'app'], function(_, Backbone, Model, 
     },
 
     parse: function(resp){
+      this.total = resp.total; //NOTE: for pagination... see what to do with this
       return ('values' in resp) ? resp.values : resp;
     },
 
@@ -43,8 +44,6 @@ define(['underscore', 'backbone', 'model', 'app'], function(_, Backbone, Model, 
       if(this.cached && this.length){return null;}
       return Backbone.Collection.prototype.fetch.apply(this, arguments);
     },
-
-    //selected: [],
 
     selected: function(){
       return this.filter(function(item){

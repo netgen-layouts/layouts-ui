@@ -7,6 +7,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       this.extend_with && options && this._extend_with(options);
       options || (options = {});
       this.ViewItem = this.ViewItem || options.ViewItem;
+      this.view_items_el = options.view_items_el || this.view_items_el;
       this.context = _.extend({}, this.context, options.context);
       options.body && (this.context.body = options.body);
       options.template && (this.template = options.template);
@@ -290,7 +291,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
       console.log('render items ----------------------')
       items || (items = this.collection.models);
       var ViewKlass = ViewItem || this.ViewItem;
-      $(el || this.$el).html(_.map(items, function(item){
+      $(el || this.view_items_el && this.$(this.view_items_el) ||  this.$el).html(_.map(items, function(item){
         return new ViewKlass({model: item, parent: this}).render().el;
       }, this));
     }

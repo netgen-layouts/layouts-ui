@@ -48,14 +48,12 @@ define(['view'], function(View){
       return this;
     },
 
-
-
     $apply: function(e){
       e && e.preventDefault();
       this.trigger('apply');
       this.close();
       return this;
-    },
+    }
 
   });
 
