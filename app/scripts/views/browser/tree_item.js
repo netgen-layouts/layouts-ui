@@ -7,7 +7,8 @@ define(['view', './list', 'collections/node_list', './pagination'], function(Vie
     className: 'item',
 
     events:{
-      'click': 'open_tree'
+      'click': 'toggle_tree',
+      'click a': 'open_tree'
     },
 
     limit: 3,
@@ -32,6 +33,10 @@ define(['view', './list', 'collections/node_list', './pagination'], function(Vie
       this.$el.attr('data-type', this.model.get('kind'));
     },
 
+    is_open: function(){
+      return this.$el.hasClass('open');
+    },
+
     add_selected_class: function(){
       $('.item').removeClass('selected');
       this.$el.addClass('selected open');
@@ -42,8 +47,16 @@ define(['view', './list', 'collections/node_list', './pagination'], function(Vie
       this.$el.removeClass('selected open');
     },
 
-    open_tree: function(e){
+    toggle_tree: function(e){
       e.stopPropagation();
+      this.$el.toggleClass('open');
+      // if(!this.is_open()){
+      //   this.open_tree();
+      // }
+    },
+
+    open_tree: function(e){
+      //e.stopPropagation();
 
       this.add_selected_class();
 
