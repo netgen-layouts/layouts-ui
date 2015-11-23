@@ -3,8 +3,17 @@ define(['underscore', './base'], function(_, Block){
 
   return Block.extend({
     path: function(){
-      console.log(this.param());
       return (this.param() && this.param().endpoint) || this.get('endpoint');
+    },
+
+    toJSON: function(options){
+      options || (options = {});
+      var json = Block.prototype.toJSON.apply(this, arguments);
+      if(!options.parse){return json;}
+      var namespace = this.get_namespace();
+      debugger;
+      !_.isString(json[namespace].parameters) && (json[namespace].parameters = JSON.stringify(json[namespace].parameters));
+      return json;
     }
   });
 
