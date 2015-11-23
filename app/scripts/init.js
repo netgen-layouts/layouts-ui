@@ -103,6 +103,7 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
         }
       }).on('apply', function(){
         console.log(browser.selected_ids());
+        alert(browser.selected_ids());
       });
 
       nodes.fetch({

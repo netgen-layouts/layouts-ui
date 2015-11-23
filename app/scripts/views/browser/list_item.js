@@ -7,7 +7,8 @@ define(['view'], function(View){
     className: 'item',
 
     events:{
-      'click': 'item_click'
+      'click input': 'toogle_select',
+      'click a': 'open'
     },
 
     initialize: function(){
@@ -24,16 +25,19 @@ define(['view'], function(View){
       this.$el.attr('data-type', this.model.get('kind'));
     },
 
-    item_click: function(){
+    open: function(){
+      if(this.model.has_children()){
+        this.parent.browser.tree_view.click_item_by_id(this.model.id);
+      }
+    },
+
+    toogle_select: function(){
       if(this.model.is_checked()){
         this.uncheck_item();
         this.model.uncheck();
       }else{
         this.check_item();
         this.model.check();
-        if(this.model.has_children()){
-          this.parent.browser.tree_view.click_item_by_id(this.model.id);
-        }
       }
     },
 
