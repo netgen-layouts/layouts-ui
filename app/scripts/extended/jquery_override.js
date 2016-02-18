@@ -26,11 +26,9 @@ define(['jquery', 'app'], function($, App){
 
   $.fn.ajax_submit = function (opts) {
     opts || (opts = {});
-    var format = opts.format ? '.' + opts.format : '';
     var $this = $(this);
     return $.ajax({
-      url: App.env.base_url + $this.attr('action') + format,
-      type: 'json',
+      url: $this.attr('action'),
       method: $this.attr('method'),
       data: $this.serialize()
     });

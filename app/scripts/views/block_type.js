@@ -2,13 +2,7 @@ define(['view'], function(View){
   'use strict';
 
   return View.extend({
-    template: 'block_templates/item',
-
-    render: function(){
-      View.prototype.render.apply(this, arguments);
-      // this.dnd();
-      return this;
-    },
+    template: 'block_types/item',
 
     dnd: function(){
       this.$el.draggable({

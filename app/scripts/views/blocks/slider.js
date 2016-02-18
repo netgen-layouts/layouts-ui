@@ -1,10 +1,10 @@
-define(['./base'], function(Base){
+define(['./block'], function(Block){
   'use strict';
 
-  return Base.extend({
+  return Block.extend({
 
     render: function(){
-      Base.prototype.render.apply(this, arguments);
+      Block.prototype.render.apply(this, arguments);
       return this.append_slider_options();
     },
 

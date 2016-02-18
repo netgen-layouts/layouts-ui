@@ -288,7 +288,7 @@ define(['underscore', 'backbone', 'app', 'extended/params_parser'], function(_, 
 
 
     render_items: function(items, el, ViewItem){
-      console.log('render items ----------------------')
+      console.log('render items ----------------------');
       items || (items = this.collection.models);
       var ViewKlass = ViewItem || this.ViewItem;
       $(el || this.view_items_el && this.$(this.view_items_el) ||  this.$el).html(_.map(items, function(item){

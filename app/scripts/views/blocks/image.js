@@ -1,7 +1,7 @@
-define(['./base'], function(Base){
+define(['./block'], function(Block){
   'use strict';
 
-  return Base.extend({
+  return Block.extend({
 
     events:{
       'drop .image-holder': '$drop'
@@ -9,7 +9,7 @@ define(['./base'], function(Base){
 
     render: function(){
       this.$el.css({minHeight: this.$el.height() });
-      Base.prototype.render.apply(this, arguments);
+      Block.prototype.render.apply(this, arguments);
       return this;
     },
 

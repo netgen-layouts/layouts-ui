@@ -136,25 +136,11 @@ module.exports = function (grunt) {
             proxies: [
 
                 {
-                  context: '/pdf',
-                  host: 'htmlpdfapi.com',
+                  context: ['/bm'],
+                  host: 'bm.lan',
                   changeOrigin: true,
                   headers: {
-                    host: 'htmlpdfapi.com',
-                    Authentication: 'Token ClwRiwn-LCN_otqr4QA8YXEpV9Vj80u8'
-                  },
-                  rewrite: {
-                    '^/pdf': '/api/v1/pdf'
-                  }
-                },
-
-
-                {
-                  context: ['/token', '/api'],
-                  host: 'smv02.poslovna.hr',
-                  changeOrigin: true,
-                  headers: {
-                    host: 'smv02.poslovna.hr'
+                    host: 'bm.lan'
                   }
                 }
 

@@ -13,7 +13,8 @@ define(function(require){
     HtmlBlock:  require('./html_block'),
     Custom:  require('./custom'),
     Slider:  require('./slider'),
-    CustomAction:  require('./custom_action')
+    CustomAction:  require('./custom_action'),
+    title:  require('./title')
   };
 
 });

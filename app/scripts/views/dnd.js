@@ -57,10 +57,10 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       return false;
     },
 
-    zone_accept_blocks: function(ui, block_template, zone_view){
+    zone_accept_blocks: function(ui, block_type, zone_view){
       var zone = zone_view.model;
 
-      if(zone.is_inherited() || !zone.should_accept(block_template)){
+      if(zone.is_inherited() || !zone.should_accept(block_type)){
         $(ui.sender).sortable('cancel');
         return false;
       }
@@ -68,35 +68,48 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       return true;
     },
 
-    save_and_add_block: function(ui, block_type, block, receiver_block){
+    save_and_add_block: function(ui, block_or_type, receiver_block){
       var receiver_model = receiver_block.model,
         container_attributes = {
-          container_id: receiver_block.is_container() ? receiver_model.id : null,
-          zone_id: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id')
+          //container_id: receiver_block.is_container() ? receiver_model.id : null,
+          block_type: block_or_type.get('definition_identifier') || block_or_type.default_identifier(),
+          zone_identifier: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id'),
+          layout_id: App.g.layout.id
         };
 
-      if(block){
-        block.set(container_attributes);
+      // if we have block
+      if(block_or_type.get('definition_identifier')){
+        block_or_type.set(container_attributes);
+        this.add_block_and_set_position(ui, block_or_type);
       }else{
-        block = App.model_helper.init_block_from_template(block_type, container_attributes);
+        block_or_type = App.model_helper.init_block_from_type(block_or_type, container_attributes);
+        this.add_block_and_set_position(ui, block_or_type);
 
-        if(block.is_group()){
-          block.save_group();
+        if(block_or_type.is_group()){
+          block_or_type.save_group();
         }else{
-          block.save();
+          block_or_type.save();
         }
-
-        this.add_new_block(ui, block);
       }
     },
 
+    add_block_and_set_position: function(ui, block){
+      var position = this.add_new_block(ui, block);
+      block.set({ position: position });
+    },
+
     add_new_block: function(ui, block){
-      var view_block = App.blocks.create_view(block.type_name(), block);
+      var view_block = App.blocks.create_view(block.type_name(), block),
+      position = ui.item.index();
       ui.item.after(view_block.$el);
-      ui.item.remove();
+      if(!$(ui.item).data('type')){
+        ui.item.remove();
+      }
+      return position;
     },
 
     setup_dnd_for_containers_and_zones: function(){
+      console.log(this.sort_element);
       var self = this,
           $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 
@@ -110,47 +123,44 @@ define(['underscore', 'view', 'app'], function(_, View, App){
         over: self.check_containers.bind(self),
         out: self.remove_forbidden_class,
         receive: function(e, ui){
-          console.log('base receive', this, arguments);
           if(self.receive_is_canceled(ui)){ return; }
 
-
           var drag_block = $(ui.item).data('_view');
-          var block_template = drag_block.model;
-          var block = block_template.has('block_type_id') && block_template;
+          var block_or_type = drag_block.model;
+
           var receiver_block = $(this).closest('[data-view]').data('_view');
 
-          if(self.is_zone() && !self.zone_accept_blocks(ui, block_template, $(this).data('_view'))){
+          if(self.is_zone() && !self.zone_accept_blocks(ui, block_or_type, $(this).data('_view'))){
             return;
           }
 
           ui.sender.data('copied', true);
 
-          self.save_and_add_block(ui, block_template, block, receiver_block);
+          self.save_and_add_block(ui, block_or_type, receiver_block);
 
         },
 
         start: function() {
-          console.log('start');
+          console.log('start drag');
           App.trigger('sortable:start');
           $(this).sortable('refreshPositions');
         },
 
         stop: function(e, ui){
           console.log('stop', this, ui);
-          var dragables = self.extract_sender_and_receiver(this, ui);
 
-          console.log('dragables', dragables);
+          var zone_id = $(ui.item).closest('[data-zone]').data('zone'),
+                position = $(ui.item).index(),
+                model = $(ui.item).data('_view').model;
 
-          if(!$(ui.item).read_data_and_remove_key('canceled')){
 
-            if(dragables.receiver && self.is_same_container(dragables)){
-              dragables.receiver.trigger('block:move');
-            }else{
-              dragables.receiver && dragables.receiver.trigger('block:move');
-              dragables.sender && dragables.sender.trigger('block:move');
-            }
+          model.move({
+            position: position,
+            zone_identifier: zone_id
+          });
 
-            App.trigger('positions:update');
+          if($(this).data('zone') !== zone_id){
+            $(ui.item).remove();
           }
 
           App.trigger('sortable:end');
@@ -161,13 +171,6 @@ define(['underscore', 'view', 'app'], function(_, View, App){
 
     is_same_container: function(dragables){
       return dragables.receiver.model.id === dragables.sender.model.id;
-    },
-
-    extract_sender_and_receiver: function(element, ui){
-      return {
-        sender: $(element).closest('[data-view]').data('_view'),
-        receiver: $(ui.item).data('_view').container()
-      };
     },
 
     setup_dnd_for_blocks: function(){

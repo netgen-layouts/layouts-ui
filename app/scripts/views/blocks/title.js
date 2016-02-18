@@ -4,8 +4,8 @@ define(['./block'], function(Block){
   return Block.extend({
 
     events: {
-      'blur .simple-block': '$blur',
-      'keyup [data-inline]': '$keyup'
+      'blur [data-inline]': '$blur',
+      'keyup [data-inline-child]': '$keyup'
     },
 
     $keyup: function (e) {

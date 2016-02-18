@@ -3,7 +3,7 @@ define([], function(){
 
   return {
     name: 'development',
-    base_url: 'http://localhost:3000/'
+    base_url: '/bm/api/v1/'
   };
 
 });

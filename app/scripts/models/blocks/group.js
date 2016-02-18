@@ -1,4 +1,4 @@
-define(['underscore', 'model', './base', 'app'], function(_, Model, Block, App){
+define(['underscore', 'model', './block', 'app'], function(_, Model, Block, App){
   'use strict';
 
   return Block.extend({
@@ -6,7 +6,7 @@ define(['underscore', 'model', './base', 'app'], function(_, Model, Block, App){
 
     html_url: function(){
       if(this.isNew()){
-        return this.urlRoot() + '/dummy?ajax=true&block[template]=' + this.template_name_from_params();
+        return this.urlRoot() + '/dummy?ajax=true&block[template]=' + this.template_name();
       }else{
         return this.urlRoot() + '/' + this.id +  '?ajax=true';
       }

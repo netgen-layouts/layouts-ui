@@ -1,7 +1,7 @@
-define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd){
+define(['underscore', './block', 'app', 'views/dnd'], function(_, Block, App, Dnd){
   'use strict';
 
-  return Base.extend(Dnd).extend({
+  return Block.extend(Dnd).extend({
     sort_element: '[data-container]',
 
     initialize: function(){

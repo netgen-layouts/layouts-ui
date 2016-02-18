@@ -1,9 +1,9 @@
-define(['./base'], function(Block){
+define(['./block'], function(Block){
   'use strict';
 
   return Block.extend({
     defaults: {
-      template: 'default'
+      //view_type: 'default'
     }
 
   });

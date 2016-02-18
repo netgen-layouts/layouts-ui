@@ -70,24 +70,24 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
         model: this.model
       });
 
-      this.model.fetch({via: 'edit'});
+      this.model.fetch({via: 'edit/full'});
 
       return this;
     },
 
-    update_positions: function(){
-      console.warn('IN CONTAINER? ', this.is_in_container());
-      if(this.model.changed.id){
-        console.info('Block base: update_positions');
-        if(this.is_in_container()){
-          console.info('in container: save_positions');
-          this.container().save_positions();
-          return;
-        }else{
-          App.trigger('positions:update');
-        }
-      }
-    },
+    // update_positions: function(){
+    //   console.warn('IN CONTAINER? ', this.is_in_container());
+    //   if(this.model.changed.id){
+    //     console.info('Block base: update_positions');
+    //     if(this.is_in_container()){
+    //       console.info('in container: save_positions');
+    //       this.container().save_positions();
+    //       return;
+    //     }else{
+    //       App.trigger('positions:update');
+    //     }
+    //   }
+    // },
 
     $destroy: function(){
       var self = this;

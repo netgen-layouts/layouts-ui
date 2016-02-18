@@ -1,7 +1,7 @@
-define(['./base'], function(Base){
+define(['./block'], function(Block){
   'use strict';
 
-  return Base.extend({
+  return Block.extend({
 
     template: 'blocks/custom'
 

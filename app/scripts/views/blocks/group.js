@@ -1,10 +1,10 @@
-define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, App){
+define(['underscore', 'backbone', './block', 'app'], function(_, Backbone, Block, App){
   'use strict';
 
-  return Base.extend({
+  return Block.extend({
 
     initialize: function(){
-      Base.prototype.initialize.apply(this, arguments);
+      Block.prototype.initialize.apply(this, arguments);
       this.on('render', this.after_render);
       this.listenTo(this.model, 'save:success', this.after_save);
       return this;
@@ -32,7 +32,7 @@ define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, 
       this.$el.attr('data-block', '')
       .attr('data-type', this.model.type_name())
       .prepend(JST['block_actions'](this.context)) // jshint ignore:line
-      .prepend(JST['block_template'](this.context)); // jshint ignore:line
+      .prepend(JST['block_type'](this.context)); // jshint ignore:line
       this.trigger_render();
     }
 

@@ -1,4 +1,4 @@
-define(['underscore', './base'], function(_, Block){
+define(['underscore', './block'], function(_, Block){
   'use strict';
 
   return Block.extend({
@@ -11,7 +11,6 @@ define(['underscore', './base'], function(_, Block){
       var json = Block.prototype.toJSON.apply(this, arguments);
       if(!options.parse){return json;}
       var namespace = this.get_namespace();
-      debugger;
       !_.isString(json[namespace].parameters) && (json[namespace].parameters = JSON.stringify(json[namespace].parameters));
       return json;
     }

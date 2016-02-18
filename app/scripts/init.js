@@ -1,7 +1,6 @@
-define(['app', 'model', 'backbone',  'components/main', 'collections/block_templates', 'views/block_templates', 'models/layout', 'views/blocks/load', 'models/blocks/helper', 'views/browser', 'collections/nodes'],
-  function(App, Model, Backbone, Components, BlockTemplates, ViewBlockTemplates, Layout, ViewBlocksLoad, ModelHelper, Browser, Nodes){
+define(['app', 'model', 'backbone',  'components/main', 'collections/block_types', 'views/block_types', 'models/layout', 'views/blocks/load', 'models/blocks/helper', 'views/browser', 'collections/nodes'],
+  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, Nodes){
   'use strict';
-
 
     Backbone.defaults = function(){
       var request = {};
@@ -38,7 +37,7 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
       this.app_cache_handler();
       this.setup_events();
 
-      App.g.block_templates = new BlockTemplates();
+      App.g.block_types = new BlockTypes();
     },
 
     setup_events: function(){
@@ -50,12 +49,12 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
 
 
       //Debounced with 200ms
-      App.onAll('positions:update', function(){
-        console.log('[LAYOUT] saving positions');
-        App.g.layout.save({
-          positions: App.get_positions()
-        });
-      }, 200);
+      // App.onAll('positions:update', function(){
+      //   console.log('[LAYOUT] saving positions');
+      //   App.g.layout.save({
+      //     positions: App.get_positions()
+      //   });
+      // }, 200);
 
       $(document).on('dragenter', function(e){
         e.preventDefault();
@@ -72,7 +71,8 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
       App.g.layout = new Layout({id: App.router.params.id});
 
       $.when(
-        App.g.block_templates.fetch_once(),
+        App.g.block_types.fetch_once(),
+        App.g.layout.blocks.fetch(),
         App.g.layout.fetch()
       ).then(this.start.bind(this));
     },
@@ -83,36 +83,14 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_templ
 
       Components.Zones.collection.reset(App.g.layout.get('zones'));
 
-      var view_block_templates = new ViewBlockTemplates({
+      var view_block_types = new ViewBlockTypes({
         el: '.blocks',
-        collection: App.g.block_templates
+        collection: App.g.block_type_groups
       });
 
-      view_block_templates.render();
+      view_block_types.render();
 
       this.blocks.load_layout_blocks();
-
-
-
-      var nodes = new Nodes();
-
-      var browser = new Browser({
-        collection: nodes,
-        context: {
-          title: 'Browse'
-        }
-      }).on('apply', function(){
-        console.log(browser.selected_ids());
-        alert(browser.selected_ids());
-      });
-
-      nodes.fetch({
-        data: { tree: true },
-        success: function(){
-          browser.open();
-        }
-      });
-
 
     },
 

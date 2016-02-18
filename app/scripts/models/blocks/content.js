@@ -1,4 +1,4 @@
-define(['./base'], function(Block){
+define(['./block'], function(Block){
   'use strict';
 
   return Block.extend({

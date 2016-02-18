@@ -1,4 +1,4 @@
-define(['collection', 'backbone',  'models/blocks/base'], function(Collection, Backbone, Block){
+define(['collection', 'backbone',  'models/blocks/block'], function(Collection, Backbone, Block){
   'use strict';
 
   return Collection.extend({

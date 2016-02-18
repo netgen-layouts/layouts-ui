@@ -3,7 +3,8 @@ define(['model'], function(Model){
 
   return Model.extend({
 
-    format: 'json',
+    idAttribute: 'identifier',
+    format: '',
     path: 'block_types',
 
     GROUPS: {
@@ -25,6 +26,7 @@ define(['model'], function(Model){
     },
 
     toJSON: function(options){
+      console.log(options);
       options || (options = {});
       var json = Model.prototype.toJSON.apply(this, arguments);
       if(!options.parse){return json;}
@@ -50,6 +52,10 @@ define(['model'], function(Model){
 
     as_container: function(){
       return this.param() && this.param().as_container;
+    },
+
+    default_identifier: function(){
+      return this.get('defaults').definition_identifier;
     }
 
   });

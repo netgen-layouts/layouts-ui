@@ -28,7 +28,8 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
           this.set(response).trigger('save:success');
         }.bind(this))
         .fail(function(response){
-          this.set(response).trigger('save:error');
+          console.log(response.responseJSON);
+          this.set(response.responseJSON).trigger('save:error');
         }.bind(this));
     },
 
@@ -59,7 +60,6 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       return Backbone.Model.prototype.set.call(this, attrs, options);
     },
 
-
     fetch: function(options){
       options && options.via && _.extend(options, {
         via: options.via,
@@ -73,18 +73,17 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     },
 
     url: function(additional){
-      additional  = additional ? '/' + additional : '';
+      additional  = additional ? additional : '';
       var url = Backbone.Model.prototype.url.apply(this, arguments);
       return this.url_format(url, additional);
     },
 
     url_format: function(url, additional){
       additional  = additional ? '/' + additional : '';
-      return this.format ? url + additional + '.'+ this.format : url;
+      return this.format ? url + additional + '.'+ this.format : url + additional;
     },
 
     set_if_empty: function(key, value){
-      console.log(this.get(key));
       return !this.has(key) && this.set(key, value);
     },
 

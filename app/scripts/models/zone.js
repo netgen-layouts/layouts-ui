@@ -2,24 +2,29 @@ define(['underscore', 'model'], function(_, Model){
   'use strict';
 
   return Model.extend({
+
+    idAttribute: 'identifier',
+
     TYPES: {
       1: 'normal',
       2: 'inherited'
     },
 
     type_name: function(){
-      return this.TYPES[this.get('kind')];
+      //return this.TYPES[this.get('kind')];
+      return 'normal';
     },
 
     is_inherited: function(){
-      return this.get('kind') === 2;
+      //return this.get('kind') === 2;
+      return  false;
     },
 
-    should_accept: function(template_or_block){
-      var accepts = JSON.parse(this.get('accepts'));
-      if(accepts.length === 0){ return true; }
-      var id = template_or_block.get('block_type_id') || template_or_block.id;
-      return _.contains(accepts, id);
+    should_accept: function(type_or_block){
+      var allowed = this.get('allowed_block_types');
+      if(allowed){ return true; }
+      var id = type_or_block.get('identifier') || type_or_block.id;
+      return _.contains(allowed, id);
     }
   });
 

@@ -11,21 +11,21 @@ define(['underscore', 'app', './main'], function(_, App, ViewBlocks){
     },
 
     load_layout_blocks: function(){
-      _.each(App.g.layout.get('positions'), function(position){
-        _.each(position.blocks, function(item){
+      var block, view_block;
+      _.each(App.g.layout.get('zones'), function(zone){
+          _.each(zone.block_ids, function(block_id){
 
-          var block = App.g.layout.get_block_by_id(item.block_id);
-          var view_block = App.blocks.create_view(block.get('type'), block);
+            block = App.g.layout.get_block_by_id(block_id);
+            view_block = App.blocks.create_view(block.get('definition_identifier'), block);
+            $('[data-zone='+ zone.identifier  +']').append(view_block.$el);
 
-          $('[data-zone='+ position.zone  +']').append(view_block.$el);
+            if(block.is_group()){
+              this.load_group_blocks(view_block);
+            }
 
-          if(block.is_group()){
-            this.load_group_blocks(view_block);
-          }
+          });
 
-        }, this);
-
-      }, this);
+      });
     },
 
     load_group_blocks: function(view_group){
