@@ -14,7 +14,8 @@ define(function(require){
     Custom:  require('./custom'),
     Slider:  require('./slider'),
     CustomAction:  require('./custom_action'),
-    title:  require('./title')
+    title:  require('./title'),
+    paragraph:  require('./paragraph')
   };
 
 });
