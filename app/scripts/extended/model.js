@@ -3,6 +3,12 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
 
   return Backbone.Model.extend({
 
+    initialize: function(){
+      Backbone.Model.prototype.initialize.apply(this, arguments);
+      this.on('error', this.error_handler);
+      return this;
+    },
+
     get: function(attr) {
       // Call the getter if available
       if (attr in this) {
@@ -12,6 +18,14 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       return Backbone.Model.prototype.get.call(this, attr);
     },
 
+    error_handler: function(model, response){
+      console.log(response.responseJSON);
+      App.show_error({
+        model: model,
+        title: response.responseJSON.status_text,
+        body: response.responseJSON.message
+      });
+    },
 
     //TODO: maybe add this to collection
     trigger: function(name, model, resp, options){
@@ -28,8 +42,8 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
           this.set(response).trigger('save:success');
         }.bind(this))
         .fail(function(response){
-          console.log(response.responseJSON);
-          this.set(response.responseJSON).trigger('save:error');
+          this.set(response.responseJSON);
+          this.error_handler(this, response);
         }.bind(this));
     },
 

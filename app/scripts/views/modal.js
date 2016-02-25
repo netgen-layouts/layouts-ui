@@ -12,8 +12,9 @@ define(['view'], function(View){
       'submit form': '$submit'
     },
 
-    initialize: function(){
+    initialize: function(options){
       View.prototype.initialize.apply(this, arguments);
+      this.context.title = options.title;
       var self = this;
       this.$el.on('hidden.bs.modal', function(){
         self.remove();

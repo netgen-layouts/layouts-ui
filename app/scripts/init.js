@@ -1,5 +1,18 @@
-define(['app', 'model', 'backbone',  'components/main', 'collections/block_types', 'views/block_types', 'models/layout', 'views/blocks/load', 'models/blocks/helper', 'views/browser', 'collections/nodes'],
-  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, Nodes){
+define([
+    'app',
+    'model',
+    'backbone',
+    'components/main',
+    'collections/block_types',
+    'views/block_types',
+    'models/layout',
+    'views/blocks/load',
+    'models/blocks/helper',
+    'views/browser',
+    'collections/nodes',
+    'views/modal'
+  ],
+  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, Nodes, Modal){
   'use strict';
 
     Backbone.defaults = function(){
@@ -115,6 +128,11 @@ define(['app', 'model', 'backbone',  'components/main', 'collections/block_types
       });
 
       return positions;
+    },
+
+    show_error: function(options){
+      console.log(options.title);
+      new Modal(options).open();
     }
   });
 

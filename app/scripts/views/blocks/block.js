@@ -92,8 +92,8 @@ define(['underscore', 'view', 'views/modal', 'views/form_modal', 'app'], functio
     $destroy: function(){
       var self = this;
       new Modal({
-        body: 'Are you sure you want to delete?',
-        context: { title: 'Confirm' }
+        title: 'Confir',
+        body: 'Are you sure you want to delete?'
       }).on('apply', function(){
         console.log('View destroy model', self.model);
         self.model.destroy();

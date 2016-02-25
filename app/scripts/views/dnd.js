@@ -72,7 +72,7 @@ define(['underscore', 'view', 'app'], function(_, View, App){
       var receiver_model = receiver_block.model,
         container_attributes = {
           //container_id: receiver_block.is_container() ? receiver_model.id : null,
-          block_type: block_or_type.get('definition_identifier') || block_or_type.default_identifier(),
+          block_type: block_or_type.get('definition_identifier') || block_or_type.get('identifier'),
           zone_identifier: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id'),
           layout_id: App.g.layout.id
         };
