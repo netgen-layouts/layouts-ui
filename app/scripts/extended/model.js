@@ -83,7 +83,11 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     },
 
     urlRoot: function(){
-      return App.env.base_url + _.result(this, 'path');
+      if(this.content_browser){
+        return App.env.cb_base_url + _.result(this, 'path');
+      }else{
+        return App.env.base_url + _.result(this, 'path');
+      }
     },
 
     url: function(additional){

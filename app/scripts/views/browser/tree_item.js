@@ -1,4 +1,4 @@
-define(['view', './list', 'collections/node_list', './pagination'], function(View, ListView, NodeList, PaginationView){
+define(['view', 'collections/locations', './list', './pagination'], function(View, Locations, ListView, PaginationView){
   'use strict';
 
   return View.extend({
@@ -30,62 +30,39 @@ define(['view', './list', 'collections/node_list', './pagination'], function(Vie
       }
 
       this.$el.attr('data-id', this.model.id);
-      this.$el.attr('data-type', this.model.get('kind'));
+      this.$el.attr('data-type', this.model.type());
     },
 
     is_open: function(){
       return this.$el.hasClass('open');
     },
 
-    add_selected_class: function(){
-      $('.item').removeClass('selected');
-      this.$el.addClass('selected open');
-    },
-
-    remove_selected_class: function(){
-      if(this.$el.find('.open')){ return; }
-      this.$el.removeClass('selected open');
-    },
-
     toggle_tree: function(e){
       e.stopPropagation();
-      this.$el.toggleClass('open');
-      // if(!this.is_open()){
-      //   this.open_tree();
-      // }
+
+      if(!this.is_open()){
+        this.open_tree(e);
+      }else{
+        this.$el.toggleClass('open');
+      }
+    },
+
+    select_tree_item: function(){
+      $('.tree .selected').removeClass('selected');
+      this.$el.addClass('selected');
     },
 
     open_tree: function(e){
-      //e.stopPropagation();
+      e.stopPropagation();
 
-      this.add_selected_class();
+      this.select_tree_item();
 
-      this.create_list();
+      this.create_list_view();
 
-      if(!this.model.has_children()){ return; }
-
-      if(this.open){
-        this.open = false;
-        this.remove_selected_class();
-        return;
-      }
-
-      if(this.model.loaded){
-        this.open = true;
-        this.add_selected_class();
-        return;
-      }
-
+      this.collection = new Locations();
       this.$el.addClass('loading');
-
-      this.model.fetch({
-        silent: true,
-        data: { tree: true },
-        success: function(){
-          this.render_tree();
-        }.bind(this)
-      });
-
+      this.listenTo(this.collection, 'sync', this.render_tree);
+      this.collection.fetch_tree_model_id(this.model.id);
     },
 
     render_tree: function(){
@@ -93,22 +70,20 @@ define(['view', './list', 'collections/node_list', './pagination'], function(Vie
       this.$el.addClass('open');
       this.model.loaded = true;
       this.open = true;
-      this.parent.browser.render_subtree(this.$('> ul'), this.model.children());
+      this.parent.browser.render_subtree(this.$('> ul'), this.collection);
     },
 
-    create_list: function(){
-      var nodes = new NodeList();
-      nodes.browser = this.parent.browser;
+    create_list_view: function(){
+      var locations = new Locations();
+      locations.browser = this.parent.browser;
 
       new ListView({
-        collection: nodes,
+        collection: locations,
         el: '.right-panel .list',
         browser: this.parent.browser
       });
 
-      nodes.fetch({
-        data: { parent_id: this.model.id, limit: this.limit }
-      });
+      locations.fetch_list_model_id(this.model.id);
 
     },
 

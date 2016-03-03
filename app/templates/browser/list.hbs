@@ -1,6 +1,28 @@
 {{#if collection.length }}
-  <ul class="items"></ul>
+  <table class="table table-striped items">
+    <thead>
+      <tr>
+        <th>#</th>
+        {{#each menu_items.models}}
+          <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{name}}">{{title}}</th>
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <ul class="dropdown-menu" aria-labelledby="drop">
+    {{#each menu_items.models}}
+      <li>
+        <input name="{{name}}" id="{{name}}" type="checkbox" autocomplete="off" {{#if visible}}checked{{/if}}>
+        <label class="glyphicon" for="{{name}}">{{title}}</label>
+      </li>
+    {{/each}}
+  </ul>
+
 {{else}}
-  No content
+  <div class="no-content">No content</div>
 {{/if}}
+
+
 

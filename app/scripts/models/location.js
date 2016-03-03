@@ -1,20 +1,30 @@
-define(['model', './mixin/tree'], function(Model, MixinTree){
+define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
   'use strict';
 
   return Model
     .extend(MixinTree)
     .extend({
 
-      format: 'json',
-      path: 'nodes',
+      content_browser: true,
 
-      has_children: function(){
-        return this.get('children_size') > 0;
+      path: function(){
+        return App.g.tree_config.name() + '/locations';
       },
 
-      parse: function(response) {
-        this.initialize_children(response);
-        return response;
+      has_children: function(){
+        return this.attributes.has_children;
+      },
+
+      type: function(){
+        return this.attributes.type;
+      },
+
+      select: function(){
+        this.selected = true;
+      },
+
+      deselect: function(){
+        this.selected = false;
       },
 
       check: function(){
@@ -31,18 +41,10 @@ define(['model', './mixin/tree'], function(Model, MixinTree){
         return this.selected_collection().get(this.id);
       },
 
-
       selected_collection: function(){
         return this.collection.browser.selected_collection;
-      },
-
-      initialize_children: function(response){
-        console.log(response);
-        if(!response.children){ return; }
-
-        this.collection.add(response.children);
-        delete(response.children);
       }
+
     });
 
 });

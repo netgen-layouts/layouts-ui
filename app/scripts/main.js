@@ -11,7 +11,7 @@ require.config({
     moment: '../../bower_components/moment/moment',
     jquery: '../../bower_components/jquery/dist/jquery',
     handlebars: '../../bower_components/handlebars/handlebars',
-    'backbone.localstorage': '../../bower_components/backbone.localstorage/backbone.localStorage',
+    localstorage: '../../bower_components/backbone.localstorage/backbone.localStorage',
     backbone_original: '../../bower_components/backbone/backbone',
     backbone: './extended/backbone_override',
 
@@ -51,7 +51,7 @@ require.config({
   }
 });
 
-require(['init', 'backbone', 'router', 'jquery', 'jquery_ui', 'extended/jquery_override','modal', 'register_helpers', 'templates'],
+require(['init', 'backbone', 'router', 'jquery', 'jquery_ui', 'extended/jquery_override', 'modal', 'register_helpers', 'templates'],
   function(App, Backbone, Router){
 
     App.init();

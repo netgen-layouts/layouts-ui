@@ -9,10 +9,11 @@ define([
     'views/blocks/load',
     'models/blocks/helper',
     'views/browser',
-    'collections/nodes',
+    'models/tree_config',
+    'collections/locations',
     'views/modal'
   ],
-  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, Nodes, Modal){
+  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, TreeConfig, Locations, Modal){
   'use strict';
 
     Backbone.defaults = function(){
@@ -51,6 +52,7 @@ define([
       this.setup_events();
 
       App.g.block_types = new BlockTypes();
+      App.g.tree_config = new TreeConfig();
     },
 
     setup_events: function(){
@@ -86,7 +88,8 @@ define([
       $.when(
         App.g.block_types.fetch_once(),
         App.g.layout.blocks.fetch(),
-        App.g.layout.fetch()
+        App.g.layout.fetch(),
+        App.g.tree_config.fetch()
       ).then(this.start.bind(this));
     },
 
@@ -105,6 +108,20 @@ define([
 
       this.blocks.load_layout_blocks();
 
+      var default_location = App.g.tree_config.default_location();
+
+      var tree_collection = new Locations();
+
+      var browser = new Browser({
+        root_locations: App.g.tree_config.root_locations,
+        collection: tree_collection,
+        title: 'Content browser'
+      }).on('apply', function(){
+        console.log(browser.selected_ids());
+        alert(browser.selected_ids());
+      }).open();
+
+      tree_collection.fetch_root_model_id(default_location.id);
     },
 
     get_positions: function(){

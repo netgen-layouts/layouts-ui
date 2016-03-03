@@ -1,9 +1,9 @@
-define(['app', 'collection', 'models/node'], function(App, Collection, Node){
+define(['app', 'collection', 'models/location'], function(App, Collection, Location){
   'use strict';
 
   return Collection.extend({
-    model: Node,
-    name: 'Nodes'
+    model: Location,
+    name: 'Locations'
   });
 
 });
