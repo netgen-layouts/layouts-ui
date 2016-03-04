@@ -7,6 +7,7 @@ define(['view', 'collections/locations'], function(View, Locations){
     className: 'item',
 
     events:{
+      'click': 'show_preview',
       'click input': 'toogle_select',
       'click a': 'open'
     },
@@ -76,6 +77,10 @@ define(['view', 'collections/locations'], function(View, Locations){
     check_item: function(){
       this.$el.addClass('selected');
       this.$(':checkbox').prop('checked', true);
+    },
+
+    show_preview: function(){
+      this.parent.browser.render_preview(this.model);
     }
 
   });

@@ -25,10 +25,6 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
         this.$el.addClass('has_children');
       }
 
-      if(this.model.is_root()){
-        this.$el.addClass('root');
-      }
-
       this.$el.attr('data-id', this.model.id);
       this.$el.attr('data-type', this.model.type());
     },
@@ -57,6 +53,8 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
 
       this.select_tree_item();
 
+      this.show_preview();
+
       this.create_list_view();
 
       this.collection = new Locations();
@@ -74,18 +72,13 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
     },
 
     create_list_view: function(){
-      var locations = new Locations();
-      locations.browser = this.parent.browser;
-
-      new ListView({
-        collection: locations,
-        el: '.right-panel .list',
-        browser: this.parent.browser
-      });
-
-      locations.fetch_list_model_id(this.model.id);
-
+      this.parent.browser.render_list_view(this.model);
     },
+
+    show_preview: function(){
+      this.parent.browser.render_preview(this.model);
+    }
+
 
   });
 

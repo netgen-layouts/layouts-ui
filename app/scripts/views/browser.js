@@ -5,7 +5,8 @@ define([
   './browser/tree',
   'collections/menu_items',
   './browser/list',
-  'collections/locations'], function(_, App, View, Modal, HeaderView, TreeView, MenuItems, ListView, Locations){
+  'collections/locations',
+  './browser/preview'], function(_, App, View, Modal, HeaderView, TreeView, MenuItems, ListView, Locations, Preview){
 
   'use strict';
 
@@ -29,17 +30,16 @@ define([
       this.menu_items.fetch();
 
       this.root_locations = options.root_locations;
-      this.selected_collection = this.collection.new_from();
+      this.selected_collection = new Locations();
 
       this.on('open', this.render_header);
-      this.listenTo(this.collection, 'sync', this.render_tree);
-      this.listenTo(this.collection, 'sync', this.render_list_view);
+      this.listenTo(this.collection, 'sync', function(){
+        this.render_tree();
+        var model = this.root_locations.selected_model();
+        this.render_list_view(model);
+      });
 
       return this;
-    },
-
-    select_first_root_locations: function(){
-      this.$('.header-item').first().addClass('selected');
     },
 
     render_header: function(){
@@ -49,11 +49,11 @@ define([
         'el': '.header'
       }).render();
 
-      this.select_first_root_locations();
       return this;
     },
 
     render_tree: function(){
+      console.log(this.collection);
       this.tree_view = new TreeView({
         collection: this.collection,
         browser: this,
@@ -77,7 +77,8 @@ define([
       return this;
     },
 
-    render_list_view: function(){
+    render_list_view: function(model){
+      console.log('render list view');
       var locations = new Locations();
       locations.browser = this;
 
@@ -87,8 +88,16 @@ define([
         browser: this
       });
 
-      var model = this.root_locations.selected_model();
       locations.fetch_list_model_id(model.id);
+    },
+
+    render_preview: function(model){
+      this.preview = new Preview({
+        context: {
+          html: model.get('html') || '<h3>' + model.get('name') + '</h3>'
+        },
+        'el': '.preview-panel .preview'
+      }).render();
     },
 
     selected_ids: function(){

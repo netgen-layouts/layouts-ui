@@ -136,7 +136,7 @@ module.exports = function (grunt) {
             proxies: [
 
                 {
-                  context: ['/bm', '/cb'],
+                  context: ['/bm', '/cb', '/var'],
                   host: 'bm.lan',
                   changeOrigin: true,
                   headers: {

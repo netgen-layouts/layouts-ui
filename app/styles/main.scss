@@ -333,7 +333,7 @@ input[type="checkbox"] {
 
 .browser{
   .modal-dialog{
-    width: 1200px;
+    width: 98%;
   }
   .modal-body{
     padding: 0 15px;
@@ -406,7 +406,7 @@ input[type="checkbox"] {
     &.selected{
       > a{
         span{
-          background-color: #b5deff;
+          background-color: #e5e5e5;
           border: 1px solid #a1ceed;
         }
       }

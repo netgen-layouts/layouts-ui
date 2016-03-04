@@ -25,8 +25,13 @@ define(['view'], function(View){
       this.parent.collection.select_model_by_id(this.model.id);
       $('.header-item').removeClass('selected');
       this.$el.addClass('selected');
-    }
 
+      this.show_preview();
+    },
+
+    show_preview: function(){
+      this.parent.browser.render_preview(this.model);
+    }
 
   });
 

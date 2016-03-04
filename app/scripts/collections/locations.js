@@ -1,4 +1,4 @@
-define(['underscore', 'app', 'collection', 'models/location'], function(_, App, Collection, Location){
+define(['underscore', 'app', 'collection', 'models/location', 'collections/breadcrumbs'], function(_, App, Collection, Location, Breadcrumbs){
   'use strict';
 
   return Collection.extend({
@@ -6,6 +6,18 @@ define(['underscore', 'app', 'collection', 'models/location'], function(_, App, 
     model: Location,
 
     name: 'Locations',
+
+    parse: function(response){
+      if(response.children){
+        this.path = new Breadcrumbs(response.path);
+        var last = this.path.last();
+        last && (last.attributes.last = true);
+        response = this.reset(response.children);
+        return response;
+      }else{
+        return response;
+      }
+    },
 
     fetch_root_model_id: function(id, options){
       this.fetch(_.extend({
