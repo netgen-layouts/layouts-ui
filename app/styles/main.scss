@@ -381,6 +381,9 @@ input[type="checkbox"] {
     .no-content{
       padding: 10px;
     }
+    tr{
+      cursor: pointer;
+    }
   }
   li{
     ul{
@@ -455,6 +458,10 @@ input[type="checkbox"] {
   }
   .list{
     position: relative;
+    img.thumbnail{
+      width: 64px;
+      height: 64px;
+    }
   }
 }
 
@@ -465,6 +472,9 @@ input[type="checkbox"] {
 .modal-subheader {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
+  .breadcrumb{
+    margin-bottom: 0px;
+  }
 }
 
 ul.header{

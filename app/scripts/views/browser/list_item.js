@@ -55,6 +55,7 @@ define(['view', 'collections/locations'], function(View, Locations){
       locations.fetch_list_model_id(this.model.id, {
         success: function(){
           this.parent.collection.reset(locations.models);
+          this.show_breadcrumb(locations);
         }.bind(this)
       });
     },
@@ -81,6 +82,10 @@ define(['view', 'collections/locations'], function(View, Locations){
 
     show_preview: function(){
       this.parent.browser.render_preview(this.model);
+    },
+
+    show_breadcrumb: function(collection){
+      this.parent.browser.render_breadcrumb(collection);
     }
 
   });

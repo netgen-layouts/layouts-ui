@@ -1,4 +1,4 @@
-define(['model', 'collections/locations'], function(Model, Locations){
+define(['model', 'collections/locations', 'collections/breadcrumbs'], function(Model, Locations, Breadcrumbs){
   'use strict';
 
   return Model
@@ -30,6 +30,13 @@ define(['model', 'collections/locations'], function(Model, Locations){
 
         this.root_locations = new Locations();
         this.root_locations.add(response.root_locations);
+        this.root_locations.models.forEach(function(model){
+          model.path = new Breadcrumbs([{
+            id: model.id,
+            name: model.get('name'),
+            last: true
+          }]);
+        });
         delete(response.root_locations);
       }
 

@@ -6,7 +6,9 @@ define([
   'collections/menu_items',
   './browser/list',
   'collections/locations',
-  './browser/preview'], function(_, App, View, Modal, HeaderView, TreeView, MenuItems, ListView, Locations, Preview){
+  './browser/preview',
+  './browser/breadcrumb'],
+  function(_, App, View, Modal, HeaderView, TreeView, MenuItems, ListView, Locations, PreviewView, BreadcrumbView){
 
   'use strict';
 
@@ -37,9 +39,15 @@ define([
         this.render_tree();
         var model = this.root_locations.selected_model();
         this.render_list_view(model);
+        this.render_breadcrumb(model);
+        console.log(model.path);
       });
 
       return this;
+    },
+
+    is_root: function(id){
+      return this.root_locations.some(function(item){ return item.id === id; });
     },
 
     render_header: function(){
@@ -53,7 +61,6 @@ define([
     },
 
     render_tree: function(){
-      console.log(this.collection);
       this.tree_view = new TreeView({
         collection: this.collection,
         browser: this,
@@ -72,13 +79,10 @@ define([
         el: el || '.tree'
       }).render();
 
-      console.log('render subtree');
-
       return this;
     },
 
     render_list_view: function(model){
-      console.log('render list view');
       var locations = new Locations();
       locations.browser = this;
 
@@ -92,11 +96,19 @@ define([
     },
 
     render_preview: function(model){
-      this.preview = new Preview({
+      this.preview = new PreviewView({
         context: {
           html: model.get('html') || '<h3>' + model.get('name') + '</h3>'
         },
         'el': '.preview-panel .preview'
+      }).render();
+    },
+
+    render_breadcrumb: function(collection){
+      this.breadcrumb = new BreadcrumbView({
+        collection: collection.path,
+        'el': '.modal-subheader .breadcrumb',
+        browser: this
       }).render();
     },
 

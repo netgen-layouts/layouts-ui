@@ -57,18 +57,22 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
 
       this.create_list_view();
 
-      this.collection = new Locations();
+      var locations = new Locations();
       this.$el.addClass('loading');
-      this.listenTo(this.collection, 'sync', this.render_tree);
-      this.collection.fetch_tree_model_id(this.model.id);
+      locations.fetch_tree_model_id(this.model.id, {
+        success: function(){
+          this.render_tree(locations);
+          this.show_breadcrumb(locations);
+        }.bind(this)
+      });
     },
 
-    render_tree: function(){
+    render_tree: function(collection){
       this.$el.removeClass('loading');
       this.$el.addClass('open');
       this.model.loaded = true;
       this.open = true;
-      this.parent.browser.render_subtree(this.$('> ul'), this.collection);
+      this.parent.browser.render_subtree(this.$('> ul'), collection);
     },
 
     create_list_view: function(){
@@ -77,6 +81,10 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
 
     show_preview: function(){
       this.parent.browser.render_preview(this.model);
+    },
+
+    show_breadcrumb: function(collection){
+      this.parent.browser.render_breadcrumb(collection);
     }
 
 

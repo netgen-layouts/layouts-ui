@@ -1,4 +1,4 @@
-define(['underscore', 'app', 'collection', 'models/location', 'collections/breadcrumbs'], function(_, App, Collection, Location, Breadcrumbs){
+define(['underscore', 'app', 'backbone', 'collection', 'models/location', 'collections/breadcrumbs'], function(_, App, Backbone, Collection, Location, Breadcrumbs){
   'use strict';
 
   return Collection.extend({
@@ -10,30 +10,28 @@ define(['underscore', 'app', 'collection', 'models/location', 'collections/bread
     parse: function(response){
       if(response.children){
         this.path = new Breadcrumbs(response.path);
-        var last = this.path.last();
-        last && (last.attributes.last = true);
-        response = this.reset(response.children);
-        return response;
+        return response.children;
       }else{
         return response;
       }
     },
 
     fetch_root_model_id: function(id, options){
-      this.fetch(_.extend({
-        url: this.url() + '/' + id + '/categories'
-      }, options));
+      this.fetch_data(id, 'categories', options);
     },
 
     fetch_tree_model_id: function(id, options){
-      this.fetch(_.extend({
-        url: this.url() + '/' + id + '/categories'
-      }, options));
+      this.fetch_data(id, 'categories', options);
     },
 
     fetch_list_model_id: function(id, options){
+      this.fetch_data(id, 'children', options);
+    },
+
+    fetch_data: function(id, postfix, options){
+      var url = this.url() + '/' + id + '/' + postfix;
       this.fetch(_.extend({
-        url: this.url() + '/' + id + '/children'
+        url: url
       }, options));
     },
 
