@@ -303,10 +303,11 @@ input[type="checkbox"] {
   & + label{
     display: block;
     position: relative;
-    padding: 5px 5px 10px 20px;
+    padding: 5px 5px 5px 20px;
     margin-bottom: 0px;
     cursor: pointer;
-    &:before {
+    font-weight: normal;
+    & i {
       position: absolute;
       top: 0px;
       left: 0px;
@@ -319,12 +320,12 @@ input[type="checkbox"] {
     left: -9999px;
   }
   &:not(:checked) + label {
-    &:before {
+    & i:before {
       content: "\e157";
     }
   }
   &:checked + label {
-    &:before {
+    & i:before {
       content: "\e067";
       color: green;
     }
@@ -346,19 +347,19 @@ input[type="checkbox"] {
         &:hover{
           background-color: #efefef;
         }
-        &:before {
-          top: 6px;
+        & i {
+          top: 7px;
           left: 8px;
           font-size: 12px;
         }
       }
       &:not(:checked) + label {
-        &:before {
+        & i:before {
           content: "";
         }
       }
       &:checked + label{
-        &:before {
+        & i:before {
           color: #333;
           content: "\e013";
         }
