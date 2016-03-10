@@ -1,7 +1,7 @@
-define(['view', './list_base'], function(View, ListBase){
+define(['./list_base'], function(ListBase){
   'use strict';
 
-  return View.extend(ListBase).extend({
+  return ListBase.extend({
     browse_tab: function(){
       return this.browse;
     }

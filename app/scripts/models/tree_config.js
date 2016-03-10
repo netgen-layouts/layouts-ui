@@ -35,6 +35,8 @@ define(['model', 'collections/items', 'collections/breadcrumbs'], function(Model
         this.root_items = new Items();
         this.root_items.add(response.root_items);
         this.root_items.models.forEach(function(model){
+          // we use this propery for list root item
+          model.is_root_model = true;
           model.path = new Breadcrumbs([{
             id: model.id,
             name: model.get('name'),

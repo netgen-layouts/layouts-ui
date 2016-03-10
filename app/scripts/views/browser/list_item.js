@@ -1,7 +1,7 @@
-define(['view', './list_base', 'collections/items'], function(View, ListBase, Items){
+define(['./list_base', 'collections/items'], function(ListBase, Items){
   'use strict';
 
-  return View.extend(ListBase).extend({
+  return ListBase.extend({
 
     tagName: 'tr',
 

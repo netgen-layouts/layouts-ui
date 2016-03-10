@@ -1,7 +1,7 @@
 define(['view'], function(View){
   'use strict';
 
-  return {
+   return View.extend({
 
     extend_with: ['browse'],
 
@@ -61,6 +61,6 @@ define(['view'], function(View){
       this.$(':checkbox').prop('checked', true);
     },
 
-  };
+  });
 
 });
