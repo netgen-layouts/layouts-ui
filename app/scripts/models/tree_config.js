@@ -47,23 +47,25 @@ define(['underscore', 'model', 'collections/items', 'models/column', 'collection
       },
 
       save_available_columns: function(){
-      if(!localStorage.getItem('default_saved')){
-        var default_columns = this.get('default_columns');
-        var available_columns = this.get('available_columns');
 
-        _.each(available_columns, function(item, index){
-          var column = new Column({
-            column_id: item.id,
-            name: item.name,
-            visible: default_columns.indexOf(item.id) !== -1,
-            order: index
+        if(!localStorage.getItem('default_saved')){
+          var default_columns = this.get('default_columns');
+          var available_columns = this.get('available_columns');
+
+          _.each(available_columns, function(item, index){
+            var column = new Column({
+              column_id: item.id,
+              name: item.name,
+              visible: default_columns.indexOf(item.id) !== -1,
+              order: index
+            });
+            column.save();
+
           });
-          column.save();
-        });
 
-        localStorage.setItem('default_saved', true);
-      }
-    },
+          localStorage.setItem('default_saved', true);
+        }
+      },
 
     });
 

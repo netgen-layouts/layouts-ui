@@ -498,3 +498,21 @@ input[type="checkbox"] {
     }
   }
 }
+
+.selected-panel{
+  padding-right: 0px;
+}
+.selected-items{
+  overflow-y: scroll;
+  max-height: 80px;
+  margin-bottom: 0px;
+  &:empty{
+    display: none;
+  }
+  li{
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}

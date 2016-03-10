@@ -13,7 +13,7 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
 
     events: {
       'contextmenu': '$show_dropdown_menu',
-      'change input[type="checkbox"]': '$toggle_table_columns'
+      'change .column-check': '$toggle_table_columns'
     },
 
     initialize: function(){

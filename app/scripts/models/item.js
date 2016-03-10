@@ -23,6 +23,10 @@ define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
         return this.attributes.type;
       },
 
+      short_name: function(){
+        return this.get('name').length > 27 ? this.get('name').substring(0, 27) + '...' : this.get('name');
+      },
+
       select: function(){
         this.selected = true;
       },

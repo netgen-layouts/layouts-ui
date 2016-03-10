@@ -1,5 +1,13 @@
 define([
-  'underscore', 'app', 'view', 'views/modal', 'collections/items', 'collections/columns', './browse'], function(_, App, View, Modal, Items, Columns, BrowseView){
+  'underscore',
+  'app',
+  'view',
+  'views/modal',
+  'collections/items',
+  'collections/columns',
+  './browse',
+  './selected_items'
+  ], function(_, App, View, Modal, Items, Columns, BrowseView, SelectedItems){
 
   'use strict';
 
@@ -22,6 +30,8 @@ define([
       this.tree_collection = options.tree_collection;
       this.selected_collection = new Items();
 
+      this.listenTo(this.selected_collection, 'add remove', this.render_selected_items.bind(this));
+
       this.on('open', function(){
         this.render_browse_view();
       }.bind(this));
@@ -39,12 +49,20 @@ define([
         columns: columns
       });
 
-      this.listenTo(columns, 'sync', function(){
-        console.log('SYYYYYYYYYYYNC', columns);
-        this.browse.render();
-      }.bind(this));
+      columns.fetch({
+        success: function(){
+          console.log(columns.length);
+          this.browse.render();
+        }.bind(this)
+      });
+    },
 
-      columns.fetch();
+    render_selected_items: function(){
+      this.selected_items = new SelectedItems({
+        collection: this.selected_collection,
+        el: '.selected-items',
+        browser: this,
+      }).render();
     },
 
     selected_values: function(){

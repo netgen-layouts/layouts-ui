@@ -19,7 +19,7 @@
   <ul class="dropdown-menu" aria-labelledby="drop">
     {{#each columns.models}}
       <li>
-        <input name="{{column_id}}" id="{{column_id}}" type="checkbox" autocomplete="off" {{#if visible}}checked{{/if}}>
+        <input name="{{column_id}}" id="{{column_id}}" type="checkbox" class="column-check" autocomplete="off" {{#if visible}}checked{{/if}}>
         <label for="{{column_id}}"><i class="glyphicon"></i>{{name}}</label>
       </li>
     {{/each}}
