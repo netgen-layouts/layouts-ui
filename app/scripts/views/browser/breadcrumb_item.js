@@ -1,4 +1,4 @@
-define(['view'], function(View){
+define(['view', 'app'], function(View, App){
   'use strict';
 
   return View.extend({
@@ -12,24 +12,23 @@ define(['view'], function(View){
     },
 
     events: {
-      'click a': 'open'
+      'click a': '$open'
     },
 
-    open: function(e){
+    $open: function(e){
       e.preventDefault();
 
-      var browser = this.parent.browser;
-      console.log(this.model.id);
+      var browse = this.parent.browse;
 
-      if(browser.is_root(this.model.id)){
-        var $item = $('.header-item a[data-id="' + this.model.id + '"]');
+      if(App.g.tree_config.is_in_root_item(this.model.id)){
+        var $item = $('option[data-id="' + this.model.id + '"]');
         if($item.length === 0){ return false; }
-        $item.trigger('click');
+        $item.prop('selected', true);
+        $item.parent().change();
       }else{
-        var result = browser.tree_view.click_item_by_id(this.model.id);
-        console.log(result);
+        var result = browse.tree_view.click_item_by_id(this.model.id);
         if(!result){
-          browser.render_list_view(this.model);
+          browse.render_list_view(this.model);
         }
       }
 

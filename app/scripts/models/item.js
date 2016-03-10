@@ -8,7 +8,7 @@ define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
       content_browser: true,
 
       path: function(){
-        return App.g.tree_config.name() + '/locations';
+        return App.g.tree_config.name() + '/items';
       },
 
       has_children: function(){
@@ -42,7 +42,8 @@ define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
       },
 
       selected_collection: function(){
-        return this.collection.browser.selected_collection;
+        return (this.collection && this.collection.browser && this.collection.browser.selected_collection) ||
+          (this.browser && this.browser.selected_collection);
       }
 
     });

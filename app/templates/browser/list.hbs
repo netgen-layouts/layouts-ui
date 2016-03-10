@@ -1,14 +1,19 @@
-{{#if collection.length }}
+
   <table class="table table-striped items">
     <thead>
-      <tr>
-        <th>#</th>
-        {{#each menu_items.models}}
-          <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{name}}">{{title}}</th>
-        {{/each}}
-      </tr>
+      <tr class="list-root"></tr>
+      {{#if collection.length }}
+        <tr>
+          <th>#</th>
+          {{#each menu_items.models}}
+            <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{name}}">{{title}}</th>
+          {{/each}}
+        </tr>
+      {{/if}}
     </thead>
+
     <tbody></tbody>
+
   </table>
 
   <ul class="dropdown-menu" aria-labelledby="drop">
@@ -19,10 +24,5 @@
       </li>
     {{/each}}
   </ul>
-
-{{else}}
-  <div class="no-content">No content</div>
-{{/if}}
-
 
 

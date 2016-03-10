@@ -1,15 +1,12 @@
-define(['view', 'collections/locations'], function(View, Locations){
+define(['view', './list_base', 'collections/items'], function(View, ListBase, Items){
   'use strict';
 
-  return View.extend({
-    template: 'browser/list_item',
+  return View.extend(ListBase).extend({
     tagName: 'tr',
     className: 'item',
 
     events:{
-      'click': 'show_preview',
-      'click input': 'toogle_select',
-      'click a': 'open'
+      'click a': '$open'
     },
 
     initialize: function(){
@@ -18,12 +15,7 @@ define(['view', 'collections/locations'], function(View, Locations){
       if(this.model.is_checked()){
         this.check_item();
       }
-      return this;
-    },
 
-    render: function(){
-      View.prototype.render.apply(this, arguments);
-      this.hide_columns_by_visibility();
       return this;
     },
 
@@ -33,16 +25,16 @@ define(['view', 'collections/locations'], function(View, Locations){
     },
 
     hide_columns_by_visibility: function(){
-      var menu_items = this.parent.browser.menu_items.invisibles();
+      var menu_items = this.parent.browse.menu_items.invisibles();
       menu_items.forEach(function(item){
         this.$('td[data-name="' + item.get('name') +  '"]').addClass('hidden');
       }.bind(this));
     },
 
-    open: function(e){
+    $open: function(e){
       e.preventDefault();
       if(this.model.has_children()){
-        var result = this.parent.browser.tree_view.click_item_by_id(this.model.id);
+        var result = this.parent.browse.tree_view.click_item_by_id(this.model.id);
         if(!result){
           this.open_item();
         }
@@ -50,42 +42,30 @@ define(['view', 'collections/locations'], function(View, Locations){
     },
 
     open_item: function(){
-      var locations = new Locations();
-      locations.browser = this.parent.browser;
-      locations.fetch_list_model_id(this.model.id, {
+      var items = new Items();
+      items.browser = this.parent.browser;
+
+      this.setup_root_model();
+
+      items.fetch_list_model_id(this.model.id, {
         success: function(){
-          this.parent.collection.reset(locations.models);
-          this.show_breadcrumb(locations);
+          this.parent.collection.reset(items.models);
+          this.show_breadcrumb(items);
         }.bind(this)
       });
     },
 
-    toogle_select: function(){
-      if(this.model.is_checked()){
-        this.uncheck_item();
-        this.model.uncheck();
-      }else{
-        this.check_item();
-        this.model.check();
-      }
+    setup_root_model: function(){
+      this.parent.browse.root_model = this.model;
+      this.parent.browse.root_model.is_root_model = true;
     },
 
-    uncheck_item: function(){
-      this.$el.removeClass('selected');
-      this.$(':checkbox').prop('checked', false);
-    },
-
-    check_item: function(){
-      this.$el.addClass('selected');
-      this.$(':checkbox').prop('checked', true);
-    },
-
-    show_preview: function(){
-      this.parent.browser.render_preview(this.model);
+    $show_preview: function(){
+      this.parent.browse.render_preview(this.model);
     },
 
     show_breadcrumb: function(collection){
-      this.parent.browser.render_breadcrumb(collection);
+      this.parent.browse.render_breadcrumb(collection);
     }
 
   });

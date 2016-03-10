@@ -4,7 +4,17 @@
 </td>
 <td data-name="id">{{model.id}}</td>
 <td data-name="parent_id">{{model.parent_id}}</td>
-<td data-name="name">{{#if model.has_children}}<a href="#">{{model.name}}</a>{{else}}{{model.name}}{{/if}}</td>
+<td data-name="name">
+  {{#if model.has_children}}
+    {{#if model.is_root_model}}
+      {{model.name}}
+    {{else}}
+      <a href="#">{{model.name}}</a>
+    {{/if}}
+    {{else}}
+      {{model.name}}
+  {{/if}}
+</td>
 <td data-name="thumbnail">{{#if model.thumbnail}}<img class="thumbnail" src="{{model.thumbnail}}" alt="{{mode.name}}">{{/if}}</td>
 <td data-name="type">{{model.type}}</td>
 <td data-name="visible">{{model.visible}}</td>

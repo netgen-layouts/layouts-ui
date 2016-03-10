@@ -22,7 +22,7 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
       console.log(response.responseJSON);
       App.show_error({
         model: model,
-        title: response.responseJSON.status_text,
+        title:  response.responseJSON.status_text,
         body: response.responseJSON.message
       });
     },

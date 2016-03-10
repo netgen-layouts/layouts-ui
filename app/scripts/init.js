@@ -8,12 +8,12 @@ define([
     'models/layout',
     'views/blocks/load',
     'models/blocks/helper',
-    'views/browser',
+    'views/browser/browser',
     'models/tree_config',
-    'collections/locations',
+    'collections/items',
     'views/modal'
   ],
-  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, TreeConfig, Locations, Modal){
+  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, TreeConfig, Items, Modal){
   'use strict';
 
     Backbone.defaults = function(){
@@ -110,14 +110,12 @@ define([
 
       var default_location = App.g.tree_config.default_location();
 
-      var tree_collection = new Locations();
+      var tree_collection = new Items();
 
       var browser = new Browser({
-        root_locations: App.g.tree_config.root_locations,
-        collection: tree_collection,
+        tree_collection: tree_collection,
         title: 'Content browser'
       }).on('apply', function(){
-        console.log(browser.selected_ids());
         alert(browser.selected_ids());
       }).open();
 

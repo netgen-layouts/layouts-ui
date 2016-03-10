@@ -34,4 +34,27 @@ define(['jquery', 'app'], function($, App){
     });
   };
 
+  $.fn.tabs = function () {
+    var $this = $(this);
+
+    $this.find('li:first').addClass('active');
+    $('.tab-pane').hide();
+    $('.tab-pane:first').show();
+
+    $this.find('li a').click(function(e){
+      e.preventDefault();
+
+      var $id = $(this);
+      var name = $id.attr('id');
+
+      // tab
+      $this.find('li').removeClass('active');
+      $id.closest('li').addClass('active');
+
+      // tab content
+      $('.tab-pane').hide();
+      $('#'+ name + '-tab').show();
+    });
+  };
+
 });

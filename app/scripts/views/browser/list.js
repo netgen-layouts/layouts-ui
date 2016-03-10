@@ -5,21 +5,21 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
 
     template: 'browser/list',
 
-    extend_with: ['browser'],
+    extend_with: ['browser', 'browse'],
 
     view_items_el: 'tbody',
 
     ViewItem: ListItem,
 
     events: {
-      'contextmenu': 'show_dropdown_menu',
-      'change input[type="checkbox"]': 'toggle_table_columns'
+      'contextmenu': '$show_dropdown_menu',
+      'change input[type="checkbox"]': '$toggle_table_columns'
     },
 
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
 
-      this.context.menu_items = this.browser.menu_items;
+      this.context.menu_items = this.browse.menu_items;
 
       App.on('browser:click', this.hide_dropdown_menu);
 
@@ -28,7 +28,7 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
       return this;
     },
 
-    show_dropdown_menu: function(e){
+    $show_dropdown_menu: function(e){
       e.preventDefault();
       $('.dropdown-menu').css({
         display: 'block',
@@ -41,7 +41,7 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
       $('.dropdown-menu').hide();
     },
 
-    toggle_table_columns: function(e){
+    $toggle_table_columns: function(e){
       var name = e.target.name,
           $th = this.$('th[data-name="' + name + '"]'),
           $td = this.$('td[data-name="' + name + '"]');
@@ -54,7 +54,7 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
         $td.addClass('hidden');
       }
 
-      this.browser.menu_items.save_visibility(name, e.target.checked);
+      this.browse.menu_items.save_visibility(name, e.target.checked);
 
       this.hide_dropdown_menu();
     },

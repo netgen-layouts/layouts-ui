@@ -1,11 +1,11 @@
-define(['underscore', 'app', 'backbone', 'collection', 'models/location', 'collections/breadcrumbs'], function(_, App, Backbone, Collection, Location, Breadcrumbs){
+define(['underscore', 'app', 'backbone', 'collection', 'models/item', 'collections/breadcrumbs'], function(_, App, Backbone, Collection, Item, Breadcrumbs){
   'use strict';
 
   return Collection.extend({
 
-    model: Location,
+    model: Item,
 
-    name: 'Locations',
+    name: 'Items',
 
     parse: function(response){
       if(response.children){

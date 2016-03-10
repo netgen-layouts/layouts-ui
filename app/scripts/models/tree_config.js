@@ -1,4 +1,4 @@
-define(['model', 'collections/locations', 'collections/breadcrumbs'], function(Model, Locations, Breadcrumbs){
+define(['model', 'collections/items', 'collections/breadcrumbs'], function(Model, Items, Breadcrumbs){
   'use strict';
 
   return Model
@@ -15,29 +15,33 @@ define(['model', 'collections/locations', 'collections/breadcrumbs'], function(M
       },
 
       default_location: function(){
-        var default_model = this.root_locations.first();
+        var default_model = this.root_items.first();
         default_model.select();
         return default_model;
       },
 
       parse: function(response) {
-        this.initialize_root_locations(response);
+        this.initialize_root_items(response);
         return response;
       },
 
-      initialize_root_locations: function(response){
-        if(!response.root_locations){ return; }
+      is_in_root_item: function(id){
+        return this.root_items.some(function(item){ return item.id === id; });
+      },
 
-        this.root_locations = new Locations();
-        this.root_locations.add(response.root_locations);
-        this.root_locations.models.forEach(function(model){
+      initialize_root_items: function(response){
+        if(!response.root_items){ return; }
+
+        this.root_items = new Items();
+        this.root_items.add(response.root_items);
+        this.root_items.models.forEach(function(model){
           model.path = new Breadcrumbs([{
             id: model.id,
             name: model.get('name'),
             last: true
           }]);
         });
-        delete(response.root_locations);
+        delete(response.root_items);
       }
 
     });

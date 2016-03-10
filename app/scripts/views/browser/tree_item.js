@@ -1,4 +1,4 @@
-define(['view', 'collections/locations', './list', './pagination'], function(View, Locations, ListView, PaginationView){
+define(['view', 'collections/items', './list', './pagination'], function(View, Items, ListView, PaginationView){
   'use strict';
 
   return View.extend({
@@ -55,14 +55,14 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
 
       this.show_preview();
 
-      this.create_list_view();
+      this.render_list_view();
 
-      var locations = new Locations();
+      var items = new Items();
       this.$el.addClass('loading');
-      locations.fetch_tree_model_id(this.model.id, {
+      items.fetch_tree_model_id(this.model.id, {
         success: function(){
-          this.render_tree(locations);
-          this.show_breadcrumb(locations);
+          this.render_tree(items);
+          this.show_breadcrumb(items);
         }.bind(this)
       });
     },
@@ -72,19 +72,19 @@ define(['view', 'collections/locations', './list', './pagination'], function(Vie
       this.$el.addClass('open');
       this.model.loaded = true;
       this.open = true;
-      this.parent.browser.render_subtree(this.$('> ul'), collection);
+      this.parent.browse.render_subtree(this.$('> ul'), collection);
     },
 
-    create_list_view: function(){
-      this.parent.browser.render_list_view(this.model);
+    render_list_view: function(){
+      this.parent.browse.render_list_view(this.model);
     },
 
     show_preview: function(){
-      this.parent.browser.render_preview(this.model);
+      this.parent.browse.render_preview(this.model);
     },
 
     show_breadcrumb: function(collection){
-      this.parent.browser.render_breadcrumb(collection);
+      this.parent.browse.render_breadcrumb(collection);
     }
 
 
