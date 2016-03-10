@@ -2,33 +2,22 @@ define(['view', './list_base', 'collections/items'], function(View, ListBase, It
   'use strict';
 
   return View.extend(ListBase).extend({
+
     tagName: 'tr',
+
     className: 'item',
+
+    browse_tab: function(){
+      return this.parent.browse;
+    },
 
     events:{
       'click a': '$open'
     },
 
-    initialize: function(){
-      View.prototype.initialize.apply(this, arguments);
-      this.setup_dom();
-      if(this.model.is_checked()){
-        this.check_item();
-      }
-
-      return this;
-    },
-
     setup_dom: function(){
       this.$el.attr('data-id', this.model.id);
       this.$el.attr('data-type', this.model.type());
-    },
-
-    hide_columns_by_visibility: function(){
-      var menu_items = this.parent.browse.menu_items.invisibles();
-      menu_items.forEach(function(item){
-        this.$('td[data-name="' + item.get('name') +  '"]').addClass('hidden');
-      }.bind(this));
     },
 
     $open: function(e){
@@ -58,10 +47,6 @@ define(['view', './list_base', 'collections/items'], function(View, ListBase, It
     setup_root_model: function(){
       this.parent.browse.root_model = this.model;
       this.parent.browse.root_model.is_root_model = true;
-    },
-
-    $show_preview: function(){
-      this.parent.browse.render_preview(this.model);
     },
 
     show_breadcrumb: function(collection){

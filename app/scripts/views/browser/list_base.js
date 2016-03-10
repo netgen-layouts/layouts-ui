@@ -2,8 +2,11 @@ define(['view'], function(View){
   'use strict';
 
   return {
+
     extend_with: ['browse'],
+
     template: 'browser/list_item',
+
     prevent_auto_render: true,
 
     events:{
@@ -13,6 +16,7 @@ define(['view'], function(View){
 
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
+      this.setup_dom && this.setup_dom();
       if(this.model.is_checked()){
         this.check_item();
       }
@@ -27,14 +31,14 @@ define(['view'], function(View){
     },
 
     hide_columns_by_visibility: function(){
-      var menu_items = this.browse.menu_items.invisibles();
+      var menu_items = this.browse_tab().menu_items.invisibles();
       menu_items.forEach(function(item){
         this.$('td[data-name="' + item.get('name') +  '"]').addClass('hidden');
       }.bind(this));
     },
 
-     $show_preview: function(){
-      this.browse.render_preview(this.model);
+    $show_preview: function(){
+      this.browse_tab().render_preview(this.model);
     },
 
     $toogle_select: function(){
