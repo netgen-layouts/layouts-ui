@@ -21,6 +21,8 @@ define(['view'], function(View){
         this.check_item();
       }
 
+      this.context.columns = this.browse_tab().columns;
+
       return this;
     },
 
@@ -31,8 +33,8 @@ define(['view'], function(View){
     },
 
     hide_columns_by_visibility: function(){
-      var menu_items = this.browse_tab().menu_items.invisibles();
-      menu_items.forEach(function(item){
+      var columns = this.browse_tab().columns.invisibles();
+      columns.forEach(function(item){
         this.$('td[data-name="' + item.get('name') +  '"]').addClass('hidden');
       }.bind(this));
     },

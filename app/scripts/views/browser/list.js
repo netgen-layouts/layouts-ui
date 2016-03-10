@@ -19,7 +19,7 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
 
-      this.context.menu_items = this.browse.menu_items;
+      this.context.columns = this.browse.columns;
 
       App.on('browser:click', this.hide_dropdown_menu);
 
@@ -54,7 +54,7 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
         $td.addClass('hidden');
       }
 
-      this.browse.menu_items.save_visibility(name, e.target.checked);
+      this.browse.columns.save_visibility(name, e.target.checked);
 
       this.hide_dropdown_menu();
     },

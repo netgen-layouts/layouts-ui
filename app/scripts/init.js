@@ -90,11 +90,11 @@ define([
         App.g.layout.blocks.fetch(),
         App.g.layout.fetch(),
         App.g.tree_config.fetch()
+      ).then(App.g.tree_config.save_available_columns.bind(App.g.tree_config)
       ).then(this.start.bind(this));
     },
 
     start: function(){
-
       $('.zones').html(App.g.layout.get('html'));
 
       Components.Zones.collection.reset(App.g.layout.get('zones'));
@@ -116,7 +116,7 @@ define([
         tree_collection: tree_collection,
         title: 'Content browser'
       }).on('apply', function(){
-        alert(browser.selected_ids());
+        alert(browser.selected_values());
       }).open();
 
       tree_collection.fetch_root_model_id(default_location.id);

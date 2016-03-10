@@ -2,19 +2,27 @@
   <input type="checkbox" id="item-{{model.id}}" {{#if model.is_checked }} checked="checked" {{/if}} />
   <label for="item-{{model.id}}"><i class="glyphicon"></i></label>
 </td>
-<td data-name="id">{{model.id}}</td>
-<td data-name="parent_id">{{model.parent_id}}</td>
-<td data-name="name">
-  {{#if model.has_children}}
-    {{#if model.is_root_model}}
-      {{model.name}}
+
+{{#each columns.models}}
+  <td data-name="{{column_id}}" {{#unless visible}}class="hidden"{{/unless}}>
+    {{! thumb}}
+    {{#eq column_id 'thumbnail'}}
+      {{#if ../../model.thumbnail}}
+      <img class="{{column_id}}" src="{{get ../../../model column_id}}">
+      {{/if}}
     {{else}}
-      <a href="#">{{model.name}}</a>
-    {{/if}}
-    {{else}}
-      {{model.name}}
-  {{/if}}
-</td>
-<td data-name="thumbnail">{{#if model.thumbnail}}<img class="thumbnail" src="{{model.thumbnail}}" alt="{{mode.name}}">{{/if}}</td>
-<td data-name="type">{{model.type}}</td>
-<td data-name="visible">{{model.visible}}</td>
+      {{! name}}
+      {{#eq column_id 'name'}}
+        {{#if ../../../model.can_show_children}}
+          <a href="#">{{get ../../../../model column_id}}</a>
+        {{else}}
+          {{get ../../../../model column_id}}
+        {{/if}}
+      {{else}}
+        {{! others}}
+        {{get ../../../model column_id}}
+      {{/eq}}
+
+    {{/eq}}
+  </td>
+{{/each}}

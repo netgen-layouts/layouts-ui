@@ -15,6 +15,10 @@ define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
         return this.attributes.has_children;
       },
 
+      can_show_children: function(){
+        return this.attributes.has_children && !this.is_root_model;
+      },
+
       type: function(){
         return this.attributes.type;
       },

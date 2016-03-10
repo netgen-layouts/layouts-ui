@@ -1,5 +1,5 @@
 define([
-  'underscore', 'app', 'view', 'views/modal', 'collections/items', './browse'], function(_, App, View, Modal, Items, BrowseView){
+  'underscore', 'app', 'view', 'views/modal', 'collections/items', 'collections/columns', './browse'], function(_, App, View, Modal, Items, Columns, BrowseView){
 
   'use strict';
 
@@ -30,15 +30,25 @@ define([
     },
 
     render_browse_view: function(){
+      var columns = new Columns();
+
       this.browse = new BrowseView({
         collection: this.tree_collection,
         el: '.browse',
-        browser: this
-      }).render();
+        browser: this,
+        columns: columns
+      });
+
+      this.listenTo(columns, 'sync', function(){
+        console.log('SYYYYYYYYYYYNC', columns);
+        this.browse.render();
+      }.bind(this));
+
+      columns.fetch();
     },
 
-    selected_ids: function(){
-      return this.selected_collection.pluck('id');
+    selected_values: function(){
+      return this.selected_collection.pluck('value');
     },
 
     $browser_click: function(){

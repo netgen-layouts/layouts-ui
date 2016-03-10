@@ -3,7 +3,6 @@ define([
   'app',
   'view',
   'views/modal',
-  'collections/menu_items',
   'collections/items',
   './root_items',
   './tree',
@@ -11,13 +10,13 @@ define([
   './list',
   './preview',
   './breadcrumb'],
-  function(_, App, View, Modal, MenuItems, Items, RootItemsView, TreeView, ListRootView, ListView, PreviewView, BreadcrumbView){
+  function(_, App, View, Modal, Items, RootItemsView, TreeView, ListRootView, ListView, PreviewView, BreadcrumbView){
 
   'use strict';
 
   return Modal.extend({
 
-    extend_with: ['browser'],
+    extend_with: ['browser', 'columns'],
 
     template: 'browser/browse',
 
@@ -31,10 +30,6 @@ define([
       Modal.prototype.initialize.apply(this, arguments);
 
       this.browser = options.browser;
-
-      this.menu_items = new MenuItems();
-      this.menu_items.save_default_columns();
-      this.menu_items.fetch();
 
       this.root_items = App.g.tree_config.root_items;
       this.listenToOnce(this.collection, 'sync', this.render_root_items);

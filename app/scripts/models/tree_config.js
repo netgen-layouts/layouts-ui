@@ -1,4 +1,4 @@
-define(['model', 'collections/items', 'collections/breadcrumbs'], function(Model, Items, Breadcrumbs){
+define(['underscore', 'model', 'collections/items', 'models/column', 'collections/breadcrumbs'], function(_, Model, Items, Column, Breadcrumbs){
   'use strict';
 
   return Model
@@ -44,7 +44,26 @@ define(['model', 'collections/items', 'collections/breadcrumbs'], function(Model
           }]);
         });
         delete(response.root_items);
+      },
+
+      save_available_columns: function(){
+      if(!localStorage.getItem('default_saved')){
+        var default_columns = this.get('default_columns');
+        var available_columns = this.get('available_columns');
+
+        _.each(available_columns, function(item, index){
+          var column = new Column({
+            column_id: item.id,
+            name: item.name,
+            visible: default_columns.indexOf(item.id) !== -1,
+            order: index
+          });
+          column.save();
+        });
+
+        localStorage.setItem('default_saved', true);
       }
+    },
 
     });
 

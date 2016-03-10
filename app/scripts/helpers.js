@@ -221,6 +221,26 @@
       return safe(this.render_partial('pages_selector', context));
     }, // END OF pages_selector (function)
 
+    get: function(model, property_name){
+      return model.get(property_name);
+    },
+
+    eq: function(val1, val2, options){
+      if(val1 === val2) {
+        return options.fn(this);
+      } else {
+        return options.inverse(this);
+      }
+    },
+
+    if_not_empty: function(context, options){
+      if(_.isEmpty(context)){
+        return options.inverse(this);
+      } else {
+        return options.fn(this);
+      }
+    }
+
   };
 
   return Helpers;

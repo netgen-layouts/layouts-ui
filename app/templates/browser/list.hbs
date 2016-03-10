@@ -5,8 +5,8 @@
       {{#if collection.length }}
         <tr>
           <th>#</th>
-          {{#each menu_items.models}}
-            <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{name}}">{{title}}</th>
+          {{#each columns.models}}
+            <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{column_id}}">{{name}}</th>
           {{/each}}
         </tr>
       {{/if}}
@@ -17,10 +17,10 @@
   </table>
 
   <ul class="dropdown-menu" aria-labelledby="drop">
-    {{#each menu_items.models}}
+    {{#each columns.models}}
       <li>
-        <input name="{{name}}" id="{{name}}" type="checkbox" autocomplete="off" {{#if visible}}checked{{/if}}>
-        <label for="{{name}}"><i class="glyphicon"></i>{{title}}</label>
+        <input name="{{column_id}}" id="{{column_id}}" type="checkbox" autocomplete="off" {{#if visible}}checked{{/if}}>
+        <label for="{{column_id}}"><i class="glyphicon"></i>{{name}}</label>
       </li>
     {{/each}}
   </ul>
