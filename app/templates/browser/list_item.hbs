@@ -1,6 +1,6 @@
 <td width="10px">
-  <input type="checkbox" id="item-{{model.id}}" {{#if model.is_checked }} checked="checked" {{/if}} />
-  <label for="item-{{model.id}}"><i class="glyphicon"></i></label>
+  <input type="checkbox" id="{{prefix}}-item-{{model.id}}" {{#if model.is_checked }} checked="checked" {{/if}} />
+  <label for="{{prefix}}-item-{{model.id}}"><i class="glyphicon"></i></label>
 </td>
 
 {{#each columns.models}}

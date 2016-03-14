@@ -7,7 +7,7 @@ define(['view'], function(View){
 
     template: 'browser/list_item',
 
-    prevent_auto_render: true,
+    prefix: 'root',
 
     events:{
       'click': '$show_preview',
@@ -22,6 +22,7 @@ define(['view'], function(View){
       }
 
       this.context.columns = this.browse_tab().columns;
+      this.context.prefix = (this.parent && this.parent.prefix) || this.prefix;
 
       return this;
     },

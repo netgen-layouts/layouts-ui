@@ -5,9 +5,11 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
 
     template: 'browser/list',
 
-    extend_with: ['browser', 'browse'],
+    extend_with: ['browser', 'browse', 'prefix'],
 
     view_items_el: 'tbody',
+
+    prefix: 'list',
 
     ViewItem: ListItem,
 
@@ -30,10 +32,10 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
 
     $show_dropdown_menu: function(e){
       e.preventDefault();
-      $('.dropdown-menu').css({
+      this.$('.dropdown-menu').css({
         display: 'block',
-        left:  e.pageX - $('.list').offset().left,
-        top: e.pageY - $('.list').offset().top
+        left:  e.pageX - this.$el.offset().left,
+        top: e.pageY - this.$el.offset().top
      });
     },
 

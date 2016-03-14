@@ -23,7 +23,9 @@ define([
     prevent_auto_render: true,
 
     events:{
-      'click .btn-preview': '$toggle_preview'
+      'click .btn-preview': '$toggle_preview',
+      'submit form': '$search',
+      'click #browser-tabs': '$tab_click'
     },
 
     initialize: function(options){
@@ -45,6 +47,24 @@ define([
 
 
       return this;
+    },
+
+    $tab_click: function(e){
+      e.preventDefault();
+      this.select_visible_items();
+    },
+
+    select_visible_items: function(){
+
+      this.list_view.collection.each(function(item){
+        console.log(item, this.browser.selected_collection);
+        if(this.browser.selected_collection.contains(item)){
+          this.list_view.$('tr[data-id="' + item.id + '"]').data('_view').check_item();
+        }else{
+          this.list_view.$('tr[data-id="' + item.id + '"]').data('_view').uncheck_item();
+        }
+      }.bind(this));
+
     },
 
     render_root_items: function(){
@@ -137,6 +157,28 @@ define([
       this.$('.list-panel')
         .toggleClass('col-md-7')
         .toggleClass('col-md-9');
+    },
+
+    $search: function(e){
+      e.preventDefault();
+
+      var items = new Items();
+      items.browser = this.browser;
+
+      items.search_data({
+        data: this.serialize('form').params,
+        success: function(){
+          this.search_list_view = new ListView({
+            collection: items,
+            el: '.right-panel .search-list',
+            browser: this.browser,
+            browse: this,
+            prefix: 'search'
+          });
+        }.bind(this)
+      });
+
+      return false;
     }
 
   });

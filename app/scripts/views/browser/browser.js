@@ -44,14 +44,13 @@ define([
 
       this.browse = new BrowseView({
         collection: this.tree_collection,
-        el: '.browse',
+        el: '.browser-tabs',
         browser: this,
         columns: columns
       });
 
       columns.fetch({
         success: function(){
-          console.log(columns.length);
           this.browse.render();
         }.bind(this)
       });

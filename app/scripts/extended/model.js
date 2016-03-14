@@ -19,11 +19,11 @@ define(['underscore', 'backbone', 'app'], function(_, Backbone, App){
     },
 
     error_handler: function(model, response){
-      console.log(response.responseJSON);
+      console.log(response);
       App.show_error({
         model: model,
-        title:  response.responseJSON.status_text,
-        body: response.responseJSON.message
+        title:  response.responseJSON ? response.responseJSON.status_text : 'Unknown error',
+        body: response.responseJSON ? response.responseJSON.message : 'Unknown message.'
       });
     },
 
