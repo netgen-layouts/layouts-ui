@@ -5,9 +5,9 @@ define([
   'views/modal',
   'collections/items',
   'collections/columns',
-  './browse',
+  './tabs',
   './selected_items'
-  ], function(_, App, View, Modal, Items, Columns, BrowseView, SelectedItems){
+  ], function(_, App, View, Modal, Items, Columns, TabsView, SelectedItems){
 
   'use strict';
 
@@ -33,16 +33,16 @@ define([
       this.listenTo(this.selected_collection, 'add remove', this.render_selected_items.bind(this));
 
       this.on('open', function(){
-        this.render_browse_view();
+        this.render_tabs_view();
       }.bind(this));
 
       return this;
     },
 
-    render_browse_view: function(){
+    render_tabs_view: function(){
       var columns = new Columns();
 
-      this.browse = new BrowseView({
+      this.tabs = new TabsView({
         collection: this.tree_collection,
         el: '.browser-tabs',
         browser: this,
@@ -51,7 +51,7 @@ define([
 
       columns.fetch({
         success: function(){
-          this.browse.render();
+          this.tabs.render();
         }.bind(this)
       });
     },

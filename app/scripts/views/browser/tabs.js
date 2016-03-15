@@ -19,7 +19,7 @@ define([
 
     extend_with: ['browser', 'columns'],
 
-    template: 'browser/browse',
+    template: 'browser/tabs',
 
     prevent_auto_render: true,
 
@@ -28,25 +28,25 @@ define([
       'submit form': '$search'
     },
 
-    initialize: function(options){
+    initialize: function(){
       Modal.prototype.initialize.apply(this, arguments);
-
-      this.browser = options.browser;
 
       this.root_items = App.g.tree_config.root_items;
       this.listenToOnce(this.collection, 'sync', this.render_root_items);
 
       this.listenTo(this.collection, 'sync', function(){
-        this.$('#browser-tabs').tabs();
-        this.set_preview_height();
-        this.render_tree();
-        var model = this.root_items.selected_model();
-        this.render_list_view(model);
-        this.render_breadcrumb(model);
+        this.render_browse_tab();
       });
 
       App.on('item:check_changed', this.toggle_selected_list_item.bind(this));
 
+      return this;
+    },
+
+    render: function(){
+      Modal.prototype.render.apply(this, arguments);
+      this.$('#browser-tabs').tabs();
+      this.set_preview_height();
       return this;
     },
 
@@ -59,6 +59,13 @@ define([
         this.list_view.$(tr).data('_view').uncheck_item();
         this.search_list_view && this.search_list_view.$(tr).data('_view').uncheck_item();
       }
+    },
+
+    render_browse_tab: function(){
+      this.render_tree();
+      var model = this.root_items.selected_model();
+      this.render_list_view(model);
+      this.render_breadcrumb(model);
     },
 
     render_root_items: function(){
@@ -123,6 +130,14 @@ define([
       items.fetch_list_model_id(model.id);
     },
 
+    render_breadcrumb: function(collection){
+      this.breadcrumb = new BreadcrumbView({
+        collection: collection.path,
+        'el': '.breadcrumb-list',
+        browse: this
+      }).render();
+    },
+
     render_preview: function(model){
       this.preview = new PreviewView({
         context: {
@@ -132,18 +147,9 @@ define([
       }).render();
     },
 
-    render_breadcrumb: function(collection){
-      this.breadcrumb = new BreadcrumbView({
-        collection: collection.path,
-        'el': '.breadcrumb-list',
-        browse: this
-      }).render();
-    },
-
-
     set_preview_height: function(){
-      var $panel = this.$('.col-md-2 .panel');
-      $panel.height($panel.closest('.row').height() - 22);
+      var $panel = this.$('.preview-panel .panel');
+      $panel.height($panel.closest('.row').height() - 22); // padding and border of .preview-panel .panel
     },
 
     $toggle_preview: function(){
@@ -165,7 +171,7 @@ define([
     render_search_list_view: function(model){
       var items = new Items();
       items.browser = this.browser;
-
+      // if user click on breadcrumb link we have a model
       if(model){
         items.fetch_list_model_id(model.id, {
           success: function(){
