@@ -7,7 +7,7 @@ define(['app', './breadcrumb_item'], function(App, BreadcrumbItemView){
       e.preventDefault();
 
       var browse = this.parent.browse;
-      browse.render_search_list_view(this.model);
+      browse.render_search_tab(this.model);
 
     }
 

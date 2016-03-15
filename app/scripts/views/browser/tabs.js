@@ -32,11 +32,10 @@ define([
       Modal.prototype.initialize.apply(this, arguments);
 
       this.root_items = App.g.tree_config.root_items;
-      this.listenToOnce(this.collection, 'sync', this.render_root_items);
 
-      this.listenTo(this.collection, 'sync', function(){
-        this.render_browse_tab();
-      });
+      this.listenToOnce(this.collection, 'sync', this.render_root_item_views.bind(this));
+
+      this.listenTo(this.collection, 'sync', this.render_browse_tab.bind(this));
 
       App.on('item:check_changed', this.toggle_selected_list_item.bind(this));
 
@@ -61,9 +60,14 @@ define([
       }
     },
 
+    render_root_item_views: function(){
+      this.render_root_items();
+      this.render_search_root_items();
+    },
+
     render_browse_tab: function(){
-      this.render_tree();
       var model = this.root_items.selected_model();
+      this.render_tree();
       this.render_list_view(model);
       this.render_breadcrumb(model);
     },
@@ -163,12 +167,12 @@ define([
     $search: function(e){
       e.preventDefault();
 
-      this.render_search_list_view();
+      this.render_search_tab();
 
       return false;
     },
 
-    render_search_list_view: function(model){
+    render_search_tab: function(model){
       var items = new Items();
       items.browser = this.browser;
       // if user click on breadcrumb link we have a model
@@ -199,6 +203,16 @@ define([
         browse: this,
         prefix: 'search'
       });
+    },
+
+    render_search_root_items: function(){
+      this.root_items_view = new RootItemsView({
+        collection: this.root_items,
+        browse: this,
+        'el': '.search-root-items'
+      }).render();
+
+      return this;
     },
 
     render_search_breadcrumb: function(collection){
