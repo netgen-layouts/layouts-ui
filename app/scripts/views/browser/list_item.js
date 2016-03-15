@@ -19,28 +19,29 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
       e.preventDefault();
       if(this.model.has_children()){
         if(this.parent.prefix !== 'list'){
-          this.open_other_item();
+          this.open_list_item();
         }else{
           var result = this.parent.browse.tree_view.click_item_by_id(this.model.id);
           if(!result){
-            this.open_item();
+            this.open_list_item_with_root();
           }
         }
       }
     },
 
-    open_other_item: function(){
+    open_list_item: function(){
       var items = new Items();
       items.browser = this.parent.browser;
 
       items.fetch_list_model_id(this.model.id, {
         success: function(){
           this.parent.collection.reset(items.models);
+          this.show_search_breadcrumb(items);
         }.bind(this)
       });
     },
 
-    open_item: function(){
+    open_list_item_with_root: function(){
       var items = new Items();
       items.browser = this.parent.browser;
 
@@ -49,7 +50,7 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
       items.fetch_list_model_id(this.model.id, {
         success: function(){
           this.parent.collection.reset(items.models);
-            this.show_breadcrumb(items);
+          this.show_breadcrumb(items);
         }.bind(this)
       });
     },
@@ -61,6 +62,10 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
 
     show_breadcrumb: function(collection){
       this.parent.browse.render_breadcrumb(collection);
+    },
+
+    show_search_breadcrumb: function(collection){
+      this.parent.browse.render_search_breadcrumb(collection);
     }
 
   });

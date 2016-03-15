@@ -4,7 +4,12 @@ define(['underscore', 'view', './breadcrumb_item'], function(_, View, Breadcrumb
   return View.extend({
     extend_with: ['browse'],
     ViewItem: BreadcrumbItem,
-    prevent_auto_render: true
+    prevent_auto_render: true,
+
+    initialize: function(options){
+      View.prototype.initialize.apply(this, arguments);
+      options.ViewItem && (this.ViewItem = options.ViewItem);
+    },
   });
 
 });

@@ -35,12 +35,12 @@ define(['underscore', 'model', 'collections/items', 'models/column', 'collection
         this.root_items = new Items();
         this.root_items.add(response.root_items);
         this.root_items.models.forEach(function(model){
-          // we use this propery for list root item
+          // we use this property for initial root list item
           model.is_root_model = true;
           model.path = new Breadcrumbs([{
             id: model.id,
             name: model.get('name'),
-            last: true
+            last: true // for initial breadcrumb
           }]);
         });
         delete(response.root_items);

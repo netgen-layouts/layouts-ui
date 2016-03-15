@@ -9,8 +9,9 @@ define([
   './list_root',
   './list',
   './preview',
-  './breadcrumb'],
-  function(_, App, View, Modal, Items, RootItemsView, TreeView, ListRootView, ListView, PreviewView, BreadcrumbView){
+  './breadcrumb',
+  './breadcrumb_search_item'],
+  function(_, App, View, Modal, Items, RootItemsView, TreeView, ListRootView, ListView, PreviewView, BreadcrumbView, BreadcrumbSearchItemView){
 
   'use strict';
 
@@ -134,7 +135,7 @@ define([
     render_breadcrumb: function(collection){
       this.breadcrumb = new BreadcrumbView({
         collection: collection.path,
-        'el': '.breadcrumb',
+        'el': '.breadcrumb-list',
         browse: this
       }).render();
     },
@@ -152,26 +153,55 @@ define([
         .toggleClass('col-md-9');
     },
 
+    /* Search */
     $search: function(e){
       e.preventDefault();
 
+      this.render_search_list_view();
+
+      return false;
+    },
+
+    render_search_list_view: function(model){
       var items = new Items();
       items.browser = this.browser;
 
-      items.search_data({
-        data: this.serialize('form').params,
-        success: function(){
-          this.search_list_view = new ListView({
-            collection: items,
-            el: '.right-panel .search-list',
-            browser: this.browser,
-            browse: this,
-            prefix: 'search'
-          });
-        }.bind(this)
-      });
+      if(model){
+        items.fetch_list_model_id(model.id, {
+          success: function(){
+            this._render_search_list_view(items);
+            this.render_search_breadcrumb(items);
+          }.bind(this)
+        });
+      }else{
+        items.search_data({
+          data: this.serialize('form').params,
+          success: function(){
+            this._render_search_list_view(items);
+            this.render_search_breadcrumb(items);
+          }.bind(this)
+        });
+      }
 
-      return false;
+    },
+
+    _render_search_list_view: function(items){
+      this.search_list_view = new ListView({
+        collection: items,
+        el: '.right-panel .search-list',
+        browser: this.browser,
+        browse: this,
+        prefix: 'search'
+      });
+    },
+
+    render_search_breadcrumb: function(collection){
+      this.breadcrumb = new BreadcrumbView({
+        collection: collection.path,
+        'el': '.breadcrumb-search',
+        browse: this,
+        ViewItem: BreadcrumbSearchItemView
+      }).render();
     }
 
   });

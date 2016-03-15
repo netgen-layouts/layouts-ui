@@ -402,12 +402,21 @@ input[type="checkbox"] {
   .breadcrumb{
     padding: 10px 0px;
     margin-bottom: 0;
-    float: left;
     & > li + li:before{
       content: "/";
       padding: 0 5px 0 10px;
       color: #999;
     }
+  }
+  .breadcrumb-list{
+    float: left;
+  }
+  .breadcrumb-search{
+    margin-left: 20px;
+    display: inline-block;
+  }
+  .btn{
+    height: 34px;
   }
   .btn-group{
     float: right;
@@ -418,7 +427,8 @@ input[type="checkbox"] {
     outline: none;
   }
   .select {
-    padding: 10px;
+    height: 34px;
+    padding: 6px 12px;
     margin: 0 5%;
     border: 1px solid #ccc;
     width: 88%;

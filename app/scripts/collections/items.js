@@ -10,6 +10,8 @@ define(['underscore', 'app', 'backbone', 'collection', 'models/item', 'collectio
     parse: function(response){
       if(response.children){
         this.path = new Breadcrumbs(response.path);
+        var last = this.path.last();
+        last && last.set({last: true});
         return response.children;
       }else{
         return response;
