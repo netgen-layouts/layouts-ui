@@ -3,6 +3,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "compass/css3";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 // @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_modals";
+//
 
 *{
   padding: 0;
@@ -86,7 +87,7 @@ img{width:100%; max-width:100%;}
     left: 0;
     right: 0;
     z-index: 1;
-    background: url('/images/drag-drop.png') center center no-repeat;
+    background: url('../images/drag-drop.png') center center no-repeat;
     background-size: 100% 100%;
   }
 }
@@ -465,7 +466,7 @@ input[type="checkbox"] {
         list-style: none;
         > a{
           padding-left: 22px;
-          background: url('/images/folder.png') 0 0 no-repeat;
+          background: url('../images/folder.png') 0 0 no-repeat;
         }
       }
       &.selected{
@@ -477,13 +478,13 @@ input[type="checkbox"] {
         }
       }
       &.has_children{
-        background: url('/images/plus.gif') left -1px no-repeat;
+        background: url('../images/plus.gif') left -1px no-repeat;
       }
       &.open{
         > ul{ display: block; }
       }
       &.has_children.open{
-        background-image: url('/images/minus.gif');
+        background-image: url('../images/minus.gif');
       }
       &.item{
         padding-left: 18px;
@@ -495,7 +496,7 @@ input[type="checkbox"] {
       }
       &.loading{
         > a{
-          background: url('/images/ajax-loader.gif') 0 0 no-repeat;
+          background: url('../images/ajax-loader.gif') 0 0 no-repeat;
         }
       }
     }
