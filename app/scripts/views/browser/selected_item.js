@@ -11,11 +11,8 @@ define(['view'], function(View){
 
     $remove_item: function(e){
       e.preventDefault();
-      $('#item-' + this.model.id).trigger('click');
-      this.model.uncheck();
-    },
-
-
+      $('tr[data-id="' + this.model.id + '"]').data('_view').$toogle_select();
+    }
 
   });
 

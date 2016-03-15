@@ -15,15 +15,9 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
       'click a': '$open'
     },
 
-    setup_dom: function(){
-      this.$el.attr('data-id', this.model.id);
-      this.$el.attr('data-type', this.model.type());
-    },
-
     $open: function(e){
       e.preventDefault();
       if(this.model.has_children()){
-        console.log(this.parent.prefix);
         if(this.parent.prefix !== 'list'){
           this.open_other_item();
         }else{

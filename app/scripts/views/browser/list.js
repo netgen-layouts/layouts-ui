@@ -45,8 +45,8 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
 
     $toggle_table_columns: function(e){
       var name = e.target.name,
-          $th = this.$('th[data-name="' + name + '"]'),
-          $td = this.$('td[data-name="' + name + '"]');
+          $th = $('th[data-name="' + name + '"]'),
+          $td = $('td[data-name="' + name + '"]');
 
       if(e.target.checked){
         $th.removeClass('hidden');

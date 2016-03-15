@@ -1,4 +1,4 @@
-define(['view'], function(View){
+define(['view', 'app'], function(View, App){
   'use strict';
 
    return View.extend({
@@ -16,7 +16,7 @@ define(['view'], function(View){
 
     initialize: function(){
       View.prototype.initialize.apply(this, arguments);
-      this.setup_dom && this.setup_dom();
+      this.setup_dom();
       if(this.model.is_checked()){
         this.check_item();
       }
@@ -25,6 +25,11 @@ define(['view'], function(View){
       this.context.prefix = (this.parent && this.parent.prefix) || this.prefix;
 
       return this;
+    },
+
+    setup_dom: function(){
+      this.$el.attr('data-id', this.model.id);
+      this.$el.attr('data-type', this.model.type());
     },
 
     render: function(){
@@ -52,6 +57,7 @@ define(['view'], function(View){
         this.check_item();
         this.model.check();
       }
+      App.trigger('item:check_changed', this.model);
     },
 
     uncheck_item: function(){

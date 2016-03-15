@@ -24,8 +24,7 @@ define([
 
     events:{
       'click .btn-preview': '$toggle_preview',
-      'submit form': '$search',
-      'click #browser-tabs': '$tab_click'
+      'submit form': '$search'
     },
 
     initialize: function(options){
@@ -45,26 +44,20 @@ define([
         this.render_breadcrumb(model);
       });
 
+      App.on('item:check_changed', this.toggle_selected_list_item.bind(this));
 
       return this;
     },
 
-    $tab_click: function(e){
-      e.preventDefault();
-      this.select_visible_items();
-    },
-
-    select_visible_items: function(){
-
-      this.list_view.collection.each(function(item){
-        console.log(item, this.browser.selected_collection);
-        if(this.browser.selected_collection.contains(item)){
-          this.list_view.$('tr[data-id="' + item.id + '"]').data('_view').check_item();
-        }else{
-          this.list_view.$('tr[data-id="' + item.id + '"]').data('_view').uncheck_item();
-        }
-      }.bind(this));
-
+    toggle_selected_list_item: function(model){
+      var tr = 'tr[data-id="' + model.id + '"]';
+      if(model.is_checked()){
+        this.list_view.$(tr).data('_view').check_item();
+        this.search_list_view && this.search_list_view.$(tr).data('_view').check_item();
+      }else{
+        this.list_view.$(tr).data('_view').uncheck_item();
+        this.search_list_view && this.search_list_view.$(tr).data('_view').uncheck_item();
+      }
     },
 
     render_root_items: function(){
@@ -104,7 +97,7 @@ define([
 
       this.list_root_view = new ListRootView({
         model: model,
-        el: '.right-panel .list-root',
+        el: '.list .list-root',
         browse: this
       }).render();
 
