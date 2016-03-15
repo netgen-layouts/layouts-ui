@@ -1,4 +1,4 @@
-define(['underscore', 'model', 'collections/items', 'models/column', 'collections/breadcrumbs'], function(_, Model, Items, Column, Breadcrumbs){
+define(['underscore', 'model', 'collections/items', 'collections/columns', 'models/column', 'collections/breadcrumbs'], function(_, Model, Items, Columns, Column, Breadcrumbs){
   'use strict';
 
   return Model
@@ -52,6 +52,7 @@ define(['underscore', 'model', 'collections/items', 'models/column', 'collection
           var default_columns = this.get('default_columns');
           var available_columns = this.get('available_columns');
 
+          var columns = new Columns();
           _.each(available_columns, function(item, index){
             var column = new Column({
               column_id: item.id,
@@ -59,6 +60,7 @@ define(['underscore', 'model', 'collections/items', 'models/column', 'collection
               visible: default_columns.indexOf(item.id) !== -1,
               order: index
             });
+            columns.add(column);
             column.save();
 
           });
