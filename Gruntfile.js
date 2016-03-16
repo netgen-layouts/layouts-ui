@@ -7,7 +7,7 @@ var mountFolder = function (connect, dir) {
 };
 
 /* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
-var Handlebars = require('grunt-contrib-handlebars/node_modules/handlebars/lib/index');
+var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
 var helpers = require('./app/scripts/helpers');
