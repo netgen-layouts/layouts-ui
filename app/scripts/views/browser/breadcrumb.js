@@ -2,7 +2,7 @@ define(['underscore', 'view', './breadcrumb_item'], function(_, View, Breadcrumb
   'use strict';
 
   return View.extend({
-    extend_with: ['browse'],
+    extend_with: ['tabs'],
     ViewItem: BreadcrumbItem,
     prevent_auto_render: true,
 

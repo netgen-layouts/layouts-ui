@@ -8,7 +8,7 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
     className: 'item',
 
     browse_tab: function(){
-      return this.parent.browse;
+      return this.parent.tabs;
     },
 
     events:{
@@ -18,10 +18,10 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
     $open: function(e){
       e.preventDefault();
       if(this.model.has_children()){
-        if(this.parent.name !== 'list'){
-          this.open_list_item();
+        if(this.parent.name === 'search'){
+          this.open_search_item();
         }else{
-          var result = this.parent.browse.tree_view.click_item_by_id(this.model.id);
+          var result = this.parent.tabs.tree_view.click_item_by_id(this.model.id);
           if(!result){
             this.open_list_item_with_root();
           }
@@ -29,7 +29,7 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
       }
     },
 
-    open_list_item: function(){
+    open_search_item: function(){
       var items = new Items();
       items.browser = this.parent.browser;
 
@@ -37,8 +37,13 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
         success: function(){
           this.parent.collection.reset(items.models);
           this.show_search_breadcrumb(items);
+          this.disable_search_panel();
         }.bind(this)
       });
+    },
+
+    disable_search_panel: function(){
+      $('.search-left-panel').find('*').prop('disabled', true);
     },
 
     open_list_item_with_root: function(){
@@ -56,16 +61,16 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
     },
 
     setup_root_model: function(){
-      this.parent.browse.root_model = this.model;
-      this.parent.browse.root_model.is_root_model = true;
+      this.parent.tabs.root_model = this.model;
+      this.parent.tabs.root_model.is_root_model = true;
     },
 
     show_breadcrumb: function(collection){
-      this.parent.browse.render_breadcrumb(collection);
+      this.parent.tabs.render_breadcrumb(collection);
     },
 
     show_search_breadcrumb: function(collection){
-      this.parent.browse.render_search_breadcrumb(collection);
+      this.parent.tabs.render_search_breadcrumb(collection);
     }
 
   });

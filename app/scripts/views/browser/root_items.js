@@ -3,7 +3,7 @@ define(['underscore', 'view', './root_item'], function(_, View, RootItem){
 
   return View.extend({
 
-    extend_with: ['browse'],
+    extend_with: ['tabs'],
 
     ViewItem: RootItem,
 
@@ -21,13 +21,13 @@ define(['underscore', 'view', './root_item'], function(_, View, RootItem){
 
     show_preview_for_first_item: function(){
       var model = this.collection.first();
-      this.browse.render_preview(model);
+      this.tabs.render_preview(model);
     },
 
     $open_root_location: function(e){
       e.preventDefault();
 
-      var items = this.browse.collection,
+      var items = this.tabs.collection,
           model = this.$('option:selected').data('_view').model;
 
       items.fetch_root_model_id(model.id);
@@ -39,7 +39,7 @@ define(['underscore', 'view', './root_item'], function(_, View, RootItem){
     },
 
     show_preview: function(model){
-      this.browse.render_preview(model);
+      this.tabs.render_preview(model);
     }
 
   });

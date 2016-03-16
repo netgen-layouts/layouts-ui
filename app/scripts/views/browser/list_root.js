@@ -3,7 +3,7 @@ define(['./list_base'], function(ListBase){
 
   return ListBase.extend({
     browse_tab: function(){
-      return this.browse;
+      return this.tabs;
     }
   });
 

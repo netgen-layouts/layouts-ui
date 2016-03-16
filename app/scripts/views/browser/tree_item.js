@@ -1,4 +1,4 @@
-define(['view', 'collections/items', './list', './pagination'], function(View, Items, ListView, PaginationView){
+define(['view', 'collections/items'], function(View, Items){
   'use strict';
 
   return View.extend({
@@ -72,19 +72,19 @@ define(['view', 'collections/items', './list', './pagination'], function(View, I
       this.$el.addClass('open');
       this.model.loaded = true;
       this.open = true;
-      this.parent.browse.render_subtree(this.$('> ul'), collection);
+      this.parent.tabs.render_subtree(this.$('> ul'), collection);
     },
 
     render_list_view: function(){
-      this.parent.browse.render_list_view(this.model);
+      this.parent.tabs.render_list_view(this.model);
     },
 
     show_preview: function(){
-      this.parent.browse.render_preview(this.model);
+      this.parent.tabs.render_preview(this.model);
     },
 
     show_breadcrumb: function(collection){
-      this.parent.browse.render_breadcrumb(collection);
+      this.parent.tabs.render_breadcrumb(collection);
     }
 
 

@@ -3,7 +3,7 @@ define(['view', 'app'], function(View, App){
 
    return View.extend({
 
-    extend_with: ['browse'],
+    extend_with: ['tabs'],
 
     template: 'browser/list_item',
 

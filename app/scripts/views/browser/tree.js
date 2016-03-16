@@ -2,7 +2,7 @@ define(['underscore', 'view', './tree_item'], function(_, View, TreeItem){
   'use strict';
 
   return View.extend({
-    extend_with: ['browse'],
+    extend_with: ['tabs'],
     ViewItem: TreeItem,
     prevent_auto_render: true,
 
