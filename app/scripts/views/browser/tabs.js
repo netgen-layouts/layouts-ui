@@ -190,7 +190,6 @@ define([
           data: this.serialize('form').params,
           success: function(){
             this._render_search_list_view(items);
-            console.log(model && model.get('name'));
             this.render_search_breadcrumb(items);
           }.bind(this)
         });
