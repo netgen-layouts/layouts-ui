@@ -146,7 +146,6 @@ define([
     },
 
     show_error: function(options){
-      console.log(options.title);
       new Modal(options).open();
     }
   });

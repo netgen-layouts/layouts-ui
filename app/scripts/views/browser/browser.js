@@ -41,19 +41,15 @@ define([
 
     render_tabs_view: function(){
       var columns = new Columns();
+      columns.fetch();
 
       this.tabs = new TabsView({
         collection: this.tree_collection,
         el: '.browser-tabs',
         browser: this,
         columns: columns
-      });
+      }).render();
 
-      columns.fetch({
-        success: function(){
-          this.tabs.render();
-        }.bind(this)
-      });
     },
 
     render_selected_items: function(){
