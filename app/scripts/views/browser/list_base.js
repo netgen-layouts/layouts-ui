@@ -7,8 +7,6 @@ define(['view', 'app'], function(View, App){
 
     template: 'browser/list_item',
 
-    prefix: 'root',
-
     events:{
       'click': '$show_preview',
       'click input': '$toogle_select'
@@ -22,7 +20,6 @@ define(['view', 'app'], function(View, App){
       }
 
       this.context.columns = this.browse_tab().columns;
-      this.context.prefix = (this.parent && this.parent.prefix) || this.prefix;
 
       return this;
     },

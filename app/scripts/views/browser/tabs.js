@@ -203,7 +203,7 @@ define([
         el: '.right-panel .search-list',
         browser: this.browser,
         browse: this,
-        prefix: 'search'
+        name: 'search'
       });
     },
 

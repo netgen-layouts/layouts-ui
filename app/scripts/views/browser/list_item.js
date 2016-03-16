@@ -18,7 +18,7 @@ define(['./list_base', 'collections/items'], function(ListBase, Items){
     $open: function(e){
       e.preventDefault();
       if(this.model.has_children()){
-        if(this.parent.prefix !== 'list'){
+        if(this.parent.name !== 'list'){
           this.open_list_item();
         }else{
           var result = this.parent.browse.tree_view.click_item_by_id(this.model.id);

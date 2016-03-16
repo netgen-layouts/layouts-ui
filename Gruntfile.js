@@ -150,7 +150,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             require('grunt-connect-proxy/lib/utils').proxyRequest,
-                            lrSnippet,
+                            //lrSnippet,
                             mountFolder(connect, '.'),
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, yeomanConfig.app)
@@ -592,7 +592,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'concurrent:server',
-            'configureProxies:server',
+            //'configureProxies:server',
             'connect:livereload',
             'handlebars',
             //'open',

@@ -5,11 +5,11 @@ define(['underscore', 'app', 'view', './list_item'], function(_, App, View, List
 
     template: 'browser/list',
 
-    extend_with: ['browser', 'browse', 'prefix'],
+    extend_with: ['browser', 'browse', 'name'],
 
     view_items_el: 'tbody',
 
-    prefix: 'list',
+    name: 'list',
 
     ViewItem: ListItem,
 
