@@ -1,0 +1,19 @@
+{
+    "name": "netgen/block-manager-ui",
+    "description": "Netgen Block Manager UI",
+    "authors": [
+        {
+            "name": "Netgen",
+            "homepage": "http://www.netgenlabs.com"
+        },
+        {
+            "name": "Effectiva",
+            "homepage": "http://www.effectiva.hr"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
