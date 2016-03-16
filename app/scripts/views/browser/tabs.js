@@ -52,11 +52,11 @@ define([
     toggle_selected_list_item: function(model){
       var tr = 'tr[data-id="' + model.id + '"]';
       if(model.is_checked()){
-        this.list_view.$(tr).data('_view').check_item();
+        this.list_view.$(tr) && this.list_view.$(tr).data('_view').check_item();
         this.search_list_view && this.search_list_view.$(tr).length &&
           this.search_list_view.$(tr).data('_view').check_item();
       }else{
-        this.list_view.$(tr).data('_view').uncheck_item();
+        this.list_view.$(tr) && this.list_view.$(tr).data('_view').uncheck_item();
         this.search_list_view && this.search_list_view.$(tr) &&
           this.search_list_view.$(tr).data('_view').uncheck_item();
       }

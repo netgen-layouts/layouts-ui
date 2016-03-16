@@ -242,7 +242,6 @@
     },
 
     uid: function(regenerate){
-      console.log(regenerate);
       regenerate && (this._last_uid = _.uniqueId('uid_'));
       return this._last_uid;
     }
