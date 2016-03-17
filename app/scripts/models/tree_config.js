@@ -6,17 +6,13 @@ define(['underscore', 'model', 'collections/items', 'collections/columns', 'mode
 
       content_browser: true,
 
-      name: function(){
-        return 'default';
-      },
-
       path: function(){
-        return this.name() + '/config';
+        return this.get('root_path') + '/config';
       },
 
       default_location: function(){
-        var default_model = this.root_items.first();
-        default_model.select();
+        var default_model = this.sections.first();
+        default_model && default_model.select();
         return default_model;
       },
 
@@ -26,15 +22,15 @@ define(['underscore', 'model', 'collections/items', 'collections/columns', 'mode
       },
 
       is_in_root_item: function(id){
-        return this.root_items.some(function(item){ return item.id === id; });
+        return this.sections.some(function(item){ return item.id === id; });
       },
 
       initialize_root_items: function(response){
-        if(!response.root_items){ return; }
+        if(!response.sections){ return; }
 
-        this.root_items = new Items();
-        this.root_items.add(response.root_items);
-        this.root_items.models.forEach(function(model){
+        this.sections = new Items();
+        this.sections.add(response.sections);
+        this.sections.models.forEach(function(model){
           // we use this property for initial root list item
           model.is_root_model = true;
           model.path = new Breadcrumbs([{
@@ -43,7 +39,7 @@ define(['underscore', 'model', 'collections/items', 'collections/columns', 'mode
             last: true // for initial breadcrumb
           }]);
         });
-        delete(response.root_items);
+        delete(response.sections);
       },
 
       save_available_columns: function(){

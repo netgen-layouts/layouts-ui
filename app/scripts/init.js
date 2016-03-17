@@ -52,7 +52,9 @@ define([
       this.setup_events();
 
       App.g.block_types = new BlockTypes();
-      App.g.tree_config = new TreeConfig();
+      App.g.tree_config = new TreeConfig({
+        root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+      });
     },
 
     setup_events: function(){
@@ -119,7 +121,7 @@ define([
         alert(browser.selected_values());
       }).open();
 
-      tree_collection.fetch_root_model_id(default_location.id);
+      default_location && tree_collection.fetch_root_model_id(default_location.id);
     },
 
     get_positions: function(){

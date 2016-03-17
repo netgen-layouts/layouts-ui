@@ -21,7 +21,7 @@ define(['view', 'collections/items'], function(View, Items){
     },
 
     setup_dom: function(){
-      if(this.model.has_children()){
+      if(this.model.has_sub_categories()){
         this.$el.addClass('has_children');
       }
 

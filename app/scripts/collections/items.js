@@ -38,7 +38,7 @@ define(['underscore', 'app', 'backbone', 'collection', 'models/item', 'collectio
     },
 
     search_data: function(options){
-      var url = App.env.cb_base_url + App.g.tree_config.name() +'/search';
+      var url = App.env.cb_base_url + App.g.tree_config.get('root_path') +'/search';
       this.fetch(_.extend({
         url: url
       }, options));
