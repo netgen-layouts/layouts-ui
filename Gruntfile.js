@@ -250,8 +250,10 @@ module.exports = function (grunt) {
 
         sass: {
           options: {
-            sourcemap: 'auto',
-            lineNumbers: true
+            sourceMap: true,
+            sourceMapEmbed: true,
+            sourceMapContents: true,
+            includePaths: ['.']
           },
           server: {
             files: [{
