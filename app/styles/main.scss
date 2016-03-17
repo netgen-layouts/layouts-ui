@@ -501,10 +501,15 @@ input[type="checkbox"] {
       }
     }
   }
-  tr{
-    img.thumbnail{
+  td{
+    img{
+      display: block;
       width: 64px;
       height: 64px;
+      padding: 4px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
     }
   }
 }

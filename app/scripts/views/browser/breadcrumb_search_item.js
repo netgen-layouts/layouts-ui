@@ -1,4 +1,4 @@
-define(['app', './breadcrumb_item'], function(App, BreadcrumbItemView){
+define(['app', 'models/item', './breadcrumb_item'], function(App, Item, BreadcrumbItemView){
   'use strict';
 
   return BreadcrumbItemView.extend({
@@ -8,7 +8,7 @@ define(['app', './breadcrumb_item'], function(App, BreadcrumbItemView){
 
       var tabs = this.parent.tabs;
 
-      if(this.model.get('name').indexOf('Search for') !== -1){
+      if(this.model.get('name').indexOf(Item.BREADCRUMB_TEXT) !== -1){
         tabs.render_search_tab();
         tabs.enable_search_panel();
       }else{

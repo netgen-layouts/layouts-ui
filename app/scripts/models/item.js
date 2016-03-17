@@ -8,11 +8,15 @@ define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
       content_browser: true,
 
       path: function(){
-        return App.g.tree_config.name() + '/items';
+        return App.g.tree_config.get('root_path') + '/browse';
       },
 
       has_children: function(){
         return this.attributes.has_children;
+      },
+
+      has_sub_categories: function(){
+        return this.attributes.has_sub_categories;
       },
 
       can_show_children: function(){
@@ -54,6 +58,8 @@ define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
           (this.browser && this.browser.selected_collection);
       }
 
+    }, {
+      BREADCRUMB_TEXT: 'Search for'
     });
 
 });

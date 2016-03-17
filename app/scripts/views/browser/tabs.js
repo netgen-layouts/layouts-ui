@@ -4,14 +4,15 @@ define([
   'view',
   'views/modal',
   'collections/items',
-  './root_items',
+  'models/item',
+  './section_items',
   './tree',
   './list_root',
   './list',
   './preview',
   './breadcrumb',
   './breadcrumb_search_item'],
-  function(_, App, View, Modal, Items, RootItemsView, TreeView, ListRootView, ListView, PreviewView, BreadcrumbView, BreadcrumbSearchItemView){
+  function(_, App, View, Modal, Items, Item, SectionItemsView, TreeView, ListRootView, ListView, PreviewView, BreadcrumbView, BreadcrumbSearchItemView){
 
   'use strict';
 
@@ -31,7 +32,7 @@ define([
     initialize: function(){
       Modal.prototype.initialize.apply(this, arguments);
 
-      this.root_items = App.g.tree_config.root_items;
+      this.sections = App.g.tree_config.sections;
 
       this.listenToOnce(this.collection, 'sync', this.render_root_item_views.bind(this));
 
@@ -68,15 +69,15 @@ define([
     },
 
     render_browse_tab: function(){
-      var model = this.root_items.selected_model();
+      var model = this.sections.selected_model();
       this.render_tree();
       this.render_list_view(model);
       this.render_breadcrumb(model);
     },
 
     render_root_items: function(){
-      this.root_items_view = new RootItemsView({
-        collection: this.root_items,
+      this.root_items_view = new SectionItemsView({
+        collection: this.sections,
         tabs: this,
         'el': '.root-items'
       }).render();
@@ -208,8 +209,8 @@ define([
     },
 
     render_search_root_items: function(){
-      this.root_items_view = new RootItemsView({
-        collection: this.root_items,
+      this.root_items_view = new SectionItemsView({
+        collection: this.sections,
         tabs: this,
         'el': '.search-root-items'
       }).render();
@@ -229,7 +230,7 @@ define([
     },
 
     change_breadcrumb_home: function(model){
-      model && model.set({ name: 'Search for "' + this.$('#search_text').val() + '"'});
+      model && model.set({ name: Item.BREADCRUMB_TEXT + ' "' + this.$('#search_text').val() + '"'});
     },
 
     disable_search_panel: function(){

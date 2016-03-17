@@ -1,11 +1,11 @@
-define(['underscore', 'view', './root_item'], function(_, View, RootItem){
+define(['underscore', 'view', './section_item'], function(_, View, SectionItem){
   'use strict';
 
   return View.extend({
 
     extend_with: ['tabs'],
 
-    ViewItem: RootItem,
+    ViewItem: SectionItem,
 
     prevent_auto_render: true,
 
