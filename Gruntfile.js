@@ -107,9 +107,9 @@ module.exports = function (grunt) {
           //    files: '<%= yeoman.app %>/scripts/{,*/}*.js',
           //    tasks: ['yuidoc']
           //  },
-            compass: {
+            sass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server']
+                tasks: ['sass:server']
             },
             handlebars: {
                 files: ['<%= yeoman.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
@@ -248,26 +248,20 @@ module.exports = function (grunt) {
             }
         },
 
-        compass: {
-            options: {
-                sassDir: '<%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
-                generatedImagesDir: '.tmp/images/generated',
-                imagesDir: '<%= yeoman.app %>/images',
-                javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/fonts',
-                importPath: 'bower_components',
-                httpImagesPath: '../images',
-                httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/fonts',
-                relativeAssets: false
-            },
-            dist: {},
-            server: {
-                options: {
-                    sourcemap: true
-                }
-            }
+        sass: {
+          options: {
+            sourcemap: 'auto',
+            lineNumbers: true
+          },
+          server: {
+            files: [{
+              expand: true,
+              cwd: '<%= yeoman.app %>/styles',
+              src: ['*.{scss,sass}'],
+              dest: '.tmp/styles',
+              ext: '.css'
+            }]
+          }
         },
         // not used since Uglify task does concat,
         // but still available if needed
@@ -550,14 +544,14 @@ module.exports = function (grunt) {
 
         concurrent: {
             server: [
-              'compass'
+              'sass'
             ],
             test: [
 
             ],
             dist: [
                 'handlebars',
-                'compass',
+                'sass',
                 'imagemin',
                 'svgmin'
                 // 'shell:translations_download'
