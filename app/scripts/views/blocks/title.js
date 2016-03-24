@@ -1,6 +1,7 @@
-define(['./block', './inline'], function(Block, Inline){
-  'use strict';
+'use strict';
 
-  return Block.extend(Inline);
+var Block = require('./block');
+var Inline = require('./inline');
 
-});
+
+module.exports = Block.extend(Inline);

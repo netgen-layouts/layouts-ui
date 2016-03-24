@@ -1,20 +1,21 @@
-define(['underscore', 'view', './block_type', 'app', './dnd'], function(_, View, ViewBlockType, App, Dnd) {
-  'use strict';
+'use strict';
 
-  return View.extend(Dnd).extend({
-    sort_element: '[data-zone]',
-    template: 'block_types/items',
+var Core = require('core_boot');
+var BlockTypeView = require('./block_type');
+var DndView = require('./dnd');
 
-    render: function(){
-      this._super('render', arguments);
+module.exports = Core.View.extend(DndView).extend({
+  sort_element: '[data-zone]',
+  template: 'block_types/items',
 
-      this.collection.each(function(group){
-        this.render_items(group.types(), '.' + group.id, ViewBlockType);
-      }.bind(this));
+  render: function(){
+    this._super('render', arguments);
 
-      return this;
-    }
+    this.collection.each(function(group){
+      this.render_items(group.types(), '.' + group.id, BlockTypeView);
+    }.bind(this));
 
-  });
+    return this;
+  }
 
 });

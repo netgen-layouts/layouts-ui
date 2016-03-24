@@ -1,11 +1,11 @@
-define(['underscore', 'app', 'collection', 'models/block_type_group'], function(_, App, Collection, BlockTypeGroup){
-  'use strict';
+'use strict';
 
-  return Collection.extend({
-    cached: true,
-    model: BlockTypeGroup,
-    name: 'BlockTypeGroups'
+var Core = require('core_boot');
+var BlockTypeGroup = require('../models/block_type_group');
 
-  });
+module.exports = Core.Collection.extend({
+  cached: true,
+  model: BlockTypeGroup,
+  name: 'BlockTypeGroups'
 
 });

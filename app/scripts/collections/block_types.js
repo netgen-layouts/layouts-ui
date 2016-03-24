@@ -1,20 +1,21 @@
-define(['underscore', 'app', 'collection', 'models/block_type', './block_type_groups'], function(_, App, Collection, BlockType, BlockTypeGroups){
-  'use strict';
+'use strict';
 
-  return Collection.extend({
-    cached: true,
-    model: BlockType,
-    name: 'BlockTypes',
+var Core = require('core_boot');
+var BlockType = require('../models/block_type');
+var BlockTypeGroups = require('./block_type_groups');
 
-    parse: function(response){
-      App.g.block_type_groups = new BlockTypeGroups(response.block_type_groups);
-      return response.block_types;
-    },
+module.exports = Core.Collection.extend({
+  cached: true,
+  model: BlockType,
+  name: 'BlockTypes',
 
-    by_group: function(){
-      return this._by_group || (this._by_group = this.groupBy(function(item){return item.group_name();}));
-    }
+  parse: function(response){
+    Core.g.block_type_groups = new BlockTypeGroups(response.block_type_groups);
+    return response.block_types;
+  },
 
-  });
+  by_group: function(){
+    return this._by_group || (this._by_group = this.groupBy(function(item){return item.group_name();}));
+  }
 
 });

@@ -1,159 +1,146 @@
-define([
-    'app',
-    'model',
-    'backbone',
-    'components/main',
-    'collections/block_types',
-    'views/block_types',
-    'models/layout',
-    'views/blocks/load',
-    'models/blocks/helper',
-    'views/browser/browser',
-    'models/tree_config',
-    'collections/items',
-    'views/modal'
-  ],
-  function(App, Model, Backbone, Components, BlockTypes, ViewBlockTypes, Layout, ViewBlocksLoad, ModelHelper, Browser, TreeConfig, Items, Modal){
-  'use strict';
+'use strict';
 
-    Backbone.defaults = function(){
-      var request = {};
+var Core = require('core_boot');
+var Components = require('./components/main');
+var BlockTypes = require('./collections/block_types');
+var ViewBlockTypes = require('./views/block_types');
+var Layout = require('./models/layout');
+var ViewBlocksLoad = require('./views/blocks/load');
+var ModelHelper = require('./models/blocks/helper');
 
-      if(App.env.name === 'staging'){
-         request.headers = {
-          Authentication: 'Token EffectivaNetgen'
-        };
-      }
+// browser
+var Browser = require('./browser-ui/views/browser');
+var TreeConfig = require('./browser-ui/models/tree_config');
+var Items = require('./browser-ui/collections/items');
 
-      return request;
+Core.Backbone.defaults = function(){
+  var request = {};
+
+  if(Core.env.name === 'staging'){
+     request.headers = {
+      Authentication: 'Token EffectivaNetgen'
     };
+  }
 
-  $.extend(App, Backbone.Events, {
+  return request;
+};
 
-    blocks: ViewBlocksLoad,
+$.extend(Core, {
 
-    model_helper: ModelHelper,
+  blocks: ViewBlocksLoad,
 
-    app_cache_handler: function(){
-        window.applicationCache && window.applicationCache.addEventListener('updateready', function() {
-          if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
-            if (confirm('A new version of this site is available. Load it?')) {
-              window.location.reload();
-            }
-          } else {
-            // Manifest didn't changed. Nothing new to server.
+  model_helper: ModelHelper,
+
+  app_cache_handler: function(){
+      window.applicationCache && window.applicationCache.addEventListener('updateready', function() {
+        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+          if (confirm('A new version of this site is available. Load it?')) {
+            window.location.reload();
           }
-        }, false);
-    },
+        } else {
+          // Manifest didn't changed. Nothing new to server.
+        }
+      }, false);
+  },
 
 
-    init: function(){
-      this.app_cache_handler();
-      this.setup_events();
+  init: function(){
+    this.app_cache_handler();
+    this.setup_events();
 
-      App.g.block_types = new BlockTypes();
-      App.g.tree_config = new TreeConfig({
-        root_path: 'ezcontent' // ezcontent, ezlocation, eztags
-      });
-    },
+    Core.g.block_types = new BlockTypes();
+    Core.g.tree_config = new TreeConfig({
+      root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+    });
+  },
 
-    setup_events: function(){
-      this.on('sortable:start', function(){
-        $(document.body).addClass('sorting');
-      }).on('sortable:end', function(){
-        $(document.body).removeClass('sorting');
-      });
+  setup_events: function(){
+    this.on('sortable:start', function(){
+      $(document.body).addClass('sorting');
+    }).on('sortable:end', function(){
+      $(document.body).removeClass('sorting');
+    });
 
+    $(document).on('dragenter', function(e){
+      e.preventDefault();
+      $(document.body).addClass('dragging');
+    }).on('dragover dragleave', function(e){
+      e.preventDefault();
+    }).on('drop', function(e){
+      e.preventDefault();
+      $(document.body).removeClass('dragging');
+    });
+  },
 
-      //Debounced with 200ms
-      // App.onAll('positions:update', function(){
-      //   console.log('[LAYOUT] saving positions');
-      //   App.g.layout.save({
-      //     positions: App.get_positions()
-      //   });
-      // }, 200);
+  page_layout: function(){
+    Core.g.layout = new Layout({id: Core.router.params.id});
 
-      $(document).on('dragenter', function(e){
-        e.preventDefault();
-        $(document.body).addClass('dragging');
-      }).on('dragover dragleave', function(e){
-        e.preventDefault();
-      }).on('drop', function(e){
-        e.preventDefault();
-        $(document.body).removeClass('dragging');
-      });
-    },
+    $.when(
+      Core.g.block_types.fetch_once(),
+      Core.g.layout.blocks.fetch(),
+      Core.g.layout.fetch(),
+      Core.g.tree_config.fetch()
+    ).then(Core.g.tree_config.save_available_columns.bind(Core.g.tree_config)
+    ).then(this.start.bind(this));
+  },
 
-    page_layout: function(){
-      App.g.layout = new Layout({id: App.router.params.id});
+  start: function(){
+    $('.zones').html(Core.g.layout.get('html'));
 
-      $.when(
-        App.g.block_types.fetch_once(),
-        App.g.layout.blocks.fetch(),
-        App.g.layout.fetch(),
-        App.g.tree_config.fetch()
-      ).then(App.g.tree_config.save_available_columns.bind(App.g.tree_config)
-      ).then(this.start.bind(this));
-    },
+    Components.Zones.collection.reset(Core.g.layout.get('zones'));
 
-    start: function(){
-      $('.zones').html(App.g.layout.get('html'));
+    var view_block_types = new ViewBlockTypes({
+      el: '.blocks',
+      collection: Core.g.block_type_groups
+    });
 
-      Components.Zones.collection.reset(App.g.layout.get('zones'));
+    view_block_types.render();
 
-      var view_block_types = new ViewBlockTypes({
-        el: '.blocks',
-        collection: App.g.block_type_groups
-      });
+    this.blocks.load_layout_blocks();
 
-      view_block_types.render();
+    this._open_browser();
+  },
 
-      this.blocks.load_layout_blocks();
+  _open_browser: function(){
 
-      var default_location = App.g.tree_config.default_location();
+    var default_location = Core.g.tree_config.default_location();
 
-      var tree_collection = new Items();
+    var tree_collection = new Items();
 
-      var browser = new Browser({
-        tree_collection: tree_collection,
-        title: 'Content browser'
-      }).on('apply', function(){
-        alert(browser.selected_values());
-      }).open();
+    var browser = new Browser({
+      tree_collection: tree_collection,
+      title: 'Content browser'
+    }).on('apply', function(){
+      alert(browser.selected_values());
+    }).open();
 
-      default_location && tree_collection.fetch_root_model_id(default_location.id);
-    },
+    default_location && tree_collection.fetch_root_model_id(default_location.id);
+  },
 
-    get_positions: function(){
-      var positions = [], blocks;
-      $('[data-zone]').each(function(){
-        var zone_id = $(this).data().zone;
-        var zone_model = $(this).data('_view').model;
-        blocks = [];
-        $(this).find('> [data-view]').each(function(){
-          var model = $(this).data('_view').model;
-          !model.isNew() && blocks.push({
-            block_id: model.id
-          });
+  get_positions: function(){
+    var positions = [], blocks;
+    $('[data-zone]').each(function(){
+      var zone_id = $(this).data().zone;
+      var zone_model = $(this).data('_view').model;
+      blocks = [];
+      $(this).find('> [data-view]').each(function(){
+        var model = $(this).data('_view').model;
+        !model.isNew() && blocks.push({
+          block_id: model.id
         });
-
-        !zone_model.is_inherited() && positions.push({
-          zone: zone_id,
-          blocks: blocks
-        });
-
       });
 
-      return positions;
-    },
+      !zone_model.is_inherited() && positions.push({
+        zone: zone_id,
+        blocks: blocks
+      });
 
-    show_error: function(options){
-      new Modal(options).open();
-    }
-  });
+    });
 
-
-  window.App = App;
-  return App;
+    return positions;
+  }
 
 });
+
+window.Core = Core;
+module.exports = Core;

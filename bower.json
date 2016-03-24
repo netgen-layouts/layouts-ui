@@ -2,19 +2,7 @@
   "name": "app",
   "version": "0.0.0",
   "dependencies": {
-    "backbone": "*",
-    "backbone.localstorage": "*",
-    "font-awesome": "*",
-    "handlebars": "3.0.3",
-    "jquery": "*",
-    "modernizr": "*",
-    "moment": "*",
-    "requirejs": "*",
-    "underscore": "*",
-    "almond": "*",
-    "bootstrap-sass": "*",
-    "jquery-ui": "~1.11.4",
-    "inflection": "~1.7.1"
+    "bootstrap-sass": "~3.3.6"
   },
   "devDependencies": {}
 }

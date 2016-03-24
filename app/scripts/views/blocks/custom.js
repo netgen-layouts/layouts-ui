@@ -1,11 +1,7 @@
-define(['./block'], function(Block){
   'use strict';
 
-  return Block.extend({
+  var Block = require('./block');
 
+  module.exports = Block.extend({
     template: 'blocks/custom'
-
   });
-
-});
-

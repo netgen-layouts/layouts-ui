@@ -1,16 +1,15 @@
-define(['model', 'app'], function(Model, App){
-  'use strict';
+'use strict';
 
-  return Model.extend({
+var Core = require('core_boot');
 
-    idAttribute: 'identifier',
+module.exports = Core.Model.extend({
 
-    types: function(){
-      return this._block_types || (this._block_types = this.get('block_types').map(function(block_type){
-        return App.g.block_types.get(block_type);
-      }));
-    }
+  idAttribute: 'identifier',
 
-  });
+  types: function(){
+    return this._block_types || (this._block_types = this.get('block_types').map(function(block_type){
+      return Core.g.block_types.get(block_type);
+    }));
+  }
 
 });

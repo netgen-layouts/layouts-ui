@@ -1,31 +1,30 @@
-define(['underscore', 'model'], function(_, Model){
-  'use strict';
+'use strict';
 
-  return Model.extend({
+var Core = require('core_boot');
 
-    idAttribute: 'identifier',
+module.exports = Core.Model.extend({
 
-    TYPES: {
-      1: 'normal',
-      2: 'inherited'
-    },
+  idAttribute: 'identifier',
 
-    type_name: function(){
-      //return this.TYPES[this.get('kind')];
-      return 'normal';
-    },
+  TYPES: {
+    1: 'normal',
+    2: 'inherited'
+  },
 
-    is_inherited: function(){
-      //return this.get('kind') === 2;
-      return  false;
-    },
+  type_name: function(){
+    //return this.TYPES[this.get('kind')];
+    return 'normal';
+  },
 
-    should_accept: function(type_or_block){
-      var allowed = this.get('allowed_block_types');
-      if(allowed){ return true; }
-      var id = type_or_block.get('identifier') || type_or_block.id;
-      return _.contains(allowed, id);
-    }
-  });
+  is_inherited: function(){
+    //return this.get('kind') === 2;
+    return  false;
+  },
 
+  should_accept: function(type_or_block){
+    var allowed = this.get('allowed_block_types');
+    if(allowed){ return true; }
+    var id = type_or_block.get('identifier') || type_or_block.id;
+    return _.contains(allowed, id);
+  }
 });

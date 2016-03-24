@@ -1,19 +1,18 @@
-define(['./block'], function(Block){
-  'use strict';
+'use strict';
 
-  return Block.extend({
+var Block = require('./block');
 
-    render: function(){
-      Block.prototype.render.apply(this, arguments);
-      return this.append_slider_options();
-    },
+module.exports = Block.extend({
 
-    append_slider_options: function(){
-      this.context.parameters = this.model.param();
-      this.$el.prepend(JST.slider(this.context));
-      return this;
-    }
+  render: function(){
+    Block.prototype.render.apply(this, arguments);
+    return this.append_slider_options();
+  },
 
-  });
+  append_slider_options: function(){
+    this.context.parameters = this.model.param();
+    this.$el.prepend(JST.slider(this.context));
+    return this;
+  }
 
 });

@@ -1,8 +1,8 @@
-define(['collection', 'backbone',  'models/blocks/block'], function(Collection, Backbone, Block){
-  'use strict';
+'use strict';
 
-  return Collection.extend({
-    model: Block
-  });
+var Core = require('core_boot');
+var Block = require('../models/blocks/block');
 
+module.exports = Core.Collection.extend({
+  model: Block
 });

@@ -1,16 +1,15 @@
-define(['view'], function(View){
-  'use strict';
+'use strict';
 
-  return View.extend({
-    template: 'block_types/item',
+var Core = require('core_boot');
 
-    dnd: function(){
-      this.$el.draggable({
-        helper: 'clone'
-      });
-      return this;
-    }
+module.exports = Core.View.extend({
+  template: 'block_types/item',
 
-  });
+  dnd: function(){
+    this.$el.draggable({
+      helper: 'clone'
+    });
+    return this;
+  }
 
 });

@@ -1,8 +1,7 @@
-define(['./block'], function(Block){
-  'use strict';
+'use strict';
 
-  return Block.extend({
-    path: 'contents'
-  });
+var Block = require('./block');
 
+module.exports = Block.extend({
+  path: 'contents'
 });
