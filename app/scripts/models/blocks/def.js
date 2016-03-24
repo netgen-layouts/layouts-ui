@@ -1,11 +1,10 @@
-define(['./base'], function(Block){
-  'use strict';
+'use strict';
 
-  return Block.extend({
-    defaults: {
-      template: 'default'
-    }
+var Block = require('./block');
 
-  });
+module.exports = Block.extend({
+  defaults: {
+    //view_type: 'default'
+  }
 
 });

@@ -1,36 +1,38 @@
-define(['underscore', './base', 'app', 'views/dnd'], function(_, Base, App, Dnd){
-  'use strict';
+'use strict';
 
-  return Base.extend(Dnd).extend({
-    sort_element: '[data-container]',
+var Core = require('core_boot');
+var Block = require('./block');
+var Dnd = require('../dnd');
 
-    initialize: function(){
-      this._super('initialize', arguments);
-      this.on('block:move block:remove', this.save_positions);
-      return this;
-    },
+module.exports = Block.extend(Dnd).extend({
+  sort_element: '[data-container]',
 
-    render: function() {
-      this._super('render', arguments);
-      App.blocks.load_container_blocks(this);
-      this.$('[data-container]').html(this.dom_elements);
-      return this;
-    },
+  initialize: function(){
+    this._super('initialize', arguments);
+    this.on('block:move block:remove', this.save_positions);
+    return this;
+  },
 
-    save_positions: function(){
-      console.log('CONTAINER: save_positions container id: ', this.model.id);
-      var positions = [], model;
+  render: function() {
+    this._super('render', arguments);
+    Core.blocks.load_container_blocks(this);
+    this.$('[data-container]').html(this.dom_elements);
+    return this;
+  },
 
-      this.$('>[data-container]>[data-in-container]').each(function(i, item){
-        model = $(item).data('_view').model;
+  save_positions: function(){
+    console.log('CONTAINER: save_positions container id: ', this.model.id);
+    var positions = [], model;
 
-        positions.push({
-          block_id: model.id
-        });
+    this.$('>[data-container]>[data-in-container]').each(function(i, item){
+      model = $(item).data('_view').model;
 
+      positions.push({
+        block_id: model.id
       });
 
-      this.model.save({positions: positions}, {silent:true});
-    }
-  });
+    });
+
+    this.model.save({positions: positions}, {silent:true});
+  }
 });

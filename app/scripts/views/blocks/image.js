@@ -1,28 +1,27 @@
-define(['./base'], function(Base){
-  'use strict';
+'use strict';
 
-  return Base.extend({
+var Block = require('./block');
 
-    events:{
-      'drop .image-holder': '$drop'
-    },
+module.exports = Block.extend({
 
-    render: function(){
-      this.$el.css({minHeight: this.$el.height() });
-      Base.prototype.render.apply(this, arguments);
-      return this;
-    },
+  events:{
+    'drop .image-holder': '$drop'
+  },
 
-    $drop: function(e){
-      var image = e.originalEvent.dataTransfer.files;
+  render: function(){
+    this.$el.css({minHeight: this.$el.height() });
+    Block.prototype.render.apply(this, arguments);
+    return this;
+  },
 
-      if(image.length){
-        var form_data = new FormData();
-        form_data.append('image[media]', image[0]);
-        this.model.save({}, { form_data: form_data });
-      }
+  $drop: function(e){
+    var image = e.originalEvent.dataTransfer.files;
+
+    if(image.length){
+      var form_data = new FormData();
+      form_data.append('image[media]', image[0]);
+      this.model.save({}, { form_data: form_data });
     }
-
-  });
+  }
 
 });

@@ -7,10 +7,10 @@ var mountFolder = function (connect, dir) {
 };
 
 /* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
-var Handlebars = require('grunt-contrib-handlebars/node_modules/handlebars/lib/index');
+var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('./app/scripts/helpers');
+var helpers = require('./app/scripts/core-ui/helpers');
 
 var known_helpers = {};
 for(var k in helpers){ known_helpers[k] = true ;}
@@ -107,9 +107,13 @@ module.exports = function (grunt) {
           //    files: '<%= yeoman.app %>/scripts/{,*/}*.js',
           //    tasks: ['yuidoc']
           //  },
-            compass: {
+            browserify: {
+              files: ['<%= yeoman.app %>/scripts/**/*.js'],
+              tasks: ['browserify:dev']
+            },
+            sass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server']
+                tasks: ['sass:server']
             },
             handlebars: {
                 files: ['<%= yeoman.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
@@ -123,7 +127,8 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/*.html',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+
                 ]
             }
         },
@@ -136,25 +141,11 @@ module.exports = function (grunt) {
             proxies: [
 
                 {
-                  context: '/pdf',
-                  host: 'htmlpdfapi.com',
+                  context: ['/bm', '/cb', '/var'],
+                  host: 'bm.lan',
                   changeOrigin: true,
                   headers: {
-                    host: 'htmlpdfapi.com',
-                    Authentication: 'Token ClwRiwn-LCN_otqr4QA8YXEpV9Vj80u8'
-                  },
-                  rewrite: {
-                    '^/pdf': '/api/v1/pdf'
-                  }
-                },
-
-
-                {
-                  context: ['/token', '/api'],
-                  host: 'smv02.poslovna.hr',
-                  changeOrigin: true,
-                  headers: {
-                    host: 'smv02.poslovna.hr'
+                    host: 'bm.lan'
                   }
                 }
 
@@ -164,7 +155,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             require('grunt-connect-proxy/lib/utils').proxyRequest,
-                            lrSnippet,
+                            //lrSnippet,
                             mountFolder(connect, '.'),
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, yeomanConfig.app)
@@ -245,7 +236,7 @@ module.exports = function (grunt) {
                     knownHelpers: known_helpers,
                     knownHelpersOnly: true
                   },
-                  amd: true,
+                  commonjs: true,
                   wrapped: true,
                   processPartialName: function(filename) {
                       return filename
@@ -262,26 +253,22 @@ module.exports = function (grunt) {
             }
         },
 
-        compass: {
-            options: {
-                sassDir: '<%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
-                generatedImagesDir: '.tmp/images/generated',
-                imagesDir: '<%= yeoman.app %>/images',
-                javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/fonts',
-                importPath: 'bower_components',
-                httpImagesPath: '../images',
-                httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/fonts',
-                relativeAssets: false
-            },
-            dist: {},
-            server: {
-                options: {
-                    sourcemap: true
-                }
-            }
+        sass: {
+          options: {
+            sourceMap: true,
+            sourceMapEmbed: true,
+            sourceMapContents: true,
+            includePaths: ['.']
+          },
+          server: {
+            files: [{
+              expand: true,
+              cwd: '<%= yeoman.app %>/styles',
+              src: ['*.{scss,sass}'],
+              dest: '.tmp/styles',
+              ext: '.css'
+            }]
+          }
         },
         // not used since Uglify task does concat,
         // but still available if needed
@@ -293,49 +280,31 @@ module.exports = function (grunt) {
          * Example build file
          * https://github.com/jrburke/r.js/blob/master/build/example.build.js
          */
-        requirejs: {
+        browserify: {
+          vendor: {
+            src: [],
+            dest: '.tmp/scripts/vendor.js',
             options: {
-                // `name` and `out` is set by grunt-usemin
-                name: '../../bower_components/almond/almond',
-                include: ['main'],
-                mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
-                out: '<%= yeoman.dist %>/scripts/main.js',
-                //out: '.tmp/scripts/main.js',
-                baseUrl:  '<%= yeoman.app %>/scripts',
-                optimize: 'uglify2',
-                // TODO: Figure out how to make sourcemaps work with grunt-usemin
-                // https://github.com/yeoman/grunt-usemin/issues/30
-                generateSourceMaps: true,
-                // required to support SourceMaps
-                // http://requirejs.org/docs/errors.html#sourcemapcomments
-                preserveLicenseComments: false,
-                useStrict: true,
-                wrap: true,
-                uglify2: {
-                    /*
-                    output: {
-                        beautify: true
-                    },
-                    */
-                    compress: {
-                        drop_console: true,
-                        drop_debugger: true
-                    }
-                } // https://github.com/mishoo/UglifyJS2
-            },
-
-            staging: {
-              options:{
-                paths: {
-                  "env": 'environments/staging'
-                }
+              debug: true,
+              require: ['jquery', 'jquery-ui']
+            }
+          },
+          dev: {
+            src: ['<%= yeoman.app %>/scripts/main.js'],
+            dest: '.tmp/scripts/main.js',
+            options: {
+              debug: true,
+              external: ['jquery', 'jquery-ui'],
+              browserifyOptions:{
+                debug: true
+              },
+              alias: {
+                'core': './app/scripts/core-ui/core.js',
+                'core_boot': './app/scripts/core-ui/core_boot.js',
+                'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
               }
             },
-
-            development: {
-
-            }
-
+          }
         },
         filerev: {
 
@@ -564,14 +533,17 @@ module.exports = function (grunt) {
 
         concurrent: {
             server: [
-              'compass'
+              'sass',
+              'browserify:dev',
+              'browserify:vendor'
             ],
             test: [
 
             ],
             dist: [
+                'browserify',
                 'handlebars',
-                'compass',
+                'sass',
                 'imagemin',
                 'svgmin'
                 // 'shell:translations_download'

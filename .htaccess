@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^app/styles/(.*)$ /bmdev/.tmp/styles/$1 [L]

@@ -1,9 +1,9 @@
-define(['collection', 'models/zone'], function(Collection, Zone){
-  'use strict';
+'use strict';
 
-  return Collection.extend({
-    model: Zone,
-    name: 'Zones'
-  });
+var Core = require('core_boot');
+var Zone = require('../models/zone');
 
+module.exports = Core.Collection.extend({
+  model: Zone,
+  name: 'Zones'
 });

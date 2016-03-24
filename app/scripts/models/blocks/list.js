@@ -1,8 +1,7 @@
-define(['./base'], function(Block){
-  'use strict';
+'use strict';
 
-  return Block.extend({
-    path: 'lists'
-  });
+var Block = require('./block');
 
+module.exports = Block.extend({
+  path: 'lists'
 });

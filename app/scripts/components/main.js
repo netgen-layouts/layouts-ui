@@ -1,8 +1,5 @@
-define(function(require){
-  'use strict';
+'use strict';
 
-  return {
-    Zones: require('./zones')
-  };
-
-});
+module.exports = {
+  Zones: require('./zones')
+};

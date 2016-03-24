@@ -1,40 +1,41 @@
-define(['underscore', 'backbone', './base', 'app'], function(_, Backbone, Base, App){
-  'use strict';
+'use strict';
 
-  return Base.extend({
+var Core = require('core_boot');
+var Block = require('./block');
 
-    initialize: function(){
-      Base.prototype.initialize.apply(this, arguments);
-      this.on('render', this.after_render);
-      this.listenTo(this.model, 'save:success', this.after_save);
-      return this;
-    },
+module.exports = Block.extend({
 
-    after_save: function(){
-      this.update_positions();
-      return this;
-    },
+  initialize: function(){
+    Block.prototype.initialize.apply(this, arguments);
+    this.on('render', this.after_render);
+    this.listenTo(this.model, 'save:success', this.after_save);
+    return this;
+  },
 
-    after_render: function(){
-      App.blocks.load_group_blocks(this);
-    },
+  after_save: function(){
+    this.update_positions();
+    return this;
+  },
 
-    render: function(){
-      if(!this.model.id){ return this; }
-      this.context.model  = this.model;
-      this.$el.html(this.model.get('html'));
-      this.render2();
+  after_render: function(){
+    Core.blocks.load_group_blocks(this);
+  },
 
-      return this;
-    },
+  render: function(){
+    if(!this.model.id){ return this; }
+    this.context.model  = this.model;
+    this.$el.html(this.model.get('html'));
+    this.render2();
 
-    render2: function(){
-      this.$el.attr('data-block', '')
-      .attr('data-type', this.model.type_name())
-      .prepend(JST['block_actions'](this.context)) // jshint ignore:line
-      .prepend(JST['block_template'](this.context)); // jshint ignore:line
-      this.trigger_render();
-    }
+    return this;
+  },
 
-  });
+  render2: function(){
+    this.$el.attr('data-block', '')
+    .attr('data-type', this.model.type_name())
+    .prepend(JST['block_actions'](this.context)) // jshint ignore:line
+    .prepend(JST['block_type'](this.context)); // jshint ignore:line
+    this.trigger_render();
+  }
+
 });

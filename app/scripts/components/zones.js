@@ -1,11 +1,11 @@
-define(['views/zones', 'collections/zones'], function(ViewZones, Zones){
-  'use strict';
+'use strict';
 
-  var Compontent = new ViewZones({
-    el: '.zones',
-    collection: new Zones()
-  });
+var Zones = require('../collections/zones');
+var ZonesView = require('../views/zones');
 
-  return Compontent;
-
+var Compontent = new ZonesView({
+  el: '.zones',
+  collection: new Zones()
 });
+
+module.exports = Compontent;
