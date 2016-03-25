@@ -98,10 +98,10 @@ $.extend(Core, {
 
     this.blocks.load_layout_blocks();
 
-    this._open_browser();
+    //this.open_browser();
   },
 
-  _open_browser: function(){
+  open_browser: function(){
 
     var default_location = Core.g.tree_config.default_location();
 
