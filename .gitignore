@@ -3,6 +3,7 @@ dist
 .tmp
 .sass-cache
 bower_components
+app/scripts/bundle.js
 app/scripts/templates.js
 *.orig
 *.log

@@ -270,16 +270,6 @@ module.exports = function (grunt) {
             }]
           }
         },
-        // not used since Uglify task does concat,
-        // but still available if needed
-        /*concat: {
-            dist: {}
-        },*/
-
-        /**
-         * Example build file
-         * https://github.com/jrburke/r.js/blob/master/build/example.build.js
-         */
         browserify: {
           vendor: {
             src: [],
@@ -304,6 +294,18 @@ module.exports = function (grunt) {
                 'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
               }
             },
+          }
+        },
+        concat: {
+          dev: {
+            src: ['.tmp/scripts/vendor.js', '.tmp/scripts/main.js'],
+            dest: '<%= yeoman.app %>/scripts/bundle.js',
+            options: {
+              // It includes semicolon.js!
+              // This is needed to prevent the two concatenated IIFE's fro each bundle being
+              // interpreted as a function call
+              separator: ';\n'
+            }
           }
         },
         filerev: {
@@ -534,8 +536,8 @@ module.exports = function (grunt) {
         concurrent: {
             server: [
               'sass',
-              'browserify:dev',
-              'browserify:vendor'
+              'browserify:vendor',
+              'browserify:dev'
             ],
             test: [
 
@@ -578,6 +580,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'concurrent:server',
+            'concat:dev',
             'configureProxies:server',
             'connect:livereload',
             'handlebars',
