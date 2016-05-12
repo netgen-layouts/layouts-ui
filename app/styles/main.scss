@@ -3,15 +3,18 @@ $icon-font-path: "../fonts/bootstrap/";
 // @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 // @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_modals";
 @import "../../../content-browser-ui-bundle/app/styles/main";
+@import "icomoon";
+@import "variables";
+@import "layout";
+@import "blocks-panel";
 
+body {
+    font-size:16px;
+}
 *{
   padding: 0;
   margin: 0;
 }
-
-body{background:#333; }
-
-#app{ margin:30px 60px 0; color:#eee;}
 
 .split{
   box-sizing:border-box;
@@ -50,7 +53,7 @@ img{width:100%; max-width:100%;}
 
 [data-block]{
   position:relative; margin-bottom:20px;
-  .block_actions{position:absolute;  display:none; text-align:right; height:100%; left:-124px; width:124px; top:-10px; padding:10px 8px 0 0; color:#fff; z-index: 1000; }
+  .block_actions{position:absolute;  display:none; text-align:right; height:100%; left:0; width:124px; top:100%; padding:10px 8px 0 0; color:#fff; z-index: 1000; }
   .block_actions span{ background: black; padding: 8px;}
   .handle{}
   form{display:none;}
@@ -198,24 +201,6 @@ input[type="text"]{
 
 .glyphicon{
   cursor: pointer;
-}
-
-.block-items{
-  overflow: hidden;
-  > div{
-    float: left;
-    color:#fff;
-    background: #444;
-    border: 1px solid #666;
-    text-align: center;
-    margin: 0 5px 5px 0;
-    span{
-      vertical-align: middle;
-      width: 120px;
-      height: 60px;
-      display: table-cell;
-    }
-  }
 }
 
 p[data-inline]{

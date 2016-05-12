@@ -1,0 +1,30 @@
+// colors
+$toolbarbg1: hsl(210, 44, 21);
+$toolbarbg2: hsl(211, 82, 13);
+$toolbarbg3: hsl(210, 36, 30);
+$toolbarColor: hsl(0, 0, 100);
+$toolbarBorderColor: hsl(211, 82, 13);
+
+$footerbg: hsl(0, 0, 90);
+
+// dimensions
+$leftWidth: 45px;
+$rightWidth: 240px;
+$topHeight: 45px;
+$bottomHeight: 30px;
+
+$leftPanelWidth: 250px;
+
+$gutter: 15px;
+
+%icomoon {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

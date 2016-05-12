@@ -181,6 +181,7 @@ module.exports = {
       $('.blocks .block-items').sortable({
         connectWith: '[data-zone], [data-container]',
         placeholder: 'no-placeholder',
+        appendTo: document.body,
         receive: function(e, ui){
           console.log(ui.sender, this);
         },

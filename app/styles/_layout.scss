@@ -1,0 +1,87 @@
+/* header */
+.app-header {
+  position:fixed;
+  top:0;
+  left:0;
+  right:$rightWidth;
+  height:$topHeight;
+  background:$toolbarbg1;
+  border-bottom:1px solid $toolbarBorderColor;
+}
+
+/* left toolbar */
+.left-toolbar {
+  position:fixed;
+  top:$topHeight;
+  left:0;
+  bottom:0;
+  width:$leftWidth;
+  background:$toolbarbg1;
+  color:$toolbarColor;
+  z-index:30;
+  border-right:1px solid $toolbarBorderColor;
+  .left-toolbar-buttons {
+    .button {
+      display:block;
+      border:none;
+      background:transparent;
+      width:$leftWidth;
+      height:$leftWidth;
+      line-height:$leftWidth;
+      text-align:center;
+      border-color:$toolbarBorderColor;
+      border-width:1px 0;
+      border-style:solid;
+      margin-top:-1px;
+      font-size:1.5em;
+      transition:color 150ms, background-color 150ms;
+      &:focus {
+        outline:none;
+      }
+      &:hover {
+        background:hsla(0, 0, 100, 0.05);
+      }
+      &.active {
+        background:$toolbarbg3;
+      }
+      &::before {
+        @extend %icomoon;
+      }
+      &[data-target="simple_blocks"]::before {
+        content:"\e919";
+      }
+    }
+  }
+}
+
+/* right sidebar */
+.right-sidebar {
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  width:$rightWidth;
+  background:$toolbarbg2;
+}
+
+/* content */
+.main-content {
+  position:fixed;
+  left:$leftWidth;
+  right:$rightWidth;
+  top:$topHeight;
+  bottom:$bottomHeight;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  padding:$gutter;
+}
+
+/* footer */
+.app-footer {
+  position:fixed;
+  bottom:0;
+  left:$leftWidth;
+  right:$rightWidth;
+  height:$bottomHeight;
+  background:$footerbg;
+}

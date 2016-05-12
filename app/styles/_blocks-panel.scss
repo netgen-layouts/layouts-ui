@@ -1,0 +1,85 @@
+.left-toolbar-panels {
+  .left-panel {
+    position:fixed;
+    left:$leftWidth;
+    top:$topHeight;
+    bottom:0;
+    width:$leftPanelWidth;
+    background:$toolbarbg3;
+    display:none;
+    .panel-content {
+      background:$toolbarbg1;
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:10px;
+      right:0;
+      border-left:1px solid $toolbarBorderColor;
+      box-shadow:0px 0 8px rgba(0, 0, 0, 0.35);
+    }
+    .header {
+      padding:0.75em 1.5em 0.75em 0.5em;
+      position:relative;
+      background:$toolbarbg2;
+      .close-panel {
+        position:absolute;
+        right:0.5em;
+        top:0.625em;
+        width:1.5em;
+        height:1.5em;
+        cursor:pointer;
+        text-align:right;
+        color:#fff;
+      }
+      h2 {
+        font-size:1em;
+        font-weight:400;
+        line-height:1.25;
+        margin:0;
+      }
+    }
+    .add-block-btn {
+      border:none;
+      border-bottom:1px solid $toolbarBorderColor;
+      width:33.333333333333%;
+      &:nth-child(3n+2) {
+        border-left:1px solid $toolbarBorderColor;
+        border-right:1px solid $toolbarBorderColor;
+      }
+    }
+  }
+}
+
+.add-block-btn {
+  cursor:grab;
+  background:$toolbarbg1;
+  color:#fff;
+  float:left;
+  text-align:center;
+  width:($leftPanelWidth - 11) / 3;
+  border:1px solid $toolbarBorderColor;
+  height:90px;
+  .icon {
+    @extend %icomoon;
+    display:block;
+    font-size:32px;
+    height:48px;
+    line-height:48px;
+    margin-top:6px;
+    color:hsla(0, 0, 100, 0.45);
+  }
+  &.title .icon::before {
+    content:"\e916";
+  }
+  &.title_with_h3 .icon::before {
+    content:"\e916";
+  }
+  &.paragraph .icon::before {
+    content:"\e918";
+  }
+  .title {
+    font-size:0.6875em;
+    display:block;
+    padding:0 4px;
+  }
+}
