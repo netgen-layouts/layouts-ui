@@ -6,6 +6,9 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "variables";
 @import "layout";
 @import "blocks-panel";
+@import "sidebar";
+
+input[type="text"]{background-color:white;}
 
 body {
     font-size:16px;
@@ -55,6 +58,8 @@ img{width:100%; max-width:100%;}
   .block_actions{position:absolute;  display:none; text-align:right; height:100%; left:0; width:124px; top:100%; padding:10px 8px 0 0; color:#fff; z-index: 1000; }
   .block_actions span{ background: black; padding: 8px;}
   .handle{}
+  border: 1px solid transparent;
+  &.editing{border-color:#069;}
   form{display:none;}
 }
 [data-block]:hover > .block_actions{display: inline-block;}

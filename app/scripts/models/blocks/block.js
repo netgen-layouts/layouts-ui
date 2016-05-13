@@ -30,9 +30,9 @@ module.exports = Core.Model.extend({
     return this.type().get('defaults').definition_identifier;
   },
 
-  template_name: function(){
-    return this.type().get('defaults').view_type;
-  },
+  // template_name: function(){
+  //   return this.get('view_type');
+  // },
 
   param: function(){
     return this.get('parameters');
