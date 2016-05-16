@@ -27,7 +27,7 @@ module.exports = Core.Model.extend({
   },
 
   type_name: function(){
-    return this.type().get('defaults').definition_identifier;
+    return this.type().get('definition_identifier');
   },
 
   // template_name: function(){

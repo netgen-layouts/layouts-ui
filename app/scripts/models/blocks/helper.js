@@ -15,7 +15,7 @@ module.exports = {
   init_block_from_type: function(type, additional_attributes){
     console.log(type);
     var Klass = Blocks[type.get('kind')] || Blocks.Def;
-    var attributes = Core._.defaults({definition_identifier: type.get('defaults').definition_identifier}, type.get('parameters'), additional_attributes);
+    var attributes = Core._.defaults({definition_identifier: type.get('definition_identifier')}, type.get('parameters'), additional_attributes);
     return new Klass(attributes);
   },
 

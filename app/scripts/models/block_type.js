@@ -6,7 +6,7 @@ module.exports = Core.Model.extend({
 
   idAttribute: 'identifier',
   format: '',
-  path: 'block_types',
+  path: 'config/block_types',
 
   GROUPS: {
     0: 'simple',
@@ -35,6 +35,10 @@ module.exports = Core.Model.extend({
     return json;
   },
 
+  type_name: function(){
+    return this.get('definition_identifier');
+  },
+
   is_group: function(){
     return this.kind_of('Group');
   },
@@ -56,7 +60,7 @@ module.exports = Core.Model.extend({
   },
 
   default_identifier: function(){
-    return this.get('defaults').definition_identifier;
+    return this.get('definition_identifier');
   }
 
 });
