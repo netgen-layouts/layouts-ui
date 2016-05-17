@@ -3,7 +3,6 @@
 module.exports = {
   Image: require('./image'),
   Def:   require('./def'),
-  SimpleBlock: require('./simple_block'),
   List:  require('./list'),
   Grid:  require('./grid'),
   Group:  require('./group'),

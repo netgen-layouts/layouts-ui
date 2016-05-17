@@ -8,7 +8,9 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'change', this.setup_dom_element);
-    this.on('render', this.update_positions);
+    // this.on('render', this.update_positions);
+
+
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
     if(!this.model.isNew()){
@@ -38,17 +40,8 @@ module.exports = Core.View.extend({
    * @return {this}
    */
   render: function(html){
-    console.log('render')
     Core.View.prototype.render.apply(this, arguments);
     this.$el.html(html || this.model.get('html'));
-    return this.append_additionals();
-  },
-
-  append_additionals: function(){
-    console.log('append_additionals', this.context);
-    this.$el
-      .prepend(JST.block_actions(this.context))
-      .prepend(JST.block_template(this.context));
     return this;
   },
 
@@ -69,24 +62,19 @@ module.exports = Core.View.extend({
   },
 
   $edit: function(e){
+    if(this.editing){return;}
     this.editing_mark();
-
-/*    new Core.FormModal({
-      model: this.model
-    });*/
-
 
     this.edit_view = new SideBarView({
       model: this.model
     });
 
-
-    this.model
-      .fetch({via: 'edit/full'})
-      .done(function(){
-        $('.right-sidebar').html(this.edit_view.$el);
+    $.get(this.model.url('edit')).done(function(response){
+        this.edit_view.$el.html(response.html);
+        $('.right-sidebar').html(this.edit_view.render().$el);
         Core.trigger('editing:unmark', {block: this});
       }.bind(this));
+
 
     return this;
   },
@@ -118,12 +106,14 @@ module.exports = Core.View.extend({
   },
 
   editing_mark: function(){
+    this.editing = true;
     this.$el.addClass('editing');
   },
 
 
   editing_unmark: function(data){
     if(this === data.block){return;}
+    this.editing = false;
     this.edit_view && this.edit_view.remove();
     this.$el.removeClass('editing');
   }

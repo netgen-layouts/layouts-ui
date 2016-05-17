@@ -1,19 +1,37 @@
 'use strict';
 
+var _ = require('underscore');
+
 module.exports = {
+
+  prevent_auto_render: true,
+
+  initialize: function(){
+    this._super('initialize', arguments);
+    this.listenToOnce(this.model, 'save:success', this.render_with_new_data);
+    this.listenTo(this.model, 'sidebar_save:success', this.render);
+    this.debounced_save = _.debounce(this.$save, 200);
+    return this;
+  },
+
   events: {
-    'blur [data-inline]': '$blur',
     'keyup [data-inline-child]': '$keyup'
   },
 
+
   $keyup: function (e) {
     var $target = $(e.target), name = $target.data('attr');
-    console.log('keyup', name);
-    this.$('input[name*="['+name+']"]').val($target.text().trim());
+    var value = $target.text().trim();
+    var $input = $('.sidebar input[name*="['+name+']"]');
+    $input.val(value);
+    this.debounced_save($input);
   },
 
-  $blur: function(e){
-    e.preventDefault();
-    this.model.save_via_form(this);
+  $save: function($input){
+
+    this.model.save_via_form($input.closest('form'))
+      .done(this.model.trigger.bind(this.model, 'save_inline:done'))
+      .fail(this.model.trigger.bind(this.model, 'save_inline:error'))
+
   }
 };

@@ -81,7 +81,7 @@ module.exports = {
       };
 
     // if we have block
-    if(block_or_type.get('definition_identifier')){
+    if(block_or_type.class_name === 'block'){
       block_or_type.set(container_attributes);
       this.add_block_and_set_position(ui, block_or_type);
     }else{
@@ -102,6 +102,7 @@ module.exports = {
   },
 
   add_new_block: function(ui, block){
+    console.log(block);
     var view_block = Core.blocks.create_view(block.type_name(), block),
     position = ui.item.index();
     ui.item.after(view_block.$el);

@@ -3,6 +3,7 @@
 var Core = require('core_boot');
 
 module.exports = Core.Model.extend({
+  class_name: 'block_type',
 
   idAttribute: 'identifier',
   format: '',
@@ -35,9 +36,10 @@ module.exports = Core.Model.extend({
     return json;
   },
 
-  type_name: function(){
-    return this.get('definition_identifier');
-  },
+
+  // type_name: function(){
+  //   return this.get('definition_identifier');
+  // },
 
   is_group: function(){
     return this.kind_of('Group');

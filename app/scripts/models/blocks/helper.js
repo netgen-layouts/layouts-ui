@@ -20,6 +20,7 @@ module.exports = {
   },
 
   init_block: function(params){
+    console.log('init_block', params);
     var block_type = Core.g.block_types.get(params.block_type);
     var Klass = Blocks[block_type.get('kind')];
     console.log(params);
