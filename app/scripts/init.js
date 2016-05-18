@@ -98,6 +98,9 @@ $.extend(Core, {
 
     this.blocks.load_layout_blocks();
 
+
+    $('.right-sidebar').html(JST.sidebar());
+
     //this.open_browser();
   },
 

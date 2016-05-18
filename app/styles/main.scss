@@ -211,6 +211,14 @@ p[data-inline]{
   padding: 6px 0;
 }
 
+
+[data-inline-child]:empty:before{
+  padding-right: 0 10px;
+  content: attr(data-hint);
+  color: #ccc;
+  font-weight:normal;
+}
+
 .the_pencil{font-size:30px; color:#fff;}
 
 [data-type="Slider"]{

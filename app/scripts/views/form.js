@@ -18,6 +18,11 @@ module.exports = Core.View.extend({
   load: function(){
     $.get(this.url).done(function(response){
       this.$el.html(response.form);
+      var self = this;
+      $('[data-block].editing [data-inline-child]').each(function(){
+        var name = $(this).data('attr');
+        self.$('input[name*="['+name+']"]').parent().hide();
+      });
     }.bind(this));
     return this;
   },
