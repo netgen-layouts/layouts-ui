@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('core_boot');
+var BmCollections = require('../../collections/bm_collections')
 
 module.exports = Core.Model.extend({
   class_name: 'block',
@@ -12,6 +13,7 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.on('create:success', this.add_to_blocks_collection);
+    this.bm_collections = new BmCollections();
     return this;
   },
 
@@ -59,6 +61,14 @@ module.exports = Core.Model.extend({
   kind_of: function(kind){
     return this.type_name() === kind;
   },
+
+
+  load_bm_collections: function(){
+    return this.bm_collections.fetch({
+      url: this.url('collections')
+    });
+  },
+
 
   move: function(data){
 

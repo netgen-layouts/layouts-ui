@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('core_boot');
+var _ = require('underscore');
 
 module.exports = Core.Model.extend({
 
@@ -22,7 +23,7 @@ module.exports = Core.Model.extend({
   },
 
   should_accept: function(type_or_block){
-    var allowed = this.get('allowed_block_types');
+    var allowed = this.get('allowed_block_definitions');
     if(allowed){ return true; }
     var id = type_or_block.get('identifier') || type_or_block.id;
     return _.contains(allowed, id);
