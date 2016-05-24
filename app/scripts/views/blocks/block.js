@@ -61,7 +61,7 @@ module.exports = Core.View.extend({
     return this.model.is_container();
   },
 
-  $edit: function(e){
+  $edit: function(){
     if(this.editing){return;}
     this.editing_mark();
 

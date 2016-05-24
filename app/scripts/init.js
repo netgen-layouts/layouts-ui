@@ -101,6 +101,7 @@ $.extend(Core, {
 
     $('.right-sidebar').html(JST.sidebar());
 
+
     //this.open_browser();
   },
 
