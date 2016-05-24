@@ -54,16 +54,6 @@
   }
 }
 
-/* right sidebar */
-.right-sidebar {
-  position:fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  width:$rightWidth;
-  background:$toolbarbg2;
-}
-
 /* content */
 .main-content {
   position:fixed;
@@ -74,6 +64,7 @@
   overflow-x:hidden;
   overflow-y:scroll;
   padding:$gutter;
+  background:$contentbg;
 }
 
 /* footer */

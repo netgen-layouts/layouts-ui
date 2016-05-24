@@ -41,10 +41,10 @@
     .add-block-btn {
       border:none;
       border-bottom:1px solid $toolbarBorderColor;
+      border-right:1px solid $toolbarBorderColor;
       width:33.333333333333%;
-      &:nth-child(3n+2) {
-        border-left:1px solid $toolbarBorderColor;
-        border-right:1px solid $toolbarBorderColor;
+      &:nth-child(3n) {
+        border-right:none;
       }
     }
   }

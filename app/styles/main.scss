@@ -7,6 +7,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "layout";
 @import "blocks-panel";
 @import "sidebar";
+@import "content";
 
 input[type="text"]{background-color:white;}
 
@@ -20,16 +21,12 @@ body {
 
 .split{
   box-sizing:border-box;
-  > div{float:left; width:49%;
-    &.r{float: right;}
+  > div{
+    float:left; width:49%;
+    &.r{float:right; clear:right;}
+    &.l{clear:left;}
   }
 }
-[data-zone]{outline:0px solid transparent; min-height:2em; padding:5px 0;}
-[data-zone]:empty:before{content:'Drop content here!'; color:#999; font-size:1em; display:block;   }
-.sorting [data-zone]{outline:1px dotted #999;   outline-offset: 3px;margin-bottom:10px; @include transition(all 0.3s ease-in-out);}
-
-[data-zone].zone_type_inherited:empty:before{content: 'Inherited zone!'}
-.zone_type_inherited{outline-color:#f00;}
 
 .s70-30{
   > div.l{width:69.5%}
@@ -48,21 +45,7 @@ img{width:100%; max-width:100%;}
 [data-block] .no-placeholder{height:2px; background:#F0D; margin-left: 20px; margin-right: 20px;}
 .blocks .no-placeholder{display:none;}
 
-
-
-
 .ui-sortable-helper{opacity:0.8}
-
-[data-block]{
-  position:relative; margin-bottom:20px;
-  .block_actions{position:absolute;  display:none; text-align:right; height:100%; left:0; width:124px; top:100%; padding:10px 8px 0 0; color:#fff; z-index: 1000; }
-  .block_actions span{ background: black; padding: 8px;}
-  .handle{}
-  border: 1px solid transparent;
-  &.editing{border-color:#069;}
-  form{display:none;}
-}
-[data-block]:hover > .block_actions{display: inline-block;}
 
 .grid-block{
   @include clearfix;

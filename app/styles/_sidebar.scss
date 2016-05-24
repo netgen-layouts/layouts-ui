@@ -1,6 +1,13 @@
 .right-sidebar{
-  background-color: white;
-  padding: 20px;
-  height:100%;
-  h1{font-size:1.4em;}
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  width:$rightWidth;
+  background:$toolbarbg2;
+  padding:20px;
+  color:#fff;
+  h1 {
+    font-size:1.4em;
+  }
 }
