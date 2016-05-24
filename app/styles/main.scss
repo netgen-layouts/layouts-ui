@@ -1,4 +1,5 @@
 $icon-font-path: "../fonts/bootstrap/";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "../../../content-browser-ui-bundle/app/styles/main";
@@ -12,8 +13,10 @@ $icon-font-path: "../fonts/bootstrap/";
 input[type="text"]{background-color:white;}
 
 body {
-    font-size:16px;
+  font-size:16px;
+  font-family:'Open Sans', Helvetica, Arial, sans-serif;
 }
+
 *{
   padding: 0;
   margin: 0;

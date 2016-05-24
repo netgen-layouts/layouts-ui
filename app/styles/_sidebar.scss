@@ -10,4 +10,38 @@
   h1 {
     font-size:1.4em;
   }
+
+  /* collection item */
+  .collection-item {
+    background:$toolbarbg3;
+    margin:0 0 3px;
+    padding:4px 4px 4px 22px;
+    position:relative;
+    .handle {
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:16px;
+      cursor:-webkit-grab;
+      cursor:grab;
+      background:hsla(0, 0, 100, 0.075);
+    }
+    &.ui-sortable-helper {
+      .handle {
+        cursor:-webkit-grabbing;
+        cursor:grabbing;
+      }
+    }
+    .name {
+      font-size:0.75em;
+      font-weight:200;
+      margin:0;
+    }
+    &.ui-sortable-placeholder {
+      border:1px dashed rgba(255,255,255,0.5) !important;
+      visibility:visible !important;
+      background:transparent;
+    }
+  }
 }
