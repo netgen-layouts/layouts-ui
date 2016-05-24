@@ -51,7 +51,7 @@ module.exports = Core.View.extend({
         }).render();
         console.log('bm_collection', bm_collection);
 
-        bm_collection.fetch();
+        bm_collection.fetch({via: 'result', data: {offset: bm_collection.get('offset'), limit: bm_collection.get('limit')} });
 
       }.bind(this));
 
