@@ -12,6 +12,10 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  events: {
+    'click .remove': '$remove'
+  },
+
   $move: function(i){
     this.model.save({
       position: i
@@ -22,4 +26,9 @@ module.exports = Core.View.extend({
     });
     return this;
   },
+
+  $remove: function(e){
+    e.preventDefault();
+    console.log('remove click');
+  }
 });

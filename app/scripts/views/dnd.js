@@ -120,8 +120,8 @@ module.exports = {
     $sort_element.sortable({
       connectWith: self.connect_with,
       placeholder: 'no-placeholder',
-      handle: '.handle',
-      cursorAt: { left: 5 },
+      handle: '.block-header',
+      //cursorAt: { left: 5 },
       delay: 150,
       distance: 20,
       over: self.check_containers.bind(self),

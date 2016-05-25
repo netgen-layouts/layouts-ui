@@ -55,7 +55,7 @@ module.exports = Core.View.extend({
 
       }.bind(this));
 
-
+    this.$('#aside-tabs').browser_tabs();
 
     this.trigger_render();
 

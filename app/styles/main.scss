@@ -163,19 +163,6 @@ input[type="text"]{
   }
 }
 
-.template_name{
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  background: black;
-  padding: 2px 5px;
-  opacity: .7;
-  z-index: 1;
-  &:empty {
-    display: none;
-  }
-}
-
 .image-holder{
   position: relative;
   .image-title{

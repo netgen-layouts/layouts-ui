@@ -27,25 +27,55 @@
 [data-block] {
   position:relative;
   border:1px solid #EDEEEF;
-  padding:$gutter*0.5;
+  background:#fff;
+  padding:$gutter*1.5 $gutter*0.5 $gutter*0.5;
   + [data-block] {
     margin-top:$gutter*0.5;
   }
-  .block_actions {
+  .block-header {
     position:absolute;
-    display:none;
-    text-align:right;
-    height:100%;
     left:0;
-    width:124px;
-    top:100%;
-    padding:10px 8px 0 0;
+    top:0;
+    width:100%;
+    //background:hsl(212, 67, 44);
     color:#fff;
-    z-index:1000;
-  }
-  .block_actions span {
-    background:black;
-    padding:8px;
+    cursor:-webkit-grab;
+    .template_name{
+      float:right;
+      //background:hsla(0, 0, 0, 0.25);
+      background:rgba($toolbarbg2, 0.5);
+      font-size:10px;
+      color:#fff;
+      padding:3px 5px;
+      display:inline-block;
+      cursor:default;
+      &:empty {
+        display: none;
+      }
+    }
+    .handle {
+      display:none;
+      float:left;
+      text-align:center;
+      line-height:4px;
+      padding:6px 8px;
+      font-size:14px;
+      cursor:-webkit-grab;
+      cursor:grab;
+      .fa {
+        display:block;
+        line-height:inherit;
+      }
+    }
+    .action-destroy {
+      display:none;
+      float:right;
+      font-size:12px;
+      height:20px;
+      line-height:20px;
+      padding:0 6px;
+      cursor:pointer;
+    }
   }
   .handle{}
   &.editing {
@@ -54,7 +84,17 @@
   form {
     display:none;
   }
-  &:hover > .block_actions {
-    display: inline-block;
+  &:hover,
+  &.editing {
+    .block-header {
+      background:#6A98CC;
+      .handle,
+      .action-destroy {
+        display:block;
+      }
+    }
+  }
+  :focus {
+    outline:none;
   }
 }

@@ -22,7 +22,7 @@ module.exports = Core.View.extend({
   events: {
     'click': '$edit',
     //'dblclick > .block_actions .action-destroy': '$fast_destroy'
-     'click > .block_actions .action-destroy': '$destroy'
+     'click .action-destroy': '$destroy'
   },
 
   setup_dom_element: function(){
