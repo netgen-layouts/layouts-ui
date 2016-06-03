@@ -22,6 +22,8 @@ module.exports = Core.View.extend({
       handle: '.handle',
       delay: 150,
       cancel: '.item-dynamic',
+      appendTo: document.body,
+      helper: 'clone',
 
       stop: function(e, ui){
         $(ui.item).data('_view').$move($(ui.item).index());

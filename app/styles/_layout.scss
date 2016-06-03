@@ -3,10 +3,39 @@
   position:fixed;
   top:0;
   left:0;
-  right:$rightWidth;
+  right:0;
   height:$topHeight;
   background:$toolbarbg1;
   border-bottom:1px solid $toolbarBorderColor;
+  color:#fff;
+  .layout-name {
+    float:left;
+    padding:0 $gutter;
+    display:flex;
+    height:$topHeight;
+    align-items:center;
+    h1 {
+      margin:0;
+      font-size:1em;
+    }
+    .edit-name {
+      display:inline-block;
+      padding-left:1em;
+      color:$mainColor;
+      font-size:0.6875em;
+    }
+  }
+  .app-logo {
+    float:left;
+    width:$leftWidth;
+    height:$topHeight;
+    background:#f3590a url("../images/ngadmin-logo-w.svg") no-repeat center center;
+    background-size:20px auto;
+  }
+  .actions {
+    float:right;
+    padding:0.5em $gutter;
+  }
 }
 
 /* left toolbar */

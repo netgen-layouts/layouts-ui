@@ -5,6 +5,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "../../../content-browser-ui-bundle/app/styles/main";
 @import "icomoon";
 @import "variables";
+@import "typography";
 @import "layout";
 @import "blocks-panel";
 @import "sidebar";
@@ -20,6 +21,25 @@ body {
 *{
   padding: 0;
   margin: 0;
+}
+
+.btn-primary {
+  background:$btnprimary;
+  border-color:$btnprimary;
+  &:hover,
+  &:focus,
+  &.focus {
+    background:darken($btnprimary, 5%);
+    border-color:darken($btnprimary, 5%);
+  }
+}
+.btn-link {
+  color:$btnprimary;
+  &:hover,
+  &:focus,
+  &.focus {
+    color:darken($btnprimary, 5%);
+  }
 }
 
 .split{
@@ -44,11 +64,7 @@ body {
 
 img{width:100%; max-width:100%;}
 
-.no-placeholder{height:2px; background:#cc0; margin:10px -20px;}
-[data-block] .no-placeholder{height:2px; background:#F0D; margin-left: 20px; margin-right: 20px;}
-.blocks .no-placeholder{display:none;}
-
-.ui-sortable-helper{opacity:0.8}
+.ui-sortable-helper{opacity:0.8;}
 
 .grid-block{
   @include clearfix;

@@ -118,6 +118,7 @@ module.exports = {
         $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 
     $sort_element.sortable({
+      appendTo: document.body,
       connectWith: self.connect_with,
       placeholder: 'no-placeholder',
       handle: '.block-header',
@@ -126,6 +127,8 @@ module.exports = {
       distance: 20,
       over: self.check_containers.bind(self),
       out: self.remove_forbidden_class,
+      helper: 'clone',
+
       receive: function(e, ui){
         if(self.receive_is_canceled(ui)){ return; }
 
@@ -154,8 +157,8 @@ module.exports = {
         console.log('stop', this, ui);
 
         var zone_id = $(ui.item).closest('[data-zone]').data('zone'),
-              position = $(ui.item).index(),
-              model = $(ui.item).data('_view').model;
+            position = $(ui.item).index(),
+            model = $(ui.item).data('_view').model;
 
 
         model.move({
@@ -167,6 +170,7 @@ module.exports = {
           $(ui.item).remove();
         }
 
+        $('.right-sidebar').html(JST.sidebar());
         Core.trigger('sortable:end');
       }
 
@@ -178,9 +182,10 @@ module.exports = {
   },
 
   setup_dnd_for_blocks: function(){
+    var self = this;
     if(this.is_zone()){
       $('.blocks .block-items').sortable({
-        connectWith: '[data-zone], [data-container]',
+        connectWith: self.connect_with,
         placeholder: 'no-placeholder',
         appendTo: document.body,
         receive: function(e, ui){
@@ -188,9 +193,9 @@ module.exports = {
         },
 
         helper: function (e, item) {
-            this.copyHelper = item.clone(true).insertAfter(item);
-            $(this).data('copied', false);
-            return item.clone();
+          this.copyHelper = item.clone(true).insertAfter(item);
+          $(this).data('copied', false);
+          return item.clone();
         },
 
         start: function(){
@@ -198,14 +203,16 @@ module.exports = {
         },
 
         stop: function (e) {
-            Core.trigger('sortable:end');
-            var copied = $(this).data('copied');
+          Core.trigger('sortable:end');
+          var copied = $(this).data('copied');
 
-            if(!copied){
-              e.preventDefault();
-              this.copyHelper.remove();
-            }
-            this.copyHelper = null;
+          if(!copied){
+            e.preventDefault();
+            this.copyHelper.remove();
+          }
+          this.copyHelper = null;
+
+          $('.right-sidebar').html(JST.sidebar());
         }
       });
     }

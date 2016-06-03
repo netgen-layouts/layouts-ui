@@ -1,11 +1,11 @@
 .right-sidebar{
   position:fixed;
-  top:0;
+  top:$topHeight;
   right:0;
   bottom:0;
   width:$rightWidth;
   background:$toolbarbg2;
-  padding:20px;
+  padding:$gutter*1.333333333334;
   color:#fff;
   overflow-y:scroll;
   h1 {
@@ -16,66 +16,6 @@
     font-weight:400;
     margin:1em 0 0.75em;
     text-transform:uppercase;
-  }
-
-  /* collection item */
-  .collection-item {
-    background:$toolbarbg3;
-    margin:0 0 3px;
-    .item-panel {
-      padding:4px 30px 4px 22px;
-      position:relative;
-      .handle {
-        position:absolute;
-        left:0;
-        top:0;
-        bottom:0;
-        width:16px;
-        cursor:-webkit-grab;
-        cursor:grab;
-        color:hsla(0, 0, 100, 0.25);
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:14px;
-        background:hsla(0, 0, 100, 0.075);
-        .fa + .fa {
-          margin-left:1px;
-        }
-      }
-      &.ui-sortable-helper {
-        .handle {
-          cursor:-webkit-grabbing;
-          cursor:grabbing;
-        }
-      }
-      .name {
-        font-size:0.75em;
-        font-weight:200;
-        margin:0;
-        min-height:36px;
-        display:flex;
-        align-items:center;
-      }
-      .controls {
-        position:absolute;
-        right:0;
-        top:50%;
-        transform:translateY(-50%);
-        padding:4px;
-        font-size:14px;
-        a {
-          display:inline-block;
-          padding:0 4px;
-          color:#A5BCD0;
-        }
-      }
-    }
-    &.ui-sortable-placeholder {
-      border:1px dashed rgba(255, 255, 255, 0.25) !important;
-      visibility:visible !important;
-      background:transparent;
-    }
   }
 
   .add-items-btn {
@@ -123,5 +63,134 @@
         }
       }
     }
+  }
+  section {
+    + section {
+      margin-top:1.5em;
+      padding-top:1.5em;
+      border-top:1px solid hsla(0, 0, 100, 0.2);
+    }
+    input[type="text"] {
+      border:none;
+      box-shadow:none;
+      border-radius:0;
+      color:#333;
+      padding:0 0.5em;
+      height:36px;
+      font-size:0.875em;
+      margin:0 0 1em;
+      background:$sidebarinput;
+      color:#fff;
+    }
+    label {
+      font-weight:400;
+      font-size:0.8125em;
+      display:block;
+      margin:0 0 0.25em;
+    }
+    select {
+      border-radius:0;
+      border:none;
+      margin:0 0 1em;
+      background:$sidebarinput url('../images/caret-down.svg') no-repeat;
+      background-position:right 8px center;
+      background-size:13px auto;
+      height:36px;
+      font-size:0.875em;
+      padding:0 2.25em 0 0.5em;
+      color:#fff;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      appearance:none;
+      width:100%;
+    }
+    option {
+      padding:0.125em 0.5em;
+    }
+    input[type="submit"] {
+      display:none;
+    }
+  }
+  #trash {
+    height:240px;
+    padding:$gutter;
+    border:1px dashed rgba(255, 255, 255, 0.25);
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    right:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:rgba(255, 255, 255, 0.5);
+    p {
+      font-size:0.625em;
+      margin:0;
+    }
+    .fa {
+      font-size:40px;
+    }
+  }
+}
+
+/* collection item */
+.collection-item {
+  background:#4b5d6e;
+  margin:0 0 3px;
+  color:#fff;
+  .item-panel {
+    padding:4px 30px 4px 22px;
+    position:relative;
+    .handle {
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:16px;
+      cursor:-webkit-grab;
+      cursor:grab;
+      color:hsla(0, 0, 100, 0.25);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14px;
+      background:hsla(0, 0, 100, 0.075);
+      .fa + .fa {
+        margin-left:1px;
+      }
+    }
+    &.ui-sortable-helper {
+      .handle {
+        cursor:-webkit-grabbing;
+        cursor:grabbing;
+      }
+    }
+    .name {
+      font-size:0.75em;
+      font-weight:200;
+      margin:0;
+      min-height:36px;
+      display:flex;
+      align-items:center;
+    }
+    .controls {
+      position:absolute;
+      right:0;
+      top:50%;
+      transform:translateY(-50%);
+      padding:4px;
+      font-size:14px;
+      a {
+        display:inline-block;
+        padding:0 4px;
+        color:#e6e6e6;
+      }
+    }
+  }
+  &.ui-sortable-placeholder {
+    border:1px dashed rgba(255, 255, 255, 0.25) !important;
+    visibility:visible !important;
+    background:transparent;
   }
 }
