@@ -81,7 +81,7 @@ module.exports = Core.View.extend({
 
   $destroy: function(){
     var self = this;
-    new Core.Modal({
+    return new Core.Modal({
       title: 'Confirm',
       body: 'Are you sure you want to delete?'
     }).on('apply', function(){

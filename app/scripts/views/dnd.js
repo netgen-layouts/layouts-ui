@@ -6,7 +6,7 @@ require('jquery-ui');
 
 module.exports = {
 
-  connect_with: '[data-zone], [data-container]',
+  connect_with: '[data-zone], [data-container], [data-trash]',
   canceled_attr: 'canceled',
 
   is_zone: function(){
@@ -37,9 +37,9 @@ module.exports = {
     drag_view = $(ui.item).data('_view');
     receiver_view = receiver_element.data('_view');
 
-    console.log('drag_view', drag_view.model.attributes);
-    console.log('receiver_view', receiver_view.model.attributes);
-    console.log('as_container', drag_view.model.is_container && drag_view.model.is_container());
+    // console.log('drag_view', drag_view.model.attributes);
+    // console.log('receiver_view', receiver_view.model.attributes);
+    // console.log('as_container', drag_view.model.is_container && drag_view.model.is_container());
 
     if(drag_view.model.is_container() && receiver_view.model.is_container()){
       receiver_element.addClass('forbidden');
@@ -102,7 +102,6 @@ module.exports = {
   },
 
   add_new_block: function(ui, block){
-    console.log(block);
     var view_block = Core.blocks.create_view(block.type_name(), block),
     position = ui.item.index();
     ui.item.after(view_block.$el);
@@ -113,12 +112,13 @@ module.exports = {
   },
 
   setup_dnd_for_containers_and_zones: function(){
-    console.log(this.sort_element);
     var self = this,
         $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 
+
     $sort_element.sortable({
       appendTo: document.body,
+      // revert: true,
       connectWith: self.connect_with,
       placeholder: 'no-placeholder',
       handle: '.block-header',
@@ -148,15 +148,12 @@ module.exports = {
       },
 
       start: function() {
-        console.log('start drag');
         Core.trigger('sortable:start');
         self.$unedit($sort_element);
         $(this).sortable('refreshPositions');
       },
 
       stop: function(e, ui){
-        console.log('stop', this, ui);
-
         var zone_id = $(ui.item).closest('[data-zone]').data('zone'),
             position = $(ui.item).index(),
             model = $(ui.item).data('_view').model;
@@ -167,9 +164,14 @@ module.exports = {
           zone_identifier: zone_id
         });
 
-        if($(this).data('zone') !== zone_id){
+        var trashed = $(ui.item).data('trashed');
+        $(ui.item).data('trashed', null);
+
+
+        if(!trashed && $(this).data('zone') !== zone_id){
           $(ui.item).remove();
         }
+
 
         $('.right-sidebar').html(JST.sidebar());
         Core.trigger('sortable:end');
@@ -178,10 +180,16 @@ module.exports = {
     });
   },
 
+
   is_same_container: function(dragables){
     return dragables.receiver.model.id === dragables.sender.model.id;
   },
 
+
+  /**
+   * Setup DND for new blocks
+   * @method setup_dnd_for_blocks
+   */
   setup_dnd_for_blocks: function(){
     var self = this;
     if(this.is_zone()){
@@ -189,9 +197,6 @@ module.exports = {
         connectWith: self.connect_with,
         placeholder: 'no-placeholder',
         appendTo: document.body,
-        receive: function(e, ui){
-          console.log(ui.sender, this);
-        },
 
         helper: function (e, item) {
           this.copyHelper = item.clone(true).insertAfter(item);
@@ -220,21 +225,43 @@ module.exports = {
     }
   },
 
+  setup_trash: function(){
+    var $trash_droppable = $('[data-trash]');
+    $trash_droppable.sortable({
+      receive: function(e, ui){
+
+        $(ui.item).data('trashed', true);
+
+        var drag_block = $(ui.item).data('_view');
+        var block_or_type = drag_block.model;
+        if(block_or_type.class_name === 'block'){
+          drag_block.$destroy()
+            .on('cancel', function(){
+              $(ui.sender).sortable('cancel');
+            });
+        }
+
+      }
+    });
+    return this;
+  },
+
   init: function(){
     this.setup_dnd_for_blocks();
     this.setup_dnd_for_containers_and_zones();
+    this.setup_trash();
   },
 
   render: function(){
     this._super('render', arguments);
     this.init();
+
+
     return this;
   },
 
   $unedit: function(sortableEl){
     Core.trigger('editing:unmark', {block: this});
-    $('.right-sidebar').html('<div id="trash"><i class="fa fa-trash-o"></i><p>Trash</p></div>');
-    sortableEl.sortable('option', 'connectWith', '#trash');
   }
 
 };

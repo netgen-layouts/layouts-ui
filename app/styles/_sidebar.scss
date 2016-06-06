@@ -1,4 +1,4 @@
-.right-sidebar{
+#sidebar{
   position:fixed;
   top:$topHeight;
   right:0;
@@ -111,7 +111,10 @@
       display:none;
     }
   }
-  #trash {
+}
+
+
+#trash {
     height:$rightWidth - (2*$gutter);
     padding:$gutter;
     border:1px dashed rgba(255, 255, 255, 0.25);
@@ -119,7 +122,8 @@
     bottom:$gutter;
     left:$gutter;
     right:$gutter;
-    display:flex;
+    // display:flex;
+    display: none;
     align-items:center;
     justify-content:center;
     flex-direction:column;
@@ -131,8 +135,23 @@
     .fa {
       font-size:2.5em;
     }
+
+  [data-block]{display:none !important;}
+
+  .no-placeholder, [data-trash]{
+    position: absolute;
+    width:100%;
+    height: 100%;
+    z-index: 999;
+    top:0;
+    left:0;
   }
+
+  .no-placeholder{z-index:1000; margin:0; background-color:rgba(255,0,0,0.5)}
+  .no-placeholder:before,.no-placeholder:after{display:none;}
 }
+
+.sorting #trash{display:flex;}
 
 /* collection item */
 .collection-item {
