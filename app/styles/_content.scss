@@ -42,11 +42,10 @@
     cursor:grab;
     .template_name{
       float:right;
-      //background:hsla(0, 0, 0, 0.25);
       background:rgba($toolbarbg2, 0.5);
-      font-size:10px;
+      font-size:0.625em;
       color:#fff;
-      padding:3px 5px;
+      padding:0.3em 0.5em;
       display:inline-block;
       cursor:default;
       &:empty {
@@ -57,9 +56,9 @@
       display:none;
       float:left;
       text-align:center;
-      line-height:4px;
-      padding:6px 8px;
-      font-size:14px;
+      line-height:0.2857142857em;
+      padding:0.4285714286em 0.5714285714em;
+      font-size:0.875em;
       cursor:-webkit-grab;
       cursor:grab;
       .fa {
@@ -70,10 +69,10 @@
     .action-destroy {
       display:none;
       float:right;
-      font-size:12px;
-      height:20px;
-      line-height:20px;
-      padding:0 6px;
+      font-size:0.75em;
+      height:1.6666666667em;
+      line-height:1.6666666667em;
+      padding:0 0.5em;
       cursor:pointer;
     }
   }
@@ -97,7 +96,7 @@
     }
   }
   &:hover {
-    border-color: #A9C5E4;
+    border-color:#A9C5E4;
     .block-header {
       background:#A9C5E4;
     }

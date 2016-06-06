@@ -5,14 +5,14 @@
   bottom:0;
   width:$rightWidth;
   background:$toolbarbg2;
-  padding:$gutter*1.333333333334;
+  padding:$gutter;
   color:#fff;
   overflow-y:scroll;
   h1 {
     font-size:1.4em;
   }
   h4 {
-    font-size:11px;
+    font-size:0.6875em;
     font-weight:400;
     margin:1em 0 0.75em;
     text-transform:uppercase;
@@ -22,9 +22,9 @@
     margin:1.5em 0;
     border:1px dashed hsla(0, 0, 100, 0.75);
     text-align:center;
-    padding:8px 4px;
-    cursor:pointer;
     font-size:0.75em;
+    padding:0.6666667em 0.33333333em;
+    cursor:pointer;
     &:hover {
       background:hsla(0, 0, 100, 0.05);
     }
@@ -47,11 +47,11 @@
         align-items:center;
         justify-content:center;
         text-align:center;
-        font-size:14px;
+        font-size:0.875em;
         border:1px solid $toolbarbg3;
         color:#fff;
         width:100%;
-        padding:6px 4px;
+        padding:0.42857em 0.2857em;
         display:flex;
         cursor:pointer;
         text-decoration:none;
@@ -93,9 +93,9 @@
       border:none;
       margin:0 0 1em;
       background:$sidebarinput url('../images/caret-down.svg') no-repeat;
-      background-position:right 8px center;
-      background-size:13px auto;
-      height:36px;
+      background-position:right 0.5714285714em center;
+      background-size:0.9285714286em auto;
+      height:2.5714285714em;
       font-size:0.875em;
       padding:0 2.25em 0 0.5em;
       color:#fff;
@@ -112,13 +112,13 @@
     }
   }
   #trash {
-    height:240px;
+    height:$rightWidth - (2*$gutter);
     padding:$gutter;
     border:1px dashed rgba(255, 255, 255, 0.25);
     position:absolute;
-    bottom:20px;
-    left:20px;
-    right:20px;
+    bottom:$gutter;
+    left:$gutter;
+    right:$gutter;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -129,7 +129,7 @@
       margin:0;
     }
     .fa {
-      font-size:40px;
+      font-size:2.5em;
     }
   }
 }
@@ -137,24 +137,24 @@
 /* collection item */
 .collection-item {
   background:#4b5d6e;
-  margin:0 0 3px;
+  margin:0 0 0.1875em;
   color:#fff;
   .item-panel {
-    padding:4px 30px 4px 22px;
+    padding:0.25em 1.875em 0.25em 1.375em;
     position:relative;
     .handle {
       position:absolute;
       left:0;
       top:0;
       bottom:0;
-      width:16px;
+      width:1.1428571429em;
       cursor:-webkit-grab;
       cursor:grab;
       color:hsla(0, 0, 100, 0.25);
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:14px;
+      font-size:0.875em;
       background:hsla(0, 0, 100, 0.075);
       .fa + .fa {
         margin-left:1px;
@@ -170,7 +170,7 @@
       font-size:0.75em;
       font-weight:200;
       margin:0;
-      min-height:36px;
+      min-height:3em;
       display:flex;
       align-items:center;
     }
@@ -179,11 +179,11 @@
       right:0;
       top:50%;
       transform:translateY(-50%);
-      padding:4px;
-      font-size:14px;
+      padding:0.2857142857em;
+      font-size:0.875em;
       a {
         display:inline-block;
-        padding:0 4px;
+        padding:0 0.2857142857em;
         color:#e6e6e6;
       }
     }
