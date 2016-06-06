@@ -2,6 +2,7 @@
 
 var Core = require('core');
 var _ = require('underscore');
+var Browser = require('browser');
 var BmCollectionItemView = require('./bm_collection_item');
 
 module.exports = Core.View.extend({
@@ -33,6 +34,20 @@ module.exports = Core.View.extend({
   },
 
   $addItems: function(){
-    console.log('add items');
+
+    var browser = new Browser({
+      title: 'Content browser',
+      tree_config: {
+        root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+      }
+    }).on('apply', function(){
+      var items = this.selected_collection.map(function(item){
+        return {value_id: item.get('value'), value_type: item.get('type')};
+      });
+      console.log(items);
+    }).load_and_open();
+
+
+
   }
 });

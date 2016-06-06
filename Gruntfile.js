@@ -292,7 +292,8 @@ module.exports = function (grunt) {
                 'core': './app/scripts/core-ui/core.js',
                 'core_boot': './app/scripts/core-ui/core_boot.js',
                 'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-                'core_pager': './app/scripts/core-ui/components/pager.js'
+                'core_pager': './app/scripts/core-ui/components/pager.js',
+                'browser': './app/scripts/browser-ui/main.js'
               }
             },
           }
