@@ -150,6 +150,7 @@ module.exports = {
       start: function() {
         console.log('start drag');
         Core.trigger('sortable:start');
+        self.$unedit($sort_element);
         $(this).sortable('refreshPositions');
       },
 
@@ -199,6 +200,7 @@ module.exports = {
         },
 
         start: function(){
+          self.$unedit($('.blocks .block-items'));
           Core.trigger('sortable:start');
         },
 
@@ -227,6 +229,12 @@ module.exports = {
     this._super('render', arguments);
     this.init();
     return this;
+  },
+
+  $unedit: function(sortableEl){
+    Core.trigger('editing:unmark', {block: this});
+    $('.right-sidebar').html('<div id="trash"><i class="fa fa-trash-o"></i><p>Trash</p></div>');
+    sortableEl.sortable('option', 'connectWith', '#trash');
   }
 
 };
