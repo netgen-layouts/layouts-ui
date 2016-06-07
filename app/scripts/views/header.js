@@ -8,7 +8,8 @@ module.exports = Core.View.extend({
   template: 'header',
 
   events: {
-    'blur .layout-name > h1': 'set_name'
+    'blur .layout-name > h1': 'set_name',
+    'keydown .layout-name > h1': 'keypress_events'
   },
 
   initialize: function(){
@@ -24,6 +25,13 @@ module.exports = Core.View.extend({
   },
 
   set_name: function(){
+  },
+
+  keypress_events: function(e){
+    if(e.keyCode === 13){
+      this.$layout_name.blur();
+      e.preventDefault();
+    }
   }
 
 });
