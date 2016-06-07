@@ -10,6 +10,7 @@ module.exports = Core.Model.extend({
     Core.Model.prototype.initialize.apply(this, arguments);
     this.on('sync', this.setup_items);
     this.items = new BmCollectionItems();
+    this.items.bm_collection = this;
     return this;
   },
 
@@ -21,6 +22,18 @@ module.exports = Core.Model.extend({
   fetch_results: function(){
     return this.fetch({via: 'result', data: {offset: this.get('offset'), limit: this.get('limit')} });
   },
+
+
+  sync_add_items: function(items){
+    var data = {
+      items: items
+    };
+    return this.save(data, {
+      url: this.url('items'),
+      method: 'POST',
+      patch: true
+    })
+  }
 
 
 });
