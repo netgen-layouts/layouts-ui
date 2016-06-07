@@ -10,6 +10,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     // this.listenTo(this.collection, 'move:success', this.render);
     this.bm_collection_model = this.collection.bm_collection
+    this.listenTo(this.bm_collection_model, 'error', this.refresh);
     this.on('render', this.setup_dnd);
     return this;
   },
@@ -20,6 +21,12 @@ module.exports = Core.View.extend({
   view_items_el: '.bm-items',
   ViewItem: BmCollectionItemView,
   template: 'bm_collection_items',
+
+
+  refresh: function(){
+    return this.collection.fetch({via: 'items'});
+  },
+
   setup_dnd: function(){
     this.$('.bm-items').sortable({
       handle: '.handle',
@@ -41,9 +48,9 @@ module.exports = Core.View.extend({
 
   $add_items: function(){
     var self = this;
-    var browser = new Browser({
+    new Browser({
       tree_config: {
-        root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+        root_path: this.bm_collection_model.config_name // 'ezcontent' // ezcontent, ezlocation, eztags
       }
     }).on('apply', function(){
       var value_type = this.tree_config.get('item_type');

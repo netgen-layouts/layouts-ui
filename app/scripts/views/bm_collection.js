@@ -10,6 +10,8 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
 
+    this.model.config_name = this.$el.data('browserConfigName');
+
     new BmCollectionItemsView({
       collection: this.model.items,
       el: this.$('.items')
