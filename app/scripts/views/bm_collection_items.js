@@ -51,6 +51,7 @@ module.exports = Core.View.extend({
   $add_items: function(){
     var self = this;
     new Browser({
+      // preselected_item_ids: this.collection.pluck('value_id'), //TODO: uncomment when EDI implements this
       tree_config: {
         root_path: this.bm_collection_model.config_name // 'ezcontent' // ezcontent, ezlocation, eztags
       }
