@@ -24,7 +24,7 @@ module.exports = Core.View.extend({
     this.$('.bm-items').sortable({
       handle: '.handle',
       delay: 150,
-      cancel: '.item-dynamic',
+      cancel: '.dynamic-item',
       appendTo: document.body,
       helper: 'clone',
 

@@ -103,6 +103,15 @@
       -moz-appearance:none;
       appearance:none;
       width:100%;
+      &[multiple] {
+        height:auto;
+        padding-top:0.25em;
+        padding-bottom:0.25em;
+        padding-left:0;
+        background-position:right 0.5714285714em top 0.7em;
+        option {
+        }
+      }
     }
     option {
       padding:0.125em 0.5em;
@@ -211,5 +220,12 @@
     border:1px dashed rgba(255, 255, 255, 0.25) !important;
     visibility:visible !important;
     background:transparent;
+  }
+  &.dynamic-item {
+    background:#374552;
+    .handle,
+    .controls {
+      display:none;
+    }
   }
 }
