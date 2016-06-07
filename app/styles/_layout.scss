@@ -17,12 +17,26 @@
     h1 {
       margin:0;
       font-size:1em;
-    }
-    .edit-name {
-      display:inline-block;
-      padding-left:1em;
-      color:$mainColor;
-      font-size:0.6875em;
+      cursor:pointer;
+      &::after {
+        @extend %fontawesome;
+        content:"\f040";
+        display:inline-block;
+        margin-left:1em;
+        color:$mainColor;
+        font-size:0.75em;
+        pointer-events:none;
+      }
+      &:hover {
+        &::after {
+          color:darken($mainColor, 5%);
+        }
+      }
+      &:focus {
+        &::after {
+          visibility: hidden;
+        }
+      }
     }
   }
   .app-logo {
@@ -35,6 +49,9 @@
   .actions {
     float:right;
     padding:0.5em $gutter;
+  }
+  :focus {
+    outline:none;
   }
 }
 

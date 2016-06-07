@@ -7,6 +7,7 @@ var ViewBlockTypes = require('./views/block_types');
 var Layout = require('./models/layout');
 var ViewBlocksLoad = require('./views/blocks/load');
 var ModelHelper = require('./models/blocks/helper');
+var HeaderView = require('./views/header');
 
 // browser
 var Browser = require('./browser-ui/views/browser');
@@ -98,6 +99,7 @@ $.extend(Core, {
 
     this.blocks.load_layout_blocks();
 
+    new HeaderView({model: Core.g.layout, el: '.app-header'});
 
     $('.right-sidebar').html(JST.sidebar());
 

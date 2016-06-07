@@ -23,6 +23,7 @@ body {
   margin: 0;
 }
 
+/* bootstrap override */
 .btn-primary {
   background:$btnprimary;
   border-color:$btnprimary;
@@ -41,6 +42,30 @@ body {
     color:darken($btnprimary, 5%);
   }
 }
+
+.modal-content {
+  background:#f2f2f2;
+  border-radius:0;
+  border:none;
+}
+.modal-header {
+  background:#fff;
+  border:none;
+  min-height:58px;
+  .modal-title {
+    font-size:1.25em;
+  }
+}
+.modal-body {
+  padding:$gutter*1.3333333334 $gutter;
+}
+.modal-footer {
+  padding:$gutter 0;
+  margin:0 $gutter;
+  border-top:1px solid #fff;
+}
+/* /bootstrap override */
+
 
 .split{
   box-sizing:border-box;
