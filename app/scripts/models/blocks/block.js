@@ -22,7 +22,6 @@ module.exports = Core.Model.extend({
   },
 
   type: function(){
-    console.log('type', this);
     if(this.get('definition_identifier')){
       return Core.g.block_types.get(this.get('definition_identifier'));
     }else{
