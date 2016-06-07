@@ -24,7 +24,9 @@ module.exports = Core.View.extend({
 
 
   refresh: function(){
-    return this.collection.fetch({via: 'items'});
+    // return this.collection.fetch({via: 'items'});
+    var bm_collection = this.bm_collection_model;
+    return bm_collection.fetch({via: 'result', data: {offset: bm_collection.get('offset'), limit: bm_collection.get('limit')} });
   },
 
   setup_dnd: function(){
