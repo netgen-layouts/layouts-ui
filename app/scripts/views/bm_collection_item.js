@@ -9,6 +9,7 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(this.model, 'destroy', this.remove);
     return this;
   },
 
@@ -39,6 +40,7 @@ module.exports = Core.View.extend({
 
   $remove: function(e){
     e.preventDefault();
-    console.log('remove click');
+    this.model.destroy();
+    return this;
   }
 });

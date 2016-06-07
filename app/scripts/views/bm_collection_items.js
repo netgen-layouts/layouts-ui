@@ -8,7 +8,7 @@ var BmCollectionItemView = require('./bm_collection_item');
 module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    // this.listenTo(this.collection, 'move:success', this.render);
+    // this.listenTo(this.collection, 'delete:success', this.render);
     this.bm_collection_model = this.collection.bm_collection
     this.listenTo(this.bm_collection_model, 'error', this.refresh);
     this.on('render', this.setup_dnd);
