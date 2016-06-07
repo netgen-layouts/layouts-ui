@@ -209,7 +209,8 @@
       margin:0;
       min-height:3em;
       display:flex;
-      align-items:center;
+      flex-direction:column;
+      justify-content:center;
     }
     .controls {
       position:absolute;
@@ -239,6 +240,18 @@
     .handle,
     .remove {
       display:none !important;
+    }
+  }
+  &.hidden-item {
+    .name {
+      color:hsla(0, 0, 100, 0.5);
+      &::after {
+        display:block;
+        color:#fff;
+        font-size:0.83333333333em;
+        margin-top:0.5em;
+        content:"item is hidden";
+      }
     }
   }
 }

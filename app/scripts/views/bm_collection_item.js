@@ -20,9 +20,8 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
 
-    if(this.model.get('type') === 2){
-      this.$el.addClass('dynamic-item');
-    }
+    this.model.get('type') === 2 && this.$el.addClass('dynamic-item');
+    !this.model.get('visible') && this.$set_render_hidden();
 
     return this;
   },
@@ -42,5 +41,9 @@ module.exports = Core.View.extend({
     e.preventDefault();
     this.model.destroy();
     return this;
+  },
+
+  $set_render_hidden: function(){
+    this.$el.addClass('hidden-item');
   }
 });
