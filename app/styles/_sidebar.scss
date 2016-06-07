@@ -124,30 +124,32 @@
 
 
 #trash {
-    height:$rightWidth - (2*$gutter);
-    padding:$gutter;
-    border:1px dashed rgba(255, 255, 255, 0.25);
-    position:absolute;
-    bottom:$gutter;
-    left:$gutter;
-    right:$gutter;
-    // display:flex;
-    display: none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    color:rgba(255, 255, 255, 0.5);
-    p {
-      font-size:0.625em;
-      margin:0;
-    }
-    .fa {
-      font-size:2.5em;
-    }
+  height:$rightWidth - (2*$gutter);
+  padding:$gutter;
+  border:1px dashed rgba(255, 255, 255, 0.25);
+  position:absolute;
+  bottom:$gutter;
+  left:$gutter;
+  right:$gutter;
+  // display:flex;
+  display: none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:rgba(255, 255, 255, 0.5);
+  p {
+    font-size:0.625em;
+    margin:0;
+  }
+  .fa {
+    font-size:2.5em;
+  }
 
-  [data-block]{display:none !important;}
+  [data-block] {
+    display:none !important;
+  }
 
-  .no-placeholder, [data-trash]{
+  .no-placeholder, [data-trash] {
     position: absolute;
     width:100%;
     height: 100%;
@@ -155,12 +157,19 @@
     top:0;
     left:0;
   }
-
-  .no-placeholder{z-index:1000; margin:0; background-color:rgba(255,0,0,0.5)}
-  .no-placeholder:before,.no-placeholder:after{display:none;}
+  .no-placeholder {
+    z-index:1000;
+    margin:0;
+    background-color:hsla(0, 100, 61, 0.25);
+  }
+  .no-placeholder:before,
+  .no-placeholder:after {
+    display:none;
+  }
+  .sorting & {
+    display:flex;
+  }
 }
-
-.sorting #trash{display:flex;}
 
 /* collection item */
 .collection-item {
@@ -205,14 +214,18 @@
     .controls {
       position:absolute;
       right:0;
-      top:50%;
-      transform:translateY(-50%);
-      padding:0.2857142857em;
+      top:0;
+      //padding:0.2857142857em;
       font-size:0.875em;
       a {
         display:inline-block;
-        padding:0 0.2857142857em;
+        width:1.5em;
+        line-height:1.5;
+        text-align:center;
         color:#e6e6e6;
+      }
+      .remove {
+        background:hsla(0, 0, 100, 0.1);
       }
     }
   }
@@ -224,8 +237,8 @@
   &.dynamic-item {
     background:#3c4b58;
     .handle,
-    .controls {
-      display:none;
+    .remove {
+      display:none !important;
     }
   }
 }

@@ -32,7 +32,7 @@ module.exports = Core.Model.extend({
       url: this.url('items'),
       method: 'POST',
       patch: true
-    })
+    });
   }
 
 
