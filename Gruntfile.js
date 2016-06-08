@@ -113,7 +113,7 @@ module.exports = function (grunt) {
             },
             sass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['sass:server']
+                tasks: ['sass:server', 'postcss']
             },
             handlebars: {
                 files: ['<%= yeoman.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
@@ -270,6 +270,19 @@ module.exports = function (grunt) {
             }]
           }
         },
+
+        postcss: {
+          options: {
+            map: true,
+            processors: [
+              require('autoprefixer')({browsers: 'last 3 versions'})
+            ]
+          },
+          dist: {
+            src: '.tmp/styles/*.css'
+          }
+        },
+
         browserify: {
           vendor: {
             src: [],
@@ -604,6 +617,7 @@ module.exports = function (grunt) {
         'clean:dist',
         'gitinfo',
         'concurrent:dist',
+        'postcss',
         'useminPrepare',
         'requirejs:'+target,
         'concat',
