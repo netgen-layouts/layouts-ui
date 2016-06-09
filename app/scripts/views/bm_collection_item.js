@@ -45,5 +45,6 @@ module.exports = Core.View.extend({
 
   $set_render_hidden: function(){
     this.$el.addClass('hidden-item');
+    this.$('.name').after('<p class="note"><i class="fa fa-eye-slash"></i> Item is hidden</p>');
   }
 });

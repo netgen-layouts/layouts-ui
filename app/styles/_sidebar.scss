@@ -70,7 +70,9 @@
       padding-top:1.5em;
       border-top:1px solid hsla(0, 0, 100, 0.2);
     }
-    input[type="text"] {
+    input[type="text"],
+    input[type="number"],
+    textarea {
       border:none;
       box-shadow:none;
       border-radius:0;
@@ -82,8 +84,14 @@
       background:$sidebarinput;
       color:#fff;
     }
+    textarea {
+      height:auto;
+      min-height:120px;
+      padding-top:0.375em;
+      resize:vertical;
+    }
     label {
-      font-weight:400;
+      font-weight:200;
       font-size:0.8125em;
       display:block;
       margin:0 0 0.25em;
@@ -118,6 +126,32 @@
     }
     input[type="submit"] {
       display:none;
+    }
+    input[type="checkbox"] {
+      position:absolute;
+      left:-9999em;
+      + label {
+        display:block;
+        position:relative;
+        padding:0.3846153846em 0.3846153846em 0.3846153846em 1.5384615385em;
+        margin:0 0 0.5em;
+        cursor:pointer;
+        &::before {
+          @extend %fontawesome;
+          font-size:14px;
+          content:"\f096";
+          position:absolute;
+          left:0;
+          top:0.5em;
+        }
+      }
+      &:checked {
+        + label {
+          &::before {
+            content:"\f046";
+          }
+        }
+      }
     }
   }
 }
@@ -226,7 +260,7 @@
         color:#e6e6e6;
       }
       .remove {
-        background:hsla(0, 0, 100, 0.1);
+        background:hsla(0, 0, 100, 0.075);
       }
     }
   }
@@ -245,13 +279,12 @@
   &.hidden-item {
     .name {
       color:hsla(0, 0, 100, 0.5);
-      &::after {
-        display:block;
-        color:#fff;
-        font-size:0.83333333333em;
-        margin-top:0.5em;
-        content:"item is hidden";
-      }
+    }
+    .note {
+      color:#fff;
+      font-size:0.625em;
+      font-weight:200;
+      margin:0.5em 0 0;
     }
   }
 }
