@@ -276,6 +276,12 @@
       display:none !important;
     }
   }
+  .named-collection & {
+    .handle,
+    .remove {
+      display:none !important;
+    }
+  }
   &.hidden-item {
     .name {
       color:hsla(0, 0, 100, 0.5);

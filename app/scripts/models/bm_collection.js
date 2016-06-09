@@ -14,6 +14,10 @@ module.exports = Core.Model.extend({
     return this;
   },
 
+  can_add_items: function(){
+    return this.get('type') !== 2;
+  },
+
   setup_items: function(){
     this.items.reset(this.attributes.items);
     return this;

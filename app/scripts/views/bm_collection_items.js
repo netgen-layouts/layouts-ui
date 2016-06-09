@@ -30,18 +30,22 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
-    this.$('.bm-items').sortable({
-      handle: '.handle',
-      delay: 150,
-      cancel: '.dynamic-item',
-      appendTo: document.body,
-      helper: 'clone',
+    if(this.bm_collection_model.get('type') === 2){
+      this.$el.addClass('named-collection');
+    } else {
+      this.$('.bm-items').sortable({
+        handle: '.handle',
+        delay: 150,
+        cancel: '.dynamic-item',
+        appendTo: document.body,
+        helper: 'clone',
 
-      stop: function(e, ui){
-        $(ui.item).data('_view').$move($(ui.item).index());
-      }
+        stop: function(e, ui){
+          $(ui.item).data('_view').$move($(ui.item).index());
+        }
 
-    });
+      });
+    }
   },
 
   save_items: function(items){
@@ -65,8 +69,6 @@ module.exports = Core.View.extend({
       self.bm_collection_model.sync_add_items(items);
 
     }).load_and_open();
-
-
 
   }
 });

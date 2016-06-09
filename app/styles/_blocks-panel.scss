@@ -96,6 +96,18 @@
   &.grid .icon::before {
     content:"\e909";
   }
+  &.slider .icon::before {
+    content:"\e913";
+  }
+  &.thumb_gallery .icon::before {
+    content:"\e915";
+  }
+  &.grid_gallery .icon::before {
+    content:"\e908";
+  }
+  &.sushi_bar .icon::before {
+    content:"\e914";
+  }
   .title {
     font-size:0.6875em;
     display:block;
