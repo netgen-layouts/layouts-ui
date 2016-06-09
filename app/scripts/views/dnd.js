@@ -74,8 +74,8 @@ module.exports = {
   save_and_add_block: function(ui, block_or_type, receiver_block){
     var receiver_model = receiver_block.model,
       container_attributes = {
-        //container_id: receiver_block.is_container() ? receiver_model.id : null,
-        block_type: block_or_type.get('definition_identifier') || block_or_type.get('identifier'),
+        // block_type: block_or_type.get('definition_identifier') || block_or_type.get('identifier'),
+        block_type: block_or_type.get('identifier'),
         zone_identifier: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id'),
         layout_id: parseInt(Core.g.layout.id, 10)
       };
@@ -86,6 +86,7 @@ module.exports = {
       this.add_block_and_set_position(ui, block_or_type);
     }else{
       block_or_type = Core.model_helper.init_block_from_type(block_or_type, container_attributes);
+      block_or_type.fresh = true;
       this.add_block_and_set_position(ui, block_or_type);
 
       if(block_or_type.is_group()){
@@ -102,12 +103,14 @@ module.exports = {
   },
 
   add_new_block: function(ui, block){
-    var view_block = Core.blocks.create_view(block.type_name(), block),
-    position = ui.item.index();
-    ui.item.after(view_block.$el);
-    if(!$(ui.item).data('type')){
-      ui.item.remove();
-    }
+
+    var view_block = Core.blocks.create_view(block.get('definition_identifier'), block),
+        position = ui.item.index();
+        ui.item.after(view_block.$el);
+
+    // Remove block_definition from UI if we are creating new block
+    block.fresh && ui.item.remove() && (block.fresh = false);
+
     return position;
   },
 
@@ -132,10 +135,9 @@ module.exports = {
       receive: function(e, ui){
         if(self.receive_is_canceled(ui)){ return; }
 
-        var drag_block = $(ui.item).data('_view');
-        var block_or_type = drag_block.model;
-
-        var receiver_block = $(this).closest('[data-view]').data('_view');
+        var drag_block = $(ui.item).data('_view'),
+            block_or_type = drag_block.model,
+            receiver_block = $(this).closest('[data-view]').data('_view');
 
         if(self.is_zone() && !self.zone_accept_blocks(ui, block_or_type, $(this).data('_view'))){
           return;
@@ -143,6 +145,7 @@ module.exports = {
 
         ui.sender.data('copied', true);
 
+        console.log('DND', receiver_block)
         self.save_and_add_block(ui, block_or_type, receiver_block);
 
       },
@@ -154,15 +157,13 @@ module.exports = {
       },
 
       stop: function(e, ui){
+        console.log(e, ui);
         var zone_id = $(ui.item).closest('[data-zone]').data('zone'),
             position = $(ui.item).index(),
             model = $(ui.item).data('_view').model;
 
 
-        model.move({
-          position: position,
-          zone_identifier: zone_id
-        });
+
 
         var trashed = $(ui.item).data('trashed');
         $(ui.item).data('trashed', null);
@@ -170,6 +171,12 @@ module.exports = {
 
         if(!trashed && $(this).data('zone') !== zone_id){
           $(ui.item).remove();
+
+          model.move({
+            position: position,
+            zone_identifier: zone_id
+          });
+
         }
 
 

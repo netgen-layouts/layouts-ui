@@ -4,7 +4,6 @@ var Core = require('core_boot');
 var SideBarView = require('../sidebar');
 
 module.exports = Core.View.extend({
-
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'change', this.setup_dom_element);
@@ -29,7 +28,7 @@ module.exports = Core.View.extend({
     this.model.is_in_container() && this.$el.attr('data-in-container', '');
     this.$el
       .attr('data-block', '')
-      .attr('data-type', this.model.type_name());
+      .attr('data-type', this.model.get('identifier'));
     return this;
   },
 
@@ -85,7 +84,6 @@ module.exports = Core.View.extend({
       title: 'Confirm',
       body: 'Are you sure you want to delete?'
     }).on('apply', function(){
-      console.log('View destroy model', self.model);
       self.model.destroy();
     }).open();
   },

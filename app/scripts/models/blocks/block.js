@@ -21,16 +21,8 @@ module.exports = Core.Model.extend({
     Core.g.layout.get('blocks').add(this);
   },
 
-  type: function(){
-    if(this.get('definition_identifier')){
-      return Core.g.block_types.get(this.get('definition_identifier'));
-    }else{
-      return Core.g.block_types.get(this.get('identifier'));
-    }
-  },
-
-  type_name: function(){
-    return this.type().get('definition_identifier');
+  definition: function(){
+    return Core.g.block_types.get(this.get('definition_identifier'));
   },
 
   // template_name: function(){
@@ -58,7 +50,7 @@ module.exports = Core.Model.extend({
   },
 
   kind_of: function(kind){
-    return this.type_name() === kind;
+    return this.get('definition_identifier') === kind;
   },
 
 
@@ -67,7 +59,6 @@ module.exports = Core.Model.extend({
       url: this.url('collections')
     });
   },
-
 
   move: function(data){
 

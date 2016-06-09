@@ -5,7 +5,7 @@ var Core = require('core_boot');
 module.exports = Core.Model.extend({
   class_name: 'block_type',
 
-  idAttribute: 'identifier',
+  idAttribute: 'definition_identifier',
   format: '',
   path: 'config/block_types',
 
