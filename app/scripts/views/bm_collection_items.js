@@ -10,7 +10,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     // this.listenTo(this.collection, 'delete:success', this.render);
     this.bm_collection_model = this.collection.bm_collection;
-    this.listenTo(this.bm_collection_model, 'error', this.refresh);
+    this.listenTo(this.bm_collection_model, 'add_items:error', this.refresh);
     this.on('render', this.setup_dnd);
     return this;
   },
@@ -24,9 +24,8 @@ module.exports = Core.View.extend({
 
 
   refresh: function(){
-    // return this.collection.fetch({via: 'items'});
-    var bm_collection = this.bm_collection_model;
-    return bm_collection.fetch({via: 'result', data: {offset: bm_collection.get('offset'), limit: bm_collection.get('limit')} });
+    return this.bm_collection_model.fetch_results();
+    // return bm_collection.fetch({via: 'result', data: {offset: bm_collection.get('offset'), limit: bm_collection.get('limit')} });
   },
 
   setup_dnd: function(){
@@ -55,7 +54,7 @@ module.exports = Core.View.extend({
   $add_items: function(){
     var self = this;
     new Browser({
-      // preselected_item_ids: this.collection.pluck('value_id'), //TODO: uncomment when EDI implements this
+      disabled_item_ids: this.collection.pluck('value_id'),
       tree_config: {
         root_path: this.bm_collection_model.config_name // 'ezcontent' // ezcontent, ezlocation, eztags
       }

@@ -19,6 +19,7 @@ module.exports = Core.Model.extend({
   },
 
   setup_items: function(){
+    console.log('setup items');
     this.items.reset(this.attributes.items);
     return this;
   },
@@ -33,6 +34,7 @@ module.exports = Core.Model.extend({
       items: items
     };
     return this.save(data, {
+      via: 'add_items',
       url: this.url('items'),
       method: 'POST',
       patch: true

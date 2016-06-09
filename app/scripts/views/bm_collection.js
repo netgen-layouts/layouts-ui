@@ -7,16 +7,22 @@ var BmCollectionItemsView = require('./bm_collection_items');
 module.exports = Core.View.extend({
   template: 'bm_collection',
 
-  render: function(){
-    Core.View.prototype.render.apply(this, arguments);
-
+  initialize: function(){
+    Core.View.prototype.initialize.apply(this, arguments);
+    this.on('render', this.render_items);
     this.model.config_name = this.$el.data('browserConfigName');
+    return this;
+  },
 
-    new BmCollectionItemsView({
+  render_items: function(){
+    this.items_view && this.items_view.remove();
+    this.items_view = new BmCollectionItemsView({
       collection: this.model.items,
-      el: this.$('.items')
-    }).render();
+    })
+
+    this.$('.items').html(this.items_view.render().$el);
 
     return this;
   },
+
 });
