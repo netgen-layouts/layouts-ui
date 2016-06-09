@@ -1,18 +1,16 @@
 <div class="left-toolbar-buttons">
-  {{#each collection.models}}
-    <button class="button open-panel" data-target="{{identifier}}"><span class="icon"></span></button>
-  {{/each}}
+  <button class="button open-panel" data-target="blocks"><span class="icon"></span></button>
 </div>
 <div class="left-toolbar-panels">
-  {{#each collection.models}}
-    <div class="left-panel left-panel-{{identifier}}">
-      <div class="panel-content">
+  <div class="left-panel left-panel-blocks">
+    <div class="panel-content">
+      <a class="close-panel"><i class="fa fa-times"></i></a>
+      {{#each collection.models}}
         <div class="header">
-          <a class="close-panel"><i class="fa fa-times"></i></a>
           <h2>{{name}}</h2>
         </div>
         <div class="block-items {{identifier}}"></div>
-      </div>
+      {{/each}}
     </div>
-  {{/each}}
+  </div>
 </div>

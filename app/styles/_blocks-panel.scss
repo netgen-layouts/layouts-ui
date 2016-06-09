@@ -17,25 +17,32 @@
       border-left:1px solid $toolbarBorderColor;
       box-shadow:0px 0 0.5em rgba(0, 0, 0, 0.35);
     }
+    .close-panel {
+      position:absolute;
+      right:0.5em;
+      top:0.625em;
+      width:1.5em;
+      height:1.5em;
+      cursor:pointer;
+      text-align:right;
+      color:#fff;
+      z-index:2;
+    }
     .header {
       padding:0.75em 1.5em 0.75em 0.5em;
       position:relative;
       background:$toolbarbg2;
-      .close-panel {
-        position:absolute;
-        right:0.5em;
-        top:0.625em;
-        width:1.5em;
-        height:1.5em;
-        cursor:pointer;
-        text-align:right;
-        color:#fff;
-      }
       h2 {
         font-size:1em;
         font-weight:400;
         line-height:1.25;
         margin:0;
+      }
+    }
+    .block-items {
+      margin:0 0 1.5em;
+      &::after {
+        @extend %clearfix;
       }
     }
     .add-block-btn {
@@ -66,7 +73,7 @@
     height:48px;
     line-height:48px;
     margin-top:0.1875em;
-    color:hsla(0, 0, 100, 0.45);
+    color:hsl(212, 19, 60);
   }
   &.title .icon::before {
     content:"\e916";
@@ -74,8 +81,20 @@
   &.title_with_h3 .icon::before {
     content:"\e916";
   }
-  &.paragraph .icon::before {
+  &.text .icon::before {
     content:"\e918";
+  }
+  &.map .icon::before {
+    content:"\e90d";
+  }
+  &.html_snippet .icon::before {
+    content:"\e90a";
+  }
+  &.list .icon::before {
+    content:"\e90b";
+  }
+  &.grid .icon::before {
+    content:"\e909";
   }
   .title {
     font-size:0.6875em;

@@ -93,7 +93,7 @@
       &::before {
         @extend %icomoon;
       }
-      &[data-target="simple_blocks"]::before {
+      &[data-target="blocks"]::before {
         content:"\e919";
       }
     }
