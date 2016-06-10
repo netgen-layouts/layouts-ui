@@ -20,7 +20,7 @@
     .close-panel {
       position:absolute;
       right:0.5em;
-      top:0.625em;
+      top:0.5em;
       width:1.5em;
       height:1.5em;
       cursor:pointer;
@@ -33,7 +33,7 @@
       position:relative;
       background:$toolbarbg2;
       h2 {
-        font-size:1em;
+        font-size:0.875em;
         font-weight:400;
         line-height:1.25;
         margin:0;
@@ -112,5 +112,6 @@
     font-size:0.6875em;
     display:block;
     padding:0 0.3636em;
+    line-height:1.2;
   }
 }
