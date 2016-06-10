@@ -66,7 +66,7 @@ module.exports = Core.View.extend({
       var value_type = this.tree_config.get('item_type');
       var items = this.selected_collection.map(function(item){
         //NOTE: type is currently hardcoded to manual items.
-        return {type: 0, value_id: item.get('value'), value_type: value_type };
+        return {type: 0, value_id: item.get('value'), value_type: value_type, position: 0 };
       });
 
       self.bm_collection_model.sync_add_items(items);
