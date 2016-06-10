@@ -21,7 +21,7 @@ module.exports = Core.View.extend({
       var self = this;
       $('[data-block].editing [data-inline-child]').each(function(){
         var name = $(this).data('attr');
-        self.$('input[name*="['+name+']"]').parent().hide();
+        self.$('[name*="['+name+']"]').parent().hide();
       });
     }.bind(this));
     return this;
@@ -29,7 +29,7 @@ module.exports = Core.View.extend({
 
   $delayed_submit: _.debounce(function(){
     this.$submit();
-  }, 200),
+  }, 500),
 
 
   $submit: function (e) {

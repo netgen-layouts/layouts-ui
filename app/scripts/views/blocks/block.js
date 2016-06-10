@@ -2,13 +2,12 @@
 
 var Core = require('core_boot');
 var SideBarView = require('../sidebar');
+var _ = require('underscore');
 
 module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'change', this.setup_dom_element);
-    // this.on('render', this.update_positions);
-
 
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
@@ -38,9 +37,11 @@ module.exports = Core.View.extend({
    * @param  {html}
    * @return {this}
    */
-  render: function(html){
+  render: function(x){
+    _.isString(x) && console.error(x);
     Core.View.prototype.render.apply(this, arguments);
-    this.$el.html(html || this.model.get('html'));
+    // this.$el.html(html || this.model.get('html'));
+    this.$el.html(this.model.get('html'));
     return this;
   },
 

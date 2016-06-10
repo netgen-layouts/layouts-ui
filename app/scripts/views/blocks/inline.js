@@ -8,9 +8,9 @@ module.exports = {
 
   initialize: function(){
     this._super('initialize', arguments);
-    this.listenToOnce(this.model, 'save:success', this.render_with_new_data);
-    this.listenTo(this.model, 'sidebar_save:success', this.render);
-    this.debounced_save = _.debounce(this.$save, 200);
+    // this.listenToOnce(this.model, 'save:success', this.render_with_new_data);
+    this.listenTo(this.model, 'read:success sidebar_save:success', this.render);
+    this.debounced_save = _.debounce(this.$save, 500);
     return this;
   },
 

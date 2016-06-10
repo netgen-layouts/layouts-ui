@@ -9,7 +9,8 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.model, 'destroy', this.remove);
+    this.bm_collection_model = this.model.collection.bm_collection;
+    this.listenTo(this.model, 'delete:success', this.remove);
     return this;
   },
 
@@ -42,7 +43,6 @@ module.exports = Core.View.extend({
   $remove: function(e){
     e.preventDefault();
     this.model.destroy();
-    return this;
   },
 
   $set_render_hidden: function(){
@@ -56,6 +56,10 @@ module.exports = Core.View.extend({
 
   $hide_remove_btn: function(){
     this.$el.removeClass('show-remove');
-  }
+  },
+
+  refresh_block: function(){
+    return this.bm_collection_model.block().fetch();
+  },
 
 });

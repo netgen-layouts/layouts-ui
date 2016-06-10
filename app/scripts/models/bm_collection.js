@@ -39,7 +39,12 @@ module.exports = Core.Model.extend({
       method: 'POST',
       patch: true
     });
-  }
+  },
+
+
+  block: function(){
+    return Core.g.layout.blocks.get(this.get('block_id'));
+  },
 
 
 });

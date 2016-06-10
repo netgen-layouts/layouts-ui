@@ -8,9 +8,9 @@ var BmCollectionItemView = require('./bm_collection_item');
 module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    // this.listenTo(this.collection, 'delete:success', this.render);
     this.bm_collection_model = this.collection.bm_collection;
-    this.listenTo(this.bm_collection_model, 'add_items:error', this.refresh);
+    this.listenTo(this.bm_collection_model, 'add_items:success', this.refresh);
+    this.listenTo(this.collection, 'move:success delete:success', this.refresh_block);
     this.on('render', this.setup_dnd);
     return this;
   },
@@ -24,8 +24,12 @@ module.exports = Core.View.extend({
 
 
   refresh: function(){
+    this.refresh_block();
     return this.bm_collection_model.fetch_results();
-    // return bm_collection.fetch({via: 'result', data: {offset: bm_collection.get('offset'), limit: bm_collection.get('limit')} });
+  },
+
+  refresh_block: function(){
+    this.bm_collection_model.block().fetch();
   },
 
   setup_dnd: function(){
