@@ -210,9 +210,11 @@
   background:#4b5d6e;
   margin:0 0 0.1875em;
   color:#fff;
+  cursor:default;
   .item-panel {
     padding:0.25em 1.875em 0.25em 1.375em;
     position:relative;
+    overflow:hidden;
     .handle {
       position:absolute;
       left:0;
@@ -246,22 +248,58 @@
       flex-direction:column;
       justify-content:center;
     }
-    .controls {
-      position:absolute;
-      right:0;
-      top:0;
-      //padding:0.2857142857em;
-      font-size:0.875em;
-      a {
-        display:inline-block;
-        width:1.5em;
-        line-height:1.5;
-        text-align:center;
-        color:#e6e6e6;
+  }
+  .controls {
+    position:absolute;
+    right:0;
+    top:0;
+    font-size:0.875em;
+    text-align:right;
+    > a {
+      display:inline-block;
+      width:1.5em;
+      line-height:1.5;
+      text-align:center;
+      color:#e6e6e6;
+      cursor:pointer;
+    }
+    .remove-toggle {
+      background:hsl(209, 16, 41);
+    }
+  }
+  .remove-btns {
+    position:absolute;
+    right:0;
+    left:0;
+    bottom:0;
+    top:0;
+    transform:translateY(-100%);
+    z-index:2;
+    display:flex;
+    > a {
+      flex:1;
+      display:flex;
+      cursor:pointer;
+      font-weight:200;
+      font-size:12px;
+      color:#fff;
+      text-decoration:none;
+      padding:0 1em;
+      align-items:center;
+      justify-content:center;
+      &.cancel {
+        background:hsla(209, 14, 45, 0.95);
       }
-      .remove {
-        background:hsla(0, 0, 100, 0.075);
+      &.remove {
+        background:hsla(350, 43, 42, 0.95);
       }
+    }
+  }
+  &.show-remove {
+    .remove-btns {
+      animation:showRemove 250ms cubic-bezier(0,0,0.58,1);
+      animation-fill-mode:both;
+      transform:translateX(0);
     }
   }
   &.ui-sortable-placeholder {
@@ -271,8 +309,7 @@
   }
   &.dynamic-item {
     background:#3c4b58;
-    .handle,
-    .remove {
+    .handle {
       display:none !important;
     }
   }
@@ -292,5 +329,14 @@
       font-weight:200;
       margin:0.5em 0 0;
     }
+  }
+}
+
+@keyframes showRemove {
+  0% {
+    transform:translateY(-100%);
+  }
+  100% {
+    transform:translateY(0);
   }
 }

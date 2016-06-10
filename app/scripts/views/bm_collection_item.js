@@ -14,7 +14,9 @@ module.exports = Core.View.extend({
   },
 
   events: {
-    'click .remove': '$remove'
+    'click .remove-toggle': '$show_remove_btn',
+    'click .remove': '$remove',
+    'click .cancel': '$hide_remove_btn'
   },
 
   render: function(){
@@ -46,5 +48,14 @@ module.exports = Core.View.extend({
   $set_render_hidden: function(){
     this.$el.addClass('hidden-item');
     this.$('.name').after('<p class="note"><i class="fa fa-eye-slash"></i> Item is hidden</p>');
+  },
+
+  $show_remove_btn: function(){
+    this.$el.addClass('show-remove');
+  },
+
+  $hide_remove_btn: function(){
+    this.$el.removeClass('show-remove');
   }
+
 });

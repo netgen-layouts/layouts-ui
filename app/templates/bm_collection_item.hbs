@@ -2,6 +2,10 @@
   <div class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></div>
   <p class="name">{{model.name}}</p>
   <div class="controls">
-    <a href="" class="remove"><i class="fa fa-times"></i></a>
+    {{#if model.can_remove_item }}<a class="remove-toggle"><i class="fa fa-times"></i></a>{{/if}}
   </div>
+  {{#if model.can_remove_item }}<div class="remove-btns">
+    <a class="cancel">Cancel</a>
+    <a class="remove">Remove</a>
+  </div>{{/if}}
 </div>
