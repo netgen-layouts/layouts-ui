@@ -56,10 +56,6 @@ module.exports = Core.View.extend({
 
   $hide_remove_btn: function(){
     this.$el.removeClass('show-remove');
-  },
-
-  refresh_block: function(){
-    return this.bm_collection_model.block().fetch();
-  },
+  }
 
 });
