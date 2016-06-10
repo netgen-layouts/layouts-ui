@@ -9,6 +9,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'change', this.setup_dom_element);
 
+    this.listenTo(this.model, 'create:success read:success sidebar_save:success', this.render);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
     if(!this.model.isNew()){

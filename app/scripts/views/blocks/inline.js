@@ -6,14 +6,6 @@ module.exports = {
 
   prevent_auto_render: true,
 
-  initialize: function(){
-    this._super('initialize', arguments);
-    // this.listenToOnce(this.model, 'save:success', this.render_with_new_data);
-    this.listenTo(this.model, 'read:success sidebar_save:success', this.render);
-    this.debounced_save = _.debounce(this.$save, 500);
-    return this;
-  },
-
   events: {
     'keyup [data-inline-child]': '$keyup'
   },
@@ -32,6 +24,11 @@ module.exports = {
     $input_or_textarea.val(value);
     this.debounced_save($input_or_textarea);
   },
+
+
+  debounced_save: _.debounce(function($input){
+    this.$save($input);
+  }, 500),
 
   $save: function($input){
 
