@@ -17,6 +17,11 @@ module.exports = Core.Model.extend({
     return this;
   },
 
+
+  edit_url: function(){
+    return '/bm/app/blocks/'+this.id+'/edit' ;
+  },
+
   add_to_blocks_collection: function(){
     Core.g.layout.get('blocks').add(this);
   },

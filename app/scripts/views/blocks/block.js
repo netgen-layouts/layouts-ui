@@ -69,8 +69,8 @@ module.exports = Core.View.extend({
       model: this.model
     });
 
-    $.get(this.model.url('edit')).done(function(response){
-        this.edit_view.$el.html(response.html);
+    $.get(this.model.edit_url()).done(function(response){
+        this.edit_view.$el.html(response);
         $('.right-sidebar').html(this.edit_view.render().$el);
         Core.trigger('editing:unmark', {block: this});
       }.bind(this));
