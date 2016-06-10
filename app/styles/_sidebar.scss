@@ -280,8 +280,7 @@
       flex:1;
       display:flex;
       cursor:pointer;
-      font-weight:200;
-      font-size:12px;
+      font-size:13px;
       color:#fff;
       text-decoration:none;
       padding:0 1em;
@@ -291,7 +290,7 @@
         background:hsla(209, 14, 45, 0.95);
       }
       &.remove {
-        background:hsla(350, 43, 42, 0.95);
+        background:rgba($btnprimary, 0.95);
       }
     }
   }
