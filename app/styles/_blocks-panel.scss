@@ -10,6 +10,7 @@
     .panel-content {
       background:$toolbarbg1;
       position:absolute;
+      overflow-y:scroll;
       top:0;
       bottom:0;
       left:0.625em;
