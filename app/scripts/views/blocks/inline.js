@@ -7,7 +7,23 @@ module.exports = {
   prevent_auto_render: true,
 
   events: {
-    'keyup [data-inline-child]': '$keyup'
+    'keyup [data-inline-child]': '$keyup',
+    'focus [data-inline-child]': '$render_sidebar'
+  },
+
+
+  render: function(){
+    this._super('render', arguments);
+    var $inline = this.$('[data-inline-child]');
+    var hint = $inline.data('hint') || '..........................';
+    $inline.after('<span>'+ hint +'</span>');
+    return this;
+  },
+
+
+  $render_sidebar: function(){
+    this.model.trigger('edit');
+    return this;
   },
 
 
@@ -19,8 +35,10 @@ module.exports = {
     value = value.replace(/&nbsp;/g, ' ');
 
     if(!$input_or_textarea.length){
-      throw new Error('Inline element not found in sidebar form.')
+      throw new Error('Inline element not found in sidebar form.');
     }
+
+    if(_.isEmpty(value)){return;}
     $input_or_textarea.val(value);
     this.debounced_save($input_or_textarea);
   },
@@ -34,7 +52,7 @@ module.exports = {
 
     this.model.save_via_form($input.closest('form'))
       .done(this.model.trigger.bind(this.model, 'save_inline:done'))
-      .fail(this.model.trigger.bind(this.model, 'save_inline:error'))
+      .fail(this.model.trigger.bind(this.model, 'save_inline:error'));
 
   }
 };

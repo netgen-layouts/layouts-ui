@@ -222,16 +222,18 @@ input[type="text"]{
 }
 
 p[data-inline]{
-  padding: 6px 0;
+  // padding: 6px 0;
 }
 
 
-[data-inline-child]:empty:before{
-  padding-right: 0 10px;
-  content: attr(data-hint);
-  color: #ccc;
-  font-weight:normal;
+[data-inline]{
+  position:relative;
 }
+
+
+[data-inline-child]{position:relative; z-index:10; padding-right:1px; width:100%; display:inline-block;}
+[data-inline-child] + span{display:none; position: absolute; z-index:1; top:0; left:0; color:#ccc;}
+[data-inline-child]:empty + span{display:block;}
 
 .the_pencil{font-size:30px; color:#fff;}
 

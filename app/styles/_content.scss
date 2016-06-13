@@ -53,6 +53,7 @@
         display: none;
       }
     }
+
     .handle {
       display:none;
       float:left;
@@ -77,6 +78,8 @@
       cursor:pointer;
     }
   }
+
+  .block-header + *{margin-top:0;}
   .handle {
 
   }

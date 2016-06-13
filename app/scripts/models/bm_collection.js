@@ -20,7 +20,7 @@ module.exports = Core.Model.extend({
   },
 
   change_type_url: function(){
-    return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.id+'/change_type';
+    return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.get('identifier')+'/change_type';
   },
 
   can_add_items: function(){
