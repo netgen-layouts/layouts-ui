@@ -18,10 +18,29 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  events: {
+    'change #collection-type': '$change_collection_type'
+  },
+
 
   destroy: function(){
     this.remove();
     $('.right-sidebar').html(JST.sidebar());
+  },
+
+  //TODO: Call some ajax to change collection type and bind to that event in sidebar
+  $change_collection_type: function(){
+    this.model.trigger('refresh:sidebar');
+    return this;
+  },
+
+
+  load: function(){
+    $.get(this.model.edit_url()).done(function(response){
+      this.$el.html(response);
+      this.render();
+    }.bind(this));
+    return this;
   },
 
 

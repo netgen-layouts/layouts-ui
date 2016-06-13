@@ -12,6 +12,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'create:success read:success sidebar_save:success', this.render);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
+    this.listenTo(this.model, 'refresh:sidebar', this.refresh_sidebar);
     if(!this.model.isNew()){
       this.setup_dom_element();
       this.render();
@@ -62,21 +63,27 @@ module.exports = Core.View.extend({
     return this.model.is_container();
   },
 
-  $edit: function(){
-    if(this.editing){return;}
-    this.editing_mark();
+
+  refresh_sidebar: function(){
+    this.edit_view && this.edit_view.load();
+    return this;
+  },
+
+  load_sidebar: function(){
 
     this.edit_view = new SideBarView({
       model: this.model
-    });
+    }).load();
 
-    $.get(this.model.edit_url()).done(function(response){
-        this.edit_view.$el.html(response);
-        $('.right-sidebar').html(this.edit_view.render().$el);
-        Core.trigger('editing:unmark', {block: this});
-      }.bind(this));
+    $('.right-sidebar').html(this.edit_view.$el);
 
+  },
 
+  $edit: function(){
+    if(this.editing){return;}
+    Core.trigger('editing:unmark', {block: this});
+    this.editing_mark();
+    this.load_sidebar();
     return this;
   },
 
