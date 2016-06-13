@@ -2,6 +2,7 @@
 
 var Core = require('core');
 var _ = require('underscore');
+var Browser = require('browser');
 
 
 module.exports = Core.View.extend({
@@ -13,6 +14,37 @@ module.exports = Core.View.extend({
     'submit form': '$submit',
     'keyup': '$delayed_submit',
     // 'change': '$delayed_submit'
+
+    'focus #query_full_edit_parameters_parent_location_id': '$browse'
+  },
+
+
+  setup_browsable: function(){
+    var $input = $('#query_full_edit_parameters_parent_location_id');
+    this.$input = $input;
+    this.$name = $('<div></div>');
+    $input.before(this.$name);
+    return this;
+  },
+
+  $browse: function(){
+    var self = this;
+    new Browser({
+      tree_config: {
+        root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+      }
+    }).on('apply', function(){
+      // var value_type = this.tree_config.get('item_type');
+      var selected = this.selected_collection.first();
+      self.$input.val(selected.get('value'));
+      self.$name.html(selected.get('name'));
+
+    }).load_and_open();
+
+  },
+
+  form_render: function(){
+    this.setup_browsable();
   },
 
   load: function(){
@@ -22,6 +54,7 @@ module.exports = Core.View.extend({
       $('[data-block].editing [data-inline-child]').each(function(){
         var name = $(this).data('attr');
         self.$('[name*="['+name+']"]').parent().hide();
+        self.form_render();
       });
     }.bind(this));
     return this;
