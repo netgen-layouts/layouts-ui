@@ -9,9 +9,19 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.on('sync', this.setup_items);
+    this.on('change_type:success', this.proxy_to_block);
     this.items = new BmCollectionItems();
     this.items.bm_collection = this;
+    console.log(this.attributes);
     return this;
+  },
+
+  proxy_to_block: function(){
+    this.block().trigger('change_type:success');
+  },
+
+  change_type_url: function(){
+    return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.id+'/change_type';
   },
 
   can_add_items: function(){
@@ -36,6 +46,18 @@ module.exports = Core.Model.extend({
     return this.save(data, {
       via: 'add_items',
       url: this.url('items'),
+      method: 'POST',
+      patch: true
+    });
+  },
+
+  sync_change_type: function(data){
+    data.new_type && (data.new_type = parseInt(data.new_type, 10));
+    data.named_collection_id && (data.named_collection_id = parseInt(data.named_collection_id, 10));
+
+    return this.save(data,{
+      via: 'change_type',
+      url: this.change_type_url(),
       method: 'POST',
       patch: true
     });

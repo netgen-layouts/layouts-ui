@@ -49,10 +49,17 @@ $.extend(Core, {
     this.app_cache_handler();
     this.setup_events();
 
+    this.on('render plugins:reinitialize', this.reinitialize_plugins);
+
     Core.g.block_types = new BlockTypes();
     Core.g.tree_config = new TreeConfig({
       root_path: 'ezcontent' // ezcontent, ezlocation, eztags
     });
+  },
+
+  reinitialize_plugins: function(data){
+    data.view.$('.xeditable').xeditable();
+    data.view.$('.js-dependable-selects-group .js-master').dependable_select();
   },
 
   setup_events: function(){

@@ -12,7 +12,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'create:success read:success sidebar_save:success', this.render);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
-    this.listenTo(this.model, 'refresh:sidebar', this.refresh_sidebar);
+    this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
     if(!this.model.isNew()){
       this.setup_dom_element();
       this.render();

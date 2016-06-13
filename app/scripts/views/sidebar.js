@@ -31,8 +31,12 @@ module.exports = Core.View.extend({
 
   //TODO: Call some ajax to change collection type and bind to that event in sidebar
   $change_collection_type: function(){
-    this.model.trigger('refresh:sidebar');
-    return this;
+    // this.model.trigger('refresh:sidebar');
+    //
+    var data = this.serialize().params.block_collection;
+    console.log(this.model);
+    this.model.default_bm_collection().sync_change_type(data);
+    // return this;
   },
 
 
@@ -49,9 +53,6 @@ module.exports = Core.View.extend({
     Core.View.remove_views_in_element('.sidebar');
     var self = this;
 
-
-    $('.xeditable').xeditable();
-
     this.$('[data-form]').each(function(){
       var $this = $(this);
       new FormView({
@@ -66,7 +67,7 @@ module.exports = Core.View.extend({
     this.model
       .load_bm_collections()
       .done(function(){
-        var bm_collection = this.model.bm_collections.where({identifier: 'default'})[0];
+        var bm_collection = this.model.default_bm_collection();
         new BmCollectionView({
           model: bm_collection,
           el: this.$('.collection-items')

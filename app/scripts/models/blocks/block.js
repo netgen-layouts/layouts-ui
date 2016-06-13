@@ -65,6 +65,10 @@ module.exports = Core.Model.extend({
     });
   },
 
+  default_bm_collection: function(){
+    return this.bm_collections.findWhere({identifier: 'default'});
+  },
+
   move: function(data){
 
     var items = Core._.pick(data, 'zone_identifier', 'position');
