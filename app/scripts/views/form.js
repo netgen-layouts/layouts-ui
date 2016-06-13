@@ -12,7 +12,7 @@ module.exports = Core.View.extend({
     events: {
     'submit form': '$submit',
     'keyup': '$delayed_submit',
-    'change': '$delayed_submit'
+    // 'change': '$delayed_submit'
   },
 
   load: function(){
@@ -27,7 +27,8 @@ module.exports = Core.View.extend({
     return this;
   },
 
-  $delayed_submit: _.debounce(function(){
+  $delayed_submit: _.debounce(function(e){
+    if($(e.target).hasClass('.js-skip-on-change')){return;}
     this.$submit();
   }, 500),
 

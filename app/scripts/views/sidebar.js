@@ -15,13 +15,14 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'destroy', this.destroy);
+    this.on('xeditable:apply:collection_type', this.$change_collection_type);
     return this;
   },
 
   events: {
-    'change #collection-type': '$change_collection_type'
+    // 'change #collection-type': '$change_collection_type',
+    'click .js-apply': '$apply'
   },
-
 
   destroy: function(){
     this.remove();
@@ -47,6 +48,9 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.remove_views_in_element('.sidebar');
     var self = this;
+
+
+    $('.xeditable').xeditable();
 
     this.$('[data-form]').each(function(){
       var $this = $(this);
