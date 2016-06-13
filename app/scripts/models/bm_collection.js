@@ -12,7 +12,6 @@ module.exports = Core.Model.extend({
     this.on('change_type:success', this.proxy_to_block);
     this.items = new BmCollectionItems();
     this.items.bm_collection = this;
-    console.log(this.attributes);
     return this;
   },
 
@@ -29,7 +28,6 @@ module.exports = Core.Model.extend({
   },
 
   setup_items: function(){
-    console.log('setup items');
     this.items.reset(this.attributes.items);
     return this;
   },

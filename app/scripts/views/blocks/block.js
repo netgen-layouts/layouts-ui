@@ -65,6 +65,7 @@ module.exports = Core.View.extend({
 
 
   refresh_sidebar: function(){
+    this.model.fetch();
     this.edit_view && this.edit_view.load();
     return this;
   },
