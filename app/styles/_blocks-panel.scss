@@ -109,6 +109,12 @@
   &.sushi_bar .icon::before {
     content:"\e914";
   }
+  &.rich_text .icon::before {
+    content:"\e912";
+  }
+  &.external_video .icon::before {
+    content:"\e917";
+  }
   .title {
     font-size:0.6875em;
     display:block;
