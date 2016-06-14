@@ -42,7 +42,7 @@ module.exports = Core.View.extend({
         handle: '.handle',
         delay: 150,
         cancel: '.dynamic-item',
-        appendTo: document.body,
+        axis: 'y',
         helper: 'clone',
 
         stop: function(e, ui){
