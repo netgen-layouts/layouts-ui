@@ -150,6 +150,37 @@
       }
     }
   }
+
+  .xeditable {
+    margin-bottom:1.5em;
+    padding-bottom:0.5em;
+    border-bottom:1px solid hsla(0, 0, 100, 0.2);
+    .js-edit {
+      display:block;
+      margin:0 0 1em;
+      background:rgba($sidebarinput, 0.3);
+      height:2.5714285714em;
+      font-size:0.875em;
+      padding:0.5714285714em 2em 0.5714285714em 0.5em;
+      position:relative;
+      color:#fff;
+      > span {
+        display:inline-block;
+        //border-bottom:1px dashed $mainColor;
+      }
+      .fa {
+        position:absolute;
+        right:0.5em;
+        top:50%;
+        transform:translateY(-50%);
+        color:$mainColor;
+      }
+    }
+    .actions {
+      text-align:right;
+      margin:0 0 0.5em;
+    }
+  }
 }
 
 
