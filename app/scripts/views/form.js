@@ -29,38 +29,14 @@ module.exports = Core.View.extend({
     'change select': '$submit',
     'change input[type="checkbox"]': '$submit',
     'change input[type="radio"]': '$submit',
-
-
-    'focus #query_full_edit_parameters_parent_location_id': '$browse'
+    'browser:change .js-input-browse': '$browse_change'
   },
 
 
-  setup_browsable: function(){
-    var $input = $('#query_full_edit_parameters_parent_location_id');
-    this.$input = $input;
-    this.$name = $('<div></div>');
-    $input.before(this.$name);
+  $browse_change: function(e, data){
+    console.log(data);
+    this.$submit();
     return this;
-  },
-
-  $browse: function(){
-    var self = this;
-    new Browser({
-      tree_config: {
-        root_path: 'ezlocation' // ezcontent, ezlocation, eztags
-      }
-    }).on('apply', function(){
-      // var value_type = this.tree_config.get('item_type');
-      var selected = this.selected_collection.first();
-      self.$input.val(selected.get('value'));
-      self.$name.html(selected.get('name'));
-
-    }).load_and_open();
-
-  },
-
-  form_render: function(){
-    this.setup_browsable();
   },
 
   load: function(){

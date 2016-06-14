@@ -60,6 +60,7 @@ $.extend(Core, {
   reinitialize_plugins: function(data){
     data.view.$('.xeditable').xeditable();
     data.view.$('.js-dependable-selects-group .js-master').dependable_select();
+    data.view.$('.js-input-browse').input_browse();
   },
 
   setup_events: function(){
