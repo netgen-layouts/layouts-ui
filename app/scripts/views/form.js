@@ -10,10 +10,26 @@ module.exports = Core.View.extend({
 
   prevent_auto_render: true,
 
-    events: {
+  initialize: function(){
+    Core.View.prototype.initialize.apply(this, arguments);
+    this.is_query_form = this.$el.data('queryForm');
+
+    this.listenTo(this.model, 'sidebar_save:success', function(){
+      this.is_query_form && this.model.trigger('refresh:items');
+    });
+
+    return this;
+  },
+
+  events: {
     'submit form': '$submit',
-    'keyup': '$delayed_submit',
-    // 'change': '$delayed_submit'
+    'keyup input': '$delayed_submit',
+    'keyup textarea': '$delayed_submit',
+
+    'change select': '$submit',
+    'change input[type="checkbox"]': '$submit',
+    'change input[type="radio"]': '$submit',
+
 
     'focus #query_full_edit_parameters_parent_location_id': '$browse'
   },
@@ -31,7 +47,7 @@ module.exports = Core.View.extend({
     var self = this;
     new Browser({
       tree_config: {
-        root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+        root_path: 'ezlocation' // ezcontent, ezlocation, eztags
       }
     }).on('apply', function(){
       // var value_type = this.tree_config.get('item_type');

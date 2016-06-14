@@ -9,7 +9,9 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.bm_collection_model = this.collection.bm_collection;
-    this.listenTo(this.bm_collection_model, 'add_items:success', this.refresh);
+    this.listenTo(this.bm_collection_model, 'add_items:success refresh:items', this.refresh);
+    console.log(this.bm_collection_model.block());
+    this.listenTo(this.bm_collection_model.block(), 'refresh:items', this.refresh);
     this.listenTo(this.collection, 'move:success delete:success', this.refresh_block);
     this.on('render', this.setup_dnd);
     return this;
