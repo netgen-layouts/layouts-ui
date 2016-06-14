@@ -107,16 +107,12 @@
       font-size:0.875em;
       padding:0 2.25em 0 0.5em;
       color:#fff;
-      -webkit-appearance:none;
-      -moz-appearance:none;
       appearance:none;
       width:100%;
       &[multiple] {
         height:auto;
-        padding-top:0.25em;
-        padding-bottom:0.25em;
-        padding-left:0;
-        background-position:right 0.5714285714em top 0.7em;
+        padding:0.25em 0;
+        background-image:none;
         option {
         }
       }

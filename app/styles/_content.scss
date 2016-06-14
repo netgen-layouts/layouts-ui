@@ -141,3 +141,31 @@
 }
 
 .blocks .no-placeholder{display:none;}
+
+.grid-row {
+  display:flex;
+  flex-wrap:wrap;
+  margin:-2px;
+  .grid-item {
+    padding:8px;
+    background:rgba(0, 0, 0, 0.025);
+    border:2px solid $zonebg;
+    font-size:0.75em;
+    @for $i from 1 through 12 {
+      &.cols-#{$i} {
+        flex-basis:100% / $i;
+      }
+    }
+  }
+}
+.list-row {
+  .list-item {
+    background:rgba(0, 0, 0, 0.025);
+    padding:8px;
+    font-size:0.75em;
+    margin:2px 0;
+    + .list-item {
+      margin-top:4px;
+    }
+  }
+}
