@@ -2,7 +2,6 @@
 
 var Core = require('core');
 var _ = require('underscore');
-var Browser = require('browser');
 
 
 module.exports = Core.View.extend({
@@ -16,6 +15,7 @@ module.exports = Core.View.extend({
 
     this.listenTo(this.model, 'sidebar_save:success', function(){
       this.is_query_form && this.model.trigger('refresh:items');
+      this.model.fetch();
     });
 
     return this;

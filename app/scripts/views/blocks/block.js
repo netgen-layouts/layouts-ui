@@ -9,7 +9,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'change', this.setup_dom_element);
 
-    this.listenTo(this.model, 'create:success read:success sidebar_save:success', this.render);
+    this.listenTo(this.model, 'create:success read:success', this.render);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
@@ -64,9 +64,7 @@ module.exports = Core.View.extend({
     return this.model.is_container();
   },
 
-
   refresh_sidebar: function(){
-    this.model.fetch();
     this.edit_view && this.edit_view.load();
     return this;
   },
