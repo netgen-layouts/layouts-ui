@@ -122,6 +122,7 @@ module.exports = {
     $sort_element.sortable({
       appendTo: document.body,
       // revert: true,
+
       connectWith: self.connect_with,
       placeholder: 'no-placeholder',
       handle: '.block-header',
@@ -185,6 +186,22 @@ module.exports = {
       }
 
     });
+
+
+    //Hack for proxing document to sortable element scroll;
+    var document_scroll_top = $(document).scrollTop();
+    var window_height = $(window).height();
+    var sortable_height = $('.main-content').height();
+    var ratio = sortable_height/window_height;
+    var $scrollable_element = $('.main-content');
+
+    var initial_top = $scrollable_element.scrollTop();
+    $(document).off('scroll.dnd').on('scroll.dnd', function(){
+      var current_document_scroll_top = $(document).scrollTop();
+      var move_by = current_document_scroll_top * ratio;
+      current_document_scroll_top > 10 && $scrollable_element.scrollTop(initial_top + move_by);
+    });
+
   },
 
 
