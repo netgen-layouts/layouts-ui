@@ -51,8 +51,9 @@ module.exports = Core.View.extend({
       $('[data-block].editing [data-inline-child]').each(function(){
         var name = $(this).data('attr');
         self.$('[name*="['+name+']"]').parent().hide();
-        self.trigger_render();
       });
+
+      self.trigger_render();
     }.bind(this));
     return this;
   },
