@@ -18,7 +18,7 @@ module.exports = Core.View.extend({
     this.items_view && this.items_view.remove();
     this.items_view = new BmCollectionItemsView({
       collection: this.model.items,
-    })
+    });
 
     this.$('.items').html(this.items_view.render().$el);
 

@@ -14,10 +14,16 @@ module.exports = Core.View.extend({
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
     this.listenTo(this.model, 'edit', this.$edit);
+    this.listenTo(this.model, 'change_type:success sidebar_save:success', this.reload_model);
     if(!this.model.isNew()){
       this.setup_dom_element();
       this.render();
     }
+  },
+
+  reload_model: function(){
+    this.model.fetch();
+    return this;
   },
 
   events: {
@@ -70,7 +76,6 @@ module.exports = Core.View.extend({
   },
 
   load_sidebar: function(){
-
     this.edit_view = new SideBarView({
       model: this.model
     }).load();

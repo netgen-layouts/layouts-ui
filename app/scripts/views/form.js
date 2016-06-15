@@ -13,10 +13,8 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.is_query_form = this.$el.data('queryForm');
 
-    this.listenTo(this.model, 'sidebar_save:success', function(){
-      this.is_query_form && this.model.trigger('refresh:items');
-      this.model.fetch();
-    });
+
+    this.listenTo(this.model, 'sidebar_save:success', this.trigger_refresh_items);
 
     return this;
   },
@@ -32,9 +30,16 @@ module.exports = Core.View.extend({
     'browser:change .js-input-browse': '$browse_change'
   },
 
+  trigger_refresh_items: function(){
+    if(this.is_query_form){
+      console.log('trigger trigger_refresh_items', this.is_query_form);
+      this.model.trigger('refresh:items');
+    }
+    return this;
+  },
+
 
   $browse_change: function(e, data){
-    console.log(data);
     this.$submit();
     return this;
   },
@@ -60,7 +65,6 @@ module.exports = Core.View.extend({
 
   $submit: function (e) {
     e && e.preventDefault();
-
     var options = {},
         params = this.serialize();
 
