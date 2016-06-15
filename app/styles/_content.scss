@@ -1,22 +1,21 @@
 /* zones */
 [data-zone] {
-  outline:0px solid transparent;
+  outline:1px dashed #676767;
   min-height:2em;
-  padding:$gutter*0.5;
-  background:$zonebg;
-  margin:0 0 $gutter;
-  &:empty:before {
-    content:'Drop content here!';
+  padding:$gutter*0.6666666667;
+  margin:0 0 $gutter*1.25;
+  &:empty::before {
+    content:'Drop blocks here!';
     color:#999;
     font-size:0.875em;
     padding:0.5em;
     display:block;
   }
-  &.zone_type_inherited:empty:before {
+  &.zone_type_inherited:empty::before {
     content:'Inherited zone!'
   }
   .sorting & {
-    outline:1px dashed #FFC91E;
+    //outline:1px dashed #FFC91E;
     @include transition(all 0.3s ease-in-out);
   }
 }
@@ -28,7 +27,7 @@
 [data-block] {
   position:relative;
   border:1px solid #EDEEEF;
-  background:#fff;
+  background:$blockbg;
   padding:$gutter*1.5 $gutter*0.5 $gutter*0.5;
   + [data-block] {
     margin-top:$gutter*0.5;
@@ -149,7 +148,7 @@
   .grid-item {
     padding:8px;
     background:rgba(0, 0, 0, 0.035);
-    border:2px solid $zonebg;
+    border:2px solid $blockbg;
     font-size:0.75em;
     word-break:break-word;
     @for $i from 1 through 12 {
@@ -170,3 +169,4 @@
     }
   }
 }
+
