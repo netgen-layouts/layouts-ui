@@ -164,6 +164,9 @@
       padding:0.5714285714em 2em 0.5714285714em 0.5em;
       position:relative;
       color:#fff;
+      &:hover {
+        background:rgba($sidebarinput, 0.4);
+      }
       > span {
         display:inline-block;
         //border-bottom:1px dashed $mainColor;
@@ -179,6 +182,43 @@
     .actions {
       text-align:right;
       margin:0 0 0.5em;
+    }
+  }
+
+  .js-input-browse {
+    .js-trigger {
+      display:block;
+      margin:0 0 1em;
+      background:$sidebarinput;
+      height:2.5714285714em;
+      font-size:0.875em;
+      padding:0.5714285714em 3.25em 0.5714285714em 0.5em;
+      position:relative;
+      color:#fff;
+      text-decoration:none;
+      span {
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display:block;
+        white-space:nowrap;
+      }
+      &::after {
+        position:absolute;
+        right:0;
+        top:0;
+        bottom:0;
+        width:3em;
+        background:$btnprimary;
+        line-height:2.5714285714em;
+        text-align:center;
+        @extend %fontawesome;
+        content:"\f24d";
+      }
+      &:hover {
+        &::after {
+          background:darken($btnprimary, 5%);
+        }
+      }
     }
   }
 }
