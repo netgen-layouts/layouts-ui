@@ -10,10 +10,38 @@
   color:#fff;
   .layout-name {
     float:left;
-    padding:0 $gutter;
-    display:flex;
-    height:$topHeight;
-    align-items:center;
+    padding:7px $gutter;
+    .js-show-form {
+      display:block;
+      font-size:1em;
+      cursor:pointer;
+      padding:0 0.5em;
+      height:36px;
+      line-height:36px;
+      .fa {
+        color:$mainColor;
+        margin-left:4px;
+      }
+    }
+    form {
+      input[type="text"] {
+        border:none;
+        box-shadow:none;
+        border-radius:0;
+        padding:0 0.5em;
+        height:36px;
+        font-size:1em;
+        margin:0;
+        background:$sidebarinput;
+        cursor:pointer;
+        color:#fff;
+        display:inline-block;
+        width:auto;
+      }
+      .btns {
+        display:inline-block;
+      }
+    }
     h1 {
       margin:0;
       font-size:1em;

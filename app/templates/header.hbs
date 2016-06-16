@@ -1,6 +1,16 @@
 <div class="app-logo"></div>
 <div class="layout-name">
-    <h1 contenteditable="true">{{ model.name }}</h1>
+    {{#if editing }}
+      <form method="post" class="js-layout">
+        <input type="text" name="name" class="js-name" value="{{ model.name }}">
+        <div class="btns">
+          <a href="#" class="btn btn-link js-cancel">Cancel</a>
+          <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    {{else}}
+      <span class="js-show-form">{{ model.name }} <i class="fa fa-pencil"></i></span>
+    {{/if}}
 </div>
 <div class="actions">
     <button class="btn btn-link">Discard</button>
