@@ -16,8 +16,8 @@
       font-size:1em;
       cursor:pointer;
       padding:0 0.5em;
-      height:36px;
-      line-height:36px;
+      height:$btnHeight;
+      line-height:$btnHeight;
       .fa {
         color:$mainColor;
         margin-left:4px;
@@ -29,7 +29,7 @@
         box-shadow:none;
         border-radius:0;
         padding:0 0.5em;
-        height:36px;
+        height:$btnHeight;
         font-size:1em;
         margin:0;
         background:$sidebarinput;
