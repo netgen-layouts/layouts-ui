@@ -68,6 +68,8 @@ module.exports = Core.View.extend({
       .load_bm_collections()
       .done(function(){
         var bm_collection = this.model.default_bm_collection();
+        if(!bm_collection){return;}
+
         new BmCollectionView({
           model: bm_collection,
           el: this.$('.collection-items')
