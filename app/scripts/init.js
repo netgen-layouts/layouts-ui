@@ -9,6 +9,9 @@ var ViewBlocksLoad = require('./views/blocks/load');
 var ModelHelper = require('./models/blocks/helper');
 var HeaderView = require('./views/header');
 
+var LayoutTypes = require('./collections/layout_types');
+var NewLayoutView = require('./views/new_layout');
+
 // browser
 var Browser = require('./browser-ui/views/browser');
 var TreeConfig = require('./browser-ui/models/tree_config');
@@ -51,6 +54,7 @@ $.extend(Core, {
 
     this.on('render plugins:reinitialize', this.reinitialize_plugins);
 
+    Core.g.layout_types = new LayoutTypes();
     Core.g.block_types = new BlockTypes();
     Core.g.tree_config = new TreeConfig({
       root_path: 'ezcontent' // ezcontent, ezlocation, eztags
@@ -83,7 +87,6 @@ $.extend(Core, {
 
   page_layout: function(){
     Core.g.layout = new Layout({id: Core.router.params.id});
-
     $.when(
       Core.g.block_types.fetch_once(),
       Core.g.layout.blocks.fetch(),
@@ -95,6 +98,22 @@ $.extend(Core, {
 
   page_layout_new: function(){
     console.log('hello layout_new');
+
+    var layout = new Layout();
+
+    var layout_view = new NewLayoutView({
+      model: layout
+    });
+
+
+    $.when(
+      Core.g.layout_types.fetch()
+    ).then(
+      layout_view.render().open()
+    );
+
+
+
   },
 
   start: function(){

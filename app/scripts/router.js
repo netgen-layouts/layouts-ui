@@ -6,7 +6,7 @@ module.exports = Core.Backbone.Router.extend({
 
   routes: {
     '': 'home',
-    'layout/new': 'layout_new',
+    'layout': 'layout_new',
     'layout(/:id)': 'layout'
   },
 
@@ -21,7 +21,11 @@ module.exports = Core.Backbone.Router.extend({
 
 
   layout_new: function(){
-    Core.page_layout_new();
+    if(Core.g.layout){
+      this.navigate_to('layout', {id: Core.g.layout.id});
+    }else{
+      Core.page_layout_new();
+    }
   }
 
 });
