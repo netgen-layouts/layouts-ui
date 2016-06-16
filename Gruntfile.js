@@ -593,17 +593,24 @@ module.exports = function (grunt) {
         }
 
         grunt.task.run([
-            'clean:server',
-            'handlebars',
-            'concurrent:server',
-            'postcss',
-            // 'concat:dev',
+            'fast_build',
             'configureProxies:server',
             'connect:livereload',
-            //'open',
             'watch'
         ]);
     });
+
+
+    grunt.registerTask('fast_build', function () {
+      grunt.task.run([
+        'clean:server',
+        'handlebars',
+        'concurrent:server',
+        'postcss'
+      ]);
+    });
+
+
 
     grunt.registerTask('test', [
         'clean:server',

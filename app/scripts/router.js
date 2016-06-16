@@ -6,6 +6,7 @@ module.exports = Core.Backbone.Router.extend({
 
   routes: {
     '': 'home',
+    'layout/new': 'layout_new',
     'layout(/:id)': 'layout'
   },
 
@@ -16,6 +17,11 @@ module.exports = Core.Backbone.Router.extend({
 
   layout: function(){
     Core.page_layout();
+  },
+
+
+  layout_new: function(){
+    Core.page_layout_new();
   }
 
 });

@@ -93,6 +93,10 @@ $.extend(Core, {
     ).then(this.start.bind(this));
   },
 
+  page_layout_new: function(){
+    console.log('hello layout_new');
+  },
+
   start: function(){
     $('.zones').html(Core.g.layout.get('html'));
 
