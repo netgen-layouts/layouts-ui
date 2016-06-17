@@ -86,7 +86,7 @@ $.extend(Core, {
   },
 
   page_layout: function(){
-    Core.g.layout = new Layout({id: Core.router.params.id});
+    Core.g.layout = new Layout({id: parseInt(Core.router.params.id, 10)});
     $.when(
       Core.g.block_types.fetch_once(),
       Core.g.layout.blocks.fetch(),

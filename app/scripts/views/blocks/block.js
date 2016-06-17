@@ -10,6 +10,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'change', this.setup_dom_element);
 
     this.listenTo(this.model, 'create:success read:success', this.render);
+    this.listenTo(this.model, 'create:success', this.$edit);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(Core, 'editing:unmark', this.editing_unmark);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);

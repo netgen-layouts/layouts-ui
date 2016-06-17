@@ -4,6 +4,7 @@ var Core = require('core_boot');
 var _ = require('underscore');
 
 module.exports = Core.Model.extend({
+  class_name: 'zone',
 
   idAttribute: 'identifier',
 

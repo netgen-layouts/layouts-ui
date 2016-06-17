@@ -2,12 +2,27 @@
 'use strict';
 
 var Core = require('core_boot');
+var Draggable = require('./draggable');
+var Receiver = require('./receiver');
+
 require('jquery-ui');
 
 module.exports = {
 
   connect_with: '[data-zone], [data-container], [data-trash]',
   canceled_attr: 'canceled',
+
+  init: function(){
+    this.setup_dnd_for_blocks();
+    this.setup_dnd_for_containers_and_zones();
+    this.setup_trash();
+  },
+
+  render: function(){
+    this._super('render', arguments);
+    this.init();
+    return this;
+  },
 
   is_zone: function(){
     return this.sort_element === '[data-zone]';
@@ -37,9 +52,6 @@ module.exports = {
     drag_view = $(ui.item).data('_view');
     receiver_view = receiver_element.data('_view');
 
-    // console.log('drag_view', drag_view.model.attributes);
-    // console.log('receiver_view', receiver_view.model.attributes);
-    // console.log('as_container', drag_view.model.is_container && drag_view.model.is_container());
 
     if(drag_view.model.is_container() && receiver_view.model.is_container()){
       receiver_element.addClass('forbidden');
@@ -71,113 +83,54 @@ module.exports = {
     return true;
   },
 
-  save_and_add_block: function(ui, block_or_type, receiver_block){
-    var receiver_model = receiver_block.model,
-      container_attributes = {
-        // block_type: block_or_type.get('definition_identifier') || block_or_type.get('identifier'),
-        block_type: block_or_type.get('identifier'),
-        zone_identifier: receiver_block.$el.data('zone') || receiver_block.model.get('zone_id'),
-        layout_id: parseInt(Core.g.layout.id, 10)
-      };
 
-    // if we have block
-    if(block_or_type.class_name === 'block'){
-      block_or_type.set(container_attributes);
-      this.add_block_and_set_position(ui, block_or_type);
-    }else{
-      block_or_type = Core.model_helper.init_block_from_type(block_or_type, container_attributes);
-      block_or_type.fresh = true;
-      this.add_block_and_set_position(ui, block_or_type);
-
-      if(block_or_type.is_group()){
-        block_or_type.save_group();
-      }else{
-        block_or_type.save();
-      }
-    }
-  },
-
-  add_block_and_set_position: function(ui, block){
-    var position = this.add_new_block(ui, block);
-    block.set({ position: position });
-  },
-
-  add_new_block: function(ui, block){
-
-    var view_block = Core.blocks.create_view(block.get('definition_identifier'), block),
-        position = ui.item.index();
-        ui.item.after(view_block.$el);
-
-    // Remove block_definition from UI if we are creating new block
-    block.fresh && ui.item.remove() && (block.fresh = false);
-
-    return position;
-  },
 
   setup_dnd_for_containers_and_zones: function(){
     var self = this,
         $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
 
-
     $sort_element.sortable({
       appendTo: document.body,
-      // revert: true,
-
       connectWith: self.connect_with,
       placeholder: 'no-placeholder',
       handle: '.block-header',
-      //cursorAt: { left: 5 },
       delay: 150,
       distance: 20,
       over: self.check_containers.bind(self),
       out: self.remove_forbidden_class,
       helper: 'clone',
 
+      //Only after receiving from other sortable
       receive: function(e, ui){
+
         if(self.receive_is_canceled(ui)){ return; }
 
-        var drag_block = $(ui.item).data('_view'),
-            block_or_type = drag_block.model,
-            receiver_block = $(this).closest('[data-view]').data('_view');
-
-        if(self.is_zone() && !self.zone_accept_blocks(ui, block_or_type, $(this).data('_view'))){
+        var draggable = new Draggable(e, ui);
+        if(self.is_zone() && !self.zone_accept_blocks(ui, draggable.model, $(this).data('_view'))){
           return;
         }
 
-        ui.sender.data('copied', true);
-
-        console.log('DND', receiver_block)
-        self.save_and_add_block(ui, block_or_type, receiver_block);
-
+        draggable.mark_sender_as_copied();
+        draggable.is_block_type() && draggable.create_new_block();
       },
 
       start: function() {
         Core.trigger('sortable:start');
-        self.$unedit($sort_element);
-        $(this).sortable('refreshPositions');
+        // $(this).sortable('refreshPositions');
       },
 
+
+      // After sort and after move to connected sortable
       stop: function(e, ui){
-        console.log(e, ui);
-
-        var zone_id = $(ui.item).closest('[data-zone]').data('zone'),
-            position = $(ui.item).index(),
-            model = $(ui.item).data('_view').model,
-            trashed = $(ui.item).data('trashed');
-
-        $(ui.item).data('trashed', null);
+        var draggable = new Draggable(e, ui),
+            receiver = new Receiver(this),
+            trashed = draggable.read_trashed_and_clear();
 
         if(!trashed){
-          $(this).data('zone') !== zone_id && $(ui.item).remove();
-
-          model.move({
-            position: position,
-            zone_identifier: zone_id
-          });
-
+          draggable.save_new_position();
+          draggable.is_zone_changed_when_moved_to(receiver);
         }
 
-        $('.right-sidebar').html(JST.sidebar());
         Core.trigger('sortable:end');
       }
 
@@ -225,7 +178,6 @@ module.exports = {
         },
 
         start: function(){
-          self.$unedit($('.blocks .block-items'));
           Core.trigger('sortable:start');
         },
 
@@ -238,50 +190,27 @@ module.exports = {
             this.copyHelper.remove();
           }
           this.copyHelper = null;
-
-          $('.right-sidebar').html(JST.sidebar());
         }
       });
     }
   },
 
   setup_trash: function(){
-    var $trash_droppable = $('[data-trash]');
-    $trash_droppable.sortable({
+    $('[data-trash]').sortable({
       receive: function(e, ui){
+        var draggable = new Draggable(e, ui);
+        draggable.mark_trashed();
 
-        $(ui.item).data('trashed', true);
-
-        var drag_block = $(ui.item).data('_view');
-        var block_or_type = drag_block.model;
-        if(block_or_type.class_name === 'block'){
-          drag_block.$destroy()
+        if(draggable.is_block()){
+          draggable.view.$destroy()
             .on('cancel', function(){
-              $(ui.sender).sortable('cancel');
+              draggable.sender.sortable('cancel');
             });
         }
 
       }
     });
     return this;
-  },
-
-  init: function(){
-    this.setup_dnd_for_blocks();
-    this.setup_dnd_for_containers_and_zones();
-    this.setup_trash();
-  },
-
-  render: function(){
-    this._super('render', arguments);
-    this.init();
-
-
-    return this;
-  },
-
-  $unedit: function(sortableEl){
-    Core.trigger('editing:unmark', {block: this});
   }
 
 };

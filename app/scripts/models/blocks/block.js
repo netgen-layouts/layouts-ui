@@ -71,10 +71,10 @@ module.exports = Core.Model.extend({
 
   move: function(data){
 
-    var items = Core._.pick(data, 'zone_identifier', 'position');
+    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position');
 
     var via = 'move';
-    return this.save(items, {
+    return this.save(attributes, {
       via: via,
       url: this.url(via),
       patch: true
