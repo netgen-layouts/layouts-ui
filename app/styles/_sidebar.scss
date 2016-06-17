@@ -189,6 +189,23 @@
       margin:0 0 0.5em;
     }
   }
+  .xeditable-active {
+    position:relative;
+    &::after {
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      right:0;
+      background:rgba($toolbarbg2, 0.8);
+      z-index:10;
+    }
+    .xeditable {
+      position:relative;
+      z-index:11;
+    }
+  }
 
   .js-input-browse {
     .js-trigger {
