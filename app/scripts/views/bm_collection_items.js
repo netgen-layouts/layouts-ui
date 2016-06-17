@@ -36,7 +36,7 @@ module.exports = Core.View.extend({
   },
 
   refresh_items: function(){
-    return this.bm_collection_model.fetch_results();
+    // return this.bm_collection_model.fetch_results();
   },
 
   refresh_block: function(){

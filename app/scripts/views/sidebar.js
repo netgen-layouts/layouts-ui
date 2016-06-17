@@ -75,7 +75,7 @@ module.exports = Core.View.extend({
           el: this.$('.collection-items')
         });
 
-        bm_collection.fetch({via: 'result', data: {offset: bm_collection.get('offset'), limit: bm_collection.get('limit')} });
+        bm_collection.fetch_results();
 
       }.bind(this));
 

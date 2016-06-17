@@ -23,6 +23,10 @@ module.exports = Core.Model.extend({
     return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.get('identifier')+'/change_type';
   },
 
+  results_url: function(){
+    return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.get('identifier')+'/result';
+  },
+
   can_add_items: function(){
     return this.get('type') !== 2;
   },
@@ -33,7 +37,11 @@ module.exports = Core.Model.extend({
   },
 
   fetch_results: function(){
-    return this.fetch({via: 'result', data: {offset: this.get('offset'), limit: this.get('limit')} });
+    return this.fetch({
+      via: 'result',
+      url: this.results_url(),
+      data: {offset: this.get('offset'), limit: this.get('limit')}
+    });
   },
 
 
