@@ -20,7 +20,12 @@ module.exports = Core.Backbone.Router.extend({
   },
 
 
+  //Testing version
   layout_new: function(){
+    Core.page_layout_new();
+  },
+
+  _layout_new: function(){
     if(Core.g.layout){
       this.navigate_to('layout', {id: Core.g.layout.id});
     }else{

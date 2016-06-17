@@ -159,19 +159,16 @@ module.exports = {
 
       stop: function(e, ui){
         console.log(e, ui);
+
         var zone_id = $(ui.item).closest('[data-zone]').data('zone'),
             position = $(ui.item).index(),
-            model = $(ui.item).data('_view').model;
+            model = $(ui.item).data('_view').model,
+            trashed = $(ui.item).data('trashed');
 
-
-
-
-        var trashed = $(ui.item).data('trashed');
         $(ui.item).data('trashed', null);
 
-
-        if(!trashed && $(this).data('zone') !== zone_id){
-          $(ui.item).remove();
+        if(!trashed){
+          $(this).data('zone') !== zone_id && $(ui.item).remove();
 
           model.move({
             position: position,
@@ -179,7 +176,6 @@ module.exports = {
           });
 
         }
-
 
         $('.right-sidebar').html(JST.sidebar());
         Core.trigger('sortable:end');

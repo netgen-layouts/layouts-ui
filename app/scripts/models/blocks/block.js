@@ -74,7 +74,7 @@ module.exports = Core.Model.extend({
     var items = Core._.pick(data, 'zone_identifier', 'position');
 
     var via = 'move';
-    this.save(items, {
+    return this.save(items, {
       via: via,
       url: this.url(via),
       patch: true

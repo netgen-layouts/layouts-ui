@@ -23,8 +23,13 @@ module.exports = Core.Modal.extend({
   },
 
 
-  on_apply: function(){
+  $submit: function(e){
+    e.preventDefault();
     this.model.save(this.serialize().params);
+  },
+
+  $apply: function(e){
+    this.$submit.apply(this, arguments);
   }
 
 });
