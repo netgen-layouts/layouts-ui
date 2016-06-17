@@ -134,7 +134,7 @@
       + label {
         display:block;
         position:relative;
-        padding:0.3846153846em 0.3846153846em 0.3846153846em 1.5384615385em;
+        padding:0.3846153846em 0.3846153846em 0.3846153846em 1.5384615385em !important;
         margin:0 0 0.5em;
         cursor:pointer;
         &::before {
@@ -154,6 +154,9 @@
         }
       }
     }
+  }
+  .checkbox {
+    margin:0;
   }
 
   .xeditable {
@@ -244,6 +247,30 @@
       }
     }
   }
+
+  [data-compound-checkbox] {
+    .children {
+      display:none;
+      padding-left:1.25em;
+      margin-bottom:1em;
+      label {
+        padding-left:0;
+      }
+    }
+    input[type="checkbox"]:checked {
+      ~ .children {
+        display:block;
+      }
+    }
+  }
+
+  .toggle-link {
+    font-size:0.75em;
+    font-weight:200;
+    display:inline-block;
+    margin:0 0 1em;
+    color:$mainColor;
+  }
 }
 
 
@@ -255,8 +282,7 @@
   bottom:$gutter;
   left:$gutter;
   right:$gutter;
-  // display:flex;
-  display: none;
+  display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
