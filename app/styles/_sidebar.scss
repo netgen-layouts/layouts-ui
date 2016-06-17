@@ -285,22 +285,26 @@
   }
 }
 
-.sorting .sidebar{visibility:hidden;}
+.sorting .sidebar{opacity:0.3; overflow:hidden;}
 
 
 #trash {
-  height:$rightWidth - (2*$gutter);
-  padding:$gutter;
+  height: $rightWidth - (1*$gutter);
+  width: $rightWidth - (1*$gutter);
+  // padding:$gutter;
   border:1px dashed rgba(255, 255, 255, 0.25);
-  position:absolute;
-  bottom:$gutter;
-  left:$gutter;
-  right:$gutter;
+  position:fixed;
+  bottom:0;
+  right: $gutter;
+  // left:$gutter;
+  // right:$gutter;
   display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
+  background:rgba(0, 0, 0, 0.8);
   color:rgba(255, 255, 255, 0.5);
+  z-index: 999;
   p {
     font-size:0.625em;
     margin:0;

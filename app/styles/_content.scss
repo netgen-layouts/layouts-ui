@@ -114,27 +114,29 @@
   }
 }
 .no-placeholder {
-  height:2px;
-  color:#cc0;
+  height:4px;
+  color:#f3590a;
   background:currentColor;
   margin:$gutter 0;
   position:relative;
+
+  z-index: 9999;
   &::before,
   &::after {
     content:"";
     display:block;
     position:absolute;
-    top:-3px;
+    top:-6px;
     border:0px solid transparent;
   }
   &::before {
     border-left-color:currentColor;
-    border-width:4px 0 4px 6px;
+    border-width:8px 0 8px 10px;
     left:0;
   }
   &::after {
     border-right-color:currentColor;
-    border-width:4px 6px 4px 0;
+    border-width:8px 10px 8px 0;
     right:0;
   }
 }
