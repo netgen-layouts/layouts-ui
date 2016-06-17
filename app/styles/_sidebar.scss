@@ -269,7 +269,19 @@
     font-weight:200;
     display:inline-block;
     margin:0 0 1em;
-    color:$mainColor;
+    color:#fff;
+    &::after {
+      @extend %fontawesome;
+      content:"\f0d7";
+      color:$mainColor;
+      display:inline-block;
+      margin-left:0.25em;
+    }
+    &[aria-expanded="true"] {
+      &::after {
+        content:"\f0d8";
+      }
+    }
   }
 }
 
