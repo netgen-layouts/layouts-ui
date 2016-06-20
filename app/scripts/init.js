@@ -90,9 +90,7 @@ $.extend(Core, {
     $.when(
       Core.g.block_types.fetch_once(),
       Core.g.layout.blocks.fetch(),
-      Core.g.layout.fetch(),
-      Core.g.tree_config.fetch()
-    ).then(Core.g.tree_config.save_available_columns.bind(Core.g.tree_config)
+      Core.g.layout.fetch()
     ).then(this.start.bind(this));
   },
 
