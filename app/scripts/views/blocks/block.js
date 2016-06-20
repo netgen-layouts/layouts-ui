@@ -127,7 +127,6 @@ module.exports = Core.View.extend({
   editing_unmark: function(data){
     if(data && this === data.block){return;}
     this.editing = false;
-    // this.edit_view && this.edit_view.destroy();
     this.$el.removeClass('editing');
   }
 

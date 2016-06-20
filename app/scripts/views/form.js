@@ -8,6 +8,7 @@ module.exports = Core.View.extend({
   extend_with: ['url'],
 
   prevent_auto_render: true,
+  ENTER_KEY: 13,
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
@@ -21,10 +22,12 @@ module.exports = Core.View.extend({
 
   events: {
     'submit form': '$submit',
+    'keypress': '$enter',
+
     'keyup input': '$delayed_submit',
     'keyup textarea': '$delayed_submit',
 
-    'change select': '$submit',
+    'change': '$submit',
     'change input[type="checkbox"]': '$submit',
     'change input[type="radio"]': '$submit',
     'browser:change .js-input-browse': '$browse_change'
@@ -34,6 +37,14 @@ module.exports = Core.View.extend({
     if(this.is_query_form){
       // console.log('trigger trigger_refresh_items', this.is_query_form);
       this.model.trigger('refresh:items');
+    }
+    return this;
+  },
+
+
+  $enter: function(e){
+    if(e.which == this.ENTER_KEY) {
+      $(e.target).blur();
     }
     return this;
   },
@@ -66,16 +77,35 @@ module.exports = Core.View.extend({
 
   $submit: function (e) {
     e && e.preventDefault();
-    var options = {},
-        params = this.serialize();
+    var options = {};
+        // params = this.serialize().params;
 
-    if(this.model.is_image()){
-      options.form_data = new FormData(this.$('form').get(0));
-      this.model.save(params, options);
-    }else{
+    var serialized_params = $('form').serialize();
+
+    var is_same = this.params_has_changed(serialized_params, this.last_params);
+    is_same && console.warn("IS SAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
+    if(is_same){return;}
+
+    this.last_params = serialized_params;
+
+
+    // if(this.model.is_image()){
+    //   options.form_data = new FormData(this.$('form').get(0));
+    //   this.model.save(params, options);
+    // }else{
       this.model.save_via_form(this, 'sidebar_save');
-    }
+    // }
 
   },
+
+
+  //TODO: add token name to config
+  params_has_changed: function(old_params, new_params){
+    var replacer = /ezxform_token%5D=[a-zA-Z0-9-_]+/;
+    old_params && (old_params = old_params.replace(replacer, ''));
+    new_params && (new_params = new_params.replace(replacer, ''));
+    return old_params === new_params;
+
+  }
 
 });
