@@ -32,7 +32,7 @@ module.exports = Core.View.extend({
 
   trigger_refresh_items: function(){
     if(this.is_query_form){
-      console.log('trigger trigger_refresh_items', this.is_query_form);
+      // console.log('trigger trigger_refresh_items', this.is_query_form);
       this.model.trigger('refresh:items');
     }
     return this;
@@ -46,7 +46,7 @@ module.exports = Core.View.extend({
 
   load: function(){
     $.get(this.url).done(function(response){
-      this.$el.html(response.form);
+      this.$el.html(response);
       var self = this;
       $('[data-block].editing [data-inline-child]').each(function(){
         var name = $(this).data('attr');
