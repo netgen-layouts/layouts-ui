@@ -97,6 +97,7 @@ $.extend(Core, {
     var layout = new Layout();
 
     var layout_view = new NewLayoutView({
+      url: '/bm/app/layouts/form/create',
       model: layout
     });
 
