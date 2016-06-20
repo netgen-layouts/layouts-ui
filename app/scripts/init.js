@@ -56,9 +56,6 @@ $.extend(Core, {
 
     Core.g.layout_types = new LayoutTypes();
     Core.g.block_types = new BlockTypes();
-    Core.g.tree_config = new TreeConfig({
-      root_path: 'ezcontent' // ezcontent, ezlocation, eztags
-    });
   },
 
   reinitialize_plugins: function(data){
