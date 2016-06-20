@@ -15,6 +15,7 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'destroy', this.destroy);
+    this.listenTo(Core, 'editing:unmark', this.destroy);
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
     return this;
   },

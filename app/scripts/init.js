@@ -79,7 +79,12 @@ $.extend(Core, {
     }).on('drop', function(e){
       e.preventDefault();
       $(document.body).removeClass('dragging');
+    }).on('click', '.main-content', function(e){
+      var $block = $(e.target).closest('[data-block]');
+      if($block.length){return;}
+      Core.trigger('editing:unmark');
     });
+
   },
 
   page_layout: function(){
