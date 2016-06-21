@@ -62,10 +62,20 @@ $.extend(Core, {
     Core.g.block_types = new BlockTypes();
   },
 
+  hide_selects_with_one_option: function(view){
+    view.$('select').each(function(){
+      var alone = $('option', this).length <= 1;
+      alone && $(this).parent().addClass('alone');
+    });
+    return this;
+  },
+
   reinitialize_plugins: function(data){
     data.view.$('.xeditable').xeditable();
     data.view.$('.js-dependable-selects-group .js-master').dependable_select();
     data.view.$('.js-input-browse').input_browse();
+    this.hide_selects_with_one_option(data.view);
+
   },
 
   setup_events: function(){
