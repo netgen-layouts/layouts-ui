@@ -87,6 +87,7 @@ module.exports = Core.View.extend({
 
   $edit: function(){
     if(this.editing){return;}
+    // $('#sidebar').addClass('loading');
     Core.trigger('editing:unmark', {block: this});
     this.editing_mark();
     this.load_sidebar();

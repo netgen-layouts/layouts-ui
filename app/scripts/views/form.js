@@ -56,7 +56,7 @@ module.exports = Core.View.extend({
   },
 
   load: function(){
-    $.get(this.url).done(function(response){
+    return $.get(this.url).done(function(response){
       this.$el.html(response);
       var self = this;
       $('[data-block].editing [data-inline-child]').each(function(){
@@ -66,7 +66,6 @@ module.exports = Core.View.extend({
 
       self.trigger_render();
     }.bind(this));
-    return this;
   },
 
   $delayed_submit: _.debounce(function(e){

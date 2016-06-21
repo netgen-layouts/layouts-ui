@@ -35,7 +35,8 @@ module.exports = {
     value = value.replace(/&nbsp;/g, ' ');
 
     if(!$input_or_textarea.length){
-      throw new Error('Inline element not found in sidebar form.');
+      //throw new Error('Inline element not found in sidebar form.');
+      return;
     }
 
     if(_.isEmpty(value)){return;}
