@@ -2,8 +2,10 @@ $icon-font-path: "../fonts/bootstrap/";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
+@import "../../node_modules/nprogress/nprogress";
 @import "../../../content-browser-ui-bundle/app/styles/main";
 @import "icomoon";
+@import "nprogress_override";
 @import "variables";
 @import "typography";
 @import "layout";
@@ -285,6 +287,3 @@ legend{
   padding: 0 10px;
   margin-bottom: 0px;
 }
-
-
-

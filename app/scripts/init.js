@@ -17,6 +17,10 @@ var Browser = require('./browser-ui/views/browser');
 var TreeConfig = require('./browser-ui/models/tree_config');
 var Items = require('./browser-ui/collections/items');
 
+
+var Nprogress = require('nprogress');
+var _ = require('underscore');
+
 Core.Backbone.defaults = function(){
   var request = {};
 
@@ -84,6 +88,15 @@ $.extend(Core, {
       if($block.length){return;}
       Core.trigger('editing:unmark');
     });
+
+    $(document)
+      .ajaxStart(function(){
+        Nprogress.start();
+      })
+
+      .ajaxStop(function(){
+       _.delay(Nprogress.done, 100);
+      });
 
   },
 
