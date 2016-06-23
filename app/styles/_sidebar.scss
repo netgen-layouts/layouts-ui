@@ -19,8 +19,14 @@
   }
 
   .collection-items {
-    margin-top:1em;
-    padding-top:1.5em;
+    margin-top:1.5em;
+    padding-top:0.5em;
+    border-top:1px solid hsla(0, 0, 100, 0.2);
+  }
+
+  [data-query-form]{
+    margin-top:1.5em;
+    padding-top:1.0em;
     border-top:1px solid hsla(0, 0, 100, 0.2);
   }
   .add-items-btn {
@@ -160,9 +166,9 @@
   }
 
   .xeditable {
-    margin-bottom:1.5em;
-    padding-bottom:0.5em;
-    border-bottom:1px solid hsla(0, 0, 100, 0.2);
+    // margin-bottom:1.5em;
+    // padding-bottom:0.5em;
+    // border-bottom:1px solid hsla(0, 0, 100, 0.2);
     .js-edit {
       display:block;
       margin:0 0 1em;
