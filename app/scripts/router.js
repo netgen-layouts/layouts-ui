@@ -12,7 +12,7 @@ module.exports = Core.Backbone.Router.extend({
 
 
   home: function(){
-    this.navigate_to('layout', {id: 1});
+    this.navigate_to('layout');
   },
 
   layout: function(){
