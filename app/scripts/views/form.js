@@ -82,7 +82,7 @@ module.exports = Core.View.extend({
     var serialized_params = $('form').serialize();
 
     var is_same = this.params_has_changed(serialized_params, this.last_params);
-    is_same && console.warn("IS SAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
+    // is_same && console.warn("IS SAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
     if(is_same){return;}
 
     this.last_params = serialized_params;

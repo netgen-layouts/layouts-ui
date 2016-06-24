@@ -69,7 +69,10 @@ module.exports = Core.View.extend({
   $add_items: function(){
     var self = this;
     new Browser({
-      disabled_item_ids: this.collection.pluck('value_id'),
+      disabled_item_ids: this.collection.reduce(function(out, item){
+        item.is_manual() && out.push(item.get('value_id'));
+        return out;
+      }, []),
       tree_config: {
         root_path: this.bm_collection_model.config_name
       }
