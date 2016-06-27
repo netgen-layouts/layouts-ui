@@ -7,6 +7,55 @@ var Receiver = require('./receiver');
 
 require('jquery-ui');
 
+/**
+ * Copied from jquery.ui.sortable and slightly modified
+ */
+var orig = jQuery.ui.sortable.prototype._mouseDrag;
+jQuery.ui.sortable.prototype._mouseDrag = function(event){
+
+
+    var i, item, itemElement, intersection,
+      o = this.options,
+      scrolled = false;
+
+    //Compute the helpers position
+    this.position = this._generatePosition(event);
+    this.positionAbs = this._convertPositionTo("absolute");
+
+    var scrollParent = o.customScrollParent;
+
+    if (!this.lastPositionAbs) {
+      this.lastPositionAbs = this.positionAbs;
+    }
+
+    if(scrollParent){
+      o.scroll = false;
+      var overflowOffset = scrollParent.offset();
+      if((overflowOffset.top + scrollParent[0].offsetHeight) - event.pageY < o.scrollSensitivity) {
+        scrollParent[0].scrollTop = scrolled = scrollParent[0].scrollTop + o.scrollSpeed;
+      } else if(event.pageY - overflowOffset.top < o.scrollSensitivity) {
+        scrollParent[0].scrollTop = scrolled = scrollParent[0].scrollTop - o.scrollSpeed;
+      }
+
+      if((overflowOffset.left + scrollParent[0].offsetWidth) - event.pageX < o.scrollSensitivity) {
+        scrollParent[0].scrollLeft = scrolled = scrollParent[0].scrollLeft + o.scrollSpeed;
+      } else if(event.pageX - overflowOffset.left < o.scrollSensitivity) {
+        scrollParent[0].scrollLeft = scrolled = scrollParent[0].scrollLeft - o.scrollSpeed;
+      }
+
+    }
+
+
+
+  if(scrolled !== false && $.ui.ddmanager && !o.dropBehaviour) {
+    $.ui.ddmanager.prepareOffsets(this, event);
+  }
+
+  orig.apply(this, arguments);
+
+}
+
+
 module.exports = {
 
   connect_with: '[data-zone], [data-container], [data-trash]',
@@ -91,6 +140,7 @@ module.exports = {
 
     $sort_element.sortable({
       appendTo: document.body,
+      customScrollParent: $('.main-content'),
       connectWith: self.connect_with,
       placeholder: 'no-placeholder',
       handle: '.block-header',
@@ -102,7 +152,6 @@ module.exports = {
 
       //Only after receiving from other sortable
       receive: function(e, ui){
-
         if(self.receive_is_canceled(ui)){ return; }
 
         var draggable = new Draggable(e, ui);
@@ -116,7 +165,9 @@ module.exports = {
 
       start: function() {
         Core.trigger('sortable:start');
-        // $(this).sortable('refreshPositions');
+
+        /*This is needed because of min-height*/
+        $(this).sortable('refreshPositions');
       },
 
 
@@ -134,21 +185,6 @@ module.exports = {
         Core.trigger('sortable:end');
       }
 
-    });
-
-
-    //Hack for proxing document to sortable element scroll;
-    var document_scroll_top = $(document).scrollTop();
-    var window_height = $(window).height();
-    var sortable_height = $('.main-content').height();
-    var ratio = sortable_height/window_height;
-    var $scrollable_element = $('.main-content');
-
-    var initial_top = $scrollable_element.scrollTop();
-    $(document).off('scroll.dnd').on('scroll.dnd', function(){
-      var current_document_scroll_top = $(document).scrollTop();
-      var move_by = current_document_scroll_top * ratio;
-      current_document_scroll_top > 10 && $scrollable_element.scrollTop(initial_top + move_by);
     });
 
   },

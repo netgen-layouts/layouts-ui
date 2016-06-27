@@ -1,14 +1,15 @@
 /* zones */
 [data-zone] {
   outline:1px dashed #676767;
-  min-height:2em;
+  min-height:4em;
   padding:$gutter*0.6666666667;
   margin:0 0 $gutter*1.25;
   &:empty::before {
     content:'Drop blocks here!';
     color:#999;
     font-size:0.875em;
-    padding:0.5em;
+    padding:1em;
+    text-align: center;
     display:block;
   }
   &.zone_type_inherited:empty::before {
