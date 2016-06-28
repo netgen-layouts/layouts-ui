@@ -217,3 +217,27 @@
 
   }
 }
+
+.external-video-block {
+  p {
+    font-size:0.75em;
+    margin:0.5em;
+  }
+  .video-thumb {
+    margin:0 auto;
+    width:100%;
+    max-width:320px;
+    position:relative;
+    &::after {
+      @extend %fontawesome;
+      content:"\f144";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      font-size:42px;
+      color:rgba(255, 255, 255, 0.75);
+      text-shadow:0 0 15px rgba(0, 0, 0, 0.5);
+    }
+  }
+}

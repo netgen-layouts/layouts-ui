@@ -13,5 +13,6 @@ module.exports = {
   Slider:  require('./slider'),
   CustomAction:  require('./custom_action'),
   title:  require('./title'),
-  text:  require('./text')
+  text:  require('./text'),
+  external_video:  require('./external_video')
 };
