@@ -6,6 +6,8 @@ var BmCollectionItems = require('../collections/bm_collection_items');
 module.exports = Core.Model.extend({
   path: 'collections',
 
+  idAttribute: 'identifier',
+
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.on('sync', this.setup_items);
@@ -13,6 +15,11 @@ module.exports = Core.Model.extend({
     this.items = new BmCollectionItems();
     this.items.bm_collection = this;
     return this;
+  },
+
+
+  is_named: function(){
+    return this.get('collection_type') === 2;
   },
 
   proxy_to_block: function(){

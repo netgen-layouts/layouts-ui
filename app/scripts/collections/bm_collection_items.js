@@ -8,7 +8,7 @@ module.exports = Core.Collection.extend({
 
 
   create_url: function(){
-    return Core.env.base_url + 'collections/' + this.bm_collection.id + '/items';
+    return Core.env.base_url + 'collections/' + this.bm_collection.get('collection_id') + '/items';
   },
 
 

@@ -10,6 +10,7 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.on('render', this.render_items);
+    this.$el.addClass('collection-type-'+this.model.get('collection_type'));
     this.model.config_name = this.$el.data('browserConfigName');
     return this;
   },

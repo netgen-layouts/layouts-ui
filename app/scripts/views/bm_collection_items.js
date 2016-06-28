@@ -30,6 +30,13 @@ module.exports = Core.View.extend({
   template: 'bm_collection_items',
 
 
+  set_context: function(){
+    Core.View.prototype.set_context.apply(this, arguments);
+    this.context.named_and_empty = this.bm_collection_model.is_named() && !this.collection.length ;
+
+    return this;
+  },
+
   refresh_items_and_block: function(){
     this.refresh_items();
     this.refresh_block();
