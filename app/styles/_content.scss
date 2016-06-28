@@ -176,8 +176,7 @@
 
 
 
-.empty_collection{
-
+.notice {
   margin-bottom:10px; color:#666;
   .fa{font-size:1.2em; color:#999; margin-right:4px; vertical-align:text-bottom;}
   .msg{font-size: 0.92em;}
@@ -220,27 +219,22 @@
 
 .external-video-block {
   background:rgba(0, 0, 0, 0.035);
-  p {
-    font-size:0.75em;
-    margin:0;
-    padding:0.5em;
-    text-align:center;
-  }
-  .video-thumb {
+  position:relative;
+  .js-video-thumb {
     margin:0 auto;
     width:100%;
     max-width:320px;
-    position:relative;
-    &::after {
-      @extend %fontawesome;
-      content:"\f144";
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%, -50%);
-      font-size:42px;
-      color:rgba(255, 255, 255, 0.75);
-      text-shadow:0 0 15px rgba(0, 0, 0, 0.5);
-    }
+    display:block;
+  }
+  &::after {
+    @extend %fontawesome;
+    content:"\f144";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    font-size:42px;
+    color:rgba(255, 255, 255, 0.75);
+    text-shadow:0 0 15px rgba(0, 0, 0, 0.5);
   }
 }
