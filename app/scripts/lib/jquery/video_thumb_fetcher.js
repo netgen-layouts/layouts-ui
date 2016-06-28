@@ -1,7 +1,21 @@
-console.log('Hello from video_thumb_fetcher');
-
 $.fn.video_thumb_fetcher = function(){
   return $(this).each(function() {
-    // body...
+    var id = $(this).data('video-id'),
+        service = $(this).data('service'),
+        $thumb = $(this).find('img.js-video-thumb');
+
+    if (service === 'youtube'){
+      $thumb.attr('src', 'https://img.youtube.com/vi/' + id + '/mqdefault.jpg');
+
+    } else if (service === 'vimeo'){
+      $.ajax({
+        type:'GET',
+        url: 'https://vimeo.com/api/v2/video/' + id + '.json',
+        dataType: 'json',
+        success: function(data){
+          $thumb.attr('src', data[0].thumbnail_large);
+        }
+      });
+    }
   });
 };

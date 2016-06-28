@@ -3,10 +3,9 @@
 var Block = require('./block');
 
 module.exports = Block.extend({
-
+/*
   render: function(){
     Block.prototype.render.apply(this, arguments);
-    this.$el.append('<div class="external-video-block">');
     this.$thumbDiv = this.$('.external-video-block'),
     this.render2();
     return this;
@@ -36,5 +35,5 @@ module.exports = Block.extend({
       });
     }
   }
-
+*/
 });
