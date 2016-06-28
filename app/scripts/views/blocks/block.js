@@ -49,9 +49,8 @@ module.exports = Core.View.extend({
    */
   render: function(x){
     _.isString(x) && console.error(x);
-    Core.View.prototype.render.apply(this, arguments);
-    // this.$el.html(html || this.model.get('html'));
     this.$el.html(this.model.get('html'));
+    Core.View.prototype.render.apply(this, arguments);
     return this;
   },
 
