@@ -15,6 +15,11 @@
         "netgen/core-ui-components-bundle": "^1.0@dev",
         "netgen/content-browser-ui-bundle": "^1.0@dev"
     },
+    "autoload": {
+        "psr-4": {
+            "Netgen\\Bundle\\BlockManagerUIBundle\\": ""
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
