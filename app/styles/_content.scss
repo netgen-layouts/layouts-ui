@@ -219,9 +219,12 @@
 }
 
 .external-video-block {
+  background:rgba(0, 0, 0, 0.035);
   p {
     font-size:0.75em;
-    margin:0.5em;
+    margin:0;
+    padding:0.5em;
+    text-align:center;
   }
   .video-thumb {
     margin:0 auto;
