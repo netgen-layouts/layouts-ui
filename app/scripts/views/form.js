@@ -22,7 +22,7 @@ module.exports = Core.View.extend({
 
   events: {
     'submit form': '$submit',
-    'keypress': '$enter',
+    'keypress input': '$enter',
 
     'keyup input': '$delayed_submit',
     'keyup textarea': '$delayed_submit',
