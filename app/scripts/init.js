@@ -17,6 +17,8 @@ var Browser = require('./browser-ui/views/browser');
 var TreeConfig = require('./browser-ui/models/tree_config');
 var Items = require('./browser-ui/collections/items');
 
+var Config = require('./models/config');
+
 
 var Nprogress = require('nprogress');
 var _ = require('underscore');
@@ -24,11 +26,9 @@ var _ = require('underscore');
 Core.Backbone.defaults = function(){
   var request = {};
 
-  if(Core.env.name === 'staging'){
-     request.headers = {
-      Authentication: 'Token EffectivaNetgen'
-    };
-  }
+  request.headers = {
+    'X-CSRF-Token': Core.g.config.get('csrf_token')
+  };
 
   return request;
 };
@@ -60,6 +60,7 @@ $.extend(Core, {
 
     Core.g.layout_types = new LayoutTypes();
     Core.g.block_types = new BlockTypes();
+    Core.g.config = new Config();
   },
 
   hide_selects_with_one_option: function(view){
@@ -107,13 +108,34 @@ $.extend(Core, {
 
       .ajaxStop(function(){
        _.delay(Nprogress.done, 100);
-      });
+      })
+
+      .ajaxError(function(e, xhr, ajaxSettings, error ){
+
+        if(xhr.status === 403){
+
+          new Core.Modal({
+            title:  'Session timeout',
+            body: 'Press OK to refresh the page',
+            cancel_disabled: true,
+            modal_options: {
+              keyboard: false,
+              backdrop: 'static'
+            }
+          }).on('apply', function(){
+            window.history.go(0);
+          }).open();
+
+        }
+
+      })
 
   },
 
   page_layout: function(){
     Core.g.layout = new Layout({id: parseInt(Core.router.params.id, 10)});
     $.when(
+      Core.g.config.fetch(),
       Core.g.block_types.fetch_once(),
       Core.g.layout.blocks.fetch(),
       Core.g.layout.fetch()
@@ -121,7 +143,7 @@ $.extend(Core, {
   },
 
   page_layout_new: function(){
-    console.log('hello layout_new');
+
 
     var layout = new Layout();
 
