@@ -35,7 +35,7 @@ module.exports = Core.Model.extend({
   },
 
   can_add_items: function(){
-    return this.get('type') !== 2;
+    return !this.is_named();
   },
 
   setup_items: function(){

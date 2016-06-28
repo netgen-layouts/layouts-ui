@@ -32,7 +32,7 @@ module.exports = Core.View.extend({
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
-    this.context.named_and_empty = this.bm_collection_model.is_named() && !this.collection.length ;
+    this.context.named_and_empty = this.bm_collection_model.is_named() && !this.collection.length;
 
     return this;
   },
@@ -51,7 +51,7 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
-    if(this.bm_collection_model.get('type') === 2){
+    if(this.bm_collection_model.is_named()){
       this.$el.addClass('named-collection');
     } else {
       this.$('.bm-items').sortable({
