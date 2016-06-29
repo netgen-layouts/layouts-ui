@@ -382,6 +382,7 @@ module.exports = function (grunt) {
 
         concurrent: {
             server: [
+              'handlebars',
               'sass:server',
               'browserify:vendor',
               'browserify:dev'
@@ -425,7 +426,6 @@ module.exports = function (grunt) {
     grunt.registerTask('fast_build', function () {
       grunt.task.run([
         'clean:server',
-        'handlebars',
         'concurrent:server',
         'postcss:server'
       ]);
