@@ -31,20 +31,23 @@ module.exports = Core.Model.extend({
   },
 
   publish: function(data){
+    var via = 'publish';
     return this.save(data, {
+      via: via,
       method: 'POST',
-      url:this.url('publish'),
-      patch: true,
-      success: this.close_layout()
+      url:this.url(via),
+      patch: true
     });
   },
 
-  discard: function(){
-    console.log('discard layout');
-  },
-
-  close_layout: function(){
-    location.href = '/';
+  discard: function(data){
+    var via = 'discard';
+    return this.save(data, {
+      via: via,
+      method: 'POST',
+      url:this.url(via),
+      patch: true
+    });
   }
 
 });

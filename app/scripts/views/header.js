@@ -18,6 +18,7 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'save:success', this.after_save);
+    this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
 
     this.render();
 
@@ -66,7 +67,17 @@ module.exports = Core.View.extend({
 
   discard_draft: function(e){
     e.preventDefault();
-    this.model.discard();
+    var self = this;
+    return new Core.Modal({
+      title: 'Confirm',
+      body: 'Are you sure you want to discard layout? All of the changes you have made will be lost.'
+    }).on('apply', function(){
+      self.model.discard();
+    }).open();
+  },
+
+  close_layout: function(){
+    location.href = '/';
   }
 
 });

@@ -241,3 +241,10 @@
     text-shadow:0 0 15px rgba(0, 0, 0, 0.5);
   }
 }
+
+.ae-ui {
+  .ae-toolbar,
+  [class^=ae-toolbar-] {
+    z-index:100;
+  }
+}
