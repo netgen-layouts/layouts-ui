@@ -10,7 +10,6 @@
     // template: 'blocks/item',
     initialize: function(){
       Core.View.prototype.initialize.apply(this, arguments);
-      // this.dnd();
       this.mark_zone_type();
 
       return this;

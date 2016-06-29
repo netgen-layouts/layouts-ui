@@ -36,58 +36,14 @@ module.exports = function (grunt) {
 
     // configurable paths
     var yeomanConfig = {
-        app: 'app',
-        dist: 'dist',
-        releases: 'releases',
-        hidden_folder: 'dist/scripts/e3b0c44298fc1c149afbf4'
+      app: 'app',
+      dist: 'Resources/public'
     };
 
-
-    grunt.registerTask('foo', 'A sample task that logs stuff.', function() {
-      console.log(grunt.filerev.summary);
-    });
 
     grunt.initConfig({
         yeoman: yeomanConfig,
         pkg: grunt.file.readJSON('package.json'),
-
-        // oneskyoutput: {
-        //   oneskyoutput: {
-        //     default_options: {
-        //       platformId: '25669',
-        //       path: '<%= yeoman.app %>/locales'
-        //     }
-        //   },
-        // },
-
-        karma: {
-          unit: {
-            configFile: 'karma.conf.js',
-            options: {
-              files: [
-                {pattern: 'bower_components/*/*.js', included: false},
-                {pattern: 'app/scripts/**/*.js', included: false},
-                {pattern: 'tests/test_templates.js', included: false},
-                {pattern: 'tests/unit/**/*.js', included: false},
-                {pattern: 'tests/fixtures/**/*.js', included: false},
-                'tests/test-main.js'
-              ],
-
-              // test results reporter to use
-              // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-              reporters: ['progress', 'coverage'],
-
-              coverageReporter: {
-                dir : 'coverage/'
-              },
-
-              preprocessors: {
-                'app/scripts/**/*.js': 'coverage'
-              }
-
-            }
-          }
-        },
 
         yuidoc: {
           compile: {
@@ -113,7 +69,7 @@ module.exports = function (grunt) {
             },
             sass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['sass:server', 'postcss']
+                tasks: ['sass:server', 'postcss:server']
             },
             handlebars: {
                 files: ['<%= yeoman.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
@@ -184,25 +140,20 @@ module.exports = function (grunt) {
                 }
             }
         },
-        open: {
-            server: {
-                path: 'http://aseba.lan/'
-            }
-        },
+
+
         clean: {
             dist: {
                 files: [{
                     dot: true,
                     src: [
                         '.tmp',
-                        'releases/*',
-                        '!releases/.htaccess',
                         '<%= yeoman.dist %>/*',
+                        '!<%= yeoman.dist %>/vendor',
                         '!<%= yeoman.dist %>/.git*'
                     ]
                 }]
             },
-            after_build: ['<%= yeoman.dist %>/includes'],
             server: '.tmp'
         },
         jshint: {
@@ -255,17 +206,34 @@ module.exports = function (grunt) {
 
         sass: {
           options: {
-            sourceMap: true,
-            sourceMapEmbed: true,
-            sourceMapContents: true,
             includePaths: ['.']
           },
           server: {
+            options: {
+              sourceMap: true,
+              sourceMapEmbed: true,
+              sourceMapContents: true
+            },
             files: [{
               expand: true,
               cwd: '<%= yeoman.app %>/styles',
               src: ['*.{scss,sass}'],
               dest: '.tmp/styles',
+              ext: '.css'
+            }]
+          },
+          dist: {
+            options: {
+              sourceMap: false,
+              sourceMapEmbed: false,
+              sourceMapContents: false,
+              outputStyle: 'compressed'
+            },
+            files: [{
+              expand: true,
+              cwd: '<%= yeoman.app %>/styles',
+              src: ['*.{scss,sass}'],
+              dest: '<%= yeoman.dist %>/css',
               ext: '.css'
             }]
           }
@@ -278,12 +246,17 @@ module.exports = function (grunt) {
               require('autoprefixer')({browsers: 'last 3 versions'})
             ]
           },
-          dist: {
+          server: {
             src: '.tmp/styles/*.css'
+          },
+
+          dist: {
+            src: '<%= yeoman.dist %>/css/*.css'
           }
         },
 
         browserify: {
+
           vendor: {
             src: [],
             dest: '.tmp/scripts/vendor.js',
@@ -292,6 +265,7 @@ module.exports = function (grunt) {
               require: ['jquery', 'jquery-ui']
             }
           },
+
           dev: {
             src: ['<%= yeoman.app %>/scripts/main.js'],
             dest: '.tmp/scripts/main.js',
@@ -309,93 +283,50 @@ module.exports = function (grunt) {
                 'browser': './app/scripts/browser-ui/main.js'
               }
             },
-          }
-        },
-        concat: {
-          dev: {
-            src: ['.tmp/scripts/vendor.js', '.tmp/scripts/main.js'],
-            dest: '<%= yeoman.app %>/bundle.js',
-            options: {
-              // It includes semicolon.js!
-              // This is needed to prevent the two concatenated IIFE's fro each bundle being
-              // interpreted as a function call
-              separator: ';\n'
-            }
-          }
-        },
-        filerev: {
-
-            files: {
-                src: [
-                    '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}', //TODO: fix reving images in HTML templates
-                    '<%= yeoman.dist %>/scripts/{,*/}*.js',
-                    '<%= yeoman.dist %>/styles/{,*/}*.css',
-                    '<%= yeoman.dist %>/fonts/**/{,*/}*.{eot,svg,ttf,woff}',
-                    '<%= yeoman.dist %>/locales/*'
-                ]
-            }
-
-        },
-
-
-         manifest: {
-            generate: {
-              options: {
-                basePath: '<%= yeoman.dist %>',
-                //network: ['http://*', 'https://*'],
-                //fallback: ['/ /offline.html'],
-                //exclude: ['js/jquery.min.js'],
-                preferOnline: true,
-                verbose: false,
-                hash: false,
-                timestamp: true
-                // master: ['*']
-              },
-              src: [
-                '*.html',
-                '*.json',
-                'images/*',
-                'locales/*',
-                'scripts/*.js',
-                'styles/*.css',
-                'fonts/**/{,*/}*.{eot,svg,ttf,woff}'
-              ],
-              dest: '<%= yeoman.dist %>/manifest.appcache'
-            }
           },
 
+          dist: {
+            src: ['<%= yeoman.app %>/scripts/main.js'],
+            dest: '.tmp/scripts/main.js',
+            options: {
+              require: ['jquery', 'jquery-ui'],
+              alias: {
+                'core': './app/scripts/core-ui/core.js',
+                'core_boot': './app/scripts/core-ui/core_boot.js',
+                'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
+                'core_pager': './app/scripts/core-ui/components/pager.js',
+                'browser': './app/scripts/browser-ui/main.js'
+              }
+            }
+          }
+        },
 
 
-        useminPrepare: {
+        uglify: {
+          dist: {
             options: {
-                dest: '<%= yeoman.dist %>'
+              compress: {
+                drop_console: true
+              }
             },
-            html: '<%= yeoman.app %>/index.html'
+            src: '.tmp/scripts/main.js',
+            dest: '<%= yeoman.dist %>/js/main.js'
+          }
         },
-        usemin: {
-            options: {
-                assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images'],
-                patterns:{
-                    js: [
-                        [
-                            /["'](images\/[^'"\)#]+)(#.+)?["']/gm,
-                            'Replacing images'
-                        ],
-                        [
-                            /["'](locales\/[^'"\)#]+)(#.+)?["']/gm,
-                            'Replacing locales'
-                        ],
-                        [
-                            /["'](styles\/[^'"\)#]+)(#.+)?["']/gm,
-                            'Replacing styles'
-                        ]
-                    ]
-                }
-            },
-            html: ['<%= yeoman.dist %>/*.html'],
-            css: ['<%= yeoman.dist %>/styles/*.css'],
-            js: ['<%= yeoman.dist %>/scripts/*.js']
+
+        filerev: {
+          files: {
+            src: [
+              '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}', //TODO: fix reving images in HTML templates
+              '<%= yeoman.dist %>/scripts/{,*/}*.js',
+              '<%= yeoman.dist %>/styles/{,*/}*.css',
+              '<%= yeoman.dist %>/fonts/**/{,*/}*.{eot,svg,ttf,woff}',
+              '<%= yeoman.dist %>/locales/*'
+            ]
+          }
         },
+
+
         imagemin: {
             dist: {
                 files: [{
@@ -416,75 +347,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
-        cssmin: {
-            // This task is pre-configured if you do not wish to use Usemin
-            // blocks for your CSS. By default, the Usemin block from your
-            // `index.html` will take care of minification, e.g.
-            //
-            //     <!-- build:css({.tmp,app}) styles/main.css -->
-            //
-            // dist: {
-            //     files: {
-            //         '<%= yeoman.dist %>/styles/main.css': [
-            //             '.tmp/styles/{,*/}*.css',
-            //             '<%= yeoman.app %>/styles/{,*/}*.css'
-            //         ]
-            //     }
-            // }
-        },
-        htmlmin: {
-            dist: {
-                options: {
-                    removeCommentsFromCDATA: true,
-                    collapseWhitespace: true,
-                    collapseBooleanAttributes: true,
-                    removeRedundantAttributes: true,
-                    useShortDoctype: true,
-                    removeEmptyAttributes: true
-                },
-                files: [{
-                    expand: true,
-                    cwd: '<%= yeoman.dist %>',
-                    src: '*.html',
-                    dest: '<%= yeoman.dist %>'
-                }]
-            }
-        },
 
-
-        preprocess : {
-            options: {
-                inline: true,
-                context : {
-                    DEBUG: false,
-                    VERSION: '<%= pkg.version %>'
-                }
-            },
-            html : {
-                src : [
-                    '<%= yeoman.dist %>/index.html'
-                ]
-            }
-        },
-
-        replace: {
-          remove_sourcemap_comment: {
-            src: ['<%= yeoman.dist %>/scripts/*.js'],
-            overwrite: true,                 // overwrite matched source files
-            replacements: [{
-              from: /\/\/#.*/,
-              to: ''
-            }]
-          },
-          manifest: {
-            src: ['<%= yeoman.dist %>/index.html'],
-            overwrite: true,                 // overwrite matched source files
-            replacements: [{
-              from: 'data-manifest',
-              to: 'manifest'
-            }]
-          }
-        },
 
         // Put files not handled in other tasks here
         copy: {
@@ -498,7 +361,7 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         '*.json',
-                        '*.html',
+                        // '*.html',
                         'data/*',
                         'locales/*',
                         'includes/*',
@@ -516,41 +379,10 @@ module.exports = function (grunt) {
             }
         },
 
-        shell: {
-            options: {
-                stderr: false
-            },
-
-            translations_download: {
-                command: 'ruby onesky.rb download'
-            },
-
-            translations_upload: {
-                command: 'ruby onesky.rb upload'
-            },
-
-            read_file_name: {
-                command: 'ls <%= yeoman.dist %>/scripts/*.main.js',
-                options: {
-                    callback: function(err, stdout, stderr, cb){
-                        var name = stdout.match(/\w+\.main\.js/)[0];
-                        grunt.config.set('main_js_file_name', name);
-                        console.log(name);
-                        cb();
-                    }
-                }
-            },
-            move_source_file: {
-                command: [
-                    'mkdir -p <%= yeoman.hidden_folder %>',
-                    'mv <%= yeoman.dist %>/scripts/*.js.map <%= yeoman.hidden_folder %>/'
-                ].join(' && ')
-            }
-        },
 
         concurrent: {
             server: [
-              'sass',
+              'sass:server',
               'browserify:vendor',
               'browserify:dev'
             ],
@@ -558,25 +390,14 @@ module.exports = function (grunt) {
 
             ],
             dist: [
-                'handlebars',
-                'browserify',
-                'sass',
-                'imagemin',
-                'svgmin'
-                // 'shell:translations_download'
+              'handlebars',
+              'browserify:dist',
+              'sass:dist',
+              'imagemin',
+              'svgmin'
             ]
         },
 
-        compress: {
-          main: {
-            options: {
-              archive: 'releases/<%= gitinfo.local.branch.current.name  %>/dist_<%= gitinfo.local.branch.current.shortSHA %>.zip'
-            },
-            files: [
-              {src: ['<%= yeoman.dist %>/**'] }, // includes files in path and its subdirs
-            ]
-          }
-        },
         bower: {
             options: {
               exclude: ['sass-bootstrap']
@@ -606,7 +427,7 @@ module.exports = function (grunt) {
         'clean:server',
         'handlebars',
         'concurrent:server',
-        'postcss'
+        'postcss:server'
       ]);
     });
 
@@ -625,29 +446,16 @@ module.exports = function (grunt) {
         'clean:dist',
         'gitinfo',
         'concurrent:dist',
-        'postcss',
-        'useminPrepare',
-        'requirejs:'+target,
-        'concat',
-        'cssmin',
+        'uglify:dist',
+        'postcss:dist',
         'copy:dist',
-        'preprocess:html',
-        'filerev',
-        'usemin',
-        'replace',
-        'sourcemaps',
-        'manifest',
-        'htmlmin',
-        'clean:after_build',
-        'compress'
+        // 'filerev',
+        // 'manifest',
+        // 'clean:after_build',
       ]);
 
     });
 
-
-    grunt.registerTask('sourcemaps', [
-        'shell:move_source_file'
-    ]);
 
     grunt.registerTask('default', [
         'jshint',
