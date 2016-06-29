@@ -28,6 +28,26 @@ module.exports = Core.Model.extend({
 
   get_block_by_id: function(id){
     return Core.g.layout.get('blocks').get(id);
+  },
+
+  publish: function(data){
+    var via = 'publish';
+    return this.save(data, {
+      via: via,
+      method: 'POST',
+      url:this.url(via),
+      patch: true
+    });
+  },
+
+  discard: function(data){
+    var via = 'discard';
+    return this.save(data, {
+      via: via,
+      method: 'POST',
+      url:this.url(via),
+      patch: true
+    });
   }
 
 });

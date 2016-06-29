@@ -79,6 +79,16 @@ module.exports = Core.Model.extend({
       url: this.url(via),
       patch: true
     });
+  },
+
+  restore: function(data){
+    var via = 'restore';
+    return this.save(data, {
+      via: via,
+      url: this.url(via),
+      method: 'POST',
+      patch: true
+    });
   }
 
 });

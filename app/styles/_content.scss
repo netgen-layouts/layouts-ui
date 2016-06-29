@@ -69,7 +69,7 @@
       }
     }
     .name{float:left; font-size:0.82em; }
-    .action-destroy {
+    .block-action {
       display:none;
       float:right;
       font-size:0.75em;
@@ -77,6 +77,9 @@
       line-height:1.6666666667em;
       padding:0 0.5em;
       cursor:pointer;
+      &:hover {
+        background:rgba(0, 0, 0, 0.1);
+      }
     }
   }
 
@@ -95,7 +98,7 @@
     .block-header {
       background:#4388AB;
       .handle,
-      .action-destroy {
+      .block-action {
         display:block;
       }
     }
@@ -236,5 +239,12 @@
     font-size:42px;
     color:rgba(255, 255, 255, 0.75);
     text-shadow:0 0 15px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.ae-ui {
+  .ae-toolbar,
+  [class^=ae-toolbar-] {
+    z-index:100;
   }
 }

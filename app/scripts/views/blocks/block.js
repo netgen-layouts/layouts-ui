@@ -16,6 +16,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
     this.listenTo(this.model, 'edit', this.$edit);
     this.listenTo(this.model, 'change_type:success sidebar_save:success', this.reload_model);
+    this.listenTo(this.model, 'restore:success', this.after_restore);
     if(!this.model.isNew()){
       this.setup_dom_element();
       this.render();
@@ -30,7 +31,8 @@ module.exports = Core.View.extend({
   events: {
     'click': '$edit',
     //'dblclick > .block_actions .action-destroy': '$fast_destroy'
-     'click .action-destroy': '$destroy'
+    'click .js-destroy': '$destroy',
+    'click .js-revert': 'restore_block'
   },
 
   setup_dom_element: function(){
@@ -50,6 +52,9 @@ module.exports = Core.View.extend({
   render: function(x){
     _.isString(x) && console.error(x);
     this.$el.html(this.model.get('html'));
+    if (!this.model.get('has_published_state')){
+      this.$el.find('.js-revert').hide();
+    }
     Core.View.prototype.render.apply(this, arguments);
     return this;
   },
@@ -128,6 +133,21 @@ module.exports = Core.View.extend({
     if(data && this === data.block){return;}
     this.editing = false;
     this.$el.removeClass('editing');
+  },
+
+  restore_block: function(){
+    var self = this;
+    return new Core.Modal({
+      title: 'Confirm',
+      body: "Are you sure you want to revert the block to it's published version? All of the changes you have made will be lost."
+    }).on('apply', function(){
+      self.model.restore();
+    }).open();
+  },
+
+  after_restore: function(){
+    this.reload_model();
+    this.refresh_sidebar();
   }
 
 });

@@ -10,12 +10,15 @@ module.exports = Core.View.extend({
   events: {
     'submit form.js-layout': 'set_name',
     'click .js-show-form': 'enter_editing',
-    'click .js-cancel': 'cancel_editing'
+    'click .js-cancel': 'cancel_editing',
+    'click .js-publish': 'publish_layout',
+    'click .js-discard': 'discard_draft'
   },
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'save:success', this.after_save);
+    this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
 
     this.render();
 
@@ -30,7 +33,7 @@ module.exports = Core.View.extend({
 
   set_name: function(e){
     e.preventDefault();
-    this.model.save(this.serialize().params, {method: "POST", patch: true});
+    this.model.save(this.serialize().params, {method: 'POST', patch: true});
   },
 
   enter_editing: function(){
@@ -55,6 +58,26 @@ module.exports = Core.View.extend({
 
   after_save: function(){
     this.exit_editing();
+  },
+
+  publish_layout: function(e){
+    e.preventDefault();
+    this.model.publish();
+  },
+
+  discard_draft: function(e){
+    e.preventDefault();
+    var self = this;
+    return new Core.Modal({
+      title: 'Confirm',
+      body: 'Are you sure you want to discard layout? All of the changes you have made will be lost.'
+    }).on('apply', function(){
+      self.model.discard();
+    }).open();
+  },
+
+  close_layout: function(){
+    location.href = '/';
   }
 
 });
