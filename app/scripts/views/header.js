@@ -10,7 +10,9 @@ module.exports = Core.View.extend({
   events: {
     'submit form.js-layout': 'set_name',
     'click .js-show-form': 'enter_editing',
-    'click .js-cancel': 'cancel_editing'
+    'click .js-cancel': 'cancel_editing',
+    'click .js-publish': 'publish_layout',
+    'click .js-discard': 'discard_draft'
   },
 
   initialize: function(){
@@ -30,7 +32,7 @@ module.exports = Core.View.extend({
 
   set_name: function(e){
     e.preventDefault();
-    this.model.save(this.serialize().params, {method: "POST", patch: true});
+    this.model.save(this.serialize().params, {method: 'POST', patch: true});
   },
 
   enter_editing: function(){
@@ -55,6 +57,16 @@ module.exports = Core.View.extend({
 
   after_save: function(){
     this.exit_editing();
+  },
+
+  publish_layout: function(e){
+    e.preventDefault();
+    this.model.publish();
+  },
+
+  discard_draft: function(e){
+    e.preventDefault();
+    this.model.discard();
   }
 
 });
