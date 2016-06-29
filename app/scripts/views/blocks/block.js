@@ -52,6 +52,9 @@ module.exports = Core.View.extend({
   render: function(x){
     _.isString(x) && console.error(x);
     this.$el.html(this.model.get('html'));
+    if (!this.model.get('has_published_state')){
+      this.$el.find('.js-revert').hide();
+    }
     Core.View.prototype.render.apply(this, arguments);
     return this;
   },
