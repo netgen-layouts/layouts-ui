@@ -139,7 +139,7 @@ module.exports = Core.View.extend({
     var self = this;
     return new Core.Modal({
       title: 'Confirm',
-      body: "Are you sure you want to revert the block to it's published version? All of the changes you have made will be lost."
+      body: "Are you sure you want to revert the block to its published version? All of the changes you have made will be lost."
     }).on('apply', function(){
       self.model.restore();
     }).open();
