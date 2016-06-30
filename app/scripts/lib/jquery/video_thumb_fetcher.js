@@ -5,7 +5,7 @@ $.fn.video_thumb_fetcher = function(){
         $thumb = $(this).find('img.js-video-thumb');
 
     if (service === 'youtube'){
-      $thumb.attr('src', 'https://img.youtube.com/vi/' + id + '/mqdefault.jpg');
+      $thumb.attr('src', 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg');
 
     } else if (service === 'vimeo'){
       $.ajax({
