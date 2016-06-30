@@ -12,3 +12,4 @@ coverage
 *.ruby-version
 releases
 onesky.json
+local_config.json
