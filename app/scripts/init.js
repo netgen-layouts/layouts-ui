@@ -133,6 +133,7 @@ $.extend(Core, {
   },
 
   page_layout: function(){
+    $("#app").removeClass('preview');
     Core.g.layout = new Layout({id: parseInt(Core.router.params.id, 10)});
     $.when(
       Core.g.config.fetch(),
@@ -142,9 +143,23 @@ $.extend(Core, {
     ).then(this.start.bind(this));
   },
 
+
+  page_layout_preview: function(){
+    $("#app").addClass('preview');
+
+    Core.g.layout = new Layout({id: parseInt(Core.router.params.id, 10)});
+    $.when(
+      Core.g.config.fetch(),
+      Core.g.block_types.fetch_once(),
+      Core.g.layout.blocks.fetch(),
+      Core.g.layout.fetch()
+    ).then(function() {
+      this.start();
+    }.bind(this));
+  },
+
+
   page_layout_new: function(){
-
-
     var layout = new Layout();
 
     var layout_view = new NewLayoutView({
@@ -152,14 +167,11 @@ $.extend(Core, {
       model: layout
     });
 
-
     $.when(
       Core.g.layout_types.fetch()
     ).then(
       layout_view.render().open()
     );
-
-
 
   },
 

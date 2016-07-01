@@ -9,8 +9,11 @@ module.exports = Core.View.extend(DndView).extend({
   template: 'block_types/items',
   events: {
     'click .open-panel': '$open_left_panel',
-    'click .close-panel': '$close_left_panels'
+    'click .close-panel': '$close_left_panels',
+    'click .js-layout-mapper': '$open_layout_mapper'
   },
+
+
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
@@ -47,6 +50,11 @@ module.exports = Core.View.extend(DndView).extend({
   $close_left_panels: function(){
     this.$('.left-panel').hide();
     this.$('.open-panel').removeClass('active');
+  },
+
+
+  $open_layout_mapper: function() {
+    Core.router.navigate_to('layout_preview', {id: 1});
   }
 
 });

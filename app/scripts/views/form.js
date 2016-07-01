@@ -59,7 +59,7 @@ module.exports = Core.View.extend({
     return $.get(this.url).done(function(response){
       this.$el.html(response);
       var self = this;
-      $('[data-block].editing [data-inline-child]').each(function(){
+      $('[data-block].editing [data-inline-child], [data-block].editing .alloy-editor').each(function(){
         var name = $(this).data('attr');
         self.$('[name*="['+name+']"]').parent().hide();
       });

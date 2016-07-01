@@ -7,6 +7,7 @@ module.exports = Core.Backbone.Router.extend({
   routes: {
     '': 'home',
     'layout': 'layout_new',
+    'layout/:id/preview': 'layout_preview',
     'layout(/:id)': 'layout'
   },
 
@@ -17,6 +18,10 @@ module.exports = Core.Backbone.Router.extend({
 
   layout: function(){
     Core.page_layout();
+  },
+
+  layout_preview: function() {
+    Core.page_layout_preview()
   },
 
 
