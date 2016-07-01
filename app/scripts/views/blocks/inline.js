@@ -1,12 +1,14 @@
 'use strict';
 
 var _ = require('underscore');
+var striptags = require('striptags');
 
 module.exports = {
 
   prevent_auto_render: true,
 
   events: {
+    'paste [data-inline-child]': '$paste',
     'keyup [data-inline-child]': '$keyup',
     'focus [data-inline-child]': '$render_sidebar'
   },
@@ -26,13 +28,22 @@ module.exports = {
     return this;
   },
 
+  $paste: function(e) {
+    var $target = this.$('[data-inline-child]');
+    //Deffer
+    setTimeout(function() {
+      $target
+        .html(striptags($target.html(), ['br']))
+        .trigger('keyup')
+    }.bind(this), 0);
+
+  },
+
 
   $keyup: function (e) {
     var $target = $(e.target), name = $target.data('attr');
-    var value = $target.html().trim();
     var $input_or_textarea = $('.sidebar [name*="['+name+']"]');
-    value = value.replace(/<br>/g, '\n');
-    value = value.replace(/&nbsp;/g, ' ');
+    var value = this.get_value($target);
 
     if(!$input_or_textarea.length){
       //throw new Error('Inline element not found in sidebar form.');
@@ -40,20 +51,30 @@ module.exports = {
     }
 
     if(_.isEmpty(value)){return;}
-    $input_or_textarea.val(value);
-    this.debounced_save($input_or_textarea);
+    this.debounced_save($input_or_textarea, function(){
+      return this.get_value($target);
+    }.bind(this));
   },
 
 
-  debounced_save: _.debounce(function($input){
+  get_value: function($el) {
+    var value = $el.html().trim();
+    value = value.replace(/<br>/g, '\n');
+    value = value.replace(/&nbsp;/g, ' ');
+    return value;
+  },
+
+
+  debounced_save: _.debounce(function($input, get_value){
+    $input.val(get_value());
     this.$save($input);
   }, 500),
 
   $save: function($input){
-
     this.model.save_via_form($input.closest('form'))
       .done(this.model.trigger.bind(this.model, 'save_inline:done'))
       .fail(this.model.trigger.bind(this.model, 'save_inline:error'));
 
   }
+
 };

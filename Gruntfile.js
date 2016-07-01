@@ -100,7 +100,10 @@ module.exports = function(grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      vendor: [
+        '<%= config.dist %>/vendor/alloy-editor'
+      ]
     },
 
     handlebars: {
@@ -286,7 +289,26 @@ module.exports = function(grunt) {
             'generated/*'
           ]
         }]
+      },
+
+
+      vendor: {
+        files: [
+          {
+            expand: true,
+            cwd: 'node_modules/ace-builds/src-min-noconflict',
+            src: '**',
+            dest: '<%= config.dist %>/vendor/ace-editor'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/alloyeditor/dist/alloy-editor',
+            src: '**',
+            dest: '<%= config.dist %>/vendor/alloy-editor'
+          }
+        ]
       }
+
     },
 
 
@@ -339,6 +361,13 @@ module.exports = function(grunt) {
     ]);
 
   });
+
+
+
+  grunt.registerTask('npm_to_vendor', [
+    'clean:vendor',
+    'copy:vendor'
+  ]);
 
 
   grunt.registerTask('default', ['server']);

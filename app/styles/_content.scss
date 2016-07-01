@@ -248,3 +248,7 @@
     z-index:100;
   }
 }
+
+
+
+.ae-placeholder:empty:not(:focus):before{margin-bottom:10px; display:block; color:#666;}
