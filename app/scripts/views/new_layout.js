@@ -9,11 +9,14 @@ module.exports = Core.Modal.extend({
   template: 'new_layout',
 
   initialize: function(){
-    Core.View.prototype.initialize.apply(this, arguments);
+    Core.Modal.prototype.initialize.apply(this, arguments);
     this.modal_options = {
       keyboard: false,
       backdrop: 'static'
     };
+
+    this.listenTo(Core.router, 'route', this.close);
+
     this.on('save:success', this.on_success);
     this.on('save:error', this.on_error);
     this.on('apply', this.on_apply);

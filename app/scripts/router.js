@@ -1,41 +1,33 @@
 'use strict';
 
 var Core = require('core_boot');
+var Pages = require('./pages/main');
 
 module.exports = Core.Backbone.Router.extend({
 
+
+  before: function(name, params, next){
+    // if(Core.g.layout){
+    //   this.navigate_to('layout', {id: Core.g.layout.id});
+    // }else{
+    //   next();
+    // }
+
+    next();
+  },
+
   routes: {
-    '': 'home',
+    '':       'home',
     'layout': 'layout_new',
-    'layout/:id/preview': 'layout_preview',
+    'layout/:id/link_zone/:zone_id/with_layout/:draft_layout_id': 'layout_preview',
     'layout(/:id)': 'layout'
   },
 
 
-  home: function(){
-    this.navigate_to('layout');
-  },
+  home: function() { this.navigate_to('layout_new'); },
 
-  layout: function(){
-    Core.page_layout();
-  },
-
-  layout_preview: function() {
-    Core.page_layout_preview()
-  },
-
-
-  //Testing version
-  layout_new: function(){
-    Core.page_layout_new();
-  },
-
-  _layout_new: function(){
-    if(Core.g.layout){
-      this.navigate_to('layout', {id: Core.g.layout.id});
-    }else{
-      Core.page_layout_new();
-    }
-  }
+  layout_new: Pages.LayoutNew.init(),
+  layout:     Pages.Layout.init(),
+  layout_preview: Pages.LayoutLink.init()
 
 });

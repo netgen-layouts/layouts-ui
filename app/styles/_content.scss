@@ -268,23 +268,44 @@
     bottom: 10px;
     left: 80px;
   }
-  [data-zone]{
-    min-height: 200px;
-  }
-  [data-zone]:before{
-    content: "choose";
-    display: block;
+
+  .zone_linker{
     position: absolute;
     top:0;
     right: 0;
     bottom:0;
     left:0;
-    color:#000;
-    background: rgba(255,255,255,.1);
-    z-index: 9999;
-    font-size: 30px;
-    text-align: center;
-    line-height: 200px;
+    background: rgba(white,.9);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+  }
+
+  [data-zone]:hover .zone_linker{
+    opacity: 1;
   }
 
 }
+
+
+.zone_chooser{
+  background: rgba(255,255,255,1);
+  z-index: 9999;
+  text-align: center;
+  padding: 100px 0;
+}
+
+
+.disabler{
+  position: absolute;
+  top:0;
+  right: 0;
+  bottom:0;
+  left:0;
+  background: rgba(0,0,0,.5);
+  z-index: 999;
+}
+
+

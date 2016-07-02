@@ -17,7 +17,7 @@ module.exports = Core.View.extend({
       new ZoneView({
         model: self.collection.get(id),
         el: this
-      });
+      }).render();
     });
     return this;
   },

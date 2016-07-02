@@ -71,8 +71,8 @@ module.exports = function(grunt) {
     browserSync: {
       bsFiles: {
         src: [
-          '.tmp/scripts/*',
-          '.tmp/styles/*',
+          '.tmp/scripts/*.js',
+          '.tmp/styles/*.css',
           '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
           '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
         ]

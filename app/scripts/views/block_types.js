@@ -54,7 +54,10 @@ module.exports = Core.View.extend(DndView).extend({
 
 
   $open_layout_mapper: function() {
-    Core.router.navigate_to('layout_preview', {id: 1});
+    this.zone_chooser_on = !this.zone_chooser_on;
+    console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<', this.zone_chooser_on);
+    Core.trigger('zone_chooser:' + (this.zone_chooser_on ? 'on' : 'off'));
+    //Core.router.navigate_to('layout_preview', {id: 1});
   }
 
 });
