@@ -67,25 +67,24 @@ module.exports = function(grunt) {
       }
     },
 
-    /*
+
     browserSync: {
       bsFiles: {
-        src: ['.tmp/scripts/*', '.tmp/styles/*', 'app/*html']
+        src: [
+          '.tmp/scripts/*',
+          '.tmp/styles/*',
+          '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
+          '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
+        ]
       },
       options: {
-
         open: false,
         watchTask: true,
-        server: {
-          middleware: [
-            proxyMiddleware('/bm/', {target: 'http://' + config.local.domain + '/', changeOrigin: true }),
-            proxyMiddleware('/cb/', {target: 'http://' + config.local.domain + '/', changeOrigin: true })
-          ],
-          baseDir: ['.tmp', config.app]
-        }
+        startPath: 'bm/dev/app',
+        proxy: config.local.domain
       }
     },
-    */
+
 
 
     clean: {
@@ -335,7 +334,7 @@ module.exports = function(grunt) {
   grunt.registerTask('server', function() {
     grunt.task.run([
       'fast_build',
-      //'browserSync',
+      'browserSync',
       'watch'
     ]);
   });
