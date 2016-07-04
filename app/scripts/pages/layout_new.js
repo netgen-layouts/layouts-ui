@@ -5,8 +5,8 @@ var NewLayoutView = require('../views/new_layout');
 
 
 module.exports = Page.extend({
-  master: 'application',
-  layout: 'layout',
+  master: 'layout_new',
+  layout: 'layout_new',
 
   deps: function(done){
     return  $.when(
@@ -23,6 +23,8 @@ module.exports = Page.extend({
       url: '/bm/app/layouts/form/create',
       model: layout
     });
+
+    this.child_view.$el.addClass("new_layout_page");
 
 
     layout_view.render().open();

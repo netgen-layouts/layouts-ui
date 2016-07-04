@@ -1,17 +1,7 @@
 'use strict';
-var LayoutPage = require('./layout');
-var LayoutLinkChooserView = require('../views/layout_link_chooser');
+var LayoutBasePage = require('./layout_base');
 
 
-module.exports = LayoutPage.extend({
-  main: function(){
-    LayoutPage.prototype.main.apply(this, arguments);
-    $('#app').addClass('preview');
-
-
-    var view = new LayoutLinkChooserView();
-    $('.app-header').append(view.render().$el);
-
-    return this;
-  },
+module.exports = LayoutBasePage.extend({
+  master: 'layout_link'
 });

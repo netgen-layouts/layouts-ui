@@ -1,1 +1,30 @@
-{{yield}}
+<header class="app-header">
+  <div class="app-logo"></div>
+  <div class="app-center"></div>
+</header>
+
+<aside class="left-toolbar blocks"></aside>
+
+<div class="main-content">
+  {{yield}}
+</div>
+
+<aside id="sidebar">
+    <div class="right-sidebar"></div>
+    <div id="trash">
+        <div data-trash></div>
+        <i class="fa fa-trash-o"></i><p>Trash</p>
+    </div>
+
+    <div class="loader">
+        <div class="content">
+            <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+            <span>Loading</span>
+        </div>
+    </div>
+</aside>
+
+<footer class="app-footer"></footer>
+
+
+
