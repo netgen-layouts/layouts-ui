@@ -17,5 +17,6 @@ module.exports = {
   title:  require('./title'),
   text:  require('./text'),
   rich_text:  require('./rich_text'),
+  html_snippet:  require('./html_snippet'),
   external_video:  require('./external_video')
 };
