@@ -1,4 +1,3 @@
-
 'use strict';
 
 var Core = require('core_boot');

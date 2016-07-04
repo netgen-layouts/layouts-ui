@@ -13,14 +13,12 @@ module.exports = {
   },
 
   init_block_from_type: function(type, additional_attributes){
-    console.log(type);
     var Klass = Blocks[type.get('kind')] || Blocks.Def;
     var attributes = Core._.defaults({definition_identifier: type.get('definition_identifier')}, type.get('parameters'), additional_attributes);
     return new Klass(attributes);
   },
 
   init_block: function(params){
-    console.log('init_block', params);
     var block_type = Core.g.block_types.get(params.block_type);
     var Klass = Blocks[block_type.get('kind')];
     console.log(params);
