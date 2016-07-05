@@ -30,7 +30,7 @@
       layout
         .fetch()
         .done(function() {
-          Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id });
+          Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit' });
         }.bind(this))
       return this;
     },

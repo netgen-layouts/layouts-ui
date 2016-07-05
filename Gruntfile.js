@@ -1,6 +1,7 @@
 // Generated on 2013-07-23 using generator-webapp 0.2.6
 'use strict';
 
+var _ = require('underscore');
 var proxyMiddleware = require('http-proxy-middleware');
 
 /* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
@@ -8,12 +9,15 @@ var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
 var helpers = require('./app/scripts/core-ui/helpers');
+var project_helpers = require('./app/scripts/lib/handlebars/helpers');
 
+var all_helpers = _.extend({}, helpers, project_helpers);
 var known_helpers = {};
-for (var k in helpers) {
+
+for (var k in all_helpers) {
   known_helpers[k] = true;
 }
-//console.log("KNOWN HELPERS", known_helpers);
+
 
 
 JavaScriptCompiler.prototype.nameLookup = function(parent, name /* , type*/ ) {
