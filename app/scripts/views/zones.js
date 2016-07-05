@@ -18,9 +18,9 @@ module.exports = Core.View.extend({
 
   load_blocks: function(){
     ViewBlocksLoad.load_layout_blocks();
-    this.render_block_types_view();
     return this;
   },
+
 
   on_reset: function(){
     this.parse_dom()
@@ -36,15 +36,15 @@ module.exports = Core.View.extend({
         el: this
       }).render();
     });
+    this.render_block_types_view();
     return this;
   },
 
 
   render_block_types_view: function(){
      new ViewBlockTypes({
-      el: '.blocks',
-      collection: Core.g.block_type_groups
-    }).render();
+      collection: Core.g.block_types
+    }).render_to('.blocks');
     return this;
   },
 });

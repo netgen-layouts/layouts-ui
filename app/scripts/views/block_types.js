@@ -25,7 +25,7 @@ module.exports = Core.View.extend(DndView).extend({
   render: function(){
     this._super('render', arguments);
 
-    this.collection.each(function(group){
+    this.collection.groups.each(function(group){
       this.render_items(group.types(), this.$('.' + group.id), BlockTypeView);
     }.bind(this));
 

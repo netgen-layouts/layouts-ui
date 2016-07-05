@@ -10,7 +10,7 @@ module.exports = Page.extend({
 
   deps: function(done){
     return  $.when(
-              Core.g.layout_types.fetch()
+              Core.g.layout_types.fetch_once()
             )
             .then(done);
   },

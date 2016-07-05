@@ -9,18 +9,6 @@ module.exports = Core.Model.extend({
   format: '',
   path: 'config/block_types',
 
-  GROUPS: {
-    0: 'simple',
-    1: 'content',
-    2: 'group',
-    3: 'container',
-    4: 'custom'
-  },
-
-  group_name: function(){
-    return this.GROUPS[this.get('group')];
-  },
-
 
   parse: function (response) {
     response.parameters = response.parameters ? JSON.parse(response.parameters) : {};

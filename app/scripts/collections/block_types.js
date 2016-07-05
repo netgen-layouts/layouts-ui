@@ -10,7 +10,7 @@ module.exports = Core.Collection.extend({
   name: 'BlockTypes',
 
   parse: function(response){
-    Core.g.block_type_groups = new BlockTypeGroups(response.block_type_groups);
+    this.groups = new BlockTypeGroups(response.block_type_groups);
     return response.block_types;
   },
 
