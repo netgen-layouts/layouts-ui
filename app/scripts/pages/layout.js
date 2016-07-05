@@ -33,7 +33,7 @@ module.exports = LayoutBasePage.extend({
   render_modal: function(model){
     new Core.Modal({
         template: 'modal_discard_or_edit',
-        title:  'What would you like to do with draft?',
+        title:  'What would you like to do with the draft?',
         model: model,
         modal_options: {
           keyboard: false,

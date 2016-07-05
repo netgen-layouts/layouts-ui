@@ -11,7 +11,7 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.collection, 'reset', this.on_reset);
-    this.listenTo(this.layout_model.blocks, 'read:success', this.load_blocks);
+    this.listenToOnce(this.layout_model.blocks, 'read:success', this.load_blocks);
     return this;
   },
 
