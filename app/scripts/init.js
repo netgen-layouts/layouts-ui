@@ -79,8 +79,11 @@ $.extend(Core, {
   reinitialize_plugins: function(data){
     data.view.$('.xeditable').xeditable();
     data.view.$('.js-dependable-selects-group .js-master').dependable_select();
+    data.view.$('.master-slave-selects .master').master_slave_selects();
     data.view.$('.js-input-browse').input_browse();
     data.view.$('.js-external-video').video_thumb_fetcher();
+
+
     this.hide_selects_with_one_option(data.view);
 
   },

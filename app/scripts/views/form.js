@@ -69,13 +69,19 @@ module.exports = Core.View.extend({
   },
 
   $delayed_submit: _.debounce(function(e){
-    if($(e.target).hasClass('.js-skip-on-change')){return;}
-    this.$submit();
+    if(this.should_skip(e)){return;}
+    this.$submit(e);
   }, 500),
+
+
+  should_skip: function(e){
+    return $(e.target).hasClass('js-skip-on-change');
+  },
 
 
   $submit: function (e) {
     e && e.preventDefault();
+    if(this.should_skip(e)){return;}
     var options = {};
         // params = this.serialize().params;
 

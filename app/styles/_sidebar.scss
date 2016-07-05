@@ -111,6 +111,7 @@
       border-radius:0;
       border:none;
       margin:0 0 1em;
+      transition: background-color 0.3s ease-out 0.1s;
       background:$sidebarinput url('../images/caret-down.svg') no-repeat;
       background-position:right 0.5714285714em center;
       background-size:0.9285714286em auto;
@@ -127,6 +128,10 @@
         option {
         }
       }
+    }
+    select.highlight{
+      background-color: lighten($sidebarinput, 40%);
+
     }
     option {
       padding:0.125em 0.5em;
