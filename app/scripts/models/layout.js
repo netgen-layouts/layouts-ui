@@ -48,6 +48,17 @@ module.exports = Core.Model.extend({
       url:this.url(via),
       patch: true
     });
+  },
+
+
+  create_new_draft: function(data){
+    var via = 'draft';
+    return this.save(data, {
+      via: via,
+      method: 'POST',
+      url:this.url(via),
+      patch: true
+    });
   }
 
 });

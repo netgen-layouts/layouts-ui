@@ -10,14 +10,17 @@ module.exports =  Page.extend({
 
     Core.g.layout = new Layout({id: parseInt(Core.router.params.id, 10)});
 
-    var resources = [
-      Core.g.config.fetch(),
-      Core.g.block_types.fetch_once(),
-      Core.g.layout.blocks.fetch(),
-      Core.g.layout.fetch()
-    ];
+    return  $.when(Core.g.config.fetch())
+             .then(function() {
+               return Core.g.layout.fetch();
+             })
+             .then(function() {
+               return $.when(Core.g.block_types.fetch_once())
+             })
+             .then(done, function(xhr) {
+               done(xhr);
+             })
 
-    return $.when.apply(null, resources).then(done);
 
   }
 

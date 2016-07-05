@@ -20,14 +20,15 @@ module.exports = Core.Backbone.Router.extend({
     '':       'home',
     'layout': 'layout_new',
     'layout/:id/link_zone/:zone_id/with_layout/:draft_layout_id': 'layout_preview',
-    'layout(/:id)': 'layout'
+    'layout/:id(/:type)': 'layout',
   },
-
 
   home: function() { this.navigate_to('layout_new'); },
 
   layout_new: Pages.LayoutNew.init(),
-  layout:     Pages.Layout.init(),
+
+  layout:         Pages.Layout.init(),
+
   layout_preview: Pages.LayoutLink.init()
 
 });

@@ -41,6 +41,13 @@ module.exports = Block.extend({
   }, 500),
 
 
+  remove: function(){
+    this.editor.destroy();
+    $('.ae-ui').remove();
+    Block.prototype.remove.apply(this, arguments);
+    return this;
+  },
+
   $save: function($input){
     this.model.save_via_form($input.closest('form'))
       .done(this.model.trigger.bind(this.model, 'save_inline:done'))

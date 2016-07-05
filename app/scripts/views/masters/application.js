@@ -1,7 +1,6 @@
 'use strict';
 
 var Core = require('core_boot');
-var HeaderView = require('../header');
 
 module.exports = Core.View.extend({
   el: '#app',
@@ -11,12 +10,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
     this.$el.removeClass('preview');
 
-    new HeaderView({
-      el: '.app-center',
-      model: Core.g.layout
-    }).render();
 
-    $('.right-sidebar').html(JST.sidebar());
 
     return this;
   },
