@@ -10,7 +10,14 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.blocks = new Blocks();
+    this.on('change:id', this.reset_blocks_loaded);
     this.blocks.url = Core.env.base_url + this.path + '/' + this.id + '/blocks';
+    return this;
+  },
+
+  reset_blocks_loaded: function(){
+    this.blocks.reset(null);
+    this.blocks.loaded = false;
     return this;
   },
 
