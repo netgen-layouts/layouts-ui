@@ -7,6 +7,7 @@ module.exports = Core.Backbone.Router.extend({
 
 
   before: function(name, params, next){
+    $('.modal').modal('hide');
     // if(Core.g.layout){
     //   this.navigate_to('layout', {id: Core.g.layout.id});
     // }else{
