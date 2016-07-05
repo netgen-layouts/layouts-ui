@@ -25,6 +25,7 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
     this.$name_input = this.$('.js-name');
+    //this.prevent_leave_page();
     return this;
   },
 
@@ -74,7 +75,21 @@ module.exports = Core.View.extend({
   },
 
   close_layout: function(){
+    this.can_leave_page = true;
     location.href = '/';
+  },
+
+  can_leave_page: false,
+
+  prevent_leave_page: function(){
+    var self = this;
+    window.addEventListener('beforeunload', function(e){
+      if (!self.can_leave_page){
+        var dialogText = 'Are you sure you want to leave the page?';
+        e.returnValue = dialogText;
+        return dialogText;
+      }
+    });
   }
 
 });
