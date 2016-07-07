@@ -7,7 +7,7 @@ define(function (require) {
 
     'rename layout': function () {
       return this.remote
-        .get('http://bm.site/bm/dev/app/#layout/1/edit')
+        .get(require.toUrl('bm/dev/app/#layout/1/edit'))
         .setFindTimeout(5000)
         .findByCssSelector('.layout-name')
           .click()

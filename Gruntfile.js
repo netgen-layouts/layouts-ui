@@ -70,6 +70,7 @@ module.exports = function(grunt) {
       },
       functional: {
         options: {
+          proxyUrl: 'http://' + config.local.domain,
           runType: 'runner', // browsers
           config: 'tests/intern',
           reporters: [ 'Console'],
