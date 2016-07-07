@@ -37,6 +37,10 @@ module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+
+  grunt.loadNpmTasks('intern');
+
+
   var local_config = 'local_config.json';
   if (!grunt.file.exists(local_config)) {
     grunt.file.copy(local_config + '.example', local_config)
@@ -54,6 +58,48 @@ module.exports = function(grunt) {
   grunt.initConfig({
     config: config,
     pkg: grunt.file.readJSON('package.json'),
+
+    intern: {
+      unit: {
+        options: {
+          runType: 'client', // console /  nodejs
+          config: 'tests/intern',
+          reporters: [ 'Console', { id: 'LcovHtml', directory: 'tests/coverage' } ],
+          suites: [ 'tests/unit/*' ],
+        }
+      },
+      functional: {
+        options: {
+          runType: 'runner', // browsers
+          config: 'tests/intern',
+          reporters: [ 'Console'],
+          functionalSuites: [ 'tests/functional/*' ]
+        }
+      }
+    },
+
+
+   selenium_standalone: {
+      options: {
+        stopOnExit: true
+      },
+      dev: {
+        seleniumVersion: '2.49.1',
+        seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
+        drivers: {
+          chrome: {
+            version: '2.21',
+            arch: process.arch,
+            baseURL: 'http://chromedriver.storage.googleapis.com'
+          },
+          ie: {
+            version: '2.53.0',
+            arch: 'ia32',
+            baseURL: 'http://selenium-release.storage.googleapis.com'
+          }
+        }
+      }
+    },
 
     watch: {
 
@@ -371,6 +417,9 @@ module.exports = function(grunt) {
     'clean:vendor',
     'copy:vendor'
   ]);
+
+
+   grunt.registerTask('test', [ 'selenium_standalone:dev:start', 'intern' ]);
 
 
   grunt.registerTask('default', ['server']);

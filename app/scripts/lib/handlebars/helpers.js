@@ -9,3 +9,4 @@ module.exports = {
     return moment(date).format(opts.hash.format || 'llll');
   }
 }
+

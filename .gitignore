@@ -13,3 +13,4 @@ coverage
 releases
 onesky.json
 local_config.json
+tests/coverage

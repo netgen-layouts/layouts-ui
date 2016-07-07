@@ -81,7 +81,7 @@ module.exports = Core.View.extend({
 
   $submit: function (e) {
     e && e.preventDefault();
-    if(this.should_skip(e)){return;}
+    if(e && this.should_skip(e)){return;}
     var options = {};
         // params = this.serialize().params;
 
