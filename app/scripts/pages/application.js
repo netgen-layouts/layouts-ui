@@ -14,7 +14,7 @@ module.exports =  Page.extend({
 
     return  $.when(Core.g.config.fetch_once())
              .then(function() {
-               return Core.g.layout.fetch_once();
+               return $.when(Core.g.layout.fetch_once(), Core.g.shared_layouts.fetch_once({via: 'shared'}))
              })
              .then(function() {
                return $.when(Core.g.block_types.fetch_once())

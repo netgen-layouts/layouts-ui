@@ -42,7 +42,8 @@ module.exports = Core.View.extend({
 
 
   render_block_types_view: function(){
-     new ViewBlockTypes({
+    if(!Core.g.block_types.length){return;}
+    new ViewBlockTypes({
       collection: Core.g.block_types
     }).render_to('.blocks');
     return this;

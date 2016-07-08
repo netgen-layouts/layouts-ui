@@ -1,11 +1,12 @@
 <div class="form-inline">
   <label>Link with layout</label>
   <select class="form-control" name="layout[id]">
-    <option {{option_value 1 params.id}} >Layout 1</option>
-    <option {{option_value 2 params.id}}>Layout 2</option>
-    <option {{option_value 5 params.id}}>Layout 5</option>
+
+    {{#each collection.models}}
+    <option {{option_value id params.id}} >{{name}}</option>
+    {{/each}}
   </select>
   or
-  <a href="{{url_for 'layout' id=params.id}}">Cancel</a>
+  <a href="{{url_for 'layout' id=params.id type="edit" }}">Cancel</a>
 </div>
 

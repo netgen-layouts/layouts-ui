@@ -10,7 +10,6 @@ module.exports = Core.View.extend({
   },
 
   $load_layout: function() {
-    console.log(this.serialize().params.layout);
     var params = _.extend({}, Core.router.params, this.serialize().params.layout);
     Core.router.navigate_to('layout_preview', params);
   }

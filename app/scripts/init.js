@@ -16,6 +16,7 @@ var TreeConfig = require('./browser-ui/models/tree_config');
 var Items = require('./browser-ui/collections/items');
 
 var Config = require('./models/config');
+var Layouts = require('./collections/layouts');
 
 
 var Nprogress = require('nprogress');
@@ -59,6 +60,7 @@ $.extend(Core, {
     Core.g.layout_types = new LayoutTypes();
     Core.g.block_types = new BlockTypes();
     Core.g.config = new Config();
+    Core.g.shared_layouts = new Layouts();
 
 
     $(function(){

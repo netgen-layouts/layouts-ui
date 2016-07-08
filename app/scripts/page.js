@@ -10,6 +10,7 @@ var master_views = require('./views/masters/main');
 
 function Page(){
   this.master || (this.master = Page.default_master);
+  this.g = {};
 }
 
 Page.default_master = 'application';
@@ -76,9 +77,10 @@ Page.prototype.render = function(){
   if(Page.last_master !== this.master){
     this.remove_old_views();
     this.master_view = Page.master_view = new master_views[this.master]();
+    this.master_view.page = this;
     Page.master_view.render();
   }
-
+  this.child_view.page = this;
   Page.master_view.yield(this.child_view);
 
   Page.last_master = this.master;

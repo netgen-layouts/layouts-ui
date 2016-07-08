@@ -21,7 +21,7 @@
 
     $choose: function(e) {
       e.preventDefault();
-      Core.router.navigate_to('layout_preview', {id: 1, zone_id: this.model.id, draft_layout_id: Core.g.layout.id });
+      Core.router.navigate_to('layout_preview', {id: Core.g.shared_layouts.first().id, zone_id: this.model.id, draft_layout_id: Core.g.layout.id });
     },
 
     $link: function(e){
