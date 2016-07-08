@@ -17,6 +17,7 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'save:success', this.after_save);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
     return this;

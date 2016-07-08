@@ -11,8 +11,13 @@ module.exports = Core.Model.extend({
     Core.Model.prototype.initialize.apply(this, arguments);
     this.blocks = new Blocks();
     this.on('change:id', this.reset_blocks_loaded);
+    this.on('discard:success', this.reset_loaded)
     this.blocks.url = Core.env.base_url + this.path + '/' + this.id + '/blocks';
     return this;
+  },
+
+  reset_loaded: function(){
+    this.loaded = null;
   },
 
   reset_blocks_loaded: function(){
@@ -48,11 +53,10 @@ module.exports = Core.Model.extend({
   },
 
   discard: function(data){
-    var via = 'discard';
     return this.save(data, {
-      via: via,
-      method: 'POST',
-      url:this.url(via),
+      via: 'discard',
+      method: 'DELETE',
+      url:this.url('draft'),
       patch: true
     });
   },

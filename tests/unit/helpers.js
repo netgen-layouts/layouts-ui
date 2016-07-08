@@ -7,7 +7,7 @@ define(function (require) {
     'date with_format': function() {
       var d = new Date();
       var f = helpers.date(d, {hash: {format: 'l'}});
-      assert.strictEqual(f, [d.getDate(), d.getMonth()+1, d.getFullYear()].join('/'))
+      assert.strictEqual(f, [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/'))
     }
   });
 });
