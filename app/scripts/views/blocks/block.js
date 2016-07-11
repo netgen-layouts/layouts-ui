@@ -7,12 +7,13 @@ var _ = require('underscore');
 module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.model, 'change', this.setup_dom_element);
 
+    this.listenTo(Core,       'editing:unmark', this.editing_unmark);
+
+    this.listenTo(this.model, 'change', this.setup_dom_element);
     this.listenTo(this.model, 'create:success read:success', this.render);
     this.listenTo(this.model, 'create:success', this.$edit);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
-    this.listenTo(Core, 'editing:unmark', this.editing_unmark);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
     this.listenTo(this.model, 'edit', this.$edit);
     this.listenTo(this.model, 'change_type:success sidebar_save:success', this.reload_model);
@@ -32,7 +33,7 @@ module.exports = Core.View.extend({
     'click': '$edit',
     //'dblclick > .block_actions .action-destroy': '$fast_destroy'
     'click .js-destroy': '$destroy',
-    'click .js-revert': 'restore_block'
+    'click .js-revert': '$restore_block'
   },
 
   setup_dom_element: function(){
@@ -98,7 +99,8 @@ module.exports = Core.View.extend({
     return this;
   },
 
-  $destroy: function(){
+  $destroy: function(e){
+    e.stopPropagation();
     var self = this;
     return new Core.Modal({
       title: 'Confirm',
@@ -135,7 +137,8 @@ module.exports = Core.View.extend({
     this.$el.removeClass('editing');
   },
 
-  restore_block: function(){
+  $restore_block: function(e){
+    e.stopPropagation();
     var self = this;
     return new Core.Modal({
       title: 'Confirm',

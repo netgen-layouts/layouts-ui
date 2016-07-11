@@ -73,19 +73,15 @@ module.exports = Core.Model.extend({
 
     var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position');
 
-    var via = 'move';
     return this.save(attributes, {
-      via: via,
-      url: this.url(via),
+      via: 'move',
       patch: true
     });
   },
 
-  restore: function(data){
-    var via = 'restore';
-    return this.save(data, {
-      via: via,
-      url: this.url(via),
+  restore: function(){
+    return this.save(null, {
+      via: 'restore',
       method: 'POST',
       patch: true
     });

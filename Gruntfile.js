@@ -105,7 +105,7 @@ module.exports = function(grunt) {
     watch: {
 
       browserify: {
-        files: ['<%= config.app %>/scripts/**/*.js'],
+        files: ['<%= config.app %>/scripts/**/*.js', '<%= config.app %>/scripts/core-ui/**/*.js'],
         tasks: ['browserify:dev']
       },
       sass: {

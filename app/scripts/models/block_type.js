@@ -15,14 +15,14 @@ module.exports = Core.Model.extend({
     return response;
   },
 
-  toJSON: function(options){
-    console.log(options);
-    options || (options = {});
-    var json = Core.Model.prototype.toJSON.apply(this, arguments);
-    if(!options.parse){return json;}
-    json.parameters = JSON.stringify(json.parameters);
-    return json;
-  },
+  // toJSON: function(options){
+  //   console.log(options);
+  //   options || (options = {});
+  //   var json = Core.Model.prototype.toJSON.apply(this, arguments);
+  //   if(!options.parse){return json;}
+  //   json.parameters = JSON.stringify(json.parameters);
+  //   return json;
+  // },
 
 
   // type_name: function(){

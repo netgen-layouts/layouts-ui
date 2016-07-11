@@ -5,7 +5,6 @@ var BlockType = require('../models/block_type');
 var BlockTypeGroups = require('./block_type_groups');
 
 module.exports = Core.Collection.extend({
-  cached: true,
   model: BlockType,
   name: 'BlockTypes',
 

@@ -5,6 +5,10 @@ var BmCollectionItems = require('../collections/bm_collection_items');
 
 module.exports = Core.Model.extend({
   path: 'collections',
+  paths: {
+    change_type: 'blocks/:block_id/collections/:id/change_type',
+    results:     'blocks/:block_id/collections/:id/result'
+  },
 
   idAttribute: 'identifier',
 
@@ -26,13 +30,6 @@ module.exports = Core.Model.extend({
     this.block().trigger('change_type:success');
   },
 
-  change_type_url: function(){
-    return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.get('identifier')+'/change_type';
-  },
-
-  results_url: function(){
-    return  Core.env.base_url + 'blocks/' + this.get('block_id') + '/collections/'+this.get('identifier')+'/result';
-  },
 
   can_add_items: function(){
     return !this.is_named();
@@ -46,7 +43,7 @@ module.exports = Core.Model.extend({
   fetch_results: function(){
     return this.fetch({
       via: 'result',
-      url: this.results_url(),
+      url: this.url('results'),
       data: {offset: this.get('offset'), limit: this.get('limit')}
     });
   },
@@ -57,8 +54,7 @@ module.exports = Core.Model.extend({
       items: items
     };
     return this.save(data, {
-      via: 'add_items',
-      url: this.url('items'),
+      via: 'items',
       method: 'POST',
       patch: true
     });
@@ -68,9 +64,8 @@ module.exports = Core.Model.extend({
     data.new_type && (data.new_type = parseInt(data.new_type, 10));
     data.named_collection_id && (data.named_collection_id = parseInt(data.named_collection_id, 10));
 
-    return this.save(data,{
+    return this.save(data, {
       via: 'change_type',
-      url: this.change_type_url(),
       method: 'POST',
       patch: true
     });

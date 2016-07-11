@@ -12,7 +12,7 @@ module.exports = Core.Model.extend({
     this.blocks = new Blocks();
     this.on('change:id', this.reset_blocks_loaded);
     this.on('discard:success', this.reset_loaded)
-    this.blocks.url = Core.env.base_url + this.path + '/' + this.id + '/blocks';
+    this.blocks.url = this.url('blocks');
     return this;
   },
 
@@ -42,18 +42,16 @@ module.exports = Core.Model.extend({
     return Core.g.layout.get('blocks').get(id);
   },
 
-  publish: function(data){
-    var via = 'publish';
-    return this.save(data, {
-      via: via,
+  publish: function(){
+    return this.save(null, {
+      via: 'publish',
       method: 'POST',
-      url:this.url(via),
       patch: true
     });
   },
 
-  discard: function(data){
-    return this.save(data, {
+  discard: function(){
+    return this.save(null, {
       via: 'discard',
       method: 'DELETE',
       url:this.url('draft'),
@@ -62,12 +60,10 @@ module.exports = Core.Model.extend({
   },
 
 
-  create_new_draft: function(data){
-    var via = 'draft';
-    return this.save(data, {
-      via: via,
+  create_new_draft: function(){
+    return this.save(null, {
+      via: 'draft',
       method: 'POST',
-      url:this.url(via),
       patch: true
     });
   }
