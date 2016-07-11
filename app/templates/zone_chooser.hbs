@@ -1,3 +1,8 @@
 <div class="zone_chooser">
   <a href="#" class="btn btn-primary js-choose">Choose zone</a>
+
+  {{#if model.is_linked}}
+    <a href="#" class="btn btn-danger js-unlink">Unlink zone from layout_id: "{{model.linked_layout_id}}" and zone_id: "{{model.linked_zone_identifier}}"</a>
+    <a href="{{url_for 'layout' id=model.linked_layout_id type="edit"}}" target="_blank" class="btn btn-success">Edit linked layout</a>
+  {{/if}}
 </div>

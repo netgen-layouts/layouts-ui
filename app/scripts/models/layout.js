@@ -2,6 +2,7 @@
 
 var Core = require('core_boot');
 var Blocks = require('../collections/blocks');
+var _ = require('underscore');
 
 module.exports = Core.Model.extend({
 
@@ -14,6 +15,13 @@ module.exports = Core.Model.extend({
     this.on('discard:success', this.reset_loaded)
     this.blocks.url = this.url('blocks');
     return this;
+  },
+
+  parse: function(resp){
+    resp && _.each(resp.zones, function(zone) {
+      zone.layout_id = resp.id
+    })
+    return Core.Model.prototype.parse.apply(this, arguments);
   },
 
   reset_loaded: function(){

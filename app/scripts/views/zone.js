@@ -2,12 +2,15 @@
 
   var Core = require('core_boot');
   var Layout = require('../models/layout');
+  var Zone = require('../models/zone');
+
 
   module.exports = Core.View.extend({
 
     events: {
       //'click': '$goto_parent'
       'click .js-choose': '$choose',
+      'click .js-unlink': '$unlink',
       'click .js-link': '$link'
     },
 
@@ -15,6 +18,7 @@
       Core.View.prototype.initialize.apply(this, arguments);
       this.listenTo(Core, 'zone_chooser:on', this.zone_chooser_on);
       this.listenTo(Core, 'zone_chooser:off', this.zone_chooser_off);
+      this.listenTo(this.model, 'unlink:success', this.render_chooser);
       this.mark_zone_type();
       return this;
     },
@@ -26,13 +30,24 @@
 
     $link: function(e){
       e.preventDefault();
-      var layout = new Layout({id: 1});
-      layout
-        .fetch()
+
+      var draft_layout_zone = new Zone({
+        identifier: Core.router.params.zone_id,
+        layout_id: Core.router.params.draft_layout_id,
+      })
+
+      draft_layout_zone
+        .link_with_zone(this.model)
         .done(function() {
           Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit' });
         }.bind(this))
       return this;
+    },
+
+
+    $unlink: function(e){
+      e.preventDefault();
+      this.model.sync_unlink();
     },
 
     // $goto_parent: function(e){
@@ -43,9 +58,8 @@
     // },
 
 
-
     mark_zone_type: function(){
-      this.$el.addClass('zone_type_'+ this.model.get('type_name'));
+      this.model.is_linked() && this.$el.addClass('linked_zone');
     },
 
     is_container: function(){
@@ -73,7 +87,6 @@
       }
     },
 
-
     zone_chooser_on: function() {
       if(this.has_blocks()){
         this.render_disabler();
@@ -93,7 +106,11 @@
     },
 
     render_chooser: function() {
-      this.chooser = $(JST.zone_chooser());
+      this.chooser && this.chooser.remove();
+      this.context.model = this.model;
+      this.context.view = this;
+
+      this.chooser = $(JST.zone_chooser(this.context));
       this.$el.append(this.chooser);
     },
 

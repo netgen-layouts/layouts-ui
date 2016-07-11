@@ -13,17 +13,18 @@
     text-align: center;
     display:block;
   }
-  &.zone_type_inherited:empty::before {
-    content:'Inherited zone!'
+  &.linked_zone:empty::before {
+    content:'Linked zone. Blocks can not be dropped directly here.'
   }
   .sorting & {
     //outline:1px dashed #FFC91E;
     @include transition(all 0.3s ease-in-out);
   }
+  &.linked_zone{
+    outline-color:#f00;
+  }
 }
-.zone_type_inherited {
-  outline-color:#f00;
-}
+
 
 /* blocks */
 [data-block] {
