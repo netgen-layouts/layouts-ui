@@ -16,44 +16,48 @@ define(function(require) {
         .maximizeWindow()
     },
 
-    'rename layout': function() {
+
+    'create': function() {
+      var layout_name = utils.stamped('Testing layout');
+      return page
+        .navigateTo('#layout')
+        .match('.modal', {visible: true})
+          .fill('Name', layout_name)
+          .clickOn('.layout-type label:nth-of-type(2)')
+          .clickOn('.action_apply')
+        .end()
+        .waitForAjax()
+        .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
+
+        .match('.layout-name', {visible: true}).assertText(layout_name)
+    },
+
+    'rename': function() {
+      var layout_name = utils.stamped('New name');
       return page
         .navigateTo('#layout/1/edit')
-        .setFindTimeout(5000)
-        .findByCssSelector('.app-center')
-        .findByCssSelector('.layout-name')
-        .click()
-        .end()
-        .findByCssSelector('.js-name')
-        .clearValue()
-        .type('New layout')
-        .end()
-        .findByCssSelector('.btn-primary')
-        .click()
-        .end()
-        .findByCssSelector('.js-show-form')
-        .getVisibleText()
-        .then(function(text) {
-          assert.strictEqual(text, 'New layout')
-        });
+        .match('.app-center')
+          .clickOn('.layout-name')
+          .match('.js-name')
+            .clearValue()
+            .type(layout_name)
+            .end()
+          .clickOn('.btn-primary')
+          .match('.js-show-form').assertText(layout_name)
     },
 
 
     'show dialog when draft exists': function() {
       return page
         .navigateTo('#layout/1')
-        .findDisplayedByCssSelector('.modal')
-          .findByCssSelector('.modal-title')
-          .assertText('What would you like to do with the draft?');
+        .match('.modal-title', {visible: true}).assertText('What would you like to do with the draft?');
     },
 
 
     'edit_existing': function() {
       return page
         .navigateTo('#layout/1')
-        .findDisplayedByCssSelector('.modal .action_cancel')
-        .click()
-        .end()
+        .clickOn('.modal .action_cancel', {visible: true})
         .waitForDeletedByCssSelector('.modal')
         .findAllByCssSelector('[data-block]')
         .then(function(elements) {
@@ -72,16 +76,10 @@ define(function(require) {
         .then(function(result) {
           base_updated_at = result;
         })
-        .findDisplayedByCssSelector('.modal')
-        .findByCssSelector('.action_apply')
-        .click()
-        .end()
-        .end()
+        .clickOn('.modal .action_apply', {visible: true})
         .waitForDeletedByCssSelector('[data-block]')
-        .getCurrentUrl()
-        .then(function(result) {
-          assert.include(result, '/bm/dev/app/#layout/1/edit')
-        })
+        .assertCurrentUrl('/edit', 'include')
+
         .execute('return Core.g.layout.get("updated_at")')
         .then(function(result) {
           var diff = new Date(result) - new Date(base_updated_at);

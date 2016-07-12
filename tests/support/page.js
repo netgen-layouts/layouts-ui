@@ -11,11 +11,13 @@ define(function(require) {
   // so we can provide the remote Command object
   // at runtime
   function Page() {
-    return Command.apply(this, arguments);
+    Command.apply(this, arguments);
+    this.g = {};
+    return this;
   }
 
   Page.utils = {
-    stamped: function(name){
+    stamped: function(name) {
       var stamp = +new Date();
       return name + ' ' + stamp;
     }
@@ -36,16 +38,38 @@ define(function(require) {
             return parentContext;
           })
       })
-    },
+    }
 
 
-  Page.prototype.navigateTo = function(url) {
+    Page.prototype.navigateTo = function(url) {
       return new this.constructor(this, function(setContext) {
         var parentContext = this._context;
 
         return this.parent.get(require.toUrl(url))
       })
-    },
+    }
+
+
+    Page.prototype.match = function(selector, opts) {
+      opts || (opts = {});
+      var findMethod = opts.visible ? 'findDisplayed' : 'find'
+      return new this.constructor(this, function(setContext) {
+        return this.parent[findMethod](opts.strategy || 'css selector', selector).then(function(element) {
+          setContext(element)
+          return element;
+        })
+      })
+    }
+
+
+
+    Page.prototype.clickOn = function(selector, opts) {
+      return new this.constructor(this, function(setContext) {
+        return this.parent.match(selector, opts).click().end()
+      })
+    }
+
+
 
     Page.prototype.findByLabel = function(input_name) {
       return new this.constructor(this, function(setFinalContext) {
@@ -80,7 +104,7 @@ define(function(require) {
     return new this.constructor(this, function() {
       return this.parent
         .findByLabel(input_name)
-        .findByCssSelector('option[value="'+value+'"]')
+        .findByCssSelector('option[value="' + value + '"]')
         .click(value)
     })
   }
@@ -92,7 +116,7 @@ define(function(require) {
       return this.parent
         .findByLabel(input_name)
         .getAttribute('value')
-        .then(function(real){
+        .then(function(real) {
           assert.strictEqual(real, expected)
         })
 
@@ -100,19 +124,31 @@ define(function(require) {
   }
 
 
+  Page.prototype.assertCurrentUrl = function(expected, method) {
+    return new this.constructor(this, function() {
+      return this.parent
+          .getCurrentUrl()
+          .then(function(real) {
+            assert[method || 'equal'](real, expected)
+          })
+    })
+  }
+
+
+
+
+
   Page.prototype.assertText = function(expected, method) {
     method || (method = 'strictEqual');
     return new this.constructor(this, function() {
       return this.parent
         .getVisibleText()
-        .then(function(real){
+        .then(function(real) {
           assert[method](real, expected)
         })
 
     })
   }
-
-
 
 
 

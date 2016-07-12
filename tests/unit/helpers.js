@@ -6,8 +6,8 @@ define(function (require) {
   registerSuite({
     'date with_format': function() {
       var d = new Date();
-      var f = helpers.date(d, {hash: {format: 'l'}});
-      assert.strictEqual(f, [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/'))
+      assert.strictEqual(helpers.date(d, {hash: {format: 'l'}}), [d.getMonth()+1, d.getDate(), d.getFullYear()].join('/'))
+      assert.ok(helpers.date(d, {hash: {}}));
     }
   });
 });
