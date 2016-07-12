@@ -55,6 +55,9 @@ module.exports = function(grunt) {
   };
 
 
+
+
+
   grunt.initConfig({
     config: config,
     pkg: grunt.file.readJSON('package.json'),
@@ -65,16 +68,17 @@ module.exports = function(grunt) {
           runType: 'client', // console /  nodejs
           config: 'tests/intern',
           reporters: [ 'Console', { id: 'LcovHtml', directory: 'tests/coverage' } ],
-          suites: [ 'tests/unit/*' ],
+          suites: [ 'tests/unit/**/*' ],
         }
       },
       functional: {
         options: {
-          proxyUrl: config.local.intern_base_url,
+          proxyUrl: 'http://localhost:3005/bm/dev/app/',
+          //proxPort: 3005,
           runType: 'runner', // browsers
           config: 'tests/intern',
           reporters: [ 'Console'],
-          functionalSuites: [ 'tests/functional/*' ]
+          functionalSuites: [ 'tests/functional/**/*' ]
         }
       }
     },
@@ -133,6 +137,17 @@ module.exports = function(grunt) {
         watchTask: true,
         startPath: 'bm/dev/app',
         proxy: config.local.domain
+      },
+
+      test: {
+        bsFiles: {},
+        options: {
+          port: 3005,
+          ghostMode: false,
+          watchTask: true,
+          startPath: 'bm/dev/app',
+          proxy: config.local.domain
+        }
       }
     },
 
@@ -420,8 +435,23 @@ module.exports = function(grunt) {
   ]);
 
 
-   grunt.registerTask('test', [ 'selenium_standalone:dev:start', 'intern' ]);
+  grunt.registerTask('test', function(target) {
+    var tasks = [];
 
+    if(!target || target == 'unit'){
+     tasks.push('intern:unit');
+    }
+
+    if(!target || target == 'functional'){
+      tasks.push('browserSync:test');
+      tasks.push('selenium_standalone:dev:start');
+      tasks.push('intern:functional');
+    }
+
+
+    grunt.task.run(tasks);
+
+  });
 
   grunt.registerTask('default', ['server']);
 
