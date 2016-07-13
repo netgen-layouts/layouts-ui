@@ -16,35 +16,25 @@ define(function(require) {
         .maximizeWindow()
     },
 
+    beforeEach: function() {
+      Page.clearStorage()
+    },
 
-    'add': function() {
-      var zone_top;
+
+    'only add': function() {
+
       return page
         .navigateTo('#layout/3/edit')
-        .findByCssSelector('.left-toolbar-buttons')
-        .findByCssSelector('.open-panel')
-        .click()
-        .end()
-        .end()
+        .clickOn('.left-toolbar-buttons .open-panel', {visible: true})
 
-      .findByCssSelector('[data-zone="top"]')
-        .then(function(element) {
-          zone_top = element;
+        .count('[data-zone="top"] [data-block]', {all: true}).store('count')
+        .drag('.panel-content .add-block-btn.title').dropTo('[data-zone="top"]')
+
+        .waitForAjax()
+        .count('[data-zone="top"] [data-block]', {all: true})
+        .then(function(result) {
+          assert.equal(result - this.read('count'), 1)
         })
-        .end()
-
-      .findByCssSelector('.panel-content .add-block-btn.title')
-        .moveMouseTo()
-        .pressMouseButton(0)
-        .sleep(100)
-        .then(function() {
-          this.moveMouseTo(zone_top)
-        })
-        .sleep(100)
-        .releaseMouseButton(0)
-        .end()
-
-      .findByCssSelector('[data-zone="top"] [data-block]')
 
     },
 
@@ -57,31 +47,29 @@ define(function(require) {
 
       return page
         .navigateTo('#layout/3/edit')
-        .findByCssSelector('[data-block]').click().end()
+        .clickOn('[data-block]')
 
-
-      .findDisplayedByCssSelector('#sidebar .loader').end()
-        .fill('Block label', label)
-        .fill('CSS class', css_class)
-        .fill('CSS ID', css_id)
-        .select('Heading level', 'h2')
+        .match('#sidebar', {visible: true})
+          .match('.loader').end()
+          .input('Block label').fill(label)
+          .input('CSS class').fill(css_class)
+          .input('CSS ID').fill(css_id)
+          .select('Heading level').choose('h2')
         .end()
 
-      .waitForAjax()
-
-      .then(function(e) {
-        return this.parent
-          .findByCssSelector('.block-header .name').assertText(label)
-
-      })
-
-      .refresh()
-        .findByCssSelector('[data-block]').click().end()
         .waitForAjax()
-        .findDisplayedByCssSelector('#sidebar')
-        .assertValue('Block label', label)
-        .assertValue('CSS class', css_class)
-        .assertValue('CSS ID', css_id)
+
+        .then(function() {
+          return this.parent.match('.block-header .name').assertText(label)
+        })
+
+        .refresh()
+        .clickOn('[data-block]')
+        .waitForAjax()
+        .match('#sidebar', {visible: true})
+          .assertValue('Block label', label)
+          .assertValue('CSS class', css_class)
+          .assertValue('CSS ID', css_id)
 
 
     },
@@ -89,53 +77,39 @@ define(function(require) {
 
 
     'move': function() {
-      var zone_right, zone_right_pos;
       return page
         .navigateTo('#layout/3/edit')
-        .findDisplayedByCssSelector('[data-block]')
-        .findByCssSelector('.block-header')
-        .moveMouseTo()
-        .pressMouseButton(0)
-        .sleep(100)
-        .end()
+        .match('[data-block]', {visible: true})
+          .match('.block-header')
+            .moveMouseTo()
+            .pressMouseButton(0)
+            .sleep(100)
+          .end()
         .end()
 
-      .findByCssSelector('[data-zone="right"]')
-        .then(function(element) {
-          zone_right = element;
-        })
-        .end()
-        .moveMouseTo(0, 0)
-        .sleep(100)
-        .then(function() {
-          this.moveMouseTo(zone_right)
-        })
-        .sleep(500)
-        .releaseMouseButton(0)
+      .moveMouseTo(0, 0)
+      .sleep(100)
+      .match('[data-zone="right"]').moveMouseTo()
+      .sleep(100)
+      .releaseMouseButton(0)
 
     },
 
 
     'destroy': function() {
-      var block;
       return page
         .navigateTo('#layout/3/edit')
-        .findDisplayedByCssSelector('[data-block]')
-        .then(function(el) {
-          block = el;
-        })
-        .findByCssSelector('.block-header')
-        .moveMouseTo()
-        .sleep(100)
-        .findByClassName('js-destroy')
-        .click().end()
+        .match('[data-block]').store('block')
+          .match('.block-header')
+            .moveMouseTo()
+            .sleep(100)
+            .clickOn('.js-destroy')
+          .end()
         .end()
-        .end()
-        .sleep(500)
-        .findByCssSelector('.modal .action_apply').click().end()
+        .clickOn('.modal .action_apply', {visible: true})
         .waitForAjax()
         .then(function() {
-          block.isDisplayed().then(function(res) {
+          this.read('block').isDisplayed().then(function(res) {
             assert.fail(res, 'Element should be destroyed');
           })
         })

@@ -16,13 +16,17 @@ define(function(require) {
         .maximizeWindow()
     },
 
+    beforeEach: function() {
+      Page.clearStorage()
+    },
+
 
     'create': function() {
       var layout_name = utils.stamped('Testing layout');
       return page
         .navigateTo('#layout')
         .match('.modal', {visible: true})
-          .fill('Name', layout_name)
+          .input('Name').fill(layout_name)
           .clickOn('.layout-type label:nth-of-type(2)')
           .clickOn('.action_apply')
         .end()
@@ -68,21 +72,17 @@ define(function(require) {
 
 
     'discard current draft and create new': function() {
-      var base_updated_at;
-
       return page
         .navigateTo('#layout/1')
-        .execute('return Core.g.layout.get("updated_at")')
-        .then(function(result) {
-          base_updated_at = result;
-        })
+        .waitForAjax()
+        .execute('return Core.g.layout.get("updated_at")').store('base_updated_at')
         .clickOn('.modal .action_apply', {visible: true})
         .waitForDeletedByCssSelector('[data-block]')
         .assertCurrentUrl('/edit', 'include')
 
         .execute('return Core.g.layout.get("updated_at")')
         .then(function(result) {
-          var diff = new Date(result) - new Date(base_updated_at);
+          var diff = new Date(result) - new Date(this.read('base_updated_at'));
           assert.isAbove(diff, 0, 'Layout is not recently updated');
         })
         .findAllByCssSelector('[data-block]')
@@ -90,8 +90,7 @@ define(function(require) {
           assert(elements.length);
         })
         .end()
-        .findByCssSelector('.app-center .js-show-form')
-        .assertText('My layout');
+        .match('.app-center .js-show-form').assertText('My layout');
 
 
     }
