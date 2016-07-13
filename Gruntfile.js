@@ -124,14 +124,6 @@ module.exports = function(grunt) {
 
 
     browserSync: {
-      bsFiles: {
-        src: [
-          '.tmp/scripts/*.js',
-          '.tmp/styles/*.css',
-          '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
-          '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
-        ]
-      },
       options: {
         open: false,
         watchTask: true,
@@ -139,8 +131,18 @@ module.exports = function(grunt) {
         proxy: config.local.domain
       },
 
+      dev: {
+        bsFiles: {
+          src: [
+            '.tmp/scripts/*.js',
+            '.tmp/styles/*.css',
+            '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
+            '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
+          ]
+        }
+      },
+
       test: {
-        bsFiles: {},
         options: {
           port: 3005,
           ghostMode: false,
@@ -400,7 +402,7 @@ module.exports = function(grunt) {
   grunt.registerTask('server', function() {
     grunt.task.run([
       'fast_build',
-      'browserSync',
+      'browserSync:dev',
       'watch'
     ]);
   });

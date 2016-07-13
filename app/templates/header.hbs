@@ -1,4 +1,7 @@
 <div class="layout-name">
+    {{#if model.shared}}
+      <span class="shared-label">Shared:</span>
+    {{/if}}
     {{#if editing }}
       <form method="post" class="js-layout">
         <input type="text" name="name" class="js-name" value="{{ model.name }}">

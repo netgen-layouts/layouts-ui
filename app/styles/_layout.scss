@@ -11,8 +11,13 @@
   .layout-name {
     float:left;
     padding:7px $gutter;
+    .shared-label{
+      display: inline-block;
+      line-height: 34px;
+      font-weight: bold;
+    }
     .js-show-form {
-      display:block;
+      display:inline-block;
       font-size:1em;
       cursor:pointer;
       padding:0 0.5em;
@@ -24,6 +29,7 @@
       }
     }
     form {
+      display: inline-block;
       input[type="text"] {
         border:none;
         box-shadow:none;
