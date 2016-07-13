@@ -21,7 +21,7 @@ define(function(require) {
     },
 
 
-    'only add': function() {
+    'add': function() {
 
       return page
         .navigateTo('#layout/3/edit')

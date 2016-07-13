@@ -42,10 +42,7 @@ define(function(require) {
         .navigateTo('#layout/1/edit')
         .match('.app-center')
           .clickOn('.layout-name')
-          .match('.js-name')
-            .clearValue()
-            .type(layout_name)
-            .end()
+          .match('.js-name').fill(layout_name)
           .clickOn('.btn-primary')
           .match('.js-show-form').assertText(layout_name)
     },
