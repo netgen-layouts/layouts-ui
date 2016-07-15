@@ -23,9 +23,11 @@
       padding:0 0.5em;
       height:$btnHeight;
       line-height:$btnHeight;
-      .fa {
+      i {
         color:$mainColor;
         margin-left:4px;
+        font-size:1em;
+        vertical-align:middle;
       }
     }
     form {
@@ -53,8 +55,8 @@
       font-size:1em;
       cursor:pointer;
       &::after {
-        @extend %fontawesome;
-        content:"\f040";
+        @extend %material-icons;
+        content:"edit";
         display:inline-block;
         margin-left:1em;
         color:$mainColor;

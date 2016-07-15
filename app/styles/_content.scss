@@ -60,14 +60,15 @@
       display:none;
       float:left;
       text-align:center;
-      line-height:0.2857142857em;
-      padding:0.4285714286em 0.5714285714em;
+      line-height:1.4285714286em;
+      padding:0 0.5714285714em;
       font-size:0.875em;
       cursor:-webkit-grab;
       cursor:grab;
-      .fa {
+      i {
         display:block;
         line-height:inherit;
+        opacity:0.4;
       }
     }
     .name{float:left; font-size:0.82em; }
@@ -79,6 +80,9 @@
       line-height:1.6666666667em;
       padding:0 0.5em;
       cursor:pointer;
+      i {
+        font-size:18px;
+      }
       &:hover {
         background:rgba(0, 0, 0, 0.1);
       }
@@ -183,8 +187,8 @@
 
 .notice {
   margin-bottom:10px; color:#666;
-  .fa{font-size:1.2em; color:#999; margin-right:4px; vertical-align:text-bottom;}
-  .msg{font-size: 0.92em;}
+  i {font-size:1.2em; color:#999; margin-right:4px; vertical-align:middle;}
+  .msg {font-size: 0.92em;}
 }
 
 
@@ -228,17 +232,16 @@
   .js-video-thumb {
     margin:0 auto;
     width:100%;
-    max-width:320px;
     display:block;
   }
   &::after {
-    @extend %fontawesome;
-    content:"\f144";
+    @extend %material-icons;
+    content:"play_circle_filled";
     position:absolute;
     left:50%;
     top:50%;
     transform:translate(-50%, -50%);
-    font-size:42px;
+    font-size:64px;
     color:rgba(255, 255, 255, 0.75);
     text-shadow:0 0 15px rgba(0, 0, 0, 0.5);
   }
