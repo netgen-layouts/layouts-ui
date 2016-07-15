@@ -12,6 +12,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "blocks-panel";
 @import "sidebar";
 @import "content";
+@import "specific";
 
 input[type="text"]{background-color:white;}
 html, body{height: 100%; background: $toolbarbg2;}
@@ -28,6 +29,10 @@ body {
 }
 
 /* bootstrap override */
+.btn {
+  border-radius:$borderRadius;
+  padding:7px 16px;
+}
 .btn-primary {
   background:$btnprimary;
   border-color:$btnprimary;

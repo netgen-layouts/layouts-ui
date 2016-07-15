@@ -4,52 +4,58 @@
     left:$leftWidth;
     top:$topHeight;
     bottom:0;
+    border-top:1px solid $toolbarBorderColor;
     width:$leftPanelWidth;
-    background:$toolbarbg3;
+    background:$toolbarbg2;
     display:none;
     .panel-content {
-      background:$toolbarbg1;
       position:absolute;
       overflow-y:scroll;
       top:0;
       bottom:0;
-      left:0.625em;
+      left:0;
       right:0;
-      border-left:1px solid $toolbarBorderColor;
-      box-shadow:0px 0 0.5em rgba(0, 0, 0, 0.35);
+      padding:$gutter;
     }
     .close-panel {
       position:absolute;
-      right:0.5em;
-      top:0.5em;
+      right:0.25em;
+      top:0.25em;
       width:1.5em;
       height:1.5em;
       cursor:pointer;
       text-align:right;
-      color:#fff;
+      color:$toolbarColor;
       z-index:2;
+      i {
+        font-size:18px;
+      }
+      &:hover {
+        color:#fff;
+      }
     }
     .header {
-      padding:0.75em 1.5em 0.75em 0.5em;
       position:relative;
-      background:$toolbarbg2;
       h2 {
-        font-size:0.875em;
-        font-weight:400;
+        font-size:0.75em;
+        font-weight:600;
         line-height:1.25;
-        margin:0;
+        text-transform:uppercase;
+        margin:0 0 0.5em;
       }
     }
     .block-items {
       margin:0 0 1.5em;
+      display:flex;
+      flex-wrap:wrap;
       &::after {
         @extend %clearfix;
       }
     }
     .add-block-btn {
       border:none;
-      border-bottom:1px solid $toolbarBorderColor;
-      border-right:1px solid $toolbarBorderColor;
+      border-bottom:1px solid $toolbarbg2;
+      border-right:1px solid $toolbarbg2;
       width:33.333333333333%;
       &:nth-child(3n) {
         border-right:none;
@@ -60,21 +66,24 @@
 
 .add-block-btn {
   cursor:grab;
-  background:$toolbarbg1;
-  color:#fff;
-  float:left;
+  background:hsl(0, 0, 29);
+  color:$toolbarColor;
   text-align:center;
   width:($leftPanelWidth - 11) / 3;
-  border:1px solid $toolbarBorderColor;
-  height:90px;
+  border:1px solid $toolbarbg2;
+  padding:0.25em 0.25em 0.625em;
+  transition:background 0.15s ease, color 0.15s ease;
+  &:hover {
+    background:hsl(0, 0, 36);
+    color:#fff;
+  }
   .icon {
     @extend %icomoon;
     display:block;
     font-size:2em;
     height:48px;
     line-height:48px;
-    margin-top:0.1875em;
-    color:hsl(212, 19, 60);
+    margin-bottom:0.125em;
   }
   &.title .icon::before {
     content:"\e916";
@@ -116,9 +125,8 @@
     content:"\e917";
   }
   .title {
-    font-size:0.6875em;
+    font-size:0.625em;
     display:block;
-    padding:0 0.3636em;
     line-height:1.2;
   }
 }

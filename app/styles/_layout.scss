@@ -5,9 +5,9 @@
   left:0;
   right:0;
   height:$topHeight;
-  background:$toolbarbg1;
-  border-bottom:1px solid $toolbarBorderColor;
+  background:$toolbarbg2;
   color:#fff;
+  padding-left:$leftWidth;
   .layout-name {
     float:left;
     padding:7px $gutter;
@@ -75,12 +75,34 @@
       }
     }
   }
-  .app-logo {
-    float:left;
+  .app-logo-box {
+    position:absolute;
+    left:0;
+    top:0;
     width:$leftWidth;
     height:$topHeight;
-    background:#f3590a url("../images/ngadmin-logo-w.svg") no-repeat center center;
-    background-size:1.25em auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .app-logo {
+    font-size:11px;
+    display:inline-block;
+    color:$btnprimary;
+    &::before,
+    &::after {
+      content:"";
+      display:block;
+      background:currentColor;
+      border-radius:50%;
+      width:1em;
+      height:1em;
+    }
+    &::after {
+      width:1.375em;
+      height:1.375em;
+      margin:-0.125em 0 0 1em;
+    }
   }
   .actions {
     float:right;
@@ -101,7 +123,7 @@
   background:$toolbarbg1;
   color:$toolbarColor;
   z-index:30;
-  border-right:1px solid $toolbarBorderColor;
+  border-top:1px solid $toolbarBorderColor;
   .left-toolbar-buttons {
     .button {
       display:block;
@@ -112,19 +134,18 @@
       line-height:$leftWidth;
       text-align:center;
       border-color:$toolbarBorderColor;
-      border-width:1px 0;
+      border-width:0 0 1px;
       border-style:solid;
-      margin-top:-1px;
       font-size:1.5em;
       transition:color 150ms, background-color 150ms;
       &:focus {
         outline:none;
       }
       &:hover {
-        background:hsla(0, 0, 100, 0.05);
+        background:$toolbarBorderColor;
       }
       &.active {
-        background:$toolbarbg3;
+        background:$toolbarbg2;
       }
       &::before {
         @extend %icomoon;

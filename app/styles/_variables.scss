@@ -1,27 +1,27 @@
 // colors
-$toolbarbg1: hsl(210, 12, 23);
-$toolbarbg2: hsl(0, 0, 18);
-$toolbarbg3: hsl(210, 15, 32);
-$toolbarColor: hsl(0, 0, 95);
-$toolbarBorderColor: hsl(0, 0, 18);
+$toolbarbg1: hsl(0, 0, 25);
+$toolbarbg2: hsl(0, 0, 22);
+$toolbarColor: hsl(285, 0, 61);
+$toolbarBorderColor: hsl(0, 0, 31);
 $mainColor: hsl(50, 90, 50);
 $blockbg: hsl(0, 0, 100);
-$btnprimary: hsl(212, 72, 59);
-$sidebarinput: hsl(211, 13, 34);
+$btnprimary: hsl(194, 100, 39);
+$sidebarinput: hsl(285, 0, 29);
 
-$contentbg: hsl(0, 0, 95);
+$contentbg: hsl(0, 0, 31);
 
 $footerbg: hsl(0, 0, 90);
 
 // dimensions
-$leftWidth: 45px;
-$rightWidth: 280px;
+$leftWidth: 50px;
+$rightWidth: 290px;
 $topHeight: 50px;
 $bottomHeight: 30px;
-$btnHeight: 34px;
+$btnHeight: 36px;
 $leftPanelWidth: 280px;
-
+$borderRadius: 2px;
 $gutter: 15px;
+$blockHeaderHeight: 30px;
 
 %icomoon {
   font-family: 'icomoon' !important;

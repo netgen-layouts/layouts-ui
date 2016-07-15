@@ -4,8 +4,9 @@
   right:0;
   bottom:0;
   width:$rightWidth;
-  background:$toolbarbg2;
+  background:$toolbarbg1;
   padding:$gutter;
+  border-top:1px solid $toolbarBorderColor;
   color:#fff;
   overflow-y:scroll;
   h1 {
@@ -31,12 +32,13 @@
   }
   .add-items-btn {
     margin:0 0 1.5em;
-    border:1px dashed hsla(0, 0, 100, 0.75);
+    border:1px dashed $toolbarColor;
     text-align:center;
-    font-size:0.75em;
-    padding:0.6666667em 0.33333333em;
+    font-size:0.625em;
+    line-height:$btnHeight;
+    text-transform:uppercase;
     cursor:pointer;
-    color:$mainColor;
+    color:#fff;
     &:hover {
       background:hsla(0, 0, 100, 0.05);
     }
@@ -60,18 +62,29 @@
         justify-content:center;
         text-align:center;
         font-size:0.875em;
-        border:1px solid $toolbarbg3;
+        border:1px solid #fff;
         color:#fff;
         width:100%;
-        padding:0.42857em 0.2857em;
+        padding:0.6428571429em 0.2857em;
         display:flex;
         cursor:pointer;
         text-decoration:none;
       }
+      &:first-child {
+        a {
+          border-radius:$borderRadius 0 0 $borderRadius;
+        }
+      }
+      &:last-child {
+        a {
+          border-radius:0 $borderRadius $borderRadius 0;
+        }
+      }
       &.active {
         a {
-          background:$toolbarbg3;
+          background:#fff;
           border:none;
+          color:$toolbarbg1;
         }
       }
     }
@@ -87,10 +100,10 @@
     textarea {
       border:none;
       box-shadow:none;
-      border-radius:0;
-      padding:0 0.5em;
+      border-radius:$borderRadius;
+      padding:0 0.75em;
       height:$btnHeight;
-      font-size:0.875em;
+      font-size:0.75em;
       margin:0 0 1em;
       background:$sidebarinput;
       color:#fff;
@@ -103,38 +116,43 @@
     }
     label {
       font-weight:200;
-      font-size:0.8125em;
+      font-size:0.75em;
       display:block;
       margin:0 0 0.25em;
+      color:$toolbarColor;
     }
     select {
-      border-radius:0;
+      border-radius:$borderRadius;
       border:none;
       margin:0 0 1em;
       transition: background-color 0.3s ease-out 0.1s;
       background:$sidebarinput url('../images/caret-down.svg') no-repeat;
       background-position:right 0.5714285714em center;
       background-size:0.9285714286em auto;
-      height:2.5714285714em;
-      font-size:0.875em;
-      padding:0 2.25em 0 0.5em;
+      height:$btnHeight;
+      font-size:0.75em;
+      padding:0 2.25em 0 0.75em;
       color:#fff;
       appearance:none;
       width:100%;
+      cursor:pointer;
       &[multiple] {
         height:auto;
         padding:0.25em 0;
         background-image:none;
         option {
+          padding:0.125em 0.125em;
+        }
+        optgroup[label] {
+          padding:0.125em 0.5em;
+          option {
+            margin:0 -0.5em;
+          }
         }
       }
     }
     select.highlight{
       background-color: lighten($sidebarinput, 40%);
-
-    }
-    option {
-      padding:0.125em 0.5em;
     }
     input[type="submit"] {
       display:none;
@@ -153,6 +171,7 @@
           font-size:18px;
           content:"check_box_outline_blank";
           position:absolute;
+          color:#fff;
           left:0;
           top:0.3em;
         }
@@ -165,37 +184,55 @@
         }
       }
     }
+    .input-note {
+      font-size:0.625em;
+      font-style:italic;
+      font-weight:300;
+      margin:0 0 1.2em;
+    }
+    input,
+    select,
+    textarea {
+      + .input-note {
+        margin-top:-0.8em;
+      }
+    }
   }
   .checkbox {
     margin:0;
   }
 
   .xeditable {
-    // margin-bottom:1.5em;
-    // padding-bottom:0.5em;
-    // border-bottom:1px solid hsla(0, 0, 100, 0.2);
     .js-edit {
-      display:block;
       margin:0 0 1em;
-      background:rgba($sidebarinput, 0.3);
-      height:2.5714285714em;
-      font-size:0.875em;
-      padding:0.5714285714em 2em 0.5714285714em 0.5em;
+      background:$sidebarinput;
+      height:$btnHeight;
+      font-size:0.75em;
       position:relative;
       color:#fff;
+      display:flex;
+      text-decoration:none;
+      border-radius:$borderRadius;
       &:hover {
-        background:rgba($sidebarinput, 0.4);
+        .icon {
+          background:hsl(0, 0, 38);
+        }
       }
       > span {
-        display:inline-block;
-        //border-bottom:1px dashed $mainColor;
+        line-height:$btnHeight;
+        padding:0 0.75em;
       }
-      i {
-        position:absolute;
-        right:0.5em;
-        top:50%;
-        transform:translateY(-50%);
-        color:$mainColor;
+      .text {
+        flex:1;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      }
+      .icon {
+        background:hsl(0, 0, 35);
+        transition:background 0.15s ease, color 0.15s ease;
+        padding:0 1.5em;
+        border-radius:0 $borderRadius $borderRadius 0;
       }
     }
     .actions {
@@ -212,7 +249,7 @@
       top:0;
       bottom:0;
       right:0;
-      background:rgba($toolbarbg2, 0.8);
+      background:rgba($toolbarbg1, 0.8);
       z-index:10;
     }
     .xeditable {
@@ -223,37 +260,37 @@
 
   .js-input-browse {
     .js-trigger {
-      display:block;
+      display:flex;
       margin:0 0 1em;
       background:$sidebarinput;
-      height:2.5714285714em;
-      font-size:0.875em;
-      padding:0.5714285714em 3.25em 0.5714285714em 0.5em;
+      height:$btnHeight;
+      font-size:0.75em;
       position:relative;
       color:#fff;
       text-decoration:none;
+      border-radius:$borderRadius;
       span {
+        flex:1;
         overflow:hidden;
         text-overflow:ellipsis;
-        display:block;
         white-space:nowrap;
+        line-height:$btnHeight;
+        padding:0 0.75em;
       }
       &::after {
-        position:absolute;
-        right:0;
-        top:0;
-        bottom:0;
-        width:42px;
-        background:$btnprimary;
-        line-height:$btnHeight;
-        font-size:24px;
-        text-align:center;
         @extend %material-icons;
+        padding:0 0.5833333333em;
+        align-items:center;
+        background:hsl(0, 0, 35);
+        font-size:24px;
+        line-height:$btnHeight;
         content:"folder_open";
+        transition:background 0.15s ease, color 0.15s ease;
+        border-radius:0 $borderRadius $borderRadius 0;
       }
       &:hover {
         &::after {
-          background:darken($btnprimary, 5%);
+          background:hsl(0, 0, 38);
         }
       }
     }
@@ -284,7 +321,6 @@
     &::before {
       @extend %material-icons;
       content:"keyboard_arrow_down";
-      color:$mainColor;
       display:inline-block;
     }
     &[aria-expanded="true"] {
@@ -348,10 +384,11 @@
 
 /* collection item */
 .collection-item {
-  background:#4b5d6e;
-  margin:0 0 0.1875em;
-  color:#fff;
+  background:#fff;
+  margin:0 0 0.25em;
+  color:#333;
   cursor:default;
+  border-radius:$borderRadius;
   .item-panel {
     padding:0.25em 1.875em 0.25em 1.375em;
     position:relative;
@@ -364,12 +401,11 @@
       width:1.1428571429em;
       cursor:-webkit-grab;
       cursor:grab;
-      color:hsla(0, 0, 100, 0.25);
       display:flex;
       align-items:center;
       justify-content:center;
       font-size:0.875em;
-      background:hsla(0, 0, 100, 0.075);
+      opacity:0.25;
       i {
         transform:rotate(90deg);
       }
@@ -393,21 +429,24 @@
   .controls {
     position:absolute;
     right:0;
-    top:0;
+    top:50%;
     font-size:0.875em;
     text-align:right;
+    transform:translateY(-50%);
     > a {
       display:inline-block;
       width:1.5em;
       line-height:1.5;
       height:1.5em;
       text-align:center;
-      color:#e6e6e6;
+      color:#444;
       text-decoration:none;
       cursor:pointer;
+      &:hover {
+        color:#009AC7;
+      }
     }
     .remove-toggle {
-      background:hsl(209, 16, 41);
       i {
         font-size:18px;
         line-height:1.1666666667em;
@@ -419,7 +458,7 @@
     right:0;
     left:0;
     bottom:0;
-    top:0;
+    top:-2px;
     transform:translateY(-100%);
     z-index:2;
     display:flex;
@@ -450,6 +489,7 @@
   }
   &.show-remove {
     .remove-btns {
+      top:0;
       transform:translateX(0);
     }
   }
@@ -459,7 +499,7 @@
     background:transparent;
   }
   &.dynamic-item {
-    background:#3c4b58;
+    //background:#3c4b58;
     .handle {
       display:none !important;
     }
@@ -488,7 +528,7 @@
 
 
 .loader{
-  position:absolute; top:0; left:0; width:100%; height:100%; background-color:#2e2e2e;display:none;justify-content:center;align-items:center;
+  position:absolute; top:0; left:0; width:100%; height:100%; background-color:$toolbarbg1;display:none;justify-content:center;align-items:center;
   span{font-size:1.2em; position:relative; top:-0.5em}
   z-index: 99999;
   .content{
