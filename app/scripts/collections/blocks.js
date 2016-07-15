@@ -2,7 +2,15 @@
 
 var Core = require('core_boot');
 var Block = require('../models/blocks/block');
+var _ = require('underscore');
 
 module.exports = Core.Collection.extend({
-  model: Block
+  model: Block,
+  destroy_all: function(){
+    var length = this.length;
+    while (this.models[0]) {
+      this.models[0].destroy();
+    }
+    return length;
+  },
 });

@@ -111,8 +111,9 @@ define(function(require) {
 
 
 
-
   Page.prototype.count = function(selector, opts) {
+    opts || (opts = {});
+    opts.all = true;
     return new this.constructor(this, function(setContext) {
       return this.parent.match(selector, opts).then(function(elements) {
           return elements.length;
@@ -216,6 +217,72 @@ define(function(require) {
 
     })
   }
+
+
+
+  // Block Manager helpers =============================================================================
+
+  Page.prototype.addBlock = function(block_name, opts) {
+    return new this.constructor(this, function(setContext) {
+      return this.parent
+        .clickOn('.left-toolbar-buttons .open-panel', {visible: true})
+        .drag('.panel-content .add-block-btn.'+block_name).dropTo('[data-zone="'+opts.to_zone+'"]')
+        .releaseMouseButton(0)
+        .sleep(100)
+        .end()
+        .waitForAjax()
+        .execute('return Core.g.layout.blocks.last().cid')
+        .then(function(result) {
+          var el = this.parent.match('[data-cid="'+result+'"]');
+          setContext(el)
+          return el;
+        })
+    })
+  }
+
+
+  Page.prototype.destroyAllBlocks = function(block_name, opts) {
+    return new this.constructor(this, function(setContext) {
+      return this.parent
+        .execute('return Core.g.layout.blocks.destroy_all()')
+        .waitForAjax();
+    }).end()
+  }
+
+
+  Page.prototype.editBlock = function(block_name, opts) {
+    return new this.constructor(this, function(setContext) {
+      return this.parent
+        .click().end()
+        .waitForAjax()
+        .waitElementToBeInvisible('.sidebar .loader')
+    }).end()
+  }
+
+
+  Page.prototype.waitElementToBeInvisible = function(selector) {
+    return new this.constructor(this, function(setContext) {
+      var parentContext = this._context;
+
+      return this.parent
+        .then(pollUntil('return $("'+selector+':visible").length === 0;', 5000, 250))
+        .then(function() {
+          setContext(parentContext)
+          return parentContext;
+        })
+    })
+  }
+
+
+  Page.prototype.waitForBrowser = function(selector) {
+    return new this.constructor(this, function(setContext) {
+      return this.parent
+        .waitForAjax()
+        .waitForDeletedByCssSelector('.modal .loader')
+    }).end()
+  }
+
+
 
 
 
