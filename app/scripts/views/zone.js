@@ -18,7 +18,7 @@
       Core.View.prototype.initialize.apply(this, arguments);
       this.listenTo(Core, 'zone_chooser:on', this.zone_chooser_on);
       this.listenTo(Core, 'zone_chooser:off', this.zone_chooser_off);
-      this.listenTo(this.model, 'unlink:success', this.render_chooser);
+      this.listenTo(this.model, 'unlink:success', this.on_unlink);
       this.mark_zone_type();
       return this;
     },
@@ -48,6 +48,13 @@
     $unlink: function(e){
       e.preventDefault();
       this.model.sync_unlink();
+    },
+
+
+    on_unlink: function(){
+      this.render_chooser();
+      this.$el.removeClass('linked_zone');
+      return this;
     },
 
     // $goto_parent: function(e){
@@ -81,7 +88,7 @@
     },
 
     render: function(){
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> is_in_link_mode', this.is_in_link_mode())
+      // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> is_in_link_mode', this.is_in_link_mode())
       if(this.is_in_link_mode()){
         this.render_linker()
       }
