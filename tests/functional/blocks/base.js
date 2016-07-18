@@ -7,7 +7,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'Blocks',
+    name: 'only Blocks',
 
     before: function() {
       page = new Page(this.remote);
@@ -100,11 +100,8 @@ define(function(require) {
       return page
         .navigateTo('#layout/3/edit')
         .match('[data-block]').store('block')
-          .match('.block-header')
-            .moveMouseTo()
-            .sleep(100)
-            .clickOn('.js-destroy')
-          .end()
+          .clickOn('.dropdown-toggle')
+          .clickOn('.js-destroy')
         .end()
         .clickOn('.modal .action_apply', {visible: true})
         .waitForAjax()

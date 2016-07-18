@@ -33,7 +33,7 @@ define(function(require) {
         .waitForAjax()
         .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
 
-        .match('.layout-name', {visible: true}).assertText(layout_name)
+        .match('.app-center .js-layout-name', {visible: true}).assertText(layout_name)
     },
 
     'rename': function() {
@@ -44,7 +44,7 @@ define(function(require) {
           .clickOn('.layout-name')
           .match('.js-name').fill(layout_name)
           .clickOn('.btn-primary')
-          .match('.js-show-form').assertText(layout_name)
+          .match('.app-center .js-layout-name').assertText(layout_name)
     },
 
 
@@ -87,7 +87,7 @@ define(function(require) {
           assert(elements.length);
         })
         .end()
-        .match('.app-center .js-show-form').assertText('My layout');
+        .match('.app-center .js-layout-name').assertText('My layout');
 
 
     }

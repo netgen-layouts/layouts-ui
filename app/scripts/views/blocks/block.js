@@ -5,13 +5,15 @@ var SideBarView = require('../sidebar');
 var _ = require('underscore');
 
 module.exports = Core.View.extend({
+  prevent_auto_render: true,
+
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
 
     this.listenTo(Core,       'editing:unmark', this.editing_unmark);
 
     this.listenTo(this.model, 'change', this.setup_dom_element);
-    this.listenTo(this.model, 'create:success read:success', this.render);
+    this.listenTo(this.model, 'change:html', this.render);
     this.listenTo(this.model, 'create:success', this.$edit);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
@@ -31,10 +33,10 @@ module.exports = Core.View.extend({
 
   events: {
     'click': '$edit',
-    //'dblclick > .block_actions .action-destroy': '$fast_destroy'
     'click .js-destroy': '$destroy',
     'click .js-revert': '$restore_block'
   },
+
 
   setup_dom_element: function(){
     this.model.is_in_container() && this.$el.attr('data-in-container', '');
@@ -51,6 +53,7 @@ module.exports = Core.View.extend({
    * @return {this}
    */
   render: function(x){
+    console.log('render', this.model.get('html').length);
     _.isString(x) && console.error(x);
     this.$el.html(this.model.get('html'));
     if (!this.model.get('has_published_state')){

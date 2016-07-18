@@ -30,7 +30,7 @@ define(function(require) {
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'})
           .match('.notice')
-          .assertText('This block is empty. Please pick some items manually or use a dynamic collection.')
+          .assertText('This block is empty. Please pick some items manually or use a dynamic collection.', 'include')
     },
 
 
