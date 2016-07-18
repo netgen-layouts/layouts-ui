@@ -53,7 +53,6 @@ module.exports = Core.View.extend({
    * @return {this}
    */
   render: function(x){
-    console.log('render', this.model.get('html').length);
     _.isString(x) && console.error(x);
     this.$el.html(this.model.get('html'));
     if (!this.model.get('has_published_state')){
