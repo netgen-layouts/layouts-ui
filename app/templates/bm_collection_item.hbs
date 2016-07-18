@@ -1,8 +1,8 @@
 <div class="item-panel">
-  <div class="handle"><i class="fa fa-ellipsis-v"></i><i class="fa fa-ellipsis-v"></i></div>
+  <div class="handle"><i class="material-icons">drag_handle</i></div>
   <p class="name">{{model.name}}</p>
   <div class="controls">
-    {{#if model.can_remove_item }}<a class="remove-toggle"><i class="fa fa-times"></i></a>{{/if}}
+    {{#if model.can_remove_item }}<a class="remove-toggle"><i class="material-icons">close</i></a>{{/if}}
   </div>
   {{#if model.can_remove_item }}<div class="remove-btns">
     <a class="cancel">Cancel</a>
