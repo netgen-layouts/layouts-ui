@@ -39,6 +39,8 @@ define(function(require) {
           .match('.form-inline').assertText('Link with layout', 'include').end()
           .count('select option').assert('equal', 2)
           .match('select option:first-child').assertText('My third layout').end()
+        .end()
+        .count('[data-block]').assert('equal', 0)
     },
 
 
@@ -74,7 +76,20 @@ define(function(require) {
           .clickOn('.js-unlink')
           .waitForAjax()
           .getAttribute('class').assert('notInclude', 'linked_zone')
-    }
+    },
+
+
+    'cancel linking a zone': function() {
+      return page
+        .clickOn('.js-choose')
+        .waitForAjax()
+        .clickOn('.app-center .js-cancel')
+        .assertCurrentUrl('#layout/1/edit', 'include')
+        .waitForAjax()
+        .count('[data-block]').assert('equal', 3)
+    },
+
+
 
 
 
