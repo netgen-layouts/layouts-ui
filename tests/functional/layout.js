@@ -60,10 +60,7 @@ define(function(require) {
         .navigateTo('#layout/1')
         .clickOn('.modal .action_cancel', {visible: true})
         .waitForDeletedByCssSelector('.modal')
-        .findAllByCssSelector('[data-block]')
-        .then(function(elements) {
-          assert.isAbove(elements.length, 0);
-        })
+        .count('[data-block]').assert('isAbove', 0)
     },
 
 
@@ -82,10 +79,7 @@ define(function(require) {
           var diff = new Date(result) - new Date(this.read('base_updated_at'));
           assert.isAbove(diff, 0, 'Layout is not recently updated');
         })
-        .findAllByCssSelector('[data-block]')
-        .then(function(elements) {
-          assert(elements.length);
-        })
+        .count('[data-block]').assert('isAbove', 0)
         .end()
         .match('.app-center .js-layout-name').assertText('My layout');
 

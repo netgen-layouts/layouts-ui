@@ -7,7 +7,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'only Blocks',
+    name: 'Blocks',
 
     before: function() {
       page = new Page(this.remote);

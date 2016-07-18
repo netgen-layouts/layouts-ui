@@ -219,6 +219,17 @@ define(function(require) {
   }
 
 
+  Page.prototype.assert = function(method, expected, msg) {
+    method || (method = 'strictEqual');
+    return new this.constructor(this, function() {
+      return this.parent.then(function(real) {
+          assert[method](real, expected, msg)
+        })
+
+    })
+  }
+
+
 
   // Block Manager helpers =============================================================================
 
@@ -231,7 +242,7 @@ define(function(require) {
         .sleep(100)
         .end()
         .waitForAjax()
-        .execute('return Core.g.layout.blocks.last().cid')
+        .execute('return Core.g.layout.blocks.last().cid').store('block_view_cid')
         .then(function(result) {
           var el = this.parent.match('[data-cid="'+result+'"]');
           setContext(el)
@@ -256,6 +267,7 @@ define(function(require) {
         .click().end()
         .waitForAjax()
         .waitElementToBeInvisible('.sidebar .loader')
+        .sleep(100)
     }).end()
   }
 
@@ -284,7 +296,16 @@ define(function(require) {
 
 
 
-
+  Page.prototype.lastBlock = function(block_name, opts) {
+    return new this.constructor(this, function(setContext) {
+      return this.parent
+        .match('[data-cid="'+this.read('block_view_cid')+'"]')
+        .then(function(el) {
+          setContext(el)
+          return el;
+        })
+    })
+  }
 
 
   return Page;

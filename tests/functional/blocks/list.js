@@ -34,7 +34,7 @@ define(function(require) {
     },
 
 
-    'only add/remove items from manual collection': function() {
+    'add/remove items from manual collection': function() {
       return page
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'}).editBlock()
@@ -47,19 +47,53 @@ define(function(require) {
           .clickOn('.action_apply')
         .end()
         .waitForAjax()
-        .count('.sidebar .collection-item')
-        .then(function (result) {
-          assert.equal(result, 3)
-        })
+        .count('.sidebar .collection-item').assert('equal', 3)
+        .count('.bm-items .collection-item .remove-toggle').assert('equal', 3)
         .match('.sidebar .collection-item')
           .clickOn('.remove-toggle').sleep(500)
           .clickOn('.remove')
           .waitForAjax()
         .end()
-        .count('.sidebar .collection-item')
-        .then(function (result) {
-          assert.equal(result, 2)
-        })
+        .count('.sidebar .collection-item').assert('equal', 2)
+
+    },
+
+
+    'change from manual to dynamic collection': function() {
+      return page
+        .navigateTo('#layout/3/edit')
+        .addBlock('list', {to_zone: 'left'}).editBlock()
+          .match('[data-xeditable-name="collection_type"]')
+          .clickOn('.js-edit', {visible: true})
+          .select('Collection type').choose('1') // 1 = Dynamic collection
+          .clickOn('.js-apply')
+        .end()
+        .waitForAjax()
+        .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Dynamic collection').end()
+        .input('Limit').fill("5")
+        .sleep(500) //Wait for input change
+        .waitForAjax()
+        .count('.bm-items .collection-item').assert('equal', 5)
+        .end()
+        .lastBlock().count('.list-item').assert('equal', 5)
+    },
+
+
+    'change from manual to named collection': function() {
+      return page
+        .navigateTo('#layout/3/edit')
+        .addBlock('list', {to_zone: 'left'}).editBlock()
+          .match('.sidebar .add-items-btn', {visible: true}).end() //Add items button should exist in manual
+          .match('[data-xeditable-name="collection_type"]')
+          .clickOn('.js-edit', {visible: true})
+          .select('Collection type').choose('2') // 2 = Named collection
+          .clickOn('.js-apply')
+        .end()
+        .waitForAjax()
+        .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Named collection').end()
+        .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in named
+        .count('.bm-items .collection-item .remove-toggle').assert('equal', 0)
+        .lastBlock().count('.list-item').assert('equal', 27)
     }
 
 
