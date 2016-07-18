@@ -1,7 +1,7 @@
 define(function(require) {
   var registerSuite = require('intern!object');
   var assert = require('intern/chai!assert');
-  var Page = require('../support/page');
+  var Page = require('../../support/page');
   var utils = Page.utils;
 
   var page;

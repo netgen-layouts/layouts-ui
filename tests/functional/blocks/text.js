@@ -8,7 +8,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'only Blocks::Text',
+    name: 'Blocks::Text',
 
     before: function() {
       page = new Page(this.remote);
