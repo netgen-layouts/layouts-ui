@@ -2,12 +2,11 @@
 .app-header {
   position:fixed;
   top:0;
-  left:0;
+  left:$leftWidth;
   right:0;
   height:$topHeight;
   background:$toolbarbg2;
   color:#fff;
-  padding-left:$leftWidth;
   .layout-name {
     float:left;
     padding:7px $gutter;
@@ -77,15 +76,37 @@
       }
     }
   }
+  .actions {
+    float:right;
+    padding:0.4375em $gutter;
+  }
+  :focus {
+    outline:none;
+  }
+}
+
+/* left toolbar */
+.left-toolbar {
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  width:$leftWidth;
+  background:$toolbarbg1;
+  color:$toolbarColor;
+  z-index:30;
+  padding-top:$leftWidth;
   .app-logo-box {
     position:absolute;
     left:0;
     top:0;
     width:$leftWidth;
-    height:$topHeight;
+    height:$topHeight+1;
     display:flex;
     align-items:center;
     justify-content:center;
+    border-bottom:1px solid $toolbarBorderColor;
+    background:$toolbarbg2;
   }
   .app-logo {
     font-size:11px;
@@ -106,26 +127,6 @@
       margin:-0.125em 0 0 1em;
     }
   }
-  .actions {
-    float:right;
-    padding:0.4375em $gutter;
-  }
-  :focus {
-    outline:none;
-  }
-}
-
-/* left toolbar */
-.left-toolbar {
-  position:fixed;
-  top:$topHeight;
-  left:0;
-  bottom:0;
-  width:$leftWidth;
-  background:$toolbarbg1;
-  color:$toolbarColor;
-  z-index:30;
-  border-top:1px solid $toolbarBorderColor;
   .bottom-menu{
     position: absolute;
     bottom: 0;
