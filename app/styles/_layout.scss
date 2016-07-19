@@ -31,7 +31,7 @@
       }
     }
     form {
-      display: inline-block;
+      display:inline-block;
       input[type="text"] {
         border:none;
         box-shadow:none;
@@ -45,9 +45,11 @@
         color:#fff;
         display:inline-block;
         width:auto;
+        float:left;
       }
       .btns {
         display:inline-block;
+        float:left;
       }
     }
     h1 {
@@ -106,7 +108,7 @@
   }
   .actions {
     float:right;
-    padding:0.5em $gutter;
+    padding:0.4375em $gutter;
   }
   :focus {
     outline:none;
@@ -163,7 +165,8 @@
   left:$leftWidth;
   right:$rightWidth;
   top:$topHeight;
-  bottom:$bottomHeight;
+  // bottom:$bottomHeight;
+  bottom:0;
   overflow-x:hidden;
   overflow-y:scroll;
   padding:$gutter;
@@ -172,10 +175,11 @@
 
 /* footer */
 .app-footer {
-  position:fixed;
-  bottom:0;
-  left:$leftWidth;
-  right:$rightWidth;
-  height:$bottomHeight;
-  background:$footerbg;
+  // position:fixed;
+  // bottom:0;
+  // left:$leftWidth;
+  // right:$rightWidth;
+  // height:$bottomHeight;
+  // background:$footerbg;
+  display:none;
 }

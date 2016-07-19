@@ -329,6 +329,28 @@
       }
     }
   }
+
+  .not-selected {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+    display:flex;
+    .content {
+      text-align:center;
+      padding:0 20%;
+      p {
+        font-size:0.75em;
+      }
+      i {
+        font-size:48px;
+        color:hsl(0, 0, 43);
+      }
+    }
+  }
 }
 
 .sorting .sidebar{opacity:0.3; overflow:hidden;}
@@ -524,16 +546,31 @@
 }
 
 
-
-
-
 .loader{
-  position:absolute; top:0; left:0; width:100%; height:100%; background-color:$toolbarbg1;display:none;justify-content:center;align-items:center;
-  span{font-size:1.2em; position:relative; top:-0.5em}
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:$toolbarbg1;
+  display:none;
+  justify-content:center;
+  align-items:center;
   z-index: 99999;
+  span {
+    font-size:0.75em;
+    position:relative;
+    top:1em;
+    display:block;
+    text-transform:uppercase;
+    opacity:0.8;
+  }
+  .loading-ng-icon {
+    margin:0;
+  }
   .content{
-    color:#fff;
-
+    color:hsl(0, 0, 50);
+    text-align:center;
   }
 }
 
