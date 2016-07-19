@@ -120,6 +120,10 @@
       display:block;
       margin:0 0 0.25em;
       color:$toolbarColor;
+      .material-icons {
+        vertical-align:text-bottom;
+        font-size:18px;
+      }
     }
     select {
       border-radius:$borderRadius;
@@ -308,7 +312,16 @@
     input[type="checkbox"]:checked {
       ~ .children {
         display:block;
+        animation:compoundFadein 0.5s ease;
       }
+    }
+  }
+  @keyframes compoundFadein {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
     }
   }
 
@@ -409,7 +422,7 @@
   background:#fff;
   margin:0 0 0.25em;
   color:#333;
-  cursor:default;
+  cursor:grab;
   border-radius:$borderRadius;
   .item-panel {
     padding:0.25em 1.875em 0.25em 1.375em;
@@ -421,7 +434,6 @@
       top:0;
       bottom:0;
       width:1.1428571429em;
-      cursor:-webkit-grab;
       cursor:grab;
       display:flex;
       align-items:center;
@@ -521,12 +533,13 @@
     background:transparent;
   }
   &.dynamic-item {
-    //background:#3c4b58;
+    cursor:default;
     .handle {
       display:none !important;
     }
   }
   .named-collection & {
+    cursor:default;
     .handle,
     .remove {
       display:none !important;
