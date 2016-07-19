@@ -2,6 +2,7 @@
 
 var Core = require('core_boot');
 var HeaderView = require('../header');
+var TopToolbarView = require('../menues/top_toolbar');
 
 
 module.exports = Core.View.extend({
@@ -15,6 +16,10 @@ module.exports = Core.View.extend({
     new HeaderView({
       el: '.app-center',
       model: Core.g.layout
+    }).render();
+
+    new TopToolbarView({
+      el: '.bottom-menu'
     }).render();
 
 

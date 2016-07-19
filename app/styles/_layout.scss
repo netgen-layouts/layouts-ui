@@ -124,37 +124,41 @@
   color:$toolbarColor;
   z-index:30;
   border-top:1px solid $toolbarBorderColor;
-  .left-toolbar-buttons {
-    .button {
-      display:block;
-      border:none;
-      background:transparent;
-      width:$leftWidth;
-      height:$leftWidth;
-      line-height:$leftWidth;
-      text-align:center;
-      border-color:$toolbarBorderColor;
-      border-width:0 0 1px;
-      border-style:solid;
-      font-size:1.5em;
-      transition:color 150ms, background-color 150ms;
-      &:focus {
-        outline:none;
-      }
-      &:hover {
-        background:$toolbarBorderColor;
-      }
-      &.active {
-        background:$toolbarbg2;
-      }
-      &::before {
-        @extend %icomoon;
-      }
-      &[data-target="blocks"]::before {
-        content:"\e900";
-      }
+  .bottom-menu{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  .button {
+    display:block;
+    border:none;
+    background:transparent;
+    width:$leftWidth;
+    height:$leftWidth;
+    line-height:$leftWidth;
+    text-align:center;
+    border-color:$toolbarBorderColor;
+    border-width:0 0 1px;
+    border-style:solid;
+    font-size:1.5em;
+    transition:color 150ms, background-color 150ms;
+    &:focus {
+      outline:none;
+    }
+    &:hover {
+      background:$toolbarBorderColor;
+    }
+    &.active {
+      background:$toolbarbg2;
+    }
+    &::before {
+      @extend %icomoon;
+    }
+    &[data-target="blocks"]::before {
+      content:"\e900";
     }
   }
+
 }
 
 /* content */

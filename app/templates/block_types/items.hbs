@@ -1,12 +1,10 @@
-<div class="left-toolbar-buttons">
-  <button class="button open-panel" data-target="blocks"><span class="icon"></span></button>
-  <button class="button js-layout-mapper"><span class="icon">L</span></button>
-</div>
+<button class="button js-open" data-target="blocks"><span class="icon"></span></button>
+
 <div class="left-toolbar-panels">
   <div class="left-panel left-panel-blocks">
     <div class="panel-content">
-      <a class="close-panel"><i class="material-icons">close</i></a>
-      {{#each collection.groups.models}}
+      <a class="js-close close-panel"><i class="material-icons">close</i></a>
+      {{#each groups}}
         <div class="header">
           <h2>{{name}}</h2>
         </div>

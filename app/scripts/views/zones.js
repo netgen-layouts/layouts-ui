@@ -3,7 +3,7 @@
 var Core = require('core_boot');
 var ZoneView = require('./zone');
 var ViewBlocksLoad = require('../views/blocks/load');
-var ViewBlockTypes = require('../views/block_types');
+var ViewBlockTypes = require('./menues/block_types');
 
 
 module.exports = Core.View.extend({
@@ -46,6 +46,12 @@ module.exports = Core.View.extend({
     new ViewBlockTypes({
       collection: Core.g.block_types
     }).render_to('.blocks');
+
+    new ViewBlockTypes({
+      collection: Core.g.block_types,
+      groups: ["content", "ezpublish"]
+    }).render_to('.containers');
+
     return this;
   },
 });
