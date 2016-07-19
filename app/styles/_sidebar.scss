@@ -19,17 +19,14 @@
     text-transform:uppercase;
   }
 
-  .collection-items {
-    margin-top:1.5em;
-    padding-top:0.5em;
-    border-top:1px solid hsla(0, 0, 100, 0.2);
+  .sidebar-panel {
+    + .sidebar-panel {
+      margin-top:0.5em;
+      padding-top:0.5em;
+      border-top:1px solid hsla(0, 0, 100, 0.2);
+    }
   }
 
-  [data-query-form]{
-    margin-top:1.5em;
-    padding-top:1.0em;
-    border-top:1px solid hsla(0, 0, 100, 0.2);
-  }
   .add-items-btn {
     margin:0 0 1.5em;
     border:1px dashed $toolbarColor;
@@ -328,17 +325,26 @@
   .toggle-link {
     font-size:0.75em;
     font-weight:200;
-    display:inline-block;
+    display:block;
     margin:0 0 1em;
+    text-transform:uppercase;
     color:#fff;
-    &::before {
+    &::after {
       @extend %material-icons;
       content:"keyboard_arrow_down";
       display:inline-block;
+      float:right;
     }
     &[aria-expanded="true"] {
-      &::before {
+      &::after {
         content:"keyboard_arrow_up";
+      }
+    }
+    &.sub-toggle {
+      display:inline-block;
+      text-transform:none;
+      &::after {
+        float:none;
       }
     }
   }
