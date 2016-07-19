@@ -86,9 +86,11 @@ module.exports = Core.View.extend({
   load_sidebar: function(){
     this.edit_view = new SideBarView({
       model: this.model
-    }).load();
+    })
 
     $('.right-sidebar').html(this.edit_view.$el);
+
+    this.edit_view.load()
 
   },
 

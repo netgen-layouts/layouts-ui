@@ -1,6 +1,7 @@
 'use strict';
 
 var LayoutBasePage = require('./layout_base');
+var HeaderView = require('../views/header');
 
 module.exports = LayoutBasePage.extend({
   main: function(params, xhr){
@@ -25,6 +26,11 @@ module.exports = LayoutBasePage.extend({
 
 
     this.load_blocks_and_go_to_edit_mode();
+
+    new HeaderView({
+      model: Core.g.layout
+    }).render_to('.app-center');
+
 
     return this;
   },
