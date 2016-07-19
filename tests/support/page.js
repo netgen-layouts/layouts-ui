@@ -236,7 +236,8 @@ define(function(require) {
   Page.prototype.addBlock = function(block_name, opts) {
     return new this.constructor(this, function(setContext) {
       return this.parent
-        .clickOn('.left-toolbar-buttons .open-panel', {visible: true})
+        .clickOn('.left-toolbar .js-open', {visible: true})
+        .sleep(250)
         .drag('.panel-content .add-block-btn.'+block_name).dropTo('[data-zone="'+opts.to_zone+'"]')
         .releaseMouseButton(0)
         .sleep(100)

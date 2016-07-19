@@ -25,10 +25,9 @@ define(function(require) {
 
       return page
         .navigateTo('#layout/3/edit')
-        .clickOn('.left-toolbar-buttons .open-panel', {visible: true})
-
+        .waitForAjax()
         .count('[data-zone="top"] [data-block]', {all: true}).store('count')
-        .drag('.panel-content .add-block-btn.title').dropTo('[data-zone="top"]')
+        .addBlock('title', {to_zone: 'top'}).editBlock()
 
         .waitForAjax()
         .count('[data-zone="top"] [data-block]', {all: true})
