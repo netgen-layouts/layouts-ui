@@ -55,7 +55,6 @@ module.exports = Core.View.extend({
       this.$el.addClass('named-collection');
     } else {
       this.$('.bm-items').sortable({
-        handle: '.handle',
         delay: 150,
         cancel: '.dynamic-item',
         axis: 'y',
