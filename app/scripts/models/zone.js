@@ -28,6 +28,18 @@ module.exports = Core.Model.extend({
     return this.is_inherited()
   },
 
+  has_blocks: function() {
+    return this.get('block_ids').length;
+  },
+
+  is_empty: function() {
+    return !this.has_blocks();
+  },
+
+  blocks: function(){
+    return Core.g.layout.blocks.get_by_ids(this.get('block_ids'));
+  },
+
   should_accept: function(type_or_block){
     var allowed = this.get('allowed_block_definitions');
     if(allowed){ return true; }

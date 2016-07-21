@@ -3,9 +3,12 @@
   var Core = require('core_boot');
   var Layout = require('../models/layout');
   var Zone = require('../models/zone');
+  var _ = require('underscore');
 
 
   module.exports = Core.View.extend({
+
+    template: 'zone',
 
     events: {
       //'click': '$goto_parent'
@@ -16,10 +19,23 @@
 
     initialize: function(){
       Core.View.prototype.initialize.apply(this, arguments);
-      this.listenTo(Core, 'zone_chooser:on', this.zone_chooser_on);
-      this.listenTo(Core, 'zone_chooser:off', this.zone_chooser_off);
+      this.listenTo(Core.state, 'change', this.render);
       this.listenTo(this.model, 'unlink:success', this.on_unlink);
       this.mark_zone_type();
+      return this;
+    },
+
+
+    load_blocks: function(){
+      var view_block, views = [];
+
+      var views = _.map(this.model.blocks(), function(block){
+        return Core.blocks.create_view(block.get('definition_identifier'), block).$el;
+      });
+
+      this.$el.append(views)
+
+
       return this;
     },
 
@@ -78,58 +94,29 @@
       return "zone_id" in Core.router.params;
     },
 
-    has_blocks: function() {
-      return this.$('[data-block]').length;
+
+
+    detect_mode: function() {
+
+      if(this.is_in_link_mode()){
+        return 'linker'
+      }
+
+      if(Core.state.get('mode_zone_link')){
+        return this.model.has_blocks() ? 'disabler' : 'chooser';
+      }
+
+
+      return 'normal';
+
     },
 
 
-    empty: function () {
-      return !this.has_blocks();
-    },
 
     render: function(){
-      // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> is_in_link_mode', this.is_in_link_mode())
-      if(this.is_in_link_mode()){
-        this.render_linker()
-      }
-    },
-
-    zone_chooser_on: function() {
-      if(this.has_blocks()){
-        this.render_disabler();
-      }else{
-        this.render_chooser();
-      }
-      this.$el.addClass('chooser_on');
-
-    },
-
-
-    zone_chooser_off: function() {
-      this.disabler && this.disabler.remove();
-      this.chooser && this.chooser.remove();
-      this.$el.removeClass('chooser_on');
-
-    },
-
-    render_chooser: function() {
-      this.chooser && this.chooser.remove();
-      this.context.model = this.model;
-      this.context.view = this;
-
-      this.chooser = $(JST.zone_chooser(this.context));
-      this.$el.append(this.chooser);
-    },
-
-    render_disabler: function() {
-      this.disabler = $('<div class="disabler" />')
-      this.$el.append(this.disabler);
-    },
-
-
-    render_linker: function() {
-      this.linker = $(JST.zone_linker());
-      this.$el.append(this.linker);
+      this.context.mode = this.detect_mode();
+      Core.View.prototype.render.apply(this, arguments);
+      this.load_blocks();
     }
 
   });

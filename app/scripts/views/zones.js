@@ -10,22 +10,10 @@ module.exports = Core.View.extend({
   extend_with: ['layout_model'],
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.collection, 'reset', this.on_reset);
-    this.listenToOnce(this.layout_model.blocks, 'read:success', this.load_blocks);
+    this.listenToOnce(this.layout_model.blocks, 'read:success', this.parse_dom);
     return this;
   },
 
-
-  load_blocks: function(){
-    ViewBlocksLoad.load_layout_blocks();
-    return this;
-  },
-
-
-  on_reset: function(){
-    this.parse_dom()
-    return this;
-  },
 
   parse_dom: function(){
     var id, self = this;

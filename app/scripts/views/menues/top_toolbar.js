@@ -18,17 +18,8 @@ module.exports = Core.View.extend({
   },
 
   $open_layout_mapper: function(e) {
-    this.zone_chooser_on = !this.zone_chooser_on;
-
-    Core.trigger('zone_chooser:' + (this.zone_chooser_on ? 'on' : 'off'));
     Core.trigger('toolbar:deactivate', this);
-
-    if(this.zone_chooser_on){
-      Core.trigger('editing:unmark');
-      $('.right-sidebar').html(JST.sidebar2());
-    }else{
-      $('.right-sidebar').html(JST.sidebar());
-    }
+    Core.state.toggle('mode_zone_link');
   }
 
 });

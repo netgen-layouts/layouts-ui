@@ -12,11 +12,13 @@ module.exports = Core.View.extend({
     'click .js-show-form': 'enter_editing',
     'click .js-cancel': 'cancel_editing',
     'click .js-publish': 'publish_layout',
-    'click .js-discard': 'discard_draft'
+    'click .js-discard': 'discard_draft',
+    'click .js-normal-mode': '$normal_mode'
   },
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(Core.state, 'change', this.render);
     this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'save:success', this.after_save);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
@@ -28,6 +30,11 @@ module.exports = Core.View.extend({
     this.$name_input = this.$('.js-name');
     //this.prevent_leave_page();
     return this;
+  },
+
+
+  $normal_mode: function(){
+    Core.state.set({mode_zone_link: false});
   },
 
   set_name: function(e){

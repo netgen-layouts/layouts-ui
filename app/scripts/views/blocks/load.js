@@ -12,24 +12,6 @@ var ViewBlocks = require('./main');
     });
   },
 
-  load_layout_blocks: function(){
-    var block, view_block;
-    Core._.each(Core.g.layout.get('zones'), function(zone){
-        Core._.each(zone.block_ids, function(block_id){
-
-          block = Core.g.layout.get_block_by_id(block_id);
-          view_block = Core.blocks.create_view(block.get('definition_identifier'), block);
-          $('[data-zone='+ zone.identifier  +']').append(view_block.$el);
-
-          if(block.is_group()){
-            this.load_group_blocks(view_block);
-          }
-
-        });
-
-    });
-  },
-
   load_group_blocks: function(view_group){
     console.log('load_group_blocks');
     var self = this;

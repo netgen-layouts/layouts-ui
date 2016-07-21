@@ -16,6 +16,7 @@ var TreeConfig = require('./browser-ui/models/tree_config');
 var Items = require('./browser-ui/collections/items');
 
 var Config = require('./models/config');
+var State = require('./models/state');
 var Layouts = require('./collections/layouts');
 
 
@@ -30,6 +31,13 @@ Core.Backbone.defaults = function(){
   };
 
   return request;
+};
+
+
+Core.default_context = function() {
+  return {
+    state: this.state
+  }
 };
 
 $.extend(Core, {
@@ -53,7 +61,6 @@ $.extend(Core, {
 
   init: function(){
     this.app_cache_handler();
-    this.setup_events();
 
     this.on('render plugins:reinitialize', this.reinitialize_plugins);
 
@@ -61,7 +68,8 @@ $.extend(Core, {
     Core.g.block_types = new BlockTypes();
     Core.g.config = new Config();
     Core.g.shared_layouts = new Layouts();
-
+    Core.state = new State();
+    this.setup_events();
 
     $(function(){
       Core.router = new Router();
@@ -139,6 +147,16 @@ $.extend(Core, {
         }
 
       })
+
+
+    Core.state.on('change', function(model) {
+      if(model.get('mode_zone_link')){
+        Core.trigger('editing:unmark');
+        $('.right-sidebar').html(JST.sidebar2());
+      }else{
+        $('.right-sidebar').html(JST.sidebar());
+      }
+    });
 
   }
 

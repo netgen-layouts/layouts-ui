@@ -15,6 +15,10 @@
     {{/if}}
 </div>
 <div class="actions">
-    <button class="btn btn-link js-discard">Discard</button>
-    <button class="btn btn-primary js-publish">Publish layout</button>
-</div>
+  {{#if state.mode_zone_link}}
+      <button class="btn btn-primary js-normal-mode">Back to editing</button>
+  {{else}}
+      <button class="btn btn-link js-discard">Discard</button>
+      <button class="btn btn-primary js-publish">Publish layout</button>
+  </div>
+{{/if}}
