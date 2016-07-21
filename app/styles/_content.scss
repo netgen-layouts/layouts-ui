@@ -1,7 +1,7 @@
 /* zones */
 [data-zone] {
   position: relative;
-  outline:1px dashed #676767;
+  outline:1px dashed hsl(0, 0, 75);
   min-height:4em;
   padding:$gutter*0.6666666667;
   margin:0 0 $gutter*1.25;
@@ -84,14 +84,15 @@
       }
       &.open {
         .dropdown-toggle {
-          background:hsl(0, 0, 88);
+          background:hsl(0, 0, 25);
+          color:$btnprimary;
         }
       }
       .dropdown-menu {
         margin:0;
         border:none;
         padding:0.5em 0;
-        background:hsl(0, 0, 88);
+        background:hsl(0, 0, 25);
         border-radius:0;
         box-shadow:none;
         font-size:0.75em;
@@ -100,9 +101,23 @@
           text-align:right;
           > a {
             padding:0.5em 1em;
-            font-weight:600;
-            color:hsl(0, 0, 55);
+            color:#fff;
             transition:color 150ms, background-color 150ms;
+            .note {
+              display:block;
+              color:hsl(0, 0, 65);
+              font-weight:300;
+              font-size:0.75em;
+              transition:color 150ms;
+            }
+            &:hover,
+            &:focus {
+              background:hsla(0, 0, 100, 0.05);
+              color:$btnprimary;
+              .note {
+                color:$btnprimary;
+              }
+            }
           }
         }
       }
@@ -173,11 +188,11 @@
 .grid-row {
   display:flex;
   flex-wrap:wrap;
-  margin:-2px;
+  margin:-1px;
   .grid-item {
     padding:8px;
     background:rgba(0, 0, 0, 0.035);
-    border:2px solid $blockbg;
+    border:1px solid $blockbg;
     font-size:0.75em;
     word-break:break-word;
     @for $i from 1 through 12 {
@@ -193,9 +208,6 @@
     padding:8px;
     font-size:0.75em;
     margin:2px 0;
-    + .list-item {
-      margin-top:4px;
-    }
   }
 }
 
