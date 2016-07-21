@@ -34,7 +34,7 @@ module.exports = Core.View.extend({
 
 
   $normal_mode: function(){
-    Core.state.set({mode_zone_link: false});
+    Core.state.set({mode: 'normal'});
   },
 
   set_name: function(e){

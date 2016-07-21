@@ -60,6 +60,7 @@ module.exports = Core.View.extend(DndView).extend({
     this.$('.left-panel').show();
     this.is_open = true;
     Core.trigger('toolbar:deactivate', this);
+    Core.state.set({mode: 'normal'});
   },
 
   $close: function(){

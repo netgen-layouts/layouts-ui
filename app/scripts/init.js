@@ -68,7 +68,9 @@ $.extend(Core, {
     Core.g.block_types = new BlockTypes();
     Core.g.config = new Config();
     Core.g.shared_layouts = new Layouts();
-    Core.state = new State();
+    Core.state = new State({
+      mode: 'normal'
+    });
     this.setup_events();
 
     $(function(){
@@ -150,7 +152,7 @@ $.extend(Core, {
 
 
     Core.state.on('change', function(model) {
-      if(model.get('mode_zone_link')){
+      if(model.get('mode') === 'linking' ){
         Core.trigger('editing:unmark');
         $('.right-sidebar').html(JST.sidebar2());
       }else{

@@ -102,7 +102,7 @@
         return 'linker'
       }
 
-      if(Core.state.get('mode_zone_link')){
+      if(Core.state.get('mode') === 'linking'){
         return this.model.has_blocks() ? 'disabler' : 'chooser';
       }
 

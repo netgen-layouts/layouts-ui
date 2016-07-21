@@ -8,9 +8,9 @@
 
 
  <div class="bottom-menu">
-  <button class="button js-layout-mapper {{active_class_if state.mode_zone_link}}"><span class="icon">L</span></button>
-  <button class="button"><span class="icon">NC</span></button>
-  <button class="button"><span class="icon">CLT</span></button>
+  <button data-mode="linking" class="button js-layout-mapper {{#eq state.mode 'linking'}} active {{/eq}}"><span class="icon">L</span></button>
+  <button data-mode="named_collections" class="button"><span class="icon">NC</span></button>
+  <button data-mode="clt" class="button"><span class="icon">CLT</span></button>
  </div>
 </aside>
 
