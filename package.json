@@ -36,7 +36,7 @@
     "bootstrap": "^3.3.6",
     "handlebars": "^4.0.5",
     "jquery": "^2.2.2",
-    "jquery-ui": "^1.10.5",
+    "jquery-ui": "1.10.5",
     "moment": "^2.14.1",
     "nprogress": "^0.2.0",
     "striptags": "^2.1.1",
