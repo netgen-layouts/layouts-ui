@@ -56,6 +56,7 @@
         .link_with_zone(this.model)
         .done(function() {
           Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit' });
+          Core.state.set({mode: 'normal'});
         }.bind(this))
       return this;
     },

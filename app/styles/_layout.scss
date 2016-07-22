@@ -10,6 +10,7 @@
   .layout-name {
     float:left;
     padding:7px $gutter;
+    .chooser{display:inline-block;}
     .label{vertical-align:top; line-height:34px; text-transform:uppercase;}
     .shared-label{
       display: inline-block;
@@ -99,6 +100,9 @@
   color:$toolbarColor;
   z-index:30;
   padding-top:$leftWidth;
+  .top-menu > div{position: relative;}
+  .top-menu .disabler{display:none;}
+  .top-menu .disable .disabler{display:block;}
   .app-logo-box {
     position:absolute;
     left:0;

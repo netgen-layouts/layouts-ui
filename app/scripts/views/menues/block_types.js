@@ -25,8 +25,14 @@ module.exports = Core.View.extend(DndView).extend({
 
     this.listenTo(Core, 'toolbar:deactivate', this.$deactivate);
     this.listenTo(Core, 'sortable:start', this.$close);
+    this.listenTo(Core.state, 'change', this.on_state);
     this.setup_global_close();
     return this;
+  },
+
+
+  on_state: function(){
+    Core.state.get('mode') !== 'normal' ? this.$el.addClass('disable') : this.$el.removeClass('disable');
   },
 
   set_context: function(){
@@ -43,6 +49,7 @@ module.exports = Core.View.extend(DndView).extend({
       this.render_items(group.types(), this.$('.' + group.id), BlockTypeView);
     }.bind(this));
 
+    this.on_state();
     return this;
   },
 

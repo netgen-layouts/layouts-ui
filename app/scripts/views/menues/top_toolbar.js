@@ -24,8 +24,9 @@ module.exports = Core.View.extend({
 
   $open_layout_mapper: function(e) {
     Core.trigger('toolbar:deactivate', this);
-    var mode = Core.state.get('mode') === 'linking' ? 'normal' : 'linking';
-    Core.state.set({mode: mode});
+    //var mode = Core.state.get('mode') === 'linking' ? 'normal' : 'linking';
+    //Core.state.set({mode: mode});
+    Core.state.set({mode: 'linking'});
   }
 
 });

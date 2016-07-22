@@ -35,6 +35,9 @@ module.exports = Core.View.extend({
 
   $normal_mode: function(){
     Core.state.set({mode: 'normal'});
+    // <a href="{{url_for 'layout' id=params.draft_layout_id type="edit" }}" class="js-cancel">Cancel</a>
+    var router = Core.router;
+    router.params.draft_layout_id && router.navigate_to('layout', {id: router.params.draft_layout_id, type: 'edit'});
   },
 
   set_name: function(e){
