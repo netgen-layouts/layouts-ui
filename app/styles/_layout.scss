@@ -10,15 +10,15 @@
   .layout-name {
     float:left;
     padding:7px $gutter;
+    .label{vertical-align:top; line-height:34px; text-transform:uppercase;}
     .shared-label{
       display: inline-block;
       line-height: 34px;
       font-weight: 700;
     }
-    .js-show-form {
+    .show-form {
       display:inline-block;
       font-size:1em;
-      cursor:pointer;
       padding:0 0.5em;
       height:$btnHeight;
       line-height:$btnHeight;
@@ -28,6 +28,9 @@
         font-size:1em;
         vertical-align:middle;
       }
+    }
+    .js-show-form{
+      cursor:pointer;
     }
     form {
       display:inline-block;
