@@ -68,7 +68,7 @@
 
 
     on_unlink: function(){
-      this.render_chooser();
+      this.render();
       this.$el.removeClass('linked_zone');
       return this;
     },

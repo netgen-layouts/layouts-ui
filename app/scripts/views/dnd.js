@@ -57,7 +57,7 @@ jQuery.ui.sortable.prototype._mouseDrag = function(event){
 
 module.exports = {
 
-  connect_with: '[data-zone], [data-container], [data-trash]',
+  connect_with: '[data-zone]:not(".linked_zone"), [data-container], [data-trash]',
   canceled_attr: 'canceled',
 
   init: function(){
