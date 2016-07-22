@@ -63,7 +63,15 @@
 
     $unlink: function(e){
       e.preventDefault();
-      this.model.sync_unlink();
+
+      var self = this;
+      return new Core.Modal({
+        title: 'Confirm',
+        body: 'Are you sure you want to unlink this zone?'
+      }).on('apply', function(){
+        self.model.sync_unlink();
+      }).open();
+
     },
 
 

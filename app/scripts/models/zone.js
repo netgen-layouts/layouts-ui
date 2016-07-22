@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('core_boot');
+var Blocks = require('../collections/blocks');
 var _ = require('underscore');
 
 module.exports = Core.Model.extend({
@@ -36,6 +37,15 @@ module.exports = Core.Model.extend({
     return !this.has_blocks();
   },
 
+
+  add_block: function(id) {
+    this.set({block_ids: _.union(this.get('block_ids'), [id]) });
+  },
+
+  remove_block: function(id) {
+    this.set({block_ids: _.without(this.get('block_ids'), id) });
+  },
+
   blocks: function(){
     return Core.g.layout.blocks.get_by_ids(this.get('block_ids'));
   },
@@ -45,6 +55,11 @@ module.exports = Core.Model.extend({
     if(allowed){ return true; }
     var id = type_or_block.get('identifier') || type_or_block.id;
     return _.contains(allowed, id);
+  },
+
+
+  linked_layout: function(){
+    return Core.g.shared_layouts.get(this.get('linked_layout_id'));
   },
 
 

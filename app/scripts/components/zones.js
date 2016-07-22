@@ -7,7 +7,7 @@ var Compontent = function() {
   return new ZonesView({
     el: '.zones',
     layout_model: Core.g.layout,
-    collection: new Zones()
+    collection: Core.g.layout.zones
   });
 }
 

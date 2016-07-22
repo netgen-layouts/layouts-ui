@@ -13,7 +13,14 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.on('create:success', this.add_to_blocks_collection);
+    this.on('destroy', this.on_destroy);
     this.bm_collections = new BmCollections();
+    return this;
+  },
+
+
+  on_destroy: function(){
+    this.zone().remove_block(this.get('id'));
     return this;
   },
 
@@ -24,6 +31,13 @@ module.exports = Core.Model.extend({
 
   add_to_blocks_collection: function(){
     Core.g.layout.get('blocks').add(this);
+    this.zone().add_block(this.get('id'));
+  },
+
+
+  remove_block_from_zone: function(){
+    console.log(this, arguments);
+    return this;
   },
 
   definition: function(){
@@ -59,6 +73,8 @@ module.exports = Core.Model.extend({
   },
 
 
+
+
   load_bm_collections: function(){
     return this.bm_collections.fetch({
       url: this.url('collections')
@@ -69,14 +85,34 @@ module.exports = Core.Model.extend({
     return this.bm_collections.findWhere({identifier: 'default'});
   },
 
+
+  zone: function(){
+    return Core.g.layout.zones.get(this.get('zone_identifier'));
+  },
+
+
+  update_zone_blocks: function(prev_zone_id, new_zone_id){
+    console.log(arguments);
+    var prev_zone = Core.g.layout.zones.get(prev_zone_id);
+    var new_zone = Core.g.layout.zones.get(new_zone_id);
+
+    var id = this.get('id');
+    prev_zone.remove_block(id);
+    new_zone.add_block(id);
+
+    return this;
+  },
+
   move: function(data){
 
     var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position');
-
+    var previous_zone = this._previousAttributes.zone_identifier;
     return this.save(attributes, {
       via: 'move',
       patch: true
-    });
+    }).done(function() {
+      this.update_zone_blocks(previous_zone, attributes.zone_identifier);
+    }.bind(this));
   },
 
   restore: function(){

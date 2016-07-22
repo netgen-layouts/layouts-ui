@@ -2,6 +2,7 @@
 
 var Core = require('core_boot');
 var Blocks = require('../collections/blocks');
+var Zones = require('../collections/zones');
 var _ = require('underscore');
 
 module.exports = Core.Model.extend({
@@ -11,8 +12,10 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.blocks = new Blocks();
+
     this.on('change:id', this.reset_blocks_loaded);
     this.on('discard:success', this.reset_loaded)
+
     this.blocks.url = this.url('blocks');
     return this;
   },
@@ -21,6 +24,7 @@ module.exports = Core.Model.extend({
     resp && _.each(resp.zones, function(zone) {
       zone.layout_id = resp.id
     })
+    this.zones = new Zones(resp.zones);
     return Core.Model.prototype.parse.apply(this, arguments);
   },
 

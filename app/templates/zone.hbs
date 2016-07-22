@@ -4,11 +4,28 @@
 
 {{#eq mode "chooser"}}
   <div class="zone_chooser">
-    <a href="#" class="btn btn-primary js-choose">Choose zone</a>
+
 
     {{#if model.is_linked}}
-      <a href="#" class="btn btn-danger js-unlink">Unlink zone from layout_id: "{{model.linked_layout_id}}" and zone_id: "{{model.linked_zone_identifier}}"</a>
-      <a href="{{url_for 'layout' id=model.linked_layout_id type="edit"}}" target="_blank" class="btn btn-success js-edit-parent">Edit linked layout</a>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="linked_info">
+            <div>This zone is linked with:</div>
+            <div><strong>Name:</strong> {{model.linked_layout.name}}</div>
+            <div><strong>Zone name:</strong> {{model.linked_zone_identifier}}</div>
+            <a href="#" class="btn btn-danger js-unlink">Unlink</a>
+          </div>
+
+        </div>
+
+        <div class="col-md-6">
+          <a href="#" class="btn btn-primary js-choose">Choose different zone</a>
+          <a href="{{url_for 'layout' id=model.linked_layout_id type="edit"}}" target="_blank" class="btn btn-success js-edit-parent">Edit linked layout</a>
+        </div>
+      </div>
+
+    {{else}}
+      <a href="#" class="btn btn-primary js-choose">Choose a zone</a>
     {{/if}}
   </div>
 {{/eq}}
@@ -16,7 +33,7 @@
 
 {{#eq mode "linker"}}
 <div class="zone_linker">
-  <a href="#" class="btn btn-primary js-link">Link zone</a>
+  <a href="#" class="btn btn-primary js-link">Link a zone</a>
 </div>
 {{/eq}}
 
