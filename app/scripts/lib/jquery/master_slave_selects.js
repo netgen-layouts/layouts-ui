@@ -18,6 +18,8 @@ function master_slave_selects(master_select, opts){
     });
 
     var $first = $('option:not(.hidden):first', $slave);
+
+    if($first.is(':selected')){return;}
     $first.prop('selected', true).trigger('change');
 
     $slave.on('transitionend', function() {
