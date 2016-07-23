@@ -200,8 +200,9 @@ module.exports = {
    */
   setup_dnd_for_blocks: function(){
     var self = this;
+
     if(this.is_zone()){
-      $('.blocks .block-items').sortable({
+      this.$('.block-items').sortable({
         connectWith: self.connect_with,
         placeholder: 'no-placeholder',
         appendTo: document.body,
