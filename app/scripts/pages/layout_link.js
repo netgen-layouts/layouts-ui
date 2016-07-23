@@ -7,7 +7,7 @@ var HeaderView = require('../views/header');
 
 module.exports = LayoutBasePage.extend({
   master: 'application',
-  layout: 'layout_link',
+  layout: 'layout',
 
   main: function(){
     LayoutBasePage.prototype.main.apply(this, arguments);
