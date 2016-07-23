@@ -21,10 +21,14 @@ module.exports = Core.Model.extend({
   },
 
   parse: function(resp){
-    resp && _.each(resp.zones, function(zone) {
-      zone.layout_id = resp.id
-    })
-    this.zones = new Zones(resp.zones);
+    if(resp){
+      _.each(resp.zones, function(zone) {
+        zone.layout_id = resp.id
+      })
+      this.zones = new Zones(resp.zones);
+      this.zones.layout = this;
+    }
+
     return Core.Model.prototype.parse.apply(this, arguments);
   },
 

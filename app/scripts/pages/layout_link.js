@@ -13,7 +13,7 @@ module.exports = LayoutBasePage.extend({
     LayoutBasePage.prototype.main.apply(this, arguments);
     Core.g.layout.blocks.fetch({data: {published: true}});
 
-    Core.state.set({mode: 'choosing'});
+    Core.state.set({mode: 'choosing', section: 'linking'});
 
 
 

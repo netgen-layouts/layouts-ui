@@ -2,7 +2,7 @@
 
 var Core = require('core_boot');
 
-var TopToolbarView = require('../menues/top_toolbar');
+var TopToolbarView = require('../menues/toolbar');
 
 
 module.exports = Core.View.extend({

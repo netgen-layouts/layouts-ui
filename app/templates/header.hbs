@@ -1,6 +1,5 @@
-
 <div class="layout-name">
-    <div class="label label-info">{{state.mode}}</div>
+    <div class="label label-info">{{state.mode_name}}</div>
     {{#if model.shared}}
       <span class="shared-label">Shared:</span>
     {{/if}}
@@ -13,7 +12,7 @@
         </div>
       </form>
     {{else}}
-      {{#eq state.mode 'normal'}}
+      {{#eq state.mode 'edit'}}
         <span class="show-form js-show-form"><span class="js-layout-name">{{ model.name }}</span> <i class="material-icons">edit</i></span>
       {{else}}
         <span class="show-form js-layout-name">{{ model.name }}</span>
@@ -23,7 +22,7 @@
     <div class="chooser"></div>
 </div>
 <div class="actions">
-  {{#eq state.mode 'normal'}}
+  {{#eq state.mode 'edit'}}
       <button class="btn btn-link js-discard">Discard</button>
       <button class="btn btn-primary js-publish">Publish layout</button>
   {{else}}

@@ -17,16 +17,14 @@ module.exports = Core.View.extend({
 
   on_state: function(){
     this.$('.active').removeClass('active');
-    this.$('[data-mode="'+Core.state.get('mode')+'"]').addClass('active');
+    this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
     return this;
   },
 
 
   $open_layout_mapper: function(e) {
     Core.trigger('toolbar:deactivate', this);
-    //var mode = Core.state.get('mode') === 'linking' ? 'normal' : 'linking';
-    //Core.state.set({mode: mode});
-    Core.state.set({mode: 'linking'});
+    Core.state.get('section') !== 'linking' && Core.state.set({mode: 'linking', section: 'linking'});
   }
 
 });

@@ -69,7 +69,8 @@ $.extend(Core, {
     Core.g.config = new Config();
     Core.g.shared_layouts = new Layouts();
     Core.state = new State({
-      mode: 'normal'
+      mode: 'edit',
+      section: 'normal'
     });
     this.setup_events();
 
