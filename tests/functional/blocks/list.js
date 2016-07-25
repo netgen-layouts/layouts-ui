@@ -94,7 +94,21 @@ define(function(require) {
         .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in named
         .count('.bm-items .collection-item .remove-toggle').assert('equal', 0)
         .lastBlock().count('.list-item').assert('equal', 27)
+    },
+
+
+    'change view type from list to grid': function() {
+      return page
+        .navigateTo('#layout/3/edit')
+        .addBlock('list', {to_zone: 'left'}).editBlock()
+        .match('.sidebar')
+          .clickOn('#design')
+          .select('View type').choose('grid')
+        .end()
+        .waitForAjax()
+        .lastBlock().match('.template_name').assertText('GRID')
     }
+
 
 
   });
