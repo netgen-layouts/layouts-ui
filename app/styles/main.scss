@@ -80,17 +80,14 @@ body {
 }
 @media screen and (min-width: 768px){
   .modal:not(.browser) {
-    text-align:center;
-    &::before {
-      display:inline-block;
-      vertical-align:middle;
-      height:100%;
-      content:"";
-    }
     .modal-dialog {
-      display:inline-block;
-      vertical-align:middle;
-      text-align:left;
+      display:flex;
+      margin:0 auto;
+      height:100%;
+      align-items:center;
+      .modal-content {
+        flex:1;
+      }
     }
   }
 }
