@@ -1,5 +1,16 @@
 $tooltipBg: hsla(0, 0, 12, 0.9);
 
+
+.layout_3_zones_a {background-image:url(../images/layout_thumbs/1_zones_a.png);}
+.layout_3_zones_b {background-image:url(../images/layout_thumbs/2_zones_smart.png);}
+
+.layout_1_zones_a {background-image:url(../images/layout_thumbs/1_zones_a.svg);}
+.layout_2_zones_smart {background-image:url(../images/layout_thumbs/2_zones_smart.png);}
+.layout_4_zones_a {background-image:url(../images/layout_thumbs/4_zones_a.svg);}
+.layout_4_zones_b {background-image:url(../images/layout_thumbs/4_zones_b.svg);}
+.layout_4_zones_c {background-image:url(../images/layout_thumbs/4_zones_c.svg);}
+.layout_6_zones_a {background-image:url(../images/layout_thumbs/6_zones_a.svg);}
+
 .bm-tooltip {
   position:relative;
   display:inline-block;
@@ -157,15 +168,22 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
         }
       }
     }
-    [value="3_zones_a"] + label:before{background-image:url(../images/layout_thumbs/1_zones_a.png);}
-    [value="3_zones_b"] + label:before{background-image:url(../images/layout_thumbs/2_zones_smart.png);}
 
-    [value="1_zones_a"] + label:before{background-image:url(../images/layout_thumbs/1_zones_a.svg);}
-    [value="2_zones_smart"] + label:before{background-image:url(../images/layout_thumbs/2_zones_smart.png);}
-    [value="4_zones_a"] + label:before{background-image:url(../images/layout_thumbs/4_zones_a.svg);}
-    [value="4_zones_b"] + label:before{background-image:url(../images/layout_thumbs/4_zones_b.svg);}
-    [value="4_zones_c"] + label:before{background-image:url(../images/layout_thumbs/4_zones_c.svg);}
-    [value="6_zones_a"] + label:before{background-image:url(../images/layout_thumbs/6_zones_a.svg);}
+
+    [value="3_zones_a"] + label:before{@extend .layout_3_zones_a;}
+    [value="3_zones_b"] + label:before{@extend .layout_3_zones_b;}
+
+    [value="1_zones_a"] + label:before{@extend .layout_1_zones_a;}
+    [value="2_zones_smart"] + label:before{@extend .layout_2_zones_smart;}
+    [value="4_zones_a"] + label:before{@extend .layout_4_zones_a;}
+    [value="4_zones_b"] + label:before{@extend .layout_4_zones_b;}
+    [value="4_zones_c"] + label:before{@extend .layout_4_zones_c;}
+    [value="6_zones_a"] + label:before{@extend .layout_6_zones_a;}
 
   }
+}
+
+
+[data-zone]{
+  .layout_icon{width:100px; height:100px; background-size:contain; background-repeat:no-repeat; display:inline-block;}
 }

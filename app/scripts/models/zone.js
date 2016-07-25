@@ -50,6 +50,10 @@ module.exports = Core.Model.extend({
     return Core.g.layout.blocks.get_by_ids(this.get('block_ids'));
   },
 
+  layout: function(){
+    return Core.g.layout;
+  },
+
   should_accept: function(type_or_block){
     var allowed = this.get('allowed_block_definitions');
     if(allowed){ return true; }

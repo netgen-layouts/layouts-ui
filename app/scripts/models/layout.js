@@ -42,6 +42,7 @@ module.exports = Core.Model.extend({
     return this;
   },
 
+
   toJSON: function(options){
     options || (options = {});
     var json = Core.Model.prototype.toJSON.apply(this, arguments);
