@@ -7,7 +7,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'only Link zone',
+    name: 'Link zone',
 
     before: function() {
       page = new Page(this.remote);
@@ -36,7 +36,7 @@ define(function(require) {
         .assertCurrentUrl('#layout/3/link_zone/top/with_layout/1', 'include')
         .waitForAjax()
         .match('.app-center', {visible: true})
-          .match('.form-inline').assertText('Link with layout', 'include').end()
+          .match('.form-inline').assertText('WITH', 'include').end()
           .count('select option').assert('equal', 2)
           .match('select option:first-child').assertText('My third layout').end()
         .end()
@@ -74,7 +74,10 @@ define(function(require) {
           .match('.js-unlink').end()
           .match('.js-edit-parent').end()
           .clickOn('.js-unlink')
-          .waitForAjax()
+        .end()
+        .clickOn('.modal .action_apply', {visible: true})
+        .waitForAjax()
+        .match('[data-zone="top"]')
           .getAttribute('class').assert('notInclude', 'linked_zone')
     },
 
@@ -83,7 +86,7 @@ define(function(require) {
       return page
         .clickOn('.js-choose')
         .waitForAjax()
-        .clickOn('.app-center .js-cancel')
+        .clickOn('.app-center .js-normal-mode')
         .assertCurrentUrl('#layout/1/edit', 'include')
         .waitForAjax()
         .count('[data-block]').assert('equal', 3)

@@ -34,16 +34,18 @@ define(function(require) {
         .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
 
         .match('.app-center .js-layout-name', {visible: true}).assertText(layout_name)
+        .end()
     },
 
     'rename': function() {
       var layout_name = utils.stamped('New name');
       return page
         .navigateTo('#layout/1/edit')
+        .waitForAjax()
         .match('.app-center')
-          .clickOn('.layout-name')
+          .clickOn('.js-layout-name')
           .match('.js-name').fill(layout_name)
-          .clickOn('.btn-primary')
+          .clickOn('.app-center .btn-primary')
           .match('.app-center .js-layout-name').assertText(layout_name)
     },
 

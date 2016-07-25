@@ -268,9 +268,26 @@ define(function(require) {
         .click().end()
         .waitForAjax()
         .waitElementToBeInvisible('.sidebar .loader')
-        .sleep(100)
+        .sleep(300)
     }).end()
   }
+
+
+
+  // Page.prototype.modalClick = function(action, opts) {
+  //   return new this.constructor(this, function(setContext) {
+  //     var parentContext = this._context;
+  //     return this.parent
+  //       .end()
+  //       .waitForAjax()
+  //       .clickOn('.modal .action_' + action)
+  //       .then(function() {
+  //         setContext(parentContext)
+  //         return parentContext;
+  //       })
+  //   }).end()
+  // }
+
 
 
   Page.prototype.waitElementToBeInvisible = function(selector) {
