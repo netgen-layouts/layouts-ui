@@ -9,9 +9,12 @@
   color:#fff;
   .layout-name {
     float:left;
-    padding:7px $gutter;
+    padding:0 $gutter;
+    height:$topHeight;
+    display:flex;
+    align-items:center;
     .chooser{display:inline-block;}
-    .label{vertical-align:top; line-height:34px; text-transform:uppercase;}
+    .label{line-height:1.5; text-transform:uppercase; margin:0 5px 0 0; padding:0.25em 0.6em; border-radius:$borderRadius;}
     .shared-label{
       display: inline-block;
       line-height: 34px;
@@ -20,11 +23,10 @@
     .show-form {
       display:inline-block;
       font-size:1em;
-      padding:0 0.5em;
-      height:$btnHeight;
-      line-height:$btnHeight;
+      margin:0 0.5em;
+      border-bottom:1px dashed hsl(0, 0, 34);
       i {
-        color:$mainColor;
+        color:$toolbarColor;
         margin-left:4px;
         font-size:1em;
         vertical-align:middle;
@@ -114,7 +116,6 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    border-bottom:1px solid $toolbarBorderColor;
     background:$toolbarbg2;
   }
   .app-logo {
@@ -140,6 +141,14 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    .button {
+      &:last-child {
+        border-bottom:none;
+      }
+      &.active {
+        background:$toolbarBorderColor;
+      }
+    }
   }
   .button {
     display:block;
@@ -150,18 +159,23 @@
     line-height:$leftWidth;
     text-align:center;
     border-color:$toolbarBorderColor;
-    border-width:0 0 1px;
+    border-width:1px 0;
     border-style:solid;
     font-size:1.5em;
     transition:color 150ms, background-color 150ms;
+    + .button {
+      margin-top:-1px;
+    }
     &:focus {
       outline:none;
     }
     &:hover {
-      background:$toolbarBorderColor;
+      background:lighten($toolbarbg1, 5%);
+      color:#fff;
     }
     &.active {
       background:$toolbarbg2;
+      color:#fff;
     }
     &::before {
       @extend %icomoon;

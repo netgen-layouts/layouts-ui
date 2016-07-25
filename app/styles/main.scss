@@ -78,6 +78,19 @@ body {
     border-top:none;
   }
 }
+@media screen and (min-width: 768px){
+  .modal:not(.browser) {
+    .modal-dialog {
+      display:flex;
+      margin:0 auto;
+      height:100%;
+      align-items:center;
+      .modal-content {
+        flex:1;
+      }
+    }
+  }
+}
 /* /bootstrap override */
 
 
