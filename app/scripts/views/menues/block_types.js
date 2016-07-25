@@ -8,8 +8,8 @@ var _ = require('underscore');
 module.exports = Core.View.extend(DndView).extend({
   extend_with: ['groups'],
 
-  // groups: ["basic", "listing", "gallery", "content", "ezpublish"],
-  groups: ["basic", "listing", "gallery"],
+  //groups: ["basic", "listing", "gallery", "content", "ezpublish"],
+  //groups: ["basic", "listing", "gallery"],
 
   sort_element: '[data-zone]',
   template: 'block_types/items',
@@ -38,7 +38,7 @@ module.exports = Core.View.extend(DndView).extend({
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
-    this.filtered_groups = this.collection.groups.get_by_ids(this.groups);
+    this.filtered_groups = this.groups ? this.collection.groups.get_by_ids(this.groups) : this.collection.groups.models;
     this.context.groups = this.filtered_groups;
     return this;
   },

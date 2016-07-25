@@ -35,10 +35,10 @@ module.exports = Core.View.extend({
       collection: Core.g.block_types
     }).render_to('.blocks');
 
-    new ViewBlockTypes({
-      collection: Core.g.block_types,
-      groups: ["content", "ezpublish"]
-    }).render_to('.containers');
+    // new ViewBlockTypes({
+    //   collection: Core.g.block_types,
+    //   groups: ["content", "ezpublish"]
+    // }).render_to('.containers');
 
     return this;
   },
