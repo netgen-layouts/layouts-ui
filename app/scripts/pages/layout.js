@@ -13,6 +13,12 @@ module.exports = LayoutBasePage.extend({
     //   Core.router.navigate_to('layout', {id: 1}, {trigger: false});
     // }
 
+
+    new HeaderView({
+      model: Core.g.layout
+    }).render_to('.app-center');
+
+
     if(layout.get('published')){
       this.create_new_draft();
       return;
@@ -27,9 +33,6 @@ module.exports = LayoutBasePage.extend({
 
     this.load_blocks_and_go_to_edit_mode();
 
-    new HeaderView({
-      model: Core.g.layout
-    }).render_to('.app-center');
 
 
     return this;
