@@ -1,8 +1,19 @@
 <div class="layout-name">
     <div class="label label-info">{{state.mode_name}}</div>
-    {{#if model.shared}}
-      <span class="shared-label">Shared:</span>
+
+    {{#unless base_layout}}
+      {{#if model.shared}}
+        <span class="shared-label">Shared:</span>
+      {{/if}}
+    {{/unless}}
+
+
+    {{#if base_layout}}
+      <a href="#" class="js-normal-mode">{{base_layout.name}}</a>
+      <span>&gt;</span>
     {{/if}}
+
+
     {{#if editing }}
       <form method="post" class="js-layout">
         <input type="text" name="name" class="js-name" value="{{ model.name }}">
@@ -19,6 +30,9 @@
       {{/eq}}
     {{/if}}
 
+
+
+
     <div class="chooser"></div>
 </div>
 <div class="actions">
@@ -26,6 +40,12 @@
       <button class="btn btn-link js-discard">Discard</button>
       <button class="btn btn-primary js-publish">Publish layout</button>
   {{else}}
-      <button class="btn btn-primary js-normal-mode">Back to editing</button>
+      {{#eq state.mode 'edit_master'}}
+        <button class="btn btn-primary js-normal-mode">Back to editing</button>
+        <button class="btn btn-link js-discard">Discard</button>
+        <button class="btn btn-primary js-publish">Publish layout</button>
+      {{else}}
+        <button class="btn btn-primary js-normal-mode">Back to editing</button>
+      {{/eq}}
   {{/eq}}
 </div>

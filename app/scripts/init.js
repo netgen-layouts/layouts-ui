@@ -152,6 +152,11 @@ $.extend(Core, {
       })
 
 
+    $(document).on('click', 'a[href="#"]', function(e){
+      e.preventDefault();
+    })
+
+
     Core.state.on('change', function(model) {
       if(model.get('section') === 'linking' ){
         Core.trigger('editing:unmark');

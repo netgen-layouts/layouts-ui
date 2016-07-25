@@ -14,7 +14,7 @@ module.exports = Core.View.extend(DndView).extend({
   sort_element: '[data-zone]',
   template: 'block_types/items',
   events: {
-    'click .js-open': '$toggle',
+    'click .js-open:not(.disable)': '$toggle',
     'click .js-close': '$close',
   },
 
@@ -32,7 +32,8 @@ module.exports = Core.View.extend(DndView).extend({
 
 
   on_state: function(){
-    Core.router.route_name !== 'layout' ? this.$el.addClass('disable') : this.$el.removeClass('disable');
+    var $button = this.$('> button');
+    Core.state.in_mode('edit', 'edit_master') ? $button.removeClass('disable') : $button.addClass('disable');
   },
 
   set_context: function(){
@@ -66,8 +67,10 @@ module.exports = Core.View.extend(DndView).extend({
     this.$('.js-open').addClass('active');
     this.$('.left-panel').show();
     this.is_open = true;
-    Core.trigger('toolbar:deactivate', this);
-    Core.state.set({mode: 'edit', section: 'normal'});
+    if (!Core.state.in_mode('edit_master')){
+      Core.trigger('toolbar:deactivate', this);
+      Core.state.set({mode: 'edit', section: 'normal'});
+    }
   },
 
   $close: function(){

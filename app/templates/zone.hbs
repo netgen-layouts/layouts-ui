@@ -20,7 +20,7 @@
 
         <div class="col-md-6">
           <a href="#" class="btn btn-primary js-choose">Choose different zone</a>
-          <a href="{{url_for 'layout' id=model.linked_layout_id type="edit"}}" target="_blank" class="btn btn-success js-edit-parent">Edit linked layout</a>
+          <a href="{{url_for 'layout_edit_master' id=model.linked_layout_id draft_layout_id=model.layout_id type="edit"}}" class="btn btn-success js-edit-parent">Edit linked layout</a>
         </div>
       </div>
 

@@ -101,6 +101,7 @@
   z-index:30;
   padding-top:$leftWidth;
   .disabler{background:rgba(64, 64, 64, 0.8);}
+  .disable{opacity: 0.2; cursor: not-allowed;}
   .top-menu > div{position: relative;}
   .top-menu .disabler{display:none;}
   .top-menu .disable .disabler{display:block;}

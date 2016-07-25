@@ -5,6 +5,8 @@ var _ = require('underscore');
 
 module.exports = Core.View.extend({
 
+  extend_with: ['base_layout'],
+
   template: 'header',
 
   events: {
@@ -22,6 +24,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'save:success', this.after_save);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
+    this.context.base_layout = this.base_layout && this.base_layout.id && this.base_layout;
     return this;
   },
 
@@ -87,7 +90,12 @@ module.exports = Core.View.extend({
 
   close_layout: function(){
     this.can_leave_page = true;
-    location.href = '/';
+    if(Core.state.in_mode('edit_master')){
+      this.$normal_mode()
+    }else{
+      location.href = '/';
+    }
+
   },
 
   can_leave_page: false,

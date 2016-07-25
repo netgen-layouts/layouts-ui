@@ -5,7 +5,7 @@ var Core = require('core_boot');
 module.exports = Core.View.extend({
   events: {
     //'click': '$activate',
-    'click .js-layout-mapper': '$open_layout_mapper'
+    'click .js-layout-mapper:not(.disable)': '$open_layout_mapper'
   },
 
   initialize: function(){
@@ -18,6 +18,14 @@ module.exports = Core.View.extend({
   on_state: function(){
     this.$('.active').removeClass('active');
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
+
+
+    if(Core.state.get('mode') === 'edit_master'){
+      this.$('[data-mode="linking"]').addClass('disable');
+    }else{
+      this.$('[data-mode="linking"]').removeClass('disable');
+    }
+
     return this;
   },
 
