@@ -121,10 +121,6 @@
             &:hover,
             &:focus {
               background:hsla(0, 0, 100, 0.05);
-              color:$btnprimary;
-              .note {
-                color:$btnprimary;
-              }
             }
           }
         }

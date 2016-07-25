@@ -378,12 +378,12 @@
 
 
 #trash {
-  height: $rightWidth - (2*$gutter);
-  width: $rightWidth - (2*$gutter);
+  height: $rightWidth - $gutter;
+  width: $rightWidth - $gutter;
   border:1px dashed rgba(255, 255, 255, 0.25);
   position:fixed;
-  bottom:$gutter;
-  right:$gutter;
+  bottom:0.5*$gutter;
+  right:0.5*$gutter;
   display:none;
   align-items:center;
   justify-content:center;
