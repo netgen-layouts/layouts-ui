@@ -379,6 +379,13 @@ module.exports = function(grunt) {
     },
 
 
+    shell: {
+      load_fixtures: {
+        command: 'tests/load_fixtures.sh <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
+      }
+    },
+
+
     concurrent: {
       server: [
         'handlebars',
@@ -445,6 +452,7 @@ module.exports = function(grunt) {
     }
 
     if(!target || target == 'functional'){
+      tasks.push('shell:load_fixtures');
       tasks.push('browserSync:test');
       tasks.push('selenium_standalone:dev:start');
       tasks.push('intern:functional');

@@ -38,6 +38,8 @@ define({
   },
 
 
+  bail: true,
+
   grep: new RegExp(process.env.GREP) || null,
 
   // A regular expression matching URLs to files that should not be included in code coverage analysis. Set to `true`

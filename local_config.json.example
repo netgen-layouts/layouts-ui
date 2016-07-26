@@ -1,3 +1,8 @@
 {
-  "domain": "bm.site"
+  "domain": "bm.site",
+  "db": {
+    "name": "mysql_db_name",
+    "user": "mysql_username",
+    "password": "mysql_password"
+  }
 }
