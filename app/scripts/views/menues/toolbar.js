@@ -20,7 +20,7 @@ module.exports = Core.View.extend({
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
 
 
-    if(Core.state.get('mode') === 'edit_master'){
+    if(Core.state.in_mode('edit_master', 'edit_shared')){
       this.$('[data-mode="linking"]').addClass('disable');
     }else{
       this.$('[data-mode="linking"]').removeClass('disable');

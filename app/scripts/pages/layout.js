@@ -14,6 +14,8 @@ module.exports = LayoutBasePage.extend({
     // }
 
 
+    Core.state.set({mode: Core.g.layout.get('shared') ? 'edit_shared' : 'edit', section: 'edit'});
+
     new HeaderView({
       model: Core.g.layout,
       base_layout: this.base_layout

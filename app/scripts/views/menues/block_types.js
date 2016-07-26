@@ -33,7 +33,7 @@ module.exports = Core.View.extend(DndView).extend({
 
   on_state: function(){
     var $button = this.$('> button');
-    Core.state.in_mode('edit', 'edit_master') ? $button.removeClass('disable') : $button.addClass('disable');
+    Core.state.in_mode('edit', 'edit_master', 'edit_shared') ? $button.removeClass('disable') : $button.addClass('disable');
   },
 
   set_context: function(){
@@ -67,7 +67,7 @@ module.exports = Core.View.extend(DndView).extend({
     this.$('.js-open').addClass('active');
     this.$('.left-panel').show();
     this.is_open = true;
-    if (!Core.state.in_mode('edit_master')){
+    if (Core.state.in_mode('linking')){
       Core.trigger('toolbar:deactivate', this);
       Core.state.set({mode: 'edit', section: 'normal'});
     }

@@ -25,6 +25,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'save:success', this.after_save);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
     this.context.base_layout = this.base_layout && this.base_layout.id && this.base_layout;
+    this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
     return this;
   },
 
