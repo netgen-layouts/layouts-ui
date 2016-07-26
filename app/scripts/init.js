@@ -19,6 +19,7 @@ var Config = require('./models/config');
 var State = require('./models/state');
 var Layouts = require('./collections/layouts');
 
+var LocalConfig = require('./models/local_config');
 
 var Nprogress = require('nprogress');
 var _ = require('underscore');
@@ -67,6 +68,8 @@ $.extend(Core, {
     Core.g.layout_types = new LayoutTypes();
     Core.g.block_types = new BlockTypes();
     Core.g.config = new Config();
+    Core.g.local_config = new LocalConfig({id: 1});
+    Core.g.local_config.fetch();
     Core.g.shared_layouts = new Layouts();
     Core.state = new State({
       mode: 'edit',

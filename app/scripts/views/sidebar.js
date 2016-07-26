@@ -18,7 +18,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'destroy', this.destroy);
     this.listenTo(Core, 'editing:unmark', this.destroy);
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
-    this.on('loaded', this.remove_loader);
+    this.on('loaded', this.on_loaded);
     this.show_loader();
     this.xhrs = [];
     return this;
@@ -26,9 +26,14 @@ module.exports = Core.View.extend({
 
   events: {
     // 'change #collection-type': '$change_collection_type',
-    'click .js-apply': '$apply'
+    'click .js-apply': '$apply',
+    'click .toggle-link': '$panel_toggle'
   },
 
+  on_loaded: function(){
+    this.$toggle_panels_on_render();
+    this.remove_loader();
+  },
 
   remove_loader: function(){
     $('#sidebar .loader').fadeOut();
@@ -55,6 +60,23 @@ module.exports = Core.View.extend({
     // return this;
   },
 
+  $panel_toggle: function(e){
+    var panel = $(e.currentTarget).attr('aria-controls');
+    if ($(e.currentTarget).attr('aria-expanded') === 'false'){
+      Core.g.local_config.save(panel, false);
+    } else {
+      Core.g.local_config.save(panel, true);
+    }
+  },
+
+  $toggle_panels_on_render: function(){
+    for(var key in Core.g.local_config.attributes){
+      if(key.indexOf('collapse') === 0 && Core.g.local_config.attributes[key]){
+        this.$('.toggle-link[aria-controls=' + key + ']').attr('aria-expanded', 'false');
+        this.$('#' + key).removeClass('in');
+      }
+    }
+  },
 
   load: function(){
     $.get(this.model.edit_url()).done(function(response){
@@ -104,7 +126,6 @@ module.exports = Core.View.extend({
       }.bind(this));
 
     this.$('#aside-tabs').browser_tabs();
-
 
     this.xhrs.push(bm_collections_xhr, bm_collection_xhr);
 
