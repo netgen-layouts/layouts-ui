@@ -95,6 +95,16 @@ define(function(require) {
   }
 
 
+  Page.prototype.inModal = function() {
+    return new this.constructor(this, function(setContext) {
+      return this.parent
+        .match('.modal')
+          .match('.modal-body', {visible: true})
+        .end()
+    })
+  }
+
+
 
 
   Page.prototype.drag = function(selector, opts) {

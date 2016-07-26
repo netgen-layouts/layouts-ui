@@ -98,11 +98,11 @@ define(function(require) {
     'destroy': function() {
       return page
         .navigateTo('#layout/3/edit')
-        .match('[data-block]').store('block')
+        .addBlock('title', {to_zone: 'top'}).store('block')
           .clickOn('.dropdown-toggle')
-          .clickOn('.js-destroy')
+          .clickOn('Delete block')
         .end()
-        .clickOn('.modal .action_apply', {visible: true})
+        .inModal().clickOn('OK').end()
         .waitForAjax()
         .then(function() {
           this.read('block').isDisplayed().then(function(res) {

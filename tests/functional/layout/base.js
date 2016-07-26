@@ -60,7 +60,7 @@ define(function(require) {
       return page
         .navigateTo('#layout/1')
         .count('[data-block]').assert('equal', 0)
-        .clickOn('Edit existing', {visible: true})
+        .inModal().clickOn('Edit existing').end()
         .waitForDeletedByCssSelector('.modal')
         .count('[data-block]').assert('isAbove', 0)
     },
@@ -71,7 +71,7 @@ define(function(require) {
       return page
         .navigateTo('#layout/1')
         .execute('return Core.g.layout.get("updated_at")').store('base_updated_at')
-        .clickOn('.modal .action_apply', {visible: true})
+        .inModal().clickOn('New draft').end()
         .waitForDeletedByCssSelector('[data-block]')
         .assertCurrentUrl('/edit', 'include')
 
