@@ -99,7 +99,8 @@ define(function(require) {
     return new this.constructor(this, function(setContext) {
       return this.parent
         .match('.modal')
-          .match('.modal-body', {visible: true})
+          .match('.modal-footer', {visible: true})
+          .sleep(100)
         .end()
     })
   }
