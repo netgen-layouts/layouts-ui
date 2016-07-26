@@ -50,13 +50,14 @@ define(function(require) {
     return new this.constructor(this, function(setContext) {
       var parentContext = this._context;
 
-      return this.parent.get(require.toUrl(url))
+      return this.parent.get(require.toUrl(url)).waitForAjax()
     })
   }
 
 
   Page.prototype.match = function(selector, opts) {
     opts || (opts = {});
+
     var findMethod = opts.visible ? 'findDisplayed' : 'find'
     findMethod = opts.all ? 'findAll' : findMethod
     return new this.constructor(this, function(setContext) {
@@ -69,6 +70,14 @@ define(function(require) {
 
 
   Page.prototype.clickOn = function(selector, opts) {
+    opts || (opts = {});
+
+    // When it starts with letter
+    if(/^\w/.test(selector)){
+      opts.strategy = 'xpath';
+      selector = './/*[self::button or self::a or self::label or self::span][normalize-space(string())="'+selector+'"]'; //buttons, links, labels, span
+    }
+
     return new this.constructor(this, function(setContext) {
       return this.parent.match(selector, opts).click().end()
     })
@@ -142,7 +151,7 @@ define(function(require) {
     return new this.constructor(this, function(setFinalContext) {
 
       return this.parent
-        .findDisplayedByXpath('//LABEL[normalize-space(string())="' + input_name + '"]')
+        .findDisplayedByXpath('.//LABEL[contains(normalize-space(string()),"'+input_name+'")]')
         .getAttribute('for')
         .then(function(id, setContext) {
           return this.parent

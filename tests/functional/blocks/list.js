@@ -63,17 +63,17 @@ define(function(require) {
       return page
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'}).editBlock()
-          .match('[data-xeditable-name="collection_type"]')
-          .clickOn('.js-edit', {visible: true})
-          .select('Collection type').choose('1') // 1 = Dynamic collection
-          .clickOn('.js-apply')
-        .end()
-        .waitForAjax()
-        .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Dynamic collection').end()
-        .input('Limit').fill("5")
-        .sleep(500) //Wait for input change
-        .waitForAjax()
-        .count('.bm-items .collection-item').assert('equal', 5)
+          .match('[data-xeditable-name="collection_type"]', {visible: true})
+            .clickOn('Change')
+            .select('Collection type').choose('1') // 1 = Dynamic collection
+            .clickOn('Apply')
+          .end()
+          .waitForAjax()
+          .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Dynamic collection').end()
+          .input('Limit').fill("5")
+          .sleep(500) //Wait for input change
+          .waitForAjax()
+          .count('.bm-items .collection-item').assert('equal', 5)
         .end()
         .lastBlock().count('.list-item').assert('equal', 5)
     },

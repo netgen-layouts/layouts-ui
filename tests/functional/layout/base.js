@@ -41,7 +41,6 @@ define(function(require) {
       var layout_name = utils.stamped('New name');
       return page
         .navigateTo('#layout/1/edit')
-        .waitForAjax()
         .match('.app-center')
           .clickOn('.js-layout-name')
           .match('.js-name').fill(layout_name)
@@ -60,7 +59,8 @@ define(function(require) {
     'edit_existing': function() {
       return page
         .navigateTo('#layout/1')
-        .clickOn('.modal .action_cancel', {visible: true})
+        .count('[data-block]').assert('equal', 0)
+        .clickOn('Edit existing', {visible: true})
         .waitForDeletedByCssSelector('.modal')
         .count('[data-block]').assert('isAbove', 0)
     },
@@ -70,7 +70,6 @@ define(function(require) {
     'discard current draft and create new': function() {
       return page
         .navigateTo('#layout/1')
-        .waitForAjax()
         .execute('return Core.g.layout.get("updated_at")').store('base_updated_at')
         .clickOn('.modal .action_apply', {visible: true})
         .waitForDeletedByCssSelector('[data-block]')

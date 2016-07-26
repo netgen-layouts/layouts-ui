@@ -7,7 +7,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'Layout shared',
+    name: 'Layout::Shared',
 
     before: function() {
       page = new Page(this.remote);
@@ -27,13 +27,18 @@ define(function(require) {
         .navigateTo('#layout?shared=1')
         .match('.modal', {visible: true})
           .input('Name').fill(layout_name)
-          .clickOn('.layout-type label:nth-of-type(2)')
-          .clickOn('.action_apply')
+          .clickOn('1 zones A')
+          .clickOn('Create layout')
         .end()
         .waitForAjax()
         .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
 
-        .match('.app-center .layout-name', {visible: true}).assertText('Shared: ' + layout_name, 'include')
+        .match('.app-center .layout-name', {visible: true})
+          .getVisibleText()
+          .then(function(out) {
+            assert.include(out, layout_name)
+            assert.include(out, 'shared')
+          })
     }
 
 
