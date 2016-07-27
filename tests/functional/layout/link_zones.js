@@ -72,7 +72,7 @@ define(function(require) {
         .match('[data-zone="top"]')
           .match('.js-choose').end()
           .match('.js-unlink').end()
-          .match('.js-edit-parent').end()
+          // .match('.js-edit-parent').end() //no parent
           .clickOn('Unlink')
         .end()
         .inModal().clickOn('OK').end()
@@ -86,7 +86,9 @@ define(function(require) {
       return page
         .clickOn('.js-choose')
         .waitForAjax()
-        .clickOn('.app-center .js-normal-mode')
+        .clickOn('Back').waitForAjax()
+        .assertCurrentUrl('#layout/1/link', 'include')
+        .clickOn('Back')
         .assertCurrentUrl('#layout/1/edit', 'include')
         .waitForAjax()
         .count('[data-block]').assert('equal', 3)

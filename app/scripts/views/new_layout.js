@@ -38,7 +38,7 @@ module.exports = Core.Modal.extend({
 
   on_success: function(resp){
     this.close();
-    Core.router.navigate_to('layout', {id: resp.id});
+    Core.router.navigate_to('layout', {id: resp.id, type: 'edit'});
   },
 
 

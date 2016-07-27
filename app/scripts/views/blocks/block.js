@@ -104,7 +104,7 @@ module.exports = Core.View.extend({
   },
 
   $destroy: function(e){
-    e.stopPropagation();
+    e && e.stopPropagation();
     var self = this;
     return new Core.Modal({
       title: 'Confirm',

@@ -109,6 +109,27 @@ define(function(require) {
             assert.fail(res, 'Element should be destroyed');
           })
         })
+    },
+
+
+    'only destroy_via_trash': function() {
+      return page
+        .navigateTo('#layout/3/edit')
+        .addBlock('title', {to_zone: 'top'}).store('block')
+          .drag('.block-header')
+          .moveMouseTo(0,0)
+          .sleep(200)
+          .moveMouseTo(100,100)
+          .sleep(500)
+          .dropTo('[data-trash]')
+        .end()
+        .inModal().clickOn('OK').end()
+        .waitForAjax()
+        .then(function() {
+          this.read('block').isDisplayed().then(function(res) {
+            assert.fail(res, 'Element should be destroyed');
+          })
+        })
     }
 
   });
