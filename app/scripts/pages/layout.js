@@ -14,7 +14,13 @@ module.exports = LayoutBasePage.extend({
     // }
 
 
-    Core.state.set({mode: Core.g.layout.get('shared') ? 'edit_shared' : 'edit', section: 'edit'});
+    if(Core.router.params.type === 'link'){
+      Core.state.set({mode: 'linking', section: 'linking'});
+    }else{
+      Core.state.set({mode: Core.g.layout.get('shared') ? 'edit_shared' : 'edit', section: 'edit'});
+    }
+
+
 
     new HeaderView({
       model: Core.g.layout,
@@ -68,10 +74,10 @@ module.exports = LayoutBasePage.extend({
   load_blocks_and_go_to_edit_mode: function(){
     var master = Core.router.route_name === 'layout_edit_master';
     if(master){
-      Core.router.navigate_to('layout_edit_master', {id: Core.g.layout.id, type: 'edit', draft_layout_id: Core.router.params.draft_layout_id}, {trigger: false });
+      //Core.router.navigate_to('layout_edit_master', {id: Core.g.layout.id, type: 'edit', draft_layout_id: Core.router.params.draft_layout_id}, {trigger: false });
       Core.state.set({mode: 'edit_master', section: 'normal'});
     }else{
-      Core.router.navigate_to('layout', {id: Core.g.layout.id, type: 'edit'}, {trigger: false });
+      //Core.router.navigate_to('layout', {id: Core.g.layout.id, type: 'edit'}, {trigger: false });
     }
     Core.g.layout.blocks.fetch();
   },

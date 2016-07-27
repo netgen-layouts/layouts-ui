@@ -22,7 +22,7 @@ module.exports = Core.Backbone.Router.extend({
     'layout': 'layout_new',
     'layout/:id/link_zone/:zone_id/with_layout/:draft_layout_id': 'layout_preview',
 
-    'layout/:id/:type/master_of/:draft_layout_id': 'layout_edit_master',
+    // 'layout/:id/:type/master_of/:draft_layout_id': 'layout_edit_master',
     'layout/:id(/:type)': 'layout',
   },
 

@@ -107,6 +107,8 @@
 
     detect_mode: function() {
 
+
+
       if(this.is_in_link_mode()){
         return 'linker'
       }
@@ -115,6 +117,9 @@
         return this.model.has_blocks() ? 'disabler' : 'chooser';
       }
 
+      if(this.model.is_linked()){
+        return 'linked'
+      }
 
       return 'normal';
 

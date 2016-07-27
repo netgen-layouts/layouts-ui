@@ -15,7 +15,9 @@ module.exports = Core.View.extend({
     'click .js-cancel': 'cancel_editing',
     'click .js-publish': 'publish_layout',
     'click .js-discard': 'discard_draft',
-    'click .js-normal-mode': '$normal_mode'
+    //'click .js-normal-mode': '$normal_mode'
+    'click .js-back': '$back',
+    'click .js-soft-back': '$soft_back'
   },
 
   initialize: function(){
@@ -24,12 +26,11 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'save:success', this.after_save);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
-    this.context.base_layout = this.base_layout && this.base_layout.id && this.base_layout;
-    this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
     return this;
   },
 
   render: function(){
+    this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
     Core.View.prototype.render.apply(this, arguments);
     this.$name_input = this.$('.js-name');
     //this.prevent_leave_page();
@@ -37,12 +38,21 @@ module.exports = Core.View.extend({
   },
 
 
-  $normal_mode: function(){
-    Core.state.set({mode: 'edit', section: 'normal'});
-    // <a href="{{url_for 'layout' id=params.draft_layout_id type="edit" }}" class="js-cancel">Cancel</a>
-    var router = Core.router;
-    router.params.draft_layout_id && router.navigate_to('layout', {id: router.params.draft_layout_id, type: 'edit'});
+  $back: function(e) {
+    window.history.back();
   },
+
+
+  $soft_back: function() {
+    Core.state.set({mode: 'edit', section: 'edit'});
+    Core.router.navigate_to_params({type: 'edit'}, {trigger: false});
+  },
+
+
+  // $normal_mode: function(){
+  //   Core.state.set({mode: 'edit', section: 'normal'});
+  //   Core.router.navigate_to_params({type: 'edit'}, {trigger: false});
+  // },
 
   set_name: function(e){
     e.preventDefault();
@@ -92,7 +102,7 @@ module.exports = Core.View.extend({
   close_layout: function(){
     this.can_leave_page = true;
     if(Core.state.in_mode('edit_master')){
-      this.$normal_mode()
+      Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit'});
     }else{
       location.href = '/';
     }

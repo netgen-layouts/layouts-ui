@@ -5,7 +5,7 @@ var Core = require('core_boot');
 module.exports = Core.View.extend({
   events: {
     //'click': '$activate',
-    'click .js-layout-mapper:not(.disable)': '$open_layout_mapper'
+    'click .js-layout-mapper:not(.disable)': '$toggle_layout_mapper'
   },
 
   initialize: function(){
@@ -30,9 +30,22 @@ module.exports = Core.View.extend({
   },
 
 
+  $toggle_layout_mapper: function() {
+    if(!Core.state.in_mode('edit', 'linking')){return;}
+    Core.state.in_mode('linking') ? this.$close_layout_mapper() : this.$open_layout_mapper();
+  },
+
+
+  $close_layout_mapper: function(e) {
+    Core.trigger('toolbar:deactivate');
+    Core.state.set({mode: 'edit', section: 'edit'});
+    Core.router.navigate_to_params({type: 'edit'}, {trigger: false});
+  },
+
   $open_layout_mapper: function(e) {
     Core.trigger('toolbar:deactivate', this);
     Core.state.get('section') !== 'linking' && Core.state.set({mode: 'linking', section: 'linking'});
+    Core.router.navigate_to_params({type: 'link'}, {trigger: false});
   }
 
 });

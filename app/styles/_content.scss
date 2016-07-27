@@ -5,6 +5,7 @@
   min-height:4em;
   padding:$gutter*0.6666666667;
   margin:0 0 $gutter*1.25;
+
   &:empty::before {
     content:'Drop blocks here!';
     color:#999;
@@ -22,6 +23,7 @@
   }
   &.linked_zone{
     outline-color:#f00;
+    color:#eee;
   }
 
   .zone_linker{
@@ -289,8 +291,7 @@
 
 
 .zone_chooser{
-  background: rgba(255,255,255,1);
-  z-index: 9999;
+  color:#eee;
   text-align: center;
   padding: 100px 0;
 }

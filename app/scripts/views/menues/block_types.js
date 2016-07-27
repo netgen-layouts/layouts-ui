@@ -25,7 +25,7 @@ module.exports = Core.View.extend(DndView).extend({
 
     this.listenTo(Core, 'toolbar:deactivate', this.$deactivate);
     this.listenTo(Core, 'sortable:start', this.$close);
-    this.listenTo(Core.router, 'change', this.on_state);
+    this.listenTo(Core.state, 'change', this.on_state);
     this.setup_global_close();
     return this;
   },
@@ -33,7 +33,7 @@ module.exports = Core.View.extend(DndView).extend({
 
   on_state: function(){
     var $button = this.$('> button');
-    Core.state.in_mode('edit', 'edit_master', 'edit_shared') ? $button.removeClass('disable') : $button.addClass('disable');
+    Core.state.in_mode('edit', 'linking', 'edit_master', 'edit_shared') ? $button.removeClass('disable') : $button.addClass('disable');
   },
 
   set_context: function(){
@@ -70,6 +70,7 @@ module.exports = Core.View.extend(DndView).extend({
     if (Core.state.in_mode('linking')){
       Core.trigger('toolbar:deactivate', this);
       Core.state.set({mode: 'edit', section: 'normal'});
+      Core.router.navigate_to_params({type: 'edit'}, {trigger: false});
     }
   },
 
