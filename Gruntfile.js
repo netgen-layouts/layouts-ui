@@ -147,6 +147,7 @@ module.exports = function(grunt) {
           port: 3005,
           ghostMode: false,
           watchTask: true,
+          notify: false,
           startPath: 'bm/dev/app',
           proxy: config.local.domain
         }

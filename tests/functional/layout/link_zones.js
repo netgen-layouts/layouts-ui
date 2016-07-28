@@ -7,7 +7,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'Link zone',
+    name: 'Layout::Link',
 
     before: function() {
       page = new Page(this.remote);
@@ -24,7 +24,6 @@ define(function(require) {
     'enter link zone mode': function() {
       return page
         .navigateTo('#layout/1/edit')
-        .waitForAjax()
         .clickOn('.js-layout-mapper', {visible: true})
         .count('.js-choose', {visible: true}).assert('equal', 2)
     },
@@ -93,6 +92,83 @@ define(function(require) {
         .waitForAjax()
         .count('[data-block]').assert('equal', 3)
     },
+
+
+    'only workflow states': function(){
+
+      function assert_step1(res) {
+        assert.include(res, 'EDIT LAYOUT')
+        assert.include(res, 'Discard')
+        assert.include(res, 'Publish layout')
+      }
+
+
+      function assert_step2(res) {
+        assert.include(res, 'CHOOSE LAYOUT ZONE')
+        assert.include(res, 'Back')
+        assert.notInclude(res, 'Discard')
+        assert.notInclude(res, 'Publish layout')
+      }
+
+
+      function assert_step3(res) {
+        assert.include(res, 'LINK LAYOUT')
+        assert.include(res, 'WITH')
+        assert.include(res, 'Back')
+        assert.notInclude(res, 'Discard')
+        assert.notInclude(res, 'Publish layout')
+      }
+
+      return page
+        .navigateTo('#layout/1/edit')
+
+        //Step1 - Normal edit
+        .match('.app-center').getVisibleText().then(assert_step1).end()
+        .match('.blocks .js-open').getAttribute('class').assert('notInclude', 'active').end()
+        .match('.js-layout-mapper').getAttribute('class').assert('notInclude', 'active').end()
+
+        //Enter Step 2 - Layout mapper
+        .clickOn('.js-layout-mapper', {visible: true})
+        .match('.app-center').getVisibleText().then(assert_step2).end()
+        .match('.blocks .js-open').getAttribute('class').assert('notInclude', 'disabled').end()
+        .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end()
+
+        //Enter Step 1
+        .clickOn('.js-soft-back')
+        .match('.app-center').getVisibleText().then(assert_step1).end()
+
+
+        //Enter Step 2
+        .clickOn('.js-layout-mapper', {visible: true})
+
+        //Enter Step 3
+        .clickOn('Choose a zone').waitForAjax()
+        .match('.app-center').getVisibleText().then(assert_step3).end()
+        .match('.blocks .js-open').getAttribute('class').assert('include', 'disable').end()
+        .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end()
+
+        //Enter Step 2
+        .clickOn('.js-back').waitForAjax()
+        .match('.app-center').getVisibleText().then(assert_step2).end()
+
+        //Enter Step 1
+        .clickOn('.js-soft-back').waitForAjax()
+        .match('.app-center').getVisibleText().then(assert_step1).end()
+
+
+        //Direct navigation
+        .navigateTo('#layout/1/link')
+        .match('.app-center').getVisibleText().then(assert_step2).end()
+        .match('.blocks .js-open').getAttribute('class').assert('notInclude', 'disabled').end()
+        .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end()
+
+        .navigateTo('#layout/3/link_zone/top/with_layout/1')
+        .match('.app-center').getVisibleText().then(assert_step3).end()
+        .match('.blocks .js-open').getAttribute('class').assert('include', 'disable').end()
+        .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end()
+
+
+      },
 
 
 

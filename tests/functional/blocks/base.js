@@ -112,7 +112,7 @@ define(function(require) {
     },
 
 
-    'only destroy_via_trash': function() {
+    'destroy_via_trash': function() {
       return page
         .navigateTo('#layout/3/edit')
         .addBlock('title', {to_zone: 'top'}).store('block')

@@ -14,7 +14,6 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.is_query_form = this.$el.data('queryForm');
     this.form_id = this.$el.data('form').replace(/.*?(\w+)\/(\w+)$/, '$1_$2');
-    console.log(this.form_id);
 
     this.is_query_form && this.listenTo(this.model, 'sidebar_save:query_form:success', this.trigger_refresh_items);
 
