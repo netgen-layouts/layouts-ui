@@ -1,11 +1,10 @@
 $icon-font-path: "../fonts/bootstrap/";
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,latin-ext);
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+@import "fonts";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "../../node_modules/nprogress/nprogress";
-@import "../../../content-browser-ui-bundle/app/styles/main";
-@import "icomoon";
+//@import "../../../content-browser-ui-bundle/app/styles/main";
 @import "nprogress_override";
 @import "variables";
 @import "typography";
@@ -23,7 +22,8 @@ body {
   font-size:16px;
   font-family:'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing:antialiased;
-  overflow: hidden;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:hidden;
 }
 
 *{
