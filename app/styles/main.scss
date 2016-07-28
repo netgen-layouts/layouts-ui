@@ -4,7 +4,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "fonts";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "../../node_modules/nprogress/nprogress";
-//@import "../../../content-browser-ui-bundle/app/styles/main";
+@import "../../../content-browser-ui-bundle/app/styles/main";
 @import "nprogress_override";
 @import "variables";
 @import "typography";
