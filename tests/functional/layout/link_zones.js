@@ -85,16 +85,15 @@ define(function(require) {
       return page
         .clickOn('.js-choose')
         .waitForAjax()
-        .clickOn('Back').waitForAjax()
+        .clickOn('.js-back').waitForAjax()
         .assertCurrentUrl('#layout/1/link', 'include')
-        .clickOn('Back')
+        .clickOn('.js-soft-back')
         .assertCurrentUrl('#layout/1/edit', 'include')
-        .waitForAjax()
         .count('[data-block]').assert('equal', 3)
     },
 
 
-    'only workflow states': function(){
+    'workflow states': function(){
 
       function assert_step1(res) {
         assert.include(res, 'EDIT LAYOUT')

@@ -130,6 +130,22 @@ define(function(require) {
             assert.fail(res, 'Element should be destroyed');
           })
         })
+    },
+
+
+    'only sidebar errors': function(){
+      return page
+        .navigateTo('#layout/2/edit')
+        .addBlock('slider', {to_zone: 'bottom'}).editBlock().end()
+        .match('#sidebar')
+          .clickOn('Design')
+          .input('Thumbnails per row/slide').fill('').sleep(250).waitForAjax()
+          .match('.errors').assertText('This value should not be blank.').end()
+          .count('.errors').assert('equal', 1)
+
+          .input('Thumbnails per row/slide').fill('5').sleep(500).waitForAjax()
+          .count('.errors').assert('equal', 0)
+
     }
 
   });
