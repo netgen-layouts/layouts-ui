@@ -170,6 +170,7 @@ module.exports = function(grunt) {
       },
       server: '.tmp',
       vendor: [
+        '<%= config.dist %>/vendor/ace-editor',
         '<%= config.dist %>/vendor/alloy-editor'
       ]
     },
