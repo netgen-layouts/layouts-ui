@@ -184,17 +184,6 @@
       content:"\e900";
     }
 
-    &.bm-tooltip {
-      .tooltip-box {
-        transition:none;
-      }
-      &:hover {
-        .tooltip-box {
-          transition:opacity 0.1s, margin 0.25s ease-out;
-          transition-delay:0.75s;
-        }
-      }
-    }
   }
 }
 

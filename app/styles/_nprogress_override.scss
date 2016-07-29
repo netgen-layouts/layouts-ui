@@ -1,9 +1,8 @@
 #nprogress{
-  $color: #f3590a;
-  .bar{z-index:9999; height: 4px; background: $color;}
+  .bar{z-index:9999; height: 4px; background: $highlightColor;}
   .spinner{left:50%; margin-left:-9px; display:none;}
-  .peg{box-shadow: 0 0 10px $color, 0 0 5px $color;}
-  .spinner-icon{border-top-color: $color; border-left-color: $color;}
+  .peg{box-shadow: 0 0 10px $highlightColor, 0 0 5px $highlightColor;}
+  .spinner-icon{border-top-color: $highlightColor; border-left-color: $highlightColor;}
 }
 
 .loading-ng-icon {
