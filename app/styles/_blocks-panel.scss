@@ -124,6 +124,15 @@
   &.external_video .icon::before {
     content:"\e917";
   }
+  &.content .icon::before {
+    content:"\e91d";
+  }
+  &.twig_block .icon::before {
+    content:"\e920";
+  }
+  &.ezcontent_field .icon::before {
+    content:"\e91c";
+  }
   .title {
     font-size:0.625em;
     display:block;

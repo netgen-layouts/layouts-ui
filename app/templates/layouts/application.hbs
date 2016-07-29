@@ -7,9 +7,18 @@
  </div>
 
  <div class="bottom-menu">
-  <button data-mode="linking" class="button js-layout-mapper {{#eq state.section 'linking'}} active {{/eq}}"><span class="icon">L</span></button>
-  <button data-mode="named_collections" class="button"><span class="icon">NC</span></button>
-  <button data-mode="clt" class="button"><span class="icon">CLT</span></button>
+  <button data-mode="linking" class="button js-layout-mapper {{#eq state.section 'linking'}} active {{/eq}} bm-tooltip" data-placement="right">
+    <span class="icon-linking"></span>
+    <div class="tooltip-box"><div class="tooltip-text">Link zone with shared layout zone</div></div>
+  </button>
+  <button data-mode="named_collections" class="button bm-tooltip" data-placement="right">
+    <span class="icon-saved_config"></span>
+    <div class="tooltip-box"><div class="tooltip-text">Manage saved Collection configurations</div></div>
+  </button>
+  <button data-mode="clt" class="button bm-tooltip" data-placement="right">
+    <span class="icon-change_layout"></span>
+    <div class="tooltip-box"><div class="tooltip-text">Change layout type</div></div>
+  </button>
  </div>
 </aside>
 

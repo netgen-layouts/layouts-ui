@@ -170,7 +170,7 @@
       outline:none;
     }
     &:hover {
-      background:lighten($toolbarbg1, 5%);
+      background:lighten($toolbarbg1, 3%);
       color:#fff;
     }
     &.active {
@@ -183,8 +183,19 @@
     &[data-target="blocks"]::before {
       content:"\e900";
     }
-  }
 
+    &.bm-tooltip {
+      .tooltip-box {
+        transition:none;
+      }
+      &:hover {
+        .tooltip-box {
+          transition:opacity 0.1s, margin 0.25s ease-out;
+          transition-delay:0.75s;
+        }
+      }
+    }
+  }
 }
 
 /* content */

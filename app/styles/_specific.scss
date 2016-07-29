@@ -16,17 +16,15 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
   display:inline-block;
   color:inherit;
   cursor:pointer;
-  &:hover {
-    color:inherit;
-  }
   .tooltip-box {
     pointer-events:none;
     opacity:0;
     position:absolute;
-    font-size:10px;
+    font-size:11px;
     color:#fff;
     z-index:990;
-    font-weight:300;
+    font-weight:400;
+    line-height:1.5;
     margin:0;
     left:50%;
     bottom:100%;
@@ -105,6 +103,7 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
     }
   }
   &:hover {
+    color:inherit;
     .tooltip-box {
       margin:0 0 6px;
       opacity:1;
