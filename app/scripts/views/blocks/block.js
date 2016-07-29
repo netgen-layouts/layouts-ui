@@ -107,8 +107,9 @@ module.exports = Core.View.extend({
     e && e.stopPropagation();
     var self = this;
     return new Core.Modal({
-      title: 'Confirm',
-      body: 'Are you sure you want to delete?'
+      title: 'Delete block',
+      body: 'Are you sure you want to delete the block? This cannot be undone.',
+      apply_text: 'Delete',
     }).on('apply', function(){
       self.model.destroy();
     }).open();
@@ -145,8 +146,9 @@ module.exports = Core.View.extend({
     e.stopPropagation();
     var self = this;
     return new Core.Modal({
-      title: 'Confirm',
-      body: "Are you sure you want to revert the block to its published version? All of the changes you have made will be lost."
+      title: 'Revert block',
+      body: 'Are you sure you want to revert the block to its published version? This cannot be undone.',
+      apply_text: 'Revert'
     }).on('apply', function(){
       self.model.restore();
     }).open();

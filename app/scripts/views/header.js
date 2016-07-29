@@ -92,8 +92,9 @@ module.exports = Core.View.extend({
     e.preventDefault();
     var self = this;
     return new Core.Modal({
-      title: 'Confirm',
-      body: 'Are you sure you want to discard layout? All of the changes you have made will be lost.'
+      title: 'Discard changes',
+      body: 'Are you sure you want to discard your changes to the layout draft?',
+      apply_text: 'Discard'
     }).on('apply', function(){
       self.model.discard();
     }).open();

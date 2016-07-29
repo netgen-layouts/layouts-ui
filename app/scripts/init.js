@@ -140,7 +140,8 @@ $.extend(Core, {
 
           new Core.Modal({
             title:  'Session timeout',
-            body: 'Press OK to refresh the page',
+            body: 'Your session has timed out. Please hit the refresh button to reload the application.',
+            apply_text: 'Refresh',
             cancel_disabled: true,
             modal_options: {
               keyboard: false,
