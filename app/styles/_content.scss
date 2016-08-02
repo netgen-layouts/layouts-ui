@@ -160,6 +160,19 @@
     margin-left:0;
     margin-right:0;
   }
+
+  .embed16x9 {
+    position:relative;
+    height:0;
+    padding-bottom:56.25%;
+    iframe {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    }
+  }
 }
 .no-placeholder {
   height:4px;
