@@ -5,5 +5,6 @@ module.exports = {
   title:  require('./title'),
   text:  require('./text'),
   rich_text:  require('./rich_text'),
+  map:  require('./map'),
   html_snippet:  require('./html_snippet')
 };
