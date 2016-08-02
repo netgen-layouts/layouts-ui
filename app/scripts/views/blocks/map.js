@@ -13,6 +13,10 @@ module.exports = Block.extend({
   },
 
   setup_map: function() {
+    if (typeof google === 'undefined' || typeof google.maps === 'undefined'){
+        return;
+    }
+
     this.$map_el = this.$('.map-embed');
     this.map = new google.maps.Map(this.$map_el.get(0), {
       center: {lat: this.model.get('parameters').latitude, lng: this.model.get('parameters').longitude},
