@@ -30,6 +30,7 @@ define(function(require) {
           .clickOn('1 zones A')
           .clickOn('Create layout')
         .end()
+        .sleep(200)
         .waitForAjax()
         .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
 

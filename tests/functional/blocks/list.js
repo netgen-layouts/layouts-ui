@@ -63,13 +63,19 @@ define(function(require) {
       return page
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'}).editBlock()
-          .match('[data-xeditable-name="collection_type"]', {visible: true})
+          .match('[data-xeditable-name="collection_type"]', {visible: true}).sleep(200)
             .clickOn('Change')
             .select('Collection type').choose('1') // 1 = Dynamic collection
             .clickOn('Apply')
           .end()
           .waitForAjax()
           .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Dynamic collection').end()
+          .match('.js-input-browse .js-name').assertText('(NO ITEM SELECTED)').end()
+          .clickOn('.js-input-browse')
+          .waitForBrowser()
+            .clickOn('.list-root label')
+            .clickOn('Confirm')
+          .end()
           .input('Limit').fill("5")
           .sleep(500) //Wait for input change
           .waitForAjax()
@@ -79,18 +85,18 @@ define(function(require) {
     },
 
 
-    'change from manual to named collection': function() {
+    'change from manual to saved configuration': function() {
       return page
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'}).editBlock()
-          .match('.sidebar .add-items-btn', {visible: true}).end() //Add items button should exist in manual
+          .match('.sidebar .add-items-btn', {visible: true}).end().sleep(200) //Add items button should exist in manual
           .match('[data-xeditable-name="collection_type"]')
           .clickOn('.js-edit', {visible: true})
           .select('Collection type').choose('2') // 2 = Named collection
           .clickOn('.js-apply')
         .end()
         .waitForAjax()
-        .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Named collection').end()
+        .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Saved configuration').end()
         .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in named
         .count('.bm-items .collection-item .remove-toggle').assert('equal', 0)
         .lastBlock().count('.list-item').assert('equal', 27)
