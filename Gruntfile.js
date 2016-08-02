@@ -445,7 +445,9 @@ module.exports = function(grunt) {
     'copy:vendor'
   ]);
 
-
+  // NOTE:
+  // ---- install selenium
+  // grunt selenium_standalone:dev:install
   grunt.registerTask('test', function(target) {
     var tasks = [];
 

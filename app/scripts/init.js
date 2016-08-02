@@ -61,7 +61,7 @@ $.extend(Core, {
 
 
   init: function(){
-    this.app_cache_handler();
+    //this.app_cache_handler();
 
     this.on('render plugins:reinitialize', this.reinitialize_plugins);
 
@@ -78,11 +78,18 @@ $.extend(Core, {
     this.setup_events();
 
     $(function(){
+      Core.load_additional_vars();
       Core.router = new Router();
       Core.Backbone.history.start();
     });
 
   },
+
+  load_additional_vars: function(){
+    var bm_base_path = $('meta[name="ngbm-base-path"]').attr('content');
+    bm_base_path && (Core.env.bm_base_path = bm_base_path);
+  },
+
 
   hide_selects_with_one_option: function(view){
     view.$('select').each(function(){

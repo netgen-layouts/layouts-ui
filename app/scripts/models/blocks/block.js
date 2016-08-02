@@ -26,7 +26,7 @@ module.exports = Core.Model.extend({
 
 
   edit_url: function(){
-    return '/bm/app/blocks/'+this.id+'/edit' ;
+    return Core.env.bm_app_url('blocks/'+this.id+'/edit');
   },
 
   add_to_blocks_collection: function(){
