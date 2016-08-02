@@ -20,7 +20,7 @@ module.exports = Page.extend({
     var layout = new Layout();
 
     var layout_view = new NewLayoutView({
-      url: '/bm/app/layouts/form/create',
+      url: Core.env.bm_app_url('layouts/form/create'),
       model: layout
     });
 
