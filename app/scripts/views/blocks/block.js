@@ -5,7 +5,6 @@ var SideBarView = require('../sidebar');
 var _ = require('underscore');
 
 module.exports = Core.View.extend({
-  prevent_auto_render: true,
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
