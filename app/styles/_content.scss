@@ -173,6 +173,11 @@
       height:100%;
     }
   }
+  .map-embed {
+    height:0;
+    position:relative;
+    padding-bottom:56.25%;
+  }
 }
 .no-placeholder {
   height:4px;
