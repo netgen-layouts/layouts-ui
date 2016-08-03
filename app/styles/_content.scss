@@ -161,6 +161,23 @@
     margin-right:0;
   }
 
+  .notice {
+    margin-bottom:10px; color:hsl(0, 0, 63); text-align:center; font-size:0.75em;
+    i {font-size:1.5em; color:hsl(0, 0, 75); position:relative; top:0.222222222222222em;}
+  }
+
+  .info {
+    text-align:center;
+    font-size:0.875em;
+    padding:5% 0;
+    background:rgba(0, 0, 0, 0.035);
+    .info-icon {
+      text-align:center;
+      font-size:3em;
+      color:hsl(0, 0, 50);
+    }
+  }
+
   .embed16x9 {
     position:relative;
     height:0;
@@ -233,13 +250,6 @@
     font-size:0.75em;
     margin:2px 0;
   }
-}
-
-
-
-.notice {
-  margin-bottom:10px; color:hsl(0, 0, 63); text-align:center; font-size:0.75em;
-  i {font-size:1.5em; color:hsl(0, 0, 75); position:relative; top:0.222222222222222em;}
 }
 
 
