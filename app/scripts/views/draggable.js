@@ -9,7 +9,7 @@ function Draggable(e, ui) {
 }
 
 Draggable.prototype.$zone = function() {
-  return this.$drag_item.closest('[data-zone]')
+  return this.$drag_item.closest('[data-zone]');
 };
 
 Draggable.prototype.zone_id = function() {

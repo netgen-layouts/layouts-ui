@@ -1,52 +1,54 @@
-{{#eq mode "disabler"}}
-  <div class="disabler"></div>
-{{/eq}}
+<div class="zone-body">
+  {{#eq mode "disabler"}}
+    <div class="disabler"></div>
+  {{/eq}}
 
-{{#eq mode "chooser"}}
-  <div class="zone_chooser">
+  {{#eq mode "chooser"}}
+    <div class="zone_chooser">
 
-    <h2>This zone is called: {{model.identifier}}</h2>
+      <h2>This zone is called: {{model.identifier}}</h2>
 
-    {{#if model.is_linked}}
-      <div class="row">
-        <div class="col-md-6">
-          <div class="linked_info">
-            <div>This zone is linked with:</div>
-            <div class="layout_icon layout_{{model.layout.type}}"></div>
-            <div><strong>Name:</strong> {{model.linked_layout.name}}</div>
-            <div><strong>Zone name:</strong> {{model.linked_zone_identifier}}</div>
-            <a href="#" class="btn btn-danger js-unlink">Unlink</a>
+      {{#if model.is_linked}}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="linked_info">
+              <div>This zone is linked with:</div>
+              <div class="layout_icon layout_{{model.layout.type}}"></div>
+              <div><strong>Name:</strong> {{model.linked_layout.name}}</div>
+              <div><strong>Zone name:</strong> {{model.linked_zone_identifier}}</div>
+              <a href="#" class="btn btn-danger js-unlink">Unlink</a>
+            </div>
+
           </div>
 
+          <div class="col-md-6">
+            <a href="#" class="btn btn-primary js-choose">Choose different zone</a>
+            {{!-- <a href="{{url_for 'layout_edit_master' id=model.linked_layout_id draft_layout_id=model.layout_id type="edit"}}" class="btn btn-success js-edit-parent">Edit linked layout</a> --}}
+          </div>
         </div>
 
-        <div class="col-md-6">
-          <a href="#" class="btn btn-primary js-choose">Choose different zone</a>
-          {{!-- <a href="{{url_for 'layout_edit_master' id=model.linked_layout_id draft_layout_id=model.layout_id type="edit"}}" class="btn btn-success js-edit-parent">Edit linked layout</a> --}}
-        </div>
-      </div>
+      {{else}}
+        <a href="#" class="btn btn-primary js-choose">Choose a zone</a>
+      {{/if}}
+    </div>
+  {{/eq}}
 
-    {{else}}
-      <a href="#" class="btn btn-primary js-choose">Choose a zone</a>
-    {{/if}}
+
+  {{#eq mode "linker"}}
+  <div class="zone_linker">
+    <a href="#" class="btn btn-primary js-link">Link a zone</a>
   </div>
-{{/eq}}
+  {{/eq}}
+
+  {{#eq mode 'linked'}}
+    <div class="linked_info">
+      <div>This zone is linked with:</div>
+      <div class="layout_icon layout_{{model.layout.type}}"></div>
+      <div><strong>Name:</strong> {{model.linked_layout.name}}</div>
+      <div><strong>Zone name:</strong> {{model.linked_zone_identifier}}</div>
+    </div>
+  {{/eq}}
 
 
-{{#eq mode "linker"}}
-<div class="zone_linker">
-  <a href="#" class="btn btn-primary js-link">Link a zone</a>
+  {{! --------------- blocks -------------------- }}
 </div>
-{{/eq}}
-
-{{#eq mode 'linked'}}
-  <div class="linked_info">
-    <div>This zone is linked with:</div>
-    <div class="layout_icon layout_{{model.layout.type}}"></div>
-    <div><strong>Name:</strong> {{model.linked_layout.name}}</div>
-    <div><strong>Zone name:</strong> {{model.linked_zone_identifier}}</div>
-  </div>
-{{/eq}}
-
-
-{{! --------------- blocks -------------------- }}

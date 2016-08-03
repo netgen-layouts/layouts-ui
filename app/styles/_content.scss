@@ -1,36 +1,38 @@
 /* zones */
 [data-zone] {
-  position: relative;
-  outline:1px dashed hsl(0, 0, 75);
-  min-height:4em;
-  padding:$gutter*0.6666666667;
-  margin:0 0 $gutter*1.25;
+  .zone-body {
+    position: relative;
+    outline:1px dashed hsl(0, 0, 75);
+    min-height:4em;
+    padding:$gutter*0.6666666667;
+    margin:0 0 $gutter*1.25;
 
-  &:empty::before {
-    content:'Drop blocks here!';
-    color:#999;
-    font-size:0.875em;
-    padding:1em;
-    text-align: center;
-    display:block;
-  }
-  &.linked_zone:empty::before {
-    content:'Linked zone. Blocks can not be dropped directly here.'
-  }
-  .sorting & {
-    //outline:1px dashed #FFC91E;
-    @include transition(all 0.3s ease-in-out);
-  }
-  &.linked_zone{
-    outline-color:#f00;
-    color:#eee;
-  }
+    &:empty::before {
+      content:'Drop blocks here!';
+      color:#999;
+      font-size:0.875em;
+      padding:1em;
+      text-align: center;
+      display:block;
+    }
+    &.linked_zone:empty::before {
+      content:'Linked zone. Blocks can not be dropped directly here.'
+    }
+    .sorting & {
+      //outline:1px dashed #FFC91E;
+      @include transition(all 0.3s ease-in-out);
+    }
+    &.linked_zone{
+      outline-color:#f00;
+      color:#eee;
+    }
 
-  .zone_linker{
-    position:absolute; top:0; left:0; bottom:0; right:0; z-index:999; background-color: rgba(0,0,0,0.5);
-    display:flex;
-    align-items: center;
-    justify-content: center;
+    .zone_linker{
+      position:absolute; top:0; left:0; bottom:0; right:0; z-index:999; background-color: rgba(0,0,0,0.5);
+      display:flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 

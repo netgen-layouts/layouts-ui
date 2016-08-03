@@ -57,7 +57,7 @@ jQuery.ui.sortable.prototype._mouseDrag = function(event){
 
 module.exports = {
 
-  connect_with: '[data-zone]:not(".linked_zone"), [data-container], [data-trash]',
+  connect_with: '[data-zone]:not(".linked_zone") .zone-body, [data-container], [data-trash]',
   canceled_attr: 'canceled',
 
   init: function(){
@@ -73,7 +73,7 @@ module.exports = {
   },
 
   is_zone: function(){
-    return this.sort_element === '[data-zone]';
+    return this.sort_element === '.zone-body';
   },
 
   set_canceled: function(ui, val){
@@ -135,7 +135,7 @@ module.exports = {
 
   setup_dnd_for_containers_and_zones: function(){
     var self = this,
-        $sort_element = this.is_zone() ? $(this.sort_element) : this.$(this.sort_element);
+        $sort_element = this.$(this.sort_element);
 
     $sort_element.sortable({
       appendTo: document.body,

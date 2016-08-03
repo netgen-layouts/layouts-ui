@@ -33,7 +33,7 @@
         return Core.blocks.create_view(block.get('definition_identifier'), block).$el;
       });
 
-      this.$el.append(views)
+      this.$('.zone-body').append(views);
 
 
       return this;
