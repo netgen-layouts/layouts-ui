@@ -11,7 +11,7 @@ module.exports = Core.View.extend(DndView).extend({
   //groups: ["basic", "listing", "gallery", "content", "ezpublish"],
   //groups: ["basic", "listing", "gallery"],
 
-  sort_element: '[data-zone]',
+  sort_element: '[data-zone] .zone-body',
   template: 'block_types/items',
   events: {
     'click .js-open:not(.disable)': '$toggle',

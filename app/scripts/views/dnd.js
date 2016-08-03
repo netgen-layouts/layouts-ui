@@ -73,7 +73,7 @@ module.exports = {
   },
 
   is_zone: function(){
-    return this.sort_element === '.zone-body';
+    return this.sort_element === '[data-zone] .zone-body';
   },
 
   set_canceled: function(ui, val){
@@ -135,7 +135,10 @@ module.exports = {
 
   setup_dnd_for_containers_and_zones: function(){
     var self = this,
-        $sort_element = this.$(this.sort_element);
+        $sort_element = $(this.sort_element);
+
+
+      console.log($sort_element);
 
     $sort_element.sortable({
       appendTo: document.body,
@@ -154,7 +157,7 @@ module.exports = {
         if(self.receive_is_canceled(ui)){ return; }
         console.log(this);
         var draggable = new Draggable(e, ui);
-        if(self.is_zone() && !self.zone_accept_blocks(ui, draggable.model, $(this).data('_view'))){
+        if(self.is_zone() && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
           return;
         }
 
