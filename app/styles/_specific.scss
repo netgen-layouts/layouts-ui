@@ -1,15 +1,12 @@
 $tooltipBg: hsla(0, 0, 12, 0.9);
 
 
-.layout_3_zones_a {background-image:url(../images/layout_thumbs/1_zones_a.svg);}
-.layout_3_zones_b {background-image:url(../images/layout_thumbs/2_zones_smart.png);}
-
-.layout_1_zones_a {background-image:url(../images/layout_thumbs/1_zones_a.svg);}
-.layout_2_zones_smart {background-image:url(../images/layout_thumbs/2_zones_smart.png);}
-.layout_4_zones_a {background-image:url(../images/layout_thumbs/4_zones_a.svg);}
-.layout_4_zones_b {background-image:url(../images/layout_thumbs/4_zones_b.svg);}
-.layout_4_zones_c {background-image:url(../images/layout_thumbs/4_zones_c.svg);}
-.layout_6_zones_a {background-image:url(../images/layout_thumbs/6_zones_a.svg);}
+.layout_layout_1 {background-image:url(../images/layout_thumbs/layout_1.svg);}
+.layout_layout_2 {background-image:url(../images/layout_thumbs/layout_2.svg);}
+.layout_layout_3 {background-image:url(../images/layout_thumbs/layout_3.svg);}
+.layout_layout_4 {background-image:url(../images/layout_thumbs/layout_4.svg);}
+.layout_layout_5 {background-image:url(../images/layout_thumbs/layout_5.svg);}
+.layout_layout_6 {background-image:url(../images/layout_thumbs/layout_6.svg);}
 
 .bm-tooltip {
   position:relative;
@@ -168,16 +165,12 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
       }
     }
 
-
-    [value="3_zones_a"] + label:before{@extend .layout_3_zones_a;}
-    [value="3_zones_b"] + label:before{@extend .layout_3_zones_b;}
-
-    [value="1_zones_a"] + label:before{@extend .layout_1_zones_a;}
-    [value="2_zones_smart"] + label:before{@extend .layout_2_zones_smart;}
-    [value="4_zones_a"] + label:before{@extend .layout_4_zones_a;}
-    [value="4_zones_b"] + label:before{@extend .layout_4_zones_b;}
-    [value="4_zones_c"] + label:before{@extend .layout_4_zones_c;}
-    [value="6_zones_a"] + label:before{@extend .layout_6_zones_a;}
+    [value="layout_1"] + label:before{@extend .layout_layout_1;}
+    [value="layout_2"] + label:before{@extend .layout_layout_2;}
+    [value="layout_3"] + label:before{@extend .layout_layout_3;}
+    [value="layout_4"] + label:before{@extend .layout_layout_4;}
+    [value="layout_5"] + label:before{@extend .layout_layout_5;}
+    [value="layout_6"] + label:before{@extend .layout_layout_6;}
 
   }
 }
