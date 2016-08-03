@@ -504,7 +504,8 @@
     text-align:right;
     transform:translateY(-50%);
     > a {
-      display:inline-block;
+      display:block;
+      float:left;
       width:1.5em;
       line-height:1.5;
       height:1.5em;
