@@ -61,7 +61,6 @@
       return this;
     },
 
-
     $unlink: function(e){
       e.preventDefault();
 
@@ -100,17 +99,17 @@
 
 
     is_in_link_mode: function() {
-      return "zone_id" in Core.router.params;
+      return 'zone_id' in Core.router.params;
     },
 
-
+    show_header: function(){
+      return Core.state.in_mode('linking', 'choosing');
+    },
 
     detect_mode: function() {
 
-
-
       if(this.is_in_link_mode()){
-        return 'linker'
+        return 'linker';
       }
 
       if(Core.state.get('mode') === 'linking'){
@@ -118,7 +117,7 @@
       }
 
       if(this.model.is_linked()){
-        return 'linked'
+        return 'linked';
       }
 
       return 'normal';
@@ -126,9 +125,9 @@
     },
 
 
-
     render: function(){
       this.context.mode = this.detect_mode();
+      this.context.show_header = this.show_header();
       Core.View.prototype.render.apply(this, arguments);
       this.load_blocks();
     }

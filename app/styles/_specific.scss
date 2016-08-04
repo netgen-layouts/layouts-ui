@@ -34,6 +34,7 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
       border-radius:$borderRadius;
       padding:0.5em 1em;
       display:inline-block;
+      text-transform:none;
     }
     &::before {
         content:"";
@@ -47,6 +48,9 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
         border-top:6px solid $tooltipBg;
         border-left:4px solid transparent;
         border-right:4px solid transparent;
+    }
+    .tt-note {
+      color:hsl(0, 0, 65);
     }
   }
   &[data-placement="bottom"] {
