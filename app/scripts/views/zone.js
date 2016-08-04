@@ -66,8 +66,9 @@
 
       var self = this;
       return new Core.Modal({
-        title: 'Confirm',
-        body: 'Are you sure you want to unlink this zone?'
+        title: 'Unlink zone',
+        body: 'Are you sure you want to unlink this zone?',
+        apply_text: 'Unlink'
       }).on('apply', function(){
         self.model.sync_unlink();
       }).open();
