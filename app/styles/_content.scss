@@ -22,6 +22,34 @@
       justify-content: center;
     }
   }
+  &.zone-disabled,
+  &.shared-zone {
+    .zone-body {
+      &::after {
+        content:"";
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba($contentbg, 0.85);
+      }
+    }
+    .block-header {
+      padding:6px 10px;
+      .handle,
+      .dropdown {
+        display:none;
+      }
+    }
+  }
+  &.shared-zone {
+    .zone-body {
+      &::after {
+        background:transparent;
+      }
+    }
+  }
   &.linked_zone .zone-body:empty::before {
     content:'Linked zone. Blocks can not be dropped directly here.'
   }

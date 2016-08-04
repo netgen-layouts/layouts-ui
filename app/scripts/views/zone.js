@@ -125,11 +125,17 @@
 
     },
 
+    set_class: function(){
+      (this.detect_mode() === 'disabler') ? this.$el.addClass('zone-disabled') : this.$el.removeClass('zone-disabled');
+      (this.detect_mode() === 'linker') ? this.$el.addClass('shared-zone') : this.$el.removeClass('shared-zone');
+    },
+
 
     render: function(){
       this.context.mode = this.detect_mode();
       this.context.show_header = this.show_header();
       Core.View.prototype.render.apply(this, arguments);
+      this.set_class();
       this.load_blocks();
     }
 
