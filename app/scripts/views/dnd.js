@@ -176,7 +176,7 @@ module.exports = {
       // After sort and after move to connected sortable
       stop: function(e, ui){
         var draggable = new Draggable(e, ui),
-            receiver = new Receiver(this),
+            receiver = new Receiver($(this).closest('[data-zone]')),
             trashed = draggable.read_trashed_and_clear();
 
         if(!trashed){
