@@ -39,7 +39,7 @@ module.exports = Core.View.extend({
 
 
   $back: function(e) {
-    window.history.back();
+    Core.router.navigate_to('layout', {type: 'link', id: this.model.id});
   },
 
 

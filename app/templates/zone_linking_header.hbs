@@ -1,0 +1,16 @@
+<div class="steps-wrapper">
+  <div class="steps">
+    <div class="step {{active_class_if state.mode 'linking'}}">1</div>
+    <div class="step {{active_class_if state.mode 'choosing'}}">2</div>
+  </div>
+
+  <div class="step-text">
+    {{#eq state.mode 'linking'}}
+      Choose a Zone you wish to link
+    {{else}}
+     Choose one of the shared layouts and then select a target zone
+    {{/eq}}
+  </div>
+</div>
+
+<div class="layout-chooser"></div>

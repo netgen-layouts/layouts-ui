@@ -16,8 +16,8 @@ module.exports = Page.extend({
   load_center: function() {
     var Zones = Components.Zones();
     Zones.$el.html(Core.g.layout.get('html'))
-
-    $('.right-sidebar').html(JST.sidebar());
+    var sidebar = Core.state.detect_sidebar();
+    $('.right-sidebar').html(JST[sidebar]());
 
 
   }

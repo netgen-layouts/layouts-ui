@@ -14,7 +14,6 @@ module.exports = Core.View.extend({
     return this;
   },
 
-
   parse_dom: function(){
     var id, self = this;
     this.$('[data-zone]').each(function(){
@@ -24,6 +23,7 @@ module.exports = Core.View.extend({
         el: this
       }).render();
     });
+
     this.render_block_types_view();
     return this;
   },

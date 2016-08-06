@@ -2,6 +2,8 @@
 
 var LayoutBasePage = require('./layout_base');
 var HeaderView = require('../views/header');
+var ZoneLinkingHeaderView = require('../views/zone_linking_header');
+
 
 module.exports = LayoutBasePage.extend({
   main: function(params, xhr){
@@ -20,7 +22,9 @@ module.exports = LayoutBasePage.extend({
       Core.state.set({mode: Core.g.layout.get('shared') ? 'edit_shared' : 'edit', section: 'edit'});
     }
 
-
+    new ZoneLinkingHeaderView({
+      el: '#zone_linking_header'
+    }).render()
 
     new HeaderView({
       model: Core.g.layout,

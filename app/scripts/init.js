@@ -169,12 +169,7 @@ $.extend(Core, {
 
 
     Core.state.on('change', function(model) {
-      if(model.get('section') === 'linking' ){
-        Core.trigger('editing:unmark');
-        $('.right-sidebar').html(JST.sidebar2());
-      }else{
-        $('.right-sidebar').html(JST.sidebar());
-      }
+      $('.right-sidebar').html(JST[model.detect_sidebar()]());
     });
 
   }

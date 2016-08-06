@@ -22,4 +22,16 @@ module.exports = Core.Model.extend({
     return _.contains(arguments, this.get('mode'));
   },
 
+
+  detect_sidebar: function(){
+    if(this.in_mode('linking')){
+      return 'sidebar2';
+    }else if(this.in_mode('choosing')){
+      return 'sidebar3';
+    }else{
+      return 'sidebar';
+    }
+
+  },
+
 });

@@ -482,3 +482,26 @@
 .ace-editor{position: absolute; top: 0; right: 0; bottom: 0; left: 0; height:300px;}
 
 .new_layout_page{background: url('../images/blurred_colors-wide.jpg') no-repeat 0 0; background-size: cover; width:100%; height:100%; position:fixed;}
+
+#zone_linking_header{
+  margin-bottom: 40px;
+  .steps-wrapper{
+    $size: 30px;
+    $color: #7E7E7E;
+    $text_color: #eee;
+    margin:20px 0;
+    .steps{
+      position: relative;display: inline-block; vertical-align:middle; margin-right:20px;
+      &:before{ content:""; display: block; position: absolute; top:50%; margin-top:-2px; left:0; width:100%; height:2px; background:$color; }
+    }
+    .step{
+      float:left; width:$size; height:$size; line-height:$size; background:$color; color:$text_color; border-radius:100%; text-align:center; margin-right:$size/1.25; position:relative;
+      &:last-child{margin-right:0;}
+      &:before{content:""; display: block; line-height: 1em; width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 10px solid $color; position:absolute; left:-8px; top:50%; margin-top: -5px; }
+      &:first-child:before{display: none;}
+      &.active{background:white; color:#000;}
+    }
+    .step-text{display:inline-block; vertical-align:middle; color:white;}
+  }
+  .layout-chooser i{vertical-align:middle;}
+}
