@@ -1,12 +1,13 @@
-  'use strict';
+'use strict';
 
-  var Core = require('core_boot');
-  var Layout = require('../models/layout');
-  var Zone = require('../models/zone');
-  var _ = require('underscore');
+var Core = require('core_boot');
+var Layout = require('../models/layout');
+var Zone = require('../models/zone');
+var DndView = require('./dnd');
+var _ = require('underscore');
 
 
-  module.exports = Core.View.extend({
+  module.exports = Core.View.extend(DndView).extend({
 
     template: 'zone',
 
@@ -22,6 +23,7 @@
       this.listenTo(Core.state, 'change', this.render);
       this.listenTo(this.model, 'unlink:success', this.on_unlink);
       this.mark_zone_type();
+      this.is_zone = true;
       return this;
     },
 
@@ -137,6 +139,8 @@
       Core.View.prototype.render.apply(this, arguments);
       this.set_class();
       this.load_blocks();
+      this.setup_dnd_for_containers_and_zones();
+      this.setup_trash();
     }
 
   });

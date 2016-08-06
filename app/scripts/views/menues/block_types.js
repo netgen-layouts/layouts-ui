@@ -51,6 +51,7 @@ module.exports = Core.View.extend(DndView).extend({
     }.bind(this));
 
     this.on_state();
+    this.setup_dnd_for_blocks();
     return this;
   },
 

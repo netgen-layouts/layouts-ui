@@ -60,21 +60,6 @@ module.exports = {
   connect_with: '[data-zone]:not(".linked_zone") .zone-body, [data-container], [data-trash]',
   canceled_attr: 'canceled',
 
-  init: function(){
-    this.setup_dnd_for_blocks();
-    this.setup_dnd_for_containers_and_zones();
-    this.setup_trash();
-  },
-
-  render: function(){
-    this._super('render', arguments);
-    this.init();
-    return this;
-  },
-
-  is_zone: function(){
-    return this.sort_element === '[data-zone] .zone-body';
-  },
 
   set_canceled: function(ui, val){
     $(ui.item).data(this.canceled_attr, val);
@@ -135,7 +120,7 @@ module.exports = {
 
   setup_dnd_for_containers_and_zones: function(){
     var self = this,
-        $sort_element = $(this.sort_element);
+        $sort_element = this.$('.zone-body');
 
 
       console.log($sort_element);
@@ -157,7 +142,7 @@ module.exports = {
         if(self.receive_is_canceled(ui)){ return; }
         console.log(this);
         var draggable = new Draggable(e, ui);
-        if(self.is_zone() && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
+        if(self.is_zone && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
           return;
         }
 
@@ -204,7 +189,7 @@ module.exports = {
   setup_dnd_for_blocks: function(){
     var self = this;
 
-    if(this.is_zone()){
+
       this.$('.block-items').sortable({
         connectWith: self.connect_with,
         placeholder: 'no-placeholder',
@@ -231,7 +216,7 @@ module.exports = {
           this.copyHelper = null;
         }
       });
-    }
+
   },
 
   setup_trash: function(){
