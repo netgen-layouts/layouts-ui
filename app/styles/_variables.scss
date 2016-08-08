@@ -47,6 +47,37 @@ $blockHeaderHeight: 30px;
   @extend .material-icons;
 }
 
+.bm-select {
+  border-radius:$borderRadius;
+  border:none;
+  margin:0 0 1em;
+  transition:background-color 0.3s ease-out 0.1s;
+  background:$sidebarinput url('../images/caret-down.svg') no-repeat;
+  background-position:right 0.5714285714em center;
+  background-size:0.9285714286em auto;
+  height:$btnHeight;
+  font-size:0.75em;
+  padding:0 2.25em 0 0.75em;
+  color:#fff;
+  appearance:none;
+  width:100%;
+  cursor:pointer;
+  &[multiple] {
+    height:auto;
+    padding:0.25em 0;
+    background-image:none;
+    option {
+      padding:0.125em 0.125em;
+    }
+    optgroup[label] {
+      padding:0.125em 0.5em;
+      option {
+        margin:0 -0.5em;
+      }
+    }
+  }
+}
+
 %clearfix {
   content:"";
   display:table;
