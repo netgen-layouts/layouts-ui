@@ -76,6 +76,11 @@ module.exports = Core.Model.extend({
   },
 
 
+  // linked_zone_name: function(){
+  //   return this.linked_layout().zones.get(this.get('linked_zone_identifier'));
+  // },
+
+
   clear_linked: function(){
     this.set({
       linked_layout_id: null,
