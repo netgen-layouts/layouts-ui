@@ -105,6 +105,7 @@ $.extend(Core, {
     data.view.$('.master-slave-selects .master').master_slave_selects();
     data.view.$('.js-input-browse').input_browse();
     data.view.$('.js-external-video').video_thumb_fetcher();
+    data.view.$('.view-type').view_types();
 
 
     this.hide_selects_with_one_option(data.view);
