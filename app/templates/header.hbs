@@ -15,11 +15,11 @@
         </div>
       </form>
     {{else}}
-      {{#eq state.mode 'edit'}}
+      {{#if normal_editing}}
         <span class="show-form js-show-form"><span class="js-layout-name">{{ model.name }}</span> <i class="material-icons">edit</i></span>
       {{else}}
         <span class="show-form js-layout-name">{{ model.name }}</span>
-      {{/eq}}
+      {{/if}}
     {{/if}}
 
 
