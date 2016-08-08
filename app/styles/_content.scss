@@ -399,6 +399,7 @@
 .external-video-block {
   background:rgba(0, 0, 0, 0.035);
   position:relative;
+  min-height:80px;
   .js-video-thumb {
     margin:0 auto;
     width:100%;
