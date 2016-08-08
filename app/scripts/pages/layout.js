@@ -86,8 +86,7 @@ module.exports = LayoutBasePage.extend({
     //   //Core.router.navigate_to('layout', {id: Core.g.layout.id, type: 'edit'}, {trigger: false });
     // }
 
-
-    Core.g.layout.blocks.fetch();
+    Core.g.layout.load_all_blocks();
   },
 
 

@@ -21,6 +21,14 @@ module.exports = Core.Model.extend({
   },
 
 
+  on_load_blocks_in_zone: function(response){
+    console.log(response);
+    // var block_ids = this.get('block_ids');
+    // block_ids.push()
+    // this.set('block_ids', this.get )
+    return this;
+  },
+
   is_inherited: function(){
     return !!this.get('linked_zone_identifier')
   },
@@ -47,7 +55,8 @@ module.exports = Core.Model.extend({
   },
 
   blocks: function(){
-    return Core.g.layout.blocks.get_by_ids(this.get('block_ids'));
+    var blocks = Core.g.layout.blocks;
+    return [].concat(blocks.get_by_ids(this.get('block_ids')), blocks.get_by_ids(this.get('linked_blocks_ids')));
   },
 
   layout: function(){
@@ -98,6 +107,19 @@ module.exports = Core.Model.extend({
       linked_layout_id: zone.get('layout_id'),
       linked_zone_identifier: zone.get('id')
     })
-  }
+  },
+
+
+  load_blocks: function(opts){
+    var blocks = Core.g.layout.blocks;
+    return blocks.fetch({
+      via: 'blocks_in_zone',
+      url: blocks.model.prototype.url('blocks_in_zone', {layout_id: this.get('linked_layout_id'), zone_identifier: this.get('linked_zone_identifier')}),
+      data: opts.data,
+      remove: false
+    }).done(function(resp){
+      this.set({ linked_blocks_ids: _.pluck(resp, 'id') });
+    }.bind(this))
+  },
 
 });

@@ -83,6 +83,29 @@ module.exports = Core.Model.extend({
       method: 'POST',
       patch: true
     });
-  }
+  },
+
+
+  load_all_blocks: function(opts){
+    opts || (opts = {});
+
+
+    // For linked blocks
+    var zone_blocks_loaded = _.map(this.zones.linked(), function(zone){
+      return zone.load_blocks({data: {published: true}});
+    })
+
+    zone_blocks_loaded.unshift(this.blocks.fetch({
+      data: opts.data,
+      remove: false
+    }));
+
+
+    $.when.apply($, zone_blocks_loaded).then(function(){
+      this.blocks.trigger('blocks_loaded:success');
+    }.bind(this));
+
+    return this;
+  },
 
 });

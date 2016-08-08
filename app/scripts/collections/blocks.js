@@ -12,5 +12,7 @@ module.exports = Core.Collection.extend({
       this.models[0].destroy();
     }
     return length;
-  },
+  }
+
+
 });

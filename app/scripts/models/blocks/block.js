@@ -9,6 +9,9 @@ module.exports = Core.Model.extend({
   format : '',
 
   path: 'blocks',
+  paths: {
+    blocks_in_zone: '/layouts/:layout_id/zones/:zone_identifier/blocks'
+  },
 
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);

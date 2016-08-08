@@ -122,9 +122,6 @@ module.exports = {
     var self = this,
         $sort_element = this.$('.zone-body');
 
-
-      console.log($sort_element);
-
     $sort_element.sortable({
       appendTo: document.body,
       customScrollParent: $('.main-content'),
@@ -140,7 +137,6 @@ module.exports = {
       //Only after receiving from other sortable
       receive: function(e, ui){
         if(self.receive_is_canceled(ui)){ return; }
-        console.log(this);
         var draggable = new Draggable(e, ui);
         if(self.is_zone && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
           return;

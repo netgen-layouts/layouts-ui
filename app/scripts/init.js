@@ -177,4 +177,5 @@ $.extend(Core, {
 });
 
 window.Core = Core;
+
 module.exports = Core;

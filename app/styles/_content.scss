@@ -32,6 +32,7 @@
         left:0;
         width:100%;
         height:100%;
+        z-index: 100;
         background:rgba($contentbg, 0.85);
       }
     }
@@ -63,7 +64,7 @@
   &.linked_zone {
     .zone-body {
       outline-color:$highlightColor;
-      color:#eee;
+      // color:#eee;
       &::after {
         position:absolute;
         left:0;
@@ -71,7 +72,8 @@
         width:100%;
         height:100%;
         content:"";
-        z-index:5;
+        z-index:100;
+        opacity: 0.2;
         background:transparent url('../images/stripped-bg.png') repeat;
       }
     }

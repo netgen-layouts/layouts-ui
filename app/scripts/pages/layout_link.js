@@ -12,7 +12,7 @@ module.exports = LayoutBasePage.extend({
 
   main: function(){
     LayoutBasePage.prototype.main.apply(this, arguments);
-    Core.g.layout.blocks.fetch({data: {published: true}});
+    Core.g.layout.load_all_blocks({data: {published: true}});
 
     Core.state.set({mode: 'choosing', section: 'linking'});
 

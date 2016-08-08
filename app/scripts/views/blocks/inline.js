@@ -14,12 +14,32 @@ module.exports = {
   },
 
 
+  initialize: function(){
+    this._super('initialize', arguments);
+    this.listenTo(Core.state, 'change', this.on_state);
+    return this;
+  },
+
+
+  on_state: function(){
+    this.update_contenteditable();
+  },
+
   render: function(){
     this._super('render', arguments);
     var $inline = this.$('[data-inline-child]');
     var hint = $inline.data('hint') || '..........................';
     $inline.after('<span>'+ hint +'</span>');
+    this.$inline = $inline;
+
+    this.update_contenteditable();
     return this;
+  },
+
+
+  update_contenteditable: function(){
+    var editable = Core.state.in_mode('edit') && !this.model.zone().is_linked();
+    this.$inline.attr('contenteditable', editable)
   },
 
 
