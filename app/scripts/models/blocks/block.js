@@ -76,6 +76,11 @@ module.exports = Core.Model.extend({
   },
 
 
+  belongs_to_current_layout: function(){
+    return Core.g.layout.id === this.get('layout_id')
+  },
+
+
 
 
   load_bm_collections: function(){
