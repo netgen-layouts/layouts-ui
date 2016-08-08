@@ -56,7 +56,7 @@ module.exports = Core.Model.extend({
 
   blocks: function(){
     var blocks = Core.g.layout.blocks;
-    return [].concat(blocks.get_by_ids(this.get('block_ids')), blocks.get_by_ids(this.get('linked_blocks_ids')));
+    return this.get('linked_layout_id') ? blocks.get_by_ids(this.get('linked_blocks_ids')) : blocks.get_by_ids(this.get('block_ids'))
   },
 
   layout: function(){

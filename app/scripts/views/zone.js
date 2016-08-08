@@ -116,7 +116,8 @@ var _ = require('underscore');
       }
 
       if(Core.state.get('mode') === 'linking'){
-        return this.model.has_blocks() ? 'disabler' : 'chooser';
+        // return this.model.has_blocks() ? 'disabler' : 'chooser';
+        return 'chooser'
       }
 
       if(this.model.is_linked()){
