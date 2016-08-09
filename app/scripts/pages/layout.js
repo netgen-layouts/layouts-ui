@@ -11,11 +11,6 @@ module.exports = LayoutBasePage.extend({
 
     var layout = Core.g.layout;
 
-    // if(params.type === 'new'){
-    //   Core.router.navigate_to('layout', {id: 1}, {trigger: false});
-    // }
-
-
     if(Core.router.params.type === 'link'){
       Core.state.set({mode: 'linking', section: 'linking'});
     }else{
@@ -44,7 +39,7 @@ module.exports = LayoutBasePage.extend({
     }
 
 
-    this.load_blocks_and_go_to_edit_mode();
+    Core.g.layout.load_all_blocks();
 
 
 
@@ -66,7 +61,7 @@ module.exports = LayoutBasePage.extend({
       //Edit
       .on('cancel', function(){
         Core.router.navigate_to_params({type: 'edit'}, {trigger: false });
-        this.load_blocks_and_go_to_edit_mode();
+        Core.g.layout.load_all_blocks()
       }.bind(this))
 
       //Discard
@@ -77,23 +72,10 @@ module.exports = LayoutBasePage.extend({
       .open();
   },
 
-  load_blocks_and_go_to_edit_mode: function(){
-    // var master = Core.router.route_name === 'layout_edit_master';
-    // if(master){
-    //   //Core.router.navigate_to('layout_edit_master', {id: Core.g.layout.id, type: 'edit', draft_layout_id: Core.router.params.draft_layout_id}, {trigger: false });
-    //   Core.state.set({mode: 'edit_master', section: 'normal'});
-    // }else{
-    //   //Core.router.navigate_to('layout', {id: Core.g.layout.id, type: 'edit'}, {trigger: false });
-    // }
-
-    Core.g.layout.load_all_blocks();
-  },
-
 
   create_new_draft: function(){
     Core.g.layout.create_new_draft().done(function() {
-      Core.router.navigate_to_params({type: 'edit'}, {trigger: false });
-      this.load_blocks_and_go_to_edit_mode()
+      Core.router.navigate_to_params({type: 'edit'});
     }.bind(this));
     return this;
   },

@@ -10,7 +10,7 @@ module.exports = Core.View.extend({
   extend_with: ['layout_model'],
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenToOnce(this.layout_model.blocks, 'blocks_loaded:success', this.parse_dom);
+    this.listenTo(this.layout_model.blocks, 'blocks_loaded:success', this.parse_dom);
     return this;
   },
 
