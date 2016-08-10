@@ -1,6 +1,11 @@
 <div class="item-panel">
   <div class="handle"><i class="material-icons">drag_handle</i></div>
-  <p class="name">{{model.name}}</p>
+  <p class="name">
+    {{model.name}}
+    {{#unless model.visible}}
+      <span class="note"><i class="material-icons">visibility_off</i> Item is hidden</span>
+    {{/unless}}
+  </p>
   <div class="controls">
     {{#if model.can_remove_item }}<a class="remove-toggle"><i class="material-icons">close</i></a>{{/if}}
   </div>

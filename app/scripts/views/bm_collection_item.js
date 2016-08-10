@@ -24,7 +24,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
 
     this.model.get('type') === 2 && this.$el.addClass('dynamic-item');
-    !this.model.get('visible') && this.$set_render_hidden();
+    !this.model.get('visible') && this.$el.addClass('hidden-item');
 
     return this;
   },
@@ -45,10 +45,6 @@ module.exports = Core.View.extend({
     this.model.destroy();
   },
 
-  $set_render_hidden: function(){
-    this.$el.addClass('hidden-item');
-    this.$('.name').after('<p class="note"><i class="fa fa-eye-slash"></i> Item is hidden</p>');
-  },
 
   $show_remove_btn: function(){
     this.$el.addClass('show-remove');

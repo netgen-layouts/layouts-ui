@@ -557,13 +557,18 @@
   }
   &.hidden-item {
     .name {
-      color:hsla(0, 0, 100, 0.5);
+      color:#666;
+    }
+    .material-icons{
+      font-size:1em;
+      vertical-align: middle;
+      margin-right: 3px;
     }
     .note {
-      color:#fff;
-      font-size:0.625em;
+      color:#333;
+      font-size:0.82em;
       font-weight:300;
-      margin:0.5em 0 0;
+      margin:0.2em 0 0;
     }
   }
 }
