@@ -374,7 +374,7 @@
   flex-wrap:wrap;
   margin:-1px;
   .grid-item {
-    padding:8px;
+    padding:8px 8px 0 8px;
     background:rgba(0, 0, 0, 0.035);
     border:1px solid $blockbg;
     font-size:0.75em;
@@ -392,7 +392,15 @@
     padding:8px;
     font-size:0.75em;
     margin:2px 0;
+    @extend .clearfix;
   }
+}
+
+
+.grid-row, .list-row{
+  .image{float:left; margin-right: 14px; margin-bottom: 10px;}
+  .name{overflow:hidden; min-width:80px;}
+  .image, .name{margin-bottom:8px;}
 }
 
 
@@ -484,7 +492,7 @@
 
 .ace-editor{position: absolute; top: 0; right: 0; bottom: 0; left: 0; height:300px;}
 
-.new_layout_page{background: url('../images/blurred_colors-wide.jpg') no-repeat 0 0; background-size: cover; width:100%; height:100%; position:fixed;}
+.new_layout_page{background: url('../images/ngbm_bg2.jpg') no-repeat 0 0; background-size: cover; width:100%; height:100%; position:fixed;}
 
 #zone_linking_header {
   margin-bottom:2.5*$gutter;
