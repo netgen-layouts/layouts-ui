@@ -74,9 +74,10 @@ module.exports = LayoutBasePage.extend({
 
 
   create_new_draft: function(){
+    Core.router.navigate_to_params({type: 'create_new_draft'}, {trigger: false});
     Core.g.layout.create_new_draft().done(function() {
       Core.router.navigate_to_params({type: 'edit'});
-    }.bind(this));
+    });
     return this;
   },
 
