@@ -7,6 +7,7 @@ var ZoneLinkingHeaderView = require('../views/zone_linking_header');
 
 module.exports = LayoutBasePage.extend({
   main: function(params, xhr){
+    $(document.body).removeClass('new_layout');
     LayoutBasePage.prototype.main.apply(this, arguments);
 
     var layout = Core.g.layout;

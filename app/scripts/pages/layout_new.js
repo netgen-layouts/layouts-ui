@@ -17,6 +17,8 @@ module.exports = Page.extend({
 
   main: function() {
 
+    $(document.body).addClass('new_layout');
+
     var layout = new Layout();
 
     var layout_view = new NewLayoutView({
