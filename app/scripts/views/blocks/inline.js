@@ -38,7 +38,7 @@ module.exports = {
 
 
   update_contenteditable: function(){
-    var editable = Core.state.in_mode('edit') && this.model.belongs_to_current_layout();
+    var editable = Core.state.in_mode('edit', 'edit_shared') && this.model.belongs_to_current_layout();
     this.$inline.attr('contenteditable', editable)
   },
 
