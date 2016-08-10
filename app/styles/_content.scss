@@ -399,6 +399,7 @@
 
 .grid-row, .list-row{
   .image{float:left; margin-right: 14px; margin-bottom: 10px;}
+  img{max-width: 80px;}
   .name{overflow:hidden; min-width:80px;}
   .image, .name{margin-bottom:8px;}
 }
