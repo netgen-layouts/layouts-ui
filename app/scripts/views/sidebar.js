@@ -27,7 +27,8 @@ module.exports = Core.View.extend({
   events: {
     // 'change #collection-type': '$change_collection_type',
     'click .js-apply': '$apply',
-    'click .toggle-link': '$panel_toggle'
+    'click .toggle-link': '$panel_toggle',
+    'click .aside-tab-control a': '$tab_toggle'
   },
 
   on_loaded: function(){
@@ -78,6 +79,10 @@ module.exports = Core.View.extend({
     }
   },
 
+  $tab_toggle: function(e){
+    Core.g.local_config.save('active_tab', $(e.currentTarget).attr('id'));
+  },
+
   load: function(){
     $.get(this.model.edit_url()).done(function(response){
       this.$el.html(response);
@@ -125,7 +130,7 @@ module.exports = Core.View.extend({
 
       }.bind(this));
 
-    this.$('#aside-tabs').browser_tabs();
+    this.$('#aside-tabs').browser_tabs({active_tab: Core.g.local_config.get('active_tab')});
 
     this.xhrs.push(bm_collections_xhr, bm_collection_xhr);
 
