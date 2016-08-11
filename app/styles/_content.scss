@@ -318,6 +318,7 @@
       > li {
         cursor:pointer;
         text-align:right;
+        &.divider{background-color:rgba(255,255,255,0.1); margin:3px auto; width:90%;}
         > a {
           padding:0.5em 1em;
           color:#fff;
@@ -491,7 +492,9 @@
 
 
 
-.ace-editor{position: absolute; top: 0; right: 0; bottom: 0; left: 0; height:300px;}
+.ace-editor{top: 0; right: 0; bottom: 0; left: 0; min-height:300px;}
+body .ace-editor{font-size:12pt;}
+
 
 .new_layout_page{background: url('../images/ngbm_bg2.jpg') no-repeat 0 0; background-size: cover; width:100%; height:100%; position:fixed;}
 .new_layout .modal-backdrop{background-color:#0098c7;}
@@ -566,3 +569,35 @@
     }
   }
 }
+
+
+
+.modal.block{
+  .modal-dialog{width:100%; padding:15px;}
+  .modal-content{height:100%; padding:0;}
+
+  .modal-body,
+   [data-block],
+  .modal-content .in{display: flex; flex:1; flex-direction:column; height:100%;}
+
+  .modal-body .ace-editor{
+    height:100%;
+    font-size:12pt;
+  }
+  .modal-header{display:none;}
+  .block-header{
+    padding:10px;
+    .handle, .dropdown{display:none}
+  }
+  [data-block]{border:none;}
+
+  .modal-body{
+    padding:0;
+    background-color:blue;
+  }
+
+  .alloy-editor{overflow:auto; margin:0 20px;}
+}
+
+
+.ae-ui{position:relative; z-index:9999;}

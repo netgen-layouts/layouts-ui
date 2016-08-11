@@ -33,7 +33,8 @@ module.exports = Core.View.extend({
   events: {
     'click': '$edit',
     'click .js-destroy': '$destroy',
-    'click .js-revert': '$restore_block'
+    'click .js-revert': '$restore_block',
+    'click .js-modal-mode': 'modal_mode'
   },
 
 
@@ -58,6 +59,7 @@ module.exports = Core.View.extend({
       this.$el.find('.js-revert').hide();
     }
     Core.View.prototype.render.apply(this, arguments);
+    this.prepare_modal_mode();
     return this;
   },
 
@@ -156,6 +158,33 @@ module.exports = Core.View.extend({
   after_restore: function(){
     this.reload_model();
     this.refresh_sidebar();
-  }
+  },
+
+
+  prepare_modal_mode: function(){
+    this.supports_modal_mode !== true && this.$('.js-modal-mode, .js-modal-mode + .divider' ).hide();
+  },
+
+  modal_mode: function(){
+    this.$placeholder = $('<div>', {height: this.$el.height()});
+    this.$el.after(this.$placeholder);
+    new Core.Modal({
+      className: 'modal block',
+      apply_text: 'Exit',
+      cancel_disabled: true,
+      $dom_el: this.$el
+    }).open()
+    .on('open', _.delay(function() {
+      this.enter_modal_mode();
+    }.bind(this), 50))
+    .on('before_close', function() {
+      this.$placeholder.replaceWith(this.$el);
+      this.exit_modal_mode();
+    }.bind(this))
+    return this;
+  },
+
+  enter_modal_mode: function(){},
+  exit_modal_mode: function(){},
 
 });

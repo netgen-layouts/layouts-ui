@@ -7,9 +7,11 @@ var _ = require('underscore');
 module.exports = Block.extend({
 
   prevent_auto_render: true,
+  supports_modal_mode: true,
 
   render: function() {
     Block.prototype.render.apply(this,arguments);
+    window.hs = this;
     this.setup_editor();
   },
 
@@ -27,7 +29,7 @@ module.exports = Block.extend({
 
     editor.setTheme("ace/theme/monokai");
     editor.setHighlightActiveLine(true);
-    editor.setOptions({fontSize: "12pt"});
+    //editor.setOptions({fontSize: "12pt"});
 
     session.setMode("ace/mode/html");
     session.setTabSize(4);
@@ -86,6 +88,15 @@ module.exports = Block.extend({
       .done(this.model.trigger.bind(this.model, 'save_inline:done'))
       .fail(this.model.trigger.bind(this.model, 'save_inline:error'));
 
-  }
+  },
+
+
+  enter_modal_mode: function(){
+    this.editor && this.editor.resize();
+  },
+
+  exit_modal_mode: function(){
+    this.editor && this.editor.resize();
+  },
 
 });

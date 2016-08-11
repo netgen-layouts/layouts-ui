@@ -7,6 +7,7 @@ var _ = require('underscore');
 module.exports = Block.extend({
 
   prevent_auto_render: true,
+  supports_modal_mode: false,
 
   render: function() {
     Block.prototype.render.apply(this,arguments);
@@ -53,6 +54,22 @@ module.exports = Block.extend({
       .done(this.model.trigger.bind(this.model, 'save_inline:done'))
       .fail(this.model.trigger.bind(this.model, 'save_inline:error'));
 
-  }
+  },
+
+  enter_modal_mode: function(){
+    this.reinitialize();
+  },
+
+  exit_modal_mode: function(){
+    this.reinitialize();
+  },
+
+
+  reinitialize: function(){
+    this.editor.destroy();
+    $('.ae-ui').remove();
+    this.setup_editor();
+    return this;
+  },
 
 });
