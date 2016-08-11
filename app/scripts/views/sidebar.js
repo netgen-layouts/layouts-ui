@@ -19,6 +19,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'restore:success', this.show_loader);
     this.listenTo(Core, 'editing:unmark', this.destroy);
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
+    this.on('xeditable:apply:collection_type', this.show_loader);
     this.on('loaded', this.on_loaded);
     this.show_loader();
     this.xhrs = [];
@@ -54,12 +55,8 @@ module.exports = Core.View.extend({
 
   //TODO: Call some ajax to change collection type and bind to that event in sidebar
   $change_collection_type: function(){
-    // this.model.trigger('refresh:sidebar');
-    //
     var data = this.serialize().params.block_collection;
-    console.log(this.model);
     this.model.default_bm_collection().sync_change_type(data);
-    // return this;
   },
 
   $panel_toggle: function(e){
