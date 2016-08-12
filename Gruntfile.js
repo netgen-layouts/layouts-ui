@@ -77,7 +77,7 @@ module.exports = function(grunt) {
           //proxPort: 3005,
           runType: 'runner', // browsers
           config: 'tests/intern',
-          reporters: [ 'Console'],
+          reporters: [ 'Runner'],
           functionalSuites: [ 'tests/functional/**/*' ]
         }
       }
@@ -149,7 +149,7 @@ module.exports = function(grunt) {
           watchTask: true,
           notify: false,
           startPath: 'bm/dev/app',
-          proxy: config.local.domain
+          proxy: config.local.test_domain
         }
       }
     },

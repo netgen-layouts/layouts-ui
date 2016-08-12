@@ -102,7 +102,7 @@ define(function(require) {
           .clickOn('.dropdown-toggle')
           .clickOn('Delete block')
         .end()
-        .inModal().clickOn('OK').end()
+        .inModal().clickOn('Delete').end()
         .waitForAjax()
         .then(function() {
           this.read('block').isDisplayed().then(function(res) {
@@ -123,7 +123,7 @@ define(function(require) {
           .sleep(500)
           .dropTo('[data-trash]')
         .end()
-        .inModal().clickOn('OK').end()
+        .inModal().clickOn('Delete').end()
         .waitForAjax()
         .then(function() {
           this.read('block').isDisplayed().then(function(res) {
@@ -136,7 +136,7 @@ define(function(require) {
     'only sidebar errors': function(){
       return page
         .navigateTo('#layout/2/edit')
-        .addBlock('slider', {to_zone: 'bottom'}).editBlock().end()
+        .addBlock('grid_gallery', {to_zone: 'bottom'}).editBlock().end()
         .match('#sidebar')
           .clickOn('Design')
           .input('Thumbnails per row/slide').fill('').sleep(250).waitForAjax()

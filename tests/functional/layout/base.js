@@ -7,7 +7,7 @@ define(function(require) {
   var page;
 
   registerSuite({
-    name: 'Layout',
+    name: 'Layout::Base',
 
     before: function() {
       page = new Page(this.remote);

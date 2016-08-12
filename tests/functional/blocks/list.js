@@ -69,6 +69,7 @@ define(function(require) {
             .clickOn('Apply')
           .end()
           .waitForAjax()
+          .sleep(500) //wait for loader
           .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Dynamic collection').end()
           .match('.js-input-browse .js-name').assertText('(NO ITEM SELECTED)').end()
           .clickOn('.js-input-browse')
@@ -96,6 +97,7 @@ define(function(require) {
           .clickOn('.js-apply')
         .end()
         .waitForAjax()
+        .sleep(500) //wait for loader
         .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Saved configuration').end()
         .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in named
         .count('.bm-items .collection-item .remove-toggle').assert('equal', 0)

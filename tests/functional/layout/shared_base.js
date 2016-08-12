@@ -27,7 +27,7 @@ define(function(require) {
         .navigateTo('#layout?shared=1')
         .match('.modal', {visible: true})
           .input('Name').fill(layout_name)
-          .clickOn('1 zones A')
+          .clickOn('.layout-type label:nth-of-type(2)')
           .clickOn('Create layout')
         .end()
         .sleep(200)

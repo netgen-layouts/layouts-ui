@@ -25,7 +25,7 @@ define(function(require) {
       return page
         .navigateTo('#layout/1/edit')
         .clickOn('.js-layout-mapper', {visible: true})
-        .count('.js-choose', {visible: true}).assert('equal', 2)
+        .count('.js-choose', {visible: true}).assert('equal', 4)
     },
 
 
