@@ -354,24 +354,18 @@
   }
   .errors {
     list-style-type:none;
-    margin:0.5em 0 0.5em 0.5em;
-    padding:0.5em 0 0 0.75em;
+    margin:0 0 1.5em;
     font-size:0.75em;
     color:$highlightColor;
     font-weight:700;
     line-height:1.25;
-    position:relative;
-    border-left:2px solid currentColor;
-    border-top:2px solid currentColor;
-    border-radius:0.75em 0 0 0;
-    &::after {
-      content:"";
-      border-top:8px solid currentColor;
-      border-left:4px solid transparent;
-      border-right:4px solid transparent;
-      position:absolute;
-      bottom:-2px;
-      left:-5px;
+  }
+  .error-input {
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      border:2px solid $highlightColor;
+      margin-bottom:0.5em;
     }
   }
 }
@@ -558,11 +552,11 @@
   &.hidden-item {
     .name {
       color:#666;
-    }
-    .material-icons{
-      font-size:1em;
-      vertical-align: middle;
-      margin-right: 3px;
+      i {
+        font-size:1em;
+        vertical-align:middle;
+        margin-right:3px;
+      }
     }
     .note {
       color:#333;
