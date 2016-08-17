@@ -105,7 +105,7 @@
   background:$toolbarbg1;
   color:$toolbarColor;
   z-index:30;
-  padding-top:$leftWidth;
+  padding-top:$leftWidth+1;
   .disabler{background:rgba(64, 64, 64, 0.8);}
   .disable{opacity: 0.2; cursor: not-allowed;}
   .top-menu > div{position: relative;}
@@ -117,6 +117,7 @@
     top:0;
     width:$leftWidth;
     height:$topHeight+1;
+    border-bottom:1px solid $toolbarBorderColor;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -146,6 +147,9 @@
     bottom: 0;
     left: 0;
     .button {
+      &:first-child {
+        border-top-width:1px;
+      }
       &:last-child {
         border-bottom:none;
       }
@@ -163,13 +167,10 @@
     line-height:$leftWidth;
     text-align:center;
     border-color:$toolbarBorderColor;
-    border-width:1px 0;
+    border-width:0 0 1px 0;
     border-style:solid;
     font-size:1.5em;
     transition:color 150ms, background-color 150ms;
-    + .button {
-      margin-top:-1px;
-    }
     &:focus {
       outline:none;
     }
