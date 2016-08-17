@@ -24,7 +24,6 @@
       display:inline-block;
       font-size:1em;
       margin:0 0.5em;
-      border-bottom:1px dashed hsl(0, 0, 34);
       i {
         color:$toolbarColor;
         margin-left:4px;
@@ -32,7 +31,8 @@
         vertical-align:middle;
       }
     }
-    .js-show-form{
+    .js-show-form {
+      border-bottom:1px dashed hsl(0, 0, 34);
       cursor:pointer;
     }
     form {
