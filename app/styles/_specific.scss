@@ -179,6 +179,11 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
   }
 }
 
+.shared-icon {
+  transform:rotate(210deg);
+  position:relative;
+  top:3px;
+}
 
 [data-zone]{
   .layout_icon{width:100px; height:100px; background-size:contain; background-repeat:no-repeat; display:inline-block;}
