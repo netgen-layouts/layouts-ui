@@ -366,6 +366,9 @@
     textarea {
       border:2px solid $highlightColor;
       margin-bottom:0.5em;
+      &:focus {
+        outline-color:$highlightColor;
+      }
     }
   }
 }

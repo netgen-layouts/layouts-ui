@@ -45,6 +45,7 @@ module.exports = Core.View.extend({
 
   remove_errors: function() {
     this.$('.errors').remove();
+    this.$('.error-input').removeClass('error-input');
   },
 
 
