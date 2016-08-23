@@ -7,6 +7,7 @@ module.exports = Core.Modal.extend({
   extend_with: ['url'],
 
   template: 'new_layout',
+  ENTER_KEY: 13,
 
   initialize: function(){
     Core.Modal.prototype.initialize.apply(this, arguments);
@@ -24,7 +25,8 @@ module.exports = Core.Modal.extend({
   },
 
   events: {
-    'submit form': '$submit'
+    'submit form': '$submit',
+    'keypress input': '$enter'
   },
 
 
@@ -56,6 +58,12 @@ module.exports = Core.Modal.extend({
     return this;
   },
 
+  $enter: function(e) {
+    if (e.which === this.ENTER_KEY) {
+      this.$submit(e);
+    }
+    return this;
+  },
 
   $submit: function(e){
     e.preventDefault();

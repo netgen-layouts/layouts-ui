@@ -131,7 +131,7 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
 .new_layout {
   form {
     input[type="submit"] {display:none;}
-    > div+div {margin-top:20px;}
+    > div+div {margin-top:1em;}
     label {font-weight:normal;}
     input[type="text"] {
       height:$btnHeight; border:1px solid hsl(0, 0, 88); background:hsl(0, 0, 96); border-radius:$borderRadius; padding:0 0.75em; font-size:0.75em; margin:0 0 1em;
@@ -142,9 +142,9 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
     $selected_color: #4b91e2;
     display:flex; margin:0 -6px;
     label {
-      margin:0 6px; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:20%; position:relative;
+      margin:0 6px 1em; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:20%; position:relative;
       &::before {
-        content:""; display:block; height:0; padding:0 0 138%; border:2px solid hsl(0, 0, 60); background-size:85%; background-repeat:no-repeat; background-position:center center; margin-bottom:4px; border-radius:$borderRadius;
+        content:""; display:block; height:0; padding:0 0 138%; border:2px solid hsl(0, 0, 60); background-size:85%; background-repeat:no-repeat; background-position:center center; border-radius:$borderRadius;
       }
       &:hover {
         $hover_color: lighten($btnprimary, 10%);
@@ -163,7 +163,7 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
             border-color:$btnprimary;
           }
           &::after {
-            @extend %material-icons; content:"check"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#fff; text-align:center; width:38px; height:38px; line-height:32px; border-radius:50%; border:3px solid #fff; background:$btnprimary; margin-top:-12px; animation:checkedFadeIn 0.15s;
+            @extend %material-icons; content:"check"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#fff; text-align:center; width:38px; height:38px; line-height:32px; border-radius:50%; border:3px solid #fff; background:$btnprimary; animation:checkedFadeIn 0.15s;
           }
         }
       }

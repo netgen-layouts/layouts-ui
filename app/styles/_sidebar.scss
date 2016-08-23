@@ -352,14 +352,6 @@
       }
     }
   }
-  .errors {
-    list-style-type:none;
-    margin:0 0 1.5em;
-    font-size:0.75em;
-    color:$highlightColor;
-    font-weight:700;
-    line-height:1.25;
-  }
   .error-input {
     input[type="text"],
     input[type="number"],
@@ -371,6 +363,15 @@
       }
     }
   }
+}
+
+.errors {
+  list-style-type:none;
+  margin:0 0 1.5em;
+  font-size:0.75em;
+  color:$highlightColor;
+  font-weight:700;
+  line-height:1.25;
 }
 
 .sorting .sidebar{opacity:0.3; overflow:hidden;}
