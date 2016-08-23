@@ -106,11 +106,29 @@
   color:$toolbarColor;
   z-index:30;
   padding-top:$leftWidth+1;
-  .disabler{background:rgba(64, 64, 64, 0.8);}
-  .disable{opacity: 0.2; cursor: not-allowed;}
-  .top-menu > div{position: relative;}
-  .top-menu .disabler{display:none;}
-  .top-menu .disable .disabler{display:block;}
+  .disabler {
+    background:rgba(64, 64, 64, 0.8);
+  }
+  .disable {
+    position:relative;
+    &:hover {
+      color:inherit !important;
+    }
+    &::after {
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+      z-index:10;
+      background:rgba($toolbarbg1, 0.85);
+      cursor:not-allowed;
+    }
+  }
+  .top-menu > div {position: relative;}
+  .top-menu .disabler {display:none;}
+  .top-menu .disable .disabler {display:block;}
   .app-logo-box {
     position:absolute;
     left:0;
