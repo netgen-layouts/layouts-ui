@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
+var $ = Core.$;
 var Blocks = require('../collections/blocks');
 var Zones = require('../collections/zones');
 var _ = require('underscore');

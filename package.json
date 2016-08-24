@@ -41,7 +41,9 @@
     "moment": "^2.14.1",
     "nprogress": "^0.2.0",
     "striptags": "^2.1.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "core": "0.9.x",
+    "browser": "0.9.x"
   },
   "scripts": {
     "postinstall": "grunt npm_to_vendor"

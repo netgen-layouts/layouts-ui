@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
+var $ = Core.$;
 var Pages = require('./pages/main');
 
 module.exports = Core.Backbone.Router.extend({

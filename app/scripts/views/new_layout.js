@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
+var $ = Core.$;
 var _ = require('underscore');
 
 module.exports = Core.Modal.extend({

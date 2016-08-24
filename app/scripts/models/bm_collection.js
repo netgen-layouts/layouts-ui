@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
 var BmCollectionItems = require('../collections/bm_collection_items');
 
 module.exports = Core.Model.extend({

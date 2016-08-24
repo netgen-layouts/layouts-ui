@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
+var $ = Core.$;
 var BlockType = require('../models/block_type');
 var BlockTypeGroups = require('./block_type_groups');
 
