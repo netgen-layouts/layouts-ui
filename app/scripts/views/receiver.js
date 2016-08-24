@@ -1,5 +1,8 @@
 'use strict';
 
+var Core = require('core');
+var $ = Core.$;
+
 function Receiver(el) {
   this.$el = $(el);
   this.view = this.$el.data('_view');

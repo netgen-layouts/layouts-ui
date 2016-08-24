@@ -8,7 +8,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('./app/scripts/core-ui/helpers');
+var helpers = require('core/app/scripts/helpers');
 var project_helpers = require('./app/scripts/lib/handlebars/helpers');
 
 var all_helpers = _.extend({}, helpers, project_helpers);
@@ -262,7 +262,7 @@ module.exports = function(grunt) {
         dest: '.tmp/scripts/vendor.js',
         options: {
           debug: true,
-          require: ['jquery', 'jquery-ui']
+          require: ['core', 'browser']
         }
       },
 
@@ -271,16 +271,11 @@ module.exports = function(grunt) {
         dest: '.tmp/scripts/main.js',
         options: {
           debug: true,
-          external: ['jquery', 'jquery-ui'],
+          external: ['core', 'browser'],
           browserifyOptions: {
-            debug: true
+            debug: true,
           },
           alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js',
-            'browser': './app/scripts/browser-ui/main.js'
           }
         },
       },
@@ -291,11 +286,6 @@ module.exports = function(grunt) {
         options: {
           require: ['jquery', 'jquery-ui'],
           alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js',
-            'browser': './app/scripts/browser-ui/main.js'
           }
         }
       }

@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
 
 module.exports = Core.Backbone.Model.extend({
 

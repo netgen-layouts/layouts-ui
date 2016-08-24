@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
 var ViewBlocks = require('./main');
 
  module.exports = {

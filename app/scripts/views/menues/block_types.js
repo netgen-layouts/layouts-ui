@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
+var $ = Core.$;
 var BlockTypeView = require('../block_type');
 var DndView = require('../dnd');
 var _ = require('underscore');
