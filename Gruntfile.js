@@ -148,7 +148,7 @@ module.exports = function(grunt) {
           ghostMode: false,
           watchTask: true,
           notify: false,
-          startPath: 'ngadminui/bm/dev/app',
+          startPath: 'bm/dev/app',
           proxy: config.local.test_domain
         }
       }
@@ -461,7 +461,6 @@ module.exports = function(grunt) {
       tasks.push('selenium_standalone:dev:start');
       tasks.push('intern:functional');
     }
-
 
     grunt.task.run(tasks);
 

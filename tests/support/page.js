@@ -101,9 +101,9 @@ define(function(require) {
         .match('.modal')
           .match('.modal-footer', {visible: true})
           .sleep(100)
-        .end()
-    })
-  }
+        .end();
+    });
+  };
 
 
 
@@ -291,6 +291,16 @@ define(function(require) {
         .sleep(300)
     }).end()
   }
+
+
+
+
+Page.prototype.sidebarTab = function(tab_name, opts) {
+    return new this.constructor(this, function(setContext) {
+      return this.parent.clickOn('.sidebar #'+tab_name.toLowerCase())
+    })
+  }
+
 
 
 

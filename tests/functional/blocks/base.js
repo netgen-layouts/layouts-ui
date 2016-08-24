@@ -13,11 +13,11 @@ define(function(require) {
       page = new Page(this.remote);
       page
         .setFindTimeout(5000)
-        .maximizeWindow()
+        .maximizeWindow();
     },
 
     beforeEach: function() {
-      Page.clearStorage()
+      Page.clearStorage();
     },
 
 
@@ -32,15 +32,14 @@ define(function(require) {
         .waitForAjax()
         .count('[data-zone="top"] [data-block]', {all: true})
         .then(function(result) {
-          assert.equal(result - this.read('count'), 1)
-        })
+          assert.equal(result - this.read('count'), 1);
+        });
 
     },
 
 
     'edit': function() {
-      var block,
-        label = utils.stamped("Lorem ipsum"),
+      var label = utils.stamped('Lorem ipsum'),
         css_class = utils.stamped('blue'),
         css_id = utils.stamped('main');
 
@@ -59,7 +58,7 @@ define(function(require) {
         .waitForAjax()
 
         .then(function() {
-          return this.parent.match('.block-header .name').assertText(label)
+          return this.parent.match('.block-header .name').assertText(label);
         })
 
         .refresh()
@@ -68,7 +67,7 @@ define(function(require) {
         .match('#sidebar', {visible: true})
           .assertValue('Block label', label)
           .assertValue('CSS class', css_class)
-          .assertValue('CSS ID', css_id)
+          .assertValue('CSS ID', css_id);
 
 
     },
@@ -90,7 +89,7 @@ define(function(require) {
       .sleep(100)
       .match('[data-zone="right"]').moveMouseTo()
       .sleep(100)
-      .releaseMouseButton(0)
+      .releaseMouseButton(0);
 
     },
 
@@ -107,8 +106,8 @@ define(function(require) {
         .then(function() {
           this.read('block').isDisplayed().then(function(res) {
             assert.fail(res, 'Element should be destroyed');
-          })
-        })
+          });
+        });
     },
 
 
@@ -128,8 +127,8 @@ define(function(require) {
         .then(function() {
           this.read('block').isDisplayed().then(function(res) {
             assert.fail(res, 'Element should be destroyed');
-          })
-        })
+          });
+        });
     },
 
 
@@ -144,7 +143,7 @@ define(function(require) {
           .count('.errors').assert('equal', 1)
 
           .input('Thumbnails per row/slide').fill('5').sleep(500).waitForAjax()
-          .count('.errors').assert('equal', 0)
+          .count('.errors').assert('equal', 0);
 
     }
 

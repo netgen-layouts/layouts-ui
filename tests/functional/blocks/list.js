@@ -38,6 +38,7 @@ define(function(require) {
       return page
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'}).editBlock()
+        .sidebarTab('Content')
         .clickOn('.sidebar .add-items-btn', {visible: true})
         .waitForBrowser()
         .match('.browser')
@@ -47,6 +48,8 @@ define(function(require) {
           .clickOn('.action_apply')
         .end()
         .waitForAjax()
+        .sleep(500) //wait for loader
+
         .count('.sidebar .collection-item').assert('equal', 3)
         .count('.bm-items .collection-item .remove-toggle').assert('equal', 3)
         .match('.sidebar .collection-item')

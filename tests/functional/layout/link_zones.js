@@ -13,11 +13,11 @@ define(function(require) {
       page = new Page(this.remote);
       page
         .setFindTimeout(5000)
-        .maximizeWindow()
+        .maximizeWindow();
     },
 
     beforeEach: function() {
-      Page.clearStorage()
+      Page.clearStorage();
     },
 
 
@@ -25,7 +25,7 @@ define(function(require) {
       return page
         .navigateTo('#layout/1/edit')
         .clickOn('.js-layout-mapper', {visible: true})
-        .count('.js-choose', {visible: true}).assert('equal', 4)
+        .count('.js-choose', {visible: true}).assert('equal', 4);
     },
 
 
@@ -34,23 +34,23 @@ define(function(require) {
         .clickOn('.js-choose', {visible: true})
         .assertCurrentUrl('#layout/3/link_zone/top/with_layout/1', 'include')
         .waitForAjax()
-        .match('.app-center', {visible: true})
-          .match('.form-inline').assertText('WITH', 'include').end()
+        .match('#zone_linking_header', {visible: true})
+          .match('.step-text').assertText('Choose one of the shared layouts and then select a target zone').end()
           .count('select option').assert('equal', 2)
           .match('select option:first-child').assertText('My third layout').end()
         .end()
-        .count('[data-block]').assert('equal', 0)
+        .count('[data-block]').assert('equal', 0);
     },
 
 
     'list through the shared layouts': function() {
       return page
-        .match('.app-center select').choose(5).end()
+        .match('#zone_linking_header select').choose(5).end()
         .waitForAjax()
         .execute('return Core.g.layout.id;').assert('equal', 5)
-        .match('.app-center select').choose(3).end()
+        .match('#zone_linking_header select').choose(3).end()
         .waitForAjax()
-        .execute('return Core.g.layout.id;').assert('equal', 3)
+        .execute('return Core.g.layout.id;').assert('equal', 3);
     },
 
 
@@ -60,24 +60,24 @@ define(function(require) {
         .waitForAjax()
         .assertCurrentUrl('#layout/1/edit', 'include')
         .waitForAjax()
-        .match('[data-zone="top"]').getAttribute('class').assert('include', 'linked_zone')
+        .match('[data-zone="top"]').getAttribute('class').assert('include', 'linked_zone');
     },
 
 
     'unlink a zone': function() {
       return page
         .clickOn('.js-layout-mapper', {visible: true})
-        .count('.js-choose', {visible: true}).assert('equal', 2)
+        .count('.js-choose', {visible: true}).assert('equal', 4)
         .match('[data-zone="top"]')
           .match('.js-choose').end()
           .match('.js-unlink').end()
           // .match('.js-edit-parent').end() //no parent
-          .clickOn('Unlink')
+          .clickOn('.zone-controls .dropdown-toggle').clickOn('Unlink')
         .end()
-        .inModal().clickOn('OK').end()
+        .inModal().clickOn('.action_apply').end()
         .waitForAjax()
         .match('[data-zone="top"]')
-          .getAttribute('class').assert('notInclude', 'linked_zone')
+          .getAttribute('class').assert('notInclude', 'linked_zone');
     },
 
 
@@ -89,33 +89,28 @@ define(function(require) {
         .assertCurrentUrl('#layout/1/link', 'include')
         .clickOn('.js-soft-back')
         .assertCurrentUrl('#layout/1/edit', 'include')
-        .count('[data-block]').assert('equal', 3)
+        .count('[data-block]').assert('equal', 3);
     },
 
 
     'workflow states': function(){
 
       function assert_step1(res) {
-        assert.include(res, 'EDIT LAYOUT')
-        assert.include(res, 'Discard')
-        assert.include(res, 'Publish layout')
+        assert.include(res, 'Discard');
+        assert.include(res, 'Publish layout');
       }
 
 
       function assert_step2(res) {
-        assert.include(res, 'CHOOSE LAYOUT ZONE')
-        assert.include(res, 'Back')
-        assert.notInclude(res, 'Discard')
-        assert.notInclude(res, 'Publish layout')
+        assert.include(res, 'Back');
+        assert.notInclude(res, 'Discard');
+        assert.notInclude(res, 'Publish layout');
       }
 
 
       function assert_step3(res) {
-        assert.include(res, 'LINK LAYOUT')
-        assert.include(res, 'WITH')
-        assert.include(res, 'Back')
-        assert.notInclude(res, 'Discard')
-        assert.notInclude(res, 'Publish layout')
+        assert.notInclude(res, 'Discard');
+        assert.notInclude(res, 'Publish layout');
       }
 
       return page
@@ -141,7 +136,7 @@ define(function(require) {
         .clickOn('.js-layout-mapper', {visible: true})
 
         //Enter Step 3
-        .clickOn('Choose a zone').waitForAjax()
+        .clickOn('Link zone').waitForAjax()
         .match('.app-center').getVisibleText().then(assert_step3).end()
         .match('.blocks .js-open').getAttribute('class').assert('include', 'disable').end()
         .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end()
@@ -164,7 +159,7 @@ define(function(require) {
         .navigateTo('#layout/3/link_zone/top/with_layout/1')
         .match('.app-center').getVisibleText().then(assert_step3).end()
         .match('.blocks .js-open').getAttribute('class').assert('include', 'disable').end()
-        .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end()
+        .match('.js-layout-mapper').getAttribute('class').assert('include', 'active').end();
 
 
       },
