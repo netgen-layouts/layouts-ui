@@ -12,14 +12,19 @@
         }
     ],
     "require-dev": {
-        "netgen/core-ui-components": "^1.0@dev",
-        "netgen/content-browser-ui-bundle": "^1.0@dev"
+        "netgen/core-ui-components": "^1.0",
+        "netgen/content-browser-ui-bundle": "^1.0"
     },
+    "repositories": [
+        { "type": "composer", "url": "https://packagist.netgen.biz" }
+    ],
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\BlockManagerUIBundle\\": ""
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"
