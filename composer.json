@@ -12,8 +12,8 @@
         }
     ],
     "require-dev": {
-        "netgen/core-ui-components": "^1.0",
-        "netgen/content-browser-ui-bundle": "^1.0"
+        "netgen/core-ui-components": "^1.0@dev",
+        "netgen/content-browser-ui-bundle": "^1.0@dev"
     },
     "repositories": [
         { "type": "composer", "url": "https://packagist.netgen.biz" }
