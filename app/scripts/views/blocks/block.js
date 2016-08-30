@@ -15,7 +15,8 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'change:html', this.render);
     this.listenTo(this.model, 'create:success', this.$edit);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
-    this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
+    this.listenTo(this.model, 'copy:success', this.on_copy);
+    this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(this.model, 'edit', this.$edit);
     this.listenTo(this.model, 'change_type:success sidebar_save:success', this.reload_model);
     this.listenTo(this.model, 'restore:success', this.after_restore);
@@ -33,6 +34,7 @@ module.exports = Core.View.extend({
   events: {
     'click': '$edit',
     'click .js-destroy': '$destroy',
+    'click .js-copy': '$copy_block',
     'click .js-revert': '$restore_block',
     'click .js-modal-mode': 'modal_mode'
   },
@@ -160,6 +162,16 @@ module.exports = Core.View.extend({
     this.refresh_sidebar();
   },
 
+  $copy_block: function(){
+    this.model.copy();
+  },
+
+  on_copy: function(data){
+    var new_block = Core.model_helper.init_block_from_type(this.model, data.attributes);
+    var view_block = Core.blocks.create_view(data.attributes.identifier, new_block);
+    this.$el.closest('.zone-body').append(view_block.$el);
+    view_block.$edit();
+  },
 
   prepare_modal_mode: function(){
     this.supports_modal_mode !== true && this.$('.js-modal-mode, .js-modal-mode + .divider' ).hide();
