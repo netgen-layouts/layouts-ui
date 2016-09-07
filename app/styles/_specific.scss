@@ -1,12 +1,11 @@
 $tooltipBg: hsla(0, 0, 12, 0.9);
 
-
-.layout_layout_1 {background-image:url(../images/layout_thumbs/layout_1.svg);}
-.layout_layout_2 {background-image:url(../images/layout_thumbs/layout_2.svg);}
-.layout_layout_3 {background-image:url(../images/layout_thumbs/layout_3.svg);}
-.layout_layout_4 {background-image:url(../images/layout_thumbs/layout_4.svg);}
-.layout_layout_5 {background-image:url(../images/layout_thumbs/layout_5.svg);}
-.layout_layout_6 {background-image:url(../images/layout_thumbs/layout_6.svg);}
+$layoutsAmount: 6;
+@for $i from 1 through $layoutsAmount {
+  .layout_layout_#{$i} {
+    background-image:url(/bundles/netgenblockmanageradmin/images/layout_thumbs/layout_#{$i}.svg);
+  }
+}
 
 .bm-tooltip {
   position:relative;
@@ -169,13 +168,9 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
       }
     }
 
-    [value="layout_1"] + label:before{@extend .layout_layout_1;}
-    [value="layout_2"] + label:before{@extend .layout_layout_2;}
-    [value="layout_3"] + label:before{@extend .layout_layout_3;}
-    [value="layout_4"] + label:before{@extend .layout_layout_4;}
-    [value="layout_5"] + label:before{@extend .layout_layout_5;}
-    [value="layout_6"] + label:before{@extend .layout_layout_6;}
-
+    @for $i from 1 through $layoutsAmount {
+      [value="layout_#{$i}"] + label:before{@extend .layout_layout_#{$i};}
+    }
   }
 }
 
