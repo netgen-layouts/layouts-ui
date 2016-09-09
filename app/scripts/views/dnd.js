@@ -155,12 +155,12 @@ module.exports = {
 
 
       // After sort and after move to connected sortable
-      stop: function(e, ui){
+      update: function(e, ui){
         var draggable = new Draggable(e, ui),
             receiver = new Receiver($(this).closest('[data-zone]')),
             trashed = draggable.read_trashed_and_clear();
 
-        if(!trashed){
+        if(!trashed && (this === ui.item.parent()[0])){
           draggable.save_new_position();
           draggable.is_zone_changed_when_moved_to(receiver);
         }

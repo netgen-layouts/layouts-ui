@@ -85,8 +85,8 @@ Draggable.prototype.save_new_position = function() {
   this.model.set({
     position: this.position(),
     zone_identifier: this.zone_id()
-  })
-  this.model.changedAttributes() && this.model.move();
+  });
+  this.model.move();
 };
 
 
