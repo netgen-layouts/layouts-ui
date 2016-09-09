@@ -35,6 +35,7 @@ module.exports = Core.View.extend({
 
   on_loaded: function(){
     this.$toggle_panels_on_render();
+    this.$multiple_select_height();
     this.remove_loader();
   },
 
@@ -77,6 +78,14 @@ module.exports = Core.View.extend({
     }
   },
 
+  $multiple_select_height: function(){
+    this.$('select[multiple]').each(function(){
+      var l = $(this).find('option').length;
+      (l > 10) && (l = 10);
+      $(this).attr('size', l);
+    });
+  },
+
   $tab_toggle: function(e){
     Core.g.local_config.save('active_tab', $(e.currentTarget).attr('id'));
   },
@@ -105,7 +114,6 @@ module.exports = Core.View.extend({
 
       self.xhrs.push(xhr);
     });
-
 
     var bm_collection_xhr = $.Deferred();
     var bm_collections_xhr = this.model
