@@ -139,9 +139,9 @@ $layoutsAmount: 6;
   }
   .layout-type {
     $selected_color: #4b91e2;
-    display:flex; margin:0 -6px;
+    display:flex; margin:0 -1%; flex-wrap:wrap; max-height:272px; overflow-y:auto;
     label {
-      margin:0 6px 1em; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:20%; position:relative;
+      margin:0 1% 1em; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:14.666666667%; position:relative;
       &::before {
         content:""; display:block; height:0; padding:0 0 138%; border:2px solid hsl(0, 0, 60); background-size:85%; background-repeat:no-repeat; background-position:center center; border-radius:$borderRadius;
       }
