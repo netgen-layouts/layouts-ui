@@ -32,7 +32,7 @@ module.exports = Core.View.extend({
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
-    this.context.named_and_empty = this.bm_collection_model.is_named() && !this.collection.length;
+    this.context.shared_and_empty = this.bm_collection_model.is_shared() && !this.collection.length;
 
     return this;
   },
@@ -51,8 +51,8 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
-    if(this.bm_collection_model.is_named()){
-      this.$el.addClass('named-collection');
+    if(this.bm_collection_model.is_shared()){
+      this.$el.addClass('shared-collection');
     } else {
       this.$('.bm-items').sortable({
         delay: 150,
