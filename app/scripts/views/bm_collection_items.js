@@ -83,7 +83,8 @@ module.exports = Core.View.extend({
         root_path: this.bm_collection_model.config_name
       }
     }).on('apply', function(){
-      var value_type = this.tree_config.get('value_type');
+      // @todo This needs to be configurable as some kind of mapping
+      var value_type = this.tree_config.get('item_type');
       var items = this.selected_collection.map(function(item){
         return {type: 0, value_id: item.get('value'), value_type: value_type, position: 0 };
       });
