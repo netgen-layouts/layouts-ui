@@ -104,6 +104,7 @@ $.extend(Core, {
     data.view.$('.js-dependable-selects-group .js-master').dependable_select();
     data.view.$('.master-slave-selects .master').master_slave_selects();
     data.view.$('.js-input-browse').input_browse();
+    data.view.$('.js-multiple-browse').multiple_browse();
     data.view.$('.js-external-video').video_thumb_fetcher();
     data.view.$('.view-type').view_types();
 
