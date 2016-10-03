@@ -77,7 +77,7 @@ module.exports = Core.Model.extend({
 
 
   belongs_to_current_layout: function(){
-    return Core.g.layout.id === this.get('layout_id')
+    return Core.g.layout.id === this.get('layout_id');
   },
 
 
@@ -109,6 +109,13 @@ module.exports = Core.Model.extend({
     new_zone.add_block(id);
 
     return this;
+  },
+
+  copy: function(){
+    return this.save(null, {
+      via: 'copy',
+      method: 'POST',
+    });
   },
 
   move: function(data){

@@ -1,12 +1,11 @@
 $tooltipBg: hsla(0, 0, 12, 0.9);
 
-
-.layout_layout_1 {background-image:url(../images/layout_thumbs/layout_1.svg);}
-.layout_layout_2 {background-image:url(../images/layout_thumbs/layout_2.svg);}
-.layout_layout_3 {background-image:url(../images/layout_thumbs/layout_3.svg);}
-.layout_layout_4 {background-image:url(../images/layout_thumbs/layout_4.svg);}
-.layout_layout_5 {background-image:url(../images/layout_thumbs/layout_5.svg);}
-.layout_layout_6 {background-image:url(../images/layout_thumbs/layout_6.svg);}
+$layoutsAmount: 6;
+@for $i from 1 through $layoutsAmount {
+  .layout_layout_#{$i} {
+    background-image:url(/bundles/netgenblockmanageradmin/images/layout_thumbs/layout_#{$i}.svg);
+  }
+}
 
 .bm-tooltip {
   position:relative;
@@ -140,9 +139,9 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
   }
   .layout-type {
     $selected_color: #4b91e2;
-    display:flex; margin:0 -6px;
+    display:flex; margin:0 -1%; flex-wrap:wrap; max-height:272px; overflow-y:auto;
     label {
-      margin:0 6px 1em; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:20%; position:relative;
+      margin:0 1% 1em; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:14.666666667%; position:relative;
       &::before {
         content:""; display:block; height:0; padding:0 0 138%; border:2px solid hsl(0, 0, 60); background-size:85%; background-repeat:no-repeat; background-position:center center; border-radius:$borderRadius;
       }
@@ -169,13 +168,9 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
       }
     }
 
-    [value="layout_1"] + label:before{@extend .layout_layout_1;}
-    [value="layout_2"] + label:before{@extend .layout_layout_2;}
-    [value="layout_3"] + label:before{@extend .layout_layout_3;}
-    [value="layout_4"] + label:before{@extend .layout_layout_4;}
-    [value="layout_5"] + label:before{@extend .layout_layout_5;}
-    [value="layout_6"] + label:before{@extend .layout_layout_6;}
-
+    @for $i from 1 through $layoutsAmount {
+      [value="layout_#{$i}"] + label:before{@extend .layout_layout_#{$i};}
+    }
   }
 }
 

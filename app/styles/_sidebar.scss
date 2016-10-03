@@ -284,6 +284,18 @@
         animation:compoundFadein 0.5s ease;
       }
     }
+    &[data-compound-reverse] {
+      .children {
+        display:block;
+        padding-left:0;
+        animation:compoundFadein 0.5s ease;
+      }
+      input[type="checkbox"]:checked {
+        ~ .children {
+          display:none;
+        }
+      }
+    }
   }
   @keyframes compoundFadein {
     0% {
@@ -546,7 +558,7 @@
       display:none !important;
     }
   }
-  .named-collection & {
+  .shared-collection & {
     cursor:default;
     .handle,
     .remove {

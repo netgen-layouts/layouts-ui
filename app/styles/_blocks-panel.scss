@@ -85,54 +85,15 @@
     line-height:48px;
     margin-bottom:0.125em;
   }
-  &.title .icon::before {
-    content:"\e916";
+
+  $blockTypes: ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('markdown', '\e922');
+
+  @each $block in $blockTypes {
+    &.#{nth($block, 1)} .icon::before {
+      content:"#{nth($block, 2)}";
+    }
   }
-  &.title_with_h3 .icon::before {
-    content:"\e916";
-  }
-  &.text .icon::before {
-    content:"\e918";
-  }
-  &.map .icon::before {
-    content:"\e90d";
-  }
-  &.html_snippet .icon::before {
-    content:"\e90a";
-  }
-  &.list .icon::before {
-    content:"\e91a";
-  }
-  &.grid .icon::before {
-    content:"\e909";
-  }
-  &.slider .icon::before {
-    content:"\e913";
-  }
-  &.thumb_gallery .icon::before {
-    content:"\e915";
-  }
-  &.grid_gallery .icon::before {
-    content:"\e908";
-  }
-  &.sushi_bar .icon::before {
-    content:"\e914";
-  }
-  &.rich_text .icon::before {
-    content:"\e912";
-  }
-  &.external_video .icon::before {
-    content:"\e917";
-  }
-  &.full_view .icon::before {
-    content:"\e91d";
-  }
-  &.twig_block .icon::before {
-    content:"\e920";
-  }
-  &.ezcontent_field .icon::before {
-    content:"\e91c";
-  }
+
   .title {
     font-size:0.625em;
     display:block;

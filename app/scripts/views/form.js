@@ -34,7 +34,8 @@ module.exports = Core.View.extend({
     'change': '$submit',
     'change input[type="checkbox"]': '$submit',
     'change input[type="radio"]': '$submit',
-    'browser:change .js-input-browse': '$browse_change',
+    'browser:change .js-input-browse': '$submit',
+    'browser:change .js-multiple-browse': '$submit',
     'focus input': '$on_focus'
   },
 

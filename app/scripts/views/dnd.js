@@ -121,7 +121,8 @@ module.exports = {
 
   setup_dnd_for_containers_and_zones: function(){
     var self = this,
-        $sort_element = this.$('.zone-body');
+        $sort_element = this.$('.zone-body'),
+        el_moved = false;
 
     $sort_element.sortable({
       appendTo: document.body,
@@ -156,14 +157,18 @@ module.exports = {
 
 
       // After sort and after move to connected sortable
+      update: function(){
+        el_moved = true;
+      },
       stop: function(e, ui){
         var draggable = new Draggable(e, ui),
             receiver = new Receiver($(this).closest('[data-zone]')),
             trashed = draggable.read_trashed_and_clear();
 
-        if(!trashed){
+        if(!trashed && el_moved){
           draggable.save_new_position();
           draggable.is_zone_changed_when_moved_to(receiver);
+          el_moved = false;
         }
 
         Core.trigger('sortable:end');

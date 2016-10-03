@@ -96,13 +96,13 @@ define(function(require) {
           .match('.sidebar .add-items-btn', {visible: true}).end().sleep(200) //Add items button should exist in manual
           .match('[data-xeditable-name="collection_type"]')
           .clickOn('.js-edit', {visible: true})
-          .select('Collection type').choose('2') // 2 = Named collection
+          .select('Collection type').choose('shared')
           .clickOn('.js-apply')
         .end()
         .waitForAjax()
         .sleep(500) //wait for loader
         .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Saved configuration').end()
-        .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in named
+        .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in shared
         .count('.bm-items .collection-item .remove-toggle').assert('equal', 0)
         .lastBlock().count('.list-item').assert('equal', 27)
     },
