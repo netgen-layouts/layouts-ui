@@ -1,6 +1,7 @@
 $icon-font-path: "../fonts/bootstrap/";
 
 @import "fonts";
+@import "bootstrap_variables";
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "../../node_modules/nprogress/nprogress";
 @import "../../../content-browser-ui-bundle/app/styles/main";
