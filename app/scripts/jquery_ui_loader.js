@@ -1,4 +1,4 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 require('jquery-ui');

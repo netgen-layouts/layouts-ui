@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 
 module.exports = Core.Backbone.Model.extend({
 

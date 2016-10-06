@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 var Blocks = require('../collections/blocks');
 var Zones = require('../collections/zones');

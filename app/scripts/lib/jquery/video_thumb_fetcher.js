@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 
 $.fn.video_thumb_fetcher = function(){

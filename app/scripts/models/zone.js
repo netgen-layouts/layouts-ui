@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var Blocks = require('../collections/blocks');
 var _ = require('underscore');
 

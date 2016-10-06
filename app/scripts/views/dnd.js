@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var Draggable = require('./draggable');
 var Receiver = require('./receiver');
 var $ = Core.$;

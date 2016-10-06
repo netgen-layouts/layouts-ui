@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var BlockTypeGroup = require('../models/block_type_group');
 
 module.exports = Core.Collection.extend({

@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 var BlockTypes = require('./collections/block_types');
 var ViewBlocksLoad = require('./views/blocks/load');

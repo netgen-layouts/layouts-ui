@@ -1,5 +1,5 @@
 'use strict';
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 
 function master_slave_selects(master_select, opts){

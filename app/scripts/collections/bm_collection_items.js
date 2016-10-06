@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var BmCollectionItem = require('../models/bm_collection_item');
 
 module.exports = Core.Collection.extend({

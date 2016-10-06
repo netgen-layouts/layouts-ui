@@ -8,7 +8,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('core/app/scripts/helpers');
+var helpers = require('netgen-core/app/scripts/helpers');
 var project_helpers = require('./app/scripts/lib/handlebars/helpers');
 
 var all_helpers = _.extend({}, helpers, project_helpers);
@@ -55,12 +55,15 @@ module.exports = function(grunt) {
   };
 
 
+  var pkg = grunt.file.readJSON('package.json');
 
+
+  var VENDOR_FILES = _.without(Object.keys(pkg.dependencies), "ace-builds", "alloyeditor");
 
 
   grunt.initConfig({
     config: config,
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkg,
 
     intern: {
       unit: {
@@ -110,7 +113,7 @@ module.exports = function(grunt) {
 
 
       browserify_vendor: {
-        files: ['node_modules/core/app/scripts/**/*.js', 'node_modules/browser/app/scripts/**/*.js'],
+        files: ['node_modules/netgen-core/app/scripts/**/*.js', 'node_modules/netgen-content-browser/app/scripts/**/*.js'],
         tasks: ['browserify:vendor']
       },
 
@@ -140,13 +143,6 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src: [
-
-
-            // WATCH CORE AND BROWSER IN DEV
-            // '../core-ui-components/.tmp/scripts/*.js',
-            // '../content-browser-ui-bundle/.tmp/scripts/*.js',
-            // '../content-browser-ui-bundle/.tmp/styles/*.css',
-
             '.tmp/scripts/*.js',
             '.tmp/styles/*.css',
             '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
@@ -275,7 +271,7 @@ module.exports = function(grunt) {
         dest: '.tmp/scripts/vendor.js',
         options: {
           debug: true,
-          require: ['core', 'browser']
+          require: VENDOR_FILES
         }
       },
 
@@ -283,7 +279,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '.tmp/scripts/main.js',
         options: {
-          external: ['core', 'browser'],
+          external: VENDOR_FILES,
           browserifyOptions: {
             debug: true,
           },
@@ -296,7 +292,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '.tmp/scripts/main.js',
         options: {
-          external: ['core', 'browser'],
+          external: ['netgen-core', 'netgen-content-browser'],
           alias: {
           }
         }
@@ -312,7 +308,7 @@ module.exports = function(grunt) {
           }
         },
         src: '.tmp/scripts/main.js',
-        dest: '<%= config.dist %>/js/main.js'
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
       }
     },
 

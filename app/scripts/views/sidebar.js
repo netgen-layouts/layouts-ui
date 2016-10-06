@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 
 var FormView = require('./form');
 var BmCollectionView = require('./bm_collection');

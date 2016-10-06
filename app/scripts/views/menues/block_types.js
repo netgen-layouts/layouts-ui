@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 var BlockTypeView = require('../block_type');
 var DndView = require('../dnd');

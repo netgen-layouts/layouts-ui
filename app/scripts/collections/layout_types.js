@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var LayoutType = require('../models/layout_type');
 
 module.exports = Core.Collection.extend({

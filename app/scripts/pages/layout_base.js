@@ -1,5 +1,5 @@
 'use strict';
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 var Page = require('./application');
 var Components = require('../components/main');
