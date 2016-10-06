@@ -16,3 +16,4 @@ local_config.json
 tests/coverage
 /vendor
 composer.lock
+.php_cs.cache
