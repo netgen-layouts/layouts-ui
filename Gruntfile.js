@@ -108,8 +108,14 @@ module.exports = function(grunt) {
 
     watch: {
 
+
+      browserify_vendor: {
+        files: ['node_modules/core/app/scripts/**/*.js', 'node_modules/browser/app/scripts/**/*.js'],
+        tasks: ['browserify:vendor']
+      },
+
       browserify: {
-        files: ['<%= config.app %>/scripts/**/*.js', '<%= config.app %>/scripts/core-ui/**/*.js'],
+        files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['browserify:dev']
       },
       sass: {
@@ -134,6 +140,13 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src: [
+
+
+            // WATCH CORE AND BROWSER IN DEV
+            // '../core-ui-components/.tmp/scripts/*.js',
+            // '../content-browser-ui-bundle/.tmp/scripts/*.js',
+            // '../content-browser-ui-bundle/.tmp/styles/*.css',
+
             '.tmp/scripts/*.js',
             '.tmp/styles/*.css',
             '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
@@ -270,7 +283,6 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '.tmp/scripts/main.js',
         options: {
-          debug: true,
           external: ['core', 'browser'],
           browserifyOptions: {
             debug: true,
@@ -284,7 +296,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '.tmp/scripts/main.js',
         options: {
-          require: ['jquery', 'jquery-ui'],
+          external: ['core', 'browser'],
           alias: {
           }
         }

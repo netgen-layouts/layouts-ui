@@ -1,10 +1,10 @@
 'use strict';
 
 var Core = require('core');
-var _ = require('underscore');
+
 var FormView = require('./form');
 var BmCollectionView = require('./bm_collection');
-var $ = require('jquery');
+var $ = Core.$;
 
 module.exports = Core.View.extend({
 
