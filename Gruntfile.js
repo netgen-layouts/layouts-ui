@@ -51,6 +51,7 @@ module.exports = function(grunt) {
   var config = {
     app: 'app',
     dist: 'Resources/public',
+    dev:  'Resources/public/dev',
     local: grunt.file.readJSON(local_config)
   };
 
@@ -58,7 +59,7 @@ module.exports = function(grunt) {
   var pkg = grunt.file.readJSON('package.json');
 
 
-  var VENDOR_FILES = _.without(Object.keys(pkg.dependencies), "ace-builds", "alloyeditor");
+  var VENDOR_FILES = _.without(Object.keys(pkg.dependencies));
 
 
   grunt.initConfig({
@@ -143,8 +144,8 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src: [
-            '.tmp/scripts/*.js',
-            '.tmp/styles/*.css',
+            '<%= config.dev %>/js/*.js',
+            '<%= config.dev %>/styles/*.css',
             '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
             '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
           ]
@@ -170,18 +171,14 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= config.dev %>',
             '<%= config.dist %>/*',
             '!<%= config.dist %>/vendor',
             '!<%= config.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp',
-      vendor: [
-        '<%= config.dist %>/vendor/ace-editor',
-        '<%= config.dist %>/vendor/alloy-editor'
-      ]
+      server: '<%= config.dev %>'
     },
 
     handlebars: {
@@ -225,7 +222,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
+          dest: '<%= config.dev %>/styles',
           ext: '.css'
         }]
       },
@@ -256,7 +253,7 @@ module.exports = function(grunt) {
         ]
       },
       server: {
-        src: '.tmp/styles/*.css'
+        src: '<%= config.dev %>/styles/*.css'
       },
 
       dist: {
@@ -268,7 +265,7 @@ module.exports = function(grunt) {
 
       vendor: {
         src: [],
-        dest: '.tmp/scripts/vendor.js',
+        dest: '<%= config.dev %>/js/vendor.js',
         options: {
           debug: true,
           require: VENDOR_FILES
@@ -277,7 +274,7 @@ module.exports = function(grunt) {
 
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dev %>/js/main.js',
         options: {
           external: VENDOR_FILES,
           browserifyOptions: {
@@ -290,7 +287,7 @@ module.exports = function(grunt) {
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dev %>/js/main.js',
         options: {
           external: ['netgen-core', 'netgen-content-browser'],
           alias: {
@@ -307,7 +304,7 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '.tmp/scripts/main.js',
+        src: '<%= config.dev %>/js/main.js',
         dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
       }
     },
@@ -350,30 +347,12 @@ module.exports = function(grunt) {
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
+          cwd: '<%= config.dev %>/images',
           dest: '<%= config.dist %>/images',
           src: [
             'generated/*'
           ]
         }]
-      },
-
-
-      vendor: {
-        files: [
-          {
-            expand: true,
-            cwd: 'node_modules/ace-builds/src-min-noconflict',
-            src: '**',
-            dest: '<%= config.dist %>/vendor/ace-editor'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/alloyeditor/dist/alloy-editor',
-            src: '**',
-            dest: '<%= config.dist %>/vendor/alloy-editor'
-          }
-        ]
       }
 
     },
@@ -438,10 +417,7 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('npm_to_vendor', [
-    'clean:vendor',
-    'copy:vendor'
-  ]);
+
 
   // NOTE:
   // ---- install selenium

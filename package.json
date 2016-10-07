@@ -32,8 +32,6 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "ace-builds": "github:ajaxorg/ace-builds#034a9f861eb3df4d84437f2e235ae86aa2af96d0",
-    "alloyeditor": "1.2.2",
     "moment": "^2.14.1",
     "nprogress": "^0.2.0",
     "striptags": "^2.1.1",
@@ -41,6 +39,5 @@
     "netgen-content-browser": "0.9.x"
   },
   "scripts": {
-    "postinstall": "grunt npm_to_vendor"
   }
 }
