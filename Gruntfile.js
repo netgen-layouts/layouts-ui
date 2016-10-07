@@ -179,9 +179,7 @@ module.exports = function(grunt) {
         }]
       },
       server: [
-        '<%= config.dev %>/*',
-        '!<%= config.dev %>/fonts',
-        '!<%= config.dev %>/images'
+        '<%= config.dev %>'
       ]
     },
 
@@ -365,6 +363,13 @@ module.exports = function(grunt) {
     shell: {
       load_fixtures: {
         command: 'tests/load_fixtures.sh <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
+      },
+
+      symlinks: {
+        command: [
+          'ln -s ../../../app/fonts <%= config.dev %>/fonts',
+          'ln -s ../../../app/images <%= config.dev %>/images'
+        ].join('\n')
       }
     },
 
@@ -392,6 +397,7 @@ module.exports = function(grunt) {
   grunt.registerTask('server', function() {
     grunt.task.run([
       'fast_build',
+      'shell:symlinks',
       'browserSync:dev',
       'watch'
     ]);
