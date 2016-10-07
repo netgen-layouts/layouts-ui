@@ -397,7 +397,6 @@ module.exports = function(grunt) {
   grunt.registerTask('server', function() {
     grunt.task.run([
       'fast_build',
-      'shell:symlinks',
       'browserSync:dev',
       'watch'
     ]);
@@ -408,7 +407,8 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
-      'postcss:server'
+      'postcss:server',
+      'shell:symlinks'
     ]);
   });
 
