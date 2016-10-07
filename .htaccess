@@ -1,3 +1,0 @@
-RewriteEngine On
-RewriteRule ^app/styles/(.*)$ /bmdev/.tmp/styles/$1 [L]
-RewriteRule ^app/scripts/(.*)$ /bmdev/.tmp/scripts/$1 [L]

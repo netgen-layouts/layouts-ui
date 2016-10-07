@@ -145,7 +145,7 @@ module.exports = function(grunt) {
         bsFiles: {
           src: [
             '<%= config.dev %>/js/*.js',
-            '<%= config.dev %>/styles/*.css',
+            '<%= config.dev %>/css/*.css',
             '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
             '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
           ]
@@ -178,7 +178,11 @@ module.exports = function(grunt) {
           ]
         }]
       },
-      server: '<%= config.dev %>'
+      server: [
+        '<%= config.dev %>/*',
+        '!<%= config.dev %>/fonts',
+        '!<%= config.dev %>/images'
+      ]
     },
 
     handlebars: {
@@ -222,7 +226,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '<%= config.dev %>/styles',
+          dest: '<%= config.dev %>/css',
           ext: '.css'
         }]
       },
@@ -253,7 +257,7 @@ module.exports = function(grunt) {
         ]
       },
       server: {
-        src: '<%= config.dev %>/styles/*.css'
+        src: '<%= config.dev %>/css/*.css'
       },
 
       dist: {
