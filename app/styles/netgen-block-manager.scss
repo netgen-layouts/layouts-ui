@@ -1,9 +1,5 @@
-$icon-font-path: "../fonts/bootstrap/";
-
 @import "fonts";
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "../../node_modules/nprogress/nprogress";
-@import "../../../content-browser-ui-bundle/app/styles/main";
 @import "variables";
 @import "nprogress_override";
 @import "typography";
@@ -119,7 +115,7 @@ img{max-width:100%;}
 .ui-sortable-helper{opacity:0.8;}
 
 .grid-block{
-  @include clearfix;
+  @extend %clearfix;
   margin: 10px 0;
   list-style: none;
   li{
