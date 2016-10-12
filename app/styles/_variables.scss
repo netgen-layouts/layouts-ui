@@ -79,7 +79,10 @@ $blockHeaderHeight: 30px;
 }
 
 %clearfix {
-  content:"";
-  display:table;
-  clear:both;
+  &::after,
+  &::before {
+    content:"";
+    display:table;
+    clear:both;
+  }
 }
