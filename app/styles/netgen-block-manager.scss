@@ -1,6 +1,9 @@
+@import "fonts";
+@import "../../node_modules/netgen-content-browser/app/styles/netgen-content-browser.scss";
+
 $namespace: '.ngc';
 
-@import "fonts";
+
 @import "../../node_modules/nprogress/nprogress";
 @import "variables";
 @import "nprogress_override";

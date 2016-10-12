@@ -292,6 +292,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
+          require: ['netgen-core', 'netgen-content-browser'],
         }
       }
     },
