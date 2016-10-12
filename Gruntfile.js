@@ -281,6 +281,7 @@ module.exports = function(grunt) {
           external: VENDOR_FILES,
           browserifyOptions: {
             debug: true,
+            standalone: 'NetgenBlockManager'
           },
           alias: {
           }
@@ -291,9 +292,6 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
-          external: ['netgen-core', 'netgen-content-browser'],
-          alias: {
-          }
         }
       }
     },
