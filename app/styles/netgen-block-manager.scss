@@ -31,8 +31,8 @@ body {
   margin: 0;
 }
 
-/* bootstrap override */
 #{$namespace}{
+  /* bootstrap override */
   a {
     color:$btnprimary;
   }
@@ -96,8 +96,12 @@ body {
       }
     }
   }
+  /* /bootstrap override */
+
+  .bm-select {
+    @extend .bm-select;
+  }
 }
-/* /bootstrap override */
 
 
 .split{
