@@ -12,6 +12,10 @@ $layoutsAmount: 6;
   display:inline-block;
   color:inherit;
   cursor:pointer;
+  #{$namespace} &,
+  #{$namespace} &:hover, {
+    color:inherit;
+  }
   .tooltip-box {
     pointer-events:none;
     opacity:0;
