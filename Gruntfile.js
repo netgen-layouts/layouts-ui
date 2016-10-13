@@ -270,7 +270,7 @@ module.exports = function(grunt) {
         dest: '<%= config.dev %>/js/vendor.js',
         options: {
           debug: true,
-          require: VENDOR_FILES
+          // require: VENDOR_FILES
         }
       },
 
@@ -278,7 +278,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
-          external: VENDOR_FILES,
+          //external: VENDOR_FILES,
           browserifyOptions: {
             debug: true,
             standalone: 'NetgenBlockManager'
