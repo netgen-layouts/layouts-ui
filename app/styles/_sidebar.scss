@@ -233,32 +233,15 @@
 
   .js-input-browse {
     .js-trigger {
-      display:flex;
-      margin:0 0 1em;
       background:$sidebarinput;
-      height:$btnHeight;
-      font-size:0.75em;
-      position:relative;
       color:#fff;
-      text-decoration:none;
       border-radius:$borderRadius;
       span {
-        flex:1;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
         line-height:$btnHeight;
-        padding:0 0.75em;
       }
       &::after {
-        @extend %material-icons;
-        padding:0 0.5833333333em;
-        align-items:center;
         background:hsl(0, 0, 35);
-        font-size:24px;
         line-height:$btnHeight;
-        content:"folder_open";
-        transition:background 0.15s ease, color 0.15s ease;
         border-radius:0 $borderRadius $borderRadius 0;
       }
       &:hover {
@@ -271,13 +254,8 @@
   .js-multiple-browse {
     .js-trigger {
       background:hsl(0, 0, 35);
-      font-size:0.75em;
-      padding:0 1.5em;
-      line-height:3;
-      display:inline-block;
       color:#fff;
       border-radius:$borderRadius;
-      text-decoration:none;
       &:hover {
         background:hsl(0, 0, 38);
       }
@@ -285,39 +263,20 @@
     .items {
       background:$sidebarinput;
       min-height:$btnHeight;
-      margin:0 0 0.5em;
-      padding:6px 0 0 6px;
-      font-size:0.75em;
       border-radius:$borderRadius;
-      @extend %clearfix;
       .item {
-        float:left;
-        margin:0 6px 6px 0;
-        display:flex;
-        line-height:1.4166666;
         > * {
-          display:flex;
-          align-items:center;
           background:hsla(0, 0, 100, 0.08);
         }
         .js-remove {
-          padding:0 3px;
           color:#fff;
-          margin:0 1px 0 0;
-          text-decoration:none;
           border-radius:$borderRadius 0 0 $borderRadius;
           &:hover {
             background:hsla(0, 0, 100, 0.17);
           }
-          i {
-            font-size:1.1666666667em;
-            float:left;
-            line-height:inherit;
-          }
         }
         .name {
           border-radius:0 $borderRadius $borderRadius 0;
-          padding:4px 6px;
         }
       }
     }
