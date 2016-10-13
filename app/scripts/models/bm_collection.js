@@ -23,7 +23,7 @@ module.exports = Core.Model.extend({
 
 
   is_shared: function(){
-    return this.get('shared') === true;
+    return this.get('collection_shared') === true;
   },
 
   proxy_to_block: function(){

@@ -279,9 +279,9 @@ module.exports = function(grunt) {
         dest: '<%= config.dev %>/js/main.js',
         options: {
           //external: VENDOR_FILES,
+          require: ['netgen-core'],
           browserifyOptions: {
-            debug: true,
-            standalone: 'NetgenBlockManager'
+            debug: true
           },
           alias: {
           }
@@ -440,6 +440,7 @@ module.exports = function(grunt) {
 
     if(!target || target == 'functional'){
       tasks.push('shell:load_fixtures');
+      tasks.push('fast_build');
       tasks.push('browserSync:test');
       tasks.push('selenium_standalone:dev:start');
       tasks.push('intern:functional');

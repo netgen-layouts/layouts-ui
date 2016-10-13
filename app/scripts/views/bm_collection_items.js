@@ -1,7 +1,7 @@
 'use strict';
 
 var Core = require('netgen-core');
-var _ = require('underscore');
+var $ = Core.$;
 var Browser = require('netgen-content-browser');
 var BmCollectionItemView = require('./bm_collection_item');
 

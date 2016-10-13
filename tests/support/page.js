@@ -37,7 +37,7 @@ define(function(require) {
       var parentContext = this._context;
 
       return this.parent
-        .then(pollUntil('return $.active === 0 || null;', 5000, 250))
+        .then(pollUntil('return ngc_jquery.active === 0 || null;', 5000, 250))
         .then(function() {
           setContext(parentContext)
           return parentContext;
@@ -325,7 +325,7 @@ Page.prototype.sidebarTab = function(tab_name, opts) {
       var parentContext = this._context;
 
       return this.parent
-        .then(pollUntil('return $("'+selector+':visible").length === 0;', 5000, 250))
+        .then(pollUntil('return ngc_jquery("'+selector+':visible").length === 0;', 5000, 250))
         .then(function() {
           setContext(parentContext)
           return parentContext;
