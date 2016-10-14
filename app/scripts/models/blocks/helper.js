@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var Blocks = require('./main');
 
 module.exports = {

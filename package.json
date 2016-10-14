@@ -1,6 +1,6 @@
 {
-  "name": "netgen_layouts",
-  "description": "",
+  "name": "netgen-block-manager",
+  "description": "Netgen - Block manager UI",
   "version": "0.9.0",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -25,25 +25,19 @@
     "http-proxy-middleware": "^0.16.0",
     "intern": "^3.2.3",
     "matchdep": "~1.0.1",
-    "mocha": "~2.5.3"
+    "mocha": "~2.5.3",
+    "handlebars": "^4.0.5"
   },
   "engines": {
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "ace-builds": "github:ajaxorg/ace-builds#034a9f861eb3df4d84437f2e235ae86aa2af96d0",
-    "alloyeditor": "1.2.2",
-    "backbone": "^1.3.2",
-    "bootstrap": "^3.3.6",
-    "handlebars": "^4.0.5",
-    "jquery": "^2.2.2",
-    "jquery-ui": "1.10.5",
     "moment": "^2.14.1",
     "nprogress": "^0.2.0",
     "striptags": "^2.1.1",
-    "underscore": "^1.8.3"
+    "netgen-core": "0.9.x",
+    "netgen-content-browser": "0.9.x"
   },
   "scripts": {
-    "postinstall": "grunt npm_to_vendor"
   }
 }

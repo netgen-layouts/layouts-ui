@@ -1,6 +1,8 @@
 'use strict';
 
+var Core = require('netgen-core');
 var _ = require('underscore');
+var $ = Core.$;
 var striptags = require('striptags');
 
 module.exports = {

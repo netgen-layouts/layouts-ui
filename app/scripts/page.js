@@ -1,7 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
-var Core = require('core_boot');
+var Core = require('netgen-core');
+var $ = Core.$;
 var App = Core;
 var View = Core.View;
 var master_views = require('./views/masters/main');

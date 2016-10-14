@@ -1,7 +1,7 @@
 'use strict';
 
 require('./templates_loader');
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var App = require('./init');
 
 require('./lib/jquery/master_slave_selects');

@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
+var $ = Core.$;
 var SideBarView = require('../sidebar');
 var _ = require('underscore');
 

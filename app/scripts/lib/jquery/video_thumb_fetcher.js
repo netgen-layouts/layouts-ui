@@ -1,3 +1,8 @@
+'use strict';
+
+var Core = require('netgen-core');
+var $ = Core.$;
+
 $.fn.video_thumb_fetcher = function(){
   return $(this).each(function() {
     var id = $(this).data('video-id'),

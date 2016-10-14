@@ -1,5 +1,7 @@
 'use strict';
 
+var Core = require('netgen-core');
+var $ = Core.$;
 var LayoutBasePage = require('./layout_base');
 var HeaderView = require('../views/header');
 var ZoneLinkingHeaderView = require('../views/zone_linking_header');

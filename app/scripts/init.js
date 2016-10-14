@@ -1,19 +1,14 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
+var $ = Core.$;
 var BlockTypes = require('./collections/block_types');
-var Layout = require('./models/layout');
 var ViewBlocksLoad = require('./views/blocks/load');
 var ModelHelper = require('./models/blocks/helper');
 var Router = require('./router');
 
 var LayoutTypes = require('./collections/layout_types');
-var NewLayoutView = require('./views/new_layout');
 
-// browser
-var Browser = require('./browser-ui/views/browser');
-var TreeConfig = require('./browser-ui/models/tree_config');
-var Items = require('./browser-ui/collections/items');
 
 var Config = require('./models/config');
 var State = require('./models/state');
@@ -38,10 +33,10 @@ Core.Backbone.defaults = function(){
 Core.default_context = function() {
   return {
     state: this.state
-  }
+  };
 };
 
-$.extend(Core, {
+_.extend(Core, {
 
   blocks: ViewBlocksLoad,
 

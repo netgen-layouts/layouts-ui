@@ -30,11 +30,12 @@ define(function(require) {
           .clickOn('.layout-type label:nth-of-type(2)')
           .clickOn('.action_apply')
         .end()
+        .sleep(200)
         .waitForAjax()
         .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
 
         .match('.app-center .js-layout-name', {visible: true}).assertText(layout_name)
-        .end()
+        .end();
     },
 
     'rename': function() {

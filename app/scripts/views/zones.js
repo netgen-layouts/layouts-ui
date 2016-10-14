@@ -1,8 +1,8 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
+var $ = Core.$;
 var ZoneView = require('./zone');
-var ViewBlocksLoad = require('../views/blocks/load');
 var ViewBlockTypes = require('./menues/block_types');
 
 

@@ -1,16 +1,17 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var Draggable = require('./draggable');
 var Receiver = require('./receiver');
+var $ = Core.$;
 
-require('jquery-ui');
+//require('../jquery_ui_loader');
 
 /**
  * Copied from jquery.ui.sortable and slightly modified
  */
-var orig = jQuery.ui.sortable.prototype._mouseDrag;
-jQuery.ui.sortable.prototype._mouseDrag = function(event){
+var orig = $.ui.sortable.prototype._mouseDrag;
+$.ui.sortable.prototype._mouseDrag = function(event){
 
 
     var i, item, itemElement, intersection,

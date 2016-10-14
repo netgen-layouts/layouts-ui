@@ -232,38 +232,59 @@
   }
 
   .js-input-browse {
-    .js-trigger {
-      display:flex;
-      margin:0 0 1em;
+    .js-clear {
       background:$sidebarinput;
-      height:$btnHeight;
-      font-size:0.75em;
-      position:relative;
+      border-radius:$borderRadius 0 0 $borderRadius;
+      border-right:1px solid $toolbarbg1;
+      &:hover {
+        background:hsl(0, 0, 35);
+      }
+    }
+    .js-trigger {
+      background:$sidebarinput;
       color:#fff;
-      text-decoration:none;
-      border-radius:$borderRadius;
-      span {
-        flex:1;
-        overflow:hidden;
-        text-overflow:ellipsis;
-        white-space:nowrap;
+      border-radius:0 $borderRadius $borderRadius 0;
+      .js-name {
         line-height:$btnHeight;
-        padding:0 0.75em;
       }
       &::after {
-        @extend %material-icons;
-        padding:0 0.5833333333em;
-        align-items:center;
         background:hsl(0, 0, 35);
-        font-size:24px;
         line-height:$btnHeight;
-        content:"folder_open";
-        transition:background 0.15s ease, color 0.15s ease;
         border-radius:0 $borderRadius $borderRadius 0;
       }
       &:hover {
         &::after {
           background:hsl(0, 0, 38);
+        }
+      }
+    }
+  }
+  .js-multiple-browse {
+    .js-trigger {
+      background:hsl(0, 0, 35);
+      color:#fff;
+      border-radius:$borderRadius;
+      &:hover {
+        background:hsl(0, 0, 38);
+      }
+    }
+    .items {
+      background:$sidebarinput;
+      min-height:$btnHeight;
+      border-radius:$borderRadius;
+      .item {
+        > * {
+          background:hsla(0, 0, 100, 0.08);
+        }
+        .js-remove {
+          color:#fff;
+          border-radius:$borderRadius 0 0 $borderRadius;
+          &:hover {
+            background:hsla(0, 0, 100, 0.17);
+          }
+        }
+        .name {
+          border-radius:0 $borderRadius $borderRadius 0;
         }
       }
     }

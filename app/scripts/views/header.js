@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var _ = require('underscore');
 
 module.exports = Core.View.extend({

@@ -55,7 +55,7 @@
     content:'Linked zone. Blocks can not be dropped directly here.'
   }
   .sorting & {
-    @include transition(all 0.3s ease-in-out);
+    transition:all 0.3s ease-in-out;
   }
   .linked_info {
     position:relative;
@@ -392,7 +392,7 @@
     background:rgba(0, 0, 0, 0.035);
     padding:8px;
     margin:2px 0;
-    @extend .clearfix;
+    @extend %clearfix;
   }
 }
 
@@ -557,6 +557,7 @@ body .ace-editor{font-size:12pt;}
     }
   }
   .layout-chooser {
+    color:#fff;
     select {
       width:auto;
       margin:1em 0 0;

@@ -1,5 +1,5 @@
 'use strict';
-var Core = require('core_boot');
+var Core = require('netgen-core');
 
 
 module.exports = Core.View.extend({

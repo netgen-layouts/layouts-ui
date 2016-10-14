@@ -38,7 +38,7 @@ define({
   },
 
 
-  bail: true,
+  bail: false,
 
   grep: new RegExp(process.env.GREP) || null,
 

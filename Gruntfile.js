@@ -8,7 +8,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('./app/scripts/core-ui/helpers');
+var helpers = require('netgen-core/app/scripts/helpers');
 var project_helpers = require('./app/scripts/lib/handlebars/helpers');
 
 var all_helpers = _.extend({}, helpers, project_helpers);
@@ -51,16 +51,20 @@ module.exports = function(grunt) {
   var config = {
     app: 'app',
     dist: 'Resources/public',
+    dev:  'Resources/public/dev',
     local: grunt.file.readJSON(local_config)
   };
 
 
+  var pkg = grunt.file.readJSON('package.json');
 
+
+  var VENDOR_FILES = _.without(Object.keys(pkg.dependencies));
 
 
   grunt.initConfig({
     config: config,
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: pkg,
 
     intern: {
       unit: {
@@ -108,8 +112,14 @@ module.exports = function(grunt) {
 
     watch: {
 
+
+      browserify_vendor: {
+        files: ['node_modules/netgen-core/app/scripts/**/*.js', 'node_modules/netgen-content-browser/app/scripts/**/*.js'],
+        tasks: ['browserify:vendor']
+      },
+
       browserify: {
-        files: ['<%= config.app %>/scripts/**/*.js', '<%= config.app %>/scripts/core-ui/**/*.js'],
+        files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['browserify:dev']
       },
       sass: {
@@ -134,8 +144,8 @@ module.exports = function(grunt) {
       dev: {
         bsFiles: {
           src: [
-            '.tmp/scripts/*.js',
-            '.tmp/styles/*.css',
+            '<%= config.dev %>/js/*.js',
+            '<%= config.dev %>/css/*.css',
             '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
             '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
           ]
@@ -161,17 +171,15 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= config.dev %>',
             '<%= config.dist %>/*',
             '!<%= config.dist %>/vendor',
             '!<%= config.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp',
-      vendor: [
-        '<%= config.dist %>/vendor/ace-editor',
-        '<%= config.dist %>/vendor/alloy-editor'
+      server: [
+        '<%= config.dev %>'
       ]
     },
 
@@ -216,7 +224,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
+          dest: '<%= config.dev %>/css',
           ext: '.css'
         }]
       },
@@ -247,7 +255,7 @@ module.exports = function(grunt) {
         ]
       },
       server: {
-        src: '.tmp/styles/*.css'
+        src: '<%= config.dev %>/css/*.css'
       },
 
       dist: {
@@ -259,44 +267,32 @@ module.exports = function(grunt) {
 
       vendor: {
         src: [],
-        dest: '.tmp/scripts/vendor.js',
+        dest: '<%= config.dev %>/js/vendor.js',
         options: {
           debug: true,
-          require: ['jquery', 'jquery-ui']
+          // require: VENDOR_FILES
         }
       },
 
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dev %>/js/main.js',
         options: {
-          debug: true,
-          external: ['jquery', 'jquery-ui'],
+          //external: VENDOR_FILES,
+          require: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js',
-            'browser': './app/scripts/browser-ui/main.js'
           }
         },
       },
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dev %>/js/main.js',
         options: {
-          require: ['jquery', 'jquery-ui'],
-          alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js',
-            'browser': './app/scripts/browser-ui/main.js'
-          }
+          require: ['netgen-core', 'netgen-content-browser'],
         }
       }
     },
@@ -309,8 +305,8 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '.tmp/scripts/main.js',
-        dest: '<%= config.dist %>/js/main.js'
+        src: '<%= config.dev %>/js/main.js',
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
       }
     },
 
@@ -352,30 +348,12 @@ module.exports = function(grunt) {
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
+          cwd: '<%= config.dev %>/images',
           dest: '<%= config.dist %>/images',
           src: [
             'generated/*'
           ]
         }]
-      },
-
-
-      vendor: {
-        files: [
-          {
-            expand: true,
-            cwd: 'node_modules/ace-builds/src-min-noconflict',
-            src: '**',
-            dest: '<%= config.dist %>/vendor/ace-editor'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/alloyeditor/dist/alloy-editor',
-            src: '**',
-            dest: '<%= config.dist %>/vendor/alloy-editor'
-          }
-        ]
       }
 
     },
@@ -384,6 +362,13 @@ module.exports = function(grunt) {
     shell: {
       load_fixtures: {
         command: 'tests/load_fixtures.sh <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
+      },
+
+      symlinks: {
+        command: [
+          'ln -s ../../../app/fonts <%= config.dev %>/fonts',
+          'ln -s ../../../app/images <%= config.dev %>/images'
+        ].join('\n')
       }
     },
 
@@ -421,7 +406,8 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean:server',
       'concurrent:server',
-      'postcss:server'
+      'postcss:server',
+      'shell:symlinks'
     ]);
   });
 
@@ -440,10 +426,7 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('npm_to_vendor', [
-    'clean:vendor',
-    'copy:vendor'
-  ]);
+
 
   // NOTE:
   // ---- install selenium
@@ -457,6 +440,7 @@ module.exports = function(grunt) {
 
     if(!target || target == 'functional'){
       tasks.push('shell:load_fixtures');
+      tasks.push('fast_build');
       tasks.push('browserSync:test');
       tasks.push('selenium_standalone:dev:start');
       tasks.push('intern:functional');

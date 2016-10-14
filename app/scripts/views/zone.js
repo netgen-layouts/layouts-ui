@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var Layout = require('../models/layout');
 var Zone = require('../models/zone');
 var DndView = require('./dnd');

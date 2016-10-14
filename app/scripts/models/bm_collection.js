@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var BmCollectionItems = require('../collections/bm_collection_items');
 
 module.exports = Core.Model.extend({
@@ -23,7 +23,7 @@ module.exports = Core.Model.extend({
 
 
   is_shared: function(){
-    return this.get('shared') === true;
+    return this.get('collection_shared') === true;
   },
 
   proxy_to_block: function(){

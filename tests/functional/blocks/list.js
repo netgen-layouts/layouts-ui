@@ -13,15 +13,15 @@ define(function(require) {
       page = new Page(this.remote);
       page
         .setFindTimeout(5000)
-        .maximizeWindow()
+        .maximizeWindow();
     },
 
     beforeEach: function() {
-      Page.clearStorage()
+      Page.clearStorage();
     },
 
     afterEach: function() {
-      page.destroyAllBlocks()
+      page.destroyAllBlocks();
     },
 
 
@@ -30,7 +30,7 @@ define(function(require) {
         .navigateTo('#layout/3/edit')
         .addBlock('list', {to_zone: 'left'})
           .match('.notice')
-          .assertText('This block is not configured yet', 'include')
+          .assertText('This block is not configured yet', 'include');
     },
 
 
@@ -41,7 +41,7 @@ define(function(require) {
         .sidebarTab('Content')
         .clickOn('.sidebar .add-items-btn', {visible: true})
         .waitForBrowser()
-        .match('.browser')
+        .match('.ngcb')
           .clickOn('.list-panel .children tr input+label')
           .clickOn('.list-panel .children tr:nth-child(2) input+label')
           .clickOn('.list-panel .children tr:nth-child(3) input+label')
@@ -57,7 +57,7 @@ define(function(require) {
           .clickOn('.remove')
           .waitForAjax()
         .end()
-        .count('.sidebar .collection-item').assert('equal', 2)
+        .count('.sidebar .collection-item').assert('equal', 2);
 
     },
 
@@ -68,7 +68,7 @@ define(function(require) {
         .addBlock('list', {to_zone: 'left'}).editBlock()
           .match('[data-xeditable-name="collection_type"]', {visible: true}).sleep(200)
             .clickOn('Change')
-            .select('Collection type').choose('1') // 1 = Dynamic collection
+            .select('Collection type').choose('dynamic') // 1 = Dynamic collection
             .clickOn('Apply')
           .end()
           .waitForAjax()
@@ -80,12 +80,12 @@ define(function(require) {
             .clickOn('.list-root label')
             .clickOn('Confirm')
           .end()
-          .input('Limit').fill("5")
+          .input('Limit').fill('5')
           .sleep(500) //Wait for input change
           .waitForAjax()
           .count('.bm-items .collection-item').assert('equal', 5)
         .end()
-        .lastBlock().count('.list-item').assert('equal', 5)
+        .lastBlock().count('.list-item').assert('equal', 5);
     },
 
 
@@ -104,7 +104,7 @@ define(function(require) {
         .match('[data-xeditable-name="collection_type"] .js-edit .text', {visible: true}).assertText('Saved configuration').end()
         .waitForDeletedByCssSelector('.sidebar .add-items-btn').end() //Add items button should not exist in shared
         .count('.bm-items .collection-item .remove-toggle').assert('equal', 0)
-        .lastBlock().count('.list-item').assert('equal', 27)
+        .lastBlock().count('.list-item').assert('equal', 27);
     },
 
 
@@ -117,7 +117,7 @@ define(function(require) {
           .select('View type').choose('grid')
         .end()
         .waitForAjax()
-        .lastBlock().match('.template_name').assertText('GRID')
+        .lastBlock().match('.template_name').assertText('GRID');
     }
 
 

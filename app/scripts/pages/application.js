@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
+var $ = Core.$;
 var Page = require('../page');
 var Layout = require('../models/layout');
 
