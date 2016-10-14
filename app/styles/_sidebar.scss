@@ -232,11 +232,19 @@
   }
 
   .js-input-browse {
+    .js-clear {
+      background:$sidebarinput;
+      border-radius:$borderRadius 0 0 $borderRadius;
+      border-right:1px solid $toolbarbg1;
+      &:hover {
+        background:hsl(0, 0, 35);
+      }
+    }
     .js-trigger {
       background:$sidebarinput;
       color:#fff;
-      border-radius:$borderRadius;
-      span {
+      border-radius:0 $borderRadius $borderRadius 0;
+      .js-name {
         line-height:$btnHeight;
       }
       &::after {
