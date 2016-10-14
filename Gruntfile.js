@@ -115,7 +115,7 @@ module.exports = function(grunt) {
 
       browserify_vendor: {
         files: ['node_modules/netgen-core/app/scripts/**/*.js', 'node_modules/netgen-content-browser/app/scripts/**/*.js'],
-        tasks: ['browserify:vendor']
+        tasks: ['browserify:dev']
       },
 
       browserify: {
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
         tasks: ['browserify:dev']
       },
       sass: {
-        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/netgen-core/app/styles/**/*.scss', 'node_modules/netgen-content-browser/app/styles/**/*.scss'],
         tasks: ['sass:server', 'postcss:server']
       },
       handlebars: {
