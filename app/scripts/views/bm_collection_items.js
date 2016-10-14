@@ -80,7 +80,8 @@ module.exports = Core.View.extend({
         return out;
       }, []),
       tree_config: {
-        root_path: this.bm_collection_model.config_name
+        overrides: this.bm_collection_model.browser_configuration,
+        root_path: this.bm_collection_model.browser_configuration.browserConfigName
       }
     }).on('apply', function(){
       // @todo This needs to be configurable as some kind of mapping
