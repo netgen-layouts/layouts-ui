@@ -4,7 +4,7 @@
     <div class="zone-controls">
       {{#eq mode "chooser"}}
         {{#if model.is_linked}}
-          <span class="zone-btn linked-zone-btn bm-tooltip" data-placement="left"><span class="link-zone-icon"></span><div class="tooltip-box"><div class="tooltip-text"><span class="tt-note">This zone is already linked with<br/> Layout:</span> <strong>{{model.linked_layout.name}}</strong><br/> <span class="tt-note">Zone:</span> <strong>{{model.linked_zone_identifier}}</strong></div></div></span>
+          <span class="zone-btn linked-zone-btn bm-tooltip" data-placement="left"><span class="link-zone-icon"></span><div class="tooltip-box"><div class="tooltip-text"><span class="tt-note">This zone is already linked with<br/> Layout:</span> <strong>{{model.linked_layout.name}}</strong><br/> <span class="tt-note">Zone:</span> <strong>{{model.linked_zone_name}}</strong></div></div></span>
           <div class="dropdown">
               <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
               <ul class="dropdown-menu dropdown-menu-right">
