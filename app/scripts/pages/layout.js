@@ -29,6 +29,10 @@ module.exports = LayoutBasePage.extend({
       base_layout: this.base_layout
     }).render_to('.app-center');
 
+    if(!layout.request.read.published && !layout.has('type')){
+      this.create_new_draft();
+      return;
+    }
 
     if(layout.get('published')){
       this.create_new_draft();
