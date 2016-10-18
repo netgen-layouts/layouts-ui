@@ -435,7 +435,12 @@
 }
 
 
-
+.ae-placeholder {
+  ul,
+  ol {
+    padding-left:1em;
+  }
+}
 .ae-placeholder:empty:not(:focus):before{margin-bottom:10px; display:block; color:#666;}
 
 
