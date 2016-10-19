@@ -427,22 +427,15 @@
   }
 }
 
-.ae-ui {
-  .ae-toolbar,
-  [class^=ae-toolbar-] {
-    z-index:100;
-  }
-}
-
-
-.ae-placeholder {
+.rich-text-editor {
   ul,
   ol {
     padding-left:1em;
   }
+  &:empty:not(:focus)::before {
+    margin-bottom:10px; display:block; color:#666;
+  }
 }
-.ae-placeholder:empty:not(:focus):before{margin-bottom:10px; display:block; color:#666;}
-
 
 
 
