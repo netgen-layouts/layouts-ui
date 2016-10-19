@@ -49,7 +49,7 @@ module.exports = Block.extend({
   setup_editor: function() {
     var self = this;
 
-    this.$editor_el = this.$('.alloy-editor');
+    this.$editor_el = this.$('.rich-text-editor');
     this.editor = CKEDITOR.inline( this.$editor_el.get(0));
 
 

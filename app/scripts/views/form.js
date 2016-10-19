@@ -92,7 +92,7 @@ module.exports = Core.View.extend({
   render_form: function(response) {
     this.$el.html(response);
     var self = this;
-    $('[data-block].editing [data-inline-child], [data-block].editing .alloy-editor, [data-block].editing .ace-editor').each(function() {
+    $('[data-block].editing [data-inline-child], [data-block].editing .rich-text-editor, [data-block].editing .ace-editor').each(function() {
       var name = $(this).data('attr');
       self.$('[name*="[' + name + ']"]').parent().hide();
     });
