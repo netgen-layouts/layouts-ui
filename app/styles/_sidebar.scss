@@ -173,6 +173,23 @@
         margin-top:-0.8em;
       }
     }
+    input[type="range"] {
+      margin:0 0 1em;
+    }
+    .range-value {
+      margin-left:8px;
+      padding:2px 6px;
+      display:inline-block;
+      background:$sidebarinput;
+      color:#fff;
+      border-radius:$borderRadius;
+    }
+    .range-range {
+      font-size:11px;
+      .range-max {
+        float:right;
+      }
+    }
   }
   .checkbox {
     margin:0;

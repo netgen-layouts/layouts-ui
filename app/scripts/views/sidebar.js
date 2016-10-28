@@ -30,12 +30,14 @@ module.exports = Core.View.extend({
     // 'change #collection-type': '$change_collection_type',
     'click .js-apply': '$apply',
     'click .toggle-link': '$panel_toggle',
-    'click .aside-tab-control a': '$tab_toggle'
+    'click .aside-tab-control a': '$tab_toggle',
+    'input input[type="range"]': '$range_value'
   },
 
   on_loaded: function(){
     this.$toggle_panels_on_render();
     this.$multiple_select_height();
+    this.$add_range_values();
     this.remove_loader();
   },
 
@@ -84,6 +86,16 @@ module.exports = Core.View.extend({
       (l > 10) && (l = 10);
       $(this).attr('size', l);
     });
+  },
+
+  $add_range_values: function(){
+    this.$('input[type="range"]').each(function(){
+      $(this).before('<div class="range-range"><span class="range-min">' + $(this).attr('min') + '</span><span class="range-max">' + $(this).attr('max') + '</span></div>').siblings('label').append('<span class="range-value">' + $(this).val() + '</span>');
+    });
+  },
+
+  $range_value: function(e){
+    $(e.currentTarget).siblings('label').find('.range-value').html(e.currentTarget.value);
   },
 
   $tab_toggle: function(e){
