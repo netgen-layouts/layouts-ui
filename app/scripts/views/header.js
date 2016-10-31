@@ -56,7 +56,7 @@ module.exports = Core.View.extend({
 
   set_name: function(e){
     e.preventDefault();
-    this.model.save(this.serialize().params, {method: 'POST', patch: true});
+    this.model.save(this.serialize().params, {patch: true});
   },
 
   enter_editing: function(){
