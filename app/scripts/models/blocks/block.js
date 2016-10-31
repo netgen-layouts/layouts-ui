@@ -124,6 +124,7 @@ module.exports = Core.Model.extend({
     var previous_zone = this._previousAttributes.zone_identifier;
     return this.save(attributes, {
       via: 'move',
+      method: 'POST',
       patch: true
     }).done(function() {
       this.update_zone_blocks(previous_zone, attributes.zone_identifier);

@@ -35,6 +35,7 @@ module.exports = Core.View.extend({
     },{
       via: 'move',
       url: this.model.url('move'),
+      method: 'POST',
       patch: true
     });
     return this;
