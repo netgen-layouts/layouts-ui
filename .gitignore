@@ -15,6 +15,7 @@ onesky.json
 local_config.json
 tests/coverage
 /vendor
+/build
 composer.lock
 .php_cs.cache
 Resources/public/dev
