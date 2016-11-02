@@ -90,7 +90,7 @@ module.exports = Core.View.extend({
 
   $add_range_values: function(){
     this.$('input[type="range"]').each(function(){
-      $(this).before('<div class="range-range"><span class="range-min">' + $(this).attr('min') + '</span><span class="range-max">' + $(this).attr('max') + '</span></div>').siblings('label').append('<span class="range-value">' + $(this).val() + '</span>');
+      $(this).siblings('label').append('<span class="range-value">' + $(this).val() + '</span>');
     });
   },
 
