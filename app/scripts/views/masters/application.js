@@ -2,7 +2,7 @@
 
 var Core = require('netgen-core');
 
-var TopToolbarView = require('../menues/toolbar');
+var Toolbar = require('../menues/toolbar');
 
 
 module.exports = Core.View.extend({
@@ -13,7 +13,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
     //this.$el.removeClass('preview');
 
-    new TopToolbarView({
+    new Toolbar({
       el: '.bottom-menu'
     }).render();
 

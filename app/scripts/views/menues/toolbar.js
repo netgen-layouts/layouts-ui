@@ -2,8 +2,8 @@
 
 var Core = require('netgen-core');
 
-module.exports = Core.View.extend({
-  events: {
+module.exports = Core.View.extend(
+{  events: {
     //'click': '$activate',
     'click .js-layout-mapper:not(.disable)': '$toggle_layout_mapper'
   },
@@ -19,13 +19,13 @@ module.exports = Core.View.extend({
     this.$('.active').removeClass('active');
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
 
+    var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared') || !Core.g.shared_layouts.length;
 
-    if(Core.state.in_mode('edit_master', 'edit_shared') || !Core.g.shared_layouts.length){
-      this.$('[data-mode="linking"]').addClass('disable');
-    }else{
-      this.$('[data-mode="linking"]').removeClass('disable');
+    if(!Core.g.shared_layouts.length){
+      alert('shared_layouts count is: 0');
     }
 
+    this.$('[data-mode="linking"]')[should_disable_linking ? 'addClass' : 'removeClass']('disable');
     return this;
   },
 
