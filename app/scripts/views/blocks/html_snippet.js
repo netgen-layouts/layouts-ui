@@ -12,7 +12,6 @@ module.exports = Block.extend({
 
   render: function() {
     Block.prototype.render.apply(this,arguments);
-    window.hs = this;
     this.setup_editor();
   },
 
