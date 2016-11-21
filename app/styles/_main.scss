@@ -1,0 +1,39 @@
+html, body{height: 100%; background: $toolbarbg2;}
+
+body {
+  font-size:16px;
+  font-family:'Roboto', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:hidden;
+}
+
+img{max-width:100%;}
+
+.field{
+  margin-bottom: 20px;
+}
+
+textarea{
+  width: 100%;
+  height: 100px;
+}
+
+input[type="text"]{
+  width: 100%;
+  background-color:white;
+}
+
+fieldset{
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+legend{
+  border: none;
+  display: inline-block;
+  width: auto;
+  padding: 0 10px;
+  margin-bottom: 0px;
+}

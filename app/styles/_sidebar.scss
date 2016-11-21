@@ -515,8 +515,8 @@
     margin:0;
     background-color:hsla(0, 100, 61, 0.25);
   }
-  .no-placeholder:before,
-  .no-placeholder:after {
+  .no-placeholder::before,
+  .no-placeholder::after {
     display:none;
   }
   .sorting & {
