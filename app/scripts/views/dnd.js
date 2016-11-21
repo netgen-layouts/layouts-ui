@@ -148,7 +148,8 @@ module.exports = {
         draggable.is_block_type() && draggable.create_new_block();
       },
 
-      start: function() {
+      start: function(e, ui) {
+        ui.helper.addClass('ngc');
         Core.trigger('sortable:start');
 
         /*This is needed because of min-height*/
@@ -203,7 +204,8 @@ module.exports = {
           return item.clone();
         },
 
-        start: function(){
+        start: function(e, ui){
+          ui.helper.addClass('ngc');
           Core.trigger('sortable:start');
         },
 
