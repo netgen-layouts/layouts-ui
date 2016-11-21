@@ -129,7 +129,7 @@ var _ = require('underscore');
     },
 
     set_class: function(){
-      (this.detect_mode() === 'disabler') ? this.$el.addClass('zone-disabled') : this.$el.removeClass('zone-disabled');
+      (this.detect_mode() === 'chooser') ? this.$el.addClass('zone-disabled') : this.$el.removeClass('zone-disabled');
       (this.detect_mode() === 'linker') ? this.$el.addClass('shared-zone') : this.$el.removeClass('shared-zone');
     },
 
