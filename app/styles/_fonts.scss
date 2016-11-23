@@ -83,13 +83,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-button:before {
+  content: "\e923";
+}
+.icon-markdown:before {
+  content: "\e922";
+}
 .icon-change_layout:before {
   content: "\e91b";
 }
 .icon-ez_content_field:before {
   content: "\e91c";
 }
-.icon-full_view:before {
+.icon-ez_full_view:before {
   content: "\e91d";
 }
 .icon-linking:before {
