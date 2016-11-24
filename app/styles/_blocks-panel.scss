@@ -86,7 +86,7 @@
     margin-bottom:0.125em;
   }
 
-  $blockTypes: ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('markdown', '\e922'), ('link', '\e923');
+  $blockTypes: ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('markdown', '\e922'), ('button', '\e923');
 
   @each $block in $blockTypes {
     &.#{nth($block, 1)} .icon::before {

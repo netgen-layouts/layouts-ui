@@ -6,6 +6,6 @@ module.exports = {
   text:  require('./text'),
   rich_text:  require('./rich_text'),
   map:  require('./map'),
-  link:  require('./link'),
+  button:  require('./button'),
   html_snippet:  require('./html_snippet')
 };
