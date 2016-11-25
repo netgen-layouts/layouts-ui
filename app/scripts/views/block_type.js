@@ -9,7 +9,7 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.$el.addClass(this.model.get('identifier'));
+    this.$el.addClass('icn-' + this.model.get('identifier'));
     return this;
   },
 
