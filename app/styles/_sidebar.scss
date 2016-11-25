@@ -295,7 +295,7 @@
     }
   }
 
-  .js-input-browse {
+  .input-browse {
     .js-clear {
       background:$sidebarinput;
       border-radius:$borderRadius 0 0 $borderRadius;
@@ -324,6 +324,7 @@
     }
   }
   .js-multiple-browse {
+    margin:0 0 1em;
     .js-trigger {
       background:hsl(0, 0, 35);
       color:#fff;
