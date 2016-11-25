@@ -21,10 +21,6 @@ module.exports = Core.View.extend(
 
     var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared') || !Core.g.shared_layouts.length;
 
-    if(!Core.g.shared_layouts.length){
-      alert('shared_layouts count is: 0');
-    }
-
     this.$('[data-mode="linking"]')[should_disable_linking ? 'addClass' : 'removeClass']('disable');
     return this;
   },

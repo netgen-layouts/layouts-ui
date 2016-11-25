@@ -19,15 +19,17 @@ module.exports =  Page.extend({
     var should_load_published = Core.router.route_name === 'layout_preview';
 
     return  $.when(Core.g.config.fetch_once())
+             .then(function(){
+               return Core.g.shared_layouts.fetch_once({via: 'shared'})
+             })
              .then(function() {
                 return $.when(
                   Core.g.layout.fetch({data: {published: should_load_published }}),
-                  Core.g.shared_layouts.fetch_once({via: 'shared'}),
                   draft_layout_id ? base_layout.fetch_once() : true
                 )
              })
              .then(function() {
-               return $.when(Core.g.block_types.fetch_once())
+               return Core.g.block_types.fetch_once();
              })
              .then(done, function(xhr) {
                done(xhr);
