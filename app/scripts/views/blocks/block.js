@@ -167,9 +167,9 @@ module.exports = Core.View.extend({
     this.model.copy();
   },
 
-  on_copy: function(data){
-    var new_block = Core.model_helper.init_block_from_type(this.model, data.attributes);
-    var view_block = Core.blocks.create_view(data.attributes.identifier, new_block);
+  on_copy: function(new_block_attributes){
+    var new_block = Core.model_helper.init_block_from_type(this.model, new_block_attributes);
+    var view_block = Core.blocks.create_view(new_block.attributes.definition_identifier, new_block);
     this.$el.closest('.zone-body').append(view_block.$el);
     view_block.$edit();
   },

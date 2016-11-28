@@ -112,10 +112,13 @@ module.exports = Core.Model.extend({
   },
 
   copy: function(){
-    return this.save(null, {
+    return this.sync('create', this, {
       via: 'copy',
       method: 'POST',
-    });
+      silent: true,
+    }).done(function(resp) {
+      this.trigger('copy:success', resp);
+    }.bind(this));
   },
 
   move: function(data){
