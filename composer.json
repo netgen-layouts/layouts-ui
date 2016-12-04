@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Netgen\\Bundle\\BlockManagerUIBundle\\": ""
+            "Netgen\\Bundle\\BlockManagerUIBundle\\": "bundle/"
         }
     },
     "minimum-stability": "dev",

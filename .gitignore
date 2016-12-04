@@ -18,5 +18,5 @@ tests/coverage
 /build
 composer.lock
 .php_cs.cache
-Resources/public/dev
-Resources/public/css/vendor.css
+bundle/Resources/public/dev
+bundle/Resources/public/css/vendor.css

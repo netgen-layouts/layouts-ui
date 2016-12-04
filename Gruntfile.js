@@ -50,8 +50,8 @@ module.exports = function(grunt) {
   // configurable paths
   var config = {
     app: 'app',
-    dist: 'Resources/public',
-    dev:  'Resources/public/dev',
+    dist: 'bundle/Resources/public',
+    dev:  'bundle/Resources/public/dev',
     local: grunt.file.readJSON(local_config)
   };
 
