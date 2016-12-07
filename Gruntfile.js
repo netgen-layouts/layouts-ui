@@ -366,8 +366,8 @@ module.exports = function(grunt) {
 
       symlinks: {
         command: [
-          'ln -s ../../../app/fonts <%= config.dev %>/fonts',
-          'ln -s ../../../app/images <%= config.dev %>/images'
+          'ln -s ../../../../app/fonts <%= config.dev %>/fonts',
+          'ln -s ../../../../app/images <%= config.dev %>/images'
         ].join('\n')
       }
     },
