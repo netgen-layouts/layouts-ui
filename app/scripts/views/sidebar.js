@@ -36,7 +36,6 @@ module.exports = Core.View.extend({
 
   on_loaded: function(){
     this.$toggle_panels_on_render();
-    this.$multiple_select_height();
     this.$add_range_values();
     this.remove_loader();
   },
@@ -78,14 +77,6 @@ module.exports = Core.View.extend({
         this.$('#' + key).removeClass('in');
       }
     }
-  },
-
-  $multiple_select_height: function(){
-    this.$('select[multiple]').each(function(){
-      var l = $(this).find('option').length;
-      (l > 10) && (l = 10);
-      $(this).attr('size', l);
-    });
   },
 
   $add_range_values: function(){

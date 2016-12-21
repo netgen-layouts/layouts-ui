@@ -96,6 +96,7 @@ module.exports = Core.View.extend({
       var name = $(this).data('attr');
       self.$('[name*="[' + name + ']"]').parent().hide();
     });
+    this.$multiple_select_height();
 
     self.trigger_render();
   },
@@ -112,6 +113,13 @@ module.exports = Core.View.extend({
     return $(e.target).hasClass('js-skip-on-change');
   },
 
+  $multiple_select_height: function(){
+    this.$('select[multiple]').each(function(){
+      var l = $(this).find('option').length;
+      (l > 10) && (l = 10);
+      $(this).attr('size', l);
+    });
+  },
 
   $submit: function(e) {
     e && e.preventDefault();
