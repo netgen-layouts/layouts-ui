@@ -1,6 +1,6 @@
 {
-    "name": "netgen/block-manager-ui-bundle",
-    "description": "Netgen Block Manager UI bundle",
+    "name": "netgen/block-manager-ui",
+    "description": "Netgen Block Manager UI",
     "authors": [
         {
             "name": "Netgen",
@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "netgen/core-ui-bundle": "^1.0@dev",
-        "netgen/content-browser-ui-bundle": "^1.0@dev"
+        "netgen/core-ui": "^1.0@dev",
+        "netgen/content-browser-ui": "^1.0@dev"
     },
     "autoload": {
         "psr-4": {
