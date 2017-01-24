@@ -134,31 +134,17 @@
     left:0;
     top:0;
     width:$leftWidth;
-    height:$topHeight+1;
-    border-bottom:1px solid $toolbarBorderColor;
+    height:$topHeight;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:$toolbarbg2;
+    background:#1f1f1f;
   }
   .app-logo {
-    font-size:11px;
-    display:inline-block;
-    color:$btnprimary;
-    &::before,
-    &::after {
-      content:"";
-      display:block;
-      background:currentColor;
-      border-radius:50%;
-      width:1em;
-      height:1em;
-    }
-    &::after {
-      width:1.375em;
-      height:1.375em;
-      margin:-0.125em 0 0 1em;
-    }
+    display:block;
+    background:transparent url('../images/layouts-logo.svg') no-repeat 50% 50%;
+    width:20px;
+    height:24px;
   }
   .bottom-menu{
     position: absolute;
