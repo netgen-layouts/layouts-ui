@@ -75,10 +75,10 @@ module.exports = Core.Model.extend({
     return this.get('definition_identifier') === kind;
   },
 
-
-  belongs_to_current_layout: function(){
-    return Core.g.layout.id === this.get('layout_id');
-  },
+  // //FIXME
+  // belongs_to_current_layout: function(){
+  //   return Core.g.layout.id === this.get('layout_id');
+  // },
 
 
 
@@ -100,10 +100,8 @@ module.exports = Core.Model.extend({
 
 
   update_zone_blocks: function(prev_zone_id, new_zone_id){
-    console.log(arguments);
     var prev_zone = Core.g.layout.zones.get(prev_zone_id);
     var new_zone = Core.g.layout.zones.get(new_zone_id);
-
     var id = this.get('id');
     prev_zone.remove_block(id);
     new_zone.add_block(id);
@@ -113,19 +111,22 @@ module.exports = Core.Model.extend({
 
   copy: function(){
     return this.sync('create', this, {
+      url: this.url('copy/zone'),
       via: 'copy',
       method: 'POST',
       silent: true,
     }).done(function(resp) {
+      resp.zone_identifier = this.get('zone_identifier');
+      resp.layout_id = this.get('layout_id');
       this.trigger('copy:success', resp);
     }.bind(this));
   },
 
   move: function(data){
-
-    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position');
+    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id');
     var previous_zone = this._previousAttributes.zone_identifier;
     return this.save(attributes, {
+      url: this.url('move/zone'),
       via: 'move',
       method: 'POST',
       patch: true

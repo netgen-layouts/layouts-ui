@@ -19,6 +19,7 @@ module.exports = {
   initialize: function(){
     this._super('initialize', arguments);
     this.listenTo(Core.state, 'change', this.on_state);
+    this.listenTo(this.model, 'restore:success', this.render);
     return this;
   },
 
@@ -40,7 +41,7 @@ module.exports = {
 
 
   update_contenteditable: function(){
-    var editable = Core.state.in_mode('edit', 'edit_shared') && this.model.belongs_to_current_layout();
+    var editable = Core.state.in_mode('edit', 'edit_shared'); // && this.model.belongs_to_current_layout();
     this.$inline.attr('contenteditable', editable)
   },
 

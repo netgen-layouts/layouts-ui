@@ -30,10 +30,14 @@ var _ = require('underscore');
 
     load_blocks: function(){
       var view_block, views = [];
-
+      console.log('load blocks');
       var views = _.map(this.model.blocks(), function(block){
+        block.set({
+          zone_identifier: this.model.id,
+          layout_id: this.model.get('layout_id')
+        });
         return Core.blocks.create_view(block.get('definition_identifier'), block).$el;
-      });
+      }, this);
 
       this.$('.zone-body').append(views);
 
