@@ -112,7 +112,7 @@ module.exports = Core.View.extend(DndView).extend({
   $edit: function(e){
     // Prevent propagation
     if(e && e.timeStamp === Core.last_edited_block_timestamp){ return; }
-    Core.last_edited_block_timestamp = e.timeStamp;
+    Core.last_edited_block_timestamp = e && e.timeStamp;
 
     // Return if already editing
     if(this.editing){ return; }
