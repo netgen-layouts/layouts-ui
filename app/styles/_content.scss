@@ -233,7 +233,7 @@
   &.editing:hover,
   &.ui-sortable-helper {
     border-color:$btnprimary;
-    .block-header {
+    > .block-header {
       background:$btnprimary;
       color:#fff;
       .template_name {
@@ -597,3 +597,13 @@ body .ace-editor{font-size:12pt;}
 
 
 .ae-ui{position:relative; z-index:9999;}
+
+
+
+[data-placeholder]{
+  min-height: 100px; background:#eee;
+  padding:5px;
+  border:1px dashed #999;
+  &.forbidden{background:#e99;}
+}
+

@@ -4,8 +4,10 @@ var Core = require('netgen-core');
 var $ = Core.$;
 var SideBarView = require('../sidebar');
 var _ = require('underscore');
+var DndView = require('../dnd');
+var Blocks = require('../../collections/blocks');
 
-module.exports = Core.View.extend({
+module.exports = Core.View.extend(DndView).extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
@@ -34,18 +36,20 @@ module.exports = Core.View.extend({
 
   events: {
     'click': '$edit',
-    'click .js-destroy': '$destroy',
-    'click .js-copy': '$copy_block',
-    'click .js-revert': '$restore_block',
-    'click .js-modal-mode': 'modal_mode'
+    'click > .block-header .js-destroy': '$destroy',
+    'click > .block-header .js-copy': '$copy_block',
+    'click > .block-header .js-revert': '$restore_block',
+    'click > .block-header .js-modal-mode': 'modal_mode'
   },
 
 
   setup_dom_element: function(){
-    this.model.is_in_container() && this.$el.attr('data-in-container', '');
+    // this.model.is_in_container() && this.$el.attr('data-in-container', '');
     this.$el
       .attr('data-block', '')
       .attr('data-type', this.model.get('identifier'));
+
+    this.is_container() && this.$el.attr('data-container', '');
     return this;
   },
 
@@ -63,11 +67,17 @@ module.exports = Core.View.extend({
     }
     Core.View.prototype.render.apply(this, arguments);
     this.prepare_modal_mode();
+    this.render_container();
     return this;
   },
 
+  render_container: function () {
+    this.setup_dnd_for_containers_and_zones();
+    this.load_inner_blocks();
+  },
+
   $container_el: function(){
-    return this.$el.parents('[data-type="Container"]');
+    return this.$el.parents('[data-container]');
   },
 
   is_in_container: function(){
@@ -90,18 +100,25 @@ module.exports = Core.View.extend({
   load_sidebar: function(){
     this.edit_view = new SideBarView({
       model: this.model
-    })
-
+    });
     $('.right-sidebar').html(this.edit_view.$el);
-
-    this.edit_view.load()
-
+    this.edit_view.load();
   },
 
-  $edit: function(){
-    if(this.editing){return;}
-    // $('#sidebar').addClass('loading');
+  /*
+    Custom prevent propagation because we want to allow most of the events and
+    only stop those to the parent
+  */
+  $edit: function(e){
+    // Prevent propagation
+    if(e && e.timeStamp === Core.last_edited_block_timestamp){ return; }
+    Core.last_edited_block_timestamp = e.timeStamp;
+
+    // Return if already editing
+    if(this.editing){ return; }
+
     Core.trigger('editing:unmark', {block: this});
+
     this.editing_mark();
     this.load_sidebar();
     return this;
@@ -164,13 +181,19 @@ module.exports = Core.View.extend({
   },
 
   $copy_block: function(){
-    this.model.copy();
+    console.log('copy_block copy_block copy_block copy_block copy_block', this);
+    if(this.is_in_container()){
+      this.model.copy_in_container();
+    } else {
+      this.model.copy();
+    }
   },
 
   on_copy: function(new_block_attributes){
     var new_block = Core.model_helper.init_block_from_type(this.model, new_block_attributes);
     var view_block = Core.blocks.create_view(new_block.attributes.definition_identifier, new_block);
-    this.$el.closest('.zone-body').append(view_block.$el);
+    // this.$el.closest('[data-receiver]').append(view_block.$el);
+    this.$el.after(view_block.$el);
     view_block.$edit();
   },
 
@@ -199,5 +222,33 @@ module.exports = Core.View.extend({
 
   enter_modal_mode: function(){},
   exit_modal_mode: function(){},
+
+
+
+  load_inner_blocks: function(){
+    var view_block, views = [];
+    console.log('load inner blocks', this.model.get('placeholders'));
+    var zone_id = this.model.zone().id;
+    var layout_id = this.model.zone().get('layout_id');
+    var block_id = this.model.id;
+    _.each(this.model.get('placeholders'), function(placeholder){
+      var blocks = new Blocks(placeholder.blocks);
+      var views = blocks.map(function(block){
+        block.set({
+          block_id: block_id,
+          placeholder: placeholder.identifier,
+          zone_identifier: zone_id,
+          layout_id: layout_id
+        });
+        return Core.blocks.create_view(block.get('definition_identifier'), block).$el;
+      }, this);
+
+      this.$('[data-placeholder="'+placeholder.identifier+'"]').append(views);
+
+    }, this)
+
+    return this;
+
+  },
 
 });

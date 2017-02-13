@@ -12,6 +12,23 @@ Draggable.prototype.$zone = function() {
   return this.$drag_item.closest('[data-zone]');
 };
 
+Draggable.prototype.$placeholder = function() {
+  return this.$drag_item.closest('[data-placeholder]');
+};
+
+Draggable.prototype.placeholder_id = function() {
+  return this.$placeholder().data('placeholder');
+};
+
+Draggable.prototype.$parent_block = function() {
+  return this.$drag_item.parents('[data-block]').data('_view');
+};
+
+Draggable.prototype.parent_block_id = function() {
+  if(!this.$parent_block()){return null;}
+  return this.$parent_block().model.id;
+};
+
 Draggable.prototype.zone_id = function() {
   return this.$zone().data('zone');
 };
@@ -65,13 +82,26 @@ Draggable.prototype.create_new_block = function() {
     block_type: identifier,
     zone_identifier: this.zone_id(),
     layout_id: Core.g.layout.id,
-    position: this.position()
+    position: this.position(),
+    placeholder: this.placeholder_id(),
+    block_id: this.parent_block_id()
   };
+
+
 
   var new_block = Core.model_helper.init_block_from_type(this.model, attributes);
   var view_block = Core.blocks.create_view(identifier, new_block);
   this.$drag_item.after(view_block.$el);
-  new_block.save();
+
+  if(this.parent_block_id()){
+    console.warn('Save in container');
+    new_block.save({}, {
+      url: new_block.url(attributes.block_id)
+    });
+  }else{
+    console.warn('Save')
+    new_block.save();
+  }
 
 
 
@@ -81,12 +111,23 @@ Draggable.prototype.create_new_block = function() {
 
 
 
-Draggable.prototype.save_new_position = function() {
+Draggable.prototype.save_new_position_for_zone = function() {
   this.model.set({
     position: this.position(),
     zone_identifier: this.zone_id()
   });
   this.model.move();
+};
+
+
+Draggable.prototype.save_new_position_for_container = function() {
+  this.model.set({
+    position: this.position(),
+    zone_identifier: this.zone_id(),
+    placeholder: this.placeholder_id(),
+    block_id: this.parent_block_id()
+  });
+  this.model.move_to_container();
 };
 
 

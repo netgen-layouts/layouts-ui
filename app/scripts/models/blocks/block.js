@@ -60,7 +60,7 @@ module.exports = Core.Model.extend({
   },
 
   is_container: function(){
-    return this.kind_of('Container');
+    return this.attributes.is_container;
   },
 
   is_in_container: function(){
@@ -98,6 +98,10 @@ module.exports = Core.Model.extend({
     return Core.g.layout.zones.get(this.get('zone_identifier'));
   },
 
+  layout: function() {
+    this.zone().layout();
+  },
+
 
   update_zone_blocks: function(prev_zone_id, new_zone_id){
     var prev_zone = Core.g.layout.zones.get(prev_zone_id);
@@ -122,11 +126,42 @@ module.exports = Core.Model.extend({
     }.bind(this));
   },
 
-  move: function(data){
+
+  copy_in_container: function(){
+    return this.sync('create', this, {
+      url: this.url('copy'),
+      via: 'copy',
+      method: 'POST',
+      silent: true,
+    }).done(function(resp) {
+      console.log(resp);
+      resp.zone_identifier = this.get('zone_identifier');
+      resp.layout_id = this.get('layout_id');
+      this.trigger('copy:success', resp);
+    }.bind(this));
+  },
+
+  move: function(){
     var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id');
     var previous_zone = this._previousAttributes.zone_identifier;
+    // attributes.placeholder = "main"
+    // attributes.block_id = 288;
     return this.save(attributes, {
       url: this.url('move/zone'),
+      via: 'move',
+      method: 'POST',
+      patch: true
+    }).done(function() {
+      this.update_zone_blocks(previous_zone, attributes.zone_identifier);
+    }.bind(this));
+  },
+
+
+  move_to_container: function(){
+    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id', 'block_id', 'placeholder');
+    var previous_zone = this._previousAttributes.zone_identifier;
+    return this.save(attributes, {
+      url: this.url('move'),
       via: 'move',
       method: 'POST',
       patch: true

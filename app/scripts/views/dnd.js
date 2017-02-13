@@ -14,36 +14,36 @@ var orig = $.ui.sortable.prototype._mouseDrag;
 $.ui.sortable.prototype._mouseDrag = function(event){
 
 
-    var i, item, itemElement, intersection,
-      o = this.options,
-      scrolled = false;
+  var i, item, itemElement, intersection,
+    o = this.options,
+    scrolled = false;
 
-    //Compute the helpers position
-    this.position = this._generatePosition(event);
-    this.positionAbs = this._convertPositionTo("absolute");
+  //Compute the helpers position
+  this.position = this._generatePosition(event);
+  this.positionAbs = this._convertPositionTo("absolute");
 
-    var scrollParent = o.customScrollParent;
+  var scrollParent = o.customScrollParent;
 
-    if (!this.lastPositionAbs) {
-      this.lastPositionAbs = this.positionAbs;
+  if (!this.lastPositionAbs) {
+    this.lastPositionAbs = this.positionAbs;
+  }
+
+  if(scrollParent){
+    o.scroll = false;
+    var overflowOffset = scrollParent.offset();
+    if((overflowOffset.top + scrollParent[0].offsetHeight) - event.pageY < o.scrollSensitivity) {
+      scrollParent[0].scrollTop = scrolled = scrollParent[0].scrollTop + o.scrollSpeed;
+    } else if(event.pageY - overflowOffset.top < o.scrollSensitivity) {
+      scrollParent[0].scrollTop = scrolled = scrollParent[0].scrollTop - o.scrollSpeed;
     }
 
-    if(scrollParent){
-      o.scroll = false;
-      var overflowOffset = scrollParent.offset();
-      if((overflowOffset.top + scrollParent[0].offsetHeight) - event.pageY < o.scrollSensitivity) {
-        scrollParent[0].scrollTop = scrolled = scrollParent[0].scrollTop + o.scrollSpeed;
-      } else if(event.pageY - overflowOffset.top < o.scrollSensitivity) {
-        scrollParent[0].scrollTop = scrolled = scrollParent[0].scrollTop - o.scrollSpeed;
-      }
-
-      if((overflowOffset.left + scrollParent[0].offsetWidth) - event.pageX < o.scrollSensitivity) {
-        scrollParent[0].scrollLeft = scrolled = scrollParent[0].scrollLeft + o.scrollSpeed;
-      } else if(event.pageX - overflowOffset.left < o.scrollSensitivity) {
-        scrollParent[0].scrollLeft = scrolled = scrollParent[0].scrollLeft - o.scrollSpeed;
-      }
-
+    if((overflowOffset.left + scrollParent[0].offsetWidth) - event.pageX < o.scrollSensitivity) {
+      scrollParent[0].scrollLeft = scrolled = scrollParent[0].scrollLeft + o.scrollSpeed;
+    } else if(event.pageX - overflowOffset.left < o.scrollSensitivity) {
+      scrollParent[0].scrollLeft = scrolled = scrollParent[0].scrollLeft - o.scrollSpeed;
     }
+
+  }
 
 
 
@@ -58,7 +58,7 @@ $.ui.sortable.prototype._mouseDrag = function(event){
 
 module.exports = {
 
-  connect_with: '[data-zone]:not(".linked_zone") .zone-body, [data-container], [data-trash]',
+  connect_with: '[data-zone]:not(".linked_zone") [data-receiver], [data-placeholder], [data-trash]',
   canceled_attr: 'canceled',
 
 
@@ -71,31 +71,35 @@ module.exports = {
   },
 
   remove_forbidden_class: function(e){
-    $(e.target).closest('[data-type="Container"]').removeClass('forbidden');
+    $(e.target).removeClass('forbidden');
   },
 
-  check_containers: function(e, ui){
-    var drag_view, receiver_view,
-        receiver_element = $(e.target).closest('[data-type="Container"]');
+  add_forbidden_class: function(e){
+    $(e.target).addClass('forbidden');
+  },
 
-    if(!receiver_element.length){
-      this.set_canceled(ui, false);
-      return;
-    }
+
+  check_containers: function(e, ui){
+    var DEPTH = 0;
+    var drag_view, receiver_view, drag_or_receiver_is_container,
+        receiver_element = $(e.target).closest('[data-container]');
+
+    if(!receiver_element.length){ return; }
 
     drag_view = $(ui.item).data('_view');
     receiver_view = receiver_element.data('_view');
+    drag_or_receiver_is_container = receiver_view.model.is_container() || drag_view.model.is_container();
 
+    var parents_length = $(e.target).parents('[data-placeholder]').length;
+    var children_length = drag_view.$('[data-placeholder]').length;
 
-    if(drag_view.model.is_container() && receiver_view.model.is_container()){
-      receiver_element.addClass('forbidden');
+    if((parents_length + children_length) > DEPTH){
+      this.add_forbidden_class(e);
       this.set_canceled(ui, true);
+    }else{
+      this.set_canceled(ui, false);
     }
 
-    if(drag_view.model.is_container && drag_view.model.is_container()){
-      receiver_element.addClass('forbidden');
-      this.set_canceled(ui, true);
-    }
   },
 
   receive_is_canceled: function(ui){
@@ -121,7 +125,7 @@ module.exports = {
 
   setup_dnd_for_containers_and_zones: function(){
     var self = this,
-        $sort_element = this.$('.zone-body'),
+        $sort_element = this.$('[data-receiver]'),
         el_moved = false;
 
     $sort_element.sortable({
@@ -138,12 +142,14 @@ module.exports = {
 
       //Only after receiving from other sortable
       receive: function(e, ui){
+        // console.log(this);
         if(self.receive_is_canceled(ui)){ return; }
         var draggable = new Draggable(e, ui);
         if(self.is_zone && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
           return;
         }
 
+        ui.item.real_target = this;
         draggable.mark_sender_as_copied();
         draggable.is_block_type() && draggable.create_new_block();
       },
@@ -162,12 +168,19 @@ module.exports = {
         el_moved = true;
       },
       stop: function(e, ui){
-        var draggable = new Draggable(e, ui),
-            receiver = new Receiver($(this).closest('[data-zone]')),
+        var real_target = ui.item.real_target || this,
+            draggable = new Draggable(e, ui),
+            receiver = new Receiver($(real_target).closest('[data-view]')),
             trashed = draggable.read_trashed_and_clear();
 
+        console.log('is_zone', receiver.is_zone());
+
         if(!trashed && el_moved){
-          draggable.save_new_position();
+          if (receiver.is_zone()){
+            draggable.save_new_position_for_zone();
+          }else{
+            draggable.save_new_position_for_container();
+          }
           draggable.is_zone_changed_when_moved_to(receiver);
           el_moved = false;
         }

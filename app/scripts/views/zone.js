@@ -41,7 +41,6 @@ var _ = require('underscore');
 
       this.$('.zone-body').append(views);
 
-
       return this;
     },
 
