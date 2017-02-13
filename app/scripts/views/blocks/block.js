@@ -192,8 +192,8 @@ module.exports = Core.View.extend(DndView).extend({
   on_copy: function(new_block_attributes){
     var new_block = Core.model_helper.init_block_from_type(this.model, new_block_attributes);
     var view_block = Core.blocks.create_view(new_block.attributes.definition_identifier, new_block);
-    // this.$el.closest('[data-receiver]').append(view_block.$el);
-    this.$el.after(view_block.$el);
+    this.$el.closest('[data-receiver]').append(view_block.$el);
+    // this.$el.after(view_block.$el);
     view_block.$edit();
   },
 
