@@ -240,6 +240,7 @@ module.exports = Core.View.extend(DndView).extend({
           zone_identifier: zone_id,
           layout_id: layout_id
         });
+        Core.g.layout.get('blocks').add(block);
         return Core.blocks.create_view(block.get('definition_identifier'), block).$el;
       }, this);
 
