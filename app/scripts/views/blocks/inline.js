@@ -81,9 +81,7 @@ module.exports = {
 
 
   get_value: function($el) {
-    var value = $el.html().trim();
-    value = value.replace(/<br>/g, '\n');
-    value = value.replace(/&nbsp;/g, ' ');
+    var value = $el[0].innerText.trim();
     return value;
   },
 
