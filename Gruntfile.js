@@ -178,6 +178,10 @@ module.exports = function(grunt) {
           ]
         }]
       },
+      vendor: [
+        '<%= config.dist %>/vendor/ace-editor',
+        '<%= config.dist %>/vendor/ckeditor'
+      ],
       server: [
         '<%= config.dev %>'
       ]
@@ -354,6 +358,22 @@ module.exports = function(grunt) {
             'generated/*'
           ]
         }]
+      },
+      vendor: {
+        files: [
+          {
+            expand: true,
+            cwd: 'node_modules/ace-builds/src-min-noconflict',
+            src: '**',
+            dest: '<%= config.dist %>/vendor/ace-editor'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/ckeditor',
+            src: '**',
+            dest: '<%= config.dist %>/vendor/ckeditor'
+          }
+        ]
       }
 
     },
@@ -386,12 +406,18 @@ module.exports = function(grunt) {
       dist: [
         'handlebars',
         'browserify:dist',
+        'copy:vendor',
         'sass:dist',
         'imagemin',
         'svgmin'
       ]
     }
   });
+
+  grunt.registerTask('npm_to_vendor', [
+    'clean:vendor',
+    'copy:vendor'
+  ]);
 
   grunt.registerTask('server', function() {
     grunt.task.run([
