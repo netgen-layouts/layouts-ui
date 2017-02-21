@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "netgen/core-ui": "~0.7.0@dev",
-        "netgen/content-browser-ui": "~0.7.0@dev"
+        "netgen/core-ui": "~0.8.0@dev",
+        "netgen/content-browser-ui": "~0.8.0@dev"
     },
     "autoload": {
         "psr-4": {
@@ -22,7 +22,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.7.x-dev"
+            "dev-master": "0.8.x-dev"
         }
     }
 }
