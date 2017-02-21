@@ -34,7 +34,7 @@ module.exports = Core.Model.extend({
   },
 
   is_container: function(){
-    return this.kind_of('Container');
+    return this.attributes.is_container;
   },
 
   is_custom: function(){

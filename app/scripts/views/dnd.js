@@ -80,20 +80,19 @@ module.exports = {
 
 
   check_containers: function(e, ui){
-    var DEPTH = 0;
     var drag_view, receiver_view, drag_or_receiver_is_container,
         receiver_element = $(e.target).closest('[data-container]');
 
-    if(!receiver_element.length){ return; }
+    if(!receiver_element.length){
+      this.set_canceled(ui, false);
+      return;
+    }
 
     drag_view = $(ui.item).data('_view');
     receiver_view = receiver_element.data('_view');
-    drag_or_receiver_is_container = receiver_view.model.is_container() || drag_view.model.is_container();
+    drag_or_receiver_is_container = receiver_view.model.is_container() && drag_view.model.is_container();
 
-    var parents_length = $(e.target).parents('[data-placeholder]').length;
-    var children_length = drag_view.$('[data-placeholder]').length;
-
-    if((parents_length + children_length) > DEPTH){
+    if(drag_or_receiver_is_container){
       this.add_forbidden_class(e);
       this.set_canceled(ui, true);
     }else{
@@ -173,7 +172,6 @@ module.exports = {
             receiver = new Receiver($(real_target).closest('[data-view]')),
             trashed = draggable.read_trashed_and_clear();
 
-        console.log('is_zone', receiver.is_zone());
 
         if(!trashed && el_moved){
           if (receiver.is_zone()){
@@ -210,6 +208,8 @@ module.exports = {
         connectWith: self.connect_with,
         placeholder: 'no-placeholder',
         appendTo: document.body,
+        over: self.check_containers.bind(self),
+        out: self.remove_forbidden_class,
 
         helper: function (e, item) {
           this.copyHelper = item.clone(true).insertAfter(item);
