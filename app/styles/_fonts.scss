@@ -83,6 +83,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-col:before {
+  content: "\e924";
+}
 .icon-button:before {
   content: "\e923";
 }
@@ -116,7 +119,7 @@
 .icon-add:before {
   content: "\e900";
 }
-.icon-col:before {
+.icon-col2:before {
   content: "\e901";
 }
 .icon-col3:before {
