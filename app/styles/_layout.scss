@@ -138,7 +138,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#1f1f1f;
+    background:$darkBg;
   }
   .app-logo {
     display:block;
@@ -208,6 +208,14 @@
   overflow-y:auto;
   padding:$gutter;
   background:$contentbg;
+  .row {
+    margin-left:-10px;
+    margin-right:-10px;
+    > [class^="col-"] {
+      padding-left:10px;
+      padding-right:10px;
+    }
+  }
 }
 
 /* footer */
