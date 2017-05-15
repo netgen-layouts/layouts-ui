@@ -22,18 +22,10 @@ module.exports = Core.Model.extend({
   },
 
 
-  is_shared: function(){
-    return this.get('collection_shared') === true;
-  },
-
   proxy_to_block: function(){
     this.block().trigger('change_type:success');
   },
 
-
-  can_add_items: function(){
-    return !this.is_shared();
-  },
 
   setup_items: function(){
     this.items.reset(this.attributes.items);
@@ -61,8 +53,6 @@ module.exports = Core.Model.extend({
   },
 
   sync_change_type: function(data){
-    data.shared_collection_id && (data.shared_collection_id = parseInt(data.shared_collection_id, 10));
-
     return this.save(data, {
       via: 'change_type',
       method: 'POST',

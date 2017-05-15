@@ -646,13 +646,6 @@
       display:none !important;
     }
   }
-  .shared-collection & {
-    cursor:default;
-    .handle,
-    .remove {
-      display:none !important;
-    }
-  }
   &.hidden-item {
     .name {
       color:#666;

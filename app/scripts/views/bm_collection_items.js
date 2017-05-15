@@ -32,7 +32,6 @@ module.exports = Core.View.extend({
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
-    this.context.shared_and_empty = this.bm_collection_model.is_shared() && !this.collection.length;
 
     return this;
   },
@@ -51,21 +50,17 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
-    if(this.bm_collection_model.is_shared()){
-      this.$el.addClass('shared-collection');
-    } else {
-      this.$('.bm-items').sortable({
-        delay: 150,
-        cancel: '.dynamic-item',
-        axis: 'y',
-        helper: 'clone',
+    this.$('.bm-items').sortable({
+      delay: 150,
+      cancel: '.dynamic-item',
+      axis: 'y',
+      helper: 'clone',
 
-        stop: function(e, ui){
-          $(ui.item).data('_view').$move($(ui.item).index());
-        }
+      stop: function(e, ui){
+        $(ui.item).data('_view').$move($(ui.item).index());
+      }
 
-      });
-    }
+    });
   },
 
   save_items: function(items){
