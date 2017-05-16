@@ -284,14 +284,14 @@
     padding-bottom:56.25%;
   }
   &[data-container] {
-    background:$darkBg;
-    border-color:$darkBg;
+    background:$toolbarbg2;
+    border-color:$toolbarbg2;
     padding:$blockHeaderHeight+10 $gutter*0.6666666667 $gutter*0.6666666667;
     &:hover,
     &.editing,
     &.editing:hover,
     &.ui-sortable-helper {
-      border-color:$darkBg;
+      border-color:$toolbarbg2;
     }
     > .block-header {
       color:#fff;
