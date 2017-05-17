@@ -88,8 +88,10 @@ _.extend(Core, {
 
   hide_selects_with_one_option: function(view){
     view.$('select').each(function(){
-      var alone = $('option', this).length <= 1;
-      alone && $(this).parent().addClass('alone');
+      if (!$(this).hasClass('js-always-show')) {
+          var alone = $('option', this).length <= 1;
+          alone && $(this).parent().addClass('alone');
+      }
     });
     return this;
   },
