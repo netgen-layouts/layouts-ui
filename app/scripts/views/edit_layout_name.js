@@ -7,13 +7,12 @@ var _ = require('underscore');
 module.exports = Core.Modal.extend({
   extend_with: ['url'],
 
-  template: 'new_layout',
+  template: 'edit_layout_name',
   ENTER_KEY: 13,
 
   initialize: function(){
     Core.Modal.prototype.initialize.apply(this, arguments);
     this.modal_options = {
-      keyboard: false,
       backdrop: 'static'
     };
 
@@ -32,17 +31,12 @@ module.exports = Core.Modal.extend({
   },
 
 
-  render: function(){
-    Core.Modal.prototype.render.apply(this, arguments);
-    var $shared_checkbox = this.$('#create_shared');
-    Core.router.params.shared && $shared_checkbox.prop('checked', true);
-    $shared_checkbox.parent().hide();
-    return this;
-  },
-
   on_success: function(resp){
     this.close();
-    Core.router.navigate_to('layout', {id: resp.id, type: 'edit'});
+    this.model.set({
+      name: this.newData.name,
+      description: this.newData.description
+    });
   },
 
 
@@ -69,7 +63,10 @@ module.exports = Core.Modal.extend({
 
   $submit: function(e){
     e.preventDefault();
-
+    this.newData = {
+      name: this.$('#edit_name').val().trim(),
+      description: this.$('#edit_description').val().trim(),
+    };
     return this.$('form')
         .ajax_submit()
         .done(function(){

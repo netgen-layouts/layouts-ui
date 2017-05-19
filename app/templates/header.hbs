@@ -1,46 +1,37 @@
-<div class="layout-name">
+<div class="bm-header">
+  <div class="layout-name">
 
-    {{#if base_layout}}
-      <a href="#" class="js-normal-mode">{{base_layout.name}}</a>
-      <span>&gt;</span>
-    {{/if}}
+      {{#if base_layout}}
+        <a href="#" class="js-normal-mode">{{base_layout.name}}</a>
+        <span>&gt;</span>
+      {{/if}}
 
-    {{#if model.shared }}<i class="material-icons shared-icon">share</i>{{/if}}
+      {{#if model.shared }}<i class="material-icons shared-icon">share</i>{{/if}}
 
-    {{#if editing }}
-      <form method="post" class="js-layout">
-        <input type="text" name="name" class="js-name" value="{{ model.name }}">
-        <div class="btns">
-          <a href="#" class="btn btn-link js-cancel">Cancel</a>
-          <button type="submit" class="btn btn-primary">Apply</button>
-        </div>
-      </form>
-    {{else}}
       {{#if normal_editing}}
-        <span class="show-form js-show-form"><span class="js-layout-name">{{ model.name }}</span> <i class="material-icons">edit</i></span>
+        <span class="show-form js-show-form"><span class="js-layout-name bm-tooltip" data-placement="bottom" title="{{ model.description}}">{{ model.name }}</span> <i class="material-icons">edit</i></span>
       {{else}}
         <span class="show-form js-layout-name">{{ model.name }}</span>
       {{/if}}
-    {{/if}}
 
-
-</div>
-<div class="actions">
-  {{#if normal_editing}}
-      <button class="btn btn-link js-discard">Discard</button>
-      <button class="btn btn-primary js-publish">Publish layout</button>
-  {{else}}
-      {{#eq state.mode 'edit_master'}}
-        <button class="btn btn-link js-back">&lt; Back</button>
+  </div>
+  <div class="actions">
+    {{#if normal_editing}}
         <button class="btn btn-link js-discard">Discard</button>
         <button class="btn btn-primary js-publish">Publish layout</button>
-      {{else}}
-        {{#eq state.mode 'linking'}}
-          <button class="btn btn-link js-soft-back">&lt; Back</button>
-        {{else}}
+    {{else}}
+        {{#eq state.mode 'edit_master'}}
           <button class="btn btn-link js-back">&lt; Back</button>
-        {{/eq}}
+          <button class="btn btn-link js-discard">Discard</button>
+          <button class="btn btn-primary js-publish">Publish layout</button>
+        {{else}}
+          {{#eq state.mode 'linking'}}
+            <button class="btn btn-link js-soft-back">&lt; Back</button>
+          {{else}}
+            <button class="btn btn-link js-back">&lt; Back</button>
+          {{/eq}}
 
-      {{/eq}}
-  {{/if}}
+        {{/eq}}
+    {{/if}}
+  </div>
 </div>

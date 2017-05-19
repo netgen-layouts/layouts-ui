@@ -104,6 +104,7 @@ _.extend(Core, {
     data.view.$('.js-multiple-browse').multiple_browse();
     data.view.$('.js-external-video').video_thumb_fetcher();
     data.view.$('.view-type').view_types();
+    data.view.$('.bm-tooltip').bm_tooltip();
 
 
     this.hide_selects_with_one_option(data.view);

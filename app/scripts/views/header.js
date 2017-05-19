@@ -2,6 +2,7 @@
 
 var Core = require('netgen-core');
 var _ = require('underscore');
+var EditLayoutNameView = require('./edit_layout_name');
 
 module.exports = Core.View.extend({
 
@@ -11,8 +12,7 @@ module.exports = Core.View.extend({
 
   events: {
     'submit form.js-layout': 'set_name',
-    'click .js-show-form': 'enter_editing',
-    'click .js-cancel': 'cancel_editing',
+    'click .js-show-form': 'open_edit_name',
     'click .js-publish': 'publish_layout',
     'click .js-discard': 'discard_draft',
     //'click .js-normal-mode': '$normal_mode'
@@ -24,8 +24,9 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(Core.state, 'change', this.render);
     this.listenTo(this.model, 'draft:success', this.render);
-    this.listenTo(this.model, 'save:success', this.after_save);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
+    this.listenTo(this.model, 'change:description change:name', this.render);
+
     return this;
   },
 
@@ -59,28 +60,11 @@ module.exports = Core.View.extend({
     this.model.save(this.serialize().params, {patch: true});
   },
 
-  enter_editing: function(){
-    this.context.editing = true;
-    this.render();
-    this.$('form.js-layout input[name="name"]').focus();
-
-    var strLength = this.$name_input.val().length * 2;
-    this.$name_input.focus();
-    this.$name_input[0].setSelectionRange(strLength, strLength);
-  },
-
-  exit_editing: function(){
-    this.context.editing = false;
-    this.render();
-  },
-
-  cancel_editing: function(e){
-    e.preventDefault();
-    this.exit_editing();
-  },
-
-  after_save: function(){
-    this.exit_editing();
+  open_edit_name: function(){
+    var edit_layout_name = new EditLayoutNameView({
+      url: Core.env.bm_app_url('layouts/' + this.model.id +  '/form/edit'),
+      model: this.model
+    }).render().open();
   },
 
   publish_layout: function(e){
