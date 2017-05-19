@@ -7,7 +7,7 @@ function view_types(master_select, opts){
   opts || (opts = {});
   var
     $this = $(master_select),
-    $slaves = $('[data-view-type]'),
+    $slaves = $this.parents('form').find('[data-view-type]'),
     master_value = $this.val();
 
     $this.addClass('js-skip-on-change');
