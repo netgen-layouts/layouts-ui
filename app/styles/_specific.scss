@@ -113,14 +113,7 @@ $layoutsAmount: 6;
 }
 
 .bm-tooltip {
-  position:relative;
-  display:inline-block;
-  color:inherit;
   cursor:pointer;
-  #{$namespace} &,
-  #{$namespace} &:hover, {
-    color:inherit;
-  }
 }
 .bm-tooltip-title {
   position:fixed;
@@ -142,6 +135,7 @@ $layoutsAmount: 6;
     display:block;
   }
   &[data-x="left"] {
+    text-align:right;
     &::before {
       border-left:6px solid $tooltipBg;
       border-top:4px solid transparent;
@@ -190,6 +184,7 @@ $layoutsAmount: 6;
     }
   }
   &[data-x="center"] {
+    text-align:center;
     &::before {
       margin-left:-3px;
       left:50%;

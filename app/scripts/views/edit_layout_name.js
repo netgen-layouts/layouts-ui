@@ -27,7 +27,6 @@ module.exports = Core.Modal.extend({
   events: {
     'submit form': '$submit',
     'keypress input': '$enter',
-    'keypress textarea': '$enter'
   },
 
 

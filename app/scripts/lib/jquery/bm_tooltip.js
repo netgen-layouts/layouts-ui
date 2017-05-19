@@ -22,7 +22,7 @@ BmTooltip.prototype.init = function(){
 }
 
 BmTooltip.prototype.showTooltip = function(){
-  if (this.visible) return;
+  if (this.visible || !this.title.length) return;
   this.visible = true;
   document.getElementById('app').appendChild(this.tooltip);
   this.calculatePosition();
