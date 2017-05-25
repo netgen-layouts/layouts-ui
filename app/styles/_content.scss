@@ -304,17 +304,8 @@
   padding:$gutter*0.6666666667;
   outline:1px dashed #bfbfbf;
   &.forbidden {
-    position:relative;
-    &::after {
-      position:absolute;
-      left:0;
-      top:0;
-      width:100%;
-      height:100%;
-      content:"";
-      z-index:100;
-      opacity: 0.4;
-      background:transparent url('../images/stripped-bg.png') repeat;
+    .no-placeholder {
+      display:none;
     }
   }
 }
