@@ -25,4 +25,7 @@
 
 <div class="zone-body" data-receiver>
   {{! --------------- blocks -------------------- }}
+  {{#if model.is_linked}}
+    <div class="linked-zone-overlay"></div>
+  {{/if}}
 </div>

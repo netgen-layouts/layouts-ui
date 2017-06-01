@@ -41,6 +41,7 @@ var _ = require('underscore');
 
       this.$('.zone-body').append(views);
 
+      this.disableContenteditable();
       return this;
     },
 
@@ -97,6 +98,10 @@ var _ = require('underscore');
 
     mark_zone_type: function(){
       this.model.is_linked() && this.$el.addClass('linked_zone');
+    },
+
+    disableContenteditable: function(){
+      this.model.is_linked() && this.$('span[contenteditable]').prop('contenteditable', false);
     },
 
     is_container: function(){
