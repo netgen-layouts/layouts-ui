@@ -25,7 +25,10 @@ module.exports = Page.extend({
 
     var layout_view = new NewLayoutView({
       url: Core.env.bm_app_url('layouts/form/create'),
-      model: layout
+      model: layout,
+      modal_options: {
+        keyboard: false
+      }
     });
 
     this.child_view.$el.addClass("new_layout_page");
