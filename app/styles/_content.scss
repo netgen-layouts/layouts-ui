@@ -219,6 +219,15 @@
         padding:0 0.25em;
       }
     }
+    .cache {
+      font-size:10px;
+      margin:0 1em;
+      font-weight:700;
+      i {
+        font-size:1.6em;
+        margin-right:0.25em;
+      }
+    }
   }
 
   .block-header + *{margin-top:0;}

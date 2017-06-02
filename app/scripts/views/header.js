@@ -2,7 +2,6 @@
 
 var Core = require('netgen-core');
 var _ = require('underscore');
-var EditLayoutNameView = require('./edit_layout_name');
 
 module.exports = Core.View.extend({
 
@@ -61,7 +60,7 @@ module.exports = Core.View.extend({
   },
 
   open_edit_name: function(){
-    var edit_layout_name = new EditLayoutNameView({
+    return new Core.ModalForm({
       url: Core.env.bm_app_url('layouts/' + this.model.id +  '/form/edit'),
       model: this.model
     }).render().open();
