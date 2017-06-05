@@ -19,4 +19,10 @@ module.exports = Core.ModalForm.extend({
     Core.router.navigate_to('layout', {id: resp.id, type: 'edit'});
   },
 
+  $cancel: function(e){
+    Core.Modal.prototype.$cancel.apply(this, arguments);
+    location.href = localStorage.getItem('bm_referrer') || '/';
+    return this;
+  },
+
 });
