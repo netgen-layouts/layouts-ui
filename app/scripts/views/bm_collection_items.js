@@ -69,18 +69,22 @@ module.exports = Core.View.extend({
 
   $add_items: function(){
     var self = this;
+
+    var $browser_config_selector = this.$el.closest('.collection-items').find('.js-browser-config-selector');
+    var browser_configuration = $browser_config_selector.find('option:selected').data();
+    var value_type = $browser_config_selector.val();
+
     new Browser({
       disabled_item_ids: this.collection.reduce(function(out, item){
-        item.is_manual() && out.push(item.get('value_id'));
+        item.is_manual() && item.get('value_type') === value_type && out.push(item.get('value_id'));
         return out;
       }, []),
       tree_config: {
-        overrides: this.bm_collection_model.browser_configuration,
-        root_path: this.bm_collection_model.browser_configuration.browserConfigName
+        overrides: browser_configuration,
+        root_path: $browser_config_selector.val()
       }
     }).on('apply', function(){
       // @todo This needs to be configurable as some kind of mapping
-      var value_type = this.tree_config.get('item_type');
       var items = this.selected_collection.map(function(item){
         return {type: 0, value_id: item.get('value'), value_type: value_type, position: 0 };
       });

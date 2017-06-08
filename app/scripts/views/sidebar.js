@@ -130,7 +130,7 @@ module.exports = Core.View.extend({
 
         new BmCollectionView({
           model: bm_collection,
-          el: this.$('.collection-items')
+          el: this.$('.collection-items .body')
         });
 
         bm_collection.fetch_results().done(function(){

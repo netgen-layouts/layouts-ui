@@ -11,7 +11,6 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.on('render', this.render_items);
     this.$el.addClass('collection-type-'+this.model.get('collection_type'));
-    this.model.browser_configuration = this.$el.data();
     return this;
   },
 
