@@ -15,7 +15,10 @@ module.exports = Core.Collection.extend({
     return this.sync('create', this, {
       contentType: 'application/json',
       data: JSON.stringify(data),
-      url: this.url('create', {collection_id: this.bm_collection.get('collection_id') })
+      url: this.url('create', {
+        block_id: this.bm_collection.get('block_id'),
+        id: this.bm_collection.get('identifier')
+      })
     });
 
   },

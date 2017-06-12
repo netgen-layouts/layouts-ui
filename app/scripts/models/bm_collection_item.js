@@ -6,7 +6,7 @@ module.exports = Core.Model.extend({
   path: 'collections/items',
 
   paths: {
-    create: 'collections/:collection_id/items'
+    create: 'blocks/:block_id/collections/:id/items'
   },
 
   can_remove_item: function(){
