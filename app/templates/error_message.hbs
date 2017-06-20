@@ -1,12 +1,13 @@
 <div class="error_message">
   <p>User friendly message</p>
-  <a data-toggle="collapse" href="#{{uid}}" aria-expanded="false" aria-controls="{{uid false}}">Error details</a>
+  <p><a data-toggle="collapse" href="#{{uid}}" aria-expanded="false" aria-controls="{{uid false}}">Error details</a></p>
 
   <div id="{{uid false}}" class="collapse">
     {{#each errors}}
       <div class="error">
-        <div><code>{{type}}</code> - {{url}}</div>
-        <div>{{timestamp}} :: {{status_code}} - {{status_text}}</div>
+        <p>{{message}}</p>
+        <p><code>{{type}}</code> - {{url}}</p>
+        <p>{{timestamp}} :: {{status_code}} - {{status_text}}</p>
 
         {{#if debug}}
           <div class="debug">
