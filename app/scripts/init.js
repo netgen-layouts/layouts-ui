@@ -188,7 +188,7 @@ _.extend(Core, {
 
         if(xhr.status === 404 && xhr.opts.url.match(/\/layouts\/\d+\/draft/)){
           title =  'Layout does not exist';
-          body = 'Layout that you are trying to edit does not exist';
+          body = 'Layout you are trying to edit does not exist.';
           on_apply = function () {
             Core.router.navigate_to('layout_new');
           }
