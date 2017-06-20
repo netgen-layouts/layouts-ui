@@ -1,0 +1,20 @@
+<div class="error_message">
+  <p>User friendly message</p>
+  <a data-toggle="collapse" href="#{{uid}}" aria-expanded="false" aria-controls="{{uid false}}">Error details</a>
+
+  <div id="{{uid false}}" class="collapse">
+    {{#each errors}}
+      <div class="error">
+        <div><code>{{type}}</code> - {{url}}</div>
+        <div>{{timestamp}} :: {{status_code}} - {{status_text}}</div>
+
+        {{#if debug}}
+          <div class="debug">
+            <pre>{{ pretty_debug }}</pre>
+          </div>
+        {{/if}}
+
+      </div>
+    {{/each}}
+  </div>
+</div>

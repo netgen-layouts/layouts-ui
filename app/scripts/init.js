@@ -30,11 +30,18 @@ Core.Backbone.defaults = function(){
 };
 
 
+var ajax_errors = {};
+
+
 Core.default_context = function() {
   return {
     state: this.state
   };
 };
+
+var debounced_display_errors = _.debounce(function(){
+  Core.display_errors();
+}, 250);
 
 _.extend(Core, {
 
@@ -57,6 +64,31 @@ _.extend(Core, {
 
   init: function(){
     //this.app_cache_handler();
+    $(document).ajaxSend(function(e, xhr, ajaxSettings, error ){
+      xhr.uid = _.uniqueId();
+      ajax_errors[xhr.uid] = xhr;
+      xhr.opts = {
+        timestamp: new Date(),
+        type: ajaxSettings.type,
+        url: ajaxSettings.url
+      };
+
+      xhr.success(function(){
+        delete(ajax_errors[xhr.uid]);
+      });
+
+    }).ajaxError(function(e, xhr, ajaxSettings, error ){
+      var url = xhr.opts.url;
+      var status = xhr.status;
+      var handle_draft = status === 404 &&
+                        (url.match(/\/layouts\/\d+\?published=false/) || url.match(/\/layouts\/\d+\/draft/));
+
+      //Skip global error message for following errors
+      if(status === 403 || handle_draft){
+        delete(ajax_errors[xhr.uid]);
+      }
+      debounced_display_errors();
+    })
 
     this.on('render plugins:reinitialize', this.reinitialize_plugins);
 
@@ -142,23 +174,41 @@ _.extend(Core, {
       })
 
       .ajaxError(function(e, xhr, ajaxSettings, error ){
+        var title, body, on_apply,
+            apply_text = 'Refresh',
+            on_apply = function(){
+              window.history.go(0);
+            };
+
 
         if(xhr.status === 403){
+          title =  'Session timeout';
+          body = 'Your session has timed out. Please hit the refresh button to reload the application.';
+        }
 
-          new Core.Modal({
-            title:  'Session timeout',
-            body: 'Your session has timed out. Please hit the refresh button to reload the application.',
-            apply_text: 'Refresh',
+        if(xhr.status === 404 && xhr.opts.url.match(/\/layouts\/\d+\/draft/)){
+          title =  'Layout does not exist';
+          body = 'Layout that you are trying to edit does not exist';
+          on_apply = function () {
+            Core.router.navigate_to('layout_new');
+          }
+          apply_text = "Create new layout"
+        }
+
+
+        if(title){
+         new Core.Modal({
+            title:  title,
+            body: body,
+            apply_text: apply_text,
             cancel_disabled: true,
             modal_options: {
               keyboard: false,
               backdrop: 'static'
             }
-          }).on('apply', function(){
-            window.history.go(0);
-          }).open();
-
+          }).on('apply', on_apply).open();
         }
+
 
       })
 
@@ -172,9 +222,45 @@ _.extend(Core, {
       $('.right-sidebar').html(JST[model.detect_sidebar()]());
     });
 
-  }
+  },
+
+  display_errors: function(){
+    var body;
+
+    var errors = _.map(ajax_errors, function(xhr) {
+      var json = xhr.responseJSON;
+      return _.extend({
+        pretty_debug: JSON.stringify(json.debug, null, 2),
+      }, json, xhr.opts);
+    });
+
+    body = JST.error_message({errors: errors});
+
+    if(!errors.length){return;}
+    new Core.Modal({
+      title:  'Something went wrong!',
+      body: body,
+      apply_text: 'Refresh',
+      cancel_disabled: true,
+      modal_options: {
+        keyboard: false,
+        backdrop: 'static'
+      }
+    }).on('apply', function(){
+      window.history.go(0);
+    }).open();
+      return this;
+    },
 
 });
+
+
+
+window.onerror = function() {
+  Core.display_errors();
+  _.delay(Nprogress.done, 100);
+  return false;
+}
 
 window.Core = Core;
 

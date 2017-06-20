@@ -656,3 +656,10 @@ body .ace-editor{font-size:12pt;}
 }
 
 .ae-ui{position:relative; z-index:9999;}
+
+
+
+.error_message{
+  .debug pre{max-height:400px; max-width:600px; overflow:auto; margin-bottom:40px;}
+  .error{margin-bottom:20px;}
+}

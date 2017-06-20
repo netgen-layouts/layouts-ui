@@ -20,7 +20,7 @@ module.exports =  Page.extend({
 
     return  $.when(Core.g.config.fetch_once())
              .then(function(){
-               return Core.g.shared_layouts.fetch_once({via: 'shared'})
+                return Core.g.shared_layouts.fetch_once({via: 'shared'})
              })
              .then(function() {
                 return $.when(
