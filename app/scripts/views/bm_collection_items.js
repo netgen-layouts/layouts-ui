@@ -19,7 +19,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.collection, 'move:success delete:success', this.refresh_block);
 
     this.on('render', this.setup_dnd);
-    this.on('render', this.hide_add_items_if_only_one_option);
+    this.on('render', this.hide_add_items_if_no_options);
     return this;
   },
   events: {
@@ -50,7 +50,7 @@ module.exports = Core.View.extend({
     return this.bm_collection_model.block().fetch();
   },
 
-  hide_add_items_if_only_one_option: function(){
+  hide_add_items_if_no_options: function(){
     var $options = this.$el.closest('.collection-items').find('.value-type-wrapper option');
     !$options.length && this.$('.add-items').hide();
   },
