@@ -19,6 +19,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.collection, 'move:success delete:success', this.refresh_block);
 
     this.on('render', this.setup_dnd);
+    this.on('render', this.hide_add_items_if_only_one_option);
     return this;
   },
   events: {
@@ -47,6 +48,11 @@ module.exports = Core.View.extend({
 
   refresh_block: function(){
     return this.bm_collection_model.block().fetch();
+  },
+
+  hide_add_items_if_only_one_option: function(){
+    var $alone = this.$el.closest('.collection-items').find('.value-type-wrapper.alone');
+    $alone.length && this.$('.add-items').hide();
   },
 
   setup_dnd: function(){

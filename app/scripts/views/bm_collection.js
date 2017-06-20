@@ -20,7 +20,8 @@ module.exports = Core.View.extend({
       collection: this.model.items,
     });
 
-    this.$('.items').html(this.items_view.render().$el);
+    this.$('.items').html(this.items_view.$el);
+    this.items_view.render();
 
     return this;
   },
