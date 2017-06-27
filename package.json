@@ -1,7 +1,7 @@
 {
   "name": "netgen-block-manager",
   "description": "Netgen - Block manager UI",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "grunt": "~1.0.1",
