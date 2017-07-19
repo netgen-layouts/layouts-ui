@@ -223,15 +223,18 @@ $layoutsAmount: 6;
     .layout-type {
       $selected_color: #4b91e2;
       display:flex; margin:0 -1%; flex-wrap:wrap; max-height:272px; overflow-y:auto;
+      .layout-type-item {
+        margin:0 1% 1em; flex-basis:14.666666667%;
+      }
       label {
-        margin:0 1% 1em; font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; flex-basis:14.666666667%; position:relative;
-        &::before {
-          content:""; display:block; height:0; padding:0 0 138%; border:2px solid hsl(0, 0, 60); background-size:85%; background-repeat:no-repeat; background-position:center center; border-radius:$borderRadius;
+        font-size:0.875em; font-weight:normal; text-align:center; cursor: pointer; position:relative;
+        .icon {
+          content:""; display:block; height:0; padding:0 0 138%; border:2px solid hsl(0, 0, 60); background-size:85%; background-repeat:no-repeat; background-position:center center; border-radius:$borderRadius; position:relative;
         }
         &:hover {
           $hover_color: lighten($btnprimary, 10%);
           color: $hover_color;
-          &:before {
+          .icon {
             border-color: $hover_color;
           }
         }
@@ -241,11 +244,11 @@ $layoutsAmount: 6;
         &:checked {
           + label {
             color:$btnprimary;
-            &::before {
+            .icon {
               border-color:$btnprimary;
-            }
-            &::after {
-              @extend %material-icons; content:"check"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#fff; text-align:center; width:38px; height:38px; line-height:32px; border-radius:50%; border:3px solid #fff; background:$btnprimary; animation:checkedFadeIn 0.15s;
+              &::after {
+                @extend %material-icons; content:"check"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); color:#fff; text-align:center; width:38px; height:38px; line-height:32px; border-radius:50%; border:3px solid #fff; background:$btnprimary; animation:checkedFadeIn 0.15s;
+              }
             }
           }
         }

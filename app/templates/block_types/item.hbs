@@ -1,2 +1,8 @@
-<span class="icon"></span>
+{{#if model.icon}}
+  <span class="icon">
+    <img src="{{model.icon}}" alt="">
+  </span>
+{{else}}
+  <span class="icon font-icon"></span>
+{{/if}}
 <span class="title">{{model.name}}</span>
