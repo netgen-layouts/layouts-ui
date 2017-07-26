@@ -53,7 +53,7 @@ $.ui.sortable.prototype._mouseDrag = function(event){
 
   orig.apply(this, arguments);
 
-}
+};
 
 
 module.exports = {
@@ -123,6 +123,8 @@ module.exports = {
 
 
   setup_dnd_for_containers_and_zones: function(){
+    if(this.should_disable_dnd()){ return; }
+
     var self = this,
         $sort_element = this.$('[data-receiver]'),
         el_moved = false;
@@ -196,13 +198,18 @@ module.exports = {
   },
 
 
+  should_disable_dnd: function() {
+    return Core.state.in_mode('translate');
+  },
+
+
   /**
    * Setup DND for new blocks
    * @method setup_dnd_for_blocks
    */
   setup_dnd_for_blocks: function(){
+   if(this.should_disable_dnd()){ return; }
     var self = this;
-
 
       this.$('.block-items').sortable({
         connectWith: self.connect_with,
@@ -237,6 +244,7 @@ module.exports = {
   },
 
   setup_trash: function(){
+    if(this.should_disable_dnd()){ return; }
     $('[data-trash]').sortable({
       receive: function(e, ui){
         var draggable = new Draggable(e, ui);

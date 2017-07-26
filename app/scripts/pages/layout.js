@@ -5,6 +5,7 @@ var $ = Core.$;
 var LayoutBasePage = require('./layout_base');
 var HeaderView = require('../views/header');
 var ZoneLinkingHeaderView = require('../views/zone_linking_header');
+var TranslateHeaderView = require('../views/translate_header');
 
 
 module.exports = LayoutBasePage.extend({
@@ -16,13 +17,19 @@ module.exports = LayoutBasePage.extend({
 
     if(Core.router.params.type === 'link'){
       Core.state.set({mode: 'linking', section: 'linking'});
+    }else if(Core.router.params.type === 'translate'){
+      Core.state.set({mode: 'translate', section: 'translate'});
     }else{
       Core.state.set({mode: Core.g.layout.get('shared') ? 'edit_shared' : 'edit', section: 'edit'});
     }
 
     new ZoneLinkingHeaderView({
       el: '#zone_linking_header'
-    }).render()
+    }).render();
+
+    new TranslateHeaderView({
+      el: '#zone_linking_header'
+    }).render();
 
     new HeaderView({
       model: Core.g.layout,
@@ -68,7 +75,7 @@ module.exports = LayoutBasePage.extend({
       //Edit
       .on('cancel', function(){
         Core.router.navigate_to_params({type: 'edit'}, {trigger: false });
-        Core.g.layout.load_all_blocks()
+        Core.g.layout.load_all_blocks();
       }.bind(this))
 
       //Discard

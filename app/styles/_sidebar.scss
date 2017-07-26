@@ -463,6 +463,13 @@
       }
     }
   }
+
+
+  .sidebar[data-disabled="true"]:before{
+    content: "READONLY"; color:darken($mainColor, 35%); font-size:14px; font-weight:bold;
+    display: block; padding:2px 4px; background: $mainColor;
+    border-radius:5px; text-align:center; margin-bottom:20px;
+  }
 }
 
 .errors {

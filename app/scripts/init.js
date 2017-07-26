@@ -210,12 +210,12 @@ _.extend(Core, {
         }
 
 
-      })
+      });
 
 
     $(document).on('click', 'a[href="#"]', function(e){
       e.preventDefault();
-    })
+    });
 
 
     Core.state.on('change', function(model) {
@@ -225,13 +225,16 @@ _.extend(Core, {
   },
 
   display_errors: function(){
-    var body;
+    var body,
+        errors = [];
 
-    var errors = _.map(ajax_errors, function(xhr) {
+    _.map(ajax_errors, function(xhr) {
       var json = xhr.responseJSON;
-      return _.extend({
-        pretty_debug: JSON.stringify(json.debug, null, 2),
-      }, json, xhr.opts);
+      json && errors.push(
+        _.extend({
+          pretty_debug: JSON.stringify(json.debug, null, 2),
+        }, json, xhr.opts)
+      );
     });
 
     body = JST.error_message({errors: errors});

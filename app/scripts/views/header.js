@@ -14,7 +14,7 @@ module.exports = Core.View.extend({
     'click .js-show-form': 'open_edit_name',
     'click .js-publish': 'publish_layout',
     'click .js-discard': 'discard_draft',
-    //'click .js-normal-mode': '$normal_mode'
+    'click .js-normal-mode': '$normal_mode',
     'click .js-back': '$back',
     'click .js-soft-back': '$soft_back'
   },
@@ -38,7 +38,7 @@ module.exports = Core.View.extend({
   },
 
 
-  $back: function(e) {
+  $back: function() {
     Core.router.navigate_to('layout', {type: 'link', id: this.model.id});
   },
 
@@ -49,10 +49,9 @@ module.exports = Core.View.extend({
   },
 
 
-  // $normal_mode: function(){
-  //   Core.state.set({mode: 'edit', section: 'normal'});
-  //   Core.router.navigate_to_params({type: 'edit'}, {trigger: false});
-  // },
+  $normal_mode: function(){
+    Core.router.navigate_to_params({type: 'edit', locale: null});
+  },
 
   set_name: function(e){
     e.preventDefault();

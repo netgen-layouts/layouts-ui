@@ -20,22 +20,20 @@ module.exports =  Page.extend({
 
     return  $.when(Core.g.config.fetch_once())
              .then(function(){
-                return Core.g.shared_layouts.fetch_once({via: 'shared'})
+                return Core.g.shared_layouts.fetch_once({via: 'shared'});
              })
              .then(function() {
                 return $.when(
-                  Core.g.layout.fetch({data: {published: should_load_published }}),
+                  Core.g.layout.fetch({data: {published: should_load_published, locale: Core.router.params.locale }}),
                   draft_layout_id ? base_layout.fetch_once() : true
-                )
+                );
              })
              .then(function() {
                return Core.g.block_types.fetch_once();
              })
              .then(done, function(xhr) {
                done(xhr);
-             })
-
-
+             });
   }
 
 });

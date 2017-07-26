@@ -13,8 +13,9 @@ module.exports = Core.Model.extend({
     blocks_in_zone: '/layouts/:layout_id/zones/:zone_identifier/blocks'
   },
 
-  initialize: function(){
+  initialize: function(attributes){
     Core.Model.prototype.initialize.apply(this, arguments);
+    this.attributes.translatable = attributes.definition_identifier === 'title'; //TODO: for testing only remove me
     this.on('create:success', this.add_to_blocks_collection);
     this.on('destroy', this.on_destroy);
     this.bm_collections = new BmCollections();

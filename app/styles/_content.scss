@@ -190,6 +190,7 @@
       align-items:center;
     }
     .template_name {
+      margin-left:10px;
       font-size:0.625em;
       text-transform:uppercase;
       padding:0 0.75em 0 0;
@@ -304,6 +305,21 @@
       color:#fff;
     }
   }
+
+  &[data-translatable="off"]{
+    &:after{
+      content: "";
+      position:absolute;
+      top:0; right:0; bottom:0; left:0;
+      background-color:rgba(0,0,0,0.5);
+      z-index:20;
+    }
+    .handle{display:none;}
+    .block-header{z-index:50; background-color:white;}
+    &.editing .block-header{z-index:100; background-color:$mainColor; color:darken($mainColor, 35%);}
+  }
+
+
 }
 
 [data-placeholder]:not(.rich-text-editor) {
@@ -320,51 +336,58 @@
 [data-block],
 [data-zone] {
   .dropdown {
+    @extend .dropdown-1;
+  }
+}
+
+
+.dropdown-1 {
+  display: inline-block;
+  .dropdown-toggle {
+    display:flex;
+    align-items:center;
+    border:none;
+    background:transparent;
+    padding:0 0.25em;
+  }
+  &.open {
     .dropdown-toggle {
-      display:flex;
-      align-items:center;
-      border:none;
-      background:transparent;
-      padding:0 0.25em;
-    }
-    &.open {
-      .dropdown-toggle {
-        background:hsl(0, 0, 25);
-        color:#fff;
-      }
-    }
-    .dropdown-menu {
-      margin:0;
-      border:none;
-      padding:0.5em 0;
       background:hsl(0, 0, 25);
-      border-radius:0;
-      box-shadow:none;
-      font-size:0.75em;
-      > li {
-        cursor:pointer;
-        text-align:right;
-        &.divider{background-color:rgba(255,255,255,0.1); margin:3px auto; width:90%;}
-        > a {
-          padding:0.5em 1em;
-          color:#fff;
-          transition:color 150ms, background-color 150ms;
-          .note {
-            display:block;
-            color:hsl(0, 0, 65);
-            font-weight:300;
-            font-size:0.75em;
-            transition:color 150ms;
-          }
-          &:hover,
-          &:focus {
-            background:hsla(0, 0, 100, 0.05);
-          }
+      color:#fff;
+    }
+  }
+  .dropdown-menu {
+    margin:0;
+    border:none;
+    padding:0.5em 0;
+    background:hsl(0, 0, 25);
+    border-radius:0;
+    box-shadow:none;
+    font-size:0.75em;
+    > li {
+      cursor:pointer;
+      text-align:right;
+      &.divider{background-color:rgba(255,255,255,0.1); margin:3px auto; width:90%;}
+      > a {
+        padding:0.5em 1em;
+        color:#fff;
+        transition:color 150ms, background-color 150ms;
+        .note {
+          display:block;
+          color:hsl(0, 0, 65);
+          font-weight:300;
+          font-size:0.75em;
+          transition:color 150ms;
+        }
+        &:hover,
+        &:focus {
+          background:hsla(0, 0, 100, 0.05);
         }
       }
     }
   }
 }
+
 
 .no-placeholder {
   height:4px;
@@ -614,17 +637,45 @@ body .ace-editor{font-size:12pt;}
       color:white;
     }
   }
-  .layout-chooser {
+
+  .title{
+    color:white;
+    font-size:24px;
+    margin-bottom: 1em;
+    .material-icons{color: #979797; vertical-align:bottom;}
+  }
+
+  .layout-chooser, .chooser {
     color:#fff;
     select {
       width:auto;
-      margin:1em 0 0;
+      min-width: 132px;
+      // margin:1em 0 0;
     }
     i {
       color:hsl(0, 0, 72);
       vertical-align:middle;
     }
   }
+  .dropdown{
+    margin-left:-4px;
+    vertical-align: middle;
+    .dropdown-toggle{
+      height:36px;
+    }
+    .dropdown-menu, .dropdown-toggle{
+      background-color:hsl(0, 0, 15);
+    }
+
+
+    &.open{
+      .dropdown-menu, .dropdown-toggle{
+        background-color:hsl(0, 0, 10);
+      }
+    }
+    a:hover{color:white;}
+  }
+
 }
 
 
@@ -662,4 +713,22 @@ body .ace-editor{font-size:12pt;}
 .error_message{
   .debug pre{max-height:400px; max-width:600px; overflow:auto; margin-bottom:40px;}
   .error{margin-bottom:20px;}
+}
+
+
+/* disable-state */
+%disable-state{
+  cursor:pointer !important;
+  pointer-events:none !important;
+}
+
+input, select{
+  &[disabled],
+  &[disabled] + label{
+    @extend %disable-state;
+  }
+}
+
+[data-input][data-disabled="true"]{
+  @extend %disable-state;
 }

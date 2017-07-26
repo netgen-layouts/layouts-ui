@@ -13,6 +13,7 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.blocks = new Blocks();
+    this.attributes.main_language = "English (GB) - main";
 
     this.on('change:id', this.reset_blocks_loaded);
     this.on('discard:success', this.reset_loaded)

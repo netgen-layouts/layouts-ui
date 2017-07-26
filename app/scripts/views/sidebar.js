@@ -38,6 +38,28 @@ module.exports = Core.View.extend({
     this.$toggle_panels_on_render();
     this.$add_range_values();
     this.remove_loader();
+    this.is_disabled();
+  },
+
+
+  is_disabled: function(){
+    var disabled = Core.state.in_mode('translate') ? !this.model.get('translatable') : false;
+    this.$el.attr('data-disabled', disabled);
+    this.$el.find(':input').attr('disabled', disabled);
+
+    var $focusableElements = this.$el.find('[data-input]').attr('data-disabled', disabled).find('a');
+    $focusableElements.each(function(){
+      if(disabled){
+        $(this).data('_tabindex', $(this).attr('tabindex'));
+        $focusableElements.attr('tabindex', '-1');
+      }else{
+        $focusableElements.attr('tabindex', $(this).data('_tabindex'));
+        $(this).data('_tabindex', null);
+      }
+    });
+
+
+    return this;
   },
 
   remove_loader: function(){

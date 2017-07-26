@@ -1,0 +1,24 @@
+<div class="translate_header">
+  <h1 class="title">Translation mode: <span class="bm-tooltip" title="TODO: Translation managment"><i class="material-icons">help</i></span></h1>
+
+  <div class="chooser">
+    <div class="form-inline">
+      Current translation:
+      <select class="bm-select" name="layout[locale]">
+        {{#each languages}}
+          <option {{option_value id ../params.locale}} >{{name}}</option>
+        {{/each}}
+      </select>
+
+      <div class="dropdown dropdown-1">
+        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="js-new-translation"><a>New translation</a></li>
+          <li class="js-set-main-language"><a>Set main language</a></li>
+          <li class="js-remove-translations"><a>Remove translations(s)</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
