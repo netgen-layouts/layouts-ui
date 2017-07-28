@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('netgen-core');
+var _ = Core._;
 
 module.exports = Core.View.extend({
 
@@ -19,10 +20,13 @@ module.exports = Core.View.extend({
     console.log(this.model);
     this.listenTo(Core.state, 'change', this.on_state);
     this.on_state();
-    this.context.languages = [
-      { id: 'en', name: 'Engleski (main)'},
-      { id: 'hr', name: 'Hrvatski'}
-    ];
+    this.context.languages = _.map(this.model.get('available_locales'), function(v,k) {
+      console.log(k, v);
+      return {id: k, name: v};
+    });
+
+
+
     return this;
   },
 
@@ -46,7 +50,7 @@ module.exports = Core.View.extend({
   $new_translation: function(){
     //TODO: change this to configure translation form
     new Core.ModalForm({
-      url: Core.env.bm_app_url('layouts/form/create'),
+      url: Core.env.bm_app_url('layouts/'+this.model.id+'/form/add_locale'),
       model: this.model,
       on_success: function(resp) {
         this.close();
