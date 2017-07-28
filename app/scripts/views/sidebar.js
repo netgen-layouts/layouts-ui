@@ -43,7 +43,7 @@ module.exports = Core.View.extend({
 
 
   is_disabled: function(){
-    var disabled = Core.state.in_mode('translate') ? !this.model.get('translatable') : false;
+    var disabled = Core.state.in_mode('translate') ? !this.model.get('is_translatable') : false;
     this.$el.attr('data-disabled', disabled);
     this.$el.find(':input').attr('disabled', disabled);
 

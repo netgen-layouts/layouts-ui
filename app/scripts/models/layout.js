@@ -9,6 +9,9 @@ var _ = require('underscore');
 module.exports = Core.Model.extend({
 
   path: 'layouts',
+  paths: {
+    blocks: ':locale/layouts/:id/blocks'
+  },
 
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
@@ -18,8 +21,26 @@ module.exports = Core.Model.extend({
     this.on('change:id', this.reset_blocks_loaded);
     this.on('discard:success', this.reset_loaded)
 
-    this.blocks.url = this.url('blocks');
+    this.blocks.url = function(){
+      return this.url('blocks');
+    }.bind(this);
+
     return this;
+  },
+
+
+  main_language: function() {
+    return this.get('available_locales')[this.get('main_locale')] + ' (Main)';
+  },
+
+
+  locale: function() {
+    return this.get('view_locale') || this.get('main_locale');
+  },
+
+
+  has_locale: function(locale) {
+    return !!this.get('available_locales')[locale];
   },
 
   parse: function(resp){

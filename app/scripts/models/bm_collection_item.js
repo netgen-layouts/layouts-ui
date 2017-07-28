@@ -6,7 +6,12 @@ module.exports = Core.Model.extend({
   path: 'collections/items',
 
   paths: {
-    create: 'blocks/:block_id/collections/:id/items'
+    create: ':locale/blocks/:block_id/collections/:id/items'
+  },
+
+  locale: function(){
+
+    return this;
   },
 
   can_remove_item: function(){

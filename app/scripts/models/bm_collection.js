@@ -6,8 +6,12 @@ var BmCollectionItems = require('../collections/bm_collection_items');
 module.exports = Core.Model.extend({
   path: 'collections',
   paths: {
-    change_type: 'blocks/:block_id/collections/:id/change_type',
-    results:     'blocks/:block_id/collections/:id/result'
+    change_type: ':locale/blocks/:block_id/collections/:id/change_type',
+    results:     ':locale/blocks/:block_id/collections/:id/result'
+  },
+
+  locale: function(){
+    return 'en_GB';
   },
 
   idAttribute: 'identifier',

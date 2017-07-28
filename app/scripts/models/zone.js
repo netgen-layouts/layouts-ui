@@ -10,7 +10,28 @@ module.exports = Core.Model.extend({
   idAttribute: 'identifier',
 
   paths: {
-    link: 'layouts/:layout_id/zones/:identifier/link'
+    link: 'layouts/:layout_id/zones/:identifier/link',
+    blocks_in_zone: ':linked_layout_locale/layouts/:linked_layout_id/zones/:linked_zone_identifier/blocks'
+  },
+
+
+  linked_layout_locale: function () {
+    var locale = this.layout().get('locale');
+    console.log(locale);
+
+    if(!this.linked_layout()){
+      return locale;
+    }
+
+    if (this.linked_layout().has_locale(locale)){
+      return locale;
+    }else{
+      return this.linked_layout().get('main_locale')
+    };
+  },
+
+  locale: function(){
+    return this.layout().get('locale');
   },
 
 
@@ -119,7 +140,7 @@ module.exports = Core.Model.extend({
     var blocks = Core.g.layout.blocks;
     return blocks.fetch({
       via: 'blocks_in_zone',
-      url: blocks.model.prototype.url('blocks_in_zone', {layout_id: this.get('linked_layout_id'), zone_identifier: this.get('linked_zone_identifier')}),
+      url: this.url('blocks_in_zone'),
       data: opts.data,
       remove: false
     }).done(function(resp){

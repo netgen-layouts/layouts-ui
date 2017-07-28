@@ -8,19 +8,25 @@ module.exports = Core.Model.extend({
 
   format : '',
 
-  path: 'blocks',
+  path: ':locale/blocks',
   paths: {
-    blocks_in_zone: '/layouts/:layout_id/zones/:zone_identifier/blocks'
+    // collections: ':locale/blocks/:id/collections',
+    blocks_in_zone: ':locale/layouts/:layout_id/zones/:zone_identifier/blocks'
+  },
+
+  locale: function(){
+    return this.layout().get('locale');
   },
 
   initialize: function(attributes){
     Core.Model.prototype.initialize.apply(this, arguments);
-    this.attributes.translatable = attributes.definition_identifier === 'title'; //TODO: for testing only remove me
+    console.log(this.attributes);
     this.on('create:success', this.add_to_blocks_collection);
     this.on('destroy', this.on_destroy);
     this.bm_collections = new BmCollections();
     return this;
   },
+
 
 
   on_destroy: function(){
@@ -30,7 +36,7 @@ module.exports = Core.Model.extend({
 
 
   edit_url: function(){
-    return Core.env.bm_app_url('blocks/'+this.id+'/edit');
+    return Core.env.bm_app_url(this.get('locale')+'/blocks/'+this.id+'/edit');
   },
 
   add_to_blocks_collection: function(){
@@ -100,7 +106,7 @@ module.exports = Core.Model.extend({
   },
 
   layout: function() {
-    this.zone().layout();
+    return this.zone().layout();
   },
 
 

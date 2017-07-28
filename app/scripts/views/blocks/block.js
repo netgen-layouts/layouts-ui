@@ -47,9 +47,6 @@ module.exports = Core.View.extend(DndView).extend({
 
 
   setup_dom_element: function(){
-    // this.model.set('translatable', true);
-
-    // this.model.is_in_container() && this.$el.attr('data-in-container', '');
     this.$el
       .attr('data-block', '')
       .attr('data-type', this.model.get('identifier'));
@@ -64,7 +61,7 @@ module.exports = Core.View.extend(DndView).extend({
   setup_translatable_mode: function(){
     var mode = null;
     if(Core.state.in_mode('translate')){
-      mode = this.model.get('translatable') ? 'on' : 'off';
+      mode = this.model.get('is_translatable') ? 'on' : 'off';
     }
     this.$el.attr('data-translatable', mode);
     return this;
@@ -80,10 +77,10 @@ module.exports = Core.View.extend(DndView).extend({
     var $translate_links = this.$('.js-translate');
     if(Core.state.in_mode('translate')){
       $normal_links.hide();
-      $translate_links.show();
+      // $translate_links.show();
     }else{
       $normal_links.show();
-      $translate_links.hide();
+      // $translate_links.hide();
     }
   },
 
@@ -289,7 +286,7 @@ module.exports = Core.View.extend(DndView).extend({
   set_cache: function(e){
     e && e.stopPropagation();
     return new Core.ModalForm({
-      url: Core.env.bm_app_url('blocks/' + this.model.id + '/config/edit/http_cache'),
+      url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/config/edit/http_cache'),
       model: this.model
     }).render().open();
   },
@@ -299,7 +296,7 @@ module.exports = Core.View.extend(DndView).extend({
     e && e.stopPropagation();
     //TODO: change this to configure translation form
     return new Core.ModalForm({
-      url: Core.env.bm_app_url('blocks/' + this.model.id + '/config/edit/http_cache'),
+      url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/form/configure_translation'),
       model: this.model
     }).render().open();
   },

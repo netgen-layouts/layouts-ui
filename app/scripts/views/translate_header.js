@@ -20,10 +20,12 @@ module.exports = Core.View.extend({
     console.log(this.model);
     this.listenTo(Core.state, 'change', this.on_state);
     this.on_state();
+
+
     this.context.languages = _.map(this.model.get('available_locales'), function(v,k) {
-      console.log(k, v);
-      return {id: k, name: v};
-    });
+      var main = this.model.get('main_locale') === k ? '(main) ' : '';
+      return {id: k, name: main + v};
+    }.bind(this));
 
 
 
@@ -48,39 +50,38 @@ module.exports = Core.View.extend({
 
 
   $new_translation: function(){
-    //TODO: change this to configure translation form
     new Core.ModalForm({
       url: Core.env.bm_app_url('layouts/'+this.model.id+'/form/add_locale'),
       model: this.model,
       on_success: function(resp) {
+        console.log(resp);
         this.close();
-        Core.router.navigate_to_params({id: resp.id});
+        Core.router.navigate_to_params({ locale: resp.locale, t: +new Date});
       }
     }).render().open();
   },
 
 
   $set_main_language: function(){
-    //TODO: change this to configure translation form
     new Core.ModalForm({
-      url: Core.env.bm_app_url('layouts/form/create'),
+      url: Core.env.bm_app_url('layouts/'+this.model.id+'/form/main_locale'),
       model: this.model,
       on_success: function(resp) {
         this.close();
-        Core.router.navigate_to_params({id: resp.id});
+        this.model.trigger('change')
+        Core.router.navigate_to_params({ t: +new Date});
       }
     }).render().open();
   },
 
 
   $remove_translations: function(){
-    //TODO: change this to configure translation form
     new Core.ModalForm({
-      url: Core.env.bm_app_url('layouts/form/create'),
+      url: Core.env.bm_app_url('layouts/'+this.model.id+'/form/remove_locale'),
       model: this.model,
       on_success: function(resp) {
         this.close();
-        Core.router.navigate_to_params({id: resp.id});
+        Core.router.navigate_to_params({locale: this.model.get('main_locale'), t: +new Date});
       }
     }).render().open();
   },
