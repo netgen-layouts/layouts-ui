@@ -54,7 +54,6 @@ module.exports = Core.View.extend({
       url: Core.env.bm_app_url('layouts/'+this.model.id+'/form/add_locale'),
       model: this.model,
       on_success: function(resp) {
-        console.log(resp);
         this.close();
         Core.router.navigate_to_params({ locale: resp.locale, t: +new Date});
       }

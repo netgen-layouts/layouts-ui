@@ -71,8 +71,8 @@ module.exports = Core.View.extend(
 
   $open_layout_translate: function() {
     Core.trigger('toolbar:deactivate', this);
-    Core.router.navigate_to_params({type: 'translate', locale: Core.g.layout.get('main_locale')}, {trigger: false});
-    Core.state.get('section') !== 'translate' && Core.state.set({mode: 'translate', section: 'translate'});
+    Core.router.navigate_to_params({type: 'translate', locale: Core.g.layout.get('main_locale')});
+    // Core.state.get('section') !== 'translate' && Core.state.set({mode: 'translate', section: 'translate'});
   }
 
 });

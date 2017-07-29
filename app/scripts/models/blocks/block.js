@@ -109,6 +109,10 @@ module.exports = Core.Model.extend({
     return this.zone().layout();
   },
 
+  container: function(){
+    return this.collection.get(this.get('block_id'));
+  },
+
 
   update_zone_blocks: function(prev_zone_id, new_zone_id){
     var prev_zone = Core.g.layout.zones.get(prev_zone_id);
@@ -148,7 +152,7 @@ module.exports = Core.Model.extend({
     }.bind(this));
   },
 
-  move: function(){
+  move: function(zone_block_ids){
     var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id');
     var previous_zone = this._previousAttributes.zone_identifier;
     // attributes.placeholder = "main"
@@ -160,11 +164,12 @@ module.exports = Core.Model.extend({
       patch: true
     }).done(function() {
       this.update_zone_blocks(previous_zone, attributes.zone_identifier);
+      this.zone().set('block_ids', zone_block_ids);
     }.bind(this));
   },
 
 
-  move_to_container: function(){
+  move_to_container: function(zone_block_ids, container_block_ids){
     var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id', 'block_id', 'placeholder');
     var previous_zone = this._previousAttributes.zone_identifier;
     return this.save(attributes, {
@@ -173,7 +178,9 @@ module.exports = Core.Model.extend({
       method: 'POST',
       patch: true
     }).done(function() {
+      console.log(this);
       this.update_zone_blocks(previous_zone, attributes.zone_identifier);
+      this.zone().set('block_ids', zone_block_ids);
     }.bind(this));
   },
 

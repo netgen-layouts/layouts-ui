@@ -1,5 +1,8 @@
 'use strict';
 
+var Core = require('netgen-core');
+var $ = Core.$;
+
 function Draggable(e, ui) {
   this.ui = ui;
   this.$drag_item = ui.item;
@@ -8,8 +11,20 @@ function Draggable(e, ui) {
   this.sender = ui.sender;
 }
 
+// Draggable.prototype.$receiver = function() {
+//   return this.$drag_item.closest('[data-receiver]');
+// };
+
 Draggable.prototype.$zone = function() {
   return this.$drag_item.closest('[data-zone]');
+};
+
+Draggable.prototype.$container = function() {
+  return this.$drag_item.closest('[data-container]');
+};
+
+Draggable.prototype.container_model = function() {
+  return this.$container().data('_view').model;
 };
 
 Draggable.prototype.$placeholder = function() {
@@ -116,9 +131,23 @@ Draggable.prototype.save_new_position_for_zone = function() {
     position: this.position(),
     zone_identifier: this.zone_id()
   });
-  this.model.move();
+
+  this.model.move(this.get_new_order_in_zone());
 };
 
+
+Draggable.prototype.get_new_order_in_zone = function() {
+  return this.$zone().find('[data-receiver]:first > [data-view]').map(function() {
+    return $(this).data('_view').model.id;
+  }).get();
+};
+
+
+Draggable.prototype.get_new_order_in_container = function() {
+  return this.$container().find('[data-receiver]:first > [data-view]').map(function() {
+    return $(this).data('_view').model.id;
+  }).get();
+};
 
 Draggable.prototype.save_new_position_for_container = function() {
   this.model.set({
@@ -127,7 +156,7 @@ Draggable.prototype.save_new_position_for_container = function() {
     placeholder: this.placeholder_id(),
     block_id: this.parent_block_id()
   });
-  this.model.move_to_container();
+  this.model.move_to_container(this.get_new_order_in_zone(), this.get_new_order_in_container());
 };
 
 
