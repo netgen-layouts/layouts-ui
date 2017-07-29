@@ -17,11 +17,11 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'destroy', this.destroy);
     this.listenTo(this.model, 'restore:success', this.show_loader);
+    this.listenTo(this.model, 'change:is_translatable', this.load);
     this.listenTo(Core, 'editing:unmark', this.destroy);
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
     this.on('xeditable:apply:collection_type', this.show_loader);
     this.on('loaded', this.on_loaded);
-    this.show_loader();
     this.xhrs = [];
     return this;
   },
@@ -116,6 +116,7 @@ module.exports = Core.View.extend({
   },
 
   load: function(){
+    this.show_loader();
     $.get(this.model.edit_url()).done(function(response){
       this.$el.html(response);
       this.render();

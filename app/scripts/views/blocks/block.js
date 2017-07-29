@@ -288,7 +288,7 @@ module.exports = Core.View.extend(DndView).extend({
     return new Core.ModalForm({
       url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/config/edit/http_cache'),
       model: this.model
-    }).render().open();
+    }).open();
   },
 
 
@@ -297,8 +297,9 @@ module.exports = Core.View.extend(DndView).extend({
     //TODO: change this to configure translation form
     return new Core.ModalForm({
       url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/form/configure_translation'),
+      via: 'configure_translate',
       model: this.model
-    }).render().open();
+    }).open();
   },
 
 });

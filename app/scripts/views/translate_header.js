@@ -58,7 +58,7 @@ module.exports = Core.View.extend({
         this.close();
         Core.router.navigate_to_params({ locale: resp.locale, t: +new Date});
       }
-    }).render().open();
+    }).open();
   },
 
 
@@ -71,7 +71,7 @@ module.exports = Core.View.extend({
         this.model.trigger('change')
         Core.router.navigate_to_params({ t: +new Date});
       }
-    }).render().open();
+    }).open();
   },
 
 
@@ -83,7 +83,7 @@ module.exports = Core.View.extend({
         this.close();
         Core.router.navigate_to_params({locale: this.model.get('main_locale'), t: +new Date});
       }
-    }).render().open();
+    }).open();
   },
 
 });

@@ -24,7 +24,7 @@ module.exports = Core.Backbone.Router.extend({
     'layout/:id/link_zone/:zone_id/with_layout/:draft_layout_id': 'layout_preview',
 
     // 'layout/:id/:type/master_of/:draft_layout_id': 'layout_edit_master',
-    'layout/:id(/:type)': 'layout',
+    'layout/:id(/:type)(/:locale)': 'layout',
   },
 
   home: function() { this.navigate_to('layout_new'); },
