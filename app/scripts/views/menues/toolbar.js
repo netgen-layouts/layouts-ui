@@ -62,16 +62,17 @@ module.exports = Core.View.extend(
 
   $close_layout_translate: function() {
     // Core.trigger('toolbar:deactivate');
-    // Core.state.set({mode: 'edit', section: 'edit'});
-    Core.router.navigate_to_params({type: 'edit', locale: null});
+    var should_trigger = Core.g.layout.get('main_locale') !== Core.router.params.locale;
+    !should_trigger && Core.state.set({mode: 'edit', section: 'edit'});
+    Core.router.navigate_to_params({type: 'edit', locale: null}, {trigger: should_trigger});
     // console.log(Core.router);
   },
 
 
   $open_layout_translate: function() {
     Core.trigger('toolbar:deactivate', this);
+    Core.router.navigate_to_params({type: 'translate', locale: Core.g.layout.get('main_locale')}, {trigger: false});
     Core.state.get('section') !== 'translate' && Core.state.set({mode: 'translate', section: 'translate'});
-    Core.router.navigate_to_params({type: 'translate'}, {trigger: false});
   }
 
 });

@@ -21,7 +21,7 @@ module.exports = Core.View.extend({
     this.listenTo(Core.state, 'change', this.on_state);
     this.on_state();
 
-
+    this.context.main_locale = Core.router.params.locale || this.model.get('main_locale');
     this.context.languages = _.map(this.model.get('available_locales'), function(v,k) {
       var main = this.model.get('main_locale') === k ? '(main) ' : '';
       return {id: k, name: main + v};
