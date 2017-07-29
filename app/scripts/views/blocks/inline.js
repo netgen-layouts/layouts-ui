@@ -7,8 +7,6 @@ var striptags = require('striptags');
 
 module.exports = {
 
-  prevent_auto_render: true,
-
   events: {
     'paste [data-inline-child]': '$paste',
     'keyup [data-inline-child]': '$keyup',
@@ -93,10 +91,7 @@ module.exports = {
   }, 500),
 
   $save: function($input){
-    this.model.save_via_form($input.closest('form'))
-      .done(this.model.trigger.bind(this.model, 'save_inline:done'))
-      .fail(this.model.trigger.bind(this.model, 'save_inline:error'));
-
+    this.model.save_via_form($input.closest('form'), 'save_inline', {silent: true});
   }
 
 };

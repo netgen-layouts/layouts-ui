@@ -6,8 +6,6 @@ var Block = require('./block');
 var _ = require('underscore');
 
 module.exports = Block.extend({
-
-  prevent_auto_render: true,
   supports_modal_mode: true,
 
   render: function() {
@@ -84,10 +82,7 @@ module.exports = Block.extend({
 
 
   $save: function($input){
-    this.model.save_via_form($input.closest('form'))
-      .done(this.model.trigger.bind(this.model, 'save_inline:done'))
-      .fail(this.model.trigger.bind(this.model, 'save_inline:error'));
-
+    this.model.save_via_form($input.closest('form'), 'save_inline', {silent: true});
   },
 
 

@@ -70,7 +70,8 @@ module.exports = Core.View.extend({
   },
 
 
-  on_success: function() {
+  on_success: function(model_attributes) {
+    this.model.set(model_attributes);
     this.remove_errors();
   },
 
@@ -140,12 +141,10 @@ module.exports = Core.View.extend({
     this.last_params = serialized_params;
 
 
-    // if(this.model.is_image()){
-    //   options.form_data = new FormData(this.$('form').get(0));
-    //   this.model.save(params, options);
-    // }else{
-    this.model.save_via_form(this, 'sidebar_save sidebar_save:' + this.form_id, this);
-    // }
+    var query_form_event = this.is_query_form ? 'sidebar_save:query_form' : '';
+    var trigger_events = ['sidebar_save', 'sidebar_save:' + this.form_id, query_form_event].join(' ');
+    this.model.save_via_form(this, trigger_events, this);
+
 
   },
 

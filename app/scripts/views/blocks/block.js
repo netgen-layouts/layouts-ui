@@ -9,6 +9,8 @@ var Blocks = require('../../collections/blocks');
 
 module.exports = Core.View.extend(DndView).extend({
 
+  prevent_auto_render: true,
+
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
 
@@ -22,7 +24,7 @@ module.exports = Core.View.extend(DndView).extend({
     this.listenTo(this.model, 'copy:success', this.on_copy);
     this.listenTo(this.model, 'delete:success', this.on_destroy);
     this.listenTo(this.model, 'edit', this.$edit);
-    this.listenTo(this.model, 'change_type:success sidebar_save:success', this.reload_model);
+    this.listenTo(this.model, 'sidebar_save:query_form:success', this.reload_model);
     this.listenTo(this.model, 'restore:success', this.after_restore);
     if(!this.model.isNew()){
       this.setup_dom_element();
