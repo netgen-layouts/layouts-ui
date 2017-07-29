@@ -44,10 +44,11 @@ module.exports = Core.View.extend({
 
   is_disabled: function(){
     var disabled = Core.state.in_mode('translate') ? !this.model.get('is_translatable') : false;
-    this.$el.attr('data-disabled', disabled);
-    this.$el.find(':input').attr('disabled', disabled);
 
-    var $focusableElements = this.$el.find('[data-input]').attr('data-disabled', disabled).find('a');
+    this.$el.find(':input:not(:disabled)').attr('disabled', disabled);
+
+
+    var $focusableElements = this.$el.find('[data-input]:not([data-disabled="true"])').attr('data-disabled', disabled).find('a');
     $focusableElements.each(function(){
       if(disabled){
         $(this).data('_tabindex', $(this).attr('tabindex'));
