@@ -58,7 +58,7 @@
       input[type="submit"] {
         display:none;
       }
-      input[type="checkbox"] {
+      input[type="checkbox"], input[type="radio"] {
         position:absolute;
         left:-9999em;
         + label {
@@ -84,6 +84,15 @@
               color:$btnprimary;
             }
           }
+        }
+      }
+
+      input[type="radio"]{
+        + label::before{
+          content: 'radio_button_off'
+        }
+        &:checked + label::before{
+          content: 'radio_button_on'
         }
       }
     }

@@ -86,6 +86,7 @@
       }
     }
   }
+  $disabledColor: #222;
   section {
     + section {
       margin-top:1.5em;
@@ -107,6 +108,9 @@
       margin:0 0 1em;
       background:$sidebarinput;
       color:#fff;
+      &:disabled{
+        background-color:$disabledColor;
+      }
     }
     textarea {
       height:auto;
@@ -131,6 +135,11 @@
     select.highlight{
       background-color: lighten($sidebarinput, 40%);
     }
+
+    select:disabled{
+      background-color:$disabledColor;
+    }
+
     input[type="submit"] {
       display:none;
     }
@@ -159,6 +168,9 @@
             content:"check_box";
           }
         }
+      }
+      &:disabled + label::before{
+        color: $disabledColor;
       }
     }
     .input-note {
