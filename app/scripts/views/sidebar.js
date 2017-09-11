@@ -22,6 +22,7 @@ module.exports = Core.View.extend({
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
     this.on('xeditable:apply:collection_type', this.show_loader);
     this.on('loaded', this.on_loaded);
+
     this.xhrs = [];
     return this;
   },
@@ -129,6 +130,7 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.remove_views_in_element('.sidebar');
     var self = this;
+    var bm_collection = this.model.default_bm_collection();
 
     this.$('[data-form]').each(function(){
       var $this = $(this);
@@ -137,41 +139,28 @@ module.exports = Core.View.extend({
         model: self.model,
         url: $this.data('form')
       });
-      var xhr = view.load();
 
+      var xhr = view.load();
       self.xhrs.push(xhr);
     });
 
-    var bm_collection_xhr = $.Deferred();
-    var bm_collections_xhr = this.model
-      .load_bm_collections()
-      .done(function(){
-        var bm_collection = this.model.default_bm_collection();
-        if(!bm_collection){
-          bm_collection_xhr.resolve();
-          return;
-        }
-
-        new BmCollectionView({
-          model: bm_collection,
-          el: this.$('.collection-items .body')
-        });
-
-        bm_collection.fetch_results().done(function(){
-          bm_collection_xhr.resolve();
-        });
-
-      }.bind(this));
-
     this.$('#aside-tabs').browser_tabs({active_tab: Core.g.local_config.get('active_tab')});
 
-    this.xhrs.push(bm_collections_xhr, bm_collection_xhr);
+    if(bm_collection){
+      new BmCollectionView({
+        model: bm_collection,
+        el: this.$('.collection-items .body')
+      });
+
+      this.xhrs.push(bm_collection.fetch_results());
+    }
+
 
     $.when.apply($, this.xhrs).then(function(){
       this.trigger('loaded');
+      this.trigger_render();
     }.bind(this));
 
-    this.trigger_render();
 
     return this;
   }

@@ -10,7 +10,6 @@ module.exports = Core.Model.extend({
 
   path: ':locale/blocks',
   paths: {
-    // collections: ':locale/blocks/:id/collections',
     blocks_in_zone: ':locale/layouts/:layout_id/zones/:zone_identifier/blocks'
   },
 
@@ -20,13 +19,20 @@ module.exports = Core.Model.extend({
 
   initialize: function(attributes){
     Core.Model.prototype.initialize.apply(this, arguments);
-    console.log(this.attributes);
     this.on('create:success', this.add_to_blocks_collection);
     this.on('destroy', this.on_destroy);
-    this.bm_collections = new BmCollections();
+    this.setup_bm_collections();
     return this;
   },
 
+
+  setup_bm_collections: function(){
+    this.bm_collections = new BmCollections((this.attributes.collections || []).map(function(item){
+      item.block_id = this.get('id');
+      return item
+    }.bind(this)));
+    delete(this.attributes.collections);
+  },
 
 
   on_destroy: function(){
@@ -87,14 +93,6 @@ module.exports = Core.Model.extend({
   //   return Core.g.layout.id === this.get('layout_id');
   // },
 
-
-
-
-  load_bm_collections: function(){
-    return this.bm_collections.fetch({
-      url: this.url('collections')
-    });
-  },
 
   default_bm_collection: function(){
     return this.bm_collections.findWhere({identifier: 'default'});
