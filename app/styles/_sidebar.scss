@@ -1,4 +1,6 @@
 #sidebar{
+  $disabledColor: #222;
+
   position:fixed;
   top:$topHeight;
   right:0;
@@ -38,6 +40,9 @@
     color:#fff;
     &:hover {
       background:hsla(0, 0, 100, 0.05);
+    }
+    &[data-disabled="true"]{
+      background-color:$disabledColor;
     }
   }
   .add-items-link {
@@ -86,7 +91,7 @@
       }
     }
   }
-  $disabledColor: #222;
+
   section {
     + section {
       margin-top:1.5em;
@@ -288,6 +293,10 @@
       text-align:right;
       margin:0 0 0.5em;
     }
+    &[data-disabled="true"]{
+      .text {background-color:$disabledColor;}
+      .icon{background-color:lighten($disabledColor, 5%);}
+    }
   }
   .xeditable-active {
     position:relative;
@@ -477,7 +486,7 @@
   }
 
 
-  .sidebar[data-disabled="true"]:before{
+  .sidebar[data-disabled-full="true"]:before{
     content: "READONLY"; color:darken($mainColor, 35%); font-size:14px; font-weight:bold;
     display: block; padding:2px 4px; background: $mainColor;
     border-radius:5px; text-align:center; margin-bottom:20px;
@@ -681,6 +690,11 @@
       margin:0.2em 0 0;
     }
   }
+}
+
+[data-disabled="true"] > .collection-item{
+  .controls,
+  .handle{display:none;}
 }
 
 
