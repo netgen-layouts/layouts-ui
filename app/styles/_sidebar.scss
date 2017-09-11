@@ -344,6 +344,9 @@
       }
     }
   }
+
+
+
   .js-multiple-browse {
     margin:0 0 1em;
     .js-trigger {
@@ -374,6 +377,11 @@
         }
       }
     }
+  }
+
+  [data-input][data-disabled="true"]{
+    .js-trigger {background-color:$disabledColor;}
+    .js-trigger::after {background-color:lighten($disabledColor, 5%);}
   }
 
   [data-compound-checkbox] {
