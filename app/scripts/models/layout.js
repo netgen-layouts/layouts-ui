@@ -16,7 +16,6 @@ module.exports = Core.Model.extend({
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
     this.blocks = new Blocks();
-    this.attributes.main_language = "English (GB) - main";
 
     this.on('change:id', this.reset_blocks_loaded);
     this.on('discard:success', this.reset_loaded)
@@ -30,7 +29,7 @@ module.exports = Core.Model.extend({
 
 
   main_language: function() {
-    return this.get('available_locales')[this.get('main_locale')] + ' (Main)';
+    return this.get('available_locales') && this.get('available_locales')[this.get('main_locale')] + ' (Main)';
   },
 
 
@@ -40,7 +39,7 @@ module.exports = Core.Model.extend({
 
 
   has_locale: function(locale) {
-    return !!this.get('available_locales')[locale];
+    return this.get('available_locales') && !!this.get('available_locales')[locale];
   },
 
   parse: function(resp){
