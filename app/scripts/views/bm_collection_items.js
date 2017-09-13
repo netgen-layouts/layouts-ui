@@ -52,7 +52,7 @@ module.exports = Core.View.extend({
 
   hide_add_items_if_no_options: function(){
     var $options = this.$el.closest('.collection-items').find('.value-type-wrapper option');
-    !$options.length && this.$('.add-items').hide();
+    // !$options.length && this.$('.add-items').hide();
   },
 
   setup_dnd: function(){

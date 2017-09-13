@@ -21,16 +21,19 @@ module.exports = Core.Model.extend({
     Core.Model.prototype.initialize.apply(this, arguments);
     this.on('create:success', this.add_to_blocks_collection);
     this.on('destroy', this.on_destroy);
+    this.on('sync', this.setup_bm_collections);
+    this.bm_collections = new BmCollections();
     this.setup_bm_collections();
     return this;
   },
 
 
   setup_bm_collections: function(){
-    this.bm_collections = new BmCollections((this.attributes.collections || []).map(function(item){
+    var items = (this.attributes.collections || []).map(function(item){
       item.block_id = this.get('id');
       return item
-    }.bind(this)));
+    }.bind(this));
+    this.bm_collections.reset(items);
     delete(this.attributes.collections);
   },
 

@@ -79,10 +79,10 @@ module.exports = Core.View.extend(DndView).extend({
     var $translate_links = this.$('.js-translate');
     if(Core.state.in_mode('translate')){
       $normal_links.hide();
-      // $translate_links.show();
+      $translate_links.show();
     }else{
       $normal_links.show();
-      // $translate_links.hide();
+      $translate_links.hide();
     }
   },
 
