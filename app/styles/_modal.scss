@@ -85,6 +85,11 @@
             }
           }
         }
+        &:disabled {
+          + label {
+            opacity:0.35;
+          }
+        }
       }
 
       input[type="radio"]{
