@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Yaml\Yaml;
 
-class NetgenBlockManagerUIExtension extends Extension implements PrependExtensionInterface
+final class NetgenBlockManagerUIExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * Loads a specific configuration.
