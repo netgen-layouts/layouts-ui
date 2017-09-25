@@ -38,8 +38,8 @@
     "moment": "^2.14.1",
     "nprogress": "^0.2.0",
     "striptags": "^2.1.1",
-    "netgen-core": "0.8.x",
-    "netgen-content-browser": "0.8.x"
+    "netgen-core": "0.9.x",
+    "netgen-content-browser": "0.9.x"
   },
   "scripts": {
     "postinstall": "grunt npm_to_vendor"
