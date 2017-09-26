@@ -1,5 +1,6 @@
 #sidebar{
-  $disabledColor: #222;
+  // $disabledColor: #4a4a4a;
+  $disabledOpacity: 0.4;
 
   position:fixed;
   top:$topHeight;
@@ -42,7 +43,7 @@
       background:hsla(0, 0, 100, 0.05);
     }
     &[data-disabled="true"]{
-      background-color:$disabledColor;
+      // background-color:$disabledColor;
     }
   }
   .add-items-link {
@@ -114,7 +115,7 @@
       background:$sidebarinput;
       color:#fff;
       &:disabled{
-        background-color:$disabledColor;
+        // background-color:$disabledColor;
       }
     }
     textarea {
@@ -142,7 +143,7 @@
     }
 
     select:disabled{
-      background-color:$disabledColor;
+      // background-color:$disabledColor;
     }
 
     input[type="submit"] {
@@ -175,7 +176,7 @@
         }
       }
       &:disabled + label::before{
-        color: $disabledColor;
+        // color: $disabledColor;
       }
     }
     .input-note {
@@ -294,8 +295,9 @@
       margin:0 0 0.5em;
     }
     &[data-disabled="true"]{
-      .text {background-color:$disabledColor;}
-      .icon{background-color:lighten($disabledColor, 5%);}
+      opacity: $disabledOpacity;
+      // .text {background-color:$disabledColor;}
+      // .icon{background-color:lighten($disabledColor, 5%);}
     }
   }
   .xeditable-active {
@@ -380,8 +382,9 @@
   }
 
   [data-input][data-disabled="true"]{
-    .js-trigger {background-color:$disabledColor;}
-    .js-trigger::after {background-color:lighten($disabledColor, 5%);}
+    opacity: $disabledOpacity;
+    // .js-trigger {background-color:$disabledColor;}
+    // .js-trigger::after {background-color:lighten($disabledColor, 5%);}
   }
 
   [data-compound-checkbox] {
@@ -493,11 +496,22 @@
     }
   }
 
+  .sidebar[data-disabled-full="true"]{
+    // opacity: 0.4;
+    .toggle-link,
+    .aside-tab-control{opacity: $disabledOpacity;}
+  }
+
+
+  .disabled-input{
+    opacity: $disabledOpacity;
+  }
 
   .sidebar[data-disabled-full="true"]:before{
-    content: "READONLY"; color:darken($mainColor, 35%); font-size:14px; font-weight:bold;
-    display: block; padding:2px 4px; background: $mainColor;
-    border-radius:5px; text-align:center; margin-bottom:20px;
+
+    // content: "READONLY"; color:darken($mainColor, 35%); font-size:14px; font-weight:bold;
+    // display: block; padding:2px 4px; background: $mainColor;
+    // border-radius:5px; text-align:center; margin-bottom:20px;
   }
 }
 

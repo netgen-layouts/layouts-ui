@@ -83,6 +83,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-translation:before {
+  content: "\e925";
+}
+
 .icon-col:before {
   content: "\e924";
 }

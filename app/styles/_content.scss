@@ -316,7 +316,7 @@
     }
     .handle{display:none;}
     .block-header{z-index:50; background-color:white;}
-    &.editing .block-header{z-index:100; background-color:$mainColor; color:darken($mainColor, 35%);}
+    &.editing .block-header{z-index:100; background-color:$btnprimary; color:#fff;}
   }
 
 

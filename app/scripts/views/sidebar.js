@@ -49,7 +49,12 @@ module.exports = Core.View.extend({
     this.$el.attr('data-disabled-full', disabled);
     this.$el.find(':input:not(:disabled)').attr('disabled', disabled);
     this.$el.find('[data-disabled="true"] [data-input]').attr('data-disabled', 'true');
+    this.$el.find('.row-input > :disabled').each(function(){
+      var $this = $(this);
+      $this.find('.disabled-input');
+      $this.parent().addClass('disabled-input');
 
+    })
     var $focusableElements = this.$el.find('[data-input]:not([data-disabled="true"])').attr('data-disabled', disabled).find('a');
 
     $focusableElements.each(function(){
