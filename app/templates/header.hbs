@@ -23,17 +23,17 @@
         <button class="btn btn-primary js-publish">Publish layout</button>
     {{else}}
         {{#eq state.mode 'edit_master'}}
-          <button class="btn btn-link js-back">&lt; Back</button>
+          <button class="btn btn-primary js-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>
           <button class="btn btn-link js-discard">Discard</button>
           <button class="btn btn-primary js-publish">Publish layout</button>
         {{else}}
           {{#eq state.mode 'linking'}}
-            <button class="btn btn-link js-soft-back">&lt; Back</button>
+            <button class="btn btn-primary js-soft-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>
           {{else}}
             {{#eq state.mode 'translate'}}
-              <button class="btn btn-link js-normal-mode">&lt; Back</button>
+              <button class="btn btn-primary js-normal-mode"><i class="material-icons">keyboard_arrow_left</i>Back</button>
             {{else}}
-              <button class="btn btn-link js-back">&lt; Back</button>
+              <button class="btn btn-primary js-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>
             {{/eq}}
           {{/eq}}
 

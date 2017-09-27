@@ -20,9 +20,11 @@ module.exports = Core.View.extend(
     this.$('.active').removeClass('active');
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
 
-    var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared') || !Core.g.shared_layouts.length;
+    var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared', 'translate') || !Core.g.shared_layouts.length;
+    var should_disable_translate = !Core.state.in_mode('edit', 'translate') || !Core.g.shared_layouts.length;
 
     this.$('[data-mode="linking"]')[should_disable_linking ? 'addClass' : 'removeClass']('disable');
+    this.$('[data-mode="translate"]')[should_disable_translate ? 'addClass' : 'removeClass']('disable');
     return this;
   },
 

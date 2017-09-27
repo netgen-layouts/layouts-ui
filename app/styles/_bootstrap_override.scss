@@ -6,6 +6,7 @@
   .btn {
     border-radius:$borderRadius;
     padding:7px 16px;
+    .material-icons{vertical-align:middle;}
   }
   .btn-primary {
     background:$btnprimary;

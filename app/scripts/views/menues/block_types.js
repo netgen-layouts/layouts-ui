@@ -34,7 +34,7 @@ module.exports = Core.View.extend(DndView).extend({
 
   on_state: function(){
     var $button = this.$('> button');
-    Core.state.in_mode('edit', 'linking', 'edit_master', 'edit_shared') ? $button.removeClass('disable') : $button.addClass('disable');
+    Core.state.in_mode('edit', 'edit_master', 'edit_shared') ? $button.removeClass('disable') : $button.addClass('disable');
   },
 
   set_context: function(){
