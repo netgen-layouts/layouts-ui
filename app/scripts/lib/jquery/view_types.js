@@ -16,7 +16,9 @@ function view_types(master_select, opts){
       var $this = $(this);
       var master_list = $this.data('viewType').split(',');
       var includes = $.inArray(master_value, master_list) !== -1;
-      $this.parent()[includes ? 'show' : 'hide'](400);
+      var $real_parent = $this.closest('.row-input');
+      $real_parent = $real_parent.length ? $real_parent : $this.parent();
+      $real_parent[includes ? 'show' : 'hide'](400);
     });
 
 }
