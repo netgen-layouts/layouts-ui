@@ -14,7 +14,7 @@ module.exports = Core.View.extend({
   initialize: function() {
     Core.View.prototype.initialize.apply(this, arguments);
     this.is_query_form = this.$el.data('queryForm');
-    this.form_id = this.$el.data('form').replace(/.*?(\w+)\/(\w+)$/, '$1_$2');
+    this.form_id = this.$el.data('form').replace('/ngadminui/bm/app/', '').replace(/\//g, '_');
 
     this.is_query_form && this.listenTo(this.model, 'sidebar_save:'+this.form_id+':success', this.trigger_refresh_items);
 
@@ -133,7 +133,6 @@ module.exports = Core.View.extend({
     var serialized_params = $('form').serialize();
 
     var is_same = this.params_has_changed(serialized_params, this.last_params);
-    // is_same && console.warn("IS SAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEe");
     if (is_same) {
       return;
     }
