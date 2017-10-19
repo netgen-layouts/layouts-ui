@@ -108,7 +108,7 @@ module.exports = Core.View.extend({
   },
 
   setPageTitle: function(){
-    if (this.model.attributes.name) document.title = this.model.attributes.name + ' - Netgen Layouts';
+    document.title = this.model.get('name') + ' - Netgen Layouts';
   },
 
 });
