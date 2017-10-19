@@ -33,6 +33,7 @@ module.exports = Core.View.extend({
     this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
     Core.View.prototype.render.apply(this, arguments);
     this.$name_input = this.$('.js-name');
+    this.setPageTitle();
     //this.prevent_leave_page();
     return this;
   },
