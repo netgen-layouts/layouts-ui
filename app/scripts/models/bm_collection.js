@@ -39,8 +39,7 @@ module.exports = Core.Model.extend({
   fetch_results: function(){
     return this.fetch({
       via: 'result',
-      url: this.url('results'),
-      data: {offset: this.get('offset'), limit: this.get('limit')}
+      url: this.url('results')
     });
   },
 
