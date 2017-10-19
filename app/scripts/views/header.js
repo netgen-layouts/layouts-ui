@@ -103,6 +103,10 @@ module.exports = Core.View.extend({
         return dialogText;
       }
     });
-  }
+  },
+
+  setPageTitle: function(){
+    document.title = this.model.get('name') + ' - Netgen Layouts';
+  },
 
 });
