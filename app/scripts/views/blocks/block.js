@@ -18,7 +18,7 @@ module.exports = Core.View.extend(DndView).extend({
     this.listenTo(Core,       'editing:unmark', this.editing_unmark);
 
     this.listenTo(this.model, 'change', this.setup_dom_element);
-    this.listenTo(this.model, 'change:html', this.render);
+    this.listenTo(this.model, 'change:html change:parameters', this.render);
     this.listenTo(this.model, 'create:success', this.$edit);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
     this.listenTo(this.model, 'copy:success', this.on_copy);
@@ -102,6 +102,15 @@ module.exports = Core.View.extend(DndView).extend({
     this.prepare_modal_mode();
     this.render_container();
     this.setup_context_menu();
+    this.addtional_info();
+    return this;
+  },
+
+  addtional_info: function(){
+    var id = this.model.get('parameters').css_id;
+    var klass = this.model.get('parameters').css_class;
+    var addtional_info = "" + (id ? '#' + id : '') + (klass ? '.' + klass : '');
+    this.$el.find('.block-header .name').append('<span class="ai">'+addtional_info+'</span>');
     return this;
   },
 

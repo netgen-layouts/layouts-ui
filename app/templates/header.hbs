@@ -19,13 +19,11 @@
   </div>
   <div class="actions">
     {{#if normal_editing}}
-        <button class="btn btn-link js-discard">Discard</button>
-        <button class="btn btn-primary js-publish">Publish layout</button>
+        {{> discard_publish }}
     {{else}}
         {{#eq state.mode 'edit_master'}}
           <button class="btn btn-primary btn-icon-left js-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>
-          <button class="btn btn-link js-discard">Discard</button>
-          <button class="btn btn-primary js-publish">Publish layout</button>
+          {{> discard_publish }}
         {{else}}
           {{#eq state.mode 'linking'}}
             <button class="btn btn-primary btn-icon-left js-soft-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>

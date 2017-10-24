@@ -7,8 +7,17 @@
   height:$topHeight;
   background:$toolbarbg2;
   color:#fff;
+  z-index:10;
   .bm-header {
     display:flex;
+  }
+
+
+  .dropdown{
+    display:inline-block;
+    button{background:none; border:none; vertical-align:middle; padding:3px;}
+    &.open button{background:#fff; color:#333;}
+    .dropdown-menu{margin:0; border-radius:0; right:-1px; margin-top:-1px; border-top-color:#fff;}
   }
 
   .main_language{margin-left:40px;}
@@ -209,4 +218,30 @@
   // height:$bottomHeight;
   // background:$footerbg;
   display:none;
+}
+
+
+
+#{$namespace}.ngbmdev{
+  .app-logo{
+    filter: invert(100%);
+  }
+  .app-header {
+
+    .dropdown{
+      display:inline-block;
+      vertical-align: middle;
+      button{display:none;}
+      .dropdown-menu {
+        background:none; border:none; margin:0; padding:0;
+        display: inline-block; position:static;
+        li{display:inline; margin:0; padding:0;}
+        a{
+          @extend .btn;
+          @extend .btn-default;
+        }
+      }
+    }
+  }
+
 }

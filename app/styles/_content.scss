@@ -202,6 +202,7 @@
     .name{
       flex:1;
       font-size:0.625em;
+      .ai{display:none;}
     }
     .handle {
       line-height:$blockHeaderHeight;
@@ -731,4 +732,9 @@ input, select{
 
 [data-input][data-disabled="true"]{
   @extend %disable-state;
+}
+
+
+.ngbmdev{
+  [data-block] .block-header .name .ai{display:inline-block; margin-left:10px; font-size:1.1em;}
 }

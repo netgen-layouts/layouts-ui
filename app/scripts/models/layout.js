@@ -81,12 +81,19 @@ module.exports = Core.Model.extend({
     return Core.g.layout.get('blocks').get(id);
   },
 
-  publish: function(){
-    return this.save(null, {
+  publish: function(opts){
+    return this.save(null, $.extend({
       via: 'publish',
       method: 'POST',
       patch: true
-    });
+    }, opts));
+  },
+
+  publish_and_continue: function(){
+    return this.publish({
+      via: 'publish_and_continue',
+      url: this.url('publish')
+    })
   },
 
   discard: function(){

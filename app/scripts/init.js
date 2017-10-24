@@ -104,13 +104,30 @@ _.extend(Core, {
     });
     this.setup_events();
 
+
+    Core.g.local_config.on('change:ngbmdev', function (m, s) {
+      $('#app')[s ? 'addClass' : 'removeClass']('ngbmdev');
+    })
+
     $(function(){
       Core.load_additional_vars();
       Core.router = new Router();
       Core.Backbone.history.start();
+      Core.dm() && $('#app').addClass('ngbmdev');
     });
 
+    $(document).on('dblclick', '.app-logo-box', this.tdm);
+
   },
+
+  dm: function() {
+    return Core.g.local_config.get('ngbmdev');
+  },
+
+  tdm: function() {
+    Core.g.local_config.save({ngbmdev: !Core.dm() });
+  },
+
 
   load_additional_vars: function(){
     var bm_base_path = $('meta[name="ngbm-base-path"]').attr('content');

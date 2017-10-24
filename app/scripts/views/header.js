@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('netgen-core');
+var $ = Core.$;
 var _ = require('underscore');
 
 module.exports = Core.View.extend({
@@ -13,6 +14,8 @@ module.exports = Core.View.extend({
     'submit form.js-layout': 'set_name',
     'click .js-show-form': 'open_edit_name',
     'click .js-publish': 'publish_layout',
+    'click .js-publish-and-continue': 'publish_and_continue',
+    'click .js-save-and-close': 'save_and_close',
     'click .js-discard': 'discard_draft',
     'click .js-normal-mode': '$normal_mode',
     'click .js-back': '$back',
@@ -24,6 +27,7 @@ module.exports = Core.View.extend({
     this.listenTo(Core.state, 'change', this.render);
     this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
+    this.listenTo(this.model, 'publish_and_continue:success', this.refresh);
     this.listenTo(this.model, 'change:description change:name', this.render);
 
     return this;
@@ -34,7 +38,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
     this.$name_input = this.$('.js-name');
     this.setPageTitle();
-    //this.prevent_leave_page();
+    // this.prevent_leave_page();
 
     return this;
   },
@@ -67,9 +71,27 @@ module.exports = Core.View.extend({
     }).render().open();
   },
 
+
+  refresh: function(){
+    Core.g.layout = null;
+    Core.router.navigate_to('layout', { type: 'create_new_draft', id: this.model.id});
+    return this;
+  },
+
   publish_layout: function(e){
     e.preventDefault();
     this.model.publish();
+  },
+
+  publish_and_continue: function(e){
+    e.preventDefault();
+    Core.router.navigate_to('layout', { type: 'publish', id: this.model.id}, {trigger: false});
+    this.model.publish_and_continue();
+  },
+
+  save_and_close: function(e){
+    e.preventDefault();
+    this.close_layout()
   },
 
   discard_draft: function(e){
@@ -84,7 +106,7 @@ module.exports = Core.View.extend({
     }).open();
   },
 
-  close_layout: function(){
+  close_layout: function(where){
     this.can_leave_page = true;
     if(Core.state.in_mode('edit_master')){
       Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit'});
@@ -98,7 +120,7 @@ module.exports = Core.View.extend({
 
   prevent_leave_page: function(){
     var self = this;
-    window.addEventListener('beforeunload', function(e){
+    $(window).one('beforeunload', function(e){
       if (!self.can_leave_page){
         var dialogText = 'Are you sure you want to leave the page?';
         e.returnValue = dialogText;
