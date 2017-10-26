@@ -15,8 +15,8 @@ module.exports = Core.View.extend({
     // this.listenTo(this.collection, 'all', function(e){console.log(e);});
 
     //ITEMS
-    this.listenTo(this.collection, 'create:success', this.refresh_items_and_block);
-    this.listenTo(this.collection, 'move:success delete:success', this.refresh_block);
+    this.listenTo(this.collection, 'create:success delete:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'move:success', this.refresh_block);
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
