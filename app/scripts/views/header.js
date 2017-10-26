@@ -27,7 +27,6 @@ module.exports = Core.View.extend({
     this.listenTo(Core.state, 'change', this.render);
     this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
-    this.listenTo(this.model, 'publish_and_continue:success', this.refresh);
     this.listenTo(this.model, 'change:description change:name', this.render);
 
     return this;
@@ -38,7 +37,6 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
     this.$name_input = this.$('.js-name');
     this.setPageTitle();
-    // this.prevent_leave_page();
 
     return this;
   },
@@ -71,13 +69,6 @@ module.exports = Core.View.extend({
     }).render().open();
   },
 
-
-  refresh: function(){
-    Core.g.layout = null;
-    Core.router.navigate_to('layout', { type: 'create_new_draft', id: this.model.id});
-    return this;
-  },
-
   publish_layout: function(e){
     e.preventDefault();
     this.model.publish();
@@ -85,7 +76,7 @@ module.exports = Core.View.extend({
 
   publish_and_continue: function(e){
     e.preventDefault();
-    Core.router.navigate_to('layout', { type: 'publish', id: this.model.id}, {trigger: false});
+    // Core.router.navigate_to('layout', { type: 'publish', id: this.model.id}, {trigger: false});
     this.model.publish_and_continue();
   },
 
@@ -107,26 +98,12 @@ module.exports = Core.View.extend({
   },
 
   close_layout: function(where){
-    this.can_leave_page = true;
     if(Core.state.in_mode('edit_master')){
       Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit'});
     }else{
       location.href = localStorage.getItem('bm_referrer') || '/';
     }
 
-  },
-
-  can_leave_page: false,
-
-  prevent_leave_page: function(){
-    var self = this;
-    $(window).one('beforeunload', function(e){
-      if (!self.can_leave_page){
-        var dialogText = 'Are you sure you want to leave the page?';
-        e.returnValue = dialogText;
-        return dialogText;
-      }
-    });
   },
 
   setPageTitle: function(){

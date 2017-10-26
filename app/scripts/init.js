@@ -282,6 +282,19 @@ window.onerror = function() {
   return false;
 }
 
+window.onbeforeunload = function (event) {
+    if(!Core.$.active){return null;}
+    var message = 'Some requests are still being processed. Are you sure you want to leave?';
+    if (typeof event == 'undefined') {
+      event = window.event;
+    }
+    if (event) {
+      event.returnValue = message;
+    }
+    return message;
+};
+
+
 window.Core = Core;
 
 module.exports = Core;

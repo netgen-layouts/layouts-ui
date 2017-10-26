@@ -93,7 +93,7 @@ module.exports = Core.Model.extend({
     return this.publish({
       via: 'publish_and_continue',
       url: this.url('publish')
-    })
+    }).done(this.create_new_draft.bind(this))
   },
 
   discard: function(){
