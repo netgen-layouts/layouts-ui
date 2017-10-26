@@ -16,8 +16,8 @@
   .dropdown{
     display:inline-block;
     button{background:none; border:none; vertical-align:middle; padding:3px;}
-    &.open button{background:#fff; color:#333;}
-    .dropdown-menu{margin:0; border-radius:0; right:-1px; margin-top:-1px; border-top-color:#fff;}
+    &.open button{}
+    .dropdown-menu{margin:0; border-radius:0; right:-1px; margin-top:4px; border-top-color:#fff;}
   }
 
   .main_language{margin-left:40px;}
