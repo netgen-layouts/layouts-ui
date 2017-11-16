@@ -33,7 +33,7 @@ module.exports = Core.Model.extend({
       item.block_id = this.get('id');
       return item
     }.bind(this));
-    this.bm_collections.reset(items);
+    this.bm_collections.set(items, {parse: true});
     delete(this.attributes.collections);
   },
 

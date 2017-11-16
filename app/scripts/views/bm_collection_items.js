@@ -56,6 +56,7 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
+    var self = this;
     this.$('.bm-items').sortable({
       delay: 150,
       cancel: '.dynamic-item',
@@ -63,7 +64,7 @@ module.exports = Core.View.extend({
       helper: 'clone',
 
       stop: function(e, ui){
-        $(ui.item).data('_view').$move($(ui.item).index());
+        $(ui.item).data('_view').$move($(ui.item).index() + self.bm_collection_model.get('offset'));
       }
 
     });
@@ -92,7 +93,7 @@ module.exports = Core.View.extend({
     }).on('apply', function(){
       // @todo This needs to be configurable as some kind of mapping
       var items = this.selected_collection.map(function(item){
-        return {type: 0, value_id: item.get('value'), value_type: value_type, position: 0 };
+        return {type: 0, value_id: item.get('value'), value_type: value_type, position: self.bm_collection_model.get('offset') };
       });
 
       self.collection.sync_create_items(items);
