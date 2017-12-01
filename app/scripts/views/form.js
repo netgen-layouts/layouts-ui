@@ -116,7 +116,7 @@ module.exports = Core.View.extend({
 
   $multiple_select_height: function(){
     this.$('select[multiple]').each(function(){
-      var l = $(this).find('option').length;
+      var l = $(this).find('option').length + $(this).find('optgroup').length;
       (l > 10) && (l = 10);
       $(this).attr('size', l);
     });
