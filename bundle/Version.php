@@ -9,5 +9,5 @@ abstract class Version
     const MAJOR_VERSION = 0;
     const MINOR_VERSION = 10;
     const RELEASE_VERSION = 0;
-    const EXTRA_VERSION = 'DEV';
+    const EXTRA_VERSION = '';
 }
