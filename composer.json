@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "netgen/core-ui": "~0.10.0",
-        "netgen/content-browser-ui": "~0.10.0"
+        "netgen/core-ui": "~0.11.0",
+        "netgen/content-browser-ui": "~0.11.0"
     },
     "repositories": [
         { "type": "composer", "url": "https://packagist.netgen.biz" }
@@ -27,7 +27,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "0.10.x-dev"
+            "dev-master": "0.11.x-dev"
         }
     }
 }
