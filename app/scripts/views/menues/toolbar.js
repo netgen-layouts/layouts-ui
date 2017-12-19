@@ -21,7 +21,7 @@ module.exports = Core.View.extend(
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
 
     var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared', 'translate') || !Core.g.shared_layouts.length;
-    var should_disable_translate = !Core.state.in_mode('edit', 'translate') || !Core.g.shared_layouts.length;
+    var should_disable_translate = !Core.state.in_mode('edit', 'edit_shared', 'translate') || !Core.g.shared_layouts.length;
 
     this.$('[data-mode="linking"]')[should_disable_linking ? 'addClass' : 'removeClass']('disable');
     this.$('[data-mode="translate"]')[should_disable_translate ? 'addClass' : 'removeClass']('disable');
@@ -57,7 +57,7 @@ module.exports = Core.View.extend(
   // Toggle translate
 
   $toggle_layout_translate: function() {
-    if(!Core.state.in_mode('edit', 'translate')){return;}
+    if(!Core.state.in_mode('edit', 'edit_shared', 'translate')){return;}
     Core.state.in_mode('translate') ? this.$close_layout_translate() : this.$open_layout_translate();
   },
 
