@@ -83,7 +83,7 @@ module.exports = Core.View.extend({
 
     new Browser({
       disabled_item_ids: this.collection.reduce(function(out, item){
-        item.is_manual() && item.get('value_type') === value_type && out.push(item.get('value_id'));
+        item.is_manual() && item.get('value_type') === value_type && out.push(item.get('value'));
         return out;
       }, []),
       tree_config: {
@@ -93,7 +93,7 @@ module.exports = Core.View.extend({
     }).on('apply', function(){
       // @todo This needs to be configurable as some kind of mapping
       var items = this.selected_collection.map(function(item){
-        return {type: 0, value_id: item.get('value'), value_type: value_type, position: self.bm_collection_model.get('offset') };
+        return {type: 0, value: item.get('value'), value_type: value_type, position: self.bm_collection_model.get('offset') };
       });
 
       self.collection.sync_create_items(items);
