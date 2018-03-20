@@ -7,10 +7,14 @@
     {{/unless}}
   </p>
   <div class="controls">
-    {{#if model.can_remove_item }}<a class="remove-toggle"><i class="material-icons">close</i></a>{{/if}}
+    <div class="dropdown">
+      <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        {{#if model.cms_url}}<li><a href="{{model.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
+        {{#if model.is_manual}}<li><a class="item-visibility">Configure visibility</a></li>{{/if}}
+        {{#if model.is_manual}}<li><a class="set-item-position">Set position</a></li>{{/if}}
+        {{#if model.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
+      </ul>
+    </div>
   </div>
-  {{#if model.can_remove_item }}<div class="remove-btns">
-    <a class="cancel">Cancel</a>
-    <a class="remove">Remove</a>
-  </div>{{/if}}
 </div>

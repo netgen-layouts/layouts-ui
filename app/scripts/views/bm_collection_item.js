@@ -15,9 +15,9 @@ module.exports = Core.View.extend({
   },
 
   events: {
-    'click .remove-toggle': '$show_remove_btn',
-    'click .remove': '$remove',
-    'click .cancel': '$hide_remove_btn'
+    'click .remove-item': '$remove',
+    'click .cancel': '$hide_remove_btn',
+    'click .item-visibility': 'set_visibility',
   },
 
   render: function(){
@@ -42,17 +42,27 @@ module.exports = Core.View.extend({
   },
 
   $remove: function(e){
-    e.preventDefault();
-    this.model.destroy();
+    e && e.preventDefault() && e.stopPropagation();
+    var self = this;
+    return new Core.Modal({
+      title: 'Delete item',
+      body: 'Are you sure you want to delete this item? This cannot be undone.',
+      apply_text: 'Delete',
+    }).on('apply', function(){
+      self.model.destroy();
+    }).open();
   },
 
-
-  $show_remove_btn: function(){
-    this.$el.addClass('show-remove');
+  set_visibility: function(e){
+    e && e.preventDefault();
+    var visibilityModal = new Core.ModalForm({
+      url: Core.env.bm_app_url('/collections/item/' + this.model.id + '/config/edit/visibility'),
+      model: this.model
+    }).open();
+    visibilityModal.on('open', function(){
+      // initialize datetime picker
+    });
+    return visibilityModal;
   },
-
-  $hide_remove_btn: function(){
-    this.$el.removeClass('show-remove');
-  }
 
 });
