@@ -3,7 +3,8 @@
 module.exports = {
   Layout: require('./layout'),
   LayoutNew: require('./layout_new'),
-  LayoutLink: require('./layout_link')
+  LayoutLink: require('./layout_link'),
+  LayoutChangeType: require('./layout_change_type')
 };
 
 

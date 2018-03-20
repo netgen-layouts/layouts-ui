@@ -6,7 +6,8 @@ module.exports = Core.View.extend(
 {  events: {
     //'click': '$activate',
     'click .js-layout-mapper:not(.disable)': '$toggle_layout_mapper',
-    'click .js-layout-translate:not(.disable)': '$toggle_layout_translate'
+    'click .js-layout-translate:not(.disable)': '$toggle_layout_translate',
+    'click .js-layout-change-type:not(.disable)': '$toggle_layout_change_type'
   },
 
   initialize: function(){
@@ -21,10 +22,12 @@ module.exports = Core.View.extend(
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
 
     var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared', 'translate') || !Core.g.shared_layouts.length;
-    var should_disable_translate = !Core.state.in_mode('edit', 'edit_shared', 'translate') || !Core.g.shared_layouts.length;
+    var should_disable_translate = !Core.state.in_mode('edit', 'edit_shared', 'translate');
+    var should_disable_change_type = !Core.state.in_mode('edit', 'edit_shared', 'change_type');
 
     this.$('[data-mode="linking"]')[should_disable_linking ? 'addClass' : 'removeClass']('disable');
     this.$('[data-mode="translate"]')[should_disable_translate ? 'addClass' : 'removeClass']('disable');
+    this.$('[data-mode="change_type"]')[should_disable_change_type ? 'addClass' : 'removeClass']('disable');
     return this;
   },
 
@@ -63,18 +66,34 @@ module.exports = Core.View.extend(
 
 
   $close_layout_translate: function() {
-    // Core.trigger('toolbar:deactivate');
-    // var should_trigger = Core.g.layout.get('main_locale') !== Core.router.params.locale;
-    // !should_trigger && Core.state.set({mode: 'edit', section: 'edit'});
     Core.router.navigate_to_params({type: 'edit', locale: null});
-    // console.log(Core.router);
   },
 
 
   $open_layout_translate: function() {
     Core.trigger('toolbar:deactivate', this);
     Core.router.navigate_to_params({type: 'translate', locale: Core.g.layout.get('main_locale')});
-    // Core.state.get('section') !== 'translate' && Core.state.set({mode: 'translate', section: 'translate'});
+  },
+
+
+
+  // Toggle change_type
+
+  $toggle_layout_change_type: function() {
+    if(!Core.state.in_mode('edit', 'edit_shared', 'change_type')){return;}
+    Core.state.in_mode('change_type') ? this.$close_layout_change_type() : this.$open_layout_change_type();
+  },
+
+
+  $close_layout_change_type: function() {
+    Core.router.navigate_to_params({type: 'edit', locale: null});
+  },
+
+
+  $open_layout_change_type: function() {
+    Core.trigger('toolbar:deactivate', this);
+    Core.router.navigate_to_params({type: 'change_type'});
   }
+
 
 });
