@@ -7,14 +7,18 @@
     {{/unless}}
   </p>
   <div class="controls">
-    <div class="dropdown">
-      <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
-      <ul class="dropdown-menu dropdown-menu-right">
-        {{#if model.cms_url}}<li><a href="{{model.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
-        {{#if model.is_manual}}<li><a class="item-visibility">Configure visibility</a></li>{{/if}}
-        {{#if model.is_manual}}<li><a class="set-item-position">Set position</a></li>{{/if}}
-        {{#if model.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
-      </ul>
-    </div>
+    {{#if model.has_menu}}
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          {{#if model.cms_url}}<li><a href="{{model.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
+          {{#if model.is_manual}}
+            <li><a class="item-visibility">Configure visibility</a></li>
+            <li><a class="set-item-position">Set position</a></li>
+          {{/if}}
+          {{#if model.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
+        </ul>
+      </div>
+    {{/if}}
   </div>
 </div>
