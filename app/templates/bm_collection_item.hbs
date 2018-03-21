@@ -2,10 +2,17 @@
   <div class="handle"><i class="material-icons">drag_handle</i></div>
   <p class="name">
     {{model.name}}
-    {{#unless model.visible}}
-      <span class="note"><i class="material-icons">visibility_off</i> Item is hidden</span>
-    {{/unless}}
   </p>
+  {{#if model.scheduled}}
+    <div class="status-icon"><i class="material-icons">access_time</i></div>
+  {{/if}}
+  {{#unless model.is_visible}}
+    <div class="status-icon">
+      <span class="bm-tooltip" title="{{#unless model.cms_visible}}Hidden in CMS{{else}}{{#if model.scheduled}}Hidden by scheduling{{else}}Hidden in Netgen Layouts{{/if}}{{/unless}}">
+        <i class="material-icons">visibility_off</i>
+      </span>
+    </div>
+  {{/unless}}
   <div class="controls">
     {{#if model.has_menu}}
       <div class="dropdown">

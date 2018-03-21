@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('netgen-core');
+var $ = Core.$;
 // var _ = require('underscore');
 
 module.exports = Core.View.extend({
@@ -24,7 +25,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
 
     this.model.get('type') === 2 && this.$el.addClass('dynamic-item');
-    !this.model.get('visible') && this.$el.addClass('hidden-item');
+    !this.model.is_visible() && this.$el.addClass('hidden-item');
 
     return this;
   },
@@ -60,7 +61,14 @@ module.exports = Core.View.extend({
       model: this.model
     }).open();
     visibilityModal.on('open', function(){
-      // initialize datetime picker
+      $('.datetimepicker').each(function(){
+        return new Core.DateTimePicker({
+          el: $(this),
+          options: {
+            // debug: true,
+          },
+        });
+      });
     });
     return visibilityModal;
   },

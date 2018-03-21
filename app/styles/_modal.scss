@@ -21,6 +21,15 @@
           color:hsl(0, 0, 70);
         }
       }
+      .input-group {
+        input[type="text"],
+        input[type="number"],
+        input[type="url"],
+        input[type="email"],
+        textarea {
+          margin: 0;
+        }
+      }
       textarea {
         height:auto;
         min-height:120px;
