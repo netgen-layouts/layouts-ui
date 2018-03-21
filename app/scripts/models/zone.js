@@ -37,6 +37,7 @@ module.exports = Core.Model.extend({
 
   initialize: function(){
     Core.Model.prototype.initialize.apply(this, arguments);
+    this.children = [];
     this.on('unlink:success', this.clear_linked);
     return this;
   },
@@ -76,7 +77,7 @@ module.exports = Core.Model.extend({
   },
 
   blocks: function(){
-    var blocks = Core.g.layout.blocks;
+    var blocks = this.layout().blocks;
     return this.get('linked_layout_id') ? blocks.get_by_ids(this.get('linked_blocks_ids')) : blocks.get_by_ids(this.get('block_ids'))
   },
 
@@ -136,8 +137,9 @@ module.exports = Core.Model.extend({
   },
 
 
+  // Load blocks of linked zones
   load_blocks: function(opts){
-    var blocks = Core.g.layout.blocks;
+    var blocks = this.layout().blocks;
     return blocks.fetch({
       via: 'blocks_in_zone',
       url: this.url('blocks_in_zone'),

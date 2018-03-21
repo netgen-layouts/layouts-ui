@@ -150,6 +150,17 @@ var _ = require('underscore');
       this.load_blocks();
       this.setup_dnd_for_containers_and_zones();
       this.setup_trash();
-    }
+      return this;
+    },
+
+
+    render_basics: function(){
+      this.context.mode = 'chooser';
+      this.context.show_zone_map_overlay = true;
+      Core.View.prototype.render.apply(this, arguments);
+      this.set_class();
+      this.load_blocks();
+      return this;
+    },
 
   });

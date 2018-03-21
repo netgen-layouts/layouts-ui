@@ -19,8 +19,6 @@ module.exports = LayoutBasePage.extend({
       Core.state.set({mode: 'linking', section: 'linking'});
     }else if(Core.router.params.type === 'translate'){
       Core.state.set({mode: 'translate', section: 'translate'});
-    }else if(Core.router.params.type === 'change_type'){
-      Core.state.set({mode: 'change_type', section: 'change_type'});
     }else{
       Core.state.set({mode: Core.g.layout.get('shared') ? 'edit_shared' : 'edit', section: 'edit'});
     }

@@ -28,4 +28,12 @@
   {{#if model.is_linked}}
     <div class="linked-zone-overlay"></div>
   {{/if}}
+
+
+  {{#if show_zone_map_overlay}}
+    <div class="zone-map-overlay">
+      <div>{{ model.name }}</div>
+    </div>
+  {{/if}}
+
 </div>

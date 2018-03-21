@@ -130,11 +130,10 @@ module.exports = Core.Model.extend({
     }));
 
 
-    $.when.apply($, zone_blocks_loaded).then(function(){
+    return $.when.apply($, zone_blocks_loaded).then(function(){
       this.blocks.trigger('blocks_loaded:success');
     }.bind(this));
 
-    return this;
   },
 
 });

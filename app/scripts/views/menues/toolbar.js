@@ -21,7 +21,7 @@ module.exports = Core.View.extend(
     this.$('.active').removeClass('active');
     this.$('[data-mode="'+Core.state.get('section')+'"]').addClass('active');
 
-    var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared', 'translate') || !Core.g.shared_layouts.length;
+    var should_disable_linking = Core.state.in_mode('edit_master', 'edit_shared', 'translate', 'change_type') || !Core.g.shared_layouts.length;
     var should_disable_translate = !Core.state.in_mode('edit', 'edit_shared', 'translate');
     var should_disable_change_type = !Core.state.in_mode('edit', 'edit_shared', 'change_type');
 
@@ -86,13 +86,15 @@ module.exports = Core.View.extend(
 
 
   $close_layout_change_type: function() {
-    Core.router.navigate_to_params({type: 'edit', locale: null});
+    Core.router.navigate_to('layout', {id: Core.router.params.id} );
   },
 
 
   $open_layout_change_type: function() {
     Core.trigger('toolbar:deactivate', this);
-    Core.router.navigate_to_params({type: 'change_type'});
+    Core.g.layout_types.fetch().done(function(){
+      Core.router.navigate_to('layout_change_type', {id: Core.router.params.id} );
+    });
   }
 
 

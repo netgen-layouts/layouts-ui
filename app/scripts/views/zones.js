@@ -3,6 +3,7 @@
 var Core = require('netgen-core');
 var $ = Core.$;
 var ZoneView = require('./zone');
+var Zone = require('../models/zone');
 var ViewBlockTypes = require('./menues/block_types');
 
 
@@ -15,11 +16,12 @@ module.exports = Core.View.extend({
   },
 
   parse_dom: function(){
-    var id, self = this;
+    var id, model, self = this;
     this.$('[data-zone]').each(function(){
       id = $(this).data('zone');
-      new ZoneView({
-        model: self.collection.get(id),
+      model = self.collection.get(id) || new Zone();
+      model && new ZoneView({
+        model: model,
         el: this
       }).render();
     });
