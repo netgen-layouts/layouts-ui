@@ -20,3 +20,4 @@ composer.lock
 .php_cs.cache
 bundle/Resources/public/dev
 bundle/Resources/public/css/vendor.css
+package-lock.json
