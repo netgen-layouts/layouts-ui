@@ -12,6 +12,8 @@ module.exports = Core.View.extend(DndView).extend({
   className: 'zone-wrapper',
   template: 'zone_wrapper',
 
+  connect_with: '[data-zone-receiver]',
+
   render: function(){
     this._render();
 
@@ -21,6 +23,7 @@ module.exports = Core.View.extend(DndView).extend({
       return new ZoneView({ model: item }).render_basics().el;
     }, this));
 
+    this.setup_dnd_for_zone_wrappers()
     this.trigger_render();
     return this;
   },

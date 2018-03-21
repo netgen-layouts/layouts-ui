@@ -260,6 +260,80 @@ module.exports = {
       }
     });
     return this;
-  }
+  },
+
+
+
+  setup_dnd_for_zone_wrappers: function(){
+
+
+    console.log(this.connect_with);
+    // if(this.should_disable_dnd()){ return; }
+
+    var self = this,
+        $sort_element = this.$('[data-zone-receiver]'),
+        el_moved = false;
+
+    $sort_element.sortable({
+      appendTo: document.body,
+      customScrollParent: $('.main-content'),
+      connectWith: self.connect_with,
+      placeholder: 'no-placeholder',
+      // handle: '.zone-map-overlay',
+      delay: 150,
+      distance: 20,
+      // over: self.check_containers.bind(self),
+      // out: self.remove_forbidden_class,
+      helper: 'clone',
+
+      //Only after receiving from other sortable
+      receive: function(e, ui){
+        // console.log(this);
+        if(self.receive_is_canceled(ui)){ return; }
+        var draggable = new Draggable(e, ui);
+        if(self.is_zone && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
+          return;
+        }
+
+        ui.item.real_target = this;
+        draggable.mark_sender_as_copied();
+        draggable.is_block_type() && draggable.create_new_block();
+      },
+
+      start: function(e, ui) {
+        ui.helper.addClass('ngc');
+        Core.trigger('sortable:start');
+
+        /*This is needed because of min-height*/
+        $(this).sortable('refreshPositions');
+      },
+
+
+      // After sort and after move to connected sortable
+      update: function(){
+        el_moved = true;
+      },
+      stop: function(e, ui){
+        var real_target = ui.item.real_target || this,
+            draggable = new Draggable(e, ui),
+            receiver = new Receiver($(real_target).closest('[data-view]'));
+
+
+        if(el_moved){
+          // if (receiver.is_zone()){
+          //   draggable.save_new_position_for_zone();
+          // }else{
+          //   draggable.save_new_position_for_container();
+          // }
+          // draggable.is_zone_changed_when_moved_to(receiver);
+          el_moved = false;
+        }
+
+        Core.trigger('sortable:end');
+      }
+
+    });
+
+  },
 
 };
