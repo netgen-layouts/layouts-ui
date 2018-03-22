@@ -86,7 +86,7 @@ module.exports = Core.View.extend(
 
 
   $close_layout_change_type: function() {
-    Core.router.navigate_to('layout', {id: Core.router.params.id} );
+    Core.router.navigate_to('layout', {id: Core.router.params.id, type: 'edit'} );
   },
 
 

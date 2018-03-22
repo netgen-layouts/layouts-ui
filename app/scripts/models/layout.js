@@ -115,6 +115,13 @@ module.exports = Core.Model.extend({
   },
 
 
+  unmapped_zones_for: function(new_layout_type){
+    var new_zones = new_layout_type.zones.pluck('id')
+    var current_zones = this.zones.pluck('id');
+    var ids = _.difference(current_zones, new_zones);
+    return this.zones.get_by_ids(ids);
+  },
+
   load_all_blocks: function(opts){
     opts || (opts = {});
 
@@ -124,7 +131,7 @@ module.exports = Core.Model.extend({
       return zone.load_blocks({data: {published: true}});
     })
 
-    zone_blocks_loaded.unshift(this.blocks.fetch({
+    zone_blocks_loaded.unshift(this.blocks.fetch_once({
       data: opts.data,
       remove: false
     }));
