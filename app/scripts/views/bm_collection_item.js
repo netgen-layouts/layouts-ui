@@ -56,18 +56,29 @@ module.exports = Core.View.extend({
 
   set_visibility: function(e){
     e && e.preventDefault();
+    var self = this;
     var visibilityModal = new Core.ModalForm({
       url: Core.env.bm_app_url('/collections/item/' + this.model.id + '/config/edit/visibility'),
       model: this.model
     }).open();
+    visibilityModal.toggleSubmit = function(){  // disable submit button if scheduled selected and both date inputs empty
+      this.$('.action_apply').prop('disabled', this.scheduled && !this.dates.some(function(date){ return date.value }));
+    };
     visibilityModal.on('open', function(){
+      visibilityModal.dates = [];
       $('.datetimepicker').each(function(){
-        return new Core.DateTimePicker({
+        visibilityModal.dates.push(new Core.DateTimePicker({
           el: $(this),
-          options: {
-            // debug: true,
-          },
+        }));
+        visibilityModal.dates.forEach(function(date, i){
+          date.on('change', function(){
+            visibilityModal.toggleSubmit();
+          });
         });
+      });
+      visibilityModal.$el.on('change', 'input[type="radio"]', function(e){
+        visibilityModal.scheduled = e.target.id === 'edit_visibility_visibility_status_2';
+        visibilityModal.toggleSubmit();
       });
     });
     return visibilityModal;

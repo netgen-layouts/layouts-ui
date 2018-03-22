@@ -4,7 +4,7 @@
     {{model.name}}
   </p>
   {{#if model.scheduled}}
-    <div class="status-icon"><i class="material-icons">access_time</i></div>
+    <div class="status-icon"><span class="bm-tooltip" title="Item is scheduled"><i class="material-icons">access_time</i></span></div>
   {{/if}}
   {{#unless model.is_visible}}
     <div class="status-icon">
