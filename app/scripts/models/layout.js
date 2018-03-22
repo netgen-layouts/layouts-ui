@@ -131,7 +131,7 @@ module.exports = Core.Model.extend({
       return zone.load_blocks({data: {published: true}});
     })
 
-    zone_blocks_loaded.unshift(this.blocks.fetch_once({
+    zone_blocks_loaded.unshift(this.blocks.fetch({
       data: opts.data,
       remove: false
     }));
