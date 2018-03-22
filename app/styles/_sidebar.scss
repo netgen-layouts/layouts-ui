@@ -662,6 +662,14 @@
       }
     }
   }
+  .status-icon {
+    padding: .25em;
+    color: #8c8c8c;
+    i {
+      vertical-align: middle;
+      font-size: .875rem;
+    }
+  }
   &.ui-sortable-placeholder {
     border:1px dashed rgba(255, 255, 255, 0.25) !important;
     visibility:visible !important;

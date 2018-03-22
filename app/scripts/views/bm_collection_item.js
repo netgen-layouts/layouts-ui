@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('netgen-core');
+var $ = Core.$;
 // var _ = require('underscore');
 
 module.exports = Core.View.extend({
@@ -24,7 +25,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.render.apply(this, arguments);
 
     this.model.get('type') === 2 && this.$el.addClass('dynamic-item');
-    !this.model.get('visible') && this.$el.addClass('hidden-item');
+    !this.model.is_visible() && this.$el.addClass('hidden-item');
 
     return this;
   },
@@ -55,12 +56,26 @@ module.exports = Core.View.extend({
 
   set_visibility: function(e){
     e && e.preventDefault();
+    var self = this;
     var visibilityModal = new Core.ModalForm({
       url: Core.env.bm_app_url('/collections/item/' + this.model.id + '/config/edit/visibility'),
       model: this.model
     }).open();
+    visibilityModal.toggleSubmit = function(){  // disable submit button if scheduled selected and both date inputs empty
+      var visibility = this.serialize().params.edit.visibility;
+      this.$('.action_apply').prop('disabled', visibility.visibility_status === 'scheduled' && !visibility.visible_from.datetime && !visibility.visible_to.datetime);
+    };
     visibilityModal.on('open', function(){
-      // initialize datetime picker
+      $('.datetimepicker').each(function(){
+        return new Core.DateTimePicker({
+          el: $(this),
+        }).on('change', function(){
+          visibilityModal.toggleSubmit();
+        });
+      });
+      visibilityModal.$el.on('change', 'input[type="radio"]', function(e){
+        visibilityModal.toggleSubmit();
+      });
     });
     return visibilityModal;
   },
