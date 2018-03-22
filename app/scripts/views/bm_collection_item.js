@@ -77,7 +77,7 @@ module.exports = Core.View.extend({
       this.$el.on('change', 'input[type="radio"]', function(){
         visibilityModal.toggleSubmit(true);
       });
-      this.toggleSubmit();
+      this.toggleSubmit(true);
     });
     return visibilityModal;
   },
