@@ -65,7 +65,8 @@ module.exports = Core.View.extend({
       this.$('.action_apply').prop('disabled', this.scheduled && !this.dates.some(function(date){ return date.value }));
     };
     visibilityModal.on('open', function(){
-      visibilityModal.dates = [];
+      this.scheduled = this.$('#edit_visibility_visibility_status_2').is(':checked');
+      this.dates = [];
       $('.datetimepicker').each(function(){
         visibilityModal.dates.push(new Core.DateTimePicker({
           el: $(this),
