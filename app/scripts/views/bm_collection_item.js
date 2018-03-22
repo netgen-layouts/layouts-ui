@@ -62,23 +62,18 @@ module.exports = Core.View.extend({
       model: this.model
     }).open();
     visibilityModal.toggleSubmit = function(){  // disable submit button if scheduled selected and both date inputs empty
-      this.$('.action_apply').prop('disabled', this.scheduled && !this.dates.some(function(date){ return date.value }));
+      var visibility = this.serialize().params.edit.visibility;
+      this.$('.action_apply').prop('disabled', visibility.visibility_status === 'scheduled' && !visibility.visible_from.datetime && !visibility.visible_to.datetime);
     };
     visibilityModal.on('open', function(){
-      this.scheduled = this.$('#edit_visibility_visibility_status_2').is(':checked');
-      this.dates = [];
       $('.datetimepicker').each(function(){
-        visibilityModal.dates.push(new Core.DateTimePicker({
+        return new Core.DateTimePicker({
           el: $(this),
-        }));
-        visibilityModal.dates.forEach(function(date, i){
-          date.on('change', function(){
-            visibilityModal.toggleSubmit();
-          });
+        }).on('change', function(){
+          visibilityModal.toggleSubmit();
         });
       });
       visibilityModal.$el.on('change', 'input[type="radio"]', function(e){
-        visibilityModal.scheduled = e.target.id === 'edit_visibility_visibility_status_2';
         visibilityModal.toggleSubmit();
       });
     });
