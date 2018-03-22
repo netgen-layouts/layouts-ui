@@ -59,6 +59,7 @@ module.exports = Core.View.extend({
     var self = this;
     var visibilityModal = new Core.ModalForm({
       url: Core.env.bm_app_url('/collections/item/' + this.model.id + '/config/edit/visibility'),
+      via: 'visibility',
       model: this.model
     }).open();
     visibilityModal.toggleSubmit = function(toggleInputs){  // disable submit button if scheduled selected and both date inputs empty
