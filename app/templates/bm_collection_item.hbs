@@ -1,5 +1,6 @@
 <div class="item-panel">
-  <div class="handle"><i class="material-icons">drag_handle</i></div>
+  {{#if model.overflown}}<div class="item-position">{{model.position}}</div>{{/if}}
+  {{#unless model.overflown}}<div class="handle"><i class="material-icons">drag_handle</i></div>{{/unless}}
   <p class="name">
     {{model.name}}
   </p>
@@ -28,4 +29,11 @@
       </div>
     {{/if}}
   </div>
+  {{#if model.editing_position}}
+    <div class="item-edit-position">
+      <input type="number" value="{{model.position}}" class="item-position-input">
+      <a href="#" class="btn btn-primary js-save-position">Save</a>
+      <a href="#" class="btn btn-default js-cancel-position">Cancel</a>
+    </div>
+  {{/if}}
 </div>

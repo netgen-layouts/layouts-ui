@@ -6,7 +6,16 @@ var $ = Core.$;
 
 module.exports = Core.View.extend({
   template: 'bm_collection_item',
-  className: 'collection-item',
+
+  attributes: function(){
+    var className = 'collection-item';
+    this.model.get('type') === 2 && (className += ' dynamic-item');
+    !this.model.is_visible() && (className += ' hidden-item');
+    this.model.get('overflown') && (className += ' overflown-item');
+    return {
+      class: className,
+    };
+  },
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
@@ -19,22 +28,23 @@ module.exports = Core.View.extend({
     'click .remove-item': '$remove',
     'click .cancel': '$hide_remove_btn',
     'click .item-visibility': '$set_visibility',
+    'click .set-item-position': '$set_item_position',
+    'click .js-cancel-position': '$cancel_item_position',
+    'click .js-save-position': '$save_item_position',
+    'keydown .item-position-input': '$position_input_keypress',
   },
 
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
 
-    this.model.get('type') === 2 && this.$el.addClass('dynamic-item');
-    !this.model.is_visible() && this.$el.addClass('hidden-item');
-
     return this;
   },
 
-  $move: function(i){
+  $move: function(i, via){
     this.model.save({
       position: i
     },{
-      via: 'move',
+      via: via || 'move',
       url: this.model.url('move'),
       method: 'POST',
       patch: true
@@ -81,6 +91,36 @@ module.exports = Core.View.extend({
       this.toggleSubmit(true);
     });
     return visibilityModal;
+  },
+
+  $set_item_position: function(e){
+    e && e.preventDefault();
+    this.model.set({
+      'editing_position': true,
+    });
+    this.render();
+    this.$('.item-position-input').focus().val('').val(this.model.get('position'));
+  },
+
+  $cancel_item_position: function(e){
+    e && e.preventDefault();
+    this.model.set({
+      'editing_position': false,
+    });
+    this.render();
+  },
+
+  $save_item_position: function(e){
+    e && e.preventDefault();
+    this.$move(parseInt(this.$('.item-position-input').val(), 10), 'move_manual');
+  },
+
+  $position_input_keypress: function(e){
+    if (e.keyCode === 27) { //   cancel on press esc
+      this.$cancel_item_position();
+    } else if (e.keyCode === 13) {  // save on press enter
+      this.$save_item_position();
+    }
   },
 
 });

@@ -32,7 +32,11 @@ module.exports = Core.Model.extend({
 
 
   setup_items: function(){
-    this.items.reset(this.attributes.items);
+    var overflown = this.attributes.overflow_items.map(function(item){
+      item.overflown = true;
+      return item;
+    });
+    this.items.reset(this.attributes.items.concat(overflown));
     return this;
   },
 
