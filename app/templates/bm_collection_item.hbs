@@ -31,7 +31,7 @@
   </div>
   {{#if model.editing_position}}
     <div class="item-edit-position">
-      <input type="number" value="{{model.position}}" class="item-position-input">
+      <input type="number" value="{{model.position}}" class="item-position-input" min="0">
       <a href="#" class="btn btn-primary js-save-position">Save</a>
       <a href="#" class="btn btn-default js-cancel-position">Cancel</a>
     </div>
