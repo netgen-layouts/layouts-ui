@@ -352,16 +352,17 @@
   }
 
   &[data-translatable="off"]{
-    &:after{
+    &::after{
       content: "";
       position:absolute;
       top:0; right:0; bottom:0; left:0;
       background-color:rgba(0,0,0,0.5);
-      z-index:20;
+      z-index:100;
     }
     .handle{display:none;}
-    .block-header{z-index:50; background-color:white;}
-    &.editing .block-header{z-index:100; background-color:$btnprimary; color:#fff;}
+    > .block-header{z-index:101; background-color:white;}
+    &.editing > .block-header{z-index:101; background-color:$btnprimary; color:#fff;}
+    &[data-container] [data-placeholder] .block-header {z-index:99;}
   }
 
 

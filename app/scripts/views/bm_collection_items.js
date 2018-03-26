@@ -16,7 +16,8 @@ module.exports = Core.View.extend({
 
     //ITEMS
     this.listenTo(this.collection, 'create:success delete:success', this.refresh_items_and_block);
-    this.listenTo(this.collection, 'move:success', this.refresh_block);
+    this.listenTo(this.collection, 'move:success visibility:success', this.refresh_block);
+    this.listenTo(this.collection, 'move_manual:success', this.refresh_items_and_block);
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
@@ -62,6 +63,8 @@ module.exports = Core.View.extend({
       cancel: '.dynamic-item',
       axis: 'y',
       helper: 'clone',
+      items: '.collection-item:not(.overflown-item)',
+      handle: '.handle',
 
       stop: function(e, ui){
         $(ui.item).data('_view').$move($(ui.item).index() + self.bm_collection_model.get('offset'));
