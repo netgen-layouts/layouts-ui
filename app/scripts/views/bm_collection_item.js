@@ -112,7 +112,8 @@ module.exports = Core.View.extend({
 
   $save_item_position: function(e){
     e && e.preventDefault();
-    this.$move(parseInt(this.$('.item-position-input').val(), 10), 'move_manual');
+    var val = this.$('.item-position-input').val();
+    val.length && this.$move(parseInt(val, 10), 'move_manual');
   },
 
   $position_input_keypress: function(e){
