@@ -2,3 +2,9 @@
 <div class="add-items add-items-btn" data-input>+ Add items</div>
 
 <div class="bm-items" data-input></div>
+
+{{#if collection.bm_collection.show_remove_all}}
+  <div class="remove-all-items">
+    <a href="#" class="js-remove-all"><i class="material-icons">delete_forever</i> Remove all items</a>
+  </div>
+{{/if}}

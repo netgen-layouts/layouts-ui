@@ -52,6 +52,22 @@
     cursor:pointer;
     color:$mainColor;
   }
+  .remove-all-items {
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 1em 0 2em;
+    a {
+      display: inline-block;
+      &:hover {
+        color: #fff;
+      }
+      i {
+        vertical-align: middle;
+        font-size: 1.5em;
+      }
+    }
+  }
 
   .aside-tab-control {
     list-style-type:none;

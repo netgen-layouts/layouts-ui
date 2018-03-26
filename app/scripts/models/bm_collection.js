@@ -7,7 +7,8 @@ module.exports = Core.Model.extend({
   path: ':locale/collections',
   paths: {
     change_type: ':locale/blocks/:block_id/collections/:id/change_type',
-    results:     ':locale/blocks/:block_id/collections/:id/result'
+    results:     ':locale/blocks/:block_id/collections/:id/result',
+    remove_all_items: 'collections/:collection_id/items',
   },
 
   locale: function(){
@@ -67,10 +68,24 @@ module.exports = Core.Model.extend({
     });
   },
 
+  remove_all_items: function(){
+    return this.save(null, {
+      via: 'delete_all',
+      method: 'DELETE',
+      url: this.url('remove_all_items'),
+    });
+  },
+
 
   block: function(){
     return Core.g.layout.blocks.get(this.get('block_id'));
   },
 
+  show_remove_all: function(){
+    return this.items.reduce(function(total, item) {
+      if (item.is_manual()) total++;
+      return total;
+    }, 0) >= 10;
+  },
 
 });

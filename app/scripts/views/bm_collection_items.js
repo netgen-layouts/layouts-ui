@@ -15,16 +15,17 @@ module.exports = Core.View.extend({
     // this.listenTo(this.collection, 'all', function(e){console.log(e);});
 
     //ITEMS
-    this.listenTo(this.collection, 'create:success delete:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'create:success delete:success move_manual:success', this.refresh_items_and_block);
     this.listenTo(this.collection, 'move:success visibility:success', this.refresh_block);
-    this.listenTo(this.collection, 'move_manual:success', this.refresh_items_and_block);
+    this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
     return this;
   },
   events: {
-    'click .add-items': '$add_items'
+    'click .add-items': '$add_items',
+    'click .js-remove-all': '$remove_all_items',
   },
 
   view_items_el: '.bm-items',
@@ -103,5 +104,17 @@ module.exports = Core.View.extend({
 
     }).load_and_open();
 
-  }
+  },
+
+  $remove_all_items: function(e){
+    e && e.preventDefault();
+    var self = this;
+    return new Core.Modal({
+      title: 'Delete all manual items',
+      body: 'Are you sure you want to delete all manual items? This cannot be undone.',
+      apply_text: 'Delete',
+    }).on('apply', function(){
+      self.bm_collection_model.remove_all_items();
+    }).open();
+  },
 });
