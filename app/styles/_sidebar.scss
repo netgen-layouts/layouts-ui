@@ -699,19 +699,8 @@
     }
   }
   &.hidden-item {
-    .name {
-      color:#666;
-      i {
-        font-size:1em;
-        vertical-align:middle;
-        margin-right:3px;
-      }
-    }
-    .note {
-      color:#333;
-      font-size:0.82em;
-      font-weight:300;
-      margin:0.2em 0 0;
+    .item-panel {
+      background: #d5d5d5;
     }
   }
   &:not(.overflown-item) + .overflown-item {
