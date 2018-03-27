@@ -15,8 +15,8 @@ module.exports = Core.View.extend({
     // this.listenTo(this.collection, 'all', function(e){console.log(e);});
 
     //ITEMS
-    this.listenTo(this.collection, 'create:success delete:success move_manual:success', this.refresh_items_and_block);
-    this.listenTo(this.collection, 'move:success visibility:success', this.refresh_block);
+    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'visibility:success', this.refresh_block);
     this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
 
     this.on('render', this.setup_dnd);
@@ -66,10 +66,10 @@ module.exports = Core.View.extend({
       helper: 'clone',
       items: '.collection-item:not(.overflown-item)',
       handle: '.handle',
-
       stop: function(e, ui){
-        $(ui.item).data('_view').$move($(ui.item).index() + self.bm_collection_model.get('offset'));
-      }
+        var newPosition = ui.item.index();
+        ui.item.data('_view').model.get('position') !== newPosition && ui.item.data('_view').$move(newPosition + self.bm_collection_model.get('offset'));
+      },
 
     });
   },

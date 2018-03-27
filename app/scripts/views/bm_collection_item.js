@@ -112,8 +112,10 @@ module.exports = Core.View.extend({
 
   $save_item_position: function(e){
     e && e.preventDefault();
-    var val = this.$('.item-position-input').val();
-    val.length && this.$move(parseInt(val, 10), 'move_manual');
+    var newPosition = parseInt(this.$('.item-position-input').val());
+    if (!isNaN(newPosition)) {
+      newPosition !== this.model.get('position') ? this.$move(newPosition, 'move_manual') : this.$cancel_item_position();
+    }
   },
 
   $position_input_keypress: function(e){
