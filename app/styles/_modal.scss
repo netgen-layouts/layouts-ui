@@ -112,6 +112,7 @@
     }
     .visibility-inputs {
       transition: opacity .2s;
+      padding: 0 0 0 1.8em;
       &.disabled {
         opacity: .3;
         position: relative;
