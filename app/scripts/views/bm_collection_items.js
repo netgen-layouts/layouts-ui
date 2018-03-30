@@ -2,7 +2,6 @@
 
 var Core = require('netgen-core');
 var $ = Core.$;
-var Browser = require('netgen-content-browser');
 var BmCollectionItemView = require('./bm_collection_item');
 
 module.exports = Core.View.extend({
@@ -21,11 +20,9 @@ module.exports = Core.View.extend({
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
+    this.$init_overflown_items;
+
     return this;
-  },
-  events: {
-    'click .add-items': '$add_items',
-    'click .js-remove-all': '$remove_all_items',
   },
 
   view_items_el: '.bm-items',
@@ -78,43 +75,7 @@ module.exports = Core.View.extend({
     this.collection.bm_collection.sync_add_items(items);
   },
 
-  $add_items: function(){
-    var self = this;
-
-    var $browser_config_selector = this.$el.closest('.collection-items').find('.js-browser-config-selector');
-    var browser_configuration = $browser_config_selector.find('option:selected').data();
-    var value_type = $browser_config_selector.val();
-
-    new Browser({
-      disabled_item_ids: this.collection.reduce(function(out, item){
-        item.is_manual() && item.get('value_type') === value_type && out.push(item.get('value'));
-        return out;
-      }, []),
-      tree_config: {
-        overrides: browser_configuration,
-        root_path: $browser_config_selector.val()
-      }
-    }).on('apply', function(){
-      // @todo This needs to be configurable as some kind of mapping
-      var items = this.selected_collection.map(function(item){
-        return {type: 0, value: item.get('value'), value_type: value_type, position: self.bm_collection_model.get('offset') };
-      });
-
-      self.collection.sync_create_items(items);
-
-    }).load_and_open();
-
+  $init_overflown_items: function(){
   },
 
-  $remove_all_items: function(e){
-    e && e.preventDefault();
-    var self = this;
-    return new Core.Modal({
-      title: 'Delete all manual items',
-      body: 'Are you sure you want to delete all manual items? This cannot be undone.',
-      apply_text: 'Delete',
-    }).on('apply', function(){
-      self.bm_collection_model.remove_all_items();
-    }).open();
-  },
 });

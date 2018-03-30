@@ -703,17 +703,6 @@
       background: #d5d5d5;
     }
   }
-  &:not(.overflown-item) + .overflown-item {
-    margin-top: 2rem;
-    &::before {
-      content:'';
-      position: absolute;
-      top: -1rem;
-      left: 0;
-      width: 100%;
-      border-top: 1px dashed #8c8c8c;
-    }
-  }
   &.overflown-item {
     .item-panel {
       background: #d5d5d5;
@@ -766,7 +755,81 @@
 }
 
 .bm-items {
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
+}
+
+.bm-overflown-before {
+  .bm-overflown-items {
+    margin: 0 0 1rem;
+    padding: 0 0 1rem;
+    border-bottom: 1px dashed #8c8c8c;
+  }
+}
+.bm-overflown-after {
+  .bm-overflown-items {
+    margin: 1rem 0;
+    padding: 1rem 0 0;
+    border-top: 1px dashed #8c8c8c;
+  }
+  .overflown-items-collapsed {
+    margin-top: -1em;
+  }
+}
+.overflown-items-collapsed {
+  text-align: center;
+  .js-show-items {
+    color: #fff;
+    display: inline-block;
+    padding: .5em;
+    position: relative;
+    &:hover {
+      color: #d0d0d0;
+    }
+    i {
+      vertical-align: middle;
+    }
+  }
+  .overflown-count {
+    position: absolute;
+    font-size: .6875em;
+    line-height: 1.4em;
+    text-align: left;
+    left: 2.7em;
+    top: 1.2em;
+  }
+}
+.bm-overflown-items-wrapper {
+  position: relative;
+  .js-hide-items {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    color: #fff;
+    background: $toolbarbg1;
+    &:hover {
+      color: #d0d0d0;
+    }
+    i {
+      vertical-align: middle;
+      &::before {
+        content: 'expand_more';
+      }
+    }
+    .bm-overflown-after & {
+      bottom: 100%;
+      transform: translate3d(-50%, 50%, 0);
+      i {
+        &::before {
+          content: 'expand_less';
+        }
+      }
+    }
+    .bm-overflown-before & {
+      top: 100%;
+      bottom: auto;
+      transform: translate3d(-50%, -50%, 0);
+    }
+  }
 }
 
 [data-disabled="true"] > .collection-item{

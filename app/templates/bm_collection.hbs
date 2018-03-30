@@ -2,5 +2,14 @@
 <div>id: {{model.id}}</div>
 <div>type: {{model.type}}</div>
 <div>name: {{model.name}}</div-->
+<div class="add-items add-items-btn" data-input>+ Add items</div>
 
+<div class="bm-overflown-before" data-input></div>
 <div class="items"></div>
+<div class="bm-overflown-after" data-input></div>
+
+{{#if model.show_remove_all}}
+  <div class="remove-all-items">
+    <a href="#" class="js-remove-all"><i class="material-icons">delete_forever</i> Remove all added items</a>
+  </div>
+{{/if}}

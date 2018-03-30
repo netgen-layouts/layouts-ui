@@ -23,6 +23,10 @@ module.exports = Core.Model.extend({
     this.on('change_type:success', this.proxy_to_block);
     this.items = new BmCollectionItems();
     this.items.bm_collection = this;
+    this.overflown_before = new BmCollectionItems();
+    this.overflown_before.bm_collection = this;
+    this.overflown_after = new BmCollectionItems();
+    this.overflown_after.bm_collection = this;
     return this;
   },
 
@@ -33,11 +37,18 @@ module.exports = Core.Model.extend({
 
 
   setup_items: function(){
-    var overflown = this.attributes.overflow_items.map(function(item){
+    var self = this;
+    this.items.reset(this.attributes.items);
+    var overflown_items = {
+      before: [],
+      after: [],
+    };
+    this.attributes.overflow_items.map(function(item){
       item.overflown = true;
-      return item;
+      item.position < self.attributes.offset ? overflown_items.before.push(item) : overflown_items.after.push(item);
     });
-    this.items.reset(this.attributes.items.concat(overflown));
+    this.overflown_before.reset(overflown_items.before);
+    this.overflown_after.reset(overflown_items.after);
     return this;
   },
 
@@ -82,7 +93,7 @@ module.exports = Core.Model.extend({
   },
 
   show_remove_all: function(){
-    return this.items.reduce(function(total, item) {
+    return this.items.models.concat(this.overflown_before.models, this.overflown_after.models).reduce(function(total, item) {
       if (item.is_manual()) total++;
       return total;
     }, 0) >= 10;
