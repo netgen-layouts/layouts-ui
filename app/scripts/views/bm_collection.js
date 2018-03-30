@@ -79,9 +79,9 @@ module.exports = Core.View.extend({
     e && e.preventDefault();
     var self = this;
     return new Core.Modal({
-      title: 'Delete all added items',
-      body: 'Are you sure you want to delete all added items? This cannot be undone.',
-      apply_text: 'Delete',
+      title: 'Remove all added items',
+      body: 'Are you sure you want to remove all added items? This cannot be undone.',
+      apply_text: 'Remove',
     }).on('apply', function(){
       self.model.remove_all_items();
     }).open();
