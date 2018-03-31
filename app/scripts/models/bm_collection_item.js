@@ -10,11 +10,11 @@ module.exports = Core.Model.extend({
   },
 
   can_remove_item: function(){
-    return this.get('type') !== 2;
+    return !this.get('is_dynamic');
   },
 
   is_manual: function(){
-    return this.get('type') === 0
+    return !this.get('is_dynamic');
   },
 
   is_visible: function(){
