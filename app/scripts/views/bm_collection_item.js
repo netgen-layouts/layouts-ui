@@ -9,7 +9,7 @@ module.exports = Core.View.extend({
 
   attributes: function(){
     var className = 'collection-item';
-    this.model.get('is_dynamic') && (className += ' dynamic-item');
+    className += this.model.get('is_dynamic') ? ' dynamic-item' : ' manual-item';
     !this.model.is_visible() && (className += ' hidden-item');
     this.model.get('overflown') && (className += ' overflown-item');
     return {

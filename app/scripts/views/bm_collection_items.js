@@ -55,19 +55,69 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
+    this.bm_collection_model.get('collection_type') === 1 ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
+  },
+  setup_dynamic_dnd: function(){
     var self = this;
-    this.$('.bm-items').sortable({
+    var item_view,
+        startPosition;
+    var nextTillDynamic = function($el){
+      var elView = $el.data('_view');
+      if(elView && (!elView.model.is_manual() || elView.model.get('position') === startPosition)){
+        $el.addClass('sorting-hidden');
+      } else if ($el.next('.collection-item').length) {
+        nextTillDynamic($el.next('.collection-item'));
+      }
+    };
+    this.$('.bm-items .item-panel').draggable({
       delay: 150,
       cancel: '.dynamic-item',
       axis: 'y',
       helper: 'clone',
-      items: '.collection-item:not(.overflown-item)',
+      handle: '.handle',
+      zIndex: 100,
+      appendTo: '.bm-items',
+      start: function(e, ui){
+        item_view = $(this).closest('.collection-item').data('_view');
+        startPosition = item_view.model.get('position');
+        $(this).closest('.collection-item').addClass('start-item');
+      },
+      stop: function(){
+        self.$('.start-item').removeClass('start-item');
+      }
+    });
+    this.$('.bm-items .collection-item').droppable({
+      hoverClass: 'highlight',
+      activeClass: 'sorting',
+      out: function(){
+        self.$('.cloned-manual').remove();
+        self.$('.sorting-hidden').removeClass('sorting-hidden');
+      },
+      over: function(e, ui){
+        if ($(this).index() !== startPosition && $(this).hasClass('manual-item')){
+          var clone = this.cloneNode(true);
+          clone.classList.add('cloned-manual');
+          this.insertAdjacentHTML('afterend', clone.outerHTML);
+          nextTillDynamic($(this));
+        }
+      },
+      drop: function(e, ui){
+        var newPosition = $(this).index();
+        item_view.model.get('position') !== newPosition && item_view.$move(newPosition + self.bm_collection_model.get('offset'));
+      },
+    });
+  },
+  setup_manual_dnd: function(){
+    var self = this;
+    this.$('.bm-items').sortable({
+      delay: 150,
+      axis: 'y',
+      helper: 'clone',
       handle: '.handle',
       stop: function(e, ui){
         var newPosition = ui.item.index();
         ui.item.data('_view').model.get('position') !== newPosition && ui.item.data('_view').$move(newPosition + self.bm_collection_model.get('offset'));
       },
-
     });
   },
 
