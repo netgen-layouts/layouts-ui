@@ -18,7 +18,6 @@ module.exports = Core.View.extend({
     this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
     this.listenTo(this.collection, 'request', this.startLoading);
     this.listenTo(this.bm_collection_model, 'read:success', this.endLoading);
-    this.listenTo(this.bm_collection_model, 'change:loading', this.render);
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);

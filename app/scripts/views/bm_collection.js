@@ -11,6 +11,7 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(this.model, 'change:loading', this.render);
     this.on('render', this.render_items);
     this.$el.addClass('collection-type-'+this.model.get('collection_type'));
 

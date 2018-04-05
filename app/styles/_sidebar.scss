@@ -769,17 +769,23 @@
   }
 }
 
-.items {
+.loading-collection {
   position: relative;
-  .items-loading {
+  .collection-loader {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    text-align: center;
-    color: #aaa;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($toolbarbg1, .8);
+    color: #ddd;
     font-size: .75em;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     span {
       text-transform: uppercase;
       display: block;
@@ -787,6 +793,7 @@
     }
   }
 }
+
 .bm-items {
   margin: 0 0 1rem;
   &.bm-items-loading {
