@@ -12,10 +12,8 @@ module.exports = Core.View.extend({
     this.listenTo(this.bm_collection_model.block(), 'refresh:items', this.refresh_items);
 
     //ITEMS
-    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success', this.refresh_items);
-    this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items);
+    this.listenTo(this.collection, 'delete:success move_manual:success visibility:success', this.refresh_items_and_block);
 
-    console.log(this);
     return this;
   },
 
@@ -37,8 +35,17 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  refresh_items_and_block: function(){
+    this.refresh_items();
+    this.refresh_block();
+  },
+
   refresh_items: function(){
     return this.bm_collection_model.fetch_results();
+  },
+
+  refresh_block: function(){
+    return this.bm_collection_model.block().fetch();
   },
 
   save_items: function(items){
