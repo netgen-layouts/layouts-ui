@@ -1,3 +1,8 @@
 <!--Collection items will appear here!-->
-
-<div class="bm-items" data-input></div>
+{{#if collection.bm_collection.loading}}
+  <div class="items-loading">
+    <i class="loading-ng-icon"></i>
+    <span>Loading</span>
+  </div>
+{{/if}}
+<div class="bm-items{{#if collection.bm_collection.loading}} bm-items-loading{{/if}}" data-input></div>

@@ -14,9 +14,11 @@ module.exports = Core.View.extend({
     // this.listenTo(this.collection, 'all', function(e){console.log(e);});
 
     //ITEMS
-    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success', this.refresh_items_and_block);
-    this.listenTo(this.collection, 'visibility:success', this.refresh_block);
+    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success visibility:success', this.refresh_items_and_block);
     this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'request', this.startLoading);
+    this.listenTo(this.bm_collection_model, 'read:success', this.endLoading);
+    this.listenTo(this.bm_collection_model, 'change:loading', this.render);
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
@@ -29,6 +31,12 @@ module.exports = Core.View.extend({
   ViewItem: BmCollectionItemView,
   template: 'bm_collection_items',
 
+  startLoading: function(){
+    this.bm_collection_model.set('loading', true);
+  },
+  endLoading: function(){
+    this.bm_collection_model.set('loading', false);
+  },
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
@@ -55,7 +63,9 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
-    this.bm_collection_model.get('collection_type') === 1 ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
+    if(!this.bm_collection_model.get('loading')) {
+      this.bm_collection_model.get('collection_type') === 1 ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
+    }
   },
   setup_dynamic_dnd: function(){
     var self = this;
