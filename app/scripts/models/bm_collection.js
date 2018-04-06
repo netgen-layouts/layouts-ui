@@ -94,7 +94,7 @@ module.exports = Core.Model.extend({
 
   show_remove_all: function(){
     return this.items.models.concat(this.overflown_before.models, this.overflown_after.models).reduce(function(total, item) {
-      if (item.is_manual()) total++;
+      !item.get('is_dynamic') && total++;
       return total;
     }, 0) >= 10;
   },

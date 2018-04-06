@@ -21,6 +21,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.bm_collection_model = this.model.collection.bm_collection;
     this.listenTo(this.model, 'delete:success', this.remove);
+
     return this;
   },
 

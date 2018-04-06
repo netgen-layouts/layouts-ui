@@ -72,15 +72,14 @@ module.exports = Core.View.extend({
         startPosition;
     var nextTillDynamic = function($el){
       var elView = $el.data('_view');
-      if(elView && (!elView.model.is_manual() || elView.model.get('position') === startPosition)){
+      if(elView && (elView.model.get('is_dynamic') || elView.model.get('position') === startPosition)){
         $el.addClass('sorting-hidden');
       } else if ($el.next('.collection-item').length) {
         nextTillDynamic($el.next('.collection-item'));
       }
     };
-    this.$('.bm-items .item-panel').draggable({
+    this.$('.bm-items .manual-item .item-panel:not(.override-item)').draggable({
       delay: 150,
-      cancel: '.dynamic-item',
       axis: 'y',
       helper: 'clone',
       handle: '.handle',
@@ -103,7 +102,7 @@ module.exports = Core.View.extend({
         self.$('.sorting-hidden').removeClass('sorting-hidden');
       },
       over: function(e, ui){
-        if ($(this).index() !== startPosition && $(this).hasClass('manual-item')){
+        if ($(e.target).data('_view').model.get('position') !== startPosition && $(this).hasClass('manual-item')){
           var clone = this.cloneNode(true);
           clone.classList.add('cloned-manual');
           this.insertAdjacentHTML('afterend', clone.outerHTML);
@@ -111,8 +110,8 @@ module.exports = Core.View.extend({
         }
       },
       drop: function(e, ui){
-        var newPosition = $(this).index();
-        item_view.model.get('position') !== newPosition && item_view.$move(newPosition + self.bm_collection_model.get('offset'));
+        var newPosition = $(e.target).data('_view').model.get('position');
+        item_view.model.get('position') !== newPosition && item_view.$move(newPosition);
       },
     });
   },

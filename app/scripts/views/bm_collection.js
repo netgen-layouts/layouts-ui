@@ -57,7 +57,7 @@ module.exports = Core.View.extend({
 
     new Browser({
       disabled_item_ids: this.model.items.reduce(function(out, item){
-        item.is_manual() && item.get('value_type') === value_type && out.push(item.get('value'));
+        !item.get('is_dynamic') && item.get('value_type') === value_type && out.push(item.get('value'));
         return out;
       }, []),
       tree_config: {
