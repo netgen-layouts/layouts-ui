@@ -98,10 +98,10 @@ module.exports = Core.View.extend({
       hoverClass: 'highlight',
       activeClass: 'sorting',
       out: function(){
-        self.$('.cloned-manual').remove();
-        self.$('.sorting-hidden').removeClass('sorting-hidden');
       },
       over: function(e, ui){
+        self.$('.cloned-manual').remove();
+        self.$('.sorting-hidden').removeClass('sorting-hidden');
         if ($(e.target).data('_view').model.get('position') !== startPosition && $(this).hasClass('manual-item')){
           var clone = this.cloneNode(true);
           clone.classList.add('cloned-manual');

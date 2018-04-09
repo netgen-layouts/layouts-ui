@@ -698,7 +698,7 @@
       font-size: .875rem;
     }
   }
-  &.overriden-item {
+  .collection-item:not(.cloned-manual) > &.overriden-item {
     border-radius: $borderRadius $borderRadius 0 0;
     padding-bottom: 0;
     .name {
@@ -731,6 +731,9 @@
         right: 0;
         top: 50%;
       }
+    }
+    .cloned-manual & {
+      display: none;
     }
   }
 }
