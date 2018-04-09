@@ -21,7 +21,6 @@ module.exports = Core.View.extend({
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
-    this.$init_overflown_items;
 
     return this;
   },
@@ -131,9 +130,6 @@ module.exports = Core.View.extend({
 
   save_items: function(items){
     this.collection.bm_collection.sync_add_items(items);
-  },
-
-  $init_overflown_items: function(){
   },
 
 });

@@ -13,6 +13,7 @@ module.exports = Core.View.extend({
 
     //ITEMS
     this.listenTo(this.collection, 'delete:success move_manual:success visibility:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'request', this.startLoading);
 
     return this;
   },
@@ -28,6 +29,12 @@ module.exports = Core.View.extend({
     'click .js-hide-items': '$hide_items',
   },
 
+  startLoading: function(){
+    this.bm_collection_model.set('loading', true);
+  },
+  endLoading: function(){
+    this.bm_collection_model.set('loading', false);
+  },
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
