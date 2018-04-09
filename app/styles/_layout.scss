@@ -207,6 +207,13 @@
       padding-right:10px;
     }
   }
+  .zones {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media screen and (min-width: 1750px){
+    right: $rightWidthLg;
+  }
 }
 
 /* footer */
@@ -218,6 +225,9 @@
   // height:$bottomHeight;
   // background:$footerbg;
   display:none;
+  // @media screen and (min-width: 1750px){
+  //   right: $rightWidthLg;
+  // }
 }
 
 

@@ -529,6 +529,10 @@
     // display: block; padding:2px 4px; background: $mainColor;
     // border-radius:5px; text-align:center; margin-bottom:20px;
   }
+
+  @media screen and (min-width: 1750px){
+    width: $rightWidthLg;
+  }
 }
 
 .errors {
@@ -589,6 +593,10 @@
   .sorting & {
     display:flex;
   }
+  @media screen and (min-width: 1750px) {
+    width: $rightWidthLg - $gutter;
+    height: $rightWidthLg - $gutter;
+  }
 }
 
 /* collection item */
@@ -599,8 +607,8 @@
   position:relative;
   display: flex;
   align-items: center;
-  width: 255px;
   color:#333;
+  width: 100%;
   .handle {
     position:absolute;
     left:0;
@@ -827,6 +835,7 @@
 
 .bm-items {
   margin: 0 0 1rem;
+  position: relative;
   &.bm-items-loading {
     // background: #fff;
     > * {
