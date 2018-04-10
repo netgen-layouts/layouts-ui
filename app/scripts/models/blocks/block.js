@@ -34,7 +34,7 @@ module.exports = Core.Model.extend({
       return item
     }.bind(this));
     this.bm_collections.set(items, {parse: true});
-    delete(this.attributes.collections);
+    //delete(this.attributes.collections);
   },
 
 
