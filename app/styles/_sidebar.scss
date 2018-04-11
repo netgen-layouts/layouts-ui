@@ -727,7 +727,8 @@ $itemHeight: 2.625rem;
       .controls {
         display: none;
       }
-      &:hover {
+      &:hover,
+      &.item-editing-position {
         width: 80%;
         .controls {
           display: block;
