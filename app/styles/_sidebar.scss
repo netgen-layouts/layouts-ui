@@ -844,7 +844,7 @@ $itemHeight: 2.625rem;
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba($toolbarbg1, .8);
+    background: $toolbarbg1;
     color: #ddd;
     font-size: .75em;
     display: flex;
