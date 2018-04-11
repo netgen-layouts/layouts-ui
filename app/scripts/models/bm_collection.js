@@ -43,9 +43,10 @@ module.exports = Core.Model.extend({
       before: [],
       after: [],
     };
+    var firstItemPosition = this.attributes.items.length ? this.attributes.items[0].position : this.attributes.offset;
     this.attributes.overflow_items.map(function(item){
       item.overflown = true;
-      item.position < self.attributes.offset ? overflown_items.before.push(item) : overflown_items.after.push(item);
+      item.position < firstItemPosition ? overflown_items.before.push(item) : overflown_items.after.push(item);
     });
     this.overflown_before.reset(overflown_items.before);
     this.overflown_after.reset(overflown_items.after);
