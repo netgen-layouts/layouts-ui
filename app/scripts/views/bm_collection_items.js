@@ -104,8 +104,13 @@ module.exports = Core.View.extend({
         if ($(e.target).data('_view').model.get('position') !== startPosition && $(this).hasClass('manual-item')){
           var clone = this.cloneNode(true);
           clone.classList.add('cloned-manual');
-          this.insertAdjacentHTML('afterend', clone.outerHTML);
-          nextTillDynamic($(this));
+          if ($(e.target).data('_view').model.get('position') - startPosition === 1) {
+            this.insertAdjacentHTML('beforebegin', clone.outerHTML);
+            self.$('.start-item').addClass('sorting-hidden');
+          } else {
+            this.insertAdjacentHTML('afterend', clone.outerHTML);
+            nextTillDynamic($(this));
+          }
         }
       },
       drop: function(e, ui){
