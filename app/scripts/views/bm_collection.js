@@ -44,8 +44,6 @@ module.exports = Core.View.extend({
   },
 
   render_overflown_items: function(){
-    this.overflown_before_view && this.overflown_before_view.remove();
-    this.overflown_after_view && this.overflown_after_view.remove();
     this.overflown_before_view.setElement(this.$('.bm-overflown-before')).render();
     this.overflown_after_view.setElement(this.$('.bm-overflown-after')).render();
   },
