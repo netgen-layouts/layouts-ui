@@ -12,6 +12,8 @@ CKEDITOR.on( 'instanceCreated', function ( event ) {
 
   editor.on( 'configLoaded', function () {
 
+    editor.config.extraPlugins = 'justify';
+
     editor.config.removePlugins =
         'colorbutton,find,flash,font,' +
         'forms,iframe,image,newpage,removeformat,' +
