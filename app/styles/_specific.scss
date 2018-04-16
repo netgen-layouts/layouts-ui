@@ -87,8 +87,9 @@ $layoutsAmount: 6;
   }
 }
 
-.ui-sortable-helper {
-  opacity:0.8;
+.ui-sortable-helper,
+.ui-draggable-dragging {
+  opacity: .8;
 }
 
 .dragging .image-holder {

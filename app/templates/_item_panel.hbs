@@ -1,0 +1,44 @@
+<div class="item-panel{{#if override}} override-item{{/if}}{{#if item.overrideItem}} overriden-item{{/if}}{{#if item.editing_position}} item-editing-position{{/if}}">
+  {{#if override}}<div class="override-divide"><i class="material-icons">swap_horiz</i></div>{{/if}}
+  {{#if item.overflown}}<div class="item-position">{{item.position}}</div>{{/if}}
+  {{#unless item.overflown}}{{#unless item.is_dynamic}}<div class="handle"><i class="material-icons">drag_handle</i></div>{{/unless}}{{/unless}}
+  <p class="name">
+    {{item.name}}
+  </p>
+  {{#if item.scheduled}}
+    <div class="status-icon"><span class="bm-tooltip" title="Item is scheduled"><i class="material-icons">access_time</i></span></div>
+  {{/if}}
+  {{#unless item.is_visible}}
+    <div class="status-icon">
+      <span class="bm-tooltip" title="{{#unless item.cms_visible}}Hidden in CMS{{else}}{{#if item.scheduled}}Hidden by scheduling{{else}}Hidden in Netgen Layouts{{/if}}{{/unless}}">
+        <i class="material-icons">visibility_off</i>
+      </span>
+    </div>
+  {{/unless}}
+  <div class="controls">
+    {{#if item.has_menu}}
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          {{#if item.cms_url}}<li><a href="{{item.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
+          {{#unless item.is_dynamic}}
+            <li><a class="item-visibility">Configure visibility</a></li>
+            <li><a class="set-item-position">Set position</a></li>
+          {{/unless}}
+          {{#if item.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
+        </ul>
+      </div>
+    {{/if}}
+  </div>
+  {{#if item.editing_position}}
+    <div class="item-edit-position">
+      <input type="number" value="{{item.position}}" class="item-position-input" min="0">
+      <a href="#" class="btn btn-primary js-save-position">Save</a>
+      <a href="#" class="btn btn-default js-cancel-position">Cancel</a>
+    </div>
+  {{/if}}
+
+</div>
+{{#if item.overrideItem}}
+  {{> item_panel item=item.overrideItem override=true}}
+{{/if}}

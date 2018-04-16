@@ -9,7 +9,7 @@ module.exports = Core.View.extend({
 
   attributes: function(){
     var className = 'collection-item';
-    this.model.get('type') === 2 && (className += ' dynamic-item');
+    className += this.model.get('is_dynamic') ? ' dynamic-item' : ' manual-item';
     !this.model.is_visible() && (className += ' hidden-item');
     this.model.get('overflown') && (className += ' overflown-item');
     return {
@@ -21,6 +21,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.bm_collection_model = this.model.collection.bm_collection;
     this.listenTo(this.model, 'delete:success', this.remove);
+
     return this;
   },
 
@@ -112,7 +113,10 @@ module.exports = Core.View.extend({
 
   $save_item_position: function(e){
     e && e.preventDefault();
-    this.$move(parseInt(this.$('.item-position-input').val(), 10), 'move_manual');
+    var newPosition = parseInt(this.$('.item-position-input').val());
+    if (!isNaN(newPosition)) {
+      newPosition !== this.model.get('position') ? this.$move(newPosition, 'move_manual') : this.$cancel_item_position();
+    }
   },
 
   $position_input_keypress: function(e){

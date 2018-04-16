@@ -2,7 +2,6 @@
 
 var Core = require('netgen-core');
 var $ = Core.$;
-var Browser = require('netgen-content-browser');
 var BmCollectionItemView = require('./bm_collection_item');
 
 module.exports = Core.View.extend({
@@ -15,22 +14,27 @@ module.exports = Core.View.extend({
     // this.listenTo(this.collection, 'all', function(e){console.log(e);});
 
     //ITEMS
-    this.listenTo(this.collection, 'create:success delete:success', this.refresh_items_and_block);
-    this.listenTo(this.collection, 'move:success visibility:success', this.refresh_block);
-    this.listenTo(this.collection, 'move_manual:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success visibility:success', this.refresh_items_and_block);
+    this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'request', this.startLoading);
+    this.listenTo(this.bm_collection_model, 'read:success', this.endLoading);
 
     this.on('render', this.setup_dnd);
     this.on('render', this.hide_add_items_if_no_options);
+
     return this;
-  },
-  events: {
-    'click .add-items': '$add_items'
   },
 
   view_items_el: '.bm-items',
   ViewItem: BmCollectionItemView,
   template: 'bm_collection_items',
 
+  startLoading: function(){
+    this.bm_collection_model.set('loading', true);
+  },
+  endLoading: function(){
+    this.bm_collection_model.set('loading', false);
+  },
 
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
@@ -57,19 +61,75 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
+    if(!this.bm_collection_model.get('loading')) {
+      this.bm_collection_model.get('collection_type') === 1 ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
+    }
+  },
+  setup_dynamic_dnd: function(){
+    var self = this;
+    var item_view,
+        startPosition;
+    var nextTillDynamic = function($el){
+      var elView = $el.data('_view');
+      if(elView && (elView.model.get('is_dynamic') || elView.model.get('position') === startPosition)){
+        $el.addClass('sorting-hidden');
+      } else if ($el.next('.collection-item').length) {
+        nextTillDynamic($el.next('.collection-item'));
+      }
+    };
+    this.$('.bm-items .manual-item .item-panel:not(.override-item)').draggable({
+      delay: 150,
+      axis: 'y',
+      helper: 'clone',
+      handle: '.handle',
+      zIndex: 100,
+      appendTo: '.bm-items',
+      start: function(e, ui){
+        item_view = $(this).closest('.collection-item').data('_view');
+        startPosition = item_view.model.get('position');
+        $(this).closest('.collection-item').addClass('start-item');
+      },
+      stop: function(){
+        self.$('.start-item').removeClass('start-item');
+      }
+    });
+    this.$('.bm-items .collection-item').droppable({
+      hoverClass: 'highlight',
+      activeClass: 'sorting',
+      out: function(){
+      },
+      over: function(e, ui){
+        self.$('.cloned-manual').remove();
+        self.$('.sorting-hidden').removeClass('sorting-hidden');
+        if ($(e.target).data('_view').model.get('position') !== startPosition && $(this).hasClass('manual-item')){
+          var clone = this.cloneNode(true);
+          clone.classList.add('cloned-manual');
+          if ($(e.target).data('_view').model.get('position') - startPosition === 1) {
+            this.insertAdjacentHTML('beforebegin', clone.outerHTML);
+            self.$('.start-item').addClass('sorting-hidden');
+          } else {
+            this.insertAdjacentHTML('afterend', clone.outerHTML);
+            nextTillDynamic($(this));
+          }
+        }
+      },
+      drop: function(e, ui){
+        var newPosition = $(e.target).data('_view').model.get('position');
+        item_view.model.get('position') !== newPosition && item_view.$move(newPosition);
+      },
+    });
+  },
+  setup_manual_dnd: function(){
     var self = this;
     this.$('.bm-items').sortable({
       delay: 150,
-      cancel: '.dynamic-item',
       axis: 'y',
       helper: 'clone',
-      items: '.collection-item:not(.overflown-item)',
       handle: '.handle',
-
       stop: function(e, ui){
-        $(ui.item).data('_view').$move($(ui.item).index() + self.bm_collection_model.get('offset'));
-      }
-
+        var newPosition = ui.item.index();
+        ui.item.data('_view').model.get('position') !== newPosition && ui.item.data('_view').$move(newPosition + self.bm_collection_model.get('offset'));
+      },
     });
   },
 
@@ -77,31 +137,4 @@ module.exports = Core.View.extend({
     this.collection.bm_collection.sync_add_items(items);
   },
 
-  $add_items: function(){
-    var self = this;
-
-    var $browser_config_selector = this.$el.closest('.collection-items').find('.js-browser-config-selector');
-    var browser_configuration = $browser_config_selector.find('option:selected').data();
-    var value_type = $browser_config_selector.val();
-
-    new Browser({
-      disabled_item_ids: this.collection.reduce(function(out, item){
-        item.is_manual() && item.get('value_type') === value_type && out.push(item.get('value'));
-        return out;
-      }, []),
-      tree_config: {
-        overrides: browser_configuration,
-        root_path: $browser_config_selector.val()
-      }
-    }).on('apply', function(){
-      // @todo This needs to be configurable as some kind of mapping
-      var items = this.selected_collection.map(function(item){
-        return {type: 0, value: item.get('value'), value_type: value_type, position: self.bm_collection_model.get('offset') };
-      });
-
-      self.collection.sync_create_items(items);
-
-    }).load_and_open();
-
-  }
 });

@@ -9,7 +9,7 @@ module.exports = Core.Collection.extend({
   sync_create_items: function(items){
 
     var data = {
-      items: items
+      items: items,
     };
 
     return this.sync('create', this, {

@@ -1,0 +1,13 @@
+<!--Collection items will appear here!-->
+{{#if collection.length}}
+  {{#if show_items}}
+    <div class="bm-overflown-items-wrapper">
+      <a href="#" class="js-hide-items"><i class="material-icons"></i></a>
+      <div class="bm-overflown-items" data-input></div>
+    </div>
+  {{else}}
+    <div class="overflown-items-collapsed">
+      <a href="#" class="js-show-items"><i class="material-icons">more_vert</i><span class="overflown-count">{{ collection.length }}</span></a>
+    </div>
+  {{/if}}
+{{/if}}

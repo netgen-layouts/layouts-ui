@@ -11,7 +11,8 @@ $.fn.video_thumb_fetcher = function(){
 
     if (service === 'youtube'){
       $thumb.attr('src', 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg?'+(+new Date));
-
+    } else if (service === 'dailymotion'){
+      $thumb.attr('src', 'https://www.dailymotion.com/thumbnail/video/' + id + '?'+(+new Date));
     } else if (service === 'vimeo'){
       $.ajax({
         type:'GET',
