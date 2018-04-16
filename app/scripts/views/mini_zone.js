@@ -7,18 +7,21 @@ var DndView = require('./dnd');
 var _ = require('underscore');
 
 
-  module.exports = Core.View.extend(DndView).extend({
+module.exports = Core.View.extend(DndView).extend({
 
-    template: 'mini_zone',
+  template: 'mini_zone',
 
-    initialize: function(){
-      Core.View.prototype.initialize.apply(this, arguments);
-      // this.listenTo(Core.state, 'change', this.render);
-      // this.listenTo(this.model, 'unlink:success', this.on_unlink);
+  initialize: function(){
+    Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(this.model, 'change:mapped', this.update_mapped);
+    this.model.is_linked() && this.$el.addClass('shared-zone');
+    this.update_mapped();
+    return this;
+  },
 
-      // this.is_zone = true;
-      this.model.is_linked() && this.$el.addClass('shared-zone')
-      return this;
-    }
+  update_mapped: function(){
+    console.log('update_mapped', this.model.attributes);
+    this.$el[this.model.get('mapped') ? 'hide' : 'show']();
+  }
 
-  });
+});

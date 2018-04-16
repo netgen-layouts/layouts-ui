@@ -115,11 +115,10 @@ module.exports = Core.Model.extend({
   },
 
 
-  unmapped_zones_for: function(new_layout_type){
+  unmapped_zone_ids_for: function(new_layout_type){
     var new_zones = new_layout_type.zones.pluck('id')
     var current_zones = this.zones.pluck('id');
-    var ids = _.difference(current_zones, new_zones);
-    return this.zones.get_by_ids(ids);
+    return _.difference(current_zones, new_zones);
   },
 
   load_all_blocks: function(opts){

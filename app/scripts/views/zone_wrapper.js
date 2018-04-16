@@ -14,15 +14,33 @@ module.exports = Core.View.extend(DndView).extend({
 
   connect_with: '[data-zone-receiver]',
 
+  initialize: function(){
+    Core.View.prototype.initialize.apply(this, arguments);
+    this.$el.attr({
+      'data-zone-wrapper': ''
+    });
+    return this;
+  },
+
+
+  add_zone: function(zone){
+    this.model.children.push(zone);
+    return this;
+  },
+
+  render_zone: function(zone){
+    return new ZoneView({ model: zone }).render_basics().el;
+  },
+
+
+  render_zones: function(){
+    this.$('.body').html(_.map(this.model.children, this.render_zone, this));
+    return this;
+  },
+
   render: function(){
     this._render();
-
-    console.log(this.model.children);
-    this.$('.body').html(_.map(this.model.children, function(item){
-      console.log(ZoneView, item, this);
-      return new ZoneView({ model: item }).render_basics().el;
-    }, this));
-
+    this.render_zones();
     this.setup_dnd_for_zone_wrappers()
     this.trigger_render();
     return this;

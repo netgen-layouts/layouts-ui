@@ -806,3 +806,22 @@ input, select{
 
   }
 }
+
+
+.chooser-zones{
+  @extend %clearfix;
+  .items > div{
+    height:100px;
+    text-align:center;
+    line-height:100px;
+
+    text-transform:uppercase;
+    background:white;
+    color:black;
+    border:1px solid #ccc;
+    float:left;
+    margin-right:10px;
+    width:160px;
+    &.shared-zone{border-color: red;}
+  }
+}

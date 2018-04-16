@@ -19,6 +19,10 @@ Draggable.prototype.$zone = function() {
   return this.$drag_item.closest('[data-zone]');
 };
 
+Draggable.prototype.$zone_wrapper = function() {
+  return this.$drag_item.closest('[data-zone-wrapper]');
+};
+
 Draggable.prototype.$container = function() {
   return this.$drag_item.closest('[data-container]');
 };
@@ -159,5 +163,20 @@ Draggable.prototype.save_new_position_for_container = function() {
   this.model.move_to_container(this.get_new_order_in_zone(), this.get_new_order_in_container());
 };
 
+
+
+Draggable.prototype.initialize_zone = function() {
+  this.model.set({mapped: true});
+  var zone_wrapper = this.$zone_wrapper();
+
+  var zone_wrapper_view = zone_wrapper.data('_view');
+  zone_wrapper_view.add_zone(this.model);
+
+  var $zone_el = zone_wrapper_view.render_zone(this.model);
+  this.$drag_item.after($zone_el);
+
+  //Remove draggable block_type element
+  this.remove();
+};
 
 module.exports = Draggable;

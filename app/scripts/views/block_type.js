@@ -4,7 +4,6 @@ var Core = require('netgen-core');
 
 module.exports = Core.View.extend({
   template: 'block_types/item',
-
   className: 'add-block-btn',
 
   initialize: function(){
@@ -12,12 +11,5 @@ module.exports = Core.View.extend({
     this.$el.addClass('icn-' + this.model.get('identifier'));
     return this;
   },
-
-  dnd: function(){
-    this.$el.draggable({
-      helper: 'clone'
-    });
-    return this;
-  }
 
 });

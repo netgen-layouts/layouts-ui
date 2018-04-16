@@ -266,8 +266,6 @@ module.exports = {
 
   setup_dnd_for_zone_wrappers: function(){
 
-
-    console.log(this.connect_with);
     // if(this.should_disable_dnd()){ return; }
 
     var self = this,
@@ -291,13 +289,9 @@ module.exports = {
         // console.log(this);
         if(self.receive_is_canceled(ui)){ return; }
         var draggable = new Draggable(e, ui);
-        if(self.is_zone && !self.zone_accept_blocks(ui, draggable.model, $(this).closest('[data-zone]').data('_view'))){
-          return;
-        }
-
         ui.item.real_target = this;
         draggable.mark_sender_as_copied();
-        draggable.is_block_type() && draggable.create_new_block();
+        draggable.initialize_zone();
       },
 
       start: function(e, ui) {
@@ -319,6 +313,7 @@ module.exports = {
             receiver = new Receiver($(real_target).closest('[data-view]'));
 
 
+        console.log(receiver);
         if(el_moved){
           // if (receiver.is_zone()){
           //   draggable.save_new_position_for_zone();
@@ -335,5 +330,46 @@ module.exports = {
     });
 
   },
+
+
+  /**
+   * Setup DND for new dragging zones in change layout view
+   */
+  setup_dnd_for_zones: function(){
+   // if(this.should_disable_dnd()){ return; }
+    var self = this;
+      this.$el.sortable({
+        connectWith: '[data-zone-receiver]',
+        placeholder: 'no-placeholder',
+        appendTo: document.body,
+        // over: self.check_containers.bind(self),
+        // out: self.remove_forbidden_class,
+
+        helper: function (e, item) {
+          this.copyHelper = item.clone(true).insertAfter(item);
+          $(this).data('copied', false);
+          return item.clone();
+        },
+
+        start: function(e, ui){
+          ui.helper.addClass('ngc');
+          Core.trigger('sortable:start');
+        },
+
+        stop: function (e) {
+          Core.trigger('sortable:end');
+          var copied = $(this).data('copied');
+
+          if(!copied){
+            e.preventDefault();
+            this.copyHelper.remove();
+          }
+          this.copyHelper = null;
+        }
+
+      });
+
+  },
+
 
 };

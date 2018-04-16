@@ -10,6 +10,7 @@ var ZoneLinkingHeaderView = require('../views/zone_linking_header');
 var ZoneWrapperView = require('../views/zone_wrapper');
 var ZoneView = require('../views/zone');
 var Layout = require('../models/layout');
+var _ = require('underscore');
 
 
 module.exports = LayoutBasePage.extend({
@@ -40,13 +41,28 @@ module.exports = LayoutBasePage.extend({
   },
 
   main: function(){
+    this.new_layout_type = Core.g.layout_types.get(Core.router.params.layout_type_id);
+    var zones, ids;
+
+    zones = this.zones = Core.g.layout.zones.deep_clone();
+    zones.update({mapped: true});
+
+    if(this.new_layout_type){
+
+      var ids = Core.g.layout.unmapped_zone_ids_for(this.new_layout_type);
+      _.each(zones.get_by_ids(ids), function(zone){
+        zone.set({mapped: false });
+      });
+
+      this.setup_zone_wrappers();
+    }
 
     var sidebar = Core.state.detect_sidebar();
     $('.right-sidebar').html(JST[sidebar]());
 
     Core.state.set({mode: 'change_type', section: 'change_type'});
 
-    this.setup_zone_wrappers();
+
 
     new HeaderView({
       model: Core.g.layout
@@ -59,23 +75,24 @@ module.exports = LayoutBasePage.extend({
 
     new LayoutZoneChooserView({
       el: '.chooser-zones .items',
-      collection: Core.g.layout.zones
-    });
+      collection: zones
+    }).render()
+
+
+
 
     return this;
   },
 
 
   setup_zone_wrappers: function(){
-    var new_layout_type = Core.g.layout_types.get(Core.router.params.layout_type_id);
-    var current_layout_zones = Core.g.layout.zones;
 
-    // this.unmapped_zones = Core.g.layout.unmapped_zones_for(new_layout_type);
-    // console.log('unmapped_zones', this.unmapped_zones);
+    var current_layout_zones = this.zones;
+    var new_layout_type = this.new_layout_type;
 
 
     var $el = $('.zones');
-    new_layout_type && $el.html(new_layout_type.get('html'));
+    $el.html(new_layout_type.get('html'));
 
 
     $el.find('[data-zone]').each(function(){
@@ -85,7 +102,9 @@ module.exports = LayoutBasePage.extend({
       zone_wrapper.children = [];
 
       var zone = current_layout_zones.get(zone_id);
-      zone && zone_wrapper.children.push(zone);
+      if(zone){
+        zone_wrapper.children.push(zone);
+      }
 
       new ZoneWrapperView({
         el: '[data-zone="'+zone_id+'"]',
