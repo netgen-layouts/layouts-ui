@@ -1,15 +1,34 @@
-<div class="header">Select a new layout type</div>
-<div class="items" name="layout[id]">
-  {{#each collection.models}}
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="in">
+      <div class="modal-header">
+          <h1 class="modal-title">Select a new layout type</h1>
+      </div>
+      <div class="modal-body">
+        <div class="items" name="layout[id]">
+          {{#each collection.models}}
 
-    <div class="layout-type-item">
-      <input id="{{uid true}}" name="layout_type[id]" required="required" value="{{id}}" {{#eq id ../params.layout_type_id}}checked="checked" {{/eq}} type="radio">
-      <label for="{{uid}}" class="required">
-        <i class="icon" style="background-image:url({{icon}})"></i> {{name}}
-      </label>
+            <div class="layout-type-item">
+              <input id="{{uid true}}" name="layout_type[id]" required="required" value="{{id}}" {{#eq id ../params.layout_type_id}}checked="checked" {{/eq}} type="radio">
+              <label for="{{uid}}" class="required">
+                <i class="icon" style="background-image:url({{icon}})"></i> {{name}}
+              </label>
+            </div>
+
+          {{/each}}
+        </div>
+      </div>
+
+    <div class="modal-footer">
+      {{#unless cancel_disabled}}
+        <button type="button" class="btn btn-link action_cancel" data-dismiss="modal">{{cancel_text}}</button>
+      {{/unless}}
+      <button type="button" class="btn btn-primary action_apply green">{{apply_text}}</button>
     </div>
-
-  {{/each}}
+  </div>
 </div>
+
+
+
 
 

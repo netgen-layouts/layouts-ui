@@ -3,7 +3,6 @@
 var Core = require('netgen-core');
 var $ = Core.$;
 var LayoutBasePage = require('./layout_base');
-var LayoutTypeChooserView = require('../views/layout_type_chooser');
 var LayoutZoneChooserView = require('../views/layout_zone_chooser');
 var HeaderView = require('../views/header');
 var ZoneLinkingHeaderView = require('../views/zone_linking_header');
@@ -68,13 +67,8 @@ module.exports = LayoutBasePage.extend({
       model: Core.g.layout
     }).render_to('.app-center');
 
-    new LayoutTypeChooserView({
-      collection: Core.g.layout_types,
-    }).render_to('.chooser-layout-types');
-
 
     new LayoutZoneChooserView({
-      // el: '.chooser-zones .items',
       collection: zones
     }).render_to('.right-sidebar');
 
@@ -115,7 +109,8 @@ module.exports = LayoutBasePage.extend({
 
 
     return this;
-  },
+  }
+
 
 
 

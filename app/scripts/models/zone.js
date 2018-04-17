@@ -140,7 +140,7 @@ module.exports = Core.Model.extend({
   // Load blocks of linked zones
   load_blocks: function(opts){
     var blocks = this.layout().blocks;
-    return blocks.fetch_once({
+    return blocks.fetch({
       via: 'blocks_in_zone',
       url: this.url('blocks_in_zone'),
       data: opts.data,
