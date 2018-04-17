@@ -43,7 +43,13 @@ module.exports = Core.View.extend({
 
 
   $back: function() {
-    Core.router.navigate_to('layout', {type: 'link', id: this.model.id});
+    console.log('State', Core.state.attributes);
+    if(Core.state.in_mode('choosing')){
+      Core.router.navigate_to('layout', {type: 'link', id: this.model.id});
+    }else{
+      Core.router.navigate_to('layout', {type: 'edit', id: this.model.id});
+    }
+
   },
 
 
