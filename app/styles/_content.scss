@@ -838,3 +838,22 @@ input, select{
     }
   }
 }
+
+.change-layout-success{
+  text-align:center;
+  font-size:20px;
+  i{color: $btnprimary; font-size: 200px;}
+  transition:opacity 0.3s ease-in;
+  opacity: 0;
+}
+
+.all_done{
+  .change-layout-success{
+    opacity: 1;
+  }
+  .chooser-zones{
+    display:none;
+  }
+}
+
+

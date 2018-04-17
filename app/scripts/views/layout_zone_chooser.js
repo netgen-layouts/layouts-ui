@@ -17,6 +17,27 @@ module.exports = Core.View.extend(DndView).extend({
     'click .js-change-layout': '$change_layout'
   },
 
+
+  initialize: function(){
+    Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(this.collection, 'change:mapped', this.on_mapped)
+    return this;
+  },
+
+
+  set_context: function(){
+    Core.View.prototype.set_context.apply(this, arguments);
+    this.context.from = Core.g.layout_types.get(Core.g.layout.get('type'));
+    this.context.to = Core.g.layout_types.get(Core.router.params.layout_type_id);
+    return this;
+  },
+
+
+  on_mapped: function() {
+    var all_done = this.collection.where({mapped: true}).length === this.collection.length;
+    this.$el[all_done ? 'addClass' : 'removeClass']('all_done');
+  },
+
   $change_layout: function(){
     this.layout_chooser_modal().open();
   },
@@ -29,12 +50,10 @@ module.exports = Core.View.extend(DndView).extend({
   },
 
   render: function(){
-    this.context.from = Core.g.layout_types.get(Core.g.layout.get('type'));
-    this.context.to = Core.g.layout_types.get(Core.router.params.layout_type_id);
-
     Core.View.prototype.render.apply(this, arguments);
 
     this.setup_dnd_for_zones();
+    this.on_mapped();
     !Core.router.params.layout_type_id && this.layout_chooser_modal().open();
     return this;
   },
