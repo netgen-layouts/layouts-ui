@@ -29,7 +29,11 @@ module.exports = Core.View.extend(DndView).extend({
   },
 
   render: function(){
+    this.context.from = Core.g.layout_types.get(Core.g.layout.get('type'));
+    this.context.to = Core.g.layout_types.get(Core.router.params.layout_type_id);
+
     Core.View.prototype.render.apply(this, arguments);
+
     this.setup_dnd_for_zones();
     !Core.router.params.layout_type_id && this.layout_chooser_modal().open();
     return this;

@@ -823,3 +823,18 @@ input, select{
   margin-bottom:10px;
   &.shared-zone{border-color: red;}
 }
+
+
+.change-layout-from-to{
+  text-align:center;
+  margin-bottom: 50px;
+  .layouts{
+    margin-bottom:10px;
+     > div{
+      width:80px;
+      margin:0 5px;
+      vertical-align:middle;
+      display:inline-block;
+    }
+  }
+}
