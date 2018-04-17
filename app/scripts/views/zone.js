@@ -15,7 +15,8 @@ var _ = require('underscore');
       //'click': '$goto_parent'
       'click .js-choose': '$choose',
       'click .js-unlink': '$unlink',
-      'click .js-link': '$link'
+      'click .js-link': '$link',
+      'click .js-unmap': '$unmap'
     },
 
     initialize: function(){
@@ -43,6 +44,12 @@ var _ = require('underscore');
 
       this.disableContenteditable();
       return this;
+    },
+
+    $unmap: function(e){
+      e.preventDefault();
+      this.model.set({mapped: false});
+      this.remove();
     },
 
     $choose: function(e) {

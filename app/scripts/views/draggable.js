@@ -174,7 +174,6 @@ Draggable.prototype.initialize_zone = function() {
 
   var $zone_el = zone_wrapper_view.render_zone(this.model);
   this.$drag_item.after($zone_el);
-
   //Remove draggable block_type element
   this.remove();
 };

@@ -74,9 +74,9 @@ module.exports = LayoutBasePage.extend({
 
 
     new LayoutZoneChooserView({
-      el: '.chooser-zones .items',
+      // el: '.chooser-zones .items',
       collection: zones
-    }).render()
+    }).render_to('.right-sidebar');
 
 
 

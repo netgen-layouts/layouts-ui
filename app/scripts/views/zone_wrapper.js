@@ -1,8 +1,6 @@
 'use strict';
 
 var Core = require('netgen-core');
-var Layout = require('../models/layout');
-var Zone = require('../models/zone');
 var ZoneView = require('../views/zone');
 var DndView = require('./dnd');
 var _ = require('underscore');
@@ -41,7 +39,7 @@ module.exports = Core.View.extend(DndView).extend({
   render: function(){
     this._render();
     this.render_zones();
-    this.setup_dnd_for_zone_wrappers()
+    this.setup_dnd_for_zone_wrappers();
     this.trigger_render();
     return this;
   },

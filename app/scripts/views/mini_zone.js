@@ -1,15 +1,12 @@
 'use strict';
 
 var Core = require('netgen-core');
-var Layout = require('../models/layout');
-var Zone = require('../models/zone');
 var DndView = require('./dnd');
-var _ = require('underscore');
-
 
 module.exports = Core.View.extend(DndView).extend({
 
   template: 'mini_zone',
+  className: 'mini_zone_view',
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
@@ -20,7 +17,8 @@ module.exports = Core.View.extend(DndView).extend({
   },
 
   update_mapped: function(){
-    console.log('update_mapped', this.model.attributes);
+    console.log('update_mapped', this.model.attributes, this.model.get('mapped'));
+    console.log('mapped', this.$el);
     this.$el[this.model.get('mapped') ? 'hide' : 'show']();
   }
 

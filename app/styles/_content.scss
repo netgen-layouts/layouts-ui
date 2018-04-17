@@ -810,18 +810,16 @@ input, select{
 
 .chooser-zones{
   @extend %clearfix;
-  .items > div{
-    height:100px;
-    text-align:center;
-    line-height:100px;
+  .no-placeholder{display:none;}
+}
 
-    text-transform:uppercase;
-    background:white;
-    color:black;
-    border:1px solid #ccc;
-    float:left;
-    margin-right:10px;
-    width:160px;
-    &.shared-zone{border-color: red;}
-  }
+.mini_zone_view{
+  text-align:center;
+  padding: 10px;
+  text-transform:uppercase;
+  background:white;
+  color:black;
+  border:1px solid #ccc;
+  margin-bottom:10px;
+  &.shared-zone{border-color: red;}
 }

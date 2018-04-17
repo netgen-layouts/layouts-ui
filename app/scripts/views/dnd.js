@@ -338,7 +338,7 @@ module.exports = {
   setup_dnd_for_zones: function(){
    // if(this.should_disable_dnd()){ return; }
     var self = this;
-      this.$el.sortable({
+      this.$('.items').sortable({
         connectWith: '[data-zone-receiver]',
         placeholder: 'no-placeholder',
         appendTo: document.body,
@@ -346,7 +346,10 @@ module.exports = {
         // out: self.remove_forbidden_class,
 
         helper: function (e, item) {
-          this.copyHelper = item.clone(true).insertAfter(item);
+          var original_view = item.data('_view');
+          var MiniZoneView = original_view.constructor
+          this.copyHelper = new MiniZoneView({model: original_view.model }).render().$el.insertAfter(item);
+
           $(this).data('copied', false);
           return item.clone();
         },
