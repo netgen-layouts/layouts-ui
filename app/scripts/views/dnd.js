@@ -264,6 +264,34 @@ module.exports = {
 
 
 
+  // ==============================================
+  // Zone wrappers
+  // ==============================================
+
+
+  check_if_zone_has_shared_zone: function(e, ui) {
+    $('.forbidden').removeClass('forbidden');
+
+    var drag_view, receiver_view,
+    receiver_element = $(e.target).closest('[data-zone-receiver]');
+
+    if(!receiver_element.length){
+      this.set_canceled(ui, false);
+      return;
+    }
+
+    drag_view = $(ui.item).data('_view');
+
+    if(receiver_element.find('.linked_zone').length || drag_view.model.is_linked() && receiver_element.find('[data-view]').length){
+      this.add_forbidden_class(e);
+      this.set_canceled(ui, true);
+    }else{
+      this.remove_forbidden_class(e);
+      this.set_canceled(ui, false);
+    }
+
+  },
+
   setup_dnd_for_zone_wrappers: function(){
 
     // if(this.should_disable_dnd()){ return; }
@@ -280,8 +308,7 @@ module.exports = {
       // handle: '.zone-map-overlay',
       delay: 150,
       distance: 20,
-      // over: self.check_containers.bind(self),
-      // out: self.remove_forbidden_class,
+      over: self.check_if_zone_has_shared_zone.bind(self),
       helper: 'clone',
 
       //Only after receiving from other sortable
@@ -313,14 +340,7 @@ module.exports = {
             receiver = new Receiver($(real_target).closest('[data-view]'));
 
 
-        console.log(receiver);
         if(el_moved){
-          // if (receiver.is_zone()){
-          //   draggable.save_new_position_for_zone();
-          // }else{
-          //   draggable.save_new_position_for_container();
-          // }
-          // draggable.is_zone_changed_when_moved_to(receiver);
           el_moved = false;
         }
 
@@ -342,8 +362,7 @@ module.exports = {
         connectWith: '[data-zone-receiver]',
         placeholder: 'no-placeholder',
         appendTo: document.body,
-        // over: self.check_containers.bind(self),
-        // out: self.remove_forbidden_class,
+        over: self.check_if_zone_has_shared_zone.bind(self),
 
         helper: function (e, item) {
           var original_view = item.data('_view');

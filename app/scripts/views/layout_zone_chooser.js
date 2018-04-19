@@ -20,21 +20,15 @@ module.exports = Core.View.extend(DndView).extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.collection, 'change:mapped', this.on_mapped)
-    return this;
-  },
-
-
-  set_context: function(){
-    Core.View.prototype.set_context.apply(this, arguments);
-    this.context.from = Core.g.layout_types.get(Core.g.layout.get('type'));
-    this.context.to = Core.g.layout_types.get(Core.router.params.layout_type_id);
+    this.listenTo(this.collection, 'change:mapped', this.on_mapped);
+    this.context.from = this.from = Core.g.layout_types.get(Core.g.layout.get('type'));
+    this.context.to = this.to = Core.g.layout_types.get(Core.router.params.layout_type_id);
     return this;
   },
 
 
   on_mapped: function() {
-    var all_done = this.collection.where({mapped: true}).length === this.collection.length;
+    var all_done = this.to && this.collection.where({mapped: true}).length === this.collection.length;
     this.$el[all_done ? 'addClass' : 'removeClass']('all_done');
   },
 

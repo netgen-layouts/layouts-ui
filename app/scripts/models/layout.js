@@ -10,7 +10,8 @@ module.exports = Core.Model.extend({
 
   path: 'layouts',
   paths: {
-    blocks: ':locale/layouts/:id/blocks'
+    blocks: ':locale/layouts/:id/blocks',
+    change_layout: '/layouts/:id/change_type'
   },
 
   initialize: function(){
@@ -114,6 +115,29 @@ module.exports = Core.Model.extend({
     });
   },
 
+
+  // JSON version
+  change_layout: function(data){
+     this.save(null, {
+      via: 'change_layout',
+      url: this.url('change_layout'),
+      method: 'POST',
+      patch: true,
+      attrs: data
+    });
+  },
+
+
+  // application/x-www-form-urlencoded; charset=UTF-8
+  _change_layout: function(data){
+    this.sync('create', this, {
+      via: 'change_layout',
+      url: this.url('change_layout'),
+      method: 'POST',
+      processData: true,
+      data: data
+    });
+  },
 
   unmapped_zone_ids_for: function(new_layout_type){
     var new_zones = new_layout_type.zones.pluck('id')

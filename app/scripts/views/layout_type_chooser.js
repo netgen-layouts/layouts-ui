@@ -8,6 +8,8 @@ module.exports = Core.Modal.extend({
 
   initialize: function(){
     Core.Modal.prototype.initialize.apply(this, arguments);
+    this.context.current_type_id = Core.g.layout.get('type');
+    this.context.current_selected_type_id = Core.router.params.layout_type_id || Core.g.layout.get('type');
 
     this
       .on('apply', function(){

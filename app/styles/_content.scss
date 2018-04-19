@@ -842,8 +842,8 @@ input, select{
 .change-layout-success{
   text-align:center;
   font-size:20px;
-  i{color: $btnprimary; font-size: 200px;}
-  transition:opacity 0.3s ease-in;
+  i{color: $btnprimary; font-size: 180px;}
+  transition:opacity 0.3s ease-in-out;
   opacity: 0;
 }
 
@@ -856,4 +856,14 @@ input, select{
   }
 }
 
+.zone-unmap{
+  position:absolute;
+  right:0;
+  top:0;
+  font-size:14px;
+  line-height:1em;
+  vertical-align:middle;
+}
 
+
+[data-zone-receiver].forbidden{outline-color: red;}

@@ -6,10 +6,10 @@
       </div>
       <div class="modal-body">
         <div class="items" name="layout[id]">
+          {{debug this}}
           {{#each collection.models}}
-
             <div class="layout-type-item">
-              <input id="{{uid true}}" name="layout_type[id]" required="required" value="{{id}}" {{#eq id ../params.layout_type_id}}checked="checked" {{/eq}} type="radio">
+              <input id="{{uid true}}" name="layout_type[id]" required="required" value="{{id}}" {{#eq id ../current_selected_type_id}}checked="checked" {{/eq}} {{#eq id ../current_type_id}}disabled="disabled" {{/eq}} type="radio">
               <label for="{{uid}}" class="required">
                 <i class="icon" style="background-image:url({{icon}})"></i> {{name}}
               </label>

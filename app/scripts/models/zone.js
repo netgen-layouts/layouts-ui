@@ -43,6 +43,14 @@ module.exports = Core.Model.extend({
   },
 
 
+
+  contains_linked_zone: function() {
+    return _.find(this.children, function(zone){
+      zode.is_linked()
+    });
+  },
+
+
   on_load_blocks_in_zone: function(response){
     console.log(response);
     // var block_ids = this.get('block_ids');

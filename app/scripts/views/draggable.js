@@ -7,7 +7,7 @@ function Draggable(e, ui) {
   this.ui = ui;
   this.$drag_item = ui.item;
   this.view = this.$drag_item.data('_view');
-  this.model = this.view.model;
+  this.model = this.view && this.view.model;
   this.sender = ui.sender;
 }
 

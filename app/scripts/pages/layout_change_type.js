@@ -43,8 +43,9 @@ module.exports = LayoutBasePage.extend({
     this.new_layout_type = Core.g.layout_types.get(Core.router.params.layout_type_id);
     var zones, ids;
 
-    zones = this.zones = Core.g.layout.zones.deep_clone();
-    zones.update({mapped: true});
+    var zones_with_blocks = Core.g.layout.zones.filter(function(z){ return z.has_blocks() })
+
+    zones = this.zones = Core.g.layout.zones.new_from(zones_with_blocks)
 
     if(this.new_layout_type){
 
