@@ -212,7 +212,7 @@
       width:100%;
       height:3px;
       cursor:pointer;
-      background:darken($sidebarinput, 15%);
+      background:#666;
       transition:all .2s ease;
       box-shadow:none;
       border:none;
@@ -233,9 +233,6 @@
       height:18px;
       background:transparent;
       width:100%;
-      &:focus {
-        outline:none;
-      }
       &::-webkit-slider-runnable-track {
         @include track();
       }
@@ -244,14 +241,17 @@
         -webkit-appearance:none;
         margin-top:-8px;
       }
-      &:focus::-webkit-slider-runnable-track {
-        background:darken($sidebarinput, 15%);
-      }
       &::-moz-range-track {
         @include track();
       }
       &::-moz-range-thumb {
         @include thumb();
+      }
+      &:focus {
+        outline:none;
+        &::-webkit-slider-runnable-track {
+          background: #999;
+        }
       }
     }
     .range-value {
