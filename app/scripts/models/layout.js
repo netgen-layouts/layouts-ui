@@ -160,7 +160,12 @@ module.exports = Core.Model.extend({
     }));
 
 
+
+
     return $.when.apply($, zone_blocks_loaded).then(function(){
+      this.zones.each(function(zone){
+        zone.set_zone_attributes_on_blocks()
+      })
       this.blocks.trigger('blocks_loaded:success');
     }.bind(this));
 

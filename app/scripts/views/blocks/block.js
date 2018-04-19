@@ -93,7 +93,6 @@ module.exports = Core.View.extend(DndView).extend({
    * @return {this}
    */
   render: function(x){
-    _.isString(x) && console.error(x);
     this.$el.html(this.model.get('html'));
     if (!this.model.get('has_published_state')){
       this.$el.find('.js-revert').hide();
@@ -271,7 +270,6 @@ module.exports = Core.View.extend(DndView).extend({
 
   load_inner_blocks: function(){
     var view_block, views = [];
-    console.log('load inner blocks', this.model.get('placeholders'));
     var zone_id = this.model.zone().id;
     var layout_id = this.model.zone().get('layout_id');
     var block_id = this.model.id;

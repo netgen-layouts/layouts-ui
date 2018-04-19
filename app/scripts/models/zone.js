@@ -154,8 +154,19 @@ module.exports = Core.Model.extend({
       data: opts.data,
       remove: false
     }).done(function(resp){
-      this.set({ linked_blocks_ids: _.pluck(resp, 'id') });
+      this.set({linked_blocks_ids: _.pluck(resp, 'id') });
     }.bind(this))
+  },
+
+
+  set_zone_attributes_on_blocks: function(){
+    _.each(this.blocks(), function(block){
+      console.log('set_zone_attributes_on_blocks',  block);
+      block.set({
+        zone_identifier: this.id,
+        layout_id: this.get('layout_id')
+      });
+    }, this);
   },
 
 });

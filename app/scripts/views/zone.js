@@ -29,16 +29,11 @@ var _ = require('underscore');
     },
 
 
-    load_blocks: function(){
+    render_blocks: function(){
       var view_block, views = [];
-      console.log('load blocks');
       var views = _.map(this.model.blocks(), function(block){
-        block.set({
-          zone_identifier: this.model.id,
-          layout_id: this.model.get('layout_id')
-        });
         return Core.blocks.create_view(block.get('definition_identifier'), block).$el;
-      }, this);
+      });
 
       this.$('.zone-body').append(views);
 
@@ -154,7 +149,7 @@ var _ = require('underscore');
       this.context.show_header = this.show_header();
       Core.View.prototype.render.apply(this, arguments);
       this.set_class();
-      this.load_blocks();
+      this.render_blocks();
       this.setup_dnd_for_containers_and_zones();
       this.setup_trash();
       return this;
@@ -166,7 +161,7 @@ var _ = require('underscore');
       this.context.show_zone_map_overlay = true;
       Core.View.prototype.render.apply(this, arguments);
       this.set_class();
-      this.load_blocks();
+      this.render_blocks();
       return this;
     },
 
