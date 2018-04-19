@@ -127,10 +127,16 @@
         }
       }
     }
-    .warning {
-      background: #f2e1c4;
+    .warning,
+    .info {
       padding: 1.1em;
       margin: 0 0 1.1em;
+    }
+    .warning {
+      background: #f2e1c4;
+    }
+    .info {
+      background: #d6eff7;
     }
   }
 }
