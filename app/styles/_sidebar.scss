@@ -665,6 +665,15 @@ $itemHeight: 2.625rem;
       &.open {
         visibility: visible;
       }
+      &.dropup {
+        .dropdown-menu {
+          &::before {
+            top: 100%;
+            bottom: auto;
+            transform: rotate(180deg);
+          }
+        }
+      }
     }
     .dropdown-menu {
       border: 0;
