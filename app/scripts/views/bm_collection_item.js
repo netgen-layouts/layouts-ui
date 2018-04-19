@@ -124,7 +124,7 @@ module.exports = Core.View.extend({
       this.$cancel_item_position();
     } else if (e.keyCode === 13) {  // save on press enter
       this.$save_item_position();
-    } else if ($.inArray(e.keyCode, [46, 8, 9, 110]) !== -1 ||
+    } else if ($.inArray(e.keyCode, [46, 8, 9]) !== -1 ||
         (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
         (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
         (e.keyCode == 86 && (e.ctrlKey === true || e.metaKey === true)) ||
