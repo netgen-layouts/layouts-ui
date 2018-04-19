@@ -18,7 +18,7 @@ module.exports = Core.View.extend(DndView).extend({
     this.listenTo(Core,       'editing:unmark', this.editing_unmark);
 
     this.listenTo(this.model, 'change', this.setup_dom_element);
-    this.listenTo(this.model, 'change:html change:parameters', this.render);
+    this.listenTo(this.model, 'change:html change:parameters configure_translate:success', this.render);
     this.listenTo(this.model, 'create:success', this.$edit);
     this.listenTo(this.model, 'change_type:success', this.refresh_sidebar);
     this.listenTo(this.model, 'copy:success', this.on_copy);
