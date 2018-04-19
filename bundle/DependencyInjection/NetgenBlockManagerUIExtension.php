@@ -38,9 +38,9 @@ final class NetgenBlockManagerUIExtension extends Extension implements PrependEx
 
         $loader->load('framework/assets.xml');
 
-        $prependConfigs = array(
+        $prependConfigs = [
             'framework/assets.yml' => 'framework',
-        );
+        ];
 
         foreach ($prependConfigs as $configFile => $prependConfig) {
             $configFile = __DIR__ . '/../Resources/config/' . $configFile;
