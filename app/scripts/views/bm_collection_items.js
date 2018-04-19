@@ -61,7 +61,7 @@ module.exports = Core.View.extend({
   },
 
   setup_dnd: function(){
-    if(!this.bm_collection_model.get('loading')) {
+    if (!this.bm_collection_model.get('loading')) {
       this.bm_collection_model.get('collection_type') === 1 ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
     }
   },
@@ -115,7 +115,10 @@ module.exports = Core.View.extend({
       },
       drop: function(e, ui){
         var newPosition = $(e.target).data('_view').model.get('position');
-        item_view.model.get('position') !== newPosition && item_view.$move(newPosition);
+        if (item_view.model.get('position') !== newPosition) {
+          item_view.$move(newPosition);
+          $(ui.draggable).remove(); // fix for draggable console error after move
+        }
       },
     });
   },
