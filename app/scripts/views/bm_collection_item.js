@@ -114,8 +114,10 @@ module.exports = Core.View.extend({
   $save_item_position: function(e){
     e && e.preventDefault();
     var newPosition = parseInt(this.$('.item-position-input').val());
-    if (!this.model.get('is_dynamic') && newPosition >= this.bm_collection_model.items.length) { // set position to last in manual collection if new position larger than collection length
-      newPosition = this.bm_collection_model.items.length - 1;
+    if (this.bm_collection_model.get('collection_type') === 0 && newPosition >= this.bm_collection_model.items.length) {
+      return new Core.Snackbar({
+        message: 'New position shouldn\'t be larger than position of the last item in collection (' + (this.bm_collection_model.items.length - 1) + ')',
+      });
     }
     if (!isNaN(newPosition)) {
       newPosition !== this.model.get('position') ? this.$move(newPosition, 'move_manual') : this.$cancel_item_position();
