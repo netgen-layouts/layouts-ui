@@ -78,18 +78,22 @@ module.exports = Core.View.extend({
       toggleInputs && this.$('.visibility-inputs').toggleClass('disabled', visibility.visibility_status !== 'scheduled');
       this.$('.action_apply').prop('disabled', visibility.visibility_status === 'scheduled' && !visibility.visible_from.datetime && !visibility.visible_to.datetime);
     };
-    visibilityModal.on('open', function(){
+    visibilityModal.initializeDatetime = function(){
+      var self  = this;
       $('.datetimepicker').each(function(){
         return new Core.DateTimePicker({
           el: $(this),
         }).on('change', function(){
-          visibilityModal.toggleSubmit();
+          self.toggleSubmit();
         });
       });
       this.$el.on('change', 'input[type="radio"]', function(){
-        visibilityModal.toggleSubmit(true);
+        self.toggleSubmit(true);
       });
       this.toggleSubmit(true);
+    };
+    visibilityModal.on('open save:error', function(){
+      this.initializeDatetime();
     });
     return visibilityModal;
   },
