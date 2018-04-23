@@ -2,6 +2,7 @@
 
 var Core = require('netgen-core');
 var _ = require('underscore');
+var $ = Core.$;
 var Browser = require('netgen-content-browser');
 var BmCollectionItemsView = require('./bm_collection_items');
 var BmCollectionOverflownItemsView = require('./bm_collection_overflown_items');
@@ -21,6 +22,8 @@ module.exports = Core.View.extend({
     this.overflown_after_view = new BmCollectionOverflownItemsView({
       collection: this.model.overflown_after,
     });
+
+    this.model.set('canAddItems', !!$('.js-browser-config-selector')[0].options.length);
 
     return this;
   },
