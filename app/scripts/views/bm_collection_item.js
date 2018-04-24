@@ -124,7 +124,7 @@ module.exports = Core.View.extend({
       });
     }
     if (!isNaN(newPosition)) {
-      newPosition !== this.model.get('position') ? this.$move(newPosition, 'move_manual') : this.$cancel_item_position();
+      newPosition !== this.model.get('position') ? this.$move(newPosition) : this.$cancel_item_position();
     }
   },
 

@@ -19,7 +19,8 @@ module.exports = Core.Collection.extend({
         locale: this.bm_collection.get('locale'),
         block_id: this.bm_collection.get('block_id'),
         id: this.bm_collection.get('identifier')
-      })
+      }),
+      via: 'create'
     });
 
   },
