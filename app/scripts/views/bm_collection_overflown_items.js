@@ -10,7 +10,7 @@ module.exports = Core.View.extend({
     this.bm_collection_model = this.collection.bm_collection;
 
     // //ITEMS
-    this.listenTo(this.collection, 'delete:success move_manual:success visibility:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'delete:success move:success visibility:success', this.refresh_items_and_block);
     this.listenTo(this.collection, 'request', this.startLoading);
 
     return this;

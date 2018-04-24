@@ -16,7 +16,8 @@ module.exports = Core.View.extend({
     //ITEMS
     this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success visibility:success', this.refresh_items_and_block);
     this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
-    this.listenTo(this.collection, 'request', this.startLoading);
+    this.listenTo(this.collection, 'request', this.onRequest);
+    this.listenTo(this.collection, 'visibility:beforeSend remove', this.startLoading);
     this.listenTo(this.bm_collection_model, 'read:success', this.endLoading);
 
     this.on('render', this.setup_dnd);
@@ -29,7 +30,10 @@ module.exports = Core.View.extend({
   ViewItem: BmCollectionItemView,
   template: 'bm_collection_items',
 
-  startLoading: function(){
+  onRequest: function(model, xhr, options){
+    if (['move', 'create'].includes(options.via)) this.startLoading();
+  },
+  startLoading: function(model, xhr, options){
     this.bm_collection_model.set('loading', true);
   },
   endLoading: function(){
@@ -131,7 +135,7 @@ module.exports = Core.View.extend({
       handle: '.handle',
       stop: function(e, ui){
         var newPosition = ui.item.index();
-        ui.item.data('_view').model.get('position') !== newPosition && ui.item.data('_view').$move(newPosition + self.bm_collection_model.get('offset'));
+        ui.item.data('_view').model.get('position') !== newPosition && ui.item.data('_view').$move(newPosition + self.bm_collection_model.get('offset'), 'move_manual');
       },
     });
   },
