@@ -1,8 +1,6 @@
 {
   "name": "netgen-block-manager",
-  "version": "0.11.0",
   "dependencies": {
-    "bootstrap-sass": "~3.3.6"
-  },
-  "devDependencies": {}
+    "bootstrap-sass": "^3.3.7"
+  }
 }
