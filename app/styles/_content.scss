@@ -866,4 +866,6 @@ input, select{
 }
 
 
-[data-zone-receiver].forbidden{outline-color: red;}
+[data-zone-receiver].forbidden{outline-color: yellow;}
+[data-zone-wrapper].has_shared_zone [data-zone-receiver]{outline-color: red;}
+[data-zone-wrapper].has_shared_zone .no-placeholder{display:none;}

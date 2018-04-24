@@ -14,9 +14,18 @@ module.exports = Core.View.extend(DndView).extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(Core, 'sortable:end', this.mark_wrappers_as_shared_zones);
+    this.listenTo(this.collection, 'change:mapped', this.mark_wrappers_as_shared_zones)
     this.$el.attr({
       'data-zone-wrapper': ''
     });
+    return this;
+  },
+
+  mark_wrappers_as_shared_zones: function(e){
+    var add = this.$el.find('.linked_zone').length;
+    console.log(e, add);
+    this.$el[add ? 'addClass' : 'removeClass']('has_shared_zone');
     return this;
   },
 
@@ -41,6 +50,7 @@ module.exports = Core.View.extend(DndView).extend({
     this.render_zones();
     this.setup_dnd_for_zone_wrappers();
     this.trigger_render();
+    this.mark_wrappers_as_shared_zones();
     return this;
   },
 

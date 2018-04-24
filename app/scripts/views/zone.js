@@ -45,6 +45,7 @@ var _ = require('underscore');
       e.preventDefault();
       this.model.set({mapped: false});
       this.remove();
+      Core.trigger('sortable:end');
     },
 
     $choose: function(e) {

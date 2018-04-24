@@ -43,14 +43,14 @@ module.exports = LayoutBasePage.extend({
     this.new_layout_type = Core.g.layout_types.get(Core.router.params.layout_type_id);
     var zones, ids;
 
-    var zones_with_blocks = Core.g.layout.zones.filter(function(z){ return z.has_blocks() || z.is_linked() })
+    var zones_with_blocks = Core.g.layout.zones.filter(function(z){ return z.has_blocks() || z.is_linked(); });
 
-    zones = this.zones = Core.g.layout.zones.new_from(zones_with_blocks).deep_clone()
+    zones = this.zones = Core.g.layout.zones.new_from(zones_with_blocks).deep_clone();
     zones.update({mapped: true});
 
     if(this.new_layout_type){
 
-      var ids = Core.g.layout.unmapped_zone_ids_for(this.new_layout_type);
+      ids = Core.g.layout.unmapped_zone_ids_for(this.new_layout_type);
       _.each(zones.get_by_ids(ids), function(zone){
         zone.set({mapped: false });
       });

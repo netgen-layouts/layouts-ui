@@ -285,6 +285,7 @@ module.exports = {
     if(receiver_element.find('.linked_zone').length || drag_view.model.is_linked() && receiver_element.find('[data-view]').length){
       this.add_forbidden_class(e);
       this.set_canceled(ui, true);
+      console.log('This zone already has shared zone.');
     }else{
       this.remove_forbidden_class(e);
       this.set_canceled(ui, false);
@@ -339,6 +340,7 @@ module.exports = {
             draggable = new Draggable(e, ui),
             receiver = new Receiver($(real_target).closest('[data-view]'));
 
+        $('.forbidden').removeClass('forbidden');
 
         if(el_moved){
           el_moved = false;
