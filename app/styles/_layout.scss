@@ -255,3 +255,74 @@
   }
 
 }
+
+#ngc-size-warning {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($toolbarbg2, .98);
+  color: #fff;
+  z-index: 1000000;
+  display: none;
+  opacity: 0;
+  .size-warning-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 94%;
+    max-width: 320px;
+    line-height: 1.42857143;
+    font-size: 14px;
+    .icon {
+      position: relative;
+      display: inline-block;
+      font-size: 42px;
+      &::before,
+      &::after {
+        @extend %material-icons;
+      }
+      &::before {
+        content: 'desktop_mac';
+        font-size: 1.4285714286em;
+        color: hsla(0, 0, 100, .5);
+      }
+      &::after {
+        content: 'settings_ethernet';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: .35em;
+        color: hsla(0, 0, 100, .2);
+        font-size: .619047619em;
+      }
+    }
+    h2 {
+      margin: 0 0 .25em;
+      font-size: 1.5em;
+      font-weight: 700;
+      line-height: 1.42857143;
+    }
+    p {
+      margin: 0 0 1em;
+      font-size: 1em;
+      color: hsla(0, 0, 100, .6);
+    }
+  }
+  @media screen and (max-width: 799px) {
+    display: block;
+    opacity: 1;
+    animation: warningFadeIn .2s;
+  }
+  @keyframes warningFadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}

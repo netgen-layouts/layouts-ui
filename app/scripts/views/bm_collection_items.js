@@ -17,7 +17,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success visibility:success', this.refresh_items_and_block);
     this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
     this.listenTo(this.collection, 'request', this.onRequest);
-    this.listenTo(this.collection, 'visibility:beforeSend remove', this.startLoading);
+    this.listenTo(this.collection, 'visibility:start remove', this.startLoading);
     this.listenTo(this.bm_collection_model, 'read:success', this.endLoading);
 
     this.on('render', this.setup_dnd);
