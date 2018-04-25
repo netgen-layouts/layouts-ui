@@ -22,3 +22,4 @@ bundle/Resources/public/dev
 bundle/Resources/public/css/vendor.css
 bundle/Resources/public/vendor/*/package.json
 package-lock.json
+yarn.lock
