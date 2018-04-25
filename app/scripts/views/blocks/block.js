@@ -94,13 +94,13 @@ module.exports = Core.View.extend(DndView).extend({
    */
   render: function(x){
     this.$el.html(this.model.get('html'));
-    if (!this.model.get('has_published_state')){
-      this.$el.find('.js-revert').hide();
-    }
     Core.View.prototype.render.apply(this, arguments);
     this.prepare_modal_mode();
     this.render_container();
     this.setup_context_menu();
+    if (!this.model.get('has_published_state')){
+      this.$el.find('.js-revert').hide();
+    }
     this.addtional_info();
     return this;
   },
