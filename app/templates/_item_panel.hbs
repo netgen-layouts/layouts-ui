@@ -22,7 +22,7 @@
         <ul class="dropdown-menu dropdown-menu-right">
           {{#if item.cms_url}}<li><a href="{{item.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
           {{#unless item.is_dynamic}}
-            <li><a class="item-visibility">Configure visibility</a></li>
+            {{#eq item.value_type "null"}}{{else}}<li><a class="item-visibility">Configure visibility</a></li>{{/eq}}
             <li><a class="set-item-position">Set position</a></li>
           {{/unless}}
           {{#if item.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
