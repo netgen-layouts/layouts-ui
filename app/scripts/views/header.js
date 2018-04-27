@@ -2,6 +2,8 @@
 
 var Core = require('netgen-core');
 var $ = Core.$;
+var moment = require('moment');
+require('moment/min/locales.min');
 var _ = require('underscore');
 
 module.exports = Core.View.extend({
@@ -146,9 +148,10 @@ module.exports = Core.View.extend({
   restore_archived: function(e){
     e.preventDefault();
     var self = this;
+    var formatedDate = moment(this.model.get('archive_updated_at')).locale(navigator.language || 'en-gb').format('LLLL');
     return new Core.Modal({
       title: 'Restore',
-      body: 'Are you sure you want to restore previously published version?',
+      body: 'Are you sure you want to restore previously published version?<br>(last updated at: ' + formatedDate + ')',
       apply_text: 'Restore',
     }).on('apply', function(){
       self.model.restore_archived();
