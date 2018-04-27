@@ -20,7 +20,8 @@ module.exports = Core.View.extend({
     'click .js-normal-mode': '$normal_mode',
     'click .js-back': '$back',
     'click .js-soft-back': '$soft_back',
-    'click .js-change-layout-apply': '$change_layout_apply'
+    'click .js-change-layout-apply': '$change_layout_apply',
+    'click .js-restore-archived': 'restore_archived',
   },
 
   initialize: function(){
@@ -140,6 +141,18 @@ module.exports = Core.View.extend({
 
   setPageTitle: function(){
     document.title = this.model.get('name') + ' - Netgen Layouts';
+  },
+
+  restore_archived: function(e){
+    e.preventDefault();
+    var self = this;
+    return new Core.Modal({
+      title: 'Restore',
+      body: 'Are you sure you want to restore previously published version?',
+      apply_text: 'Restore',
+    }).on('apply', function(){
+      self.model.restore_archived();
+    }).open();
   },
 
 });

@@ -11,7 +11,8 @@ module.exports = Core.Model.extend({
   path: 'layouts',
   paths: {
     blocks: ':locale/layouts/:id/blocks',
-    change_layout: '/layouts/:id/change_type'
+    change_layout: '/layouts/:id/change_type',
+    restore_archived: '/layouts/:id/restore',
   },
 
   initialize: function(){
@@ -170,5 +171,13 @@ module.exports = Core.Model.extend({
     }.bind(this));
 
   },
+
+  restore_archived: function(){
+    return this.save(null, {
+      via: 'restore_archived',
+      url: this.url('restore_archived'),
+      method: 'POST',
+    }).done(location.reload());
+  }
 
 });
