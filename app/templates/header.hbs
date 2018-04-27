@@ -31,7 +31,11 @@
             {{#eq state.mode 'translate'}}
               <button class="btn btn-primary btn-icon-left js-normal-mode"><i class="material-icons">keyboard_arrow_left</i>Back</button>
             {{else}}
-              <button class="btn btn-primary btn-icon-left js-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>
+              {{#eq state.mode 'change_type'}}
+                <button class="btn btn-link js-back">Cancel</button>
+              {{else}}
+                <button class="btn btn-primary btn-icon-left js-back"><i class="material-icons">keyboard_arrow_left</i>Back</button>
+              {{/eq}}
             {{/eq}}
           {{/eq}}
 

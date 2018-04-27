@@ -1,30 +1,28 @@
 
 <div class="change-layout-from-to">
   <div class="layouts">
-    <div>
-      <img src="{{from.icon}}" />
-      <div>{{from.name}}</div>
+    <div class="layout-from">
+      <div class="image"><img src="{{from.icon}}" /></div>
+      <label>{{from.name}}</label>
     </div>
-    =>
-    <div>
-      <img src="{{to.icon}}" />
-      <div>{{to.name}}</div>
+    <i class="material-icons">forward</i>
+    <div class="layout-to">
+      <div class="image"><img src="{{to.icon}}" /></div>
+      <label>{{to.name}}</label>
+      <a href="#" class="js-change-layout">Change</a>
     </div>
-  </div>
-  <div>
-    <a href="#" class="btn btn-primary js-change-layout">Change layout</a>
   </div>
 </div>
 
 
 <div class="chooser chooser-zones">
-  <div class="header">Drag and drop zones to new layout below:</div>
+  <h5>Drag and drop zones to new layout below:</h5>
   <div class="items"></div>
 </div>
 
 
 <div class="change-layout-success">
-  <div><i class="material-icons">check_circle</i></div>
-  <div>All zones are mapped.</div>
-  <div>Please apply changes.</div>
+  <i class="material-icons">check_circle</i>
+  <p>All zones are mapped.</p>
+  <p>Please apply changes.</p>
 </div>

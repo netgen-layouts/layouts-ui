@@ -10,6 +10,7 @@ var _ = require('underscore');
   module.exports = Core.View.extend(DndView).extend({
 
     template: 'zone',
+    className: 'zone-view',
 
     events: {
       //'click': '$goto_parent'

@@ -6,7 +6,7 @@ var DndView = require('./dnd');
 module.exports = Core.View.extend(DndView).extend({
 
   template: 'mini_zone',
-  className: 'mini_zone_view',
+  className: 'mini-zone-view',
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);

@@ -24,24 +24,6 @@
     }
   }
 
-
-  //TODO: @goran zone wrapper
-  > {
-    .name{
-      color:#fff;
-    }
-    .body{
-      outline:1px dashed hsl(0, 0, 75);
-      min-height:6em;
-      padding:$gutter*0.6666666667;
-      margin:0 0 $gutter*1.25;
-      .zone-body{
-        padding:0;
-      }
-    }
-  }
-
-
   &.zone-disabled,
   &.shared-zone {
     .zone-body {
@@ -95,29 +77,6 @@
     z-index:100;
     opacity: 0.2;
     background:transparent url('../images/stripped-bg.png') repeat;
-  }
-
-
-  .zone-map-overlay{
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    z-index:100;
-    color: #333;
-    text-align:center;
-    background: rgba(255,255,255,0.8);
-    font-size:2em;
-    text-transform:uppercase;
-    font-weight:bold;
-    div {
-      position:absolute;
-      left:0;
-      width:100%;
-      top: 50%;
-      margin-top:-1em;
-    }
   }
 
   .zone-header {
@@ -783,89 +742,3 @@ input, select{
 .ngbmdev{
   [data-block] .block-header .name .ai{display:inline-block; margin-left:10px; font-size:1.1em;}
 }
-
-
-
-
-//TODO: @goran finish this
-.chooser-layout-types{
-  @extend %clearfix;
-  color: white;
-  .layout-type-item{float:left; margin-right:10px; }
-  i{
-    display: block;
-    height: 0;
-    padding: 0 0 138%;
-    border: 2px solid #999999;
-    background-color: white;
-    background-size: 85%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border-radius: 2px;
-    position: relative;
-
-  }
-}
-
-
-.chooser-zones{
-  @extend %clearfix;
-  .no-placeholder{display:none;}
-}
-
-.mini_zone_view{
-  text-align:center;
-  padding: 10px;
-  text-transform:uppercase;
-  background:white;
-  color:black;
-  border:1px solid #ccc;
-  margin-bottom:10px;
-  &.shared-zone{border-color: red;}
-}
-
-
-.change-layout-from-to{
-  text-align:center;
-  margin-bottom: 50px;
-  .layouts{
-    margin-bottom:10px;
-     > div{
-      width:80px;
-      margin:0 5px;
-      vertical-align:middle;
-      display:inline-block;
-    }
-  }
-}
-
-.change-layout-success{
-  text-align:center;
-  font-size:20px;
-  i{color: $btnprimary; font-size: 180px;}
-  transition:opacity 0.3s ease-in-out;
-  opacity: 0;
-}
-
-.all_done{
-  .change-layout-success{
-    opacity: 1;
-  }
-  .chooser-zones{
-    display:none;
-  }
-}
-
-.zone-unmap{
-  position:absolute;
-  right:0;
-  top:0;
-  font-size:14px;
-  line-height:1em;
-  vertical-align:middle;
-}
-
-
-[data-zone-receiver].forbidden{outline-color: yellow;}
-[data-zone-wrapper].has_shared_zone [data-zone-receiver]{outline-color: red;}
-[data-zone-wrapper].has_shared_zone .no-placeholder{display:none;}
