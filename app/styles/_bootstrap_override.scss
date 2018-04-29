@@ -41,6 +41,18 @@
       border-color:darken($highlightColor, 5%);
     }
   }
+  .btn-outline {
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+    transition: background-color .25s;
+    &:hover,
+    &:focus,
+    &.focus {
+      color: #fff;
+      background: rgba(255, 255, 255, .1);
+    }
+  }
 
   .modal-content {
     background:#fff;
