@@ -1,5 +1,4 @@
 <div class="item-panel{{#if override}} override-item{{/if}}{{#if item.overrideItem}} overriden-item{{/if}}{{#if item.editing_position}} item-editing-position{{/if}}">
-  {{#if override}}<div class="override-divide"><i class="material-icons">swap_horiz</i></div>{{/if}}
   {{#if item.overflown}}<div class="item-position">{{item.position}}</div>{{/if}}
   {{#unless item.overflown}}{{#unless item.is_dynamic}}<div class="handle"><i class="material-icons">drag_handle</i></div>{{/unless}}{{/unless}}
   <p class="name">

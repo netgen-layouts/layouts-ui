@@ -743,7 +743,7 @@ $itemHeight: 2.625rem;
           display: block;
         }
         + .override-item {
-          width: 20%;
+          width: calc(20% + 2px);
           .controls {
             display: none;
           }
@@ -756,23 +756,10 @@ $itemHeight: 2.625rem;
     right: 0;
     top: 0;
     float: left;
-    width: 60%;
-    border-radius: 0 $borderRadius $borderRadius 0;
+    width: calc(60% + 2px);
     padding-left: 1em;
-    border-left: 1px dashed #bdbdbd;
     transition: width .2s;
-    .override-divide {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translate3d(-50%, -50%, 0);
-      i {
-        vertical-align: middle;
-        position: relative;
-        z-index: 2;
-        color: #666;
-      }
-    }
+    box-shadow: -2px 0 4px hsla(0, 0, 0, .25);
   }
   .collection-item.sorting & {
     &.override-item {
