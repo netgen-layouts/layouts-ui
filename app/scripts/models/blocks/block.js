@@ -125,9 +125,14 @@ module.exports = Core.Model.extend({
     return this;
   },
 
-  copy: function(){
-    return this.sync('create', this, {
-      url: this.url('copy/zone'),
+  copy: function(in_container) {
+    var new_block = this.clone();
+    var new_position = this.get('parent_position') + 1;
+    return new_block.save({
+      position: new_position,
+      parent_position: new_position,
+    }, {
+      url: this.url(in_container ? 'copy' : 'copy/zone'),
       via: 'copy',
       method: 'POST',
       silent: true,
@@ -138,20 +143,6 @@ module.exports = Core.Model.extend({
     }.bind(this));
   },
 
-
-  copy_in_container: function(){
-    return this.sync('create', this, {
-      url: this.url('copy'),
-      via: 'copy',
-      method: 'POST',
-      silent: true,
-    }).done(function(resp) {
-      console.log(resp);
-      resp.zone_identifier = this.get('zone_identifier');
-      resp.layout_id = this.get('layout_id');
-      this.trigger('copy:success', resp);
-    }.bind(this));
-  },
 
   move: function(zone_block_ids){
     var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id');
