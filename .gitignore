@@ -20,5 +20,6 @@ composer.lock
 bundle/Resources/public/dev
 bundle/Resources/public/css/vendor.css
 bundle/Resources/public/vendor/*/package.json
+bundle/Resources/public/vendor/ckeditor/samples
 package-lock.json
 yarn.lock
