@@ -19,9 +19,9 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'restore:success', this.show_loader);
     this.listenTo(this.model, 'change:is_translatable', this.load);
     this.listenTo(Core, 'editing:unmark', this.destroy);
+    this.listenTo(this, 'loaded', this.on_loaded);
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
     this.on('xeditable:apply:collection_type', this.show_loader);
-    this.on('loaded', this.on_loaded);
 
     this.xhrs = [];
     return this;
@@ -82,6 +82,7 @@ module.exports = Core.View.extend({
   },
 
   destroy: function(){
+    this.remove_loader();
     this.remove();
     $('.right-sidebar').html(JST.sidebar());
   },
