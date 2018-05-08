@@ -3,7 +3,7 @@
 bundle/Resources/public/vendor/ckeditor/samples/
 node_modules/
 tests/coverage/
-vendor/
+/vendor/
 **/Resources/public/dev/
 .php_cs.cache
 app/scripts/templates.js
