@@ -150,7 +150,7 @@ module.exports = Core.View.extend({
     var self = this;
     var formatedDate = moment(this.model.get('archive_updated_at')).locale(navigator.language || 'en-gb').format('LLLL');
     return new Core.Modal({
-      title: 'Restore',
+      title: 'Restore archived version',
       body: 'Are you sure you want to restore the archived version of the layout to the current draft?<br /><br /><b>Last published at:</b> ' + formatedDate,
       apply_text: 'Restore',
     }).on('apply', function(){
