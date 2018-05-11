@@ -233,6 +233,9 @@ module.exports = Core.View.extend(DndView).extend({
     new_block.add_to_blocks_collection();
     this.$el.after(view_block.$el);
     view_block.$edit();
+    return new Core.Snackbar({
+      message: 'Block succesfully duplicated.',
+    });
   },
 
   prepare_modal_mode: function(){
