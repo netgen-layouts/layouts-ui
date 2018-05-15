@@ -9,6 +9,9 @@ $btnprimary: hsl(194, 100, 39);
 $sidebarinput: hsl(0, 0, 40);
 $highlightColor: hsl(344, 90, 55);
 $darkBg: hsl(0, 0, 12);
+@mixin striped-bg($bg1, $bg2) {
+  background: repeating-linear-gradient(45deg, $bg1, $bg1 3px, $bg2 3px, $bg2 10px);
+}
 
 $contentbg: hsl(0, 0, 31);
 

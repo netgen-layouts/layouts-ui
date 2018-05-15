@@ -36,8 +36,11 @@
   }
   &.shared-zone {
     .mini-zone-item {
-      background: repeating-linear-gradient(45deg, lighten($toolbarbg1, 7%), lighten($toolbarbg1, 7%) 3px, $toolbarbg1 3px, $toolbarbg1 9px);
+      @include striped-bg(lighten($toolbarbg1, 7%), $toolbarbg1);
     }
+  }
+  &.ui-sortable-helper {
+    max-height: 100px !important;
   }
 }
 
@@ -189,6 +192,19 @@
       right: .4285em;
       top: .357em;
       padding: .1em 0;
+    }
+  }
+  &.ui-sortable-helper {
+    outline:1px dashed hsl(0, 0, 75);
+    max-height: 200px;
+    &.linked_zone {
+      @include striped-bg(lighten($toolbarbg1, 7%), $toolbarbg1);
+    }
+    [data-block] {
+      display: none;
+    }
+    .zone-unmap {
+      display: none;
     }
   }
 }

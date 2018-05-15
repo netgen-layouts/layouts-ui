@@ -140,6 +140,7 @@ module.exports = {
       over: self.check_containers.bind(self),
       out: self.remove_forbidden_class,
       helper: 'clone',
+      tolerance: 'pointer',
 
       //Only after receiving from other sortable
       receive: function(e, ui){
@@ -311,6 +312,7 @@ module.exports = {
       distance: 20,
       over: self.check_if_zone_has_shared_zone.bind(self),
       helper: 'clone',
+      tolerance: 'pointer',
 
       //Only after receiving from other sortable
       receive: function(e, ui){
@@ -329,7 +331,6 @@ module.exports = {
         /*This is needed because of min-height*/
         $(this).sortable('refreshPositions');
       },
-
 
       // After sort and after move to connected sortable
       update: function(){
