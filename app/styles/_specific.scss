@@ -311,7 +311,7 @@ $tooltipBg: hsla(0, 0, 12, 0.9);
   position:relative;
 }
 
-[data-inline-child]{position:relative; z-index:10; padding-right:1px; width:100%; display:inline-block;}
+[data-inline-child]{position:relative; z-index:10; padding-right:1px; width:100%; display:block;}
 [data-inline-child] + span{display:none; position: absolute; z-index:1; top:0; left:0; color:#ccc;}
 [data-inline-child]:empty + span{display:block;}
 
