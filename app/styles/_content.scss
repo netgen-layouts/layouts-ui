@@ -76,8 +76,7 @@
     height:100%;
     z-index:100;
     opacity: .2;
-    background:transparent url('../images/stripped-bg.png') repeat;
-    background: repeating-linear-gradient(45deg, $contentbg, $contentbg 3px, transparent 3px, transparent 10px);
+    @include striped-bg($contentbg, transparent);
   }
 
   .zone-header {
