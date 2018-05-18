@@ -623,7 +623,7 @@ $itemHeight: 2.625rem;
     align-items:center;
     justify-content:center;
     font-size:.875em;
-    opacity:.25;
+    opacity:.4;
     i {
       transform:rotate(90deg);
     }
@@ -648,8 +648,10 @@ $itemHeight: 2.625rem;
     max-height: 2.8333333333em;
   }
   .controls {
-    font-size:0.875em;
+    font-size: .875em;
     color: #8c8c8c;
+    position: relative;
+    min-width: 2.7142857143em;
     button {
       border: 0;
       background: transparent;
@@ -661,10 +663,17 @@ $itemHeight: 2.625rem;
       }
     }
     .dropdown {
-      position: static;
+      position: absolute;
+      z-index: 10;
+      right: 0;
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
       visibility: hidden;
       &.open {
         visibility: visible;
+        + .item-position {
+          visibility: hidden;
+        }
       }
       &.dropup {
         .dropdown-menu {
@@ -683,6 +692,7 @@ $itemHeight: 2.625rem;
       font-size: .75rem;
       text-align: right;
       width: 100%;
+      margin-top: .75em;
       &::before {
         content: '';
         position: absolute;
@@ -708,11 +718,21 @@ $itemHeight: 2.625rem;
     .dropdown {
       visibility: visible;
     }
+    .item-position {
+      visibility: hidden;
+    }
   }
   &.ui-draggable-dragging {
     .dropdown {
       visibility: hidden;
     }
+  }
+  .item-position {
+    font-size: .75rem;
+    text-align: right;
+    padding: 0 .5em 0 0;
+    min-width: 1.7em;
+    color: #757575;
   }
   .status-icon {
     padding: .25em;
@@ -785,13 +805,6 @@ $itemHeight: 2.625rem;
   &.overflown-item {
     .item-panel {
       background: #d5d5d5;
-      padding-left: .25em;
-    }
-    .item-position {
-      font-size: 12px;
-      padding: 0 .5em 0 0;
-      min-width: 1.7em;
-      color: #757575;
     }
   }
   .item-edit-position {

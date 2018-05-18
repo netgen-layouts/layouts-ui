@@ -18,6 +18,7 @@ module.exports = Core.Model.extend({
 
   init_override_item: function(){
     this.overrideItem = new this.constructor(this.get('override_item'));
+    this.overrideItem.set('position', this.get('position'));
   },
 
   can_remove_item: function(){
