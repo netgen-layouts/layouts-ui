@@ -104,7 +104,7 @@ module.exports = Core.View.extend({
       'editing_position': true,
     });
     this.render();
-    this.$('.item-position-input').focus().val('').val(this.model.get('position'));
+    this.$('.item-position-input').focus().val('').val(this.model.get('position') + 1);
   },
 
   $cancel_item_position: function(e){
@@ -117,10 +117,15 @@ module.exports = Core.View.extend({
 
   $save_item_position: function(e){
     e && e.preventDefault();
-    var newPosition = parseInt(this.$('.item-position-input').val());
+    var newPosition = parseInt(this.$('.item-position-input').val()) - 1;
+    if (newPosition < 0) {
+      return new Core.Snackbar({
+        message: 'New position must be larger than 0',
+      });
+    }
     if (this.bm_collection_model.get('collection_type') === 0 && newPosition >= this.bm_collection_model.items.length) {
       return new Core.Snackbar({
-        message: 'New position shouldn\'t be larger than position of the last item in collection (' + (this.bm_collection_model.items.length - 1) + ')',
+        message: 'New position shouldn\'t be larger than position of the last item in collection (' + (this.bm_collection_model.items.length) + ')',
       });
     }
     if (!isNaN(newPosition)) {

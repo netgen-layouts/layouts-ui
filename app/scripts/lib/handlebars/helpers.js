@@ -13,5 +13,17 @@ module.exports = {
   log: function(something){
     console.log(something);
   },
+
+  math: function(lvalue, operator, rvalue){
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return {
+        '+': lvalue + rvalue,
+        '-': lvalue - rvalue,
+        '*': lvalue * rvalue,
+        '/': lvalue / rvalue,
+        '%': lvalue % rvalue,
+    }[operator];
+  },
 };
 
