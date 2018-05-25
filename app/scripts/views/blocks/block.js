@@ -109,7 +109,7 @@ module.exports = Core.View.extend(DndView).extend({
     var id = this.model.get('parameters').css_id;
     var klass = this.model.get('parameters').css_class;
     var addtional_info = "" + (id ? '#' + id : '') + (klass ? '.' + klass : '');
-    this.$el.find('.block-header .name').append('<span class="ai">'+addtional_info+'</span>');
+    this.$el.find('.block-header .name').first().append('<span class="ai">'+addtional_info+'</span>');
     return this;
   },
 
