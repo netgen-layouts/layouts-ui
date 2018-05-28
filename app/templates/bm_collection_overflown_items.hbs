@@ -1,13 +1,17 @@
 <!--Collection items will appear here!-->
 {{#if collection.length}}
-  {{#if show_items}}
-    <div class="bm-overflown-items-wrapper">
-      <a href="#" class="js-hide-items"><i class="material-icons"></i></a>
+  <div class="bm-overflown">
+    <a class="toggle-link sub-toggle" role="button" data-toggle="collapse" href="#overflown-{{collection.cid}}" aria-expanded="false" aria-controls="overflown-{{collection.cid}}">{{message}}</a>
+    <div class="collapse" id="overflown-{{collection.cid}}" aria-expanded="false">
       <div class="bm-overflown-items" data-input></div>
     </div>
-  {{else}}
-    <div class="overflown-items-collapsed">
-      <a href="#" class="js-show-items"><i class="material-icons">more_vert</i><span class="overflown-count">{{ collection.length }}</span></a>
-    </div>
+  </div>
+{{else}}
+  {{#if before}}
+    {{#if collection.bm_collection.offset}}
+      <div class="bm-overflown">
+        <p>{{message}}</p>
+      </div>
+    {{/if}}
   {{/if}}
 {{/if}}

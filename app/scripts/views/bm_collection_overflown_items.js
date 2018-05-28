@@ -5,6 +5,8 @@ var $ = Core.$;
 var BmCollectionItemView = require('./bm_collection_item');
 
 module.exports = Core.View.extend({
+  extend_with: ['before'],
+
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.bm_collection_model = this.collection.bm_collection;
@@ -16,12 +18,16 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  render: function(){
+    this.context.before = this.before;
+    this.context.message = this.getMessage();
+    Core.View.prototype.render.apply(this, arguments);
+    return this;
+  },
+
   view_items_el: '.bm-overflown-items',
   ViewItem: BmCollectionItemView,
   template: 'bm_collection_overflown_items',
-  context: {
-    show_items: false,
-  },
   events: {
     'click .js-show-items': '$show_items',
     'click .js-hide-items': '$hide_items',
@@ -32,12 +38,6 @@ module.exports = Core.View.extend({
   },
   endLoading: function(){
     this.bm_collection_model.set('loading', false);
-  },
-
-  set_context: function(){
-    Core.View.prototype.set_context.apply(this, arguments);
-
-    return this;
   },
 
   refresh_items_and_block: function(){
@@ -67,6 +67,13 @@ module.exports = Core.View.extend({
     e && e.preventDefault();
     this.context.show_items = false;
     this.render();
+  },
+
+  getMessage: function(){
+    var offsetInput = document.getElementById('edit_offset');
+    var offset = offsetInput ? offsetInput.value : this.bm_collection_model.get('offset'); // temporary fix. get from collection_model when fetch offset and limit parameters from result items
+    if (!this.before) return this.collection.length + ' manual item' + (this.collection.length > 1 ? 's' : '') + ' out of range';
+    return 'Skipping ' + offset + (this.collection.length >= offset ? ' manual item' : ' item') + (offset > 1 ? 's' : '') + (this.collection.length < offset && this.collection.length ? ', ' + this.collection.length + ' of them manual' : '');
   },
 
 });

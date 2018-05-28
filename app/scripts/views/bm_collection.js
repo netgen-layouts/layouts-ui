@@ -18,9 +18,11 @@ module.exports = Core.View.extend({
 
     this.overflown_before_view = new BmCollectionOverflownItemsView({
       collection: this.model.overflown_before,
+      before: true,
     });
     this.overflown_after_view = new BmCollectionOverflownItemsView({
       collection: this.model.overflown_after,
+      before: false,
     });
 
     this.model.set('canAddItems', !!$('.js-browser-config-selector')[0].options.length);

@@ -922,23 +922,29 @@ $itemHeight: 2.625rem;
   }
 }
 
-.bm-overflown-before {
+.bm-overflown {
+  > p {
+    font-size: .75em;
+    margin: 0;
+  }
+  #sidebar & > .toggle-link {
+    margin: 0;
+  }
   .bm-overflown-items {
+    margin-top: .75em;
+  }
+  .bm-overflown-before & {
     margin: 0 0 1rem;
-    padding: 0 0 1rem;
+    padding: 0 0 .75rem;
     border-bottom: 1px dashed #8c8c8c;
   }
-}
-.bm-overflown-after {
-  .bm-overflown-items {
+  .bm-overflown-after & {
     margin: 1rem 0;
-    padding: 1rem 0 0;
+    padding: .75rem 0 0;
     border-top: 1px dashed #8c8c8c;
   }
-  .overflown-items-collapsed {
-    margin-top: -1em;
-  }
 }
+
 .overflown-items-collapsed {
   text-align: center;
   .js-show-items {
