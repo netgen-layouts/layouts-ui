@@ -623,7 +623,7 @@ $itemHeight: 2.625rem;
     align-items:center;
     justify-content:center;
     font-size:.875em;
-    opacity:.4;
+    opacity:.5;
     i {
       transform:rotate(90deg);
     }
@@ -703,7 +703,7 @@ $itemHeight: 2.625rem;
         cursor: pointer;
         &:hover,
         &:focus {
-          background:hsla(0, 0, 100, 0.05);
+          background: hsla(0, 0, 100, .05);
           color: inherit;
         }
       }
@@ -791,9 +791,9 @@ $itemHeight: 2.625rem;
   position: relative;
   height: $itemHeight;
   &.ui-sortable-placeholder {
-    border:1px dashed rgba(255, 255, 255, 0.25) !important;
-    visibility:visible !important;
-    background:transparent;
+    border: 1px dashed rgba(255, 255, 255, .25) !important;
+    visibility: visible !important;
+    background: transparent;
   }
   &.hidden-item {
     .item-panel {
@@ -803,6 +803,10 @@ $itemHeight: 2.625rem;
   &.overflown-item {
     .item-panel {
       background: #d5d5d5;
+    }
+    .handle {
+      cursor: default;
+      opacity: .15;
     }
   }
   .item-edit-position {
