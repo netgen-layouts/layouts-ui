@@ -70,8 +70,7 @@ module.exports = Core.View.extend({
   },
 
   getMessage: function(){
-    var offsetInput = document.getElementById('collection_edit_offset');
-    var offset = offsetInput ? offsetInput.value : this.bm_collection_model.get('offset'); // temporary fix. get from collection_model when fetch offset and limit parameters from result items
+    var offset = !this.bm_collection_model.items.length ? 0 : this.bm_collection_model.items.models[0].get('position');
     if (!this.before) return this.collection.length + ' manual item' + (this.collection.length > 1 ? 's' : '') + ' out of range';
     return 'Skipping ' + offset + (this.collection.length >= offset ? ' manual item' : ' item') + (offset > 1 ? 's' : '') + (this.collection.length < offset && this.collection.length ? ', ' + this.collection.length + ' of them manual' : '');
   },
