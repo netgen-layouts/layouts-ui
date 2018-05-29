@@ -663,11 +663,6 @@ $itemHeight: 2.625rem;
       }
     }
     .dropdown {
-      position: absolute;
-      z-index: 10;
-      right: 0;
-      top: 50%;
-      transform: translate3d(0, -50%, 0);
       visibility: hidden;
       &.open {
         visibility: visible;
@@ -731,8 +726,11 @@ $itemHeight: 2.625rem;
     font-size: .75rem;
     text-align: right;
     padding: 0 .5em 0 0;
-    min-width: 1.7em;
     color: #757575;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
   }
   .status-icon {
     padding: .25em;
