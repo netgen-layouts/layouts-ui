@@ -19,8 +19,10 @@ module.exports = Core.View.extend({
   },
 
   render: function(){
+    this.offset = !this.bm_collection_model.items.length ? 0 : this.bm_collection_model.items.models[0].get('position');
     this.context.before = this.before;
     this.context.message = this.getMessage();
+    this.context.offset = this.offset;
     Core.View.prototype.render.apply(this, arguments);
     return this;
   },
@@ -70,7 +72,7 @@ module.exports = Core.View.extend({
   },
 
   getMessage: function(){
-    var offset = !this.bm_collection_model.items.length ? 0 : this.bm_collection_model.items.models[0].get('position');
+    var offset = this.offset;
     if (!this.before) return this.collection.length + ' manual item' + (this.collection.length > 1 ? 's' : '') + ' out of range';
     return 'Skipping ' + offset + (this.collection.length >= offset ? ' manual item' : ' item') + (offset > 1 ? 's' : '') + (this.collection.length < offset && this.collection.length ? ', ' + this.collection.length + ' of them manual' : '');
   },
