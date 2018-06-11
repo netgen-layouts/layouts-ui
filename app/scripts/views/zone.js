@@ -87,6 +87,7 @@ var _ = require('underscore');
 
 
     on_unlink: function(){
+      this.model.set_zone_attributes_on_blocks();
       this.render();
       this.$el.removeClass('linked_zone');
       return this;
