@@ -1,29 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\Bundle\BlockManagerUIBundle\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
+use Jean85\PrettyVersions;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Yaml\Yaml;
 
 final class NetgenBlockManagerUIExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
-        $loader = new XmlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+        $container->setParameter(
+            'ngbm_app.asset.version',
+            PrettyVersions::getVersion('netgen/block-manager-ui')->getShortCommitHash()
         );
-
-        $loader->load('framework/assets.xml');
 
         $prependConfigs = [
             'framework/assets.yml' => 'framework',
