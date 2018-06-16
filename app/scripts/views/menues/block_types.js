@@ -9,9 +9,6 @@ var _ = require('underscore');
 module.exports = Core.View.extend(DndView).extend({
   extend_with: ['groups'],
 
-  //groups: ["basic", "listing", "gallery", "content", "ezpublish"],
-  //groups: ["basic", "listing", "gallery"],
-
   sort_element: '[data-zone] .zone-body',
   template: 'block_types/items',
   events: {
