@@ -1,6 +1,6 @@
 {
     "name": "netgen/block-manager-ui",
-    "description": "Netgen Block Manager user interface",
+    "description": "Netgen Layouts layout editing interface",
     "license": "proprietary",
     "authors": [
         {

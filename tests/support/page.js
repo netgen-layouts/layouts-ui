@@ -251,7 +251,7 @@ define(function(require) {
 
 
 
-  // Block Manager helpers =============================================================================
+  // Various helpers =============================================================================
 
   Page.prototype.addBlock = function(block_name, opts) {
     return new this.constructor(this, function(setContext) {
