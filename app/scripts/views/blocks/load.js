@@ -21,7 +21,7 @@ var ViewBlocks = require('./main');
       if(!json){return;}
       var data = JSON.parse(json);
 
-      var block = Core.g.layout.get_block_by_id(parseInt(data.block_id, 10));
+      var block = Core.g.layout.get_block_by_id(parseInt(data.parent_block_id, 10));
 
       block.group = view_group.model;
       block.in_group = true;
@@ -36,7 +36,7 @@ var ViewBlocks = require('./main');
     container_view.children = [];
     container_view.dom_elements = [];
     Core._.each(container_view.model.get('get_positions'), function(item){
-      var block = Core.g.layout.get_block_by_id(item.block_id),
+      var block = Core.g.layout.get_block_by_id(item.parent_block_id),
           child = this.create_view(block.type_name(), block);
 
         block.is_group() && this.load_group_blocks(child);
