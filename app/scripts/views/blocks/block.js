@@ -44,9 +44,8 @@ module.exports = Core.View.extend(DndView).extend({
     'click > .block-header .js-revert': '$restore_block',
     'click > .block-header .js-modal-mode': 'modal_mode',
     'click > .block-header .js-set-cache': 'set_cache',
-    'click > .block-header .js-translate': '$configure_translate'
+    'click > .block-header .js-translate': '$configure_translate',
   },
-
 
   setup_dom_element: function(){
     this.$el
@@ -229,6 +228,10 @@ module.exports = Core.View.extend(DndView).extend({
 
   on_copy: function(new_block_attributes){
     var new_block = Core.model_helper.init_block_from_type(this.model, new_block_attributes);
+    new_block.set({
+      parent_block_id: this.model.get('parent_block_id'),
+      parent_placeholder: this.model.get('parent_placeholder'),
+    });
     var view_block = Core.blocks.create_view(new_block.attributes.definition_identifier, new_block);
     new_block.add_to_blocks_collection();
     this.$el.after(view_block.$el);
@@ -270,13 +273,13 @@ module.exports = Core.View.extend(DndView).extend({
     var view_block, views = [];
     var zone_id = this.model.zone().id;
     var layout_id = this.model.zone().get('layout_id');
-    var block_id = this.model.id;
+    var parent_block_id = this.model.id;
     _.each(this.model.get('placeholders'), function(placeholder){
       var blocks = new Blocks(placeholder.blocks);
       var views = blocks.map(function(block){
         block.set({
-          block_id: block_id,
-          placeholder: placeholder.identifier,
+          parent_block_id: parent_block_id,
+          parent_placeholder: placeholder.identifier,
           zone_identifier: zone_id,
           layout_id: layout_id
         });

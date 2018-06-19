@@ -101,9 +101,9 @@ Draggable.prototype.create_new_block = function() {
     block_type: identifier,
     zone_identifier: this.zone_id(),
     layout_id: Core.g.layout.id,
-    position: this.position(),
-    placeholder: this.placeholder_id(),
-    block_id: this.parent_block_id()
+    parent_position: this.position(),
+    parent_placeholder: this.placeholder_id(),
+    parent_block_id: this.parent_block_id()
   };
 
 
@@ -115,7 +115,7 @@ Draggable.prototype.create_new_block = function() {
   if(this.parent_block_id()){
     console.warn('Save in container');
     new_block.save({}, {
-      url: new_block.url(attributes.block_id)
+      url: new_block.url(attributes.parent_block_id)
     });
   }else{
     console.warn('Save')
@@ -132,7 +132,7 @@ Draggable.prototype.create_new_block = function() {
 
 Draggable.prototype.save_new_position_for_zone = function() {
   this.model.set({
-    position: this.position(),
+    parent_position: this.position(),
     zone_identifier: this.zone_id()
   });
 
@@ -155,10 +155,10 @@ Draggable.prototype.get_new_order_in_container = function() {
 
 Draggable.prototype.save_new_position_for_container = function() {
   this.model.set({
-    position: this.position(),
+    parent_position: this.position(),
     zone_identifier: this.zone_id(),
-    placeholder: this.placeholder_id(),
-    block_id: this.parent_block_id()
+    parent_placeholder: this.placeholder_id(),
+    parent_block_id: this.parent_block_id()
   });
   this.model.move_to_container(this.get_new_order_in_zone(), this.get_new_order_in_container());
 };

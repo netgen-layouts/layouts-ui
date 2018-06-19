@@ -111,7 +111,7 @@ module.exports = Core.Model.extend({
   },
 
   container: function(){
-    return this.collection.get(this.get('block_id'));
+    return this.collection.get(this.get('parent_block_id'));
   },
 
 
@@ -129,7 +129,6 @@ module.exports = Core.Model.extend({
     var new_block = this.clone();
     var new_position = this.get('parent_position') + 1;
     return new_block.save({
-      position: new_position,
       parent_position: new_position,
     }, {
       url: this.url(in_container ? 'copy' : 'copy/zone'),
@@ -145,10 +144,8 @@ module.exports = Core.Model.extend({
 
 
   move: function(zone_block_ids){
-    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id');
+    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'parent_position', 'layout_id');
     var previous_zone = this._previousAttributes.zone_identifier;
-    // attributes.placeholder = "main"
-    // attributes.block_id = 288;
     return this.save(attributes, {
       url: this.url('move/zone'),
       via: 'move',
@@ -162,7 +159,7 @@ module.exports = Core.Model.extend({
 
 
   move_to_container: function(zone_block_ids, container_block_ids){
-    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'position', 'layout_id', 'block_id', 'placeholder');
+    var attributes = Core._.pick(this.attributes, 'zone_identifier', 'parent_position', 'layout_id', 'parent_block_id', 'parent_placeholder');
     var previous_zone = this._previousAttributes.zone_identifier;
     return this.save(attributes, {
       url: this.url('move'),
