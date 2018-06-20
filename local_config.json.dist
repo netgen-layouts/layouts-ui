@@ -1,5 +1,8 @@
 {
   "domain": "example.com",
+  "test_domain": "example.com",
+  "start_path": "bm/dev/app",
+  "test_start_path": "bm/dev/app",
   "db": {
     "name": "testdb",
     "host": "localhost",

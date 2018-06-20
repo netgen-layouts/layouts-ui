@@ -119,7 +119,7 @@ module.exports = function(grunt) {
       options: {
         open: false,
         watchTask: true,
-        startPath: 'ngadminui/bm/dev/app',
+        startPath: config.local.start_path,
         proxy: config.local.domain
       },
 
@@ -140,7 +140,7 @@ module.exports = function(grunt) {
           ghostMode: false,
           watchTask: true,
           notify: false,
-          startPath: 'bm/dev/app',
+          startPath: config.local.test_start_path,
           proxy: config.local.test_domain
         }
       }
