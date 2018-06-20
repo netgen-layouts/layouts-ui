@@ -1,0 +1,9 @@
+{
+  "domain": "example.com",
+  "db": {
+    "name": "testdb",
+    "host": "localhost",
+    "user": "root",
+    "password": "root"
+  }
+}

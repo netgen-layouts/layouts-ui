@@ -1,10 +1,9 @@
-// Generated on 2013-07-23 using generator-webapp 0.2.6
 'use strict';
 
 var _ = require('underscore');
 var proxyMiddleware = require('http-proxy-middleware');
 
-/* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
+// Override Handlebars default name lookup
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
@@ -18,36 +17,22 @@ for (var k in all_helpers) {
   known_helpers[k] = true;
 }
 
-
-
 JavaScriptCompiler.prototype.nameLookup = function(parent, name /* , type*/ ) {
   return "Handlebars.r(" + parent + ",'" + name + "')";
 };
-
-/* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
-
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
 
 module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-
   grunt.loadNpmTasks('intern');
-
 
   var local_config = 'local_config.json';
   if (!grunt.file.exists(local_config)) {
-    grunt.file.copy(local_config + '.example', local_config)
-    throw new Error('Please fill ' + local_config + ' in directory of Gruntfile.js');
+    grunt.file.copy(local_config + '.dist', local_config)
+    throw new Error('Please fill in the ' + local_config +' file in the root directory and run Grunt again.');
   }
 
-  // configurable paths
   var config = {
     app: 'app',
     dist: 'bundle/Resources/public',
@@ -55,12 +40,9 @@ module.exports = function(grunt) {
     local: grunt.file.readJSON(local_config)
   };
 
-
   var pkg = grunt.file.readJSON('package.json');
 
-
   var VENDOR_FILES = _.without(Object.keys(pkg.dependencies));
-
 
   grunt.initConfig({
     config: config,
@@ -75,6 +57,7 @@ module.exports = function(grunt) {
           suites: [ 'tests/unit/**/*' ],
         }
       },
+
       functional: {
         options: {
           proxyUrl: 'http://localhost:3005/bm/dev/app/',
@@ -87,11 +70,11 @@ module.exports = function(grunt) {
       }
     },
 
-
-   selenium_standalone: {
+    selenium_standalone: {
       options: {
         stopOnExit: true
       },
+
       dev: {
         seleniumVersion: '2.49.1',
         seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
@@ -111,8 +94,6 @@ module.exports = function(grunt) {
     },
 
     watch: {
-
-
       browserify_vendor: {
         files: ['node_modules/@netgen/layouts-core-ui/app/scripts/**/*.js', 'node_modules/@netgen/content-browser-ui/app/scripts/**/*.js'],
         tasks: ['browserify:dev']
@@ -122,16 +103,17 @@ module.exports = function(grunt) {
         files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['browserify:dev']
       },
+
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/@netgen/layouts-core-ui/app/styles/**/*.scss', 'node_modules/@netgen/content-browser-ui/app/styles/**/*.scss'],
         tasks: ['sass:server', 'postcss:server']
       },
+
       handlebars: {
         files: ['<%= config.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
         tasks: ['handlebars']
       }
     },
-
 
     browserSync: {
       options: {
@@ -164,8 +146,6 @@ module.exports = function(grunt) {
       }
     },
 
-
-
     clean: {
       dist: {
         files: [{
@@ -178,10 +158,12 @@ module.exports = function(grunt) {
           ]
         }]
       },
+
       vendor: [
         '<%= config.dist %>/vendor/ace-editor',
         '<%= config.dist %>/vendor/ckeditor'
       ],
+
       server: [
         '<%= config.dev %>'
       ]
@@ -192,6 +174,7 @@ module.exports = function(grunt) {
         files: {
           '<%= config.app %>/scripts/templates.js': '<%= config.app %>/templates/**/*.hbs'
         },
+
         options: {
           compilerOptions: {
             knownHelpers: known_helpers,
@@ -218,6 +201,7 @@ module.exports = function(grunt) {
       options: {
         includePaths: ['.']
       },
+
       server: {
         options: {
           sourceMap: true,
@@ -232,6 +216,7 @@ module.exports = function(grunt) {
           ext: '.css'
         }]
       },
+
       dist: {
         options: {
           sourceMap: false,
@@ -259,6 +244,7 @@ module.exports = function(grunt) {
           })
         ]
       },
+
       server: {
         src: '<%= config.dev %>/css/*.css'
       },
@@ -269,7 +255,6 @@ module.exports = function(grunt) {
     },
 
     browserify: {
-
       vendor: {
         src: [],
         dest: '<%= config.dev %>/js/vendor.js',
@@ -301,7 +286,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     uglify: {
       dist: {
         options: {
@@ -314,7 +298,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     imagemin: {
       dist: {
         files: [{
@@ -325,6 +308,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+
     svgmin: {
       dist: {
         files: [{
@@ -335,7 +319,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-
 
     // Put files not handled in other tasks here
     copy: {
@@ -359,6 +342,7 @@ module.exports = function(grunt) {
           ]
         }]
       },
+
       vendor: {
         files: [
           {
@@ -375,9 +359,7 @@ module.exports = function(grunt) {
           }
         ]
       }
-
     },
-
 
     shell: {
       load_fixtures: {
@@ -391,7 +373,6 @@ module.exports = function(grunt) {
         ].join('\n')
       }
     },
-
 
     concurrent: {
       server: [
@@ -427,7 +408,6 @@ module.exports = function(grunt) {
     ]);
   });
 
-
   grunt.registerTask('fast_build', function() {
     grunt.task.run([
       'clean:server',
@@ -436,7 +416,6 @@ module.exports = function(grunt) {
       'shell:symlinks'
     ]);
   });
-
 
   grunt.registerTask('build', function() {
     grunt.task.run([
@@ -447,21 +426,15 @@ module.exports = function(grunt) {
       'postcss:dist',
       'copy:dist'
     ]);
-
   });
 
-
-
-
-
-  // NOTE:
-  // ---- install selenium
+  // To use, install Selenium
   // grunt selenium_standalone:dev:install
   grunt.registerTask('test', function(target) {
     var tasks = [];
 
     if(!target || target == 'unit'){
-     tasks.push('intern:unit');
+      tasks.push('intern:unit');
     }
 
     if(!target || target == 'functional'){
@@ -473,9 +446,7 @@ module.exports = function(grunt) {
     }
 
     grunt.task.run(tasks);
-
   });
 
   grunt.registerTask('default', ['server']);
-
 };
