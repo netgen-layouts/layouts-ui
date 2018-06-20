@@ -32,7 +32,7 @@ define(function(require) {
         .end()
         .sleep(200)
         .waitForAjax()
-        .assertCurrentUrl(new RegExp('/bm/dev/app/#layout/\\d+/edit'), 'match')
+        .assertCurrentUrl(new RegExp('/.+/app/#layout/\\d+/edit'), 'match')
 
         .match('.app-center .js-layout-name', {visible: true}).assertText(layout_name)
         .end();
