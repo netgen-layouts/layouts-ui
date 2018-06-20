@@ -294,7 +294,7 @@ module.exports = function(grunt) {
           }
         },
         src: '<%= config.dev %>/js/main.js',
-        dest: '<%= config.dist %>/js/netgen-block-manager.js'
+        dest: '<%= config.dist %>/js/netgen-layouts-app.js'
       }
     },
 
