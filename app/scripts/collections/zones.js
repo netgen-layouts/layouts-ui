@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 var Zone = require('../models/zone');
 
 module.exports = Core.Collection.extend({

@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 var _ = Core._;
 
 module.exports = Core.View.extend({

@@ -8,7 +8,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('netgen-core/app/scripts/helpers');
+var helpers = require('@netgen/layouts-core-ui/app/scripts/helpers');
 var project_helpers = require('./app/scripts/lib/handlebars/helpers');
 
 var all_helpers = _.extend({}, helpers, project_helpers);
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
 
 
       browserify_vendor: {
-        files: ['node_modules/netgen-core/app/scripts/**/*.js', 'node_modules/netgen-content-browser/app/scripts/**/*.js'],
+        files: ['node_modules/@netgen/layouts-core-ui/app/scripts/**/*.js', 'node_modules/@netgen/content-browser-ui/app/scripts/**/*.js'],
         tasks: ['browserify:dev']
       },
 
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
         tasks: ['browserify:dev']
       },
       sass: {
-        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/netgen-core/app/styles/**/*.scss', 'node_modules/netgen-content-browser/app/styles/**/*.scss'],
+        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/@netgen/layouts-core-ui/app/styles/**/*.scss', 'node_modules/@netgen/content-browser-ui/app/styles/**/*.scss'],
         tasks: ['sass:server', 'postcss:server']
       },
       handlebars: {
@@ -283,8 +283,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
-          //external: VENDOR_FILES,
-          require: ['netgen-core'],
+          require: ['@netgen/layouts-core-ui'],
           browserifyOptions: {
             debug: true
           },
@@ -297,7 +296,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
-          require: ['netgen-core', 'netgen-content-browser'],
+          require: ['@netgen/layouts-core-ui', '@netgen/content-browser-ui'],
         }
       }
     },
@@ -311,7 +310,7 @@ module.exports = function(grunt) {
           }
         },
         src: '<%= config.dev %>/js/main.js',
-        dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
+        dest: '<%= config.dist %>/js/netgen-block-manager.js'
       }
     },
 

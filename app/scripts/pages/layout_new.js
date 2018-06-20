@@ -1,5 +1,5 @@
 'use strict';
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 var $ = Core.$;
 var Page = require('../page');
 var Layout = require('../models/layout');

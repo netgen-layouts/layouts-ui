@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 
 module.exports = Core.View.extend({
   template: 'block_types/item',

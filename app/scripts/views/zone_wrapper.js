@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 var ZoneView = require('../views/zone');
 var DndView = require('./dnd');
 var _ = require('underscore');
