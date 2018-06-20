@@ -27,17 +27,17 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('intern');
 
-  var local_config = 'local_config.json';
-  if (!grunt.file.exists(local_config)) {
-    grunt.file.copy(local_config + '.dist', local_config)
-    throw new Error('Please fill in the ' + local_config +' file in the root directory and run Grunt again.');
+  var grunt_config = 'grunt.json';
+  if (!grunt.file.exists(grunt_config)) {
+    grunt.file.copy(grunt_config + '.dist', grunt_config)
+    throw new Error('Please fill in the ' + grunt_config +' file in the root directory and run Grunt again.');
   }
 
   var config = {
     app: 'app',
     dist: 'bundle/Resources/public',
     dev:  'bundle/Resources/public/dev',
-    local: grunt.file.readJSON(local_config)
+    local: grunt.file.readJSON(grunt_config)
   };
 
   var pkg = grunt.file.readJSON('package.json');

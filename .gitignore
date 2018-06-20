@@ -8,7 +8,7 @@ tests/coverage/
 .php_cs.cache
 app/scripts/templates.js
 composer.lock
-local_config.json
+grunt.json
 package-lock.json
 yarn.lock
 *.sublime-workspace
