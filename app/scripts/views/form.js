@@ -14,7 +14,7 @@ module.exports = Core.View.extend({
   initialize: function() {
     Core.View.prototype.initialize.apply(this, arguments);
     this.is_query_form = this.$el.data('queryForm');
-    this.form_id = this.$el.data('form').replace('/ngadminui/bm/app/', '').replace(/\//g, '_');
+    this.form_id = this.$el.data('form').replace(/(\/.+)?\/bm\/app\//g, '').replace(/\//g, '_');
 
     this.is_query_form && this.listenTo(this.model, 'sidebar_save:'+this.form_id+':success', this.trigger_refresh_items);
 
