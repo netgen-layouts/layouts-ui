@@ -363,7 +363,7 @@ module.exports = function(grunt) {
 
     shell: {
       load_fixtures: {
-        command: 'tests/load_fixtures.sh <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
+        command: 'tests/load_fixtures.sh <%= config.local.db.host %> <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
       },
 
       symlinks: {
