@@ -150,7 +150,7 @@ module.exports = Core.View.extend({
 
   //TODO: add token name to config
   params_has_changed: function(old_params, new_params) {
-    var replacer = /(ezxform)?_token%5D=[a-zA-Z0-9-_]+/;
+    var replacer = /(\w+)?_token%5D=[a-zA-Z0-9-_]+/;
     old_params && (old_params = old_params.replace(replacer, ''));
     new_params && (new_params = new_params.replace(replacer, ''));
     return old_params === new_params;
