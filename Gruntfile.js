@@ -60,8 +60,7 @@ module.exports = function(grunt) {
 
       functional: {
         options: {
-          proxyUrl: 'http://localhost:3005/bm/dev/app/',
-          //proxPort: 3005,
+          proxyUrl: 'http://' + config.local.test_domain + ':3005/' + config.local.test_start_path + '/',
           runType: 'runner', // browsers
           config: 'tests/intern',
           reporters: [ 'Runner'],
