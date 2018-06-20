@@ -70,7 +70,6 @@ module.exports = Core.View.extend({
         root_path: $browser_config_selector.val()
       }
     }).on('apply', function(){
-      // @todo This needs to be configurable as some kind of mapping
       var items = this.selected_collection.map(function(item){
         return {type: 0, value: item.get('value'), value_type: value_type, position: self.model.get('offset') };
       });
