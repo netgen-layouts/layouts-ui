@@ -11,5 +11,6 @@ composer.lock
 grunt.json
 package-lock.json
 yarn.lock
+yarn-error.log
 *.sublime-workspace
 **/Resources/public/vendor/*/package.json
