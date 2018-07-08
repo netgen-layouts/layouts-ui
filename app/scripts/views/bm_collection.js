@@ -61,7 +61,7 @@ module.exports = Core.View.extend({
     var value_type = $browser_config_selector.val();
 
     new Browser({
-      disabled_item_ids: this.model.items.reduce(function(out, item){
+      disabled_item_values: this.model.items.reduce(function(out, item){
         !item.get('is_dynamic') && item.get('value_type') === value_type && out.push(item.get('value'));
         return out;
       }, []),
