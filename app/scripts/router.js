@@ -23,8 +23,6 @@ module.exports = Core.Backbone.Router.extend({
     'layout': 'layout_new',
     'layout/:id/link_zone/:zone_id/with_layout/:draft_layout_id': 'layout_preview',
     'layout/:id/change_type(/:layout_type_id)': 'layout_change_type',
-
-
     'layout/:id(/:type)(/:locale)': 'layout',
   },
 
