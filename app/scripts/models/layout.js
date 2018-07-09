@@ -11,7 +11,6 @@ module.exports = Core.Model.extend({
   path: 'layouts',
   paths: {
     blocks: ':locale/layouts/:id/blocks',
-    change_layout: '/layouts/:id/change_type',
     restore_archived: '/layouts/:id/restore',
   },
 
@@ -113,30 +112,6 @@ module.exports = Core.Model.extend({
       via: 'draft',
       method: 'POST',
       patch: true
-    });
-  },
-
-
-  // JSON version
-  change_layout: function(data){
-     this.save(null, {
-      via: 'change_layout',
-      url: this.url('change_layout'),
-      method: 'POST',
-      patch: true,
-      attrs: data
-    });
-  },
-
-
-  // application/x-www-form-urlencoded; charset=UTF-8
-  _change_layout: function(data){
-    this.sync('create', this, {
-      via: 'change_layout',
-      url: this.url('change_layout'),
-      method: 'POST',
-      processData: true,
-      data: data
     });
   },
 
