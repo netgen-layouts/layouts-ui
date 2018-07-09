@@ -6,6 +6,7 @@ var Block = require('./block');
 var _ = require('underscore');
 
 module.exports = {
+  mode: "ace/mode/html",
   supports_modal_mode: true,
 
   render: function() {
@@ -29,7 +30,7 @@ module.exports = {
     editor.setHighlightActiveLine(true);
     //editor.setOptions({fontSize: "12pt"});
 
-    session.setMode("ace/mode/html");
+    session.setMode(this.mode);
     session.setTabSize(4);
     session.setUseSoftTabs(true);
 
