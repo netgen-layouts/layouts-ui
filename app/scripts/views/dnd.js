@@ -354,47 +354,4 @@ module.exports = {
 
   },
 
-
-  /**
-   * Setup DND for new dragging zones in change layout view
-   */
-  setup_dnd_for_zones: function(){
-   // if(this.should_disable_dnd()){ return; }
-    var self = this;
-      this.$('.items').sortable({
-        connectWith: '[data-zone-receiver]',
-        placeholder: 'no-placeholder',
-        appendTo: document.body,
-        over: self.check_if_zone_has_shared_zone.bind(self),
-
-        helper: function (e, item) {
-          var original_view = item.data('_view');
-          var MiniZoneView = original_view.constructor
-          this.copyHelper = new MiniZoneView({model: original_view.model }).render().$el.insertAfter(item);
-
-          $(this).data('copied', false);
-          return item.clone();
-        },
-
-        start: function(e, ui){
-          ui.helper.addClass('ngc');
-          Core.trigger('sortable:start');
-        },
-
-        stop: function (e) {
-          Core.trigger('sortable:end');
-          var copied = $(this).data('copied');
-
-          if(!copied){
-            e.preventDefault();
-            this.copyHelper.remove();
-          }
-          this.copyHelper = null;
-        }
-
-      });
-
-  },
-
-
 };
