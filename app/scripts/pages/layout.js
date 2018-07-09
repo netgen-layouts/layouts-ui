@@ -5,7 +5,6 @@ var $ = Core.$;
 var LayoutBasePage = require('./layout_base');
 var HeaderView = require('../views/header');
 var ZoneLinkingHeaderView = require('../views/zone_linking_header');
-var TranslateHeaderView = require('../views/translate_header');
 
 
 module.exports = LayoutBasePage.extend({
@@ -24,10 +23,6 @@ module.exports = LayoutBasePage.extend({
     }
 
     new ZoneLinkingHeaderView({
-      el: '#zone_linking_header'
-    }).render();
-
-    new TranslateHeaderView({
       el: '#zone_linking_header'
     }).render();
 
