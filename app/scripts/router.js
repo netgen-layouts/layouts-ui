@@ -36,6 +36,5 @@ module.exports = Core.Backbone.Router.extend({
   layout_edit_master: Pages.Layout.init(),
 
   layout_preview: Pages.LayoutLink.init(),
-  layout_change_type: Pages.LayoutChangeType.init()
 
 });

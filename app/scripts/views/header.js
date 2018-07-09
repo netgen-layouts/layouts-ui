@@ -22,7 +22,6 @@ module.exports = Core.View.extend({
     'click .js-normal-mode': '$normal_mode',
     'click .js-back': '$back',
     'click .js-soft-back': '$soft_back',
-    'click .js-change-layout-apply': '$change_layout_apply',
     'click .js-restore-archived': 'restore_archived',
   },
 
@@ -32,7 +31,6 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'draft:success', this.render);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
     this.listenTo(this.model, 'change:description change:name', this.render);
-    this.listenTo(this.model, 'change_layout:success', this.$edit_mode);
 
     return this;
   },
@@ -55,25 +53,6 @@ module.exports = Core.View.extend({
     }
 
   },
-
-  $change_layout_apply: function() {
-    var data = {
-      new_type: Core.router.params.layout_type_id,
-      zone_mappings: {}
-    };
-
-    $('[data-zone-wrapper]').each(function(){
-      var name = this.dataset.zone
-      var ids = $('[data-zone-receiver] > [data-view]', this).map(function(){
-        return $(this).data('_view').model.id
-      }).get()
-      data.zone_mappings[name] = ids
-    })
-
-    console.log(data);
-    this.model.change_layout(data);
-  },
-
 
   $soft_back: function() {
     Core.state.set({mode: 'edit', section: 'edit'});
