@@ -14,7 +14,6 @@ module.exports = Core.View.extend(DndView).extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
 
-    this.listenTo(Core.state, 'change', this.on_core_state_change);
     this.listenTo(Core,       'editing:unmark', this.editing_unmark);
 
     this.listenTo(this.model, 'change', this.setup_dom_element);
@@ -44,7 +43,6 @@ module.exports = Core.View.extend(DndView).extend({
     'click > .block-header .js-revert': '$restore_block',
     'click > .block-header .js-modal-mode': 'modal_mode',
     'click > .block-header .js-set-cache': 'set_cache',
-    'click > .block-header .js-translate': '$configure_translate',
   },
 
   setup_dom_element: function(){
@@ -52,37 +50,8 @@ module.exports = Core.View.extend(DndView).extend({
       .attr('data-block', '')
       .attr('data-type', this.model.get('identifier'));
 
-    this.setup_translatable_mode();
-
     this.is_container() && this.$el.attr('data-container', '');
     return this;
-  },
-
-
-  setup_translatable_mode: function(){
-    var mode = null;
-    if(Core.state.in_mode('translate')){
-      mode = this.model.get('is_translatable') ? 'on' : 'off';
-    }
-    this.$el.attr('data-translatable', mode);
-    return this;
-  },
-
-  on_core_state_change: function(){
-    this.setup_translatable_mode();
-  },
-
-
-  setup_context_menu: function() {
-    var $normal_links = this.$('.js-destroy, .js-copy, .js-revert, .js-modal-mode, .js-set-cache');
-    var $translate_links = this.$('.js-translate');
-    if(Core.state.in_mode('translate')){
-      $normal_links.hide();
-      $translate_links.show();
-    }else{
-      $normal_links.show();
-      $translate_links.hide();
-    }
   },
 
   /**
@@ -96,7 +65,6 @@ module.exports = Core.View.extend(DndView).extend({
     Core.View.prototype.render.apply(this, arguments);
     this.prepare_modal_mode();
     this.render_container();
-    this.setup_context_menu();
     if (!this.model.get('has_published_state')){
       this.$el.find('.js-revert').hide();
     }
@@ -299,17 +267,6 @@ module.exports = Core.View.extend(DndView).extend({
     e && e.stopPropagation();
     return new Core.ModalForm({
       url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/config/edit/http_cache'),
-      model: this.model
-    }).open();
-  },
-
-
-  $configure_translate: function(e){
-    e && e.stopPropagation();
-    //TODO: change this to configure translation form
-    return new Core.ModalForm({
-      url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/form/configure_translation'),
-      via: 'configure_translate',
       model: this.model
     }).open();
   },
