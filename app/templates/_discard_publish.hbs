@@ -5,6 +5,6 @@
   <ul class="dropdown-menu dropdown-menu-right" role="menu">
     <li><a href="#" class="js-publish-and-continue">Publish and continue editing</a></li>
     <li><a href="#" class="js-save-and-close">Save draft and close</a></li>
-    {{#if model.has_archived_state}}<li><a href="#" class="js-restore-archived">Restore archived version</a></li>{{/if}}
+    {{> additional_actions}}
   </ul>
 </div>

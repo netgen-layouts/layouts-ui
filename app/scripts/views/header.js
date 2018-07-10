@@ -22,18 +22,17 @@ module.exports = Core.View.extend({
     'click .js-normal-mode': '$normal_mode',
     'click .js-back': '$back',
     'click .js-soft-back': '$soft_back',
-    'click .js-restore-archived': 'restore_archived',
   },
 
-  initialize: function(){
-    Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(Core.state, 'change', this.render);
-    this.listenTo(this.model, 'draft:success', this.render);
-    this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
-    this.listenTo(this.model, 'change:description change:name', this.render);
+  // initialize: function(){
+  //   Core.View.prototype.initialize.apply(this, arguments);
+  //   this.listenTo(Core.state, 'change', this.render);
+  //   this.listenTo(this.model, 'draft:success', this.render);
+  //   this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
+  //   this.listenTo(this.model, 'change:description change:name', this.render);
 
-    return this;
-  },
+  //   return this;
+  // },
 
   render: function(){
     this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
@@ -122,19 +121,6 @@ module.exports = Core.View.extend({
 
   setPageTitle: function(){
     document.title = this.model.get('name') + ' - Netgen Layouts';
-  },
-
-  restore_archived: function(e){
-    e.preventDefault();
-    var self = this;
-    var formatedDate = moment(this.model.get('archive_updated_at')).locale(navigator.language || 'en-gb').format('LLLL');
-    return new Core.Modal({
-      title: 'Restore archived version',
-      body: 'Are you sure you want to restore the archived version of the layout to the current draft?<br /><br /><b>Last published at:</b> ' + formatedDate,
-      apply_text: 'Restore',
-    }).on('apply', function(){
-      self.model.restore_archived();
-    }).open();
   },
 
 });
