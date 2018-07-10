@@ -42,7 +42,6 @@ module.exports = Core.View.extend(DndView).extend({
     'click > .block-header .js-copy': '$copy_block',
     'click > .block-header .js-revert': '$restore_block',
     'click > .block-header .js-modal-mode': 'modal_mode',
-    'click > .block-header .js-set-cache': 'set_cache',
   },
 
   setup_dom_element: function(){
@@ -261,14 +260,6 @@ module.exports = Core.View.extend(DndView).extend({
 
     return this;
 
-  },
-
-  set_cache: function(e){
-    e && e.stopPropagation();
-    return new Core.ModalForm({
-      url: Core.env.bm_app_url(this.model.get('locale') + '/blocks/' + this.model.id + '/config/edit/http_cache'),
-      model: this.model
-    }).open();
   },
 
 });
