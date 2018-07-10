@@ -24,15 +24,15 @@ module.exports = Core.View.extend({
     'click .js-soft-back': '$soft_back',
   },
 
-  // initialize: function(){
-  //   Core.View.prototype.initialize.apply(this, arguments);
-  //   this.listenTo(Core.state, 'change', this.render);
-  //   this.listenTo(this.model, 'draft:success', this.render);
-  //   this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
-  //   this.listenTo(this.model, 'change:description change:name', this.render);
+  initialize: function(){
+    Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(Core.state, 'change', this.render);
+    this.listenTo(this.model, 'draft:success', this.render);
+    this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
+    this.listenTo(this.model, 'change:description change:name', this.render);
 
-  //   return this;
-  // },
+    return this;
+  },
 
   render: function(){
     this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
