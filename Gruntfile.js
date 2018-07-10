@@ -40,13 +40,8 @@ module.exports = function(grunt) {
     local: grunt.file.readJSON(grunt_config)
   };
 
-  var pkg = grunt.file.readJSON('package.json');
-
-  var VENDOR_FILES = _.without(Object.keys(pkg.dependencies));
-
   grunt.initConfig({
     config: config,
-    pkg: pkg,
 
     intern: {
       unit: {
@@ -254,15 +249,6 @@ module.exports = function(grunt) {
     },
 
     browserify: {
-      vendor: {
-        src: [],
-        dest: '<%= config.dev %>/js/vendor.js',
-        options: {
-          debug: true,
-          // require: VENDOR_FILES
-        }
-      },
-
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/netgen-layouts-app.js',
@@ -377,7 +363,6 @@ module.exports = function(grunt) {
       server: [
         'handlebars',
         'sass:server',
-        'browserify:vendor',
         'browserify:dev'
       ],
       test: [
