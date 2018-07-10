@@ -265,7 +265,7 @@ module.exports = function(grunt) {
 
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '<%= config.dev %>/js/main.js',
+        dest: '<%= config.dev %>/js/netgen-layouts-app.js',
         options: {
           require: ['@netgen/layouts-core-ui'],
           browserifyOptions: {
@@ -278,7 +278,7 @@ module.exports = function(grunt) {
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '<%= config.dev %>/js/main.js',
+        dest: '<%= config.dev %>/js/netgen-layouts-app.js',
         options: {
           require: ['@netgen/layouts-core-ui', '@netgen/content-browser-ui'],
         }
@@ -292,7 +292,7 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '<%= config.dev %>/js/main.js',
+        src: '<%= config.dev %>/js/netgen-layouts-app.js',
         dest: '<%= config.dist %>/js/netgen-layouts-app.js'
       }
     },
