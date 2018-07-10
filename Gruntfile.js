@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           runType: 'client', // console /  nodejs
           config: 'tests/intern',
           reporters: [ 'Console', { id: 'LcovHtml', directory: 'tests/coverage' } ],
-          suites: [ 'tests/unit/**/*' ],
+          suites: [ 'tests/unit/**/*' ]
         }
       },
 
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
         processors: [
           require('autoprefixer')({
             browsers: 'last 3 versions',
-            remove: false,
+            remove: false
           })
         ]
       },
@@ -256,17 +256,15 @@ module.exports = function(grunt) {
           require: ['@netgen/layouts-core-ui'],
           browserifyOptions: {
             debug: true
-          },
-          alias: {
           }
-        },
+        }
       },
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/netgen-layouts-app.js',
         options: {
-          require: ['@netgen/layouts-core-ui', '@netgen/content-browser-ui'],
+          require: ['@netgen/layouts-core-ui', '@netgen/content-browser-ui']
         }
       }
     },
@@ -364,9 +362,6 @@ module.exports = function(grunt) {
         'handlebars',
         'sass:server',
         'browserify:dev'
-      ],
-      test: [
-
       ],
       dist: [
         'handlebars',
