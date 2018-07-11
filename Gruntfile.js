@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('underscore');
-var proxyMiddleware = require('http-proxy-middleware');
 
 // Override Handlebars default name lookup
 var Handlebars = require('handlebars/lib/index');
@@ -55,7 +54,7 @@ module.exports = function(grunt) {
 
       functional: {
         options: {
-          proxyUrl: 'http://' + config.local.test_domain + ':3005/' + config.local.test_start_path + '/',
+          proxyUrl: config.local.test_domain + ':3005/' + config.local.test_start_path + '/',
           runType: 'runner', // browsers
           config: 'tests/intern',
           reporters: [ 'Runner'],

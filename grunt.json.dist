@@ -1,6 +1,6 @@
 {
-  "domain": "example.com",
-  "test_domain": "example.com",
+  "domain": "http://example.com",
+  "test_domain": "http://example.com",
   "start_path": "bm/dev/app",
   "test_start_path": "bm/dev/app",
   "db": {
