@@ -11,13 +11,11 @@ module.exports = Core.View.extend({
 
     this.listenTo(this.bm_collection_model.block(), 'refresh:items', this.refresh_items);
 
-    // this.listenTo(this.collection, 'all', function(e){console.log(e);});
-
     //ITEMS
-    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success visibility:success', this.refresh_items_and_block);
+    this.listenTo(this.collection, 'move:success create:success delete:success move_manual:success ', this.refresh_items_and_block);
     this.listenTo(this.bm_collection_model, 'delete_all:success', this.refresh_items_and_block);
     this.listenTo(this.collection, 'request', this.onRequest);
-    this.listenTo(this.collection, 'visibility:start remove', this.startLoading);
+    this.listenTo(this.collection, 'remove', this.startLoading);
     this.listenTo(this.bm_collection_model, 'read:success', this.endLoading);
 
     this.on('render', this.setup_dnd);

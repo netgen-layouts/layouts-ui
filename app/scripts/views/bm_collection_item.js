@@ -28,7 +28,6 @@ module.exports = Core.View.extend({
   events: {
     'click .remove-item': '$remove',
     'click .cancel': '$hide_remove_btn',
-    'click .item-visibility': '$set_visibility',
     'click .set-item-position': '$set_item_position',
     'click .js-cancel-position': '$cancel_item_position',
     'click .js-save-position': '$save_item_position',
@@ -63,39 +62,6 @@ module.exports = Core.View.extend({
     }).on('apply', function(){
       self.model.destroy();
     }).open();
-  },
-
-  $set_visibility: function(e){
-    e && e.preventDefault();
-    var self = this;
-    var visibilityModal = new Core.ModalForm({
-      url: Core.env.bm_app_url('/collections/item/' + this.model.id + '/config/edit/visibility'),
-      via: 'visibility',
-      model: this.model
-    }).open();
-    visibilityModal.toggleSubmit = function(toggleInputs){  // disable submit button if scheduled selected and both date inputs empty
-      var visibility = this.serialize().params.edit.visibility;
-      toggleInputs && this.$('.visibility-inputs').toggleClass('disabled', visibility.visibility_status !== 'scheduled');
-      this.$('.action_apply').prop('disabled', visibility.visibility_status === 'scheduled' && !visibility.visible_from.datetime && !visibility.visible_to.datetime);
-    };
-    visibilityModal.initializeDatetime = function(){
-      var self  = this;
-      $('.datetimepicker').each(function(){
-        return new Core.DateTimePicker({
-          el: $(this),
-        }).on('change', function(){
-          self.toggleSubmit();
-        });
-      });
-      this.$el.on('change', 'input[type="radio"]', function(){
-        self.toggleSubmit(true);
-      });
-      this.toggleSubmit(true);
-    };
-    visibilityModal.on('open save:error', function(){
-      this.initializeDatetime();
-    });
-    return visibilityModal;
   },
 
   $set_item_position: function(e){
