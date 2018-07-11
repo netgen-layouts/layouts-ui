@@ -3,12 +3,10 @@
   <p class="name">
     {{item.name}}
   </p>
-  {{#if item.scheduled}}
-    <div class="status-icon"><span class="bm-tooltip" title="Item is scheduled"><i class="material-icons">access_time</i></span></div>
-  {{/if}}
+  {{#> overrides/item_additional_icons}}{{!-- override with partial --}}{{/overrides/item_additional_icons}}
   {{#unless item.is_visible}}
     <div class="status-icon">
-      <span class="bm-tooltip" title="{{#unless item.cms_visible}}Hidden in CMS{{else}}{{#if item.scheduled}}Hidden by scheduling{{else}}Hidden in Netgen Layouts{{/if}}{{/unless}}">
+      <span class="bm-tooltip" title="{{#unless item.cms_visible}}Hidden in CMS{{else}}{{#> overrides/item_visibility_tooltip}}{{!-- override with partial --}}{{/overrides/item_visibility_tooltip}}{{/unless}}">
         <i class="material-icons">visibility_off</i>
       </span>
     </div>
@@ -19,8 +17,8 @@
         <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
         <ul class="dropdown-menu dropdown-menu-right">
           {{#if item.cms_url}}<li><a href="{{item.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
+          {{#> overrides/item_additional_actions}}{{!-- override with partial --}}{{/overrides/item_additional_actions}}
           {{#unless item.is_dynamic}}
-            {{#eq item.value_type "null"}}{{else}}<li><a class="item-visibility">Configure visibility</a></li>{{/eq}}
             <li><a class="set-item-position">Set position</a></li>
           {{/unless}}
           {{#if item.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
