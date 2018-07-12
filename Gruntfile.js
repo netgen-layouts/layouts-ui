@@ -8,10 +8,9 @@ var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
 var helpers = require('@netgen/layouts-core-ui/app/scripts/helpers');
 var project_helpers = require('./app/scripts/lib/handlebars/helpers');
-
 var all_helpers = _.extend({}, helpers, project_helpers);
-var known_helpers = {};
 
+var known_helpers = {};
 for (var k in all_helpers) {
   known_helpers[k] = true;
 }
@@ -99,7 +98,7 @@ module.exports = function(grunt) {
 
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/@netgen/layouts-core-ui/app/styles/**/*.scss', 'node_modules/@netgen/content-browser-ui/app/styles/**/*.scss'],
-        tasks: ['sass:server', 'postcss:server']
+        tasks: ['sass:dev', 'postcss:dev']
       },
 
       handlebars: {
@@ -140,26 +139,9 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '<%= config.dev %>',
-            '<%= config.dist %>/*',
-            '!<%= config.dist %>/vendor',
-            '!<%= config.dist %>/.git*'
-          ]
-        }]
-      },
-
-      vendor: [
-        '<%= config.dist %>/vendor/ace-editor',
-        '<%= config.dist %>/vendor/ckeditor'
-      ],
-
-      server: [
-        '<%= config.dev %>'
-      ]
+      dev: '<%= config.dev %>',
+      vendor: '<%= config.dist %>/vendor',
+      dist: '<%= config.dist %>'
     },
 
     handlebars: {
@@ -196,7 +178,7 @@ module.exports = function(grunt) {
         includePaths: ['.']
       },
 
-      server: {
+      dev: {
         options: {
           sourceMap: true,
           sourceMapEmbed: true,
@@ -239,7 +221,7 @@ module.exports = function(grunt) {
         ]
       },
 
-      server: {
+      dev: {
         src: '<%= config.dev %>/css/*.css'
       },
 
@@ -305,27 +287,6 @@ module.exports = function(grunt) {
 
     // Put files not handled in other tasks here
     copy: {
-      dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            'images/{,*/}*.{webp,gif}',
-            'fonts/**/{,*/}*.{eot,svg,ttf,woff,woff2}'
-          ]
-        }, {
-          expand: true,
-          cwd: '<%= config.dev %>/images',
-          dest: '<%= config.dist %>/images',
-          src: [
-            'generated/*'
-          ]
-        }]
-      },
-
       vendor: {
         files: [
           {
@@ -341,15 +302,27 @@ module.exports = function(grunt) {
             dest: '<%= config.dist %>/vendor/ckeditor'
           }
         ]
+      },
+
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= config.app %>',
+          dest: '<%= config.dist %>',
+          src: [
+            'fonts/**/{,*/}*.{eot,svg,ttf,woff,woff2}'
+          ]
+        }]
       }
     },
 
     shell: {
-      load_fixtures: {
+      fixtures: {
         command: 'tests/load_fixtures.sh <%= config.local.db.host %> <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
       },
 
-      symlinks: {
+      dev: {
         command: [
           'ln -s ../../../../app/fonts <%= config.dev %>/fonts',
           'ln -s ../../../../app/images <%= config.dev %>/images'
@@ -358,16 +331,17 @@ module.exports = function(grunt) {
     },
 
     concurrent: {
-      server: [
+      dev: [
         'handlebars',
-        'sass:server',
-        'browserify:dev'
+        'browserify:dev',
+        'sass:dev'
       ],
+
       dist: [
         'handlebars',
         'browserify:dist',
-        'copy:vendor',
         'sass:dist',
+        'copy:vendor',
         'imagemin',
         'svgmin'
       ]
@@ -389,10 +363,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('fast_build', function() {
     grunt.task.run([
-      'clean:server',
-      'concurrent:server',
-      'postcss:server',
-      'shell:symlinks'
+      'clean:dev',
+      'concurrent:dev',
+      'postcss:dev',
+      'shell:dev'
     ]);
   });
 
@@ -400,9 +374,9 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean:dist',
       'concurrent:dist',
-      'uglify:dist',
       'postcss:dist',
-      'copy:dist'
+      'copy:dist',
+      'uglify:dist'
     ]);
   });
 
@@ -416,7 +390,7 @@ module.exports = function(grunt) {
     }
 
     if(!target || target == 'functional'){
-      tasks.push('shell:load_fixtures');
+      tasks.push('shell:fixtures');
       tasks.push('fast_build');
       tasks.push('browserSync:test');
       tasks.push('selenium_standalone:dev:start');
