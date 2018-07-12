@@ -1,5 +1,5 @@
 {
-  "name": "@netgen/layouts-app-ui",
+  "name": "@netgen/layouts-ui",
   "description": "Netgen Layouts layout editing interface",
   "version": "0.12.0",
   "main": "app/scripts/main.js",
