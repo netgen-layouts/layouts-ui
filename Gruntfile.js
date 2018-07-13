@@ -102,7 +102,7 @@ module.exports = function(grunt) {
       },
 
       handlebars: {
-        files: ['<%= config.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
+        files: ['<%= config.app %>/templates/**/*.hbs'],
         tasks: ['handlebars']
       }
     },
