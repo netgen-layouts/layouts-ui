@@ -332,13 +332,11 @@ module.exports = function(grunt) {
 
     concurrent: {
       dev: [
-        'handlebars',
         'browserify:dev',
         'sass:dev'
       ],
 
       dist: [
-        'handlebars',
         'browserify:dist',
         'sass:dist',
         'copy:vendor',
@@ -364,6 +362,7 @@ module.exports = function(grunt) {
   grunt.registerTask('fast_build', function() {
     grunt.task.run([
       'clean:dev',
+      'handlebars',
       'concurrent:dev',
       'postcss:dev',
       'shell:dev'
@@ -373,6 +372,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', function() {
     grunt.task.run([
       'clean:dist',
+      'handlebars',
       'concurrent:dist',
       'postcss:dist',
       'copy:dist',
