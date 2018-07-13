@@ -1,9 +1,10 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var BmModel = require('./model');
 var BmCollectionItems = require('../collections/bm_collection_items');
 
-module.exports = Core.Model.extend({
+module.exports = BmModel.extend({
   path: ':locale/collections',
   paths: {
     change_type: ':locale/blocks/:block_id/collections/:id/change_type',

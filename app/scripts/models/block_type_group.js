@@ -1,8 +1,9 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var BmModel = require('./model');
 
-module.exports = Core.Model.extend({
+module.exports = BmModel.extend({
 
   idAttribute: 'identifier',
 

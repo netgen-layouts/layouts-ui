@@ -1,12 +1,13 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var BmModel = require('./model');
 var $ = Core.$;
 var Blocks = require('../collections/blocks');
 var Zones = require('../collections/zones');
 var _ = require('underscore');
 
-module.exports = Core.Model.extend({
+module.exports = BmModel.extend({
 
   path: 'layouts',
   paths: {

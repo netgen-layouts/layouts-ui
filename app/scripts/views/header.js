@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var $ = Core.$;
 var moment = require('moment');
 require('moment/min/locales.min');
@@ -77,7 +78,7 @@ module.exports = Core.View.extend({
 
   open_edit_name: function(){
     return new Core.ModalForm({
-      url: Core.env.bm_app_url('layouts/' + this.model.id +  '/form/edit'),
+      url: Env.bm_app_url('layouts/' + this.model.id +  '/form/edit'),
       model: this.model
     }).render().open();
   },

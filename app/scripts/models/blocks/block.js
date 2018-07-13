@@ -1,9 +1,11 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../../environments/default');
+var BmModel = require('../model');
 var BmCollections = require('../../collections/bm_collections');
 
-module.exports = Core.Model.extend({
+module.exports = BmModel.extend({
   class_name: 'block',
 
   format : '',
@@ -45,7 +47,7 @@ module.exports = Core.Model.extend({
 
 
   edit_url: function(){
-    return Core.env.bm_app_url(this.get('locale')+'/blocks/'+this.id+'/edit');
+    return Env.bm_app_url(this.get('locale')+'/blocks/'+this.id+'/edit');
   },
 
   add_to_blocks_collection: function(){

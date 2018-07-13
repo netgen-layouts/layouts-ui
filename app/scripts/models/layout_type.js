@@ -1,10 +1,11 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var BmModel = require('./model');
 var Zones = require('../collections/zones');
 var _ = require('underscore');
 
-module.exports = Core.Model.extend({
+module.exports = BmModel.extend({
   idAttribute: 'identifier',
   path: 'config/layout_types',
 

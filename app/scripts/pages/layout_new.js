@@ -1,5 +1,6 @@
 'use strict';
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var $ = Core.$;
 var Page = require('../page');
 var Layout = require('../models/layout');
@@ -24,7 +25,7 @@ module.exports = Page.extend({
     var layout = new Layout();
 
     var layout_view = new NewLayoutView({
-      url: Core.env.bm_app_url('layouts/form/create'),
+      url: Env.bm_app_url('layouts/form/create'),
       model: layout,
       modal_options: {
         keyboard: false

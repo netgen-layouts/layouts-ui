@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('./environments/default');
 var $ = Core.$;
 var BlockTypes = require('./collections/block_types');
 var ViewBlocksLoad = require('./views/blocks/load');
@@ -131,7 +132,7 @@ _.extend(Core, {
 
   load_additional_vars: function(){
     var bm_base_path = $('meta[name="ngbm-base-path"]').attr('content');
-    bm_base_path && (Core.env.bm_base_path = bm_base_path);
+    bm_base_path && (Env.bm_base_path = bm_base_path);
   },
 
 

@@ -1,9 +1,9 @@
 'use strict';
 
-var Core = require('@netgen/layouts-core-ui');
+var BmModel = require('./model');
 var _ = require('underscore');
 
-module.exports = Core.Model.extend({
+module.exports = BmModel.extend({
   defaults: {
     id: 1
   },
