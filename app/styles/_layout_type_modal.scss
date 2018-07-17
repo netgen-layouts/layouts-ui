@@ -1,0 +1,88 @@
+#{$namespace} {
+  .modal-content {
+    form {
+      label + ul {
+        margin: -.5em 0 .85em;
+        padding: 0;
+        list-style: none;
+        color: #d00;
+        font-size: .92em;
+      }
+    }
+  }
+  .layout-type {
+    $selected_color: #4b91e2;
+    display: flex;
+    margin: 0 -1%;
+    flex-wrap: wrap;
+    max-height: 20rem;
+    overflow-y: auto;
+    .layout-type-item {
+      margin: 0 1% 1em;
+      flex: 0 0 14.666666667%;
+      width: 14.666666667%;
+      input[type='radio'] {
+        position: absolute;
+        left: -9999em;
+        visibility: hidden;
+        + label {
+          font-size: .875em;
+          font-weight: normal;
+          text-align: center;
+          cursor: pointer;
+          position: relative;
+          padding: 0;
+          margin: 0;
+          display: block;
+          .icon {
+            content: '';
+            display: block;
+            height: 0;
+            padding: 0 0 138%;
+            border: 2px solid hsl(0, 0, 60);
+            background-size: 85%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            border-radius: $borderRadius;
+            position: relative;
+          }
+          &::before {
+            display: none;
+          }
+          &:hover {
+            $hover_color: lighten($btnprimary, 10%);
+            color: $hover_color;
+            .icon {
+              border-color: $hover_color;
+            }
+          }
+        }
+        &:checked {
+          + label {
+            color: $btnprimary;
+            .icon {
+              border-color: $btnprimary;
+              &::after {
+                @extend %material-icons;
+                content: 'check';
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: #fff;
+                text-align: center;
+                width: 2.375rem;
+                height: 2.375rem;
+                line-height: 2rem;
+                border-radius: 50%;
+                border: .1875rem solid #fff;
+                background: $btnprimary;
+                animation: checkedFadeIn .15s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

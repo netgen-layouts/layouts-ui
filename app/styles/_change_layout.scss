@@ -13,19 +13,19 @@
     position: relative;
   }
   .handle {
-    position:absolute;
-    left:0;
-    top:0;
-    bottom:0;
-    width:1.3571428571em;
-    cursor:grab;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:.875em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1.3571428571em;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .875em;
     color: hsl(0, 0, 50);
     i {
-      transform:rotate(90deg);
+      transform: rotate(90deg);
     }
   }
   .name {
@@ -40,7 +40,7 @@
     }
   }
   &.ui-sortable-helper {
-    max-height: 100px !important;
+    max-height: 6.25rem !important;
   }
 }
 
@@ -125,7 +125,6 @@
     margin: 0;
   }
   &.forbidden {
-    // outline-color: #ff0;
     .no-placeholder {
       display: none;
     }
@@ -195,8 +194,8 @@
     }
   }
   &.ui-sortable-helper {
-    outline:1px dashed hsl(0, 0, 75);
-    max-height: 200px;
+    outline: 1px dashed hsl(0, 0, 75);
+    max-height: 12.5rem;
     &.linked_zone {
       @include striped-bg(lighten($toolbarbg1, 7%), $toolbarbg1);
     }

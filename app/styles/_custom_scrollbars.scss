@@ -1,30 +1,6 @@
-/*
-  Uncomment to preview other styles
-*/
-
-
-//scroll 1
-// ::-webkit-scrollbar { width: 5px; }
-// ::-webkit-scrollbar-track { background: #ddd; }
-// ::-webkit-scrollbar-thumb { background: #666; }
-
-//scroll 2
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-thumb { background: #999; }
-
-
-//scroll 3
-// ::-webkit-scrollbar { width: 5px; }
-// ::-webkit-scrollbar-thumb { background: #ddd; }
-// ::-webkit-scrollbar-track { background: #666; }
-
-//scroll 4
-// ::-webkit-scrollbar { width: 10px; }
-// ::-webkit-scrollbar-thumb { background: #666; border-radius: 20px; }
-// ::-webkit-scrollbar-track { background: #ddd; border-radius: 20px; }
-
-//scroll 5
-// ::-webkit-scrollbar { width: 15px; }
-// ::-webkit-scrollbar-thumb { background: #666; }
-// ::-webkit-scrollbar-track { background: #ddd; }
-// ::-webkit-scrollbar-button { background: #666; height: 15px; border-radius: 50%; }
+::-webkit-scrollbar {
+  width: .3125rem;
+}
+::-webkit-scrollbar-thumb {
+  background: #999;
+}

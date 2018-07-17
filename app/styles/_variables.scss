@@ -1,33 +1,35 @@
+$namespace: '.ngc';
+
 // colors
-$toolbarbg1: hsl(0, 0, 25);
-$toolbarbg2: hsl(0, 0, 22);
-$toolbarColor: hsl(285, 0, 61);
-$toolbarBorderColor: hsl(0, 0, 31);
-$mainColor: hsl(50, 90, 50);
-$blockbg: hsl(0, 0, 100);
-$btnprimary: hsl(194, 100, 39);
-$sidebarinput: hsl(0, 0, 40);
-$highlightColor: hsl(344, 90, 55);
-$darkBg: hsl(0, 0, 12);
+$toolbarbg1: hsl(0, 0, 25) !default;
+$toolbarbg2: hsl(0, 0, 22) !default;
+$toolbarColor: hsl(285, 0, 61) !default;
+$toolbarBorderColor: hsl(0, 0, 31) !default;
+$mainColor: hsl(50, 90, 50) !default;
+$blockbg: hsl(0, 0, 100) !default;
+$btnprimary: hsl(194, 100, 39) !default;
+$sidebarinput: hsl(0, 0, 40) !default;
+$highlightColor: hsl(344, 90, 55) !default;
+$darkBg: hsl(0, 0, 12) !default;
 @mixin striped-bg($bg1, $bg2) {
   background: repeating-linear-gradient(45deg, $bg1, $bg1 3px, $bg2 3px, $bg2 10px);
 }
 
-$contentbg: hsl(0, 0, 31);
+$contentbg: hsl(0, 0, 31) !default;
 
-$footerbg: hsl(0, 0, 90);
+$footerbg: hsl(0, 0, 90) !default;
 
 // dimensions
-$leftWidth: 50px;
-$rightWidth: 300px;
-$rightWidthLg: 400px;
-$topHeight: 50px;
-$bottomHeight: 30px;
-$btnHeight: 36px;
-$leftPanelWidth: 280px;
-$borderRadius: 2px;
-$gutter: 15px;
-$blockHeaderHeight: 30px;
+$leftWidth: 3.125rem !default;
+$rightWidth: 18.75rem !default;
+$rightWidthLg: 25rem !default;
+$topHeight: 3.125rem !default;
+$bottomHeight: 1.875rem !default;
+$btnHeight: 2.25rem !default;
+$leftPanelWidth: 17.5rem !default;
+$borderRadius: .125rem !default;
+$gutter: .9375rem;
+$blockHeaderHeight: 1.875rem !default;
 
 %icomoon {
   font-family: 'netgen_layouts' !important;
@@ -40,44 +42,46 @@ $blockHeaderHeight: 30px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 %fontawesome {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal .875rem/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 %material-icons {
   @extend .material-icons;
 }
 
 .bm-select {
-  border-radius:$borderRadius;
-  border:none;
-  margin:0 0 1em;
-  transition:background-color 0.3s ease-out 0.1s;
-  background:$sidebarinput url('../images/caret-down.svg') no-repeat;
-  background-position:right 0.5714285714em center;
-  background-size:0.9285714286em auto;
-  height:$btnHeight;
-  font-size:0.75em;
-  padding:0 2.25em 0 0.75em;
-  color:#fff;
-  appearance:none;
-  width:100%;
-  cursor:pointer;
+  border-radius: $borderRadius;
+  border: 0;
+  margin: 0 0 1em;
+  transition: background-color .3s ease-out .1s;
+  background: $sidebarinput url('../images/caret-down.svg') no-repeat;
+  background-position: right .5714285714em center;
+  background-size: .9285714286em auto;
+  height: $btnHeight;
+  font-size: .75em;
+  padding: 0 2.25em 0 .75em;
+  color: #fff;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
   &[multiple] {
-    height:auto;
-    padding:0.25em 0;
-    background-image:none;
+    height: auto;
+    padding: .25em 0;
+    background-image: none;
     option {
-      padding:0.125em 0.125em;
+      padding: .125em;
     }
     optgroup[label] {
-      padding:0.125em 0.5em;
+      padding: .125em .5em;
       option {
-        margin:0 -0.5em;
+        margin: 0 -.5em;
       }
     }
   }
@@ -87,8 +91,8 @@ $blockHeaderHeight: 30px;
 %clearfix {
   &::after,
   &::before {
-    content:"";
-    display:table;
-    clear:both;
+    content: '';
+    display: table;
+    clear: both;
   }
 }

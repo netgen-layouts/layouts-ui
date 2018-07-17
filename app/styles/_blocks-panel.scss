@@ -1,113 +1,113 @@
 .left-toolbar-panels {
   .left-panel {
-    position:fixed;
-    left:$leftWidth;
-    top:$topHeight;
-    bottom:0;
-    border-top:1px solid $toolbarBorderColor;
-    width:$leftPanelWidth;
-    background:$toolbarbg2;
-    display:none;
+    position: fixed;
+    left: $leftWidth;
+    top: $topHeight;
+    bottom: 0;
+    border-top: 1px solid $toolbarBorderColor;
+    width: $leftPanelWidth;
+    background: $toolbarbg2;
+    display: none;
     .panel-content {
-      position:absolute;
-      overflow-y:auto;
-      top:0;
-      bottom:0;
-      left:0;
-      right:0;
-      padding:$gutter;
+      position: absolute;
+      overflow-y: auto;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: $gutter;
     }
     .close-panel {
-      position:absolute;
-      right:0.25em;
-      top:0.25em;
-      width:1.5em;
-      height:1.5em;
-      cursor:pointer;
-      text-align:right;
-      color:$toolbarColor;
-      z-index:2;
+      position: absolute;
+      right: .25em;
+      top: .25em;
+      width: 1.5em;
+      height: 1.5em;
+      cursor: pointer;
+      text-align: right;
+      color: $toolbarColor;
+      z-index: 2;
       i {
-        font-size:18px;
+        font-size: 1.125rem;
       }
       &:hover {
-        color:#fff;
+        color: #fff;
       }
     }
     .header {
-      position:relative;
+      position: relative;
       h2 {
-        font-size:0.75em;
-        font-weight:500;
-        line-height:1.25;
-        text-transform:uppercase;
-        margin:0 0 0.5em;
+        font-size: .75em;
+        font-weight: 500;
+        line-height: 1.25;
+        text-transform: uppercase;
+        margin: 0 0 .5em;
       }
     }
     .block-items {
-      margin:0 0 1.5em;
-      display:flex;
-      flex-wrap:wrap;
+      margin: 0 0 1.5em;
+      display: flex;
+      flex-wrap: wrap;
       &::after {
         @extend %clearfix;
       }
     }
     .add-block-btn {
-      border:none;
-      border-bottom:1px solid $toolbarbg2;
-      border-right:1px solid $toolbarbg2;
-      width:33.333333333333%;
+      border: 0;
+      border-bottom: 1px solid $toolbarbg2;
+      border-right: 1px solid $toolbarbg2;
+      width: 33.333333333333%;
       &:nth-child(3n) {
-        border-right:none;
+        border-right: 0;
       }
     }
   }
 }
 
 .add-block-btn {
-  cursor:grab;
-  background:hsl(0, 0, 29);
-  color:$toolbarColor;
-  text-align:center;
-  width:($leftPanelWidth - 11) / 3;
-  border:1px solid $toolbarbg2;
-  padding:0.25em 0.25em 0.625em;
-  transition:background 0.15s ease, color 0.15s ease;
+  cursor: grab;
+  background: hsl(0, 0, 29);
+  color: $toolbarColor;
+  text-align: center;
+  width: ($leftPanelWidth - 11) / 3;
+  border: 1px solid $toolbarbg2;
+  padding: .25em .25em .625em;
+  transition: background .15s ease, color .15s ease;
   &:hover {
-    background:hsl(0, 0, 36);
-    color:#fff;
+    background: hsl(0, 0, 36);
+    color: #fff;
   }
   .icon {
-    font-size:2em;
-    height:1.5em;
-    line-height:1.25;
-    margin-bottom:0.125em;
-    padding:0.125em;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    font-size: 2em;
+    height: 1.5em;
+    line-height: 1.25;
+    margin-bottom: .125em;
+    padding: .125em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     img {
-      max-width:100%;
-      max-height:100%;
-      display:block;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
     }
   }
   .font-icon {
-    display:block;
+    display: block;
     @extend %icomoon;
   }
 
-  $blockTypes: ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('markdown', '\e922'), ('button', '\e923'), ('column', '\e924'), ('two_columns', '\e901'), ('three_columns', '\e902'), ('four_columns', '\e903'), ('six_columns', '\e90c');
+  $blockTypes:  ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('markdown', '\e922'), ('button', '\e923'), ('column', '\e924'), ('two_columns', '\e901'), ('three_columns', '\e902'), ('four_columns', '\e903'), ('six_columns', '\e90c');
 
   @each $block in $blockTypes {
     &.icn-#{nth($block, 1)} .font-icon::before {
-      content:"#{nth($block, 2)}";
+      content: "#{nth($block, 2)}";
     }
   }
 
   .title {
-    font-size:0.625em;
-    display:block;
-    line-height:1.2;
+    font-size: .625em;
+    display: block;
+    line-height: 1.2;
   }
 }

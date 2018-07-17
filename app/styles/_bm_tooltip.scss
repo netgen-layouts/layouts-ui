@@ -1,0 +1,98 @@
+.bm-tooltip {
+  cursor: pointer;
+}
+.bm-tooltip-title {
+  $tooltipBg: hsla(0, 0, 12, .9);
+  position: fixed;
+  display: block;
+  font-size: .6875rem;
+  color: #fff;
+  z-index: 1001;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 12.5rem;
+  background: $tooltipBg;
+  border-radius: $borderRadius;
+  padding: .5em 1em;
+  &::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    display: block;
+  }
+  &[data-x='left'] {
+    text-align: right;
+    &::before {
+      border-left: .375rem solid $tooltipBg;
+      border-top: .25rem solid transparent;
+      border-bottom: .25rem solid transparent;
+      border-right: 0;
+      left: 100%;
+      top: 50%;
+      margin-top: -.1875rem;
+    }
+    &[data-y='top'] {
+      &::before {
+        bottom: .625rem;
+        top: auto;
+        margin-top: 0;
+      }
+    }
+    &[data-y='bottom'] {
+      &::before {
+        top: .625rem;
+        margin-top: 0;
+      }
+    }
+  }
+  &[data-x='right'] {
+    &::before {
+      border-right: .375rem solid $tooltipBg;
+      border-top: .25rem solid transparent;
+      border-bottom: .25rem solid transparent;
+      border-left: 0;
+      right: 100%;
+      top: 50%;
+      margin-top: -.1875rem;
+    }
+    &[data-y='top'] {
+      &::before {
+        bottom: .625rem;
+        top: auto;
+        margin-top: 0;
+      }
+    }
+    &[data-y='bottom'] {
+      &::before {
+        top: .625rem;
+        margin-top: 0;
+      }
+    }
+  }
+  &[data-x='center'] {
+    text-align: center;
+    &::before {
+      margin-left: -.1875rem;
+      left: 50%;
+    }
+    &[data-y='bottom'] {
+      &::before {
+        border-bottom: .375rem solid $tooltipBg;
+        border-left: .25rem solid transparent;
+        border-right: .25rem solid transparent;
+        border-top: 0;
+        bottom: 100%;
+      }
+    }
+    &[data-y='top'] {
+      &::before {
+        border-top: .375rem solid $tooltipBg;
+        border-left: .25rem solid transparent;
+        border-right: .25rem solid transparent;
+        border-bottom: 0;
+        top: 100%;
+      }
+    }
+  }
+}

@@ -1,187 +1,180 @@
 /* header */
 .app-header {
-  position:fixed;
-  top:0;
-  left:$leftWidth;
-  right:0;
-  height:$topHeight;
-  background:$toolbarbg2;
-  color:#fff;
-  z-index:10;
+  position: fixed;
+  top: 0;
+  left: $leftWidth;
+  right: 0;
+  height: $topHeight;
+  background: $toolbarbg2;
+  color: #fff;
+  z-index: 10;
   .bm-header {
-    display:flex;
+    display: flex;
   }
 
 
-  .dropdown{
-    display:inline-block;
-    button{background:none; border:none; vertical-align:middle; padding:3px;}
-    &.open button{}
-    .dropdown-menu{margin:0; border-radius:0; right:-1px; margin-top:4px; border-top-color:#fff;}
+  .dropdown {
+    display: inline-block;
+    button {
+      background: transparent;
+      border: 0;
+      vertical-align: middle;
+      padding: 3px;
+    }
+    .dropdown-menu {
+      margin: 0;
+      border-radius: 0;
+      right: -1px;
+      margin-top: .25rem;
+      border-top-color: #fff;
+    }
   }
 
-  .main_language{margin-left:40px;}
+  .main_language {
+    margin-left: 2.5rem;
+  }
   .layout-name {
-    flex:1;
-    padding:0 $gutter;
-    height:$topHeight;
-    display:flex;
-    align-items:center;
-    .chooser{display:inline-block;}
-    .label{line-height:1.5; text-transform:uppercase; margin:0 5px 0 0; padding:0.25em 0.6em; border-radius:$borderRadius;}
-    .shared-label{
+    flex: 1;
+    padding: 0 $gutter;
+    height: $topHeight;
+    display: flex;
+    align-items: center;
+    .chooser {
       display: inline-block;
-      line-height: 34px;
-      font-weight: 700;
     }
     .show-form {
-      display:inline-block;
-      font-size:1em;
-      margin:0 0.5em;
+      display: inline-block;
+      font-size: 1em;
+      margin: 0 .5em;
       i {
-        color:$toolbarColor;
-        margin-left:4px;
-        font-size:1em;
-        vertical-align:middle;
+        color: $toolbarColor;
+        margin-left: .25em;
+        font-size: 1em;
+        vertical-align: middle;
       }
     }
     .js-show-form {
-      border-bottom:1px dashed hsl(0, 0, 34);
-      cursor:pointer;
-    }
-    h1 {
-      margin:0;
-      font-size:1em;
-      cursor:pointer;
-      &::after {
-        @extend %material-icons;
-        content:"edit";
-        display:inline-block;
-        margin-left:1em;
-        color:$mainColor;
-        font-size:0.75em;
-        pointer-events:none;
-      }
-      &:hover {
-        &::after {
-          color:darken($mainColor, 5%);
-        }
-      }
-      &:focus {
-        &::after {
-          visibility: hidden;
-        }
-      }
+      border-bottom: 1px dashed hsl(0, 0, 34);
+      cursor: pointer;
     }
     i {
-      color:hsl(0, 0, 72);
-      margin:0 4px 0 0;
+      color: hsl(0, 0, 72);
+      margin: 0 .1667em 0 0;
     }
   }
   .actions {
-    padding:0.4375em $gutter;
+    padding: .4375em $gutter;
   }
   :focus {
-    outline:none;
+    outline: none;
   }
 }
 
 /* left toolbar */
 .left-toolbar {
-  position:fixed;
-  top:0;
-  left:0;
-  bottom:0;
-  width:$leftWidth;
-  background:$toolbarbg1;
-  color:$toolbarColor;
-  z-index:30;
-  padding-top:$leftWidth+1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $leftWidth;
+  background: $toolbarbg1;
+  color: $toolbarColor;
+  z-index: 30;
+  padding-top: $topHeight;
   .disabler {
-    background:rgba(64, 64, 64, 0.8);
+    background: rgba(64, 64, 64, .8);
   }
   .disable {
-    position:relative;
+    position: relative;
     &:hover {
-      color:inherit !important;
+      color: inherit !important;
     }
     &::after {
-      content:"";
-      position:absolute;
-      left:0;
-      top:0;
-      width:100%;
-      height:100%;
-      z-index:10;
-      background:rgba($toolbarbg1, 0.85);
-      cursor:not-allowed;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      background: rgba($toolbarbg1, .85);
+      cursor: not-allowed;
     }
   }
-  .top-menu > div {position: relative;}
-  .top-menu .disabler {display:none;}
-  .top-menu .disable .disabler {display:block;}
+  .top-menu {
+    margin-top: 1px;
+    > div {
+      position: relative;
+    }
+    .disabler {
+      display: none;
+    }
+    .disable .disabler {
+      display: block;
+    }
+  }
   .app-logo-box {
-    position:absolute;
-    left:0;
-    top:0;
-    width:$leftWidth;
-    height:$topHeight;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:$darkBg;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $leftWidth;
+    height: $topHeight;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $darkBg;
   }
   .app-logo {
-    display:block;
-    background:transparent url('../images/layouts-logo.svg') no-repeat 50% 50%;
-    width:20px;
-    height:24px;
+    display: block;
+    background: transparent url('../images/layouts-logo.svg') no-repeat 50% 50%;
+    width: 1.25rem;
+    height: 1.5rem;
   }
-  .bottom-menu{
+  .bottom-menu {
     position: absolute;
     bottom: 0;
     left: 0;
     .button {
       &:first-child {
-        border-top-width:1px;
+        border-top-width: 1px;
       }
       &:last-child {
-        border-bottom:none;
+        border-bottom: 0;
       }
       &.active {
-        background:$toolbarBorderColor;
+        background: $toolbarBorderColor;
       }
     }
   }
   .button {
-    display:block;
-    border:none;
-    background:transparent;
-    width:$leftWidth;
-    height:$leftWidth;
-    line-height:$leftWidth;
-    text-align:center;
-    border-color:$toolbarBorderColor;
-    border-width:0 0 1px 0;
-    border-style:solid;
-    font-size:1.5em;
-    transition:color 150ms, background-color 150ms;
+    display: block;
+    border: 0;
+    background: transparent;
+    width: $leftWidth;
+    height: $leftWidth;
+    line-height: $leftWidth;
+    text-align: center;
+    border-color: $toolbarBorderColor;
+    border-width: 0 0 1px;
+    border-style: solid;
+    font-size: 1.5em;
+    transition: color 150ms, background-color 150ms;
     &:focus {
-      outline:none;
+      outline: none;
     }
     &:hover {
-      background:lighten($toolbarbg1, 3%);
-      color:#fff;
+      background: lighten($toolbarbg1, 3%);
+      color: #fff;
     }
     &.active {
-      background:$toolbarbg2;
-      color:#fff;
+      background: $toolbarbg2;
+      color: #fff;
     }
     &::before {
       @extend %icomoon;
     }
-    &[data-target="blocks"]::before {
-      content:"\e900";
+    &[data-target='blocks']::before {
+      content: '\e900';
     }
 
   }
@@ -189,29 +182,29 @@
 
 /* content */
 .main-content {
-  position:fixed;
-  left:$leftWidth;
-  right:$rightWidth;
-  top:$topHeight;
+  position: fixed;
+  left: $leftWidth;
+  right: $rightWidth;
+  top: $topHeight;
   // bottom:$bottomHeight;
-  bottom:0;
-  overflow-x:hidden;
-  overflow-y:auto;
-  padding:$gutter;
-  background:$contentbg;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: $gutter;
+  background: $contentbg;
   .row {
-    margin-left:-10px;
-    margin-right:-10px;
-    > [class^="col-"] {
-      padding-left:10px;
-      padding-right:10px;
+    margin-left: -.625rem;
+    margin-right: -.625rem;
+    > [class^='col-'] {
+      padding-left: .625rem;
+      padding-right: .625rem;
     }
   }
   .zones {
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
   }
-  @media screen and (min-width: 1750px){
+  @media screen and (min-width: 1750px) {
     right: $rightWidthLg;
   }
 }
@@ -224,7 +217,7 @@
   // right:$rightWidth;
   // height:$bottomHeight;
   // background:$footerbg;
-  display:none;
+  display: none;
   // @media screen and (min-width: 1750px){
   //   right: $rightWidthLg;
   // }
@@ -232,21 +225,30 @@
 
 
 
-#{$namespace}.ngbmdev{
-  .app-logo{
+#{$namespace}.ngbmdev {
+  .app-logo {
     filter: invert(100%);
   }
   .app-header {
-
-    .dropdown{
-      display:inline-block;
+    .dropdown {
+      display: inline-block;
       vertical-align: middle;
-      button{display:none;}
+      button {
+        display: none;
+      }
       .dropdown-menu {
-        background:none; border:none; margin:0; padding:0;
-        display: inline-block; position:static;
-        li{display:inline; margin:0; padding:0;}
-        a{
+        background: none;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        position: static;
+        li {
+          display: inline;
+          margin: 0;
+          padding: 0;
+        }
+        a {
           @extend .btn;
           @extend .btn-default;
         }
@@ -274,13 +276,13 @@
     transform: translate(-50%, -50%);
     text-align: center;
     width: 94%;
-    max-width: 320px;
+    max-width: 20rem;
     line-height: 1.42857143;
-    font-size: 14px;
+    font-size: .874rem;
     .icon {
       position: relative;
       display: inline-block;
-      font-size: 42px;
+      font-size: 2.625rem;
       &::before,
       &::after {
         @extend %material-icons;

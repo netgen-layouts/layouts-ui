@@ -1,0 +1,277 @@
+/* zones */
+[data-zone] {
+  .zone-body {
+    position: relative;
+    outline: 1px dashed hsl(0, 0, 75);
+    min-height: 6em;
+    padding: $gutter * .6666666667;
+    margin: 0 0 $gutter * 1.25;
+
+    &:empty::before {
+      content: 'Drop blocks here!';
+      color: #999;
+      font-size: .875em;
+      padding: 1em;
+      text-align: center;
+      display: block;
+    }
+    .zone_linker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 999;
+      background-color: rgba(0, 0, 0, .5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &.zone-disabled,
+  &.shared-zone {
+    .zone-body {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: rgba($contentbg, .85);
+      }
+    }
+    .block-header {
+      padding: .375em .625em;
+      .handle,
+      .dropdown {
+        display: none;
+      }
+    }
+  }
+  &.shared-zone {
+    .zone-body {
+      &::after {
+        background: transparent;
+      }
+    }
+  }
+  &.linked_zone {
+    .zone-body {
+      outline-color: $highlightColor;
+      &:empty::before {
+        content: 'Linked zone. Blocks can not be dropped directly here.';
+      }
+    }
+  }
+  .sorting & {
+    transition: all .3s ease-in-out;
+  }
+  .linked_info {
+    position: relative;
+    z-index: 6;
+  }
+  .linked-zone-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 102;
+    opacity: .2;
+    @include striped-bg($contentbg, transparent);
+  }
+
+  .zone-header {
+    margin: 0 0 .375em;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    .zone-name {
+      flex: 1;
+      padding: 0 .5em;
+      font-size: .625em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .zone-controls {
+      display: flex;
+    }
+    .zone-btn {
+      border-radius: $borderRadius;
+      border: 0;
+      background: transparent;
+      text-transform: uppercase;
+      height: 2.6em;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      font-size: .625em;
+      padding: 0 1.5em;
+      display: flex;
+      align-items: center;
+      transition: all .2s;
+      &.link-zone-btn {
+        border: 1px solid #fff;
+        padding: 0 2em;
+        > .link-zone-icon + span {
+          margin-left: .8em;
+        }
+        > span + .link-zone-icon {
+          margin-left: .8em;
+        }
+        &:hover {
+          background: hsla(0, 0, 100, .1);
+        }
+      }
+      &.linked-zone-btn {
+        background: $highlightColor;
+        .link-zone-icon {
+          margin: 0;
+        }
+      }
+    }
+    .dropdown {
+      .dropdown-toggle {
+        height: 1.625em;
+        margin-left: .375em;
+      }
+    }
+    .link-zone-icon {
+      display: inline-block;
+      position: relative;
+      color: inherit;
+      height: .2em;
+      background: currentColor;
+      width: 1.8em;
+      &::before,
+      &::after {
+        content: '';
+        position: relative;
+        display: block;
+        top: -.2em;
+      }
+      &::before {
+        float: left;
+        width: .6em;
+        height: .6em;
+        border-radius: 50%;
+        background: currentColor;
+      }
+      &::after {
+        float: right;
+        right: -.2em;
+        border-left: .6em solid currentColor;
+        border-top: .3em solid transparent;
+        border-bottom: .3em solid transparent;
+        border-right: 0;
+      }
+    }
+  }
+}
+
+#zone_linking_header {
+  margin-bottom: 2.5 * $gutter;
+  .steps-wrapper {
+    $size: 1.875em;
+    $color: hsl(0, 0, 50);
+    margin: $gutter 0;
+    font-size: 1rem;
+    .steps {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: $gutter;
+    }
+    .step {
+      float: left;
+      width: $size;
+      height: $size;
+      line-height: $size;
+      background: $color;
+      color: $contentbg;
+      border-radius: 100%;
+      text-align: center;
+      margin-right: $size / 1.25;
+      position: relative;
+      &:last-child {
+        margin-right: 0;
+      }
+      + .step {
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 100%;
+        }
+        &::before {
+          height: .125em;
+          background: $color;
+          width: ($size / 1.25) - .125;
+          margin-right: .125em;
+        }
+        &::after {
+          border-top: .25em solid transparent;
+          border-bottom: .25em solid transparent;
+          border-left: .625em solid $color;
+        }
+      }
+      &.active {
+        background: #fff;
+        color: #222;
+      }
+    }
+    .step-text {
+      display: inline-block;
+      vertical-align: middle;
+      color: #fff;
+    }
+  }
+
+  .title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+    .material-icons {
+      color: #979797;
+      vertical-align: bottom;
+    }
+  }
+
+  .layout-chooser,
+  .chooser {
+    color: #fff;
+    select {
+      width: auto;
+      min-width: 8.25rem;
+    }
+    i {
+      color: hsl(0, 0, 72);
+      vertical-align: middle;
+    }
+  }
+  .dropdown {
+    margin-left: -.25em;
+    vertical-align: middle;
+    .dropdown-toggle {
+      height: 2.25rem;
+    }
+    .dropdown-menu,
+    .dropdown-toggle {
+      background-color: hsl(0, 0, 15);
+    }
+    &.open {
+      .dropdown-menu,
+      .dropdown-toggle {
+        background-color: hsl(0, 0, 10);
+      }
+    }
+    a:hover {
+      color: #fff;
+    }
+  }
+}

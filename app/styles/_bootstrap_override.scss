@@ -1,44 +1,49 @@
-#{$namespace}{
+#{$namespace} {
   /* bootstrap override */
   a {
-    color:$btnprimary;
+    color: $btnprimary;
   }
   .btn {
-    border-radius:$borderRadius;
-    padding:7px 16px;
-    .material-icons{
-      vertical-align:middle;
-      margin-bottom: -2px;
-      margin-top: -5px;
+    border-radius: $borderRadius;
+    padding: .5em 1.125em;
+    .material-icons {
+      font-size: 1.7142857143em;
+      vertical-align: middle;
+      margin-bottom: -.08333333333em;
+      margin-top: -.2083333333em;
     }
-    &.btn-icon-left .material-icons{margin-left:-10px;}
+    &.btn-icon-left {
+      .material-icons {
+        margin-left: -.715rem;
+      }
+    }
   }
   .btn-primary {
-    background:$btnprimary;
-    border-color:$btnprimary;
+    background: $btnprimary;
+    border-color: $btnprimary;
     &:hover,
     &:focus,
     &.focus {
-      background:darken($btnprimary, 5%);
-      border-color:darken($btnprimary, 5%);
+      background: darken($btnprimary, 5%);
+      border-color: darken($btnprimary, 5%);
     }
   }
   .btn-link {
-    color:$btnprimary;
+    color: $btnprimary;
     &:hover,
     &:focus,
     &.focus {
-      color:darken($btnprimary, 5%);
+      color: darken($btnprimary, 5%);
     }
   }
   .btn-danger {
-    background:$highlightColor;
-    border-color:$highlightColor;
+    background: $highlightColor;
+    border-color: $highlightColor;
     &:hover,
     &:focus,
     &.focus {
-      background:darken($highlightColor, 5%);
-      border-color:darken($highlightColor, 5%);
+      background: darken($highlightColor, 5%);
+      border-color: darken($highlightColor, 5%);
     }
   }
   .btn-outline {
@@ -50,49 +55,49 @@
     &:focus,
     &.focus {
       color: #fff;
-      background: rgba(255, 255, 255, .1);
+      background: hsla(0, 0, 100, .1);
     }
   }
 
   .modal-content {
-    background:#fff;
-    border-radius:0;
-    border:none;
+    background: #fff;
+    border-radius: 0;
+    border: 0;
   }
   .modal-header {
-    background:#404040;
-    color:#fff;
-    border:none;
-    min-height:58px;
+    background: #404040;
+    color: #fff;
+    border: 0;
+    min-height: 3.625rem;
     .modal-title {
-      font-size:1.25em;
-      font-weight:400;
+      font-size: 1.25em;
+      font-weight: 400;
     }
     .close {
-      font-size:1.25em;
-      color:inherit;
-      text-shadow:none;
-      opacity:1;
-      margin:0;
+      font-size: 1.25em;
+      color: inherit;
+      text-shadow: none;
+      opacity: 1;
+      margin: 0;
     }
   }
   .modal-body {
-    padding:$gutter*1.3333333334 $gutter;
+    padding: $gutter * 1.3333333334 $gutter;
   }
   .modal-footer {
-    padding:0 0 $gutter;
-    margin:0 $gutter;
-    border:none;
+    padding: 0 0 $gutter;
+    margin: 0 $gutter;
+    border: 0;
   }
   @media screen and (min-width: 768px){
     .modal:not(.browser) {
       .modal-dialog {
-        display:flex;
-        margin:0 auto;
-        height:100%;
-        align-items:center;
+        display: flex;
+        margin: 0 auto;
+        height: 100%;
+        align-items: center;
         .modal-content {
-          flex:1;
+          flex: 1;
         }
       }
     }

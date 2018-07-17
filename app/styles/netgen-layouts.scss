@@ -1,67 +1,22 @@
-@import "fonts";
-@import "../../node_modules/@netgen/layouts-core-ui/app/styles/core.scss";
-@import "../../node_modules/@netgen/content-browser-ui/app/styles/ngcb";
-
-$namespace: '.ngc';
-
-*{
-  padding: 0;
-  margin: 0;
-}
-
-@import "../../node_modules/nprogress/nprogress";
-@import "variables";
-@import "main";
-@import "bootstrap_override";
-@import "nprogress_override";
-@import "typography";
-@import "layout";
-@import "blocks-panel";
-@import "sidebar";
-@import "content";
-@import "custom_scrollbars";
-@import "change_layout";
-@import "specific";
-@import "modal";
-
-
-
-/* check if deprecated */
-[data-type="Group"]{outline: 1px dotted red;
-  > .block_actions{ top:-41px; left:-18px; height:30px;
-    span{background-color:#900;}
-  }
-  // [data-block] .block_actions{
-  //   .action-destroy, .handle{display:none;}
-  // }
-  > .template_name{
-    top: auto;
-    bottom: 0;
-  }
-  [data-type="Container"]{
-    > .block_actions{
-      left: auto;
-      right: -8px;
-    }
-  }
-}
-
-.split{
-  box-sizing:border-box;
-  > div{
-    float:left; width:49%;
-    &.r{float:right; clear:right;}
-    &.l{clear:left;}
-  }
-}
-
-.s70-30{
-  > div.l{width:69.5%}
-  > div.r{width:29.5%}
-}
-
-.s30-70{
-  > div.l{width:29.5%}
-  > div.r{width:69.5%}
-}
-/* /check if deprecated */
+@import 'fonts';
+@import '../../node_modules/@netgen/layouts-core-ui/app/styles/core';
+@import '../../node_modules/@netgen/content-browser-ui/app/styles/ngcb';
+@import '../../node_modules/nprogress/nprogress';
+@import 'variables';
+@import 'main';
+@import 'bootstrap_override';
+@import 'nprogress_override';
+@import 'loader';
+@import 'typography';
+@import 'layout';
+@import 'blocks-panel';
+@import 'sidebar';
+@import 'collection_items';
+@import 'zones';
+@import 'blocks';
+@import 'content';
+@import 'custom_scrollbars';
+@import 'bm_tooltip';
+@import 'layout_type_modal';
+@import 'specific';
+@import 'modal';

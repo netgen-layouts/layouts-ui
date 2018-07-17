@@ -1,121 +1,19 @@
-#nprogress{
-  .bar{z-index:9999; height: 4px; background: $highlightColor;}
-  .spinner{left:50%; margin-left:-9px; display:none;}
-  .peg{box-shadow: 0 0 10px $highlightColor, 0 0 5px $highlightColor;}
-  .spinner-icon{border-top-color: $highlightColor; border-left-color: $highlightColor;}
-}
-
-.loading-ng-icon {
-  display:inline-block;
-  position:relative;
-  font-size:1em;
-  width:1.375em;
-  height:2.375em;
-  margin:0em 1.5em -0.3em;
-  transform:rotate(-48deg);
-  animation:loadRotate 1.5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
-  &::before,
-  &::after {
-    content:"";
-    display:block;
-    background:currentColor;
-    border-radius:50%;
-    position:absolute;
-    left:50%;
+#nprogress {
+  .bar {
+    z-index: 9999;
+    height: .25rem;
+    background: $highlightColor;
   }
-  &::before {
-    width:1em;
-    height:1em;
-    margin-left:-0.5em;
-    bottom:1.375em;
-    animation:loadBounceTopSquash 0.75s alternate infinite ease, loadBounceTopFlow 0.75s alternate infinite ease;
+  .spinner {
+    left: 50%;
+    margin-left: -.5625rem;
+    display: none;
   }
-  &::after {
-    width:1.375em;
-    height:1.375em;
-    margin-left:-0.6875em;
-    bottom:0;
-    animation:loadBounceBottomSquash 0.75s alternate infinite ease, loadBounceBottomFlow 0.75s alternate infinite ease;
+  .peg {
+    box-shadow: 0 0 .625rem $highlightColor, 0 0 .3125rem $highlightColor;
   }
-}
-@keyframes loadBounceTopSquash {
-  0% {
-    height:0.375em;
-    border-radius:3.75em 3.75em 1.25em 1.25em;
-    transform:scaleX(2);
-  }
-  15% {
-    height:1em;
-    border-radius:50%;
-    transform:scaleX(1);
-  }
-  100% {
-    height:1em;
-    border-radius:50%;
-    transform:scaleX(1);
-  }
-}
-@keyframes loadBounceBottomSquash {
-  0% {
-    height:1em;
-    border-radius:1.25em 1.25em 3.75em 3.75em;
-    transform:scaleX(1.5);
-  }
-  15% {
-    height:1.375em;
-    border-radius:50%;
-    transform:scaleX(1);
-  }
-  100% {
-    height:1.375em;
-    border-radius:50%;
-    transform:scaleX(1);
-  }
-}
-@keyframes loadBounceTopFlow {
-  0% {
-    bottom:1.125em;
-  }
-  50% {
-    bottom:2.25em;
-    animation-timing-function:cubic-bezier(0.55, 0.06, 0.68, 0.19);
-  }
-  90% {
-    bottom:1.75em;
-  }
-  100% {
-    bottom:1.75em;
-  }
-}
-@keyframes loadBounceBottomFlow {
-  0% {
-    bottom:0.1875em;
-  }
-  50% {
-    bottom:-0.9375em;
-    animation-timing-function:cubic-bezier(0.55, 0.06, 0.68, 0.19);
-  }
-  90% {
-    bottom:0em;
-  }
-  100% {
-    bottom:0em;
-  }
-}
-@keyframes loadRotate {
-  0% {
-    transform:rotate(-228deg);
-  }
-  49% {
-    transform:rotate(-48deg);
-  }
-  51% {
-    transform:rotate(-48deg);
-  }
-  92% {
-    transform:rotate(132deg);
-  }
-  100% {
-    transform:rotate(132deg);
+  .spinner-icon {
+    border-top-color: $highlightColor;
+    border-left-color: $highlightColor;
   }
 }

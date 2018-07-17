@@ -1,111 +1,112 @@
 #{$namespace} {
   .modal-content {
-    $inputHeight: 44px;
-    input[type="text"],
-    input[type="number"],
-    input[type="url"],
-    input[type="email"],
+    $inputHeight: 2.75rem;
+    input[type='text'],
+    input[type='number'],
+    input[type='url'],
+    input[type='email'],
     textarea {
-      border:1px solid hsl(0, 0, 70);
-      box-shadow:none;
-      border-radius:$borderRadius;
-      padding:0 0.75em;
+      border: 1px solid hsl(0, 0, 70);
+      box-shadow: none;
+      border-radius: $borderRadius;
+      padding: 0 .75em;
       width: 100%;
-      height:$inputHeight;
-      font-size:0.875em;
-      margin:0 0 0.5em;
-      background:#fff;
-      color:#333;
+      height: $inputHeight;
+      font-size: .875em;
+      margin: 0 0 .5em;
+      background: #fff;
+      color: #333;
       &::placeholder {
-        color:hsl(0, 0, 70);
+        color: hsl(0, 0, 70);
       }
     }
     .input-group {
-      input[type="text"],
-      input[type="number"],
-      input[type="url"],
-      input[type="email"],
+      input[type='text'],
+      input[type='number'],
+      input[type='url'],
+      input[type='email'],
       textarea {
         margin: 0;
       }
     }
     textarea {
-      height:auto;
-      min-height:120px;
-      padding-top:0.375em;
-      resize:vertical;
+      height: auto;
+      min-height: 7.5em;
+      padding-top: .375em;
+      resize: vertical;
     }
     label {
-      font-weight:400;
-      font-size:0.875em;
-      display:block;
-      margin:0 0 0.25em;
+      font-weight: 400;
+      font-size: .875em;
+      display: block;
+      margin: 0 0 .25em;
       .material-icons {
-        vertical-align:text-bottom;
-        font-size:18px;
+        vertical-align: text-bottom;
+        font-size: 1.2857142857em;
       }
     }
     select {
       @extend .bm-select;
-      border:1px solid hsl(0, 0, 70);
-      margin:0 0 0.5em;
-      background-image:url('../images/caret-down-b.svg');
-      background-color:#fff;
-      height:$inputHeight;
-      font-size:0.875em;
-      color:#333;
+      border: 1px solid hsl(0, 0, 70);
+      margin: 0 0 .5em;
+      background-image: url('../images/caret-down-b.svg');
+      background-color: #fff;
+      height: $inputHeight;
+      font-size: .875em;
+      color: #333;
       &[multiple] {
-        background-image:none;
+        background-image: none;
       }
     }
     > div {
       + div {
-        margin-top:1em;
+        margin-top: 1em;
       }
     }
-    input[type="submit"] {
-      display:none;
+    input[type='submit'] {
+      display: none;
     }
-    input[type="checkbox"], input[type="radio"] {
-      position:absolute;
-      left:-9999em;
+    input[type='checkbox'],
+    input[type='radio'] {
+      position: absolute;
+      left: -9999em;
       + label {
-        display:inline-block;
-        position:relative;
-        padding:0.3846153846em 0.3846153846em 0.3846153846em 2em;
-        margin:0 0 0.5em;
-        cursor:pointer;
+        display: inline-block;
+        position: relative;
+        padding: .3846153846em .3846153846em .3846153846em 2em;
+        margin: 0 0 .5em;
+        cursor: pointer;
         &::before {
           @extend %material-icons;
-          font-size:24px;
-          content:"check_box_outline_blank";
-          position:absolute;
-          left:0;
-          top:0.1em;
-          color:hsl(0, 0, 40);
+          font-size: 1.5rem;
+          content: 'check_box_outline_blank';
+          position: absolute;
+          left: 0;
+          top: .1em;
+          color: hsl(0, 0, 40);
         }
       }
       &:checked {
         + label {
           &::before {
-            content:"check_box";
-            color:$btnprimary;
+            content: 'check_box';
+            color: $btnprimary;
           }
         }
       }
       &:disabled {
         + label {
-          opacity:0.35;
+          opacity: .35;
         }
       }
     }
 
-    input[type="radio"]{
-      + label::before{
-        content: 'radio_button_off'
+    input[type='radio'] {
+      + label::before {
+        content: 'radio_button_off';
       }
-      &:checked + label::before{
-        content: 'radio_button_on'
+      &:checked + label::before {
+        content: 'radio_button_on';
       }
     }
     .visibility-inputs {
