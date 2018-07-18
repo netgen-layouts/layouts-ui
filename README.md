@@ -16,10 +16,10 @@ Development build
 To build development assets and start watching files for changes, just run
 Grunt without any arguments:
 
-    ```
-    $ npm install
-    $ grunt
-    ```
+```
+$ npm install
+$ grunt
+```
 
 This will place all generated assets into `bundle/Resources/public/dev` folder.
 Composer will be symlink this folder to `bundles/blockmanagerui/dev` inside
@@ -30,10 +30,10 @@ Production build
 
 To build the production assets, run Grunt with the following:
 
-    ```
-    $ npm install
-    $ grunt build
-    ```
+```
+$ npm install
+$ grunt build
+```
 
 This will place all generated assets into `bundle/Resources/public` folder.
 Composer will be symlink this folder to `bundles/blockmanagerui` inside
