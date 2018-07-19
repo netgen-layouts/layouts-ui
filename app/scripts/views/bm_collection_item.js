@@ -2,7 +2,6 @@
 
 var Core = require('@netgen/layouts-core-ui');
 var $ = Core.$;
-// var _ = require('underscore');
 
 module.exports = Core.View.extend({
   template: 'bm_collection_item',
