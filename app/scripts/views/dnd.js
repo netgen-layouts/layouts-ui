@@ -5,8 +5,6 @@ var Draggable = require('./draggable');
 var Receiver = require('./receiver');
 var $ = Core.$;
 
-//require('../jquery_ui_loader');
-
 /**
  * Copied from jquery.ui.sortable and slightly modified
  */
