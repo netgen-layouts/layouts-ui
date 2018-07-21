@@ -163,7 +163,6 @@ module.exports = function(grunt) {
               .replace(/_(\w+)\.hbs$/, '$1');
           },
           processName: function(filename) {
-            // funky name processing here
             return filename
               .replace(/^app\/templates\//, '')
               .replace(/\.hbs$/, '');
