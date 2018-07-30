@@ -10,6 +10,16 @@ Requirements
 * NPM
 * Grunt CLI (`npm install -g grunt-cli`)
 
+First time build configuration
+------------------------------
+
+Before building the project for the first time, you need to fill some configuration
+used by BrowserSync, namely domain and path under which the project will be available.
+
+Copy `grunt.json.dist` file to `grunt.json` and change `domain` and `start_path` to
+correct values. Usually, you will need to update only the domain, since the path is
+preconfigured with a correct value.
+
 Development build
 -----------------
 
