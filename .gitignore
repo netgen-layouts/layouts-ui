@@ -6,7 +6,6 @@ tests/coverage/
 /vendor/
 **/Resources/public/dev/
 .php_cs.cache
-app/scripts/templates.js
 composer.lock
 grunt.json
 package-lock.json
