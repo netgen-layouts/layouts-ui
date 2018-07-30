@@ -1,7 +1,7 @@
 {
   "domain": "http://example.com",
-  "test_domain": "http://example.com",
   "start_path": "bm/dev/app",
+  "test_domain": "http://example.com",
   "test_start_path": "bm/dev/app",
   "db": {
     "name": "testdb",
