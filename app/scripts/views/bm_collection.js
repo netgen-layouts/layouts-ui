@@ -71,7 +71,7 @@ module.exports = Core.View.extend({
       }
     }).on('apply', function(){
       var items = this.selected_collection.map(function(item){
-        return {type: 0, value: item.get('value'), value_type: value_type, position: self.model.get('offset') };
+        return {value: item.get('value'), value_type: value_type, position: self.model.get('offset') };
       });
 
       self.model.items.sync_create_items(items);
