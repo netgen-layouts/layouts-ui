@@ -375,7 +375,8 @@ module.exports = function(grunt) {
       'concurrent:dist',
       'postcss:dist',
       'copy:dist',
-      'uglify:dist'
+      'uglify:dist',
+      'npm_to_vendor'
     ]);
   });
 
