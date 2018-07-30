@@ -140,7 +140,6 @@ module.exports = function(grunt) {
 
     clean: {
       dev: '<%= config.dev %>',
-      vendor: '<%= config.dist %>/vendor',
       dist: '<%= config.dist %>'
     },
 
@@ -345,11 +344,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('npm_to_vendor', [
-    'clean:vendor',
-    'copy:vendor'
-  ]);
-
   grunt.registerTask('server', function() {
     grunt.task.run([
       'fast_build',
@@ -375,8 +369,7 @@ module.exports = function(grunt) {
       'concurrent:dist',
       'postcss:dist',
       'copy:dist',
-      'uglify:dist',
-      'npm_to_vendor'
+      'uglify:dist'
     ]);
   });
 
