@@ -51,15 +51,16 @@ module.exports = Block.extend({
     var self = this;
 
     this.$editor_el = this.$('.rich-text-editor');
-    this.editor = CKEDITOR.inline( this.$editor_el.get(0));
+    if (this.$editor_el.length > 0) {
+      this.editor = CKEDITOR.inline(this.$editor_el.get(0));
 
-
-    this.editor.on('change', function(){
-      var $textarea = self.get_sidebar_element();
-      var data = this.getData();
-      $textarea.html(data);
-      self.debounced_save($textarea);
-    });
+      this.editor.on('change', function(){
+        var $textarea = self.get_sidebar_element();
+        var data = this.getData();
+        $textarea.html(data);
+        self.debounced_save($textarea);
+      });
+    }
   },
 
 

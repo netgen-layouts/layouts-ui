@@ -25,7 +25,7 @@ module.exports = Core.View.extend({
       before: false,
     });
 
-    this.model.set('canAddItems', !!$('.js-browser-config-selector')[0].options.length);
+    this.model.set('canAddItems', $('.js-browser-config-selector').length && !!$('.js-browser-config-selector')[0].options.length);
 
     return this;
   },
