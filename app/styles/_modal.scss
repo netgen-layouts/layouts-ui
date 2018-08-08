@@ -137,5 +137,13 @@
     .info-message {
       background: #d6eff7;
     }
+    .errors {
+      list-style-type: none;
+      margin: 0 0 1.5em;
+      font-size: .75em;
+      color: $highlightColor;
+      font-weight: 700;
+      line-height: 1.25;
+    }
   }
 }
