@@ -95,7 +95,7 @@ module.exports = Core.View.extend({
     var self = this;
     $('[data-block].editing [data-inline-child], [data-block].editing .rich-text-editor, [data-block].editing .ace-editor, [data-block].editing .attr-hide').each(function() {
       var name = $(this).data('attr');
-      self.$('[name*="[' + name + ']"]').parent().hide();
+      self.$('[name*="[' + name + ']"]').parent().addClass('hidden');
     });
     this.$multiple_select_height();
 
