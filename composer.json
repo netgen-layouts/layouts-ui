@@ -1,6 +1,6 @@
 {
-    "name": "netgen/block-manager-ui",
-    "description": "Netgen Layouts layout editing interface",
+    "name": "netgen/layouts-ui",
+    "description": "Netgen Layouts user interface",
     "license": "proprietary",
     "authors": [
         {
@@ -16,11 +16,8 @@
         "netgen/content-browser-ui": "~0.12.0"
     },
     "require-dev": {
-        "netgen/core-ui": "~0.12.0"
+        "netgen/layouts-core-ui": "~0.12.0"
     },
-    "repositories": [
-        { "type": "composer", "url": "https://packagist.netgen.biz" }
-    ],
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\BlockManagerUIBundle\\": "bundle/"

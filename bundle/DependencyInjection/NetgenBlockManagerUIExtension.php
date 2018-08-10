@@ -21,7 +21,7 @@ final class NetgenBlockManagerUIExtension extends Extension implements PrependEx
     {
         $container->setParameter(
             'ngbm_app.asset.version',
-            PrettyVersions::getVersion('netgen/block-manager-ui')->getShortCommitHash()
+            PrettyVersions::getVersion('netgen/layouts-ui')->getShortCommitHash()
         );
 
         $prependConfigs = [
