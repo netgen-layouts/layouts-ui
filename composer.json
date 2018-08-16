@@ -1,7 +1,7 @@
 {
     "name": "netgen/layouts-ui",
     "description": "Netgen Layouts user interface",
-    "license": "proprietary",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Netgen",
