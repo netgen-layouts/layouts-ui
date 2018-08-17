@@ -337,7 +337,6 @@ module.exports = function(grunt) {
       dist: [
         'browserify:dist',
         'sass:dist',
-        'copy:vendor',
         'imagemin',
         'svgmin'
       ]
@@ -366,6 +365,7 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean:dist',
       'handlebars',
+      'copy:vendor',
       'concurrent:dist',
       'postcss:dist',
       'copy:dist',
