@@ -7,4 +7,8 @@ $namespace: '.ngc';
   @import "../../node_modules/eonasdan-bootstrap-datetimepicker/src/sass/bootstrap-datetimepicker";
   @import "../../node_modules/@netgen/layouts-ui-core/app/styles/datetime_picker";
 }
+
 @import "../../node_modules/@netgen/layouts-ui-core/app/styles/snackbar";
+@import '../../node_modules/@netgen/layouts-ui-core/app/styles/core';
+@import '../../node_modules/@netgen/content-browser-ui/app/styles/ngcb';
+@import '../../node_modules/nprogress/nprogress';
