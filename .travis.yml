@@ -1,0 +1,29 @@
+dist: trusty
+sudo: required
+
+language: node_js
+
+node_js:
+  - "node"
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - master
+    - /^\d.\d+-release$/
+
+before_script:
+  - npm install -g grunt-cli
+  - cp grunt.json.dist grunt.json
+
+script:
+  - grunt build
+
+notifications:
+  email: false
+
+git:
+  depth: 30
