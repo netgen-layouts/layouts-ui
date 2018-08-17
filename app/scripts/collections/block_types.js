@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var $ = Core.$;
 var BlockType = require('../models/block_type');
 var BlockTypeGroups = require('./block_type_groups');

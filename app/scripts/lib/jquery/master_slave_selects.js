@@ -1,5 +1,5 @@
 'use strict';
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var $ = Core.$;
 
 function master_slave_selects(master_select, opts){

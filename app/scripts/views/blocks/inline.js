@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var _ = require('underscore');
 var $ = Core.$;
 var striptags = require('striptags');

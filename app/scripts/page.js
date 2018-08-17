@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var $ = Core.$;
 var App = Core;
 var View = Core.View;

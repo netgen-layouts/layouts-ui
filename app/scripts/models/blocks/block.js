@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var Env = require('../../environments/default');
 var BmModel = require('../model');
 var BmCollections = require('../../collections/bm_collections');
