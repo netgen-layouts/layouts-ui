@@ -1,0 +1,9 @@
+//TODO: namespace, defaults variable maybe
+$namespace: '.ngc';
+
+//TODO: html, body
+#{$namespace}{
+  @import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+  @import "datetime_picker";
+}
+@import "snackbar";
