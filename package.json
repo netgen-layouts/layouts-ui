@@ -2,6 +2,10 @@
   "name": "@netgen/layouts-ui",
   "description": "Netgen Layouts user interface",
   "version": "0.12.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netgen-layouts/layouts-ui.git"
+  },
   "main": "app/scripts/main.js",
   "devDependencies": {
     "autoprefixer": "^8.6.5",
