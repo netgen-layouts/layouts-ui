@@ -16,7 +16,7 @@
         "netgen/content-browser-ui": "~0.12.0"
     },
     "require-dev": {
-        "netgen/layouts-core-ui": "~0.12.0"
+        "netgen/layouts-ui-core": "~0.12.0"
     },
     "autoload": {
         "psr-4": {
