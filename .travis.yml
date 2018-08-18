@@ -20,6 +20,11 @@ script:
 
 notifications:
   email: false
+  slack:
+    secure: gswRhOB7EJbrlGUu9BkvbGzZdc14AquS8dkPox59kojV0MFtL02BZ6/KX2WlER6++rcBhXzgIaNrsI019i3St5uLpSYaE8Un3XklwE8zf1QfyvUeHXjXspMidtnVKC6Lv3w3a8/HxP0IwYFgq8ECAlpec0+3u7DI2wy0Fv33AyFBVoW+Zp3nWSLhHqHDSw9T3PO77bZZD+R7nvtwqVVwK8FEZi9tLCGyoaNPX0WKpnLm92kWdOS+TTVtXB8/kc2bJbttEc5EJVoru5tQdQwbM9QT2K+OdlsKOCOtAfNaoz6NnnAy8ao2d2DZkPuweNGWsNL2QoBpyrfg88qAGGC96aen6rCWiVEKRgmBcmZ3r4srU/nHBaTMP741cSL4ye+YA9ghEg042NmBCqkcbRk88Anv77w6Z6X+kUgHTgGUCrGBta7wegzZIM+z/arLvM61yMcSf1RT0zi8iRwshyUNkp1tFk5eBIxS1asc/iTkxNIfs0W15yRO2yQvlzyPgdzQY3TSgy6fm+g//02bcaihmTP1oT9/kWH6EIrjIFPSq3LRXMNzFbvuhh7He1SEz2Jx/tm0kDK97OsgFB/CU/beyWdF4i2vpLk2WauvfxzK14bsNppy7covTwPdIxeH8aeG4HmC02iwXCp6XRtRKsl7EaKKvcqrZ2fzoQ0RrBRWRV4=
+    on_success: change
+    on_failure: always
+    on_pull_requests: false
 
 git:
-  depth: 30
+  depth: 1
