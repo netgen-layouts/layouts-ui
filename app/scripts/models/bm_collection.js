@@ -98,7 +98,7 @@ module.exports = BmModel.extend({
     return this.items.models.concat(this.overflown_before.models, this.overflown_after.models).reduce(function(total, item) {
       !item.get('is_dynamic') && total++;
       return total;
-    }, 0) >= 10;
+    }, 0) >= 5;
   },
 
 });
