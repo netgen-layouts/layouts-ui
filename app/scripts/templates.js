@@ -15,7 +15,7 @@ Handlebars.registerPartial("discard_publish", Handlebars.template({"1":function(
 Handlebars.registerPartial("item_panel", Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return " override-item";
 },"3":function(container,depth0,helpers,partials,data) {
-    return " overriden-item";
+    return " overridden-item";
 },"5":function(container,depth0,helpers,partials,data) {
     return " item-editing-position";
 },"7":function(container,depth0,helpers,partials,data) {

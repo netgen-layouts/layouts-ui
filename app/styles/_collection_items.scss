@@ -138,13 +138,13 @@ $itemHeight: 2.625rem;
       font-size: .875rem;
     }
   }
-  .collection-item:not(.cloned-manual) > &.overriden-item {
+  .collection-item:not(.cloned-manual) > &.overridden-item {
     .name {
       color: #999;
     }
   }
   .collection-item:not(.sorting) & {
-    &.overriden-item {
+    &.overridden-item {
       width: 40%;
       border-radius: $borderRadius 0 0 $borderRadius;
       padding-right: .75em;
