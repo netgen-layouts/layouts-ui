@@ -328,7 +328,7 @@
     display: block;
   }
   &::after {
-    @extend %material-icons;
+    @extend .material-icons;
     content: 'play_circle_filled';
     position: absolute;
     left: 50%;

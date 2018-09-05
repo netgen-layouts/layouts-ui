@@ -52,10 +52,6 @@ $blockHeaderHeight: 1.875rem !default;
   -moz-osx-font-smoothing: grayscale;
 }
 
-%material-icons {
-  @extend .material-icons;
-}
-
 .bm-select {
   border-radius: $borderRadius;
   border: 0;

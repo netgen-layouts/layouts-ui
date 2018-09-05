@@ -164,7 +164,7 @@
         margin: 0 0 .5em;
         cursor: pointer;
         &::before {
-          @extend %material-icons;
+          @extend .material-icons;
           font-size: 1.5em;
           content: 'check_box_outline_blank';
           position: absolute;
@@ -428,7 +428,7 @@
     text-transform: uppercase;
     color: #fff;
     &::after {
-      @extend %material-icons;
+      @extend .material-icons;
       content: 'arrow_drop_down';
       display: inline-block;
       vertical-align: middle;

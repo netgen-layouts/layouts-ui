@@ -285,7 +285,7 @@
       font-size: 2.625rem;
       &::before,
       &::after {
-        @extend %material-icons;
+        @extend .material-icons;
       }
       &::before {
         content: 'desktop_mac';

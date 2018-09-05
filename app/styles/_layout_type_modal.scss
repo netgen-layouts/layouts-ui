@@ -63,7 +63,7 @@
             .icon {
               border-color: $btnprimary;
               &::after {
-                @extend %material-icons;
+                @extend .material-icons;
                 content: 'check';
                 position: absolute;
                 left: 50%;
