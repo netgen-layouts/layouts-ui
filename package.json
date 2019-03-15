@@ -39,7 +39,7 @@
     "moment": "^2.22.2",
     "nprogress": "^0.2.0",
     "striptags": "^2.2.1",
-    "@netgen/layouts-ui-core": "https://github.com/netgen-layouts/layouts-ui-core#master",
-    "@netgen/content-browser-ui": "https://github.com/netgen-layouts/content-browser-ui#master"
+    "@netgen/layouts-ui-core": "https://github.com/netgen-layouts/layouts-ui-core#0.12",
+    "@netgen/content-browser-ui": "https://github.com/netgen-layouts/content-browser-ui#0.12"
   }
 }
