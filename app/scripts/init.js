@@ -186,9 +186,13 @@ _.extend(Core, {
       .ajaxStart(function(){
         Nprogress.start();
       })
-
+      
       .ajaxStop(function(){
-       _.delay(Nprogress.done, 100);
+        _.delay(function(){
+          if ($.active === 0){
+            Nprogress.done();
+          }
+        }, 100);
       })
 
       .ajaxError(function(e, xhr, ajaxSettings, error ){
@@ -239,6 +243,14 @@ _.extend(Core, {
     Core.state.on('change', function(model) {
       $('.right-sidebar').html(JST[model.detect_sidebar()]());
     });
+
+    this.on("loading-overlay:show", function(){
+      $(".loading-overlay").show();
+    })
+    
+    this.on("loading-overlay:hide", function(){
+      $(".loading-overlay").hide();
+    })
 
   },
 
