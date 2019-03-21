@@ -127,6 +127,7 @@ module.exports = Core.View.extend(DndView).extend({
     if(this.editing){ return; }
 
     Core.trigger('editing:unmark', {block: this});
+    this.trigger("edit:started");
 
     this.editing_mark();
     this.load_sidebar();
