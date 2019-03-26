@@ -56,8 +56,8 @@
       border: 0;
       border-bottom: 1px solid $toolbarbg2;
       border-right: 1px solid $toolbarbg2;
-      width: 33.333333333333%;
-      &:nth-child(3n) {
+      width: 25%;
+      &:nth-child(4n) {
         border-right: 0;
       }
     }
