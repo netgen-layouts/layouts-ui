@@ -203,7 +203,7 @@ _.extend(Core, {
         if(xhr.status === 403){
           if (xhr.opts.type === 'GET') {
             title = 'Not allowed';
-            body = 'You don\'t have permission to edit this Layout';
+            body = 'You don\'t have permission to edit this layout.';
             apply_text = 'Ok';
             on_apply = function() {
               location.href = localStorage.getItem('bm_referrer') || '/';
