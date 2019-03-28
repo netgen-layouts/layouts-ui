@@ -192,16 +192,26 @@ _.extend(Core, {
       })
 
       .ajaxError(function(e, xhr, ajaxSettings, error ){
+        if (Core.error_displayed) return true;
+        Core.error_displayed = true;
         var title, body, on_apply,
             apply_text = 'Refresh',
             on_apply = function(){
               window.history.go(0);
             };
 
-
         if(xhr.status === 403){
-          title =  'Session timeout';
-          body = 'Your session has timed out. Please hit the refresh button to reload the application.';
+          if (xhr.opts.type === 'GET') {
+            title = 'Not allowed';
+            body = 'You don\'t have permission to edit this Layout';
+            apply_text = 'Ok';
+            on_apply = function() {
+              location.href = localStorage.getItem('bm_referrer') || '/';
+            };
+          } else {
+            title =  'Session timeout';
+            body = 'Your session has timed out. Please hit the refresh button to reload the application.';
+          }
         }
 
         if(xhr.status === 404 && xhr.opts.url.match(/\/layouts\/\d+\/draft/)){
@@ -243,6 +253,8 @@ _.extend(Core, {
   },
 
   display_errors: function(){
+    if (Core.error_displayed) return true;
+    Core.error_displayed = true;
     var body,
         errors = [];
 

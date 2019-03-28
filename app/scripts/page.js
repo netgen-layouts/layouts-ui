@@ -89,4 +89,3 @@ Page.prototype.render = function(){
 };
 
 module.exports = Page;
-

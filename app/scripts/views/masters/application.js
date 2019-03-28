@@ -29,4 +29,3 @@ module.exports = Core.View.extend({
     return this;
   },
 });
-
