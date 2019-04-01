@@ -495,13 +495,6 @@
     }
   }
 
-  .sidebar[data-disabled-full='true'] {
-    .toggle-link,
-    .aside-tab-control {
-      opacity: $disabledOpacity;
-    }
-  }
-
   .disabled-input {
     opacity: $disabledOpacity;
   }
