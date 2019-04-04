@@ -52,6 +52,7 @@ module.exports = Core.View.extend({
   },
 
   destroy: function(){
+    this.model.trigger("sidebar:destroyed");
     this.remove_loader();
     this.remove();
     $('.right-sidebar').html(JST.sidebar());
@@ -135,6 +136,7 @@ module.exports = Core.View.extend({
 
 
     $.when.apply($, this.xhrs).then(function(){
+      this.model.trigger("sidebar:loaded");
       this.trigger('loaded');
       this.trigger_render();
     }.bind(this));

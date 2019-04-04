@@ -29,6 +29,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(Core.state, 'change', this.render);
     this.listenTo(this.model, 'draft:success', this.render);
+    this.listenTo(this.model, 'draft:success', this.enable_edit);
     this.listenTo(this.model, 'publish:success discard:success', this.close_layout);
     this.listenTo(this.model, 'change:description change:name', this.render);
 
@@ -83,15 +84,40 @@ module.exports = Core.View.extend({
     }).render().open();
   },
 
-  publish_layout: function(e){
-    e.preventDefault();
-    this.model.publish();
+  enable_edit: function(){
+    Core.trigger("loading-overlay:hide")
   },
 
+  publish_layout: function(e){
+    e.preventDefault();
+    this.start_publish(this.model.publish.bind(this.model));
+  },
+  
   publish_and_continue: function(e){
     e.preventDefault();
     // Core.router.navigate_to('layout', { type: 'publish', id: this.model.id}, {trigger: false});
-    this.model.publish_and_continue();
+    
+    this.start_publish(this.model.publish_and_continue.bind(this.model));
+    
+  },
+  
+  start_publish: function(continueFunction){
+    Core.trigger("loading-overlay:show")
+    setTimeout(function(){
+      if ($.active === 0) {
+        continueFunction();
+        return;
+      }
+      
+      var intervalId = setInterval(function() {
+        if ($.active === 0){
+          
+          clearInterval(intervalId);
+          continueFunction();
+        }
+      }.bind(this), 100)    
+    }, 1000);
+  
   },
 
   save_and_close: function(e){

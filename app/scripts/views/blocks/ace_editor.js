@@ -9,6 +9,13 @@ module.exports = {
   mode: "ace/mode/html",
   supports_modal_mode: true,
 
+  initialize: function(){
+    this._super('initialize', arguments);
+    this.listenTo(this.model, 'sidebar:loaded', this.enable_editor);
+    this.listenTo(this.model, 'sidebar:destroyed', this.disable_editor);
+    return this;
+  },
+
   render: function() {
     Block.prototype.render.apply(this,arguments);
     this.setup_editor();
@@ -57,7 +64,22 @@ module.exports = {
       })
 
       this.remove_doctype_validation(editor);
+      this.disable_editor();
     }
+  },
+
+  enable_editor: function(){
+    this.editor.container.style.pointerEvents="auto";
+    //this.editor.container.style.opacity=1;
+    this.editor.renderer.setStyle("disabled", false);
+    this.editor.focus();
+  },
+  
+  disable_editor: function(){
+    this.editor.container.style.pointerEvents="none";
+    //this.editor.container.style.opacity=0.8;
+    this.editor.renderer.setStyle("disabled", true);
+    this.editor.blur();
   },
 
   remove_doctype_validation: function(editor){

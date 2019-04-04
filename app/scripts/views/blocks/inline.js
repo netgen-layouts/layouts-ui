@@ -18,6 +18,8 @@ module.exports = {
     this._super('initialize', arguments);
     this.listenTo(Core.state, 'change', this.on_state);
     this.listenTo(this.model, 'restore:success', this.render);
+    this.listenTo(this.model, 'sidebar:loaded', this.on_sidebar_loaded);
+    this.listenTo(this.model, 'sidebar:destroyed', this.on_sidebar_destroyed);
     return this;
   },
 
@@ -37,10 +39,21 @@ module.exports = {
     return this;
   },
 
+  on_sidebar_loaded: function(){
+    this.sidebarLoaded = this.editing;
+    this.update_contenteditable();
+    this.$inline.focus()
+  },
+  
+  on_sidebar_destroyed: function(){
+    this.sidebarLoaded = false;
+    this.update_contenteditable();
+    this.$inline.blur()
+  },
 
   update_contenteditable: function(){
-    var editable = Core.state.in_mode('edit', 'edit_shared') ||
-                   Core.state.in_mode('translate') && this.model.get('editable');
+    var editable = !!this.sidebarLoaded && (Core.state.in_mode('edit', 'edit_shared') ||
+                   Core.state.in_mode('translate') && this.model.get('editable'));
     this.$inline.attr('contenteditable', editable)
   },
 

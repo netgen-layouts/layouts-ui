@@ -328,3 +328,14 @@
     }
   }
 }
+
+.loading-overlay {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  cursor: wait;
+  z-index: 1000;
+  display: none;
+}
