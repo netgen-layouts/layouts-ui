@@ -13,3 +13,4 @@ yarn.lock
 yarn-error.log
 *.sublime-workspace
 **/Resources/public/vendor/*/package.json
+.vscode

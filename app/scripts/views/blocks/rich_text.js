@@ -37,6 +37,13 @@ module.exports = Block.extend({
 
   supports_modal_mode: false,
 
+  initialize: function(){
+    this._super('initialize', arguments);
+    this.listenTo(this.model, 'sidebar:loaded', this.enable_editor);
+    this.listenTo(this.model, 'sidebar:destroyed', this.disable_editor);
+    return this;
+  },
+
   render: function() {
     Block.prototype.render.apply(this,arguments);
     this.setup_editor();
@@ -53,6 +60,7 @@ module.exports = Block.extend({
     this.$editor_el = this.$('.rich-text-editor');
     if (this.$editor_el.length > 0) {
       this.editor = CKEDITOR.inline(this.$editor_el.get(0));
+      this.editor.config.readOnly = true;
 
       this.editor.on('change', function(){
         var $textarea = self.get_sidebar_element();
@@ -94,6 +102,16 @@ module.exports = Block.extend({
     $('.ae-ui').remove();
     this.setup_editor();
     return this;
+  },
+
+  enable_editor: function(){
+    this.editor.setReadOnly(false);
+    this.editor.focus();
+  },
+  
+  disable_editor: function(){
+    this.editor.setReadOnly();
+    //this.editor.blur();
   },
 
 });

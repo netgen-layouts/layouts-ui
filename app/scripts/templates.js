@@ -392,7 +392,7 @@ this["JST"]["layout_link_chooser"] = Handlebars.template({"1":function(container
 this["JST"]["layouts/application"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.escapeExpression;
 
-  return "<aside class=\"left-toolbar\">\n  <div class=\"app-logo-box\"><div class=\"app-logo bm-tooltip\" title=\""
+  return "<div class=\"loading-overlay\"></div>\n\n<aside class=\"left-toolbar\">\n  <div class=\"app-logo-box\"><div class=\"app-logo bm-tooltip\" title=\""
     + alias1(container.lambda((depth0 != null ? Handlebars.r(depth0,'layouts_version') : depth0), depth0))
     + "\"></div></div>\n\n <div class=\"top-menu\">\n  <div class=\"blocks\"></div>\n </div>\n\n <div class=\"bottom-menu\"></div>\n</aside>\n\n\n"
     + alias1(Handlebars.r(helpers,'yield').call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"yield","hash":{},"data":data}))
