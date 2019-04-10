@@ -120,8 +120,8 @@ module.exports = function(grunt) {
           src: [
             '<%= config.dev %>/js/*.js',
             '<%= config.dev %>/css/*.css',
-            '../block-manager/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
-            '../block-manager/bundles/BlockManagerBundle/Resources/views/**/*.twig'
+            '../layouts-core/bundles/BlockManagerAdminBundle/Resources/views/app/**/*.twig',
+            '../layouts-core/bundles/BlockManagerBundle/Resources/views/**/*.twig'
           ]
         }
       },
