@@ -1,18 +1,18 @@
 assets:
     packages:
-        ngbm_app_css:
+        nglayouts_app_css:
             base_path: '/bundles/netgenlayoutsui/css'
-            version: '%ngbm_app.asset.version%'
+            version: '%nglayouts_app.asset.version%'
             version_format: '%%s?%%s'
-        ngbm_app_js:
+        nglayouts_app_js:
             base_path: '/bundles/netgenlayoutsui/js'
-            version: '%ngbm_app.asset.version%'
+            version: '%nglayouts_app.asset.version%'
             version_format: '%%s?%%s'
-        ngbm_app_vendor:
+        nglayouts_app_vendor:
             base_path: '/bundles/netgenlayoutsui/vendor'
-            version: '%ngbm_app.asset.version%'
+            version: '%nglayouts_app.asset.version%'
             version_format: '%%s?%%s'
-        ngbm_app:
+        nglayouts_app:
             base_path: '/bundles/netgenlayoutsui'
-            version: '%ngbm_app.asset.version%'
+            version: '%nglayouts_app.asset.version%'
             version_format: '%%s?%%s'

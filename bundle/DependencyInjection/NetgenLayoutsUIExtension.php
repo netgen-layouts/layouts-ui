@@ -20,7 +20,7 @@ final class NetgenLayoutsUIExtension extends Extension implements PrependExtensi
     public function prepend(ContainerBuilder $container): void
     {
         $container->setParameter(
-            'ngbm_app.asset.version',
+            'nglayouts_app.asset.version',
             PrettyVersions::getVersion('netgen/layouts-ui')->getShortCommitHash()
         );
 
