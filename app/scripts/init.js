@@ -186,7 +186,7 @@ _.extend(Core, {
       .ajaxStart(function(){
         Nprogress.start();
       })
-      
+
       .ajaxStop(function(){
         _.delay(function(){
           if ($.active === 0){
@@ -210,7 +210,7 @@ _.extend(Core, {
             body = 'You don\'t have permission to edit this layout.';
             apply_text = 'OK';
             on_apply = function() {
-              location.href = localStorage.getItem('bm_referrer') || '/';
+              location.href = localStorage.getItem('ngl_referrer') || '/';
             };
           } else {
             title =  'Session timeout';
@@ -257,7 +257,7 @@ _.extend(Core, {
     this.on("loading-overlay:show", function(){
       $(".loading-overlay").show();
     })
-    
+
     this.on("loading-overlay:hide", function(){
       $(".loading-overlay").hide();
     })

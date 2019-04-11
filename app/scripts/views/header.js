@@ -92,15 +92,15 @@ module.exports = Core.View.extend({
     e.preventDefault();
     this.start_publish(this.model.publish.bind(this.model));
   },
-  
+
   publish_and_continue: function(e){
     e.preventDefault();
     // Core.router.navigate_to('layout', { type: 'publish', id: this.model.id}, {trigger: false});
-    
+
     this.start_publish(this.model.publish_and_continue.bind(this.model));
-    
+
   },
-  
+
   start_publish: function(continueFunction){
     Core.trigger("loading-overlay:show")
     setTimeout(function(){
@@ -108,16 +108,16 @@ module.exports = Core.View.extend({
         continueFunction();
         return;
       }
-      
+
       var intervalId = setInterval(function() {
         if ($.active === 0){
-          
+
           clearInterval(intervalId);
           continueFunction();
         }
-      }.bind(this), 100)    
+      }.bind(this), 100)
     }, 1000);
-  
+
   },
 
   save_and_close: function(e){
@@ -141,7 +141,7 @@ module.exports = Core.View.extend({
     if(Core.state.in_mode('edit_master')){
       Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit'});
     }else{
-      location.href = localStorage.getItem('bm_referrer') || '/';
+      location.href = localStorage.getItem('ngl_referrer') || '/';
     }
 
   },
