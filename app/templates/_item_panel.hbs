@@ -6,7 +6,7 @@
   {{#> overrides/item_additional_icons}}{{!-- override with partial --}}{{/overrides/item_additional_icons}}
   {{#unless item.is_visible}}
     <div class="status-icon">
-      <span class="bm-tooltip" title="{{#unless item.cms_visible}}Hidden in CMS{{else}}{{#> overrides/item_visibility_tooltip}}{{!-- override with partial --}}{{/overrides/item_visibility_tooltip}}{{/unless}}">
+      <span class="ngl-tooltip" title="{{#unless item.cms_visible}}Hidden in CMS{{else}}{{#> overrides/item_visibility_tooltip}}{{!-- override with partial --}}{{/overrides/item_visibility_tooltip}}{{/unless}}">
         <i class="material-icons">visibility_off</i>
       </span>
     </div>

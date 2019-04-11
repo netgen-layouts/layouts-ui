@@ -14,7 +14,7 @@ function BmTooltip(el){
 BmTooltip.prototype.init = function(){
   this.el.title = '';
   this.tooltip = document.createElement('div');
-  this.tooltip.className = 'bm-tooltip-title';
+  this.tooltip.className = 'ngl-tooltip-title';
   this.tooltip.innerHTML = this.title;
 
   $(this.el).on('mouseenter', this.showTooltip.bind(this));

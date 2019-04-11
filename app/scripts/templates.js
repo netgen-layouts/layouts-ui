@@ -25,7 +25,7 @@ Handlebars.registerPartial("item_panel", Handlebars.template({"1":function(conta
 },"11":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "    <div class=\"status-icon\">\n      <span class=\"bm-tooltip\" title=\""
+  return "    <div class=\"status-icon\">\n      <span class=\"ngl-tooltip\" title=\""
     + ((stack1 = Handlebars.r(helpers,'unless').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'item') : depth0)) != null ? Handlebars.r(stack1,'cms_visible') : stack1),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(14, data, 0),"data":data})) != null ? stack1 : "")
     + "\">\n        <i class=\"material-icons\">visibility_off</i>\n      </span>\n    </div>\n";
 },"12":function(container,depth0,helpers,partials,data) {
@@ -304,7 +304,7 @@ this["JST"]["header"] = Handlebars.template({"1":function(container,depth0,helpe
 },"5":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <span class=\"show-form bm-tooltip js-show-form\" title=\""
+  return "        <span class=\"show-form ngl-tooltip js-show-form\" title=\""
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'description') : stack1), depth0))
     + "\"><span class=\"js-layout-name\" data-placement=\"bottom\">"
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'name') : stack1), depth0))
@@ -316,7 +316,7 @@ this["JST"]["header"] = Handlebars.template({"1":function(container,depth0,helpe
 },"8":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "        <span class=\"show-form bm-tooltip js-layout-name\" title=\""
+  return "        <span class=\"show-form ngl-tooltip js-layout-name\" title=\""
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'description') : stack1), depth0))
     + "\">"
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'name') : stack1), depth0))
@@ -392,7 +392,7 @@ this["JST"]["layout_link_chooser"] = Handlebars.template({"1":function(container
 this["JST"]["layouts/application"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var alias1=container.escapeExpression;
 
-  return "<div class=\"loading-overlay\"></div>\n\n<aside class=\"left-toolbar\">\n  <div class=\"app-logo-box\"><div class=\"app-logo bm-tooltip\" title=\""
+  return "<div class=\"loading-overlay\"></div>\n\n<aside class=\"left-toolbar\">\n  <div class=\"app-logo-box\"><div class=\"app-logo ngl-tooltip\" title=\""
     + alias1(container.lambda((depth0 != null ? Handlebars.r(depth0,'layouts_version') : depth0), depth0))
     + "\"></div></div>\n\n <div class=\"top-menu\">\n  <div class=\"blocks\"></div>\n </div>\n\n <div class=\"bottom-menu\"></div>\n</aside>\n\n\n"
     + alias1(Handlebars.r(helpers,'yield').call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"yield","hash":{},"data":data}))
@@ -418,7 +418,7 @@ this["JST"]["layouts/toolbar"] = Handlebars.template({"1":function(container,dep
 
   return "  <button data-mode=\""
     + alias2(alias1((depth0 != null ? Handlebars.r(depth0,'mode') : depth0), depth0))
-    + "\" class=\"button bm-tooltip "
+    + "\" class=\"button ngl-tooltip "
     + alias2(alias1((depth0 != null ? Handlebars.r(depth0,'className') : depth0), depth0))
     + "\" title=\""
     + alias2(alias1((depth0 != null ? Handlebars.r(depth0,'title') : depth0), depth0))
@@ -562,7 +562,7 @@ this["JST"]["zone"] = Handlebars.template({"1":function(container,depth0,helpers
 },"3":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "          <span class=\"zone-btn linked-zone-btn bm-tooltip\" data-placement=\"left\" title=\"<span class='tt-note'>This zone is already linked with<br/> Layout:</span> <strong>"
+  return "          <span class=\"zone-btn linked-zone-btn ngl-tooltip\" data-placement=\"left\" title=\"<span class='tt-note'>This zone is already linked with<br/> Layout:</span> <strong>"
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'linked_layout') : stack1)) != null ? Handlebars.r(stack1,'name') : stack1), depth0))
     + "</strong><br/> <span class='tt-note'>Zone:</span> <strong>"
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'linked_zone_name') : stack1), depth0))

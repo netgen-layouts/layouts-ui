@@ -9,10 +9,10 @@
       {{#if model.shared }}<i class="material-icons shared-icon">share</i>{{/if}}
 
       {{#if normal_editing}}
-        <span class="show-form bm-tooltip js-show-form" title="{{ model.description}}"><span class="js-layout-name" data-placement="bottom">{{ model.name }}</span> <i class="material-icons">edit</i></span>
+        <span class="show-form ngl-tooltip js-show-form" title="{{ model.description}}"><span class="js-layout-name" data-placement="bottom">{{ model.name }}</span> <i class="material-icons">edit</i></span>
         {{#> overrides/header_additional_name}}{{!-- override with partial --}}{{/overrides/header_additional_name}}
       {{else}}
-        <span class="show-form bm-tooltip js-layout-name" title="{{ model.description}}">{{ model.name }}</span>
+        <span class="show-form ngl-tooltip js-layout-name" title="{{ model.description}}">{{ model.name }}</span>
       {{/if}}
 
 
