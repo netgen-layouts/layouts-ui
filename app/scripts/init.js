@@ -131,7 +131,7 @@ _.extend(Core, {
 
 
   load_additional_vars: function(){
-    var bm_base_path = $('meta[name="ngbm-base-path"]').attr('content');
+    var bm_base_path = $('meta[name="nglayouts-base-path"]').attr('content');
     bm_base_path && (Env.bm_base_path = bm_base_path);
   },
 
