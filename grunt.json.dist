@@ -1,8 +1,8 @@
 {
   "domain": "http://example.com",
-  "start_path": "bm/dev/app",
+  "start_path": "nglayouts/dev/app",
   "test_domain": "http://example.com",
-  "test_start_path": "bm/dev/app",
+  "test_start_path": "nglayouts/dev/app",
   "db": {
     "name": "testdb",
     "host": "localhost",

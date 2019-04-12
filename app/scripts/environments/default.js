@@ -1,11 +1,14 @@
 'use strict';
 
+var Core = require('@netgen/layouts-ui-core');
+var $ = Core.$;
+
 function normalize_path(path) {
   return path.replace(/\/+/g, '/');
 }
 
 var self = module.exports = {
-  bm_base_path: '/bm',
+  bm_base_path: $('meta[name="nglayouts-route-prefix"]').attr('content'),
   bm_base_app_path: '/app/',
   bm_base_api_path: '/api/v1/',
 
