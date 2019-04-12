@@ -53,7 +53,7 @@ module.exports = {
 
   update_contenteditable: function(){
     var editable = !!this.sidebarLoaded && (Core.state.in_mode('edit', 'edit_shared') ||
-                   Core.state.in_mode('translate') && this.model.get('editable'));
+                   Core.state.in_mode('translate'));
     this.$inline.attr('contenteditable', editable)
   },
 
