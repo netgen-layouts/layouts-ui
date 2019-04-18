@@ -2,17 +2,17 @@ assets:
     packages:
         nglayouts_app_css:
             base_path: '/bundles/netgenlayoutsui/css'
-            version: '%nglayouts_app.asset.version%'
+            version: '%netgen_layouts.app.asset_version%'
             version_format: '%%s?%%s'
         nglayouts_app_js:
             base_path: '/bundles/netgenlayoutsui/js'
-            version: '%nglayouts_app.asset.version%'
+            version: '%netgen_layouts.app.asset_version%'
             version_format: '%%s?%%s'
         nglayouts_app_vendor:
             base_path: '/bundles/netgenlayoutsui/vendor'
-            version: '%nglayouts_app.asset.version%'
+            version: '%netgen_layouts.app.asset_version%'
             version_format: '%%s?%%s'
         nglayouts_app:
             base_path: '/bundles/netgenlayoutsui'
-            version: '%nglayouts_app.asset.version%'
+            version: '%netgen_layouts.app.asset_version%'
             version_format: '%%s?%%s'
