@@ -10,11 +10,11 @@ module.exports =  Page.extend({
   deps: function(done){
 
     if(!Core.g.layout || Core.g.layout.id != Core.router.params.id){
-      Core.g.layout = new Layout({id: parseInt(Core.router.params.id, 10)});
+      Core.g.layout = new Layout({id: Core.router.params.id});
     }
 
     var draft_layout_id = Core.router.params.draft_layout_id;
-    var base_layout = this.base_layout = new Layout({id: parseInt(draft_layout_id, 10)});
+    var base_layout = this.base_layout = new Layout({id: draft_layout_id});
 
     var should_load_published = Core.router.route_name === 'layout_preview';
 

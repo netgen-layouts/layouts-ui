@@ -21,7 +21,7 @@ var ViewBlocks = require('./main');
       if(!json){return;}
       var data = JSON.parse(json);
 
-      var block = Core.g.layout.get_block_by_id(parseInt(data.parent_block_id, 10));
+      var block = Core.g.layout.get_block_by_id(data.parent_block_id);
 
       block.group = view_group.model;
       block.in_group = true;
