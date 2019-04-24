@@ -32,6 +32,18 @@ CKEDITOR.on( 'instanceCreated', function ( event ) {
 
 });
 
+CKEDITOR.on( 'dialogDefinition', function ( event ) {
+  var dialogName = event.data.name;
+
+  if (dialogName == 'link') {
+    var dialogDefinition = event.data.definition;
+    var informationTab = dialogDefinition.getContents('target');
+    var targetField = informationTab.get('linkTargetType');
+
+    // Keep only "<not set>" and "New Window (_blank)" options
+    targetField.items = targetField.items.filter(function ( x ) { return x[1] == '_blank' || x[1] == 'notSet'; });
+  }
+});
 
 module.exports = Block.extend({
 
@@ -108,7 +120,7 @@ module.exports = Block.extend({
     this.editor.setReadOnly(false);
     this.editor.focus();
   },
-  
+
   disable_editor: function(){
     this.editor.setReadOnly();
     //this.editor.blur();
