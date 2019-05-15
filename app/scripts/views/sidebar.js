@@ -61,6 +61,8 @@ module.exports = Core.View.extend({
   //TODO: Call some ajax to change collection type and bind to that event in sidebar
   $change_collection_type: function(){
     var data = this.serialize().params.block_collection;
+    data.new_type = parseInt(data.new_type);
+
     this.model.default_bm_collection().sync_change_type(data);
   },
 
