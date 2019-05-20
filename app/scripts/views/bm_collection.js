@@ -60,23 +60,21 @@ module.exports = Core.View.extend({
     var browser_configuration = $browser_config_selector.find('option:selected').data();
     var value_type = $browser_config_selector.val();
 
-    new Browser({
-      disabled_item_values: this.model.items.reduce(function(out, item){
+    new Browser.Browser({
+      disabledItems: this.model.items.reduce(function(out, item){
         !item.get('is_dynamic') && item.get('value_type') === value_type && out.push(item.get('value'));
         return out;
       }, []),
-      tree_config: {
-        overrides: browser_configuration,
-        root_path: $browser_config_selector.val()
-      }
-    }).on('apply', function(){
-      var items = this.selected_collection.map(function(item){
-        return {value: item.get('value'), value_type: value_type, position: self.model.get('offset') };
-      });
+      overrides: browser_configuration,
+      rootPath: $browser_config_selector.val(),
+      onConfirm: function(selected){
+        var items = selected.map(function(item){
+          return {value: item.value, value_type: value_type, position: self.model.get('offset') };
+        });
 
-      self.model.items.sync_create_items(items);
-
-    }).load_and_open();
+        self.model.items.sync_create_items(items);
+      },
+    }).open();
 
   },
 

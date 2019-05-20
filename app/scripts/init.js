@@ -10,6 +10,7 @@ var Router = require('./router');
 
 var LayoutTypes = require('./collections/layout_types');
 
+var Browser = require('@netgen/content-browser-ui');
 
 var Config = require('./models/config');
 var State = require('./models/state');
@@ -150,8 +151,9 @@ _.extend(Core, {
     data.view.$('.xeditable').xeditable();
     data.view.$('.js-dependable-selects-group .js-master').dependable_select();
     data.view.$('.master-slave-selects .master').master_slave_selects();
-    data.view.$('.js-input-browse').input_browse();
-    data.view.$('.js-multiple-browse').multiple_browse();
+    [...document.getElementsByClassName('js-input-browse')].forEach(el => new Browser.InputBrowse(el));
+    [...document.getElementsByClassName('js-multiple-browse')].forEach(el => new Browser.MultipleBrowse(el));
+
     data.view.$('.js-external-video').video_thumb_fetcher();
     data.view.$('.view-type').view_types();
     data.view.$('.ngl-tooltip').bm_tooltip();
