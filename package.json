@@ -8,10 +8,7 @@
   },
   "main": "app/scripts/main.js",
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
     "autoprefixer": "^8.6.5",
-    "babelify": "^10.0.0",
     "grunt": "^1.0.3",
     "grunt-browser-sync": "^2.2.0",
     "grunt-browserify": "^5.3.0",

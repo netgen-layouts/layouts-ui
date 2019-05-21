@@ -147,12 +147,16 @@ _.extend(Core, {
     return this;
   },
 
-  reinitialize_plugins: function(data){
+  reinitialize_plugins: function(data) {
     data.view.$('.xeditable').xeditable();
     data.view.$('.js-dependable-selects-group .js-master').dependable_select();
     data.view.$('.master-slave-selects .master').master_slave_selects();
-    [...document.getElementsByClassName('js-input-browse')].forEach(el => new Browser.InputBrowse(el));
-    [...document.getElementsByClassName('js-multiple-browse')].forEach(el => new Browser.MultipleBrowse(el));
+    Array.prototype.forEach.call(document.getElementsByClassName('js-input-browse'), function(el) {
+      return new Browser.InputBrowse(el);
+    });
+    Array.prototype.forEach.call(document.getElementsByClassName('js-multiple-browse'), function(el) {
+      return new Browser.MultipleBrowse(el);
+    });
 
     data.view.$('.js-external-video').video_thumb_fetcher();
     data.view.$('.view-type').view_types();
