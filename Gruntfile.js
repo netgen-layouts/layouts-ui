@@ -234,6 +234,9 @@ module.exports = function(grunt) {
         dest: '<%= config.dev %>/js/netgen-layouts.js',
         options: {
           require: ['@netgen/layouts-ui-core'],
+          transform: [
+            ['babelify', { presets: ['@babel/env'] }],
+          ],
           browserifyOptions: {
             debug: true
           }
@@ -244,7 +247,10 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/netgen-layouts.js',
         options: {
-          require: ['@netgen/layouts-ui-core', '@netgen/content-browser-ui']
+          require: ['@netgen/layouts-ui-core', '@netgen/content-browser-ui'],
+          transform: [
+            ['babelify', { presets: ['@babel/env'] }],
+          ],
         }
       }
     },
