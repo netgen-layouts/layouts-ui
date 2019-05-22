@@ -66,7 +66,7 @@ module.exports = Core.View.extend({
         return out;
       }, []),
       overrides: browser_configuration,
-      rootPath: $browser_config_selector.val(),
+      itemType: $browser_config_selector.val(),
       onConfirm: function(selected){
         var items = selected.map(function(item){
           return {value: item.value, value_type: value_type, position: self.model.get('offset') };
