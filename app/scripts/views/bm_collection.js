@@ -25,7 +25,7 @@ module.exports = Core.View.extend({
       before: false,
     });
 
-    this.model.set('canAddItems', $('.js-browser-config-selector').length && !!$('.js-browser-config-selector')[0].options.length);
+    this.model.set('canAddItems', $('.js-browser-item-type').length && !!$('.js-browser-item-type')[0].options.length);
 
     return this;
   },
@@ -56,9 +56,9 @@ module.exports = Core.View.extend({
   $add_items: function(){
     var self = this;
 
-    var $browser_config_selector = this.$el.closest('.collection-items').find('.js-browser-config-selector');
-    var browser_configuration = $browser_config_selector.find('option:selected').data();
-    var value_type = $browser_config_selector.val();
+    var $browser_item_type = this.$el.closest('.collection-items').find('.js-browser-item-type');
+    var browser_configuration = $browser_item_type.find('option:selected').data();
+    var value_type = $browser_item_type.val();
 
     new Browser.Browser({
       disabledItems: this.model.items.reduce(function(out, item){
@@ -66,7 +66,7 @@ module.exports = Core.View.extend({
         return out;
       }, []),
       overrides: browser_configuration,
-      itemType: $browser_config_selector.val(),
+      itemType: $browser_item_type.val(),
       onConfirm: function(selected){
         var items = selected.map(function(item){
           return {value: item.value, value_type: value_type, position: self.model.get('offset') };
