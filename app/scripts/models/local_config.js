@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../core');
 
 module.exports = Core.Backbone.Model.extend({
 

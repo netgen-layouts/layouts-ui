@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../core');
 var $ = Core.$;
 var LayoutBasePage = require('./layout_base');
 var HeaderView = require('../views/header');

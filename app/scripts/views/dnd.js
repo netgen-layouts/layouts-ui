@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../core');
 var Draggable = require('./draggable');
 var Receiver = require('./receiver');
 var $ = Core.$;

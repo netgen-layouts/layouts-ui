@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../core');
 var _ = require('underscore');
 var $ = Core.$;
 var Browser = require('@netgen/content-browser-ui');

@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../../core');
 var _ = require('underscore');
 var $ = Core.$;
 var striptags = require('striptags');
@@ -44,7 +44,7 @@ module.exports = {
     this.update_contenteditable();
     this.$inline.focus()
   },
-  
+
   on_sidebar_destroyed: function(){
     this.sidebarLoaded = false;
     this.update_contenteditable();

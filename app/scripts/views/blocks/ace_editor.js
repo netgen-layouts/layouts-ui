@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../../core');
 var $ = Core.$;
 var Block = require('./block');
 var _ = require('underscore');
@@ -74,7 +74,7 @@ module.exports = {
     this.editor.renderer.setStyle("disabled", false);
     this.editor.focus();
   },
-  
+
   disable_editor: function(){
     this.editor.container.style.pointerEvents="none";
     //this.editor.container.style.opacity=0.8;

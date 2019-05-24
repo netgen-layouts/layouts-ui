@@ -6,12 +6,10 @@ var _ = require('underscore');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('@netgen/layouts-ui-core/app/scripts/helpers');
-var project_helpers = require('./app/scripts/lib/handlebars/helpers');
-var all_helpers = _.extend({}, helpers, project_helpers);
+var helpers = require('./app/scripts/helpers');
 
 var known_helpers = {};
-for (var k in all_helpers) {
+for (var k in helpers) {
   known_helpers[k] = true;
 }
 
@@ -87,7 +85,7 @@ module.exports = function(grunt) {
 
     watch: {
       browserify_vendor: {
-        files: ['node_modules/@netgen/layouts-ui-core/app/scripts/**/*.js', 'node_modules/@netgen/content-browser-ui/app/scripts/**/*.js'],
+        files: ['node_modules/@netgen/content-browser-ui/app/scripts/**/*.js'],
         tasks: ['browserify:dev']
       },
 
@@ -97,7 +95,7 @@ module.exports = function(grunt) {
       },
 
       sass: {
-        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/@netgen/layouts-ui-core/app/styles/**/*.scss', 'node_modules/@netgen/content-browser-ui/app/styles/**/*.scss'],
+        files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}', 'node_modules/@netgen/content-browser-ui/app/styles/**/*.scss'],
         tasks: ['sass:dev', 'postcss:dev']
       },
 
@@ -233,7 +231,6 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/netgen-layouts.js',
         options: {
-          require: ['@netgen/layouts-ui-core'],
           browserifyOptions: {
             debug: true
           }
@@ -244,7 +241,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/netgen-layouts.js',
         options: {
-          require: ['@netgen/layouts-ui-core', '@netgen/content-browser-ui']
+          require: ['@netgen/content-browser-ui']
         }
       }
     },

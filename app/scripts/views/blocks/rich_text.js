@@ -1,7 +1,7 @@
 /*global CKEDITOR */
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../../core');
 var $ = Core.$;
 var Block = require('./block');
 var _ = require('underscore');

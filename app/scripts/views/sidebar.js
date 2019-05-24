@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../core');
 
 var FormView = require('./form');
 var BmCollectionView = require('./bm_collection');

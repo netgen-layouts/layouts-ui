@@ -1,0 +1,75 @@
+#{$namespace}.js-snackbar-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+  .snackbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    .snackbar-box {
+      animation: slideIn .3s ease-out;
+      margin: 0 auto;
+      background: #1f1f1f;
+      padding: 1em 1.5em;
+      max-width: 44em;
+      cursor: pointer;
+    }
+    .snackbar-message {
+      margin: 0;
+      font-size: 1.125em;
+      color: #fff;
+      animation: fadeIn .3s;
+    }
+    &.slide-out {
+      .snackbar-box {
+        animation: slideOut .2s ease-in forwards;
+      }
+      .snackbar-message {
+        animation: fadeOut .2s forwards;
+      }
+    }
+    &.fade-out {
+      .snackbar-box {
+        opacity: 0;
+        animation: fadeOut .2s;
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes slideOut {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    transform: opacity(0);
+  }
+  100% {
+    transform: opacity(1);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    transform: opacity(1);
+  }
+  100% {
+    transform: opacity(0);
+  }
+}

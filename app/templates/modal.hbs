@@ -1,0 +1,20 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="in">
+      <div class="modal-header">
+        <h1 class="modal-title">{{title}}</h1>
+      </div>
+
+      <div class="modal-body">
+        {{{body}}}
+      </div>
+
+      <div class="modal-footer">
+        {{#unless cancel_disabled}}
+          <button type="button" class="btn btn-link action_cancel" data-dismiss="modal">{{cancel_text}}</button>
+        {{/unless}}
+
+        <button type="button" class="btn btn-primary action_apply green">{{apply_text}}</button>
+      </div>
+  </div>
+</div>

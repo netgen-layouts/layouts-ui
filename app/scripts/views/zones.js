@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('../core');
 var $ = Core.$;
 var ZoneView = require('./zone');
 var Zone = require('../models/zone');

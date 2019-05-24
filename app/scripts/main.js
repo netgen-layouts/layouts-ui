@@ -1,7 +1,7 @@
 'use strict';
 
 require('./templates_loader');
-var Core = require('@netgen/layouts-ui-core');
+var Core = require('./core');
 var App = require('./init');
 
 require('./lib/jquery/master_slave_selects');
