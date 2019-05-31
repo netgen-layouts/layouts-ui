@@ -21,8 +21,6 @@ module.exports = function(grunt) {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.loadNpmTasks('intern');
-
   var grunt_config = 'grunt.json';
   if (!grunt.file.exists(grunt_config)) {
     grunt.file.copy(grunt_config + '.dist', grunt_config)
@@ -38,50 +36,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     config: config,
-
-    intern: {
-      unit: {
-        options: {
-          runType: 'client', // console /  nodejs
-          config: 'tests/intern',
-          reporters: [ 'Console', { id: 'LcovHtml', directory: 'tests/coverage' } ],
-          suites: [ 'tests/unit/**/*' ]
-        }
-      },
-
-      functional: {
-        options: {
-          proxyUrl: config.local.test_domain + ':3005/' + config.local.test_start_path + '/',
-          runType: 'runner', // browsers
-          config: 'tests/intern',
-          reporters: [ 'Runner'],
-          functionalSuites: [ 'tests/functional/**/*' ]
-        }
-      }
-    },
-
-    selenium_standalone: {
-      options: {
-        stopOnExit: true
-      },
-
-      dev: {
-        seleniumVersion: '2.49.1',
-        seleniumDownloadURL: 'http://selenium-release.storage.googleapis.com',
-        drivers: {
-          chrome: {
-            version: '2.21',
-            arch: process.arch,
-            baseURL: 'http://chromedriver.storage.googleapis.com'
-          },
-          ie: {
-            version: '2.53.0',
-            arch: 'ia32',
-            baseURL: 'http://selenium-release.storage.googleapis.com'
-          }
-        }
-      }
-    },
 
     watch: {
       browserify_vendor: {
@@ -121,17 +75,6 @@ module.exports = function(grunt) {
             '../layouts-core/bundles/LayoutsAdminBundle/Resources/views/app/**/*.twig',
             '../layouts-core/bundles/LayoutsBundle/Resources/views/**/*.twig'
           ]
-        }
-      },
-
-      test: {
-        options: {
-          port: 3005,
-          ghostMode: false,
-          watchTask: true,
-          notify: false,
-          startPath: config.local.test_start_path,
-          proxy: config.local.test_domain
         }
       }
     },
@@ -313,10 +256,6 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      fixtures: {
-        command: 'tests/load_fixtures.sh <%= config.local.db.host %> <%= config.local.db.user %> <%= config.local.db.password %> <%= config.local.db.name %>'
-      },
-
       dev: {
         command: [
           'ln -s ../../../../app/fonts <%= config.dev %>/fonts',
@@ -368,26 +307,6 @@ module.exports = function(grunt) {
       'copy:dist',
       'uglify:dist'
     ]);
-  });
-
-  // To use, install Selenium
-  // grunt selenium_standalone:dev:install
-  grunt.registerTask('test', function(target) {
-    var tasks = [];
-
-    if(!target || target == 'unit'){
-      tasks.push('intern:unit');
-    }
-
-    if(!target || target == 'functional'){
-      tasks.push('shell:fixtures');
-      tasks.push('fast_build');
-      tasks.push('browserSync:test');
-      tasks.push('selenium_standalone:dev:start');
-      tasks.push('intern:functional');
-    }
-
-    grunt.task.run(tasks);
   });
 
   grunt.registerTask('default', ['server']);

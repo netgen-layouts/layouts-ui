@@ -8,7 +8,7 @@ var _ = require('underscore');
 var Backbone = require('./extended/backbone_override');
 
 Backbone.$ = jQuery;
-Backbone.LocalStorage = require('backbone.localstorage');
+Backbone.LocalStorage = require('backbone.localstorage').LocalStorage;
 
 var CoreExtend = {
   utils: utils,
