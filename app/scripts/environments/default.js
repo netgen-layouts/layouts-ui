@@ -10,7 +10,7 @@ function normalize_path(path) {
 var self = module.exports = {
   bm_base_path: $('meta[name="nglayouts-route-prefix"]').attr('content'),
   bm_base_app_path: '/app/',
-  bm_base_api_path: '/api/v1/',
+  bm_base_api_path: '/api/app/',
 
   bm_api_url: function(path) {
     return normalize_path(self.bm_base_path + self.bm_base_api_path + path);
