@@ -1,5 +1,6 @@
 'use strict';
 
+var Env = require('../environments/default');
 var Core = require('../core');
 var $ = Core.$;
 
@@ -30,6 +31,8 @@ module.exports = Core.View.extend({
     'click .set-item-position': '$set_item_position',
     'click .js-cancel-position': '$cancel_item_position',
     'click .js-save-position': '$save_item_position',
+    'click .override-item-view-type': '$override_item_view_type',
+    'click .override-slot-view-type': '$override_slot_view_type',
     'keydown .item-position-input': '$position_input_keypress',
   },
 
@@ -95,6 +98,62 @@ module.exports = Core.View.extend({
     }
     if (!isNaN(newPosition)) {
       newPosition !== this.model.get('position') ? this.$move(newPosition) : this.$cancel_item_position();
+    }
+  },
+
+  $override_item_view_type: function(e){
+    e && e.preventDefault();
+    return new Core.ModalForm({
+      url: Env.bm_app_url('/collections/item/' + this.model.id + '/form/edit/view_type'),
+      model: this.model,
+    }).open();
+  },
+
+  createSlot: function() {
+    $.ajax({
+      url: Env.bm_api_url('/collections/' + this.model.collection.bm_collection.get('collection_id') + '/slots'),
+      method: 'POST',
+      headers: {
+        'X-CSRF-Token': Core.g.config.get('csrf_token'),
+      },
+      contentType: 'application/json',
+      data: JSON.stringify({
+        position: this.model.get('position'),
+      }),
+    }).done(function(data) {
+      this.model.set('slot_id', data.id);
+      this.$override_slot_view_type(null, true);
+    }.bind(this));
+  },
+
+  deleteSlot: function() {
+    $.ajax({
+      url: Env.bm_api_url('/collections/slots/' + this.model.get('slot_id')),
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-Token': Core.g.config.get('csrf_token'),
+      },
+    }).done(function(){
+      this.model.set('slot_id', null);
+    }.bind(this));
+  },
+
+  $override_slot_view_type: function(e, shouldDeleteSlot){
+    e && e.preventDefault();
+    var self = this;
+    var slotId = this.model.get('slot_id');
+    if (!slotId) {
+      this.createSlot();
+    } else {
+      return new Core.ModalForm({
+        url: Env.bm_app_url('/collections/slot/' + this.model.get('slot_id') + '/form/edit/view_type'),
+        model: self.model,
+        prevent_model_fetch: true,
+      }).on('cancel', function(){
+        if (shouldDeleteSlot) self.deleteSlot();
+      }).on('save:success', function(){
+        self.bm_collection_model.fetch_results();
+      }).open();
     }
   },
 

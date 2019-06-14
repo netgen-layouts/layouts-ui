@@ -19,6 +19,8 @@ module.exports = Core.ModalForm = Modal.extend({
       backdrop: 'static'
     }, options.modal_options);
 
+    this.prevent_model_fetch = options.prevent_model_fetch || false;
+
     this.listenTo(Core.router, 'route', this.close);
 
     this.on('save:success', function(){
@@ -42,7 +44,7 @@ module.exports = Core.ModalForm = Modal.extend({
     var via = this.via || 'save';
     this.model.trigger.apply(this.model, [via+':start'].concat(_.toArray(arguments)) );
     this.close();
-    this.model.fetch();
+    if (!this.prevent_model_fetch) this.model.fetch();
   },
 
   on_error: function(xhr){

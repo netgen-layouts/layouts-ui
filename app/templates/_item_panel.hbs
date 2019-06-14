@@ -11,6 +11,15 @@
       </span>
     </div>
   {{/unless}}
+  {{#ifCond item.item_view_type '||' item.slot_view_type}}
+    <div class="status-icon">
+      <span class="ngl-tooltip"
+        title="{{#if item.item_view_type}}<div>Overriden item view type to {{#replace "_" " "}}{{item.item_view_type}}{{/replace}}.</div>{{/if}}
+        {{#if item.slot_view_type}}<div>Overriden slot view type to {{#replace "_" " "}}{{item.slot_view_type}}{{/replace}}.</div>{{/if}}">
+        <i class="material-icons">error_outline</i>
+      </span>
+    </div>
+  {{/ifCond}}
   <div class="controls">
     {{#if item.has_menu}}
       <div class="dropdown">
@@ -21,6 +30,10 @@
           {{#unless item.is_dynamic}}
             <li><a class="set-item-position">Set position</a></li>
           {{/unless}}
+          {{#unless item.is_dynamic}}
+            <li><a class="override-item-view-type">Override item view type</a></li>
+          {{/unless}}
+          <li><a class="override-slot-view-type">Override slot view type</a></li>
           {{#if item.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
         </ul>
       </div>
