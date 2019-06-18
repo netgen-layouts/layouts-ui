@@ -7,6 +7,12 @@
     "url": "https://github.com/netgen-layouts/layouts-ui.git"
   },
   "main": "app/scripts/main.js",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "autoprefixer": "^9.5.1",
     "grunt": "^1.0.4",
