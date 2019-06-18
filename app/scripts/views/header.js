@@ -109,6 +109,10 @@ module.exports = Core.View.extend({
         body: 'What should be done with caches after layout publish?',
         apply_text: 'Clear caches',
         cancel_text: 'Do not clear caches',
+        modal_options: {
+          keyboard: false,
+          backdrop: 'static'
+        }
       }).on('apply', function(){
         self.start_publish(continueFunction, {clearCache: true});
       }).on('cancel', function(){
