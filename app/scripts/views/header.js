@@ -90,22 +90,39 @@ module.exports = Core.View.extend({
 
   publish_layout: function(e){
     e.preventDefault();
-    this.start_publish(this.model.publish.bind(this.model));
+    this.pre_publish(this.model.publish.bind(this.model));
   },
 
   publish_and_continue: function(e){
     e.preventDefault();
     // Core.router.navigate_to('layout', { type: 'publish', id: this.model.id}, {trigger: false});
 
-    this.start_publish(this.model.publish_and_continue.bind(this.model));
-
+    this.pre_publish(this.model.publish_and_continue.bind(this.model));
   },
 
-  start_publish: function(continueFunction){
-    Core.trigger("loading-overlay:show")
+  pre_publish: function(continueFunction) {
+    var self = this;
+    Core.trigger("loading-overlay:show");
+    if (Core.g.config.get('automatic_cache_clear') !== true) {
+      return new Core.Modal({
+        title: 'Automatic cache clear for this site is turned off',
+        body: 'What should be done with caches after layout publish?',
+        apply_text: 'Clear caches',
+        cancel_text: 'Do not clear caches',
+      }).on('apply', function(){
+        self.start_publish(continueFunction, {clearCache: true});
+      }).on('cancel', function(){
+        self.start_publish(continueFunction);
+      }).open();
+    } else {
+      self.start_publish(continueFunction);
+    }
+  },
+
+  start_publish: function(continueFunction, options){
     setTimeout(function(){
       if ($.active === 0) {
-        continueFunction();
+        continueFunction(options);
         return;
       }
 
@@ -113,11 +130,10 @@ module.exports = Core.View.extend({
         if ($.active === 0){
 
           clearInterval(intervalId);
-          continueFunction();
+          continueFunction(options);
         }
       }.bind(this), 100)
     }, 1000);
-
   },
 
   save_and_close: function(e){

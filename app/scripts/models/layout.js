@@ -83,18 +83,23 @@ module.exports = BmModel.extend({
   },
 
   publish: function(opts){
+    var options = opts || {};
+    var queryParams = options.clearCache ? '?clearCache=true' : '';
     return this.save(null, $.extend({
       via: 'publish',
       method: 'POST',
+      url: this.url('publish') + queryParams,
       patch: true
     }, opts));
   },
 
-  publish_and_continue: function(){
-    return this.publish({
+  publish_and_continue: function(opts){
+    var options = opts || {};
+    var queryParams = options.clearCache ? '?clearCache=true' : '';
+    return this.publish($.extend({
       via: 'publish_and_continue',
-      url: this.url('publish')
-    }).done(this.create_new_draft.bind(this))
+      url: this.url('publish') + queryParams,
+    }, options)).done(this.create_new_draft.bind(this))
   },
 
   discard: function(){
