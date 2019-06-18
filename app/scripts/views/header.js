@@ -105,8 +105,8 @@ module.exports = Core.View.extend({
     Core.trigger("loading-overlay:show");
     if (Core.g.config.get('automatic_cache_clear') !== true) {
       return new Core.Modal({
-        title: 'Automatic cache clear for this site is turned off',
-        body: 'What should be done with caches after layout publish?',
+        title: 'Cache clearing',
+        body: 'Automatic cache clear for this site is turned off. Do you want to clear caches after publish?',
         apply_text: 'Clear caches',
         cancel_text: 'Do not clear caches',
         modal_options: {
