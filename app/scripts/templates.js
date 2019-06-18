@@ -41,7 +41,7 @@ Handlebars.registerPartial("item_panel", Handlebars.template({"1":function(conta
     + ((stack1 = Handlebars.r(helpers,'if').call(alias1,((stack1 = (depth0 != null ? Handlebars.r(depth0,'item') : depth0)) != null ? Handlebars.r(stack1,'item_view_type') : stack1),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n        "
     + ((stack1 = Handlebars.r(helpers,'if').call(alias1,((stack1 = (depth0 != null ? Handlebars.r(depth0,'item') : depth0)) != null ? Handlebars.r(stack1,'slot_view_type') : stack1),{"name":"if","hash":{},"fn":container.program(20, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\">\n        <i class=\"material-icons\">error_outline</i>\n      </span>\n    </div>\n";
+    + "\">\n        <i class=\"material-icons\">info_outlined</i>\n      </span>\n    </div>\n";
 },"17":function(container,depth0,helpers,partials,data) {
     var stack1;
 
