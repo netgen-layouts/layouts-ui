@@ -255,8 +255,14 @@ module.exports = function(grunt) {
     },
 
     shell: {
+      dist: {
+        command: [
+          'ln -s ../../../node_modules/@netgen/content-browser-ui/bundle/Resources/public/media <%= config.dist %>/media',
+        ].join('\n')
+      },
       dev: {
         command: [
+          'ln -s ../../../../node_modules/@netgen/content-browser-ui/bundle/Resources/public/media <%= config.dev %>/media',
           'ln -s ../../../../app/fonts <%= config.dev %>/fonts',
           'ln -s ../../../../app/images <%= config.dev %>/images'
         ].join('\n')
@@ -304,7 +310,8 @@ module.exports = function(grunt) {
       'concurrent:dist',
       'postcss:dist',
       'copy:dist',
-      'uglify:dist'
+      'uglify:dist',
+      'shell:dist'
     ]);
   });
 
