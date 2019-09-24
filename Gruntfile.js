@@ -237,6 +237,12 @@ module.exports = function(grunt) {
             cwd: 'node_modules/ckeditor',
             src: '**',
             dest: '<%= config.dist %>/vendor/ckeditor'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/@netgen/content-browser-ui/bundle/Resources/public/media',
+            src: '**',
+            dest: '<%= config.dist %>/media'
           }
         ]
       },
@@ -255,11 +261,6 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      dist: {
-        command: [
-          'ln -s ../../../node_modules/@netgen/content-browser-ui/bundle/Resources/public/media <%= config.dist %>/media',
-        ].join('\n')
-      },
       dev: {
         command: [
           'ln -s ../../../../node_modules/@netgen/content-browser-ui/bundle/Resources/public/media <%= config.dev %>/media',
@@ -310,8 +311,7 @@ module.exports = function(grunt) {
       'concurrent:dist',
       'postcss:dist',
       'copy:dist',
-      'uglify:dist',
-      'shell:dist'
+      'uglify:dist'
     ]);
   });
 
