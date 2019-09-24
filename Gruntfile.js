@@ -237,6 +237,12 @@ module.exports = function(grunt) {
             cwd: 'node_modules/ckeditor',
             src: '**',
             dest: '<%= config.dist %>/vendor/ckeditor'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/@netgen/content-browser-ui/bundle/Resources/public/media',
+            src: '**',
+            dest: '<%= config.dist %>/media'
           }
         ]
       },
@@ -257,6 +263,7 @@ module.exports = function(grunt) {
     shell: {
       dev: {
         command: [
+          'ln -s ../../../../node_modules/@netgen/content-browser-ui/bundle/Resources/public/media <%= config.dev %>/media',
           'ln -s ../../../../app/fonts <%= config.dev %>/fonts',
           'ln -s ../../../../app/images <%= config.dev %>/images'
         ].join('\n')
