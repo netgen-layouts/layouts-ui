@@ -192,7 +192,8 @@ module.exports = function(grunt) {
       dist: {
         options: {
           compress: {
-            drop_console: true
+            drop_console: true,
+            inline: false,
           }
         },
         src: '<%= config.dev %>/js/netgen-layouts.js',
