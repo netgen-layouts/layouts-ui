@@ -10,8 +10,12 @@ branches:
     - master
     - /^\d.\d+$/
 
+install:
+  - composer install
+  - yarn install
+
 before_script:
-  - npm install -g grunt-cli
+  - yarn global add grunt-cli
   - cp grunt.json.dist grunt.json
 
 script:
