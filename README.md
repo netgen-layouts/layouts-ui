@@ -5,8 +5,8 @@ This repository contains the user interface for Netgen Layouts.
 ## Requirements
 
 * NodeJS
-* NPM / Yarn
-* Grunt CLI (`npm install -g grunt-cli`)
+* Yarn
+* Grunt CLI (`yarn global add grunt-cli`)
 
 ## First time build configuration
 
