@@ -4,7 +4,9 @@ This repository contains the user interface for Netgen Layouts.
 
 ## Requirements
 
+* PHP
 * NodeJS
+* Composer
 * Yarn
 * Grunt CLI (`yarn global add grunt-cli`)
 
@@ -19,10 +21,17 @@ preconfigured with a correct value.
 
 ## Development build
 
+Building the project requires you to have [Composer](https://getcomposer.org/download/)
+installed. Since this package and its dependencies are not usable standalone,
+they are not published on NPM registry. Instead, Composer is used to manage
+version dependencies. When you use Yarn to install JavaScript dependencies, they
+are symlinked from the Composer `vendor` folder to `node_modules`.
+
 To build development assets and start watching files for changes, just run
 Grunt without any arguments:
 
 ```
+$ composer install
 $ yarn install
 $ grunt
 ```
@@ -34,6 +43,7 @@ This will place all generated assets into `bundle/Resources/public/dev` folder.
 To build the production assets, run Grunt with the following:
 
 ```
+$ composer install
 $ yarn install
 $ grunt build
 ```
