@@ -1,1 +1,14 @@
-<svg viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><g fill-rule="nonzero"><path d="M26 22.516H0l4.334 7.506h17.333L26 22.516z" fill="#5bc5dd"/><path d="M0 22.516L13 0l4.333 7.506L4.334 30.022 0 22.516z" fill="#009ac7"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 82 82">
+  <defs>
+    <path id="layouts-logo-mark_color-a" d="M0.000112549018,40.7697562 C0.000112549018,63.2857499 18.2533122,81.5383868 40.769306,81.5383868 C63.2851872,81.5383868 81.5383868,63.2857499 81.5383868,40.7697562 C81.5383868,18.2533122 63.2851872,0.000112549018 40.769306,0.000112549018 C18.2533122,0.000112549018 0.000112549018,18.2533122 0.000112549018,40.7697562 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#A477FC" d="M81.5383868,40.769306 C81.5383868,63.2852997 63.2851872,81.5384994 40.7691934,81.5384994 C18.2531997,81.5384994 4.97379915e-14,63.2852997 4.97379915e-14,40.769306 C4.97379915e-14,18.2533122 18.2531997,0.000112549018 40.7691934,0.000112549018 C63.2851872,0.000112549018 81.5383868,18.2533122 81.5383868,40.769306"/>
+    <mask id="layouts-logo-mark_color-b" fill="#fff">
+      <use xlink:href="#layouts-logo-mark_color-a"/>
+    </mask>
+    <polygon fill="#FFF" points="35.142 56.511 27.567 59.299 27.567 0 35.142 0" mask="url(#layouts-logo-mark_color-b)"/>
+    <polygon fill="#FFF" points="42.718 53.685 50.293 53.685 50.293 0 42.718 0" mask="url(#layouts-logo-mark_color-b)"/>
+    <polygon fill="#000" points="50.293 40.654 27.567 59.3 82.629 59.3 82.629 40.654" mask="url(#layouts-logo-mark_color-b)"/>
+  </g>
+</svg>
