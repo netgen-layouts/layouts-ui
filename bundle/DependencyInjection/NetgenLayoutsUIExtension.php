@@ -25,7 +25,7 @@ final class NetgenLayoutsUIExtension extends Extension implements PrependExtensi
         );
 
         $prependConfigs = [
-            'framework/assets.yml' => 'framework',
+            'framework/assets.yaml' => 'framework',
         ];
 
         foreach ($prependConfigs as $configFile => $prependConfig) {
