@@ -6,6 +6,7 @@
   .btn {
     border-radius: $borderRadius;
     padding: .5em 1.125em;
+    transition: background-color .2s;
     .material-icons {
       font-size: 1.7142857143em;
       vertical-align: middle;
@@ -34,6 +35,16 @@
     &:focus,
     &.focus {
       color: darken($btnprimary, 5%);
+    }
+  }
+  .btn-link-white {
+    color: #fff;
+    background: transparent;
+    &:hover,
+    &:focus,
+    &.focus {
+      color: #fff;
+      text-decoration: underline;
     }
   }
   .btn-danger {

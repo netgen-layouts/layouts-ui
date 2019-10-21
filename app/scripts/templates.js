@@ -7,7 +7,7 @@ Handlebars.registerPartial("discard_publish", Handlebars.template({"1":function(
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<button class=\"btn btn-link js-discard\">Discard</button>\n<button class=\"btn btn-primary js-publish\">Publish layout</button>\n<div class=\"dropdown\">\n  <button class=\"dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\"><i class=\"material-icons\">more_horiz</i></button>\n  <ul class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">\n    <li><a href=\"#\" class=\"js-publish-and-continue\">Publish and continue editing</a></li>\n    <li><a href=\"#\" class=\"js-save-and-close\">Save draft and close</a></li>\n    "
+  return "<button class=\"btn btn-link-white js-discard\">Discard</button>\n<button class=\"btn btn-primary js-publish\">Publish layout</button>\n<div class=\"dropdown\">\n  <button class=\"dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\"><i class=\"material-icons\">more_horiz</i></button>\n  <ul class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">\n    <li><a href=\"#\" class=\"js-publish-and-continue\">Publish and continue editing</a></li>\n    <li><a href=\"#\" class=\"js-save-and-close\">Save draft and close</a></li>\n    "
     + ((stack1 = container.invokePartial(Handlebars.r(partials,'overrides/layout_additional_actions'),depth0,{"name":"overrides/layout_additional_actions","fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "\n  </ul>\n</div>\n";
 },"usePartial":true,"useData":true}));
@@ -394,7 +394,7 @@ this["JST"]["header"] = Handlebars.template({"1":function(container,depth0,helpe
 
   return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"change_type",{"name":"eq","hash":{},"fn":container.program(22, data, 0),"inverse":container.program(24, data, 0),"data":data})) != null ? stack1 : "");
 },"22":function(container,depth0,helpers,partials,data) {
-    return "                <button class=\"btn btn-link js-back\">Cancel</button>\n";
+    return "                <button class=\"btn btn-link-white js-back\">Cancel</button>\n";
 },"24":function(container,depth0,helpers,partials,data) {
     return "                <button class=\"btn btn-primary btn-icon-left js-back\"><i class=\"material-icons\">keyboard_arrow_left</i>Back</button>\n";
 },"26":function(container,depth0,helpers,partials,data) {
