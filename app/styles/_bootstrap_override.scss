@@ -2,6 +2,10 @@
   /* bootstrap override */
   a {
     color: $btnprimary;
+    &:hover,
+    &:focus {
+      color: lighten($btnprimary, 5%);
+    }
   }
   .btn {
     border-radius: $borderRadius;
