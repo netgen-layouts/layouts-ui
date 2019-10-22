@@ -124,7 +124,7 @@ Handlebars.registerPartial("item_panel", Handlebars.template({"1":function(conta
 },"usePartial":true,"useData":true}));
 
 Handlebars.registerPartial("layouts/app_header", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<header class=\"app-header\">\n  <div class=\"app-center\"></div>\n</header>\n";
+    return "<header class=\"app-header\"></header>\n";
 },"useData":true}));
 
 Handlebars.registerPartial("layouts/sidebar", Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -336,14 +336,16 @@ this["JST"]["form_modal"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main
 },"useData":true});
 
 this["JST"]["header"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "";
+},"3":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "        <a href=\"#\" class=\"js-normal-mode\">"
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? Handlebars.r(depth0,'base_layout') : depth0)) != null ? Handlebars.r(stack1,'name') : stack1), depth0))
     + "</a>\n        <span>&gt;</span>\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "<i class=\"material-icons shared-icon\">share</i>";
 },"5":function(container,depth0,helpers,partials,data) {
+    return "<i class=\"material-icons shared-icon\">share</i>";
+},"7":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "        <span class=\"show-form ngl-tooltip js-show-form\" title=\""
@@ -351,11 +353,9 @@ this["JST"]["header"] = Handlebars.template({"1":function(container,depth0,helpe
     + "\"><span class=\"js-layout-name\" data-placement=\"bottom\">"
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'name') : stack1), depth0))
     + "</span> <i class=\"material-icons\">edit</i></span>\n        "
-    + ((stack1 = container.invokePartial(Handlebars.r(partials,'overrides/header_additional_name'),depth0,{"name":"overrides/header_additional_name","fn":container.program(6, data, 0),"inverse":container.noop,"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + ((stack1 = container.invokePartial(Handlebars.r(partials,'overrides/header_additional_name'),depth0,{"name":"overrides/header_additional_name","fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
     + "\n";
-},"6":function(container,depth0,helpers,partials,data) {
-    return "";
-},"8":function(container,depth0,helpers,partials,data) {
+},"9":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "        <span class=\"show-form ngl-tooltip js-layout-name\" title=\""
@@ -363,55 +363,59 @@ this["JST"]["header"] = Handlebars.template({"1":function(container,depth0,helpe
     + "\">"
     + alias2(alias1(((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'name') : stack1), depth0))
     + "</span>\n";
-},"10":function(container,depth0,helpers,partials,data) {
+},"11":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return ((stack1 = container.invokePartial(Handlebars.r(partials,'discard_publish'),depth0,{"name":"discard_publish","data":data,"indent":"        ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-},"12":function(container,depth0,helpers,partials,data) {
+},"13":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"edit_master",{"name":"eq","hash":{},"fn":container.program(13, data, 0),"inverse":container.program(15, data, 0),"data":data})) != null ? stack1 : "");
-},"13":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"edit_master",{"name":"eq","hash":{},"fn":container.program(14, data, 0),"inverse":container.program(16, data, 0),"data":data})) != null ? stack1 : "");
+},"14":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "          <button class=\"btn btn-primary btn-icon-left js-back\"><i class=\"material-icons\">keyboard_arrow_left</i>Back</button>\n"
     + ((stack1 = container.invokePartial(Handlebars.r(partials,'discard_publish'),depth0,{"name":"discard_publish","data":data,"indent":"          ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
-},"15":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"linking",{"name":"eq","hash":{},"fn":container.program(16, data, 0),"inverse":container.program(18, data, 0),"data":data})) != null ? stack1 : "")
-    + "\n";
 },"16":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"linking",{"name":"eq","hash":{},"fn":container.program(17, data, 0),"inverse":container.program(19, data, 0),"data":data})) != null ? stack1 : "")
+    + "\n";
+},"17":function(container,depth0,helpers,partials,data) {
     return "            <button class=\"btn btn-primary btn-icon-left js-soft-back\"><i class=\"material-icons\">keyboard_arrow_left</i>Back</button>\n";
-},"18":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"translate",{"name":"eq","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data})) != null ? stack1 : "");
 },"19":function(container,depth0,helpers,partials,data) {
-    return "              <button class=\"btn btn-primary btn-icon-left js-normal-mode\"><i class=\"material-icons\">keyboard_arrow_left</i>Back</button>\n";
-},"21":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"change_type",{"name":"eq","hash":{},"fn":container.program(22, data, 0),"inverse":container.program(24, data, 0),"data":data})) != null ? stack1 : "");
+  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"translate",{"name":"eq","hash":{},"fn":container.program(20, data, 0),"inverse":container.program(22, data, 0),"data":data})) != null ? stack1 : "");
+},"20":function(container,depth0,helpers,partials,data) {
+    return "              <button class=\"btn btn-primary btn-icon-left js-normal-mode\"><i class=\"material-icons\">keyboard_arrow_left</i>Back</button>\n";
 },"22":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = Handlebars.r(helpers,'eq').call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"change_type",{"name":"eq","hash":{},"fn":container.program(23, data, 0),"inverse":container.program(25, data, 0),"data":data})) != null ? stack1 : "");
+},"23":function(container,depth0,helpers,partials,data) {
     return "                <button class=\"btn btn-link-white js-back\">Cancel</button>\n";
-},"24":function(container,depth0,helpers,partials,data) {
+},"25":function(container,depth0,helpers,partials,data) {
     return "                <button class=\"btn btn-primary btn-icon-left js-back\"><i class=\"material-icons\">keyboard_arrow_left</i>Back</button>\n";
-},"26":function(container,depth0,helpers,partials,data) {
+},"27":function(container,depth0,helpers,partials,data) {
     return "      <button class=\"btn btn-primary btn-icon-left js-change-layout-apply\">Apply</button>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
 
-  return "<div class=\"bm-header\">\n  <div class=\"layout-name\">\n\n"
-    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,(depth0 != null ? Handlebars.r(depth0,'base_layout') : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+  return "<div class=\"app-logo-box\"><div class=\"app-logo ngl-tooltip\" title=\""
+    + container.escapeExpression(container.lambda((depth0 != null ? Handlebars.r(depth0,'layouts_version') : depth0), depth0))
+    + "\"></div></div>\n<div class=\"bm-header\">\n  <div class=\"layout-name\">\n\n      "
+    + ((stack1 = container.invokePartial(Handlebars.r(partials,'overrides/header'),depth0,{"name":"overrides/header","fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "\n\n"
+    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,(depth0 != null ? Handlebars.r(depth0,'base_layout') : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n      "
-    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'shared') : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,((stack1 = (depth0 != null ? Handlebars.r(depth0,'model') : depth0)) != null ? Handlebars.r(stack1,'shared') : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n\n"
-    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,(depth0 != null ? Handlebars.r(depth0,'normal_editing') : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(8, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,(depth0 != null ? Handlebars.r(depth0,'normal_editing') : depth0),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.program(9, data, 0),"data":data})) != null ? stack1 : "")
     + "\n\n  </div>\n  <div class=\"actions\">\n"
-    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,(depth0 != null ? Handlebars.r(depth0,'normal_editing') : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(12, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = Handlebars.r(helpers,'if').call(alias1,(depth0 != null ? Handlebars.r(depth0,'normal_editing') : depth0),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(13, data, 0),"data":data})) != null ? stack1 : "")
     + "\n\n"
-    + ((stack1 = Handlebars.r(helpers,'eq').call(alias1,((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"change_type",{"name":"eq","hash":{},"fn":container.program(26, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = Handlebars.r(helpers,'eq').call(alias1,((stack1 = (depth0 != null ? Handlebars.r(depth0,'state') : depth0)) != null ? Handlebars.r(stack1,'mode') : stack1),"change_type",{"name":"eq","hash":{},"fn":container.program(27, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n\n\n  </div>\n</div>\n";
 },"usePartial":true,"useData":true});
 
@@ -432,12 +436,8 @@ this["JST"]["layout_link_chooser"] = Handlebars.template({"1":function(container
 },"useData":true,"useDepths":true});
 
 this["JST"]["layouts/application"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var alias1=container.escapeExpression;
-
-  return "<div class=\"loading-overlay\"></div>\n\n<aside class=\"left-toolbar\">\n  <div class=\"app-logo-box\"><div class=\"app-logo ngl-tooltip\" title=\""
-    + alias1(container.lambda((depth0 != null ? Handlebars.r(depth0,'layouts_version') : depth0), depth0))
-    + "\"></div></div>\n\n <div class=\"top-menu\">\n  <div class=\"blocks\"></div>\n </div>\n\n <div class=\"bottom-menu\"></div>\n</aside>\n\n\n"
-    + alias1(Handlebars.r(helpers,'yield').call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"yield","hash":{},"data":data}))
+    return "<div class=\"loading-overlay\"></div>\n\n<aside class=\"left-toolbar\">\n <div class=\"top-menu\">\n  <div class=\"blocks\"></div>\n </div>\n\n <div class=\"bottom-menu\"></div>\n</aside>\n\n\n"
+    + container.escapeExpression(Handlebars.r(helpers,'yield').call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"yield","hash":{},"data":data}))
     + "\n";
 },"useData":true});
 

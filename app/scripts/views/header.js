@@ -37,6 +37,7 @@ module.exports = Core.View.extend({
   },
 
   render: function(){
+    this.context.layouts_version = Core.g.version;
     this.context.normal_editing = Core.state.in_mode('edit', 'edit_shared');
     Core.View.prototype.render.apply(this, arguments);
     this.$name_input = this.$('.js-name');

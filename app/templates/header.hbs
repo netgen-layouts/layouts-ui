@@ -1,5 +1,8 @@
+<div class="app-logo-box"><div class="app-logo ngl-tooltip" title="{{layouts_version}}"></div></div>
 <div class="bm-header">
   <div class="layout-name">
+
+      {{#> overrides/header}}{{!-- override with partial --}}{{/overrides/header}}
 
       {{#if base_layout}}
         <a href="#" class="js-normal-mode">{{base_layout.name}}</a>

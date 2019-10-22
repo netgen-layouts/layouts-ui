@@ -2,8 +2,9 @@
 .app-header {
   position: fixed;
   top: 0;
-  left: $leftWidth;
-  right: 0;
+  left: 0;
+  width: 100%;
+  padding-left: $leftWidth;
   height: $topHeight;
   background: $toolbarbg2;
   color: #fff;
@@ -11,8 +12,6 @@
   .bm-header {
     display: flex;
   }
-
-
   .dropdown {
     display: inline-block;
     button {
@@ -29,13 +28,18 @@
       border-top-color: #fff;
     }
   }
-
   .main_language {
-    margin-left: 2.5rem;
+    padding-left: 1em;
+    font-size: .8125em;
+    color: #999;
+    height: $topHeight;
+    border-left: 2px solid $contentbg;
+    display: inline-flex;
+    align-items: center;
   }
   .layout-name {
     flex: 1;
-    padding: 0 $gutter;
+    padding: 0 $gutter 0 0;
     height: $topHeight;
     display: flex;
     align-items: center;
@@ -45,7 +49,7 @@
     .show-form {
       display: inline-block;
       font-size: 1em;
-      margin: 0 .5em;
+      margin: 0 1em;
       i {
         color: $toolbarColor;
         margin-left: .25em;
@@ -70,17 +74,35 @@
   }
 }
 
+/* app logo */
+.app-logo-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: $leftWidth;
+  height: $topHeight;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $darkBg;
+}
+.app-logo {
+  display: block;
+  background: transparent url('../images/layouts-logo.svg') no-repeat 50% 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 /* left toolbar */
 .left-toolbar {
   position: fixed;
-  top: 0;
+  top: $topHeight;
   left: 0;
   bottom: 0;
   width: $leftWidth;
   background: $toolbarbg1;
   color: $toolbarColor;
   z-index: 30;
-  padding-top: $topHeight;
   .disabler {
     background: rgba(64, 64, 64, .8);
   }
@@ -112,23 +134,6 @@
     .disable .disabler {
       display: block;
     }
-  }
-  .app-logo-box {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: $leftWidth;
-    height: $topHeight;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: $darkBg;
-  }
-  .app-logo {
-    display: block;
-    background: transparent url('../images/layouts-logo.svg') no-repeat 50% 50%;
-    width: 1.25rem;
-    height: 1.5rem;
   }
   .bottom-menu {
     position: absolute;

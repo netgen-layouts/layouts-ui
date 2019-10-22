@@ -28,8 +28,9 @@ module.exports = LayoutBasePage.extend({
 
     new HeaderView({
       model: Core.g.layout,
-      base_layout: this.base_layout
-    }).render_to('.app-center');
+      base_layout: this.base_layout,
+      el: '.app-header',
+    }).render();
 
     if(!layout.request.read.published && !layout.has('type')){
       this.create_new_draft();

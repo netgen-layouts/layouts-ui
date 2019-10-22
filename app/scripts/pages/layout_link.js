@@ -22,8 +22,9 @@ module.exports = LayoutBasePage.extend({
     });
 
     new HeaderView({
-      model: this.base_layout
-    }).render_to('.app-center');
+      model: this.base_layout,
+      el: '.app-header',
+    }).render();
 
     new LayoutLinkChooserView({
       collection: Core.g.shared_layouts,

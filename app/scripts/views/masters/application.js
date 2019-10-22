@@ -11,9 +11,7 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-
-    this.context.layouts_version = this.el.dataset.version;
-
+    Core.g.version = this.el.dataset.version;
     return this;
   },
 
