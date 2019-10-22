@@ -68,7 +68,7 @@ module.exports = Core.View.extend({
       overrides: browser_configuration,
       itemType: $browser_item_type.val(),
       onConfirm: function(selected){
-        var items = selected.map(function(item){
+        var items = selected.reverse().map(function(item){
           return {value: item.value, value_type: value_type, position: self.model.get('offset') };
         });
 
