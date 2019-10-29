@@ -2,7 +2,9 @@
 <div class="bm-header">
   <div class="layout-name">
 
-      {{#> overrides/header}}{{!-- override with partial --}}{{/overrides/header}}
+      {{#if normal_editing}}
+        {{#> overrides/header}}{{!-- override with partial --}}{{/overrides/header}}
+      {{/if}}
 
       {{#if base_layout}}
         <a href="#" class="js-normal-mode">{{base_layout.name}}</a>
