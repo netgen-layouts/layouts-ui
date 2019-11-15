@@ -16,6 +16,9 @@
     "require": {
         "netgen/content-browser-ui": "^1.0"
     },
+    "require-dev": {
+        "franzl/studio": "*"
+    },
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\LayoutsUIBundle\\": "bundle/"
