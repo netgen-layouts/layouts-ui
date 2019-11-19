@@ -131,14 +131,20 @@ module.exports = BmModel.extend({
 
 
     // For linked blocks
-    var zone_blocks_loaded = _.map(this.zones.linked(), function(zone){
-      return zone.load_blocks({data: {published: true}});
-    })
+    if (!this.get('linked_blocks_loaded')) {
+      var zone_blocks_loaded = _.map(this.zones.linked(), function(zone){
+        return zone.load_blocks({data: {published: true}});
+      })
+      this.set('linked_blocks_loaded', true);
+    }
 
-    zone_blocks_loaded.unshift(this.blocks.fetch({
-      data: opts.data,
-      remove: false
-    }));
+    if (!this.get('blocks_loaded')) {
+      zone_blocks_loaded.unshift(this.blocks.fetch({
+        data: opts.data,
+        remove: false
+      }));
+      this.set('blocks_loaded', true);
+    }
 
 
 
