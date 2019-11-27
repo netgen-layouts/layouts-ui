@@ -113,6 +113,7 @@ module.exports = BmModel.extend({
 
 
   create_new_draft: function(){
+    this.set('linked_blocks_loaded', false);
     return this.save(null, {
       via: 'draft',
       method: 'POST',
