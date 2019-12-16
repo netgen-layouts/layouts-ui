@@ -162,6 +162,7 @@ module.exports = Core.View.extend({
     if(Core.state.in_mode('edit_master')){
       Core.router.navigate_to('layout', {id: Core.router.params.draft_layout_id, type: 'edit'});
     }else{
+      Core.should_navigate_away = true;
       location.href = localStorage.getItem('ngl_referrer') || '/';
     }
 

@@ -120,6 +120,13 @@ _.extend(Core, {
 
     $(document).on('dblclick', '.app-logo-box', this.tdm);
 
+    window.addEventListener('beforeunload', function (e) {
+      if (Core.should_navigate_away || window.___browserSync___) return null; // don't show prompt if publishing, discarding or browsersync active
+      var confirmationMessage = 'There could be unsaved changes. Are you sure you want to leave?';
+
+      (e || window.event).returnValue = confirmationMessage;
+      return confirmationMessage;
+    });
   },
 
   dm: function() {
@@ -216,6 +223,7 @@ _.extend(Core, {
             body = 'You don\'t have permission to edit this layout.';
             apply_text = 'OK';
             on_apply = function() {
+              Core.should_navigate_away = true;
               location.href = localStorage.getItem('ngl_referrer') || '/';
             };
           } else {
@@ -312,21 +320,6 @@ window.onerror = function() {
   _.delay(Nprogress.done, 100);
   return false;
 }
-
-// Publishing layout is done via ajax and always triggers this - Disabled until further
-//
-// window.onbeforeunload = function (event) {
-//     if(!Core.$.active){return null;}
-//     var message = 'Some requests are still being processed. Are you sure you want to leave?';
-//     if (typeof event == 'undefined') {
-//       event = window.event;
-//     }
-//     if (event) {
-//       event.returnValue = message;
-//     }
-//     return message;
-// };
-
 
 window.Core = Core;
 

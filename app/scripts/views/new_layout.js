@@ -21,6 +21,7 @@ module.exports = Core.ModalForm.extend({
 
   $cancel: function(e){
     Core.Modal.prototype.$cancel.apply(this, arguments);
+    Core.should_navigate_away = true;
     location.href = localStorage.getItem('ngl_referrer') || '/';
     return this;
   },
