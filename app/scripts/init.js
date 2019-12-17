@@ -121,7 +121,7 @@ _.extend(Core, {
     $(document).on('dblclick', '.app-logo-box', this.tdm);
 
     window.addEventListener('beforeunload', function (e) {
-      if (Core.should_navigate_away || window.___browserSync___) return null; // don't show prompt if publishing, discarding or browsersync active
+      if (Core.should_navigate_away || process.env === 'development') return null; // don't show prompt if publishing, discarding or in dev mode
       var confirmationMessage = 'There could be unsaved changes. Are you sure you want to leave?';
 
       (e || window.event).returnValue = confirmationMessage;

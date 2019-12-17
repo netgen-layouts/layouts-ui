@@ -174,7 +174,12 @@ module.exports = function(grunt) {
         dest: '<%= config.dev %>/js/netgen-layouts.js',
         options: {
           browserifyOptions: {
-            debug: true
+            debug: true,
+            insertGlobalVars: {
+              process: function() {
+                return JSON.stringify({env: 'development'});
+              },
+            },
           }
         }
       },
@@ -183,7 +188,14 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/netgen-layouts.js',
         options: {
-          require: ['@netgen/content-browser-ui']
+          require: ['@netgen/content-browser-ui'],
+          browserifyOptions: {
+            insertGlobalVars: {
+              process: function() {
+                return JSON.stringify({env: 'production'});
+              },
+            },
+          },
         }
       }
     },
