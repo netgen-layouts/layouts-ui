@@ -26,7 +26,8 @@ module.exports =  Page.extend({
              })
              .then(function() {
                 return $.when(
-                  Core.g.layout.request && Core.g.layout.request.read ? true : Core.g.layout.fetch({data: {published: should_load_published }}),
+                  // Core.g.layout.request && Core.g.layout.request.read ? true : Core.g.layout.fetch({data: {published: should_load_published }}),
+                  Core.g.layout.fetch({data: {published: should_load_published }}),
                   Core.g.layout_types.fetch_once(),
                   draft_layout_id ? base_layout.fetch_once() : true
                 );
