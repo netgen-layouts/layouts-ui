@@ -30,7 +30,7 @@
     "grunt-sass": "^3.1.0",
     "grunt-shell": "^3.0.1",
     "grunt-svgmin": "^6.0.0",
-    "handlebars": "~4.0.14",
+    "handlebars": "~4.5.3",
     "matchdep": "^2.0.0",
     "node-sass": "^4.13.0"
   },
@@ -43,7 +43,7 @@
     "bootstrap-sass": "^3.4.1",
     "ckeditor4": "4.13.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
-    "handlebars": "~4.0.14",
+    "handlebars": "~4.5.3",
     "jquery": "^2.2.4",
     "jquery-ui": "~1.10.5",
     "moment": "^2.24.0",
