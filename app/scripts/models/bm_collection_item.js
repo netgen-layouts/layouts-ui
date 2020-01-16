@@ -34,8 +34,4 @@ module.exports = BmModel.extend({
     return this.get('visible') && this.get('cms_visible');
   },
 
-  has_menu: function(){
-    return this.get('cms_url') || this.can_remove_item() || !this.get('is_dynamic');
-  },
-
 });

@@ -21,23 +21,21 @@
     </div>
   {{/ifCond}}
   <div class="controls">
-    {{#if item.has_menu}}
-      <div class="dropdown">
-        <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
-        <ul class="dropdown-menu dropdown-menu-right">
-          {{#if item.cms_url}}<li><a href="{{item.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
-          {{#> overrides/item_additional_actions}}{{!-- override with partial --}}{{/overrides/item_additional_actions}}
-          {{#unless item.is_dynamic}}
-            <li><a class="set-item-position">Set position</a></li>
-          {{/unless}}
-          {{#unless item.is_dynamic}}
-            <li><a class="override-item-view-type">Override item view type</a></li>
-          {{/unless}}
-          <li><a class="override-slot-view-type">Override slot view type</a></li>
-          {{#if item.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
-        </ul>
-      </div>
-    {{/if}}
+    <div class="dropdown">
+      <button class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="material-icons">more_horiz</i></button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        {{#if item.cms_url}}<li><a href="{{item.cms_url}}" target="_blank" rel="noopener noreferrer">Edit in CMS</a></li>{{/if}}
+        {{#> overrides/item_additional_actions}}{{!-- override with partial --}}{{/overrides/item_additional_actions}}
+        {{#unless item.is_dynamic}}
+          <li><a class="set-item-position">Set position</a></li>
+        {{/unless}}
+        {{#unless item.is_dynamic}}
+          <li><a class="override-item-view-type">Override item view type</a></li>
+        {{/unless}}
+        <li><a class="override-slot-view-type">Override slot view type</a></li>
+        {{#if item.can_remove_item}}<li><a class="remove-item">Remove</a></li>{{/if}}
+      </ul>
+    </div>
     <div class="item-position">{{math item.position '+' 1}}</div>
   </div>
   {{#if item.editing_position}}
