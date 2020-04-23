@@ -16,6 +16,9 @@
     "require": {
         "netgen/content-browser-ui": "^1.2"
     },
+    "require-dev": {
+        "netgen/layouts-coding-standard": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\LayoutsUIBundle\\": "bundle/"
