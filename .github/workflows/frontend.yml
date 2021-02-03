@@ -9,7 +9,7 @@ on:
 
 jobs:
   frontend:
-    name: ${{ matrix.script }}
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
