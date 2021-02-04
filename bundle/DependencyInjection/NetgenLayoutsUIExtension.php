@@ -22,7 +22,7 @@ final class NetgenLayoutsUIExtension extends Extension implements PrependExtensi
     {
         $container->setParameter(
             'netgen_layouts.app.asset_version',
-            PrettyVersions::getVersion('netgen/layouts-ui')->getShortCommitHash()
+            PrettyVersions::getVersion('netgen/layouts-ui')->getShortReference()
         );
 
         $prependConfigs = [
