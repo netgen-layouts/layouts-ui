@@ -5,7 +5,7 @@ node_modules/
 tests/coverage/
 /vendor/
 **/Resources/public/dev/
-.php_cs.cache
+.php-cs-fixer.cache
 composer.lock
 grunt.json
 package-lock.json
