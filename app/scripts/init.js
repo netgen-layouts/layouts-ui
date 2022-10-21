@@ -253,6 +253,9 @@ _.extend(Core, {
               backdrop: 'static'
             }
           }).on('apply', on_apply).open();
+        } else {
+          Core.error_displayed = false;
+          ajax_errors[xhr.uid] = xhr;
         }
 
 
