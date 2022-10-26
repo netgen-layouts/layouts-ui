@@ -83,7 +83,7 @@ _.extend(Core, {
       var url = xhr.opts.url;
       var status = xhr.status;
       var handle_draft = status === 404 &&
-                        (url.match(/\/layouts\/\d+\?published=false/) || url.match(/\/layouts\/\d+\/draft/));
+                        (url.match(/\/layouts\/[\w-]+\?published=false/) || url.match(/\/layouts\/[\w-]+\/draft/));
 
       //Skip global error message for following errors
       if(status === 403 || handle_draft){
@@ -232,7 +232,7 @@ _.extend(Core, {
           }
         }
 
-        if(xhr.status === 404 && xhr.opts.url.match(/\/layouts\/\d+\/draft/)){
+        if(xhr.status === 404 && xhr.opts.url.match(/\/layouts\/[\w-]+\/draft/)){
           title =  'Layout does not exist';
           body = 'Layout you are trying to edit does not exist.';
           on_apply = function () {
@@ -240,7 +240,6 @@ _.extend(Core, {
           }
           apply_text = "Create new layout"
         }
-
 
         if(title){
          new Core.Modal({
@@ -253,7 +252,7 @@ _.extend(Core, {
               backdrop: 'static'
             }
           }).on('apply', on_apply).open();
-        } else {
+        } else if(xhr.status !== 404) {
           Core.error_displayed = false;
           ajax_errors[xhr.uid] = xhr;
         }
