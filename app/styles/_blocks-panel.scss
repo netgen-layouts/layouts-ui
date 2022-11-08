@@ -97,7 +97,7 @@
     @extend %icomoon;
   }
 
-  $blockTypes:  ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('markdown', '\e922'), ('button', '\e923'), ('column', '\e924'), ('two_columns', '\e901'), ('three_columns', '\e902'), ('four_columns', '\e903'), ('six_columns', '\e90c');
+  $blockTypes:  ('title', '\e916'), ('title_with_h3', '\e916'), ('text', '\e918'), ('map', '\e90d'), ('html_snippet', '\e90a'), ('list', '\e91a'), ('grid', '\e909'), ('slider', '\e913'), ('thumb_gallery', '\e915'), ('grid_gallery', '\e908'), ('sushi_bar', '\e914'), ('rich_text', '\e912'), ('external_video', '\e917'), ('full_view', '\e91d'), ('twig_block', '\e920'), ('ezcontent_field', '\e91c'), ('ibexa_content_field', '\e91c'), ('markdown', '\e922'), ('button', '\e923'), ('column', '\e924'), ('two_columns', '\e901'), ('three_columns', '\e902'), ('four_columns', '\e903'), ('six_columns', '\e90c');
 
   @each $block in $blockTypes {
     &.icn-#{nth($block, 1)} .font-icon::before {
