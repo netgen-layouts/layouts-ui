@@ -93,10 +93,13 @@ module.exports = Core.View.extend({
   render_form: function(response) {
     this.$el.html(response);
     var self = this;
-    $('[data-block].editing [data-inline-child], [data-block].editing .rich-text-editor, [data-block].editing .ace-editor, [data-block].editing .attr-hide').each(function() {
-      var name = $(this).data('attr');
-      self.$('[name*="[' + name + ']"]').parent().addClass('hidden');
-    });
+
+    if (Core.state.get('mode') !== 'preview') {
+      $('[data-block].editing [data-inline-child], [data-block].editing .rich-text-editor, [data-block].editing .ace-editor, [data-block].editing .attr-hide').each(function() {
+        var name = $(this).data('attr');
+        self.$('[name*="[' + name + ']"]').parent().addClass('hidden');
+      });
+    }
     this.$multiple_select_height();
 
     self.trigger_render();
