@@ -107,15 +107,15 @@ _.extend(Core, {
     this.setup_events();
 
 
-    Core.g.local_config.on('change:ngbmdev', function (m, s) {
-      $('#app')[s ? 'addClass' : 'removeClass']('ngbmdev');
+    Core.g.local_config.on('change:ngldev', function (m, s) {
+      $('#app')[s ? 'addClass' : 'removeClass']('ngldev');
     })
 
     $(function(){
       Core.load_additional_vars();
       Core.router = new Router();
       Core.Backbone.history.start();
-      Core.dm() && $('#app').addClass('ngbmdev');
+      Core.dm() && $('#app').addClass('ngldev');
     });
 
     $(document).on('dblclick', '.app-logo-box', this.tdm);
@@ -130,11 +130,11 @@ _.extend(Core, {
   },
 
   dm: function() {
-    return Core.g.local_config.get('ngbmdev');
+    return Core.g.local_config.get('ngldev');
   },
 
   tdm: function() {
-    Core.g.local_config.save({ngbmdev: !Core.dm() });
+    Core.g.local_config.save({ngldev: !Core.dm() });
   },
 
 
