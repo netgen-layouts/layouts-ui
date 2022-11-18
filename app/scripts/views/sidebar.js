@@ -18,6 +18,7 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'destroy', this.destroy);
     this.listenTo(this.model, 'restore:success', this.show_loader);
     this.listenTo(this.model, 'change:is_translatable', this.load);
+    this.listenTo(this.model, 'change:parameters', this.on_change_parameters);
     this.listenTo(Core, 'editing:unmark', this.destroy);
     this.listenTo(this, 'loaded', this.on_loaded);
     this.on('xeditable:apply:collection_type', this.$change_collection_type);
@@ -25,6 +26,14 @@ module.exports = Core.View.extend({
 
     this.xhrs = [];
     return this;
+  },
+
+  on_change_parameters: function() {
+    const hasContentFieldChanged = this.model._previousAttributes.parameters.content !== this.model.attributes.parameters.content
+    const isComponent = ['ibexa_component', 'ezcomponent'].includes(this.model.attributes.definition_identifier)
+    if(!hasContentFieldChanged || !isComponent) return;
+
+    this.load()
   },
 
   events: {
