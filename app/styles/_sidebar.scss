@@ -335,6 +335,16 @@
       .js-name {
         line-height: $btnHeight;
       }
+      .icon {
+        background: #595959;
+        transition: background .15s ease, color .15s ease;
+        padding: 0 1.5em;
+        border-radius: 0 0.125rem 0.125rem 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       &::after {
         background: hsl(0, 0, 35);
         line-height: $btnHeight;
