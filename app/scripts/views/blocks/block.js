@@ -29,6 +29,16 @@ module.exports = Core.View.extend(DndView).extend({
       this.setup_dom_element();
       this.render();
     }
+
+    const bc = new BroadcastChannel('publish_content');
+    bc.addEventListener('message', (event) => { 
+      const { contentId, blockId, locale } = event.data;
+
+      if(blockId !== this.model.id) return;
+      
+      this.reload_model();      
+      this.$edit();
+    });
   },
 
   reload_model: function(){
