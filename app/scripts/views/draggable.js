@@ -116,14 +116,20 @@ Draggable.prototype.create_new_block = function() {
     console.warn('Save in container');
     new_block.save({}, {
       url: new_block.url(attributes.parent_block_id)
-    });
+    })
+    .then(res => {
+      const blockModel = Core.g.layout.blocks.models.find(model => model.id === res.id)
+      blockModel.trigger('edit');
+    })
   }else{
     console.warn('Save')
-    new_block.save();
+    new_block.save()
+    .then(res => {
+      const blockModel = Core.g.layout.blocks.models.find(model => model.id === res.id)
+      blockModel.trigger('edit');
+    })
   }
-
-
-
+  
   //Remove draggable block_type element
   this.remove();
 };
