@@ -129,7 +129,7 @@ Draggable.prototype.create_new_block = function() {
       blockModel.trigger('edit');
     })
   }
-  
+
   //Remove draggable block_type element
   this.remove();
 };
