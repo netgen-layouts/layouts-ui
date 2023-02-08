@@ -42,7 +42,7 @@
     "bootstrap": "^3.4.1",
     "bootstrap-sass": "3.4.1",
     "ckeditor4": "4.13.1",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "handlebars": "~4.0.14",
     "jquery": "^2.2.4",
     "jquery-ui": "~1.10.5",
