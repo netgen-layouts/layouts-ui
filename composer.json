@@ -19,6 +19,9 @@
     "require-dev": {
         "netgen/layouts-coding-standard": "^2.0"
     },
+    "config": {
+        "allow-plugins": false
+    },
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\LayoutsUIBundle\\": "bundle/"
