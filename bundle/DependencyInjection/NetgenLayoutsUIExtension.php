@@ -15,9 +15,7 @@ use function file_get_contents;
 
 final class NetgenLayoutsUIExtension extends Extension implements PrependExtensionInterface
 {
-    public function load(array $configs, ContainerBuilder $container): void
-    {
-    }
+    public function load(array $configs, ContainerBuilder $container): void {}
 
     public function prepend(ContainerBuilder $container): void
     {
