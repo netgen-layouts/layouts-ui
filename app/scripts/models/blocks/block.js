@@ -57,7 +57,6 @@ module.exports = BmModel.extend({
 
 
   remove_block_from_zone: function(){
-    console.log(this, arguments);
     return this;
   },
 
@@ -169,7 +168,6 @@ module.exports = BmModel.extend({
       method: 'POST',
       patch: true
     }).done(function() {
-      console.log(this);
       this.update_zone_blocks(previous_zone, attributes.zone_identifier);
       this.zone().set('block_ids', zone_block_ids);
     }.bind(this));

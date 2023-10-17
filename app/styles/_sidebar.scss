@@ -10,7 +10,10 @@
   padding: $gutter;
   border-top: 1px solid $toolbarBorderColor;
   color: #fff;
-  overflow-y: auto;
+  overflow-y: visible;
+  overflow-x: visible;
+
+
   h1 {
     font-size: 1.4em;
   }
