@@ -102,6 +102,14 @@ module.exports = Core.View.extend({
     }
     this.$multiple_select_height();
 
+    this.$el.find('.datetimepicker').each(function () {
+      new Core.DateTimePicker({
+        el: $(this),
+      }).on('change', function () {
+        self.$submit()
+      })
+    })
+
     self.trigger_render();
   },
 
