@@ -50,6 +50,12 @@ module.exports = Core.View.extend({
     this.$toggle_panels_on_render();
     this.$add_range_values();
     this.remove_loader();
+
+    this.$el.find('.datetimepicker').each(function () {
+      var a =  new Core.DateTimePicker({
+        el: $(this),
+      })
+    })
   },
 
   remove_loader: function(){
