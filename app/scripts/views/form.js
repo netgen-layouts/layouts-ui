@@ -103,8 +103,6 @@ module.exports = Core.View.extend({
     this.$multiple_select_height();
 
     this.$el.find('.datetimepicker').each(function () {
-      console.debug($(this))
-
       new Core.DateTimePicker({
         el: $(this),
         pluginOptions: {
