@@ -105,6 +105,11 @@ module.exports = Core.View.extend({
     this.$el.find('.datetimepicker').each(function () {
       new Core.DateTimePicker({
         el: $(this),
+        pluginOptions: {
+          inline: true,
+          sideBySide: false,
+          widgetParent: $("#content_edit_parameters_datetime"),
+        }
       }).on('change', function () {
         self.$submit()
       })
