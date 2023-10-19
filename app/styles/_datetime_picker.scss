@@ -52,7 +52,7 @@
 
 .bootstrap-datetimepicker-widget {
     .sidebar-panel:first-child &,
-    .tab-pane & {
+    .tab-pane:last-child & {
         margin-bottom: 1.25rem;
 
         .material-icons {
@@ -95,44 +95,44 @@
   padding-right: 2rem;
   position: relative;
 
-  .sidebar-panel:first-child &,
-  .tab-pane & {
-    padding-right: 0;
-    margin-right: .25rem;
+    .sidebar-panel:first-child &,
+    .tab-pane:last-child & {
+        padding-right: 0;
+        margin-right: .25rem;
 
-    .datetime {
-        input[type='text'] {
+        .datetime {
+            input[type='text'] {
 
-            #sidebar & {
-                padding-right: 2.125rem;
+                #sidebar & {
+                    padding-right: 2.125rem;
 
+                }
+            }
+
+            .input-icon {
+                transform: translateY(0);
+                top: 0;
+                padding-right: 0.25em;
             }
         }
 
-        .input-icon {
-            transform: translateY(0);
-            top: 0;
-            padding-right: 0.25em;
+        .js-clear-input {
+            right: auto;
+            left: 100%;
+            top: .25rem;
+            margin-top: 0;
+
+            i { color: #ffffff;}
         }
-    }
 
-    .js-clear-input {
-        right: auto;
-        left: 100%;
-        top: .25rem;
-        margin-top: 0;
-
-        i { color: #ffffff;}
-    }
-
-    .dropdown-menu {
-        background-color: #4f4f4f;
-        color: white;
-
-        *  {
+        .dropdown-menu {
+            background-color: #4f4f4f;
             color: white;
+
+            *  {
+                color: white;
+            }
         }
-    }
   }
 
   .input-group {
