@@ -108,7 +108,7 @@ module.exports = Core.View.extend({
         pluginOptions: {
           inline: true,
           sideBySide: false,
-          widgetParent: $("#content_edit_parameters_datetime"),
+          widgetParent: $(".datetimepicker").closest(".row-input"),
         }
       }).on('change', function () {
         self.$submit()

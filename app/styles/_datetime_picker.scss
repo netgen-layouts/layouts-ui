@@ -51,32 +51,41 @@
 
 
 .bootstrap-datetimepicker-widget {
-    margin-bottom: 1.25rem;
+    .sidebar-panel:first-child &,
+    .tab-pane & {
+        margin-bottom: 1.25rem;
 
-    .picker-switch.accordion-toggle {
-        td span {
-            background-color: #595959;
-            height: 42px;
-            position: relative;
-
-            &:before {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%,-50%);
+        .material-icons {
+            &::before {
+                color: #ffffff;
             }
         }
-    }
 
-    table {
-        thead tr:first-child th:hover {
-            background: #666666;
+        .picker-switch.accordion-toggle {
+            td span {
+                background-color: #595959;
+                height: 42px;
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%,-50%);
+                }
+            }
         }
 
-        td {
-            &.day:hover,
-            span:hover {
+        table {
+            thead tr:first-child th:hover {
                 background: #666666;
+            }
+
+            td {
+                &.day:hover,
+                span:hover {
+                    background: #666666;
+                }
             }
         }
     }
@@ -86,7 +95,8 @@
   padding-right: 2rem;
   position: relative;
 
-  .sidebar-panel & {
+  .sidebar-panel:first-child &,
+  .tab-pane & {
     padding-right: 0;
     margin-right: .25rem;
 
@@ -111,6 +121,8 @@
         left: 100%;
         top: .25rem;
         margin-top: 0;
+
+        i { color: #ffffff;}
     }
 
     .dropdown-menu {
