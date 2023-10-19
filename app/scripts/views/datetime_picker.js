@@ -45,6 +45,7 @@ module.exports = Core.DateTimePicker = View.extend({
 
     this.$dateEl.datetimepicker($.extend({}, this.defaultOptions, this.options));
     this.datePicker = this.$dateEl.data('DateTimePicker');
+    options.pluginOptions && this.datePicker.options(options.pluginOptions)
 
     this.$dateFormatted.val() && this.setPluginDate(this.$dateFormatted.val());
     this.toggleClearBtn();
@@ -72,5 +73,4 @@ module.exports = Core.DateTimePicker = View.extend({
   toggleClearBtn: function(){
     this.datePicker.date() ? this.$el.addClass('date-entered') : this.$el.removeClass('date-entered');
   },
-
 });

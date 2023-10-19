@@ -49,57 +49,90 @@
   }
 }
 
+
+.bootstrap-datetimepicker-widget {
+    .sidebar-panel:first-child &,
+    .tab-pane:last-child & {
+        margin-bottom: 1.25rem;
+
+        .material-icons {
+            &::before {
+                color: #ffffff;
+            }
+        }
+
+        .picker-switch.accordion-toggle {
+            td span {
+                background-color: #595959;
+                height: 42px;
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%,-50%);
+                }
+            }
+        }
+
+        table {
+            thead tr:first-child th:hover {
+                background: #666666;
+            }
+
+            td {
+                &.day:hover,
+                span:hover {
+                    background: #666666;
+                }
+            }
+        }
+    }
+}
+
 .datetimepicker {
   padding-right: 2rem;
   position: relative;
 
-  .sidebar-panel & {
-    padding-right: 0;
-    margin-right: .25rem;
+    .sidebar-panel:first-child &,
+    .tab-pane:last-child & {
+        padding-right: 0;
+        margin-right: .25rem;
 
-    .datetime {
-        input[type='text'] {
+        .datetime {
+            input[type='text'] {
 
-            #sidebar & {
-                padding-right: 2.125rem;
+                #sidebar & {
+                    padding-right: 2.125rem;
 
+                }
+            }
+
+            .input-icon {
+                transform: translateY(0);
+                top: 0;
+                padding-right: 0.25em;
             }
         }
 
-        .input-icon {
-            transform: translateY(calc(-50% - .25rem));
-            padding-right: 0.25em;
-        }
-    }
+        .js-clear-input {
+            right: auto;
+            left: 100%;
+            top: .25rem;
+            margin-top: 0;
 
-    .js-clear-input {
-        right: auto;
-        left: 100%;
-        margin-top: -1.25rem;
-
-    }
-
-    .bootstrap-datetimepicker-widget table {
-        thead tr:first-child th:hover {
-            background: #666666;
+            i { color: #ffffff;}
         }
 
-        td {
-            &.day:hover,
-            span:hover {
-                background: #666666;
-            }
-        }
-    }
-
-    .dropdown-menu {
-        background-color: #4f4f4f;
-        color: white;
-
-        *  {
+        .dropdown-menu {
+            background-color: #4f4f4f;
             color: white;
+
+            *  {
+                color: white;
+            }
         }
-    }
   }
 
   .input-group {
