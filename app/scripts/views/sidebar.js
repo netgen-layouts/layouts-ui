@@ -31,7 +31,8 @@ module.exports = Core.View.extend({
   on_change_parameters: function() {
     const hasContentFieldChanged = this.model._previousAttributes.parameters.content !== this.model.attributes.parameters.content
     const isComponent = this.model.attributes.definition_identifier.startsWith('ibexa_component') ||
-      this.model.attributes.definition_identifier.startsWith('ezcomponent');
+      this.model.attributes.definition_identifier.startsWith('ezcomponent') ||
+      this.model.attributes.definition_identifier.startsWith('sylius_component');
 
     if(!hasContentFieldChanged || !isComponent) return;
 
