@@ -50,5 +50,8 @@
     "nprogress": "^0.2.0",
     "striptags": "^2.2.1",
     "underscore": "^1.9.1"
+  },
+  "resolutions": {
+    "minimatch": "^9.0.0"
   }
 }
