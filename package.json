@@ -52,6 +52,6 @@
     "underscore": "^1.9.1"
   },
   "resolutions": {
-    "minimatch": "^9.0.0"
+    "minimatch": "^3.0.0"
   }
 }
