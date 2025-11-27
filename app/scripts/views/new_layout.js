@@ -8,7 +8,7 @@ module.exports = Core.ModalForm.extend({
 
   render: function(){
     Core.Modal.prototype.render.apply(this, arguments);
-    var $shared_checkbox = this.$('#create_shared');
+    var $shared_checkbox = this.$('#create_isShared');
     Core.router.params.shared && $shared_checkbox.prop('checked', true);
     $shared_checkbox.parent().hide();
     return this;
