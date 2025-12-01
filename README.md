@@ -30,7 +30,7 @@ are symlinked from the Composer `vendor` folder to `node_modules`.
 To build development assets and start watching files for changes, just run
 Grunt without any arguments:
 
-```
+```bash
 $ composer install
 $ yarn install
 $ grunt
@@ -42,7 +42,7 @@ This will place all generated assets into `bundle/Resources/public/dev` folder.
 
 To build the production assets, run Grunt with the following:
 
-```
+```bash
 $ composer install
 $ yarn install
 $ grunt build
