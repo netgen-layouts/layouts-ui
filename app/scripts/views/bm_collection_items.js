@@ -64,7 +64,7 @@ module.exports = Core.View.extend({
 
   setup_dnd: function(){
     if (!this.bm_collection_model.get('loading')) {
-      this.bm_collection_model.get('collection_type') === 1 ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
+      this.bm_collection_model.get('collection_type') === 'dynamic' ? this.setup_dynamic_dnd() : this.setup_manual_dnd();
     }
   },
   setup_dynamic_dnd: function(){

@@ -91,7 +91,7 @@ module.exports = Core.View.extend({
         message: 'New position must be larger than 0',
       });
     }
-    if (this.bm_collection_model.get('collection_type') === 0 && newPosition >= this.bm_collection_model.items.length) {
+    if (this.bm_collection_model.get('collection_type') === 'manual' && newPosition >= this.bm_collection_model.items.length) {
       return new Core.Snackbar({
         message: 'New position shouldn\'t be larger than position of the last item in collection (' + (this.bm_collection_model.items.length) + ')',
       });
