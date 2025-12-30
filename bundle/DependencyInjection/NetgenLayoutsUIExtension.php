@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\Bundle\LayoutsUIBundle\DependencyInjection;
 
-use Jean85\PrettyVersions;
+use Composer\InstalledVersions;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Yaml\Yaml;
 
 use function file_get_contents;
+use function mb_substr;
 
 final class NetgenLayoutsUIExtension extends Extension implements PrependExtensionInterface
 {
@@ -21,7 +22,7 @@ final class NetgenLayoutsUIExtension extends Extension implements PrependExtensi
     {
         $container->setParameter(
             'netgen_layouts.app.asset_version',
-            PrettyVersions::getVersion('netgen/layouts-ui')->getShortReference(),
+            mb_substr(InstalledVersions::getReference('netgen/layouts-ui') ?? '', 0, 8),
         );
 
         $prependConfigs = [
