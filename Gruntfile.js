@@ -256,6 +256,12 @@ module.exports = function(grunt) {
             cwd: 'node_modules/@netgen/content-browser-ui/bundle/Resources/public/media',
             src: '**',
             dest: '<%= config.dist %>/media'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/bootstrap-sass/assets/fonts/bootstrap',
+            src: '**',
+            dest: '<%= config.dist %>/fonts/bootstrap'
           }
         ]
       },
